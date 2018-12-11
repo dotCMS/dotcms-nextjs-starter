@@ -24,6 +24,7 @@
   ],
   "devDependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@babel/register": "^7.0.0"
+    "@babel/register": "^7.0.0",
+    "ignore-styles": "^5.0.1"
   }
 }
