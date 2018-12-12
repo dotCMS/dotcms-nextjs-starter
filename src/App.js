@@ -1,12 +1,7 @@
-import React, { Component } from 'react';
-import Home from './Home';
+import React from 'react';
+import Page from './Page';
 
-class App extends Component {
-  render() {
-    return (
-      <Home data={{hello: 'world'}}></Home>
-    );
-  }
-}
-
+const App = (props) => {
+    return <Page data={props.data} />;
+};
 export default App;

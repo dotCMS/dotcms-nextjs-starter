@@ -1,0 +1,11 @@
+.row {
+    border: solid 1px;
+    display: flex;
+    width: 100%;
+}
+
+.column {
+    border: solid 2px;
+    min-height: 100px;
+    margin: 0 10px;
+}

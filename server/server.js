@@ -6,9 +6,27 @@ import url from 'url';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 
+import DotCMSApi from '../src/libs/dotcms.api';
+
 import App from '../src/App';
 
 const STATIC_FOLDER = './build';
+
+const isThisAPage = pathname => {
+    const ext = path.parse(pathname).ext;
+    return ext.length === 0 || ext === '.html';
+};
+
+const getScript = data => {
+    if (data) {
+        return `
+        <script type="${mimeType['.js']}">
+            var dotcmsPage = ${JSON.stringify(data)}
+        </script>`;
+    } else {
+        return '';
+    }
+};
 
 // maps file extention to MIME types
 const mimeType = {
@@ -36,43 +54,65 @@ const server = http.createServer((request, response) => {
     // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
     // by limiting the path to current directory only
     const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
-    let pathname = path.join(STATIC_FOLDER, sanitizePath);
 
-    fs.exists(pathname, exist => {
-        if (!exist) {
-            // if the file is not found, return 404
-            request.statusCode = 404;
-            request.end(`File ${pathname} not found!`);
-            return;
-        }
+    if (isThisAPage(sanitizePath)) {
+        fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
+            DotCMSApi.getPage(sanitizePath).then(page => {
+                const app = renderToString(<App data={page} />);
+                data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
+                data = data.replace('<div id="script"></div>', getScript(page));
 
-        // if is a directory, then look for index.html
-        if (fs.statSync(pathname).isDirectory()) {
-            pathname += '/index.html';
-        }
-
-        // read file from file system
-        fs.readFile(pathname, 'utf8', (err, data) => {
-            if (err) {
-                response.statusCode = 500;
-                response.end(`Error getting the file: ${err}.`);
-            } else {
-                const parsedPath = path.parse(pathname);
-
-                if (parsedPath.base === 'index.html') {
-                    const app = renderToString(<App data={{ hello: 'world' }} />);
-                    data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
-                }
-
-                // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-                const ext = parsedPath.ext;
-
-                // if the file is found, set Content-type and send data
-                response.setHeader('Content-type', mimeType[ext] || 'text/plain');
+                response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                 response.end(data);
-            }
+            });
         });
-    });
+    } else {
+        const pathname = path.join(STATIC_FOLDER, sanitizePath);
+
+        fs.exists(pathname, exist => {
+            if (!exist) {
+                // if the file is not found un build folder, proxy to dotcms instance
+                let proxy = http.request({
+                    hostname: 'localhost',
+                    port: 8080,
+                    path: request.url,
+                    method: 'GET'
+                }, res => {
+                    res.pipe(
+                        response,
+                        {
+                            end: true
+                        }
+                    );
+                });
+
+                request.pipe(
+                    proxy,
+                    {
+                        end: true
+                    }
+                );
+                return;
+            }
+
+            // read file from file system (build folder)
+            fs.readFile(pathname, (err, data) => {
+                if (err) {
+                    response.statusCode = 500;
+                    response.end(`Error getting the file: ${err}.`);
+                } else {
+                    const parsedPath = path.parse(pathname);
+
+                    // based on the URL path, extract the file extention. e.g. .js, .doc, ...
+                    const ext = parsedPath.ext;
+
+                    // if the file is found, set Content-type and send data
+                    response.setHeader('Content-type', mimeType[ext] || 'text/plain');
+                    response.end(data);
+                }
+            });
+        });
+    }
 });
 
 server.listen(5000, err => {
