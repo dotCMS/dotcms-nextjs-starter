@@ -2,10 +2,10 @@ import React from 'react';
 import './Page.css';
 import Row from './Row';
 
-const Page = ({ data: { body } }) => {
+const Page = ({data}) => {
     return (
         <div className="Page">
-            {body.rows.map((row, i) => {
+            {data.body.rows.map((row, i) => {
                 return <Row row={row} key={i} />;
             })}
         </div>

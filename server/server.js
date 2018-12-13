@@ -2,6 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import path from 'path';
 import url from 'url';
+import { parse } from 'querystring';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -47,71 +48,99 @@ const mimeType = {
 };
 
 const server = http.createServer((request, response) => {
-    const parsedUrl = url.parse(request.url);
+    if (request.method === 'POST') {
+        var postData = '';
 
-    // extract URL path
-    // Avoid https://en.wikipedia.org/wiki/Directory_traversal_attack
-    // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
-    // by limiting the path to current directory only
-    const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
+        // Get all post data when receive data event.
+        request.on('data', function(chunk) {
+            postData += chunk;
+        });
 
-    if (isThisAPage(sanitizePath)) {
-        fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-            DotCMSApi.getPage(sanitizePath).then(page => {
-                const app = renderToString(<App data={page} />);
+        // When all request post data has been received.
+        request.on('end', function() {
+            // Parse the post data and get client sent username and password.
+            // let postDataObject = JSON.parse(postData);
+            const page = DotCMSApi.processPage(JSON.parse(parse(postData).dotPageData).entity);
+            
+            fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
+                const app = renderToString(<App data={page.layout} />);
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                data = data.replace('<div id="script"></div>', getScript(page));
 
                 response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                 response.end(data);
             });
         });
-    } else {
-        const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
-        fs.exists(pathname, exist => {
-            if (!exist) {
-                // if the file is not found un build folder, proxy to dotcms instance
-                let proxy = http.request({
-                    hostname: 'localhost',
-                    port: 8080,
-                    path: request.url,
-                    method: 'GET'
-                }, res => {
-                    res.pipe(
-                        response,
+    } else {
+        const parsedUrl = url.parse(request.url);
+
+        // extract URL path
+        // Avoid https://en.wikipedia.org/wiki/Directory_traversal_attack
+        // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
+        // by limiting the path to current directory only
+        const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
+
+        if (isThisAPage(sanitizePath)) {
+            fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
+                DotCMSApi.getPage(sanitizePath).then(page => {
+                    const app = renderToString(<App data={page.layout} />);
+                    data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
+                    data = data.replace('<div id="script"></div>', getScript(page.layout));
+
+                    response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
+                    response.end(data);
+                });
+            });
+        } else {
+            const pathname = path.join(STATIC_FOLDER, sanitizePath);
+
+            fs.exists(pathname, exist => {
+                if (!exist) {
+                    // if the file is not found un build folder, proxy to dotcms instance
+                    let proxy = http.request(
+                        {
+                            hostname: 'localhost',
+                            port: 8080,
+                            path: request.url,
+                            method: 'GET'
+                        },
+                        res => {
+                            res.pipe(
+                                response,
+                                {
+                                    end: true
+                                }
+                            );
+                        }
+                    );
+
+                    request.pipe(
+                        proxy,
                         {
                             end: true
                         }
                     );
-                });
-
-                request.pipe(
-                    proxy,
-                    {
-                        end: true
-                    }
-                );
-                return;
-            }
-
-            // read file from file system (build folder)
-            fs.readFile(pathname, (err, data) => {
-                if (err) {
-                    response.statusCode = 500;
-                    response.end(`Error getting the file: ${err}.`);
-                } else {
-                    const parsedPath = path.parse(pathname);
-
-                    // based on the URL path, extract the file extention. e.g. .js, .doc, ...
-                    const ext = parsedPath.ext;
-
-                    // if the file is found, set Content-type and send data
-                    response.setHeader('Content-type', mimeType[ext] || 'text/plain');
-                    response.end(data);
+                    return;
                 }
+
+                // read file from file system (build folder)
+                fs.readFile(pathname, (err, data) => {
+                    if (err) {
+                        response.statusCode = 500;
+                        response.end(`Error getting the file: ${err}.`);
+                    } else {
+                        const parsedPath = path.parse(pathname);
+
+                        // based on the URL path, extract the file extention. e.g. .js, .doc, ...
+                        const ext = parsedPath.ext;
+
+                        // if the file is found, set Content-type and send data
+                        response.setHeader('Content-type', mimeType[ext] || 'text/plain');
+                        response.end(data);
+                    }
+                });
             });
-        });
+        }
     }
 });
 
