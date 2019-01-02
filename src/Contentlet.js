@@ -32,7 +32,7 @@ const SimpleWidget = ({data}) => {
 }
 
 const getComponent = (data) => {
-    switch (data.dotType) {
+    switch (data.contentType) {
         case 'webPageContent':
             return ContentGeneric;
         case 'calendarEvent':

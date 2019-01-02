@@ -6,6 +6,8 @@ const processPage = (page) => {
             col.containers = col.containers.map(container => {
                 return {
                     ...container,
+                    ...page.containers[container.identifier].container,
+                    acceptTypes: page.containers[container.identifier].containerStructures.map(structure => structure.contentTypeVar).join(','),
                     contentlets: page.containers[container.identifier].contentlets[`uuid-${container.uuid}`]
                 };
             });

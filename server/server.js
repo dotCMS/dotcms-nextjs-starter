@@ -65,6 +65,7 @@ const server = http.createServer((request, response) => {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(<App data={page.layout} />);
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
+                data = data.replace('<div id="script"></div>', getScript(page.layout));
 
                 response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                 response.end(data);
