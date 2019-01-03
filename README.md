@@ -1,6 +1,10 @@
 # Backend
 Node server for Server Side Render the pages.
 
+### `npm run serve`
+
+Compiles the react app and runs the node server to SSR the app.
+
 # Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
