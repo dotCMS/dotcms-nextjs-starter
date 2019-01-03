@@ -18,9 +18,11 @@ const processPage = (page) => {
 
 export default {
     processPage: processPage,
-    getPage: async (pathname) => {
+    getPage: async ({addHost, pathname}) => {
         // TODO: we need to pass dinamically the lagunage_id and the host
-        return await fetch(`http://localhost:8080/api/v1/page/render/${pathname.slice(1)}?language_id=1`, {
+        const url = `${addHost ? 'http://localhost:8080' : ''}/api/v1/page/render/${pathname.slice(1)}?language_id=1`
+
+        return await fetch(url, {
             headers: {
                 DOTAUTH: Buffer.from(`admin@dotcms.com:admin`).toString('base64')
             }
