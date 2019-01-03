@@ -4,7 +4,7 @@ const DotContainer = (props) => {
     const data = props.data;
     return (
         <div
-            data-dot-accept-types="Document,Blog,webPageContent,Products,News,Media,calendarEvent,Location,WIDGET,FORM"
+            data-dot-accept-types={data.acceptTypes}
             data-dot-object="container"
             data-dot-inode={data.inode}
             data-dot-identifier={data.identifier}

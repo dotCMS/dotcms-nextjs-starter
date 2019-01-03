@@ -1,3 +1,6 @@
+# Backend
+Node server for Server Side Render the pages.
+
 # Frontend
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
