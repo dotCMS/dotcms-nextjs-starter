@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 import DotCMSApi from '../src/libs/dotcms.api';
 
 if (window.dotcmsPage) {

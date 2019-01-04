@@ -18,9 +18,9 @@ const processPage = (page) => {
 
 export default {
     processPage: processPage,
-    getPage: async ({addHost, pathname}) => {
+    getPage: async ({includeHost, pathname}) => {
         // TODO: we need to pass dinamically the lagunage_id and the host
-        const url = `${addHost ? 'http://localhost:8080' : ''}/api/v1/page/render/${pathname.slice(1)}?language_id=1`
+        const url = `${includeHost ? 'http://localhost:8080' : ''}/api/v1/page/render/${pathname.slice(1)}?language_id=1`;
 
         return await fetch(url, {
             headers: {

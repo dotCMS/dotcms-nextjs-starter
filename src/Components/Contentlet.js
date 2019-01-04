@@ -1,5 +1,5 @@
 import React from 'react';
-import DotContentlet from './libs/DotContentlet';
+import DotContentlet from '../libs/DotContentlet';
 
 function createMarkup(html) { return {__html: html}; };
 
