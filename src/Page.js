@@ -1,14 +1,18 @@
 import React from 'react';
+import { Container as BootstrapContainer } from 'reactstrap';
+
+import RowContainer from './Components/RowContainer';
+
 import './Page.css';
-import Row from './Row';
+
 
 const Page = ({data}) => {
     return (
-        <div className="Page">
+        <BootstrapContainer>
             {data.body.rows.map((row, i) => {
-                return <Row row={row} key={i} />;
+                return <RowContainer row={row} key={i} />;
             })}
-        </div>
+        </BootstrapContainer>
     );
 };
 
