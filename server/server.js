@@ -83,7 +83,10 @@ const server = http.createServer((request, response) => {
 
         if (isThisAPage(sanitizePath)) {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                DotCMSApi.getPage(sanitizePath).then(page => {
+                DotCMSApi.getPage({
+                    includeHost: true,
+                    pathname: sanitizePath
+                }).then(page => {
                     const app = renderToString(<App data={page.layout} />);
                     data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                     data = data.replace('<div id="script"></div>', getScript(page.layout));
