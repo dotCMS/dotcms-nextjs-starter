@@ -7,3 +7,7 @@
     border: solid 2px;
     min-height: 100px;
 }
+
+.alert {
+    margin-top: 2rem;
+}
