@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders and matches snapshot 1`] = `
+<Navbar
+  color="light"
+  expand="md"
+  light={true}
+  tag="header"
+>
+  <NavbarBrand
+    href="/"
+    tag="a"
+  >
+    DotCMS - SPA
+  </NavbarBrand>
+  <Nav />
+</Navbar>
+`;

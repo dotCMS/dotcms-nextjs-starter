@@ -3088,6 +3088,11 @@ dotenv@6.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.0.0.tgz#24e37c041741c5f4b25324958ebbc34bca965935"
   integrity sha512-FlWbnhgjtwD+uNLUGHbMykMOYQaTivdHEmYwAKFjn6GKe/CqY0fNae93ZHTd20snh9ZLr8mTzIL9m0APQ1pjQg==
 
+dotenv@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
+  integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -3192,6 +3197,13 @@ enzyme-adapter-utils@^1.9.0:
     object.assign "^4.1.0"
     prop-types "^15.6.2"
     semver "^5.6.0"
+
+enzyme-to-json@^3.3.5:
+  version "3.3.5"
+  resolved "https://registry.yarnpkg.com/enzyme-to-json/-/enzyme-to-json-3.3.5.tgz#f8eb82bd3d5941c9d8bc6fd9140030777d17d0af"
+  integrity sha512-DmH1wJ68HyPqKSYXdQqB33ZotwfUhwQZW3IGXaNXgR69Iodaoj8TF/D9RjLdz4pEhGq2Tx2zwNUIjBuqoZeTgA==
+  dependencies:
+    lodash "^4.17.4"
 
 enzyme@^3.8.0:
   version "3.8.0"
@@ -9737,6 +9749,11 @@ w3c-xmlserializer@^1.0.0:
     domexception "^1.0.1"
     webidl-conversions "^4.0.2"
     xml-name-validator "^3.0.0"
+
+waait@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/waait/-/waait-1.0.2.tgz#c234ed748a032cb7d5e83cb691567c6dc545b37d"
+  integrity sha512-amvD7uRx48U2gXOgzwV7PbcpSy8O3Fect2SqiLbBIVH9Zh0UMnDWckSLnsdKNwq7pvarWnPWrpYad2P3pgmRYw==
 
 walker@~1.0.5:
   version "1.0.7"

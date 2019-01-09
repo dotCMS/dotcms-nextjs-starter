@@ -32,8 +32,10 @@
   "devDependencies": {
     "@babel/polyfill": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "ignore-styles": "^5.0.1",
     "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.7.1"
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
+    "ignore-styles": "^5.0.1",
+    "waait": "^1.0.2"
   }
 }

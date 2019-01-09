@@ -22,6 +22,4 @@ describe('<RowContainer />', () => {
         const rows = wrapper.find('Row');
         expect(rows).toHaveLength(1);
     });
-    
-
 })
