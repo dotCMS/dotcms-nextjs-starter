@@ -7,7 +7,7 @@ export default class Nav extends Component {
         items: []
     };
 
-    componentDidMount() {
+    async componentDidMount() {
         fetch('/api/v1/nav//?depth=2')
             .then(response => response.json())
             .then(data => data.entity.children)
@@ -31,10 +31,10 @@ export default class Nav extends Component {
             <>
                 <NavbarToggler onClick={this.toggleOpen} />
                 <Collapse isOpen={this.state.isOpen} navbar>
-                    <BootstrapNav pills="true">
+                    <BootstrapNav pills={true}>
                         {this.state.items.map(item => {
                             return (
-                                <NavItem>
+                                <NavItem key={item.folder}>
                                     <NavLink active={item.href === window.location.pathname} href={item.href}>
                                         {item.title}
                                     </NavLink>

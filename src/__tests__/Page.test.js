@@ -14,6 +14,5 @@ describe('<Page />', () => {
         const alert = wrapper.find('Alert');
         expect(alert.length).toBe(1);
     });
-    
 
 })
