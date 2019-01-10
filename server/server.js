@@ -6,16 +6,18 @@ import { parse } from 'querystring';
 
 import React from 'react';
 import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 
 import DotCMSApi from '../src/libs/dotcms.api';
 
 import App from '../src/App';
+import Page from '../src/Page';
 
 const STATIC_FOLDER = './build';
 
 const isThisAPage = pathname => {
     const ext = path.parse(pathname).ext;
-    return ext.length === 0 || ext === '.html';
+    return !pathname.startsWith('/api') && ext.length === 0 || ext === '.html';
 };
 
 const getScript = data => {
@@ -61,9 +63,14 @@ const server = http.createServer((request, response) => {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
             const page = DotCMSApi.processPage(JSON.parse(parse(postData).dotPageData).entity);
-            
+
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const app = renderToString(<App data={page.layout} />);
+                const context = {};
+                const app = renderToString(
+                    <StaticRouter location={request.url} context={context}>
+                        <Page data={page.layout} />
+                    </StaticRouter>
+                );
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                 data = data.replace('<div id="script"></div>', getScript(page.layout));
 
@@ -71,9 +78,9 @@ const server = http.createServer((request, response) => {
                 response.end(data);
             });
         });
-
     } else {
         const parsedUrl = url.parse(request.url);
+
 
         // extract URL path
         // Avoid https://en.wikipedia.org/wiki/Directory_traversal_attack
@@ -83,11 +90,17 @@ const server = http.createServer((request, response) => {
 
         if (isThisAPage(sanitizePath)) {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
+                const context = {};
+
                 DotCMSApi.getPage({
                     includeHost: true,
                     pathname: sanitizePath
                 }).then(page => {
-                    const app = renderToString(<App data={page.layout} />);
+                    const app = renderToString(
+                        <StaticRouter location={request.url} context={context}>
+                            <Page data={page.layout} />
+                        </StaticRouter>
+                    );
                     data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                     data = data.replace('<div id="script"></div>', getScript(page.layout));
 
@@ -99,14 +112,17 @@ const server = http.createServer((request, response) => {
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
             fs.exists(pathname, exist => {
-                if (!exist) {
+                if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
                     let proxy = http.request(
                         {
                             hostname: 'localhost',
                             port: 8080,
                             path: request.url,
-                            method: 'GET'
+                            method: 'GET',
+                            headers: {
+                                DOTAUTH: Buffer.from(`${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`).toString('base64')
+                            }
                         },
                         res => {
                             res.pipe(

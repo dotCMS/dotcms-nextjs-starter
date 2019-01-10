@@ -6,7 +6,8 @@ import Header from './Components/Header';
 
 import './Page.css';
 
-const Page = ({ data }) => {
+const Page = (props) => {
+    const data = props.data;
     return (
         <>
             <Header />

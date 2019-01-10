@@ -2,20 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Page from './Page';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
-import DotCMSApi from '../src/libs/dotcms.api';
 
 if (window.dotcmsPage) {
-    ReactDOM.hydrate(<App data={window.dotcmsPage} />, document.getElementById('root'));
+    ReactDOM.hydrate(
+        <BrowserRouter>
+            <Page data={window.dotcmsPage} />
+        </BrowserRouter>,
+        document.getElementById('root')
+    );
 } else {
-    DotCMSApi.getPage({
-        pathname: window.location.pathname
-    }).then(data => {
-        ReactDOM.render(<App data={data.layout} />, document.getElementById('root'));
-    })
+    ReactDOM.render(<App data={{just: 'testing'}} />, document.getElementById('root'));
 }
 
 

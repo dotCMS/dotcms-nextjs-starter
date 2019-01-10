@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Nav as BootstrapNav, NavItem, NavLink, NavbarToggler, Collapse } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Nav extends Component {
     state = {
@@ -35,7 +36,7 @@ export default class Nav extends Component {
                         {this.state.items.map(item => {
                             return (
                                 <NavItem key={item.folder}>
-                                    <NavLink active={item.href === window.location.pathname} href={item.href}>
+                                    <NavLink tag={Link} active={item.href === window.location.pathname} to={item.href}>
                                         {item.title}
                                     </NavLink>
                                 </NavItem>
