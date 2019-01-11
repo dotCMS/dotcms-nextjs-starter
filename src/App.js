@@ -23,6 +23,8 @@ class PageFetchWrapper extends Component {
             layout: data.layout,
             pathname: pathname
         });
+
+        DotCMSApi.emitEditPage(pathname);
     }
 
     async shouldComponentUpdate(nextProps, prevState) {

@@ -33,5 +33,15 @@ export default {
                 return processPage(page);
             })
             .catch(err => err);
+    },
+    emitEditPage: (pathname) => {
+        const customEvent = window.top.document.createEvent('CustomEvent');
+        customEvent.initCustomEvent('ng-event', false, false,  {
+            name: 'remote-render-edit',
+            data: {
+                pathname
+            }
+        });
+        window.top.document.dispatchEvent(customEvent);
     }
 };
