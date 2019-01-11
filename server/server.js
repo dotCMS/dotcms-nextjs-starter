@@ -11,13 +11,12 @@ import { StaticRouter } from 'react-router-dom';
 import DotCMSApi from '../src/libs/dotcms.api';
 
 import App from '../src/App';
-import Page from '../src/Page';
 
 const STATIC_FOLDER = './build';
 
 const isThisAPage = pathname => {
     const ext = path.parse(pathname).ext;
-    return !pathname.startsWith('/api') && ext.length === 0 || ext === '.html';
+    return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
 };
 
 const getScript = data => {
@@ -29,6 +28,15 @@ const getScript = data => {
     } else {
         return '';
     }
+};
+
+const getMainComponent = (url, layout) => {
+    const context = {};
+    return (
+        <StaticRouter location={url} context={context}>
+            <App data={layout} />
+        </StaticRouter>
+    );
 };
 
 // maps file extention to MIME types
@@ -65,12 +73,7 @@ const server = http.createServer((request, response) => {
             const page = DotCMSApi.processPage(JSON.parse(parse(postData).dotPageData).entity);
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const context = {};
-                const app = renderToString(
-                    <StaticRouter location={request.url} context={context}>
-                        <Page data={page.layout} />
-                    </StaticRouter>
-                );
+                const app = renderToString(getMainComponent(request.url, page.layout));
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                 data = data.replace('<div id="script"></div>', getScript(page.layout));
 
@@ -81,7 +84,6 @@ const server = http.createServer((request, response) => {
     } else {
         const parsedUrl = url.parse(request.url);
 
-
         // extract URL path
         // Avoid https://en.wikipedia.org/wiki/Directory_traversal_attack
         // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
@@ -90,17 +92,12 @@ const server = http.createServer((request, response) => {
 
         if (isThisAPage(sanitizePath)) {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const context = {};
 
                 DotCMSApi.getPage({
                     includeHost: true,
                     pathname: sanitizePath
                 }).then(page => {
-                    const app = renderToString(
-                        <StaticRouter location={request.url} context={context}>
-                            <Page data={page.layout} />
-                        </StaticRouter>
-                    );
+                    const app = renderToString(getMainComponent(request.url, page.layout));
                     data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                     data = data.replace('<div id="script"></div>', getScript(page.layout));
 
@@ -121,7 +118,9 @@ const server = http.createServer((request, response) => {
                             path: request.url,
                             method: 'GET',
                             headers: {
-                                DOTAUTH: Buffer.from(`${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`).toString('base64')
+                                DOTAUTH: Buffer.from(
+                                    `${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`
+                                ).toString('base64')
                             }
                         },
                         res => {

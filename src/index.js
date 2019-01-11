@@ -1,23 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import Page from './Page';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
+import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import App from './App';
 
 
 if (window.dotcmsPage) {
     ReactDOM.hydrate(
-        <BrowserRouter>
-            <Page data={window.dotcmsPage} />
-        </BrowserRouter>,
+        <Router>
+            <App data={window.dotcmsPage} />
+        </Router>,
         document.getElementById('root')
     );
 } else {
-    ReactDOM.render(<App data={{just: 'testing'}} />, document.getElementById('root'));
+    ReactDOM.render(
+        <Router>
+            <App />
+        </Router>,
+        document.getElementById('root')
+    );
 }
 
 

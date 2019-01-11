@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
+import { Route } from 'react-router-dom';
+
 import Page from './Page';
-
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-
 import DotCMSApi from '../src/libs/dotcms.api';
 
 class PageFetchWrapper extends Component {
     constructor() {
         super();
         this.state = {
-            page: {},
+            layout: {},
             pathname: null
         };
     }
@@ -21,7 +20,7 @@ class PageFetchWrapper extends Component {
         });
 
         this.setState({
-            page: data,
+            layout: data.layout,
             pathname: pathname
         });
     }
@@ -35,19 +34,24 @@ class PageFetchWrapper extends Component {
     }
 
     async componentDidMount() {
-        this.setPage(this.props.location.pathname);
+        if (this.props.data) {
+            this.setState({
+                layout: this.props.data,
+                pathname: this.props.location.pathname
+            });
+        } else {
+            this.setPage(this.props.location.pathname);
+        }
     }
 
     render() {
-        return <Page data={this.state.page.layout} />;
+        return <Page data={this.state.layout} />;
     }
 }
 
 const App = data => {
     return (
-        <Router>
-            <Route component={PageFetchWrapper} />
-        </Router>
+        <Route render={(props) => <PageFetchWrapper {...props} {...data} />} />
     );
 };
 export default App;
