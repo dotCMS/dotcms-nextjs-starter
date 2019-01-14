@@ -40,8 +40,10 @@ describe('<Nav />', () => {
     });
 
     it('should call api correctly', () => {
-        expect(window.fetch).toHaveBeenCalledWith('/api/v1/nav//?depth=2');
-    })
+        expect(window.fetch).toHaveBeenCalledWith('/api/v1/nav//?depth=2', {
+            headers: { DOTAUTH: expect.any(String) }
+        });
+    });
 
     it('renders nav correctly', async () => {
         await wrapper.update();

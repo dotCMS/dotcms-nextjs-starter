@@ -9,7 +9,13 @@ export default class Nav extends Component {
     };
 
     async componentDidMount() {
-        fetch('/api/v1/nav//?depth=2')
+        fetch('/api/v1/nav//?depth=2', {
+            headers: {
+                DOTAUTH: Buffer.from(
+                    `${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`
+                ).toString('base64')
+            }
+        })
             .then(response => response.json())
             .then(data => data.entity.children)
             .then(data => {
