@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import wait from 'waait';
+import { Link } from 'react-router-dom';
 
 import Nav from '../Components/Nav';
 
@@ -39,8 +40,10 @@ describe('<Nav />', () => {
     });
 
     it('should call api correctly', () => {
-        expect(window.fetch).toHaveBeenCalledWith('/api/v1/nav//?depth=2');
-    })
+        expect(window.fetch).toHaveBeenCalledWith('/api/v1/nav//?depth=2', {
+            headers: { DOTAUTH: expect.any(String) }
+        });
+    });
 
     it('renders nav correctly', async () => {
         await wrapper.update();
@@ -51,8 +54,8 @@ describe('<Nav />', () => {
 
         const navLinks = wrapper.find('NavLink');
         expect(navLinks.map(item => item.props())).toEqual([
-            { active: false, children: 'About Us', href: '/about', tag: 'a' },
-            { active: false, children: 'Products', href: '/products', tag: 'a' }
+            { active: false, children: 'About Us', to: '/about', tag: Link },
+            { active: false, children: 'Products', to: '/products', tag: Link }
         ]);
     });
 

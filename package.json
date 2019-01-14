@@ -2,23 +2,13 @@
   "name": "dotcms-spa-edit-mode-round",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "bootstrap": "^4.2.1",
-    "dotenv": "^6.2.0",
-    "node-fetch": "^2.3.0",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1",
-    "react-test-renderer": "^16.7.0",
-    "reactstrap": "^7.0.2"
-  },
   "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject",
-    "serve": "npm run build && node server/index.js"
+    "serve": "npm run build && nodemon --inspect=0.0.0.0:9229 server/index.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,13 +19,27 @@
     "not ie <= 11",
     "not op_mini all"
   ],
+  "dependencies": {
+    "bootstrap": "^4.2.1",
+    "dotenv": "^6.2.0",
+    "node-fetch": "^2.3.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1",
+    "react-test-renderer": "^16.7.0",
+    "reactstrap": "^7.0.2"
+  },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/polyfill": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "enzyme-to-json": "^3.3.5",
     "ignore-styles": "^5.0.1",
+    "nodemon": "^1.18.9",
     "waait": "^1.0.2"
   }
 }
