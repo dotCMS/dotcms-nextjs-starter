@@ -35,7 +35,6 @@ export default class LoginForm extends Component {
     render() {
         return (
             <Form onSubmit={this.onSubmitHandler} innerRef={this.formEl}>
-            {/* <Form onSubmit={this.onSubmitHandler}> */}
                 <FormGroup>
                     <Label for="user">User</Label>
                     <Input type="text" name="user" placeholder="User or email" onChange={this.onChange} required />

@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 
 import { Redirect } from 'react-router-dom';
 
-import LoginForm from '../Components/LoginForm';
-
-import DotCMSApi from '../libs/dotcms.api';
-
 import './Login.css';
+import DotCMSApi from '../libs/dotcms.api';
+import LoginForm from '../Components/LoginForm';
 
 export default class Login extends Component {
     constructor() {
