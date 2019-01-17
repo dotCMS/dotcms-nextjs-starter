@@ -9,7 +9,7 @@ import './Page.css';
 const CantRender = () => {
     return (
         <Alert className="alert" color="danger">
-            <h4 className="alert-heading">Page can\'t be rendered</h4>
+            <h4 className="alert-heading">Page can not be rendered</h4>
             <p>You might not have enterprise license or the page is not created with our layout editor.</p>
         </Alert>
     );
