@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { Nav as BootstrapNav, NavItem, NavLink, NavbarToggler, Collapse } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import DotCMSApi from '../libs/dotcms.api';
 
 export default class Nav extends Component {
     state = {
-        isOpen: false,
+        collapsed: false,
+        showLogin: false,
         items: []
     };
 
     async componentDidMount() {
-        fetch('/api/v1/nav//?depth=2', {
-            headers: {
-                DOTAUTH: Buffer.from(
-                    `${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`
-                ).toString('base64')
-            }
+        DotCMSApi.request({
+            url: '/api/v1/nav//?depth=2'
         })
             .then(response => response.json())
             .then(data => data.entity.children)
@@ -26,18 +24,25 @@ export default class Nav extends Component {
             });
     }
 
-    toggleOpen = e => {
+    toggleCollapsed = e => {
         this.setState({
             ...this.state,
-            isOpen: !this.state.isOpen
+            collapsed: !this.state.collapsed
+        });
+    };
+
+    toggleLogin = e => {
+        this.setState({
+            ...this.state,
+            showLogin: !this.state.showLogin
         });
     };
 
     render() {
         return (
             <>
-                <NavbarToggler onClick={this.toggleOpen} />
-                <Collapse isOpen={this.state.isOpen} navbar>
+                <NavbarToggler onClick={this.toggleCollapsed} />
+                <Collapse isOpen={this.state.collapsed} navbar>
                     <BootstrapNav pills={true}>
                         {this.state.items.map(item => {
                             return (

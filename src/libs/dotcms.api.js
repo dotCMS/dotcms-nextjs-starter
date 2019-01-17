@@ -1,47 +1,81 @@
+const { login, isLogin, logout } = require('./dotcms.auth');
 const fetch = require('node-fetch');
 
-const processPage = (page) => {
+const getUrl = pathname => {
+    const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DEFAULT_HOST : '';
+    return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
+};
+
+const translate = page => {
     page.layout.body.rows.forEach(row => {
         row.columns.forEach(col => {
             col.containers = col.containers.map(container => {
                 return {
                     ...container,
                     ...page.containers[container.identifier].container,
-                    acceptTypes: page.containers[container.identifier].containerStructures.map(structure => structure.contentTypeVar).join(','),
+                    acceptTypes: page.containers[container.identifier].containerStructures
+                        .map(structure => structure.contentTypeVar)
+                        .join(','),
                     contentlets: page.containers[container.identifier].contentlets[`uuid-${container.uuid}`]
                 };
             });
         });
     });
     return page;
-}
+};
 
-export default {
-    processPage: processPage,
-    getPage: async ({includeHost, pathname}) => {
-        // TODO: we need to pass dinamically the lagunage_id and the host
-        const url = `${includeHost ? process.env.REACT_APP_DEFAULT_HOST : ''}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
+const request = ({ url, method }) => {
+    return fetch(url, {
+        method: method || 'GET',
+        headers: {
+            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`
+        }
+    });
+};
 
-        return await fetch(url, {
-            headers: {
-                DOTAUTH: Buffer.from(`${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`).toString('base64')
+export const get = async ({ pathname }) => {
+    const url = getUrl(pathname);
+
+    return request({ url })
+        .then(data => {
+            if (data.ok) {
+                return data.json();
+            } else {
+                return data;
             }
         })
-            .then(data => data.json())
-            .then(data => data.entity)
-            .then(page => {
-                return processPage(page);
-            })
-            .catch(err => err);
-    },
-    emitEditPage: (pathname) => {
-        const customEvent = window.top.document.createEvent('CustomEvent');
-        customEvent.initCustomEvent('ng-event', false, false,  {
-            name: 'remote-render-edit',
-            data: {
-                pathname
+        .then(data => {
+            if (data.entity) {
+                return data.entity.layout ? translate(data.entity) : {};
             }
+            throw new Error(data.status);
+        })
+        .catch(err => {
+            throw new Error(err);
         });
-        window.top.document.dispatchEvent(customEvent);
-    }
+};
+
+const emitNavigationEnd = pathname => {
+    const customEvent = window.top.document.createEvent('CustomEvent');
+    customEvent.initCustomEvent('ng-event', false, false, {
+        name: 'remote-render-edit',
+        data: {
+            pathname
+        }
+    });
+    window.top.document.dispatchEvent(customEvent);
+};
+
+export default {
+    auth: {
+        login,
+        logout,
+        isLogin
+    },
+    page: {
+        translate,
+        get,
+        emitNavigationEnd
+    },
+    request
 };
