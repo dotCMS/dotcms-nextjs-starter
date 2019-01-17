@@ -70,7 +70,7 @@ const server = http.createServer((request, response) => {
         request.on('end', function() {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
-            const page = DotCMSApi.processPage(JSON.parse(parse(postData).dotPageData).entity);
+            const page = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, page.layout));
@@ -93,8 +93,7 @@ const server = http.createServer((request, response) => {
         if (isThisAPage(sanitizePath)) {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
 
-                DotCMSApi.getPage({
-                    includeHost: true,
+                DotCMSApi.page.get({
                     pathname: sanitizePath
                 }).then(page => {
                     const app = renderToString(getMainComponent(request.url, page.layout));
@@ -117,11 +116,7 @@ const server = http.createServer((request, response) => {
                             port: 8080,
                             path: request.url,
                             method: 'GET',
-                            headers: {
-                                DOTAUTH: Buffer.from(
-                                    `${process.env.REACT_APP_USER_EMAIL}:${process.env.REACT_APP_USER_PASSWORD}`
-                                ).toString('base64')
-                            }
+                            headers: request.headers
                         },
                         res => {
                             res.pipe(

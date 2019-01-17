@@ -11,8 +11,8 @@ describe('<Page />', () => {
 
     it('should render alert', () => {
         const wrapper = shallow((<Page data={{body: {}}} />));
-        const alert = wrapper.find('Alert');
-        expect(alert.length).toBe(1);
+        const cantRender = wrapper.find('CantRender');
+        expect(cantRender.length).toBe(1);
     });
 
 })

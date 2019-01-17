@@ -625,7 +625,7 @@ const PAGE_MOCK = {
     }
 };
 
-const PAGE_MOCK_FORMMATED = DotCMSApi.processPage(PAGE_MOCK);
+const PAGE_MOCK_FORMMATED = DotCMSApi.page.translate(PAGE_MOCK);
 
 export default PAGE_MOCK_FORMMATED;
 
