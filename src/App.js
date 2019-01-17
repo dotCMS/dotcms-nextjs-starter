@@ -7,6 +7,8 @@ import Login from './Pages/Login';
 
 import DotCMSApi from './libs/dotcms.api';
 
+const ERROR_UNAUTHORIZED_USER = '400';
+
 class PageFetchWrapper extends Component {
     constructor() {
         super();
@@ -63,7 +65,7 @@ class PageFetchWrapper extends Component {
     }
 
     render() {
-        if (this.state.error === '401') {
+        if (this.state.error === ERROR_UNAUTHORIZED_USER) {
             return <Redirect to="/login" />;
         }
 

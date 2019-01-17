@@ -21,7 +21,7 @@ const user = getQuestion('Email / User Id');
 const password = getQuestion('Password');
 const expirationDays = getQuestion('Expiration Days (default 10)');
 
-const startCreateReactApp = token => {
+const setEnvVarTokenAndStartCreateReactApp = token => {
     spawn(`REACT_APP_AUTH_TOKEN=${token} npm run ${process.argv[2]}`, {
         stdio: 'inherit',
         shell: true
@@ -30,7 +30,7 @@ const startCreateReactApp = token => {
 
 const main = async () => {
     if (process.env.REACT_APP_BEARER_TOKEN) {
-        startCreateReactApp(process.env.REACT_APP_BEARER_TOKEN);
+        setEnvVarTokenAndStartCreateReactApp(process.env.REACT_APP_BEARER_TOKEN);
     } else {
         let token;
 
@@ -51,10 +51,16 @@ const main = async () => {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    if (res.status === 400) {
-                        console.log(
-                            '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
-                        );
+                    if (res.status !== 500) {
+                        if (res.status === 400) {
+                            console.log(
+                                '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
+                            );
+                        } else {
+                            console.log(
+                                `------------------------------------\nERROR ${res.status}\n------------------------------------`
+                            );
+                        }
                     }
                     return res.json();
                 })
@@ -64,7 +70,7 @@ const main = async () => {
         if (token) {
             rl.close();
             console.log(`BEARER TOKEN: ${token}`);
-            startCreateReactApp(token);
+            setEnvVarTokenAndStartCreateReactApp(token);
         }
     }
 };
