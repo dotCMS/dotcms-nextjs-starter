@@ -33,7 +33,7 @@ const request = ({ url, method }) => {
     });
 };
 
-export const get = async ({ pathname }) => {
+const get = async ({ pathname }) => {
     const url = getUrl(pathname);
 
     return request({ url })
