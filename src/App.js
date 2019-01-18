@@ -41,16 +41,9 @@ class PageFetchWrapper extends Component {
                 this.setState({
                     layout: data.layout,
                     pathname: pathname,
-                    error: null
+                    error: data.error
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
-            })
-            .catch(err => {
-                this.setState({
-                    layout: {},
-                    pathname: pathname,
-                    error: err.message
-                });
             });
     }
 
