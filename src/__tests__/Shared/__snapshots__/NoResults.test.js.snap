@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NoResults /> renders and matches snapshot 1`] = `
+<Fragment>
+  <div
+    className="alert alert-info"
+  >
+    No results available.
+  </div>
+</Fragment>
+`;

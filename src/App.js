@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 
 import Page from './Page';
 import DotCMSApi from '../src/libs/dotcms.api';
+import NewsDetailPage from './Pages/NewsDetail';
 
 class PageFetchWrapper extends Component {
     constructor() {
@@ -53,7 +54,10 @@ class PageFetchWrapper extends Component {
 
 const App = data => {
     return (
-        <Route render={(props) => <PageFetchWrapper {...props} {...data} />} />
+        <>  
+            <Route path="/news-events/news/:id" component={NewsDetailPage} />
+            <Route render={(props) => <PageFetchWrapper {...props} {...data} />} />
+        </>
     );
 };
 export default App;

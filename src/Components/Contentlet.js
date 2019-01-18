@@ -1,5 +1,6 @@
 import React from 'react';
 import DotContentlet from '../libs/DotContentlet';
+import NewsPage from '../Pages/News'
 
 function createMarkup(html) { return {__html: html}; };
 
@@ -39,6 +40,8 @@ const getComponent = (data) => {
             return CalendarEvent;
         case 'SimpleWidget':
             return SimpleWidget;
+        case 'NewsWidgets':
+            return NewsPage;
         default: 
             return ContentGeneric;
     }
