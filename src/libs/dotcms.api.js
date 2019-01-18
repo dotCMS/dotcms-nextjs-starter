@@ -1,4 +1,4 @@
-const { login, isLogin, logout } = require('./dotcms.auth');
+const { login, isLogin, logout, getCurrentSite } = require('./dotcms.auth');
 const fetch = require('node-fetch');
 
 const getUrl = pathname => {
@@ -24,12 +24,14 @@ const translate = page => {
     return page;
 };
 
-const request = ({ url, method }) => {
+const request = ({ url, method, body }) => {
     return fetch(url, {
         method: method || 'GET',
         headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`
-        }
+            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+            "Content-type": "application/json"
+        },
+        body: body
     });
 };
 
@@ -51,7 +53,9 @@ const get = async ({ pathname }) => {
             throw new Error(data.status);
         })
         .catch(err => {
-            throw new Error(err);
+            return {
+                error: err.message
+            }
         });
 };
 
@@ -76,6 +80,9 @@ export default {
         translate,
         get,
         emitNavigationEnd
+    },
+    sites: {
+        getCurrentSite
     },
     request
 };

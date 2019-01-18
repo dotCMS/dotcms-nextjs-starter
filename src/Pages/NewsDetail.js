@@ -6,7 +6,7 @@ class NewsDetailPage extends React.Component {
     super(props, context);
     
     try {
-      console.log("---props", props, this.props.match.params.id);
+    //   console.log("---props", props, this.props.match.params.id);
     } catch (e) {}
 
     const newsMock = {

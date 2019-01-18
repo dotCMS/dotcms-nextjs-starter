@@ -1,118 +1,164 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import wait from 'waait';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { shallow } from "enzyme";
+import wait from "waait";
+import { Link } from "react-router-dom";
+import DotCMSApi from "../../libs/dotcms.api";
+import Pagination from "../../Components/Shared/Pagination";
 
-import News from '../../Pages/News';
+import News from "../../Pages/News";
 
-describe('<News />', () => {
-    let wrapper;
+function fillQuery(query, fetchParams) {
+  query = query
+    .replace("CONFHOSTVALUE", fetchParams.CONFHOSTVALUE)
+    .replace("SORTBYVALUE", fetchParams.SORTBYVALUE)
+    .replace("SORTTYPEVALUE", fetchParams.SORTTYPEVALUE)
+    .replace("OFFSETVALUE", fetchParams.OFFSETVALUE)
+    .replace("SIZEPERPAGE", fetchParams.SIZEPERPAGE);
+  return query;
+}
 
-    beforeEach(async () => {
-        window.fetch = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve({
-                                entity: {
-                                    identifier: "48190c8c-42c4-46af-8d1a-0cd5db894797"
-                                }
-                            });
-                        })
-                });
-            });
+async function pageChange() {}
+
+describe("<News />", () => {
+  let wrapper;
+  const conHostId = "48190c8c-42c4-46af-8d1a-0cd5db894797";
+  let newsPageData;
+  let newsSearchData;
+
+  beforeEach(async () => {
+    DotCMSApi.sites.getCurrentSite = jest.fn().mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        resolve({
+          identifier: conHostId
         });
+      });
+    });
 
-        const newsSearchData = {
-            contentlets: [{
-                title: 'news1'
-            },{
-                title: 'news2'
-            },{
-                title: 'news3'
-            }],
-            esresponse: [
-                {
-                    hits: {
-                        total: 25
-                    }
-                }
-            ]
-        };
-        
-        window.fetch = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve({
-                                newsSearchData
-                            });
-                        })
-                });
-            });
+    newsSearchData = {
+      contentlets: [
+        {
+          title: "news1"
+        },
+        {
+          title: "news2"
+        },
+        {
+          title: "news3"
+        }
+      ],
+      esresponse: [
+        {
+          hits: {
+            total: 25
+          }
+        }
+      ]
+    };
+
+    DotCMSApi.request = jest.fn().mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        resolve({
+          status: 200,
+          json: () =>
+            new Promise((resolve, reject) => {
+              resolve(newsSearchData);
+            })
         });
-
-        const newsPageData = {
-            sortResultsBy: 'title',
-            sortOrder1: 'asc',
-            pagination: true,
-            itemsPerPage: 30,
-            numberOfResults: 9
-        };
-        wrapper = await shallow(<News data={newsPageData} />);
+      });
     });
 
-    xit('should call api correctly', async () => {
-        expect(window.fetch).toHaveBeenCalledWith('/api/v1/site/currentSite', {
-            headers: { DOTAUTH: expect.any(String) }
+    newsPageData = {
+      sortResultsBy: "title",
+      sortOrder1: "asc",
+      pagination: true,
+      itemsPerPage: 30,
+      numberOfResults: 9
+    };
+  });
+
+  it("should render NewsList & Pagination components", async () => {
+    wrapper = shallow(<News data={newsPageData} />);
+    await wait();
+    expect(DotCMSApi.sites.getCurrentSite).toHaveBeenCalled();
+
+    const fetchParams = {
+      CONFHOSTVALUE: conHostId,
+      SORTBYVALUE: newsPageData.sortResultsBy + "_dotraw",
+      SORTTYPEVALUE: newsPageData.sortOrder1,
+      OFFSETVALUE: "0",
+      SIZEPERPAGE: newsPageData.pagination
+        ? newsPageData.itemsPerPage
+        : newsPageData.numberOfResults
+    };
+
+    const query = fillQuery(wrapper.state().query, fetchParams);
+
+    const params = {
+      body: query,
+      method: "POST",
+      url: wrapper.state().url
+    };
+    expect(DotCMSApi.request).toHaveBeenCalledWith(params);
+
+    expect(wrapper.find("NoResults").exists()).toBeFalsy();
+
+    const newsList = wrapper.find("NewsList");
+    expect(newsList.props()).toEqual({
+      configuration: newsPageData,
+      news: newsSearchData.contentlets
+    });
+
+    const pagination = wrapper.find(Pagination);
+    expect(pagination.prop("sizePerPage")).toEqual(fetchParams.SIZEPERPAGE);
+    expect(pagination.prop("totalItems")).toEqual(
+      newsSearchData.esresponse[0].hits.total
+    );
+  });
+
+  it("should render NewsList & NO Pagination components", async () => {
+    newsPageData = { ...newsPageData, pagination: false };
+    wrapper = shallow(<News data={newsPageData} />);
+    await wait();
+
+    expect(wrapper.find("NoResults").exists()).toBeFalsy();
+
+    const newsList = wrapper.find("NewsList");
+    expect(newsList.props()).toEqual({
+      configuration: newsPageData,
+      news: newsSearchData.contentlets
+    });
+
+    expect(wrapper.find("Pagination").exists()).toBeFalsy();
+  });
+
+  it("should render NoResults component", async () => {
+    newsSearchData = {
+      contentlets: [],
+      esresponse: [
+        {
+          hits: {
+            total: 0
+          }
+        }
+      ]
+    };
+
+    DotCMSApi.request = jest.fn().mockImplementation(() => {
+      return new Promise((resolve, reject) => {
+        resolve({
+          status: 200,
+          json: () =>
+            new Promise((resolve, reject) => {
+              resolve(newsSearchData);
+            })
         });
-        console.log('---window.fetch', window.fetch)
-        await wait();
-        // await wrapper.update();
-        // expect(window.fetch).toHaveBeenCalledWith('/api/es/search', {
-            // headers: { DOTAUTH: expect.any(String) }
-        // });
-        // process.nextTick(() => { // 6
-        //     // expect(wrapper.state()).toEqual({
-        //       // ... assert the set state
-        //     // });
-      
-        //     window.fetch.mockClear(); // 7
-        //     done(); // 8
-        //   });
+      });
     });
 
-    /*
-    it('renders nav correctly', async () => {
-        await wrapper.update();
-        await wait();
-
-        const navItems = wrapper.find('NavItem');
-        expect(navItems.length).toEqual(2);
-
-        const navLinks = wrapper.find('NavLink');
-        expect(navLinks.map(item => item.props())).toEqual([
-            { active: false, children: 'About Us', to: '/about', tag: Link },
-            { active: false, children: 'Products', to: '/products', tag: Link }
-        ]);
-    });
-
-    it('should have BootstrapNav and pill in true', () => {
-        expect(wrapper.find('Nav').props().pills).toBe(true);
-    });
-
-    it('should expand menu', async () => {
-        expect(wrapper.find('Collapse').props().isOpen).toBe(false);
-
-        wrapper.find('NavbarToggler').simulate('click');
-        await wrapper.update();
-        await wait();
-
-        expect(wrapper.find('Collapse').props().isOpen).toBe(true);
-    });
-    */
+    wrapper = shallow(<News data={newsPageData} />);
+    await wait();
+    expect(wrapper.find("NoResults").exists()).toBeTruthy();
+    expect(wrapper.find("NewsList").exists()).toBeFalsy();
+    expect(wrapper.find("Pagination").exists()).toBeFalsy();
+  });
 });
