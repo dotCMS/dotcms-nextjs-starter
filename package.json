@@ -9,8 +9,8 @@
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject",
     "serve": "npm run build && nodemon --inspect=0.0.0.0:9229 server/index.js",
-    "tokenize:start": "node server/initWithToken.js start",
-    "tokenize:serve": "node server/initWithToken.js serve"
+    "auth:start": "node server/initWithToken.js start",
+    "auth:serve": "node server/initWithToken.js serve"
   },
   "eslintConfig": {
     "extends": "react-app"
