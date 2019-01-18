@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import Page from './Page';
-import Login from './Pages/Login';
+import Layout from './Components/Layout';
+import CantRender from './Components/CantRender';
 
 import DotCMSApi from './libs/dotcms.api';
 
 const ERROR_UNAUTHORIZED_USER = '400';
+
+const NoAuth = () => (
+    <CantRender title="Invalid Authorization Token" color="warning">
+        <p>
+            Please set one in the <code>.env</code> file or use <code>npm run auth:start</code>
+        </p>
+    </CantRender>
+);
 
 class PageFetchWrapper extends Component {
     constructor() {
@@ -35,7 +44,8 @@ class PageFetchWrapper extends Component {
                     error: null
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
-            }).catch(err => {
+            })
+            .catch(err => {
                 this.setState({
                     layout: {},
                     pathname: pathname,
@@ -65,18 +75,17 @@ class PageFetchWrapper extends Component {
     }
 
     render() {
-        if (this.state.error === ERROR_UNAUTHORIZED_USER) {
-            return <Redirect to="/login" />;
-        }
-
-        return <Page data={this.state.layout} error={this.state.error} />;
+        return (
+            <Layout>
+                {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
+            </Layout>
+        );
     }
 }
 
 const App = data => {
     return (
         <Switch>
-            <Route path="/login" component={Login} />
             <Route render={props => <PageFetchWrapper {...props} {...data} />} />
         </Switch>
     );
