@@ -51,7 +51,9 @@ const get = async ({ pathname }) => {
             throw new Error(data.status);
         })
         .catch(err => {
-            throw new Error(err);
+            return {
+                error: err.message
+            }
         });
 };
 

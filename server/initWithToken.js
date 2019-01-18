@@ -51,18 +51,22 @@ const main = async () => {
                 body: JSON.stringify(data)
             })
                 .then(res => {
-                    if (res.status !== 500) {
-                        if (res.status === 400) {
-                            console.log(
-                                '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
-                            );
-                        } else {
-                            console.log(
-                                `------------------------------------\nERROR ${res.status}\n------------------------------------`
-                            );
-                        }
+                    if (res.status === 200) {
+                        return res.json();
                     }
-                    return res.json();
+                    if (res.status === 400 || res.status === 401) {
+                        console.log(
+                            '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
+                        );
+                    } else {
+                        console.log(
+                            `------------------------------------\nERROR ${
+                                res.status
+                            }\n------------------------------------`
+                        );
+                    }
+
+                    return {};
                 })
                 .then(res => (res.entity ? res.entity.token : null));
         }
