@@ -5,11 +5,13 @@ import { Link } from 'react-router-dom';
 
 import Nav from '../Components/Nav';
 
+import DotCMSApi from '../libs/dotcms.api';
+
 describe('<Nav />', () => {
     let wrapper;
 
     beforeEach(async () => {
-        window.fetch = jest.fn().mockImplementation(() => {
+        DotCMSApi.request = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve({
                     status: 200,
@@ -40,8 +42,8 @@ describe('<Nav />', () => {
     });
 
     it('should call api correctly', () => {
-        expect(window.fetch).toHaveBeenCalledWith('/api/v1/nav//?depth=2', {
-            headers: { DOTAUTH: expect.any(String) }
+        expect(DotCMSApi.request).toHaveBeenCalledWith({
+            url: '/api/v1/nav//?depth=2'
         });
     });
 

@@ -1,5 +1,14 @@
-# Backend
+# Backend (SSR)
 Node server for Server Side Render the pages.
+
+### `npm run tokenize:serve`
+
+If `REACT_APP_BEARER_TOKEN` is not set in the `.env` file, this script prompt to ask you for the DotCMS email/user and password to:
+
+1. Get the token api from `/api/v1/authentication/api-token`
+2. Set the the token as an node env variable
+4. Then run `npm run serve`
+3. Pass the token as header in all the request to the DotCMS instance
 
 ### `npm run serve`
 
@@ -12,6 +21,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run tokenize:start`
+
+If `REACT_APP_BEARER_TOKEN` is not set in the `.env` file, this script prompt to ask you for the DotCMS email/user and password to:
+
+1. Get the token api from `/api/v1/authentication/api-token`
+2. Set the the token as an node env variable
+4. Then run `npm run start`
+3. Pass the token as header in all the request to the DotCMS instance
 
 ### `npm start`
 

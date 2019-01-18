@@ -8,7 +8,6 @@ import "./News.css";
 class NewsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       loading: true,
       news: [],
@@ -38,11 +37,7 @@ class NewsPage extends React.Component {
   async getCurrentSite() {
     return fetch("/api/v1/site/currentSite", {
       headers: {
-        DOTAUTH: Buffer.from(
-          `${process.env.REACT_APP_USER_EMAIL}:${
-            process.env.REACT_APP_USER_PASSWORD
-          }`
-        ).toString("base64")
+        Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*=\s*([^;]*).*$)|^.*$/, "$1")}`
       }
     })
       .then(response => response.json())
@@ -54,11 +49,7 @@ class NewsPage extends React.Component {
       method: 'post',
       headers: {
         "Content-type": "application/json",
-        DOTAUTH: Buffer.from(
-          `${process.env.REACT_APP_USER_EMAIL}:${
-            process.env.REACT_APP_USER_PASSWORD
-          }`
-        ).toString("base64")
+        Authorization: `Bearer ${document.cookie.replace(/(?:(?:^|.*;\s*)access_token\s*=\s*([^;]*).*$)|^.*$/, "$1")}`
       },
       body: query
     })
