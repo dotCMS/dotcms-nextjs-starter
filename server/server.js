@@ -58,7 +58,7 @@ const mimeType = {
 };
 
 const server = http.createServer((request, response) => {
-    if (request.method === 'POST') {
+    if (request.method === 'POST' && !request.url.startsWith('/api')) {
         var postData = '';
 
         // Get all post data when receive data event.
@@ -115,8 +115,9 @@ const server = http.createServer((request, response) => {
                             hostname: 'localhost',
                             port: 8080,
                             path: request.url,
-                            method: 'GET',
-                            headers: request.headers
+                            method: request.method,
+                            headers: request.headers,
+                            body: request.body
                         },
                         res => {
                             res.pipe(
