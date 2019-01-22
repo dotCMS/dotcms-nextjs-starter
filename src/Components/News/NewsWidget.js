@@ -1,10 +1,10 @@
-import React from "react";
-import { Spinner } from "reactstrap";
-import NewsList from "./NewsList";
-import NoResults from "../Shared/NoResults";
-import Pagination from "../Shared/Pagination";
-import DotCMSApi from "../../libs/dotcms.api";
-import "./NewsWidget.css";
+import React from 'react';
+import { Spinner } from 'reactstrap';
+import NewsList from './NewsList';
+import NoResults from '../Shared/NoResults';
+import Pagination from '../Shared/Pagination';
+import DotCMSApi from '../../libs/dotcms.api';
+import './NewsWidget.css';
 
 class NewsWidget extends React.Component {
   constructor(props, context) {
@@ -28,7 +28,7 @@ class NewsWidget extends React.Component {
             "from": OFFSETVALUE,
             "size": SIZEPERPAGE
         }}`,
-      url: "/api/es/search"
+      url: '/api/es/search'
     };
 
     this.pageChange = this.pageChange.bind(this);
@@ -37,18 +37,18 @@ class NewsWidget extends React.Component {
   async getNewsData(query) {
     return DotCMSApi.request({
       url: this.state.url,
-      method: "POST",
+      method: 'POST',
       body: query
     }).then(response => response.json());
   }
 
   fillQuery(fetchParams) {
     let query = this.state.query
-      .replace("CONFHOSTVALUE", fetchParams.CONFHOSTVALUE)
-      .replace("SORTBYVALUE", fetchParams.SORTBYVALUE)
-      .replace("SORTTYPEVALUE", fetchParams.SORTTYPEVALUE)
-      .replace("OFFSETVALUE", fetchParams.OFFSETVALUE)
-      .replace("SIZEPERPAGE", fetchParams.SIZEPERPAGE);
+      .replace('CONFHOSTVALUE', fetchParams.CONFHOSTVALUE)
+      .replace('SORTBYVALUE', fetchParams.SORTBYVALUE)
+      .replace('SORTTYPEVALUE', fetchParams.SORTTYPEVALUE)
+      .replace('OFFSETVALUE', fetchParams.OFFSETVALUE)
+      .replace('SIZEPERPAGE', fetchParams.SIZEPERPAGE);
     return query;
   }
 
@@ -56,10 +56,16 @@ class NewsWidget extends React.Component {
     const currentSite = await DotCMSApi.sites.getCurrentSite();
     const fetchParams = {
       CONFHOSTVALUE: currentSite.identifier,
-      SORTBYVALUE: this.props.data.sortResultsBy ? this.props.data.sortResultsBy + "_dotraw" : "title_dotraw",
-      SORTTYPEVALUE: this.props.data.sortOrder1 ? this.props.data.sortOrder1 : "asc",
-      OFFSETVALUE: "0",
-      SIZEPERPAGE: this.props.data.pagination ? this.props.data.itemsPerPage : this.props.data.numberOfResults
+      SORTBYVALUE: this.props.data.sortResultsBy
+        ? this.props.data.sortResultsBy + '_dotraw'
+        : 'title_dotraw',
+      SORTTYPEVALUE: this.props.data.sortOrder1
+        ? this.props.data.sortOrder1
+        : 'asc',
+      OFFSETVALUE: '0',
+      SIZEPERPAGE: this.props.data.pagination
+        ? this.props.data.itemsPerPage
+        : this.props.data.numberOfResults
     };
 
     const query = this.fillQuery(fetchParams);
@@ -105,7 +111,7 @@ class NewsWidget extends React.Component {
                   onPageChange={this.pageChange}
                 />
               ) : (
-                ""
+                ''
               )}
             </>
           ) : (

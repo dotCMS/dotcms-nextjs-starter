@@ -5,18 +5,9 @@ import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 export default class DotPagination extends React.Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
-      activePage: 0,
-      totalItems: 0
+      activePage: 0
     };
-  }
-
-  componentDidMount() {
-    this.setState(state => ({
-      ...state,
-      totalItems: this.props.totalItems
-    }));
   }
 
   pageChange(pageNumber) {
@@ -29,8 +20,8 @@ export default class DotPagination extends React.Component {
   }
 
   render() {
-    const { activePage, totalItems } = this.state;
-    const { pageSize } = this.props;
+    const { activePage } = this.state;
+    const { pageSize, totalItems } = this.props;
     const pages = Math.ceil(totalItems / pageSize) || 0;
     return (
       <>
@@ -46,7 +37,7 @@ export default class DotPagination extends React.Component {
       </>
     );
   }
-};
+}
 
 DotPagination.propTypes = {
   pageSize: PropTypes.number,
