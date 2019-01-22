@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewsListItem /> renders news correctly 1`] = `
+<Media
+  className="news-list-row"
+  tag="li"
+>
+  <Media
+    href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+    left={true}
+  >
+    <Media
+      alt="image"
+      object={true}
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+    />
+  </Media>
+  <Media
+    body={true}
+  >
+    <Media
+      heading={true}
+    >
+      <a
+        href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+      >
+        The Gas Price Rollercoaster
+      </a>
+    </Media>
+    <h5>
+      news.sysPublishDate
+    </h5>
+    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+  </Media>
+</Media>
+`;
+
+exports[`<NewsListItem /> renders news, without "image" 1`] = `
+<Media
+  className="news-list-row"
+  tag="li"
+>
+  <Media
+    body={true}
+  >
+    <Media
+      heading={true}
+    >
+      <a
+        href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+      >
+        The Gas Price Rollercoaster
+      </a>
+    </Media>
+    <h5>
+      news.sysPublishDate
+    </h5>
+    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+  </Media>
+</Media>
+`;
+
+exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
+<Media
+  className="news-list-row"
+  tag="li"
+>
+  <Media
+    href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+    left={true}
+  >
+    <Media
+      alt="image"
+      object={true}
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+    />
+  </Media>
+  <Media
+    body={true}
+  >
+    <Media
+      heading={true}
+    >
+      <a
+        href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+      >
+        The Gas Price Rollercoaster
+      </a>
+    </Media>
+    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+  </Media>
+</Media>
+`;
+
+exports[`<NewsListItem /> renders news, without "summary" 1`] = `
+<Media
+  className="news-list-row"
+  tag="li"
+>
+  <Media
+    href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+    left={true}
+  >
+    <Media
+      alt="image"
+      object={true}
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+    />
+  </Media>
+  <Media
+    body={true}
+  >
+    <Media
+      heading={true}
+    >
+      <a
+        href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+      >
+        The Gas Price Rollercoaster
+      </a>
+    </Media>
+    <h5>
+      news.sysPublishDate
+    </h5>
+    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+  </Media>
+</Media>
+`;
+
+exports[`<NewsListItem /> renders news, without "title" 1`] = `
+<Media
+  className="news-list-row"
+  tag="li"
+>
+  <Media
+    href="/news-events/news/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6"
+    left={true}
+  >
+    <Media
+      alt="image"
+      object={true}
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+    />
+  </Media>
+  <Media
+    body={true}
+  >
+    <h5>
+      news.sysPublishDate
+    </h5>
+    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+  </Media>
+</Media>
+`;

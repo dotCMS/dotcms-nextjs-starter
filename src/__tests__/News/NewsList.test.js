@@ -11,8 +11,9 @@ describe('<NewsList />', () => {
         for (let i = 0, total = 5; i < total; i++) {
             newsList.push(newsMock);
         }
-        const wrapper = shallow((<NewsList news={newsList} configuration={{}} />));
+        const wrapper = shallow(
+            <NewsList news={newsList} fieldsToDisplay={''} />
+        );
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
-
-})
+});
