@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Media } from "reactstrap";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Media } from 'reactstrap';
 
-const NewsListRow = ({ news, configuration }) => {
+const NewsListItem = ({ news, configuration }) => {
   const displayedFields = configuration.fieldsToDisplay.split(",");
   return (
     <>
@@ -22,7 +22,7 @@ const NewsListRow = ({ news, configuration }) => {
           ) : (
             ""
           )}
-          <h5>{displayedFields.includes("publishDate") ? news.sysPublishDate: ""}</h5>
+          {displayedFields.includes("publishDate") ? (<h5>news.sysPublishDate</h5>) : ""}
           {displayedFields.includes("summary") ? news.lead : ""}
         </Media>
       </Media>
@@ -30,9 +30,9 @@ const NewsListRow = ({ news, configuration }) => {
   );
 };
 
-NewsListRow.propTypes = {
+NewsListItem.propTypes = {
     configuration: PropTypes.object,
     news: PropTypes.object.isRequired
 };
 
-export default NewsListRow;
+export default NewsListItem;

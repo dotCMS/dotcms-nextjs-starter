@@ -1,6 +1,6 @@
 import React from 'react';
 import DotContentlet from '../libs/DotContentlet';
-import NewsPage from '../Pages/News'
+import NewsWidget from './News/NewsWidget'
 
 function createMarkup(html) { return {__html: html}; };
 
@@ -41,7 +41,7 @@ const getComponent = (data) => {
         case 'SimpleWidget':
             return SimpleWidget;
         case 'NewsWidgets':
-            return NewsPage;
+            return NewsWidget;
         default: 
             return ContentGeneric;
     }

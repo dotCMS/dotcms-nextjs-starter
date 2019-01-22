@@ -1,16 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import NewsListRow from '../../Components/News/NewsListRow';
+import NewsListItem from '../../Components/News/NewsListItem';
 import toJSON from 'enzyme-to-json';
 
 import { newsMock } from '../../TestUtils/news';
 
-describe('<NewsListRow />', () => {
+describe('<NewsListItem />', () => {
     it('renders news correctly', () => {
         const conf = {
             fieldsToDisplay: 'title,image,summary,publishDate,summary'
         };
-        const wrapper = shallow((<NewsListRow news={newsMock} configuration={conf} />));
+        const wrapper = shallow((<NewsListItem news={newsMock} configuration={conf} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
@@ -18,7 +18,7 @@ describe('<NewsListRow />', () => {
         const conf = {
             fieldsToDisplay: 'image,summary,publishDate,summary'
         };
-        const wrapper = shallow((<NewsListRow news={newsMock} configuration={conf} />));
+        const wrapper = shallow((<NewsListItem news={newsMock} configuration={conf} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
@@ -26,7 +26,7 @@ describe('<NewsListRow />', () => {
         const conf = {
             fieldsToDisplay: 'title,summary,publishDate,summary'
         };
-        const wrapper = shallow((<NewsListRow news={newsMock} configuration={conf} />));
+        const wrapper = shallow((<NewsListItem news={newsMock} configuration={conf} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
@@ -34,7 +34,7 @@ describe('<NewsListRow />', () => {
         const conf = {
             fieldsToDisplay: 'title,summary,image,summary'
         };
-        const wrapper = shallow((<NewsListRow news={newsMock} configuration={conf} />));
+        const wrapper = shallow((<NewsListItem news={newsMock} configuration={conf} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
@@ -42,7 +42,7 @@ describe('<NewsListRow />', () => {
         const conf = {
             fieldsToDisplay: 'title,summary,publishDate,image'
         };
-        const wrapper = shallow((<NewsListRow news={newsMock} configuration={conf} />));
+        const wrapper = shallow((<NewsListItem news={newsMock} configuration={conf} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 

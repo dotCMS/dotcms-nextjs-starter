@@ -1,12 +1,11 @@
-import React from "react";
+import React from 'react';
+import { Alert } from 'reactstrap';
 
 const NoResults = () => {
   return (
-    <>
-        <div className="alert alert-info">
-            No results available.
-        </div>
-    </>
+    <Alert color="info">
+        No results available.
+    </Alert>
   );
 };
 

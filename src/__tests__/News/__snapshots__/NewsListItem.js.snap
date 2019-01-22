@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NewsListRow /> renders news correctly 1`] = `
+exports[`<NewsListItem /> renders news correctly 1`] = `
 <Fragment>
   <Media
     className="news-list-row"
@@ -29,7 +29,7 @@ exports[`<NewsListRow /> renders news correctly 1`] = `
         </a>
       </Media>
       <h5>
-        2011-06-29 11:00:00.0
+        news.sysPublishDate
       </h5>
       Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
     </Media>
@@ -37,7 +37,7 @@ exports[`<NewsListRow /> renders news correctly 1`] = `
 </Fragment>
 `;
 
-exports[`<NewsListRow /> renders news, without "image" 1`] = `
+exports[`<NewsListItem /> renders news, without "image" 1`] = `
 <Fragment>
   <Media
     className="news-list-row"
@@ -56,7 +56,7 @@ exports[`<NewsListRow /> renders news, without "image" 1`] = `
         </a>
       </Media>
       <h5>
-        2011-06-29 11:00:00.0
+        news.sysPublishDate
       </h5>
       Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
     </Media>
@@ -64,7 +64,7 @@ exports[`<NewsListRow /> renders news, without "image" 1`] = `
 </Fragment>
 `;
 
-exports[`<NewsListRow /> renders news, without "publishDate" 1`] = `
+exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
 <Fragment>
   <Media
     className="news-list-row"
@@ -92,14 +92,13 @@ exports[`<NewsListRow /> renders news, without "publishDate" 1`] = `
           The Gas Price Rollercoaster
         </a>
       </Media>
-      <h5 />
       Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
     </Media>
   </Media>
 </Fragment>
 `;
 
-exports[`<NewsListRow /> renders news, without "summary" 1`] = `
+exports[`<NewsListItem /> renders news, without "summary" 1`] = `
 <Fragment>
   <Media
     className="news-list-row"
@@ -128,7 +127,7 @@ exports[`<NewsListRow /> renders news, without "summary" 1`] = `
         </a>
       </Media>
       <h5>
-        2011-06-29 11:00:00.0
+        news.sysPublishDate
       </h5>
       Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
     </Media>
@@ -136,7 +135,7 @@ exports[`<NewsListRow /> renders news, without "summary" 1`] = `
 </Fragment>
 `;
 
-exports[`<NewsListRow /> renders news, without "title" 1`] = `
+exports[`<NewsListItem /> renders news, without "title" 1`] = `
 <Fragment>
   <Media
     className="news-list-row"
@@ -156,7 +155,7 @@ exports[`<NewsListRow /> renders news, without "title" 1`] = `
       body={true}
     >
       <h5>
-        2011-06-29 11:00:00.0
+        news.sysPublishDate
       </h5>
       Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
     </Media>

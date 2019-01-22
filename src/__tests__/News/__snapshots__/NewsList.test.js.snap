@@ -6,7 +6,7 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
     className="news-list"
     list={true}
   >
-    <NewsListRow
+    <NewsListItem
       configuration={Object {}}
       key="0"
       news={
@@ -46,7 +46,7 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
         }
       }
     />
-    <NewsListRow
+    <NewsListItem
       configuration={Object {}}
       key="1"
       news={
@@ -86,7 +86,7 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
         }
       }
     />
-    <NewsListRow
+    <NewsListItem
       configuration={Object {}}
       key="2"
       news={
@@ -126,7 +126,7 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
         }
       }
     />
-    <NewsListRow
+    <NewsListItem
       configuration={Object {}}
       key="3"
       news={
@@ -166,7 +166,7 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
         }
       }
     />
-    <NewsListRow
+    <NewsListItem
       configuration={Object {}}
       key="4"
       news={

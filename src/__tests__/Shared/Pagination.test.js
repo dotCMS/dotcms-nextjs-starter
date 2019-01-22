@@ -7,7 +7,7 @@ describe('<Pagination />', () => {
     it('renders pagination correctly', () => {
         const pageSize = 9;
         const totalItems = 25;
-        const wrapper = shallow((<Pagination sizePerPage={pageSize} totalItems={totalItems} onPageChange={() => {}} />));
+        const wrapper = shallow((<Pagination pageSize={pageSize} totalItems={totalItems} onPageChange={() => {}} />));
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
@@ -15,9 +15,9 @@ describe('<Pagination />', () => {
         const pageSize = 9;
         const totalItems = 25;
         const pageChange = jest.fn();
-        const wrapper = shallow((<Pagination sizePerPage={pageSize} totalItems={totalItems} onPageChange={pageChange} />));
+        const wrapper = shallow((<Pagination pageSize={pageSize} totalItems={totalItems} onPageChange={pageChange} />));
         wrapper.find('PaginationLink').at(1).simulate('click')
         expect(pageChange).toHaveBeenCalledWith(1);
-        expect(wrapper.state().activePage).toBe(2);
+        expect(wrapper.state().activePage).toBe(1);
     });
 })

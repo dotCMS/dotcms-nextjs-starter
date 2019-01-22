@@ -1,11 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
 import wait from "waait";
-import { Link } from "react-router-dom";
 import DotCMSApi from "../../libs/dotcms.api";
 import Pagination from "../../Components/Shared/Pagination";
 
-import News from "../../Pages/News";
+import NewsWidget from "../../Components/News/NewsWidget";
 
 function fillQuery(query, fetchParams) {
   query = query
@@ -17,9 +16,7 @@ function fillQuery(query, fetchParams) {
   return query;
 }
 
-async function pageChange() {}
-
-describe("<News />", () => {
+describe("<NewsWidget />", () => {
   let wrapper;
   const conHostId = "48190c8c-42c4-46af-8d1a-0cd5db894797";
   let newsPageData;
@@ -77,7 +74,7 @@ describe("<News />", () => {
   });
 
   it("should render NewsList & Pagination components", async () => {
-    wrapper = shallow(<News data={newsPageData} />);
+    wrapper = shallow(<NewsWidget data={newsPageData} />);
     await wait();
     expect(DotCMSApi.sites.getCurrentSite).toHaveBeenCalled();
 
@@ -109,7 +106,7 @@ describe("<News />", () => {
     });
 
     const pagination = wrapper.find(Pagination);
-    expect(pagination.prop("sizePerPage")).toEqual(fetchParams.SIZEPERPAGE);
+    expect(pagination.prop("pageSize")).toEqual(fetchParams.SIZEPERPAGE);
     expect(pagination.prop("totalItems")).toEqual(
       newsSearchData.esresponse[0].hits.total
     );
@@ -117,7 +114,7 @@ describe("<News />", () => {
 
   it("should render NewsList & NO Pagination components", async () => {
     newsPageData = { ...newsPageData, pagination: false };
-    wrapper = shallow(<News data={newsPageData} />);
+    wrapper = shallow(<NewsWidget data={newsPageData} />);
     await wait();
 
     expect(wrapper.find("NoResults").exists()).toBeFalsy();
@@ -155,7 +152,7 @@ describe("<News />", () => {
       });
     });
 
-    wrapper = shallow(<News data={newsPageData} />);
+    wrapper = shallow(<NewsWidget data={newsPageData} />);
     await wait();
     expect(wrapper.find("NoResults").exists()).toBeTruthy();
     expect(wrapper.find("NewsList").exists()).toBeFalsy();

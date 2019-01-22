@@ -1,12 +1,12 @@
 import React from "react";
 import { Spinner } from "reactstrap";
-import NewsList from "../Components/News/NewsList";
-import NoResults from "../Components/Shared/NoResults";
-import Pagination from "../Components/Shared/Pagination";
-import DotCMSApi from "../libs/dotcms.api";
-import "./News.css";
+import NewsList from "./NewsList";
+import NoResults from "../Shared/NoResults";
+import Pagination from "../Shared/Pagination";
+import DotCMSApi from "../../libs/dotcms.api";
+import "./NewsWidget.css";
 
-class NewsPage extends React.Component {
+class NewsWidget extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -101,7 +101,7 @@ class NewsPage extends React.Component {
               {this.props.data.pagination ? (
                 <Pagination
                   totalItems={fetchParams.TOTALITEMS}
-                  sizePerPage={fetchParams.SIZEPERPAGE}
+                  pageSize={fetchParams.SIZEPERPAGE}
                   onPageChange={this.pageChange}
                 />
               ) : (
@@ -117,4 +117,4 @@ class NewsPage extends React.Component {
   }
 }
 
-export default NewsPage;
+export default NewsWidget;
