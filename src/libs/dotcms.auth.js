@@ -23,7 +23,13 @@ export const login = ({ user, password }) => {
 };
 
 export const getCurrentSite = () => {
-  return fetch("/api/v1/site/currentSite")
+  return fetch("/api/v1/site/currentSite", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+      "Content-type": "application/json"
+    }
+  })
     .then(response => response.json())
     .then(data => data.entity);
 };
