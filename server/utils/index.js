@@ -1,6 +1,15 @@
-const { dotCmsInstance, expirationDays, nodePreviewURL, password, user, writeEnv, rl } = require('./questions');
+const {
+    dotCmsInstance,
+    expirationDays,
+    nodePreviewURL,
+    password,
+    user,
+    writeEnv,
+    rl,
+    requiredQuestion
+} = require('./questions');
 
-const { DOTCMS, fakeEnv, printHeading } = require('./print');
+const { DOTCMS, fakeEnv, printHeading, printDim } = require('./print');
 
 const questions = {
     dotCmsInstance,
@@ -14,7 +23,9 @@ const questions = {
 module.exports = {
     DOTCMS,
     fakeEnv,
+    printDim,
     printHeading,
     questions,
-    rl
+    rl,
+    requiredQuestion
 };

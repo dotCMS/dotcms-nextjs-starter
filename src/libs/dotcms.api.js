@@ -3,10 +3,7 @@ const { getCurrentSite } = require('./dotcms.sites');
 const fetch = require('node-fetch');
 
 const getUrl = pathname => {
-    const host =
-        process.env.NODE_ENV !== 'development'
-            ? process.env.REACT_APP_DEFAULT_HOST
-            : '';
+    const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DOTCMS_HOST : '';
     return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
 };
 
