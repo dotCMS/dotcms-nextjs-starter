@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const parseEnvFile = file => {
     return Object.assign(
@@ -15,29 +15,23 @@ const parseEnvFile = file => {
     );
 };
 
-const createEnvFile = params => {
+export const createEnvFile = params => {
     const content = Object.keys(params)
         .map(key => `${key}=${params[key]}`)
         .join('\n');
 
     return new Promise((resolve, reject) => {
         fs.writeFile('.env', content, (err, data) => {
-            console.log('createEnvFile', data);
             resolve(data);
         });
     });
 };
 
-const getParsedEnvFile = () => {
+export const getParsedEnvFile = () => {
     return new Promise((resolve, reject) => {
         fs.readFile('.env', 'utf8', async (err, file) => {
             const parsedEnvFile = err ? null : parseEnvFile(file);
             resolve(parsedEnvFile);
         });
     });
-};
-
-module.exports = {
-    getParsedEnvFile,
-    createEnvFile
 };

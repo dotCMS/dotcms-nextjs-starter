@@ -72,6 +72,7 @@ const server = http.createServer((request, response) => {
             // let postDataObject = JSON.parse(postData);
             const page = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
 
+
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, page.layout));
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);

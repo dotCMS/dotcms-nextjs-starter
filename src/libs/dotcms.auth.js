@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 export const isLogin = () => {
     return document.cookie.split('access_token').length > 1;
 };
@@ -8,8 +10,8 @@ export const logout = () => {
     });
 };
 
-export const login = ({ user, password }) => {
-    return fetch('/api/v1/authentication/api-token', {
+export const login = ({ user, password, expirationDays, host }) => {
+    return fetch(`${host || ''}/api/v1/authentication/api-token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -17,7 +19,7 @@ export const login = ({ user, password }) => {
         body: JSON.stringify({
             user: user,
             password: password,
-            expirationDays: 10
+            expirationDays: expirationDays || 10
         })
     });
 };
