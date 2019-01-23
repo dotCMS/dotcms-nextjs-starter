@@ -1,13 +1,18 @@
 require('dotenv').config();
 
-const fs = require('fs');
 const fetch = require('node-fetch');
 const { spawn } = require('child_process');
 
-const { DOTCMS, questions, rl, printHeading, requiredQuestion } = require('./utils');
+const { DOTCMS, questions, rl, printHeading, createEnvFile, getParsedEnvFile, printBright } = require('./utils');
 
-const setEnvVarTokenAndStartCreateReactApp = token => {
-    spawn(`REACT_APP_AUTH_TOKEN=${token} npm run ${process.argv[2]}`, {
+const setEnvVarsTokenAndStartCreateReactApp = vars => {
+    let prep = vars
+        ? Object.keys(vars)
+                .map(key => `${key}=${vars[key]}`)
+                .join(' ')
+        : '';
+
+    spawn(`${prep} npm run ${process.argv[2]}`, {
         stdio: 'inherit',
         shell: true
     });
@@ -15,113 +20,95 @@ const setEnvVarTokenAndStartCreateReactApp = token => {
 
 const printWelcome = () => {
     printHeading(`Welcome to ${DOTCMS} SPA starter`);
-    console.log('This utility will walk you through setting up\nall the necessary environmental variables');
+    console.log('This utility will walk you through setting up\nall the necessary environmental variables\n');
 };
 
-const parseEnvFile = file => {
-    return Object.assign(
-        ...file
-            .toString()
-            .split('\n')
-            .filter(line => /^([^=:#]+?)[=:](.*)/.test(line))
-            .map(line => {
-                const item = line.split('=');
-                return {
-                    [item[0]]: item[1]
-                };
-            })
-    );
+const DEFAULT_ENV_VARS = {
+    PUBLIC_URL: 'http://localhost:5000/',
+    REACT_APP_DOTCMS_HOST: 'http://localhost:8080'
 };
 
-const createEnvFile = params => {
-    const content = Object.keys(params)
-        .map(key => `${key}=${params[key]}`)
-        .join('\n');
-
-    fs.writeFile('.env', content, (err, data) => {
-        console.log(data);
-    });
-};
-
-const main = () => {
+const main = async () => {
     if (process.env.REACT_APP_BEARER_TOKEN) {
-        setEnvVarTokenAndStartCreateReactApp(process.env.REACT_APP_BEARER_TOKEN);
+        setEnvVarsTokenAndStartCreateReactApp(process.env.REACT_APP_BEARER_TOKEN);
     } else {
         let cliValues = {
             expirationDays: 10,
             writeEnv: true,
-            env: {}
+            env: DEFAULT_ENV_VARS
         };
 
         printWelcome();
 
-        fs.readFile('.env', 'utf8', async (err, file) => {
-            const parsedEnvFile = err ? {} : parseEnvFile(file);
+        const parsedEnvFile = await getParsedEnvFile();
 
-            if (err) {
-                printHeading('No .env file in your system');
-                cliValues.writeEnv = await questions.writeEnv().then(res => res === 'y' || res === 'Y');
-            }
+        if (parsedEnvFile) {
+            cliValues.env = {
+                ...cliValues.env,
+                ...parsedEnvFile
+            };
+            printBright('We found a .env file in your system');
+        } else {
+            printBright('No .env file in your system');
+        }
 
-            cliValues.env.REACT_APP_DOTCMS_HOST = await requiredQuestion(
-                questions.dotCmsInstance,
-                parsedEnvFile.REACT_APP_DOTCMS_HOST
-            );
+        cliValues.writeEnv = await questions.writeEnv(!!parsedEnvFile).then(res => res === 'y' || res === 'Y');
 
-            cliValues.env.PUBLIC_URL = await requiredQuestion(questions.nodePreviewURL, parsedEnvFile.PUBLIC_URL);
+        cliValues.env.REACT_APP_DOTCMS_HOST = await questions.dotCmsInstance(cliValues.env.REACT_APP_DOTCMS_HOST);
 
-            let token;
-            while (!token) {
-                printHeading('Authorization');
+        cliValues.env.PUBLIC_URL = await questions.nodePreviewURL(cliValues.env.PUBLIC_URL);
 
-                cliValues.user = await questions.user();
-                cliValues.password = await questions.password();
-                cliValues.expirationDays = await questions.expirationDays();
+        let token;
+        while (!token) {
+            printHeading('Authorization');
 
-                // console.log(cliValues);
+            cliValues.user = await questions.user();
+            cliValues.password = await questions.password();
+            cliValues.expirationDays = await questions.expirationDays();
 
-                const url = `${cliValues.env.REACT_APP_DOTCMS_HOST}/api/v1/authentication/api-token`;
+            const url = `${cliValues.env.REACT_APP_DOTCMS_HOST}/api/v1/authentication/api-token`;
 
-                console.log(url);
-
-                token = await fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        user: cliValues.user,
-                        password: cliValues.password
-                    })
+            token = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user: cliValues.user,
+                    password: cliValues.password
                 })
-                    .then(res => {
-                        if (res.status === 200) {
-                            return res.json();
-                        }
-                        if (res.status === 400 || res.status === 401) {
-                            console.log(
-                                '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
-                            );
-                        } else {
-                            console.log(
-                                `------------------------------------\nERROR ${
-                                    res.status
-                                }\n------------------------------------`
-                            );
-                        }
+            })
+                .then(res => {
+                    if (res.status === 200) {
+                        return res.json();
+                    }
+                    if (res.status === 400 || res.status === 401) {
+                        console.log(
+                            '------------------------------------\nWRONG CREDENTIALS \n------------------------------------'
+                        );
+                    } else {
+                        console.log(
+                            `------------------------------------\nERROR ${
+                                res.status
+                            }\n------------------------------------`
+                        );
+                    }
 
-                        return {};
-                    })
-                    .then(res => (res.entity ? res.entity.token : null));
-            }
+                    return {};
+                })
+                .then(res => (res.entity ? res.entity.token : null));
+        }
 
-            if (token) {
-                rl.close();
-                cliValues.env.REACT_APP_BEARER_TOKEN = token;
-                createEnvFile(cliValues.env);
-                setEnvVarTokenAndStartCreateReactApp(token);
+        if (token) {
+            rl.close();
+            cliValues.env.REACT_APP_BEARER_TOKEN = token;
+
+            if (cliValues.writeEnv) {
+                createEnvFile(cliValues.env).then(setEnvVarsTokenAndStartCreateReactApp)
+            } else {
+                setEnvVarsTokenAndStartCreateReactApp(cliValues.env);
             }
-        });
+        }
     }
 };
 

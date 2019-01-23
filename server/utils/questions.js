@@ -1,6 +1,6 @@
 const readline = require('readline');
 
-const { DOTCMS, getQuestionHint, printDim } = require('./print');
+const { DOTCMS, getQuestionHint } = require('./print');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -23,26 +23,13 @@ const nodePreviewURL = async current =>
     (await getQuestion(`Node Preview URL ${getQuestionHint(current, 'current')}`)()) || current;
 const password = getQuestion(`${DOTCMS} Password`);
 const user = getQuestion(`${DOTCMS} Email / User Id`);
-const writeEnv = getQuestion(`Looks like you don't have a .env file in your project.\nWould you like to create one? (y/n) ${getQuestionHint('y')}`);
+const writeEnv = async existing => {
+    const label = existing
+        ? 'Would you like to overwrite the env variables in the file?'
+        : 'Would you like to create one?';
 
-const requiredQuestion = async (question, defaultAnswer) => {
-    let answer;
-    let counter = 0;
-
-    while(!answer) {
-        answer = await question(defaultAnswer);
-
-        if (!answer) {
-            counter++;
-        }
-
-        if (counter) {
-            printDim('\nThis is a required field');
-        }
-    }
-
-    return answer
-}
+    return await getQuestion(`${label} (y/n) ${getQuestionHint('y')}`)();
+};
 
 module.exports = {
     dotCmsInstance,
@@ -51,6 +38,5 @@ module.exports = {
     password,
     rl,
     user,
-    writeEnv,
-    requiredQuestion
+    writeEnv
 };

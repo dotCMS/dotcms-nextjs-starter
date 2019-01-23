@@ -5,11 +5,11 @@ const {
     password,
     user,
     writeEnv,
-    rl,
-    requiredQuestion
+    rl
 } = require('./questions');
 
-const { DOTCMS, fakeEnv, printHeading, printDim } = require('./print');
+const { DOTCMS, printHeading, printDim, printBright } = require('./print');
+const { getParsedEnvFile, createEnvFile } = require('./envFile');
 
 const questions = {
     dotCmsInstance,
@@ -22,10 +22,11 @@ const questions = {
 
 module.exports = {
     DOTCMS,
-    fakeEnv,
+    getParsedEnvFile,
+    printBright,
     printDim,
     printHeading,
     questions,
     rl,
-    requiredQuestion
+    createEnvFile
 };
