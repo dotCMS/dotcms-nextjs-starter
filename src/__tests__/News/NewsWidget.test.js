@@ -62,15 +62,15 @@ describe('<NewsWidget />', () => {
         await wait();
 
         const fetchParams = {
-            SORTBYVALUE: newsPageData.sortResultsBy + '_dotraw',
-            SORTTYPEVALUE: newsPageData.sortOrder1,
-            OFFSETVALUE: '0',
-            SIZEPERPAGE: newsPageData.pagination
+            fieldsToDisplay: '',
+            sortResultsBy: newsPageData.sortResultsBy,
+            sortOrder1: newsPageData.sortOrder1,
+            itemsPerPage: newsPageData.pagination
                 ? newsPageData.itemsPerPage
                 : newsPageData.numberOfResults,
-            LANGUAGEIDVALUE: newsPageData.languageId,
-            PAGINATION: newsPageData.pagination,
-            NUMBEROFRESULTS: newsPageData.numberOfResults
+                languageId: newsPageData.languageId,
+            pagination: newsPageData.pagination,
+            numberOfResults: newsPageData.numberOfResults
         };
 
         expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', fetchParams);
@@ -83,7 +83,7 @@ describe('<NewsWidget />', () => {
         });
 
         const pagination = wrapper.find(Pagination);
-        expect(pagination.prop('pageSize')).toEqual(fetchParams.SIZEPERPAGE);
+        expect(pagination.prop('pageSize')).toEqual(fetchParams.itemsPerPage);
         expect(pagination.prop('totalItems')).toEqual(
             newsSearchData.esresponse[0].hits.total
         );

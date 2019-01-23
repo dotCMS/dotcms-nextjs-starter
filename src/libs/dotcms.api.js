@@ -71,16 +71,19 @@ const esSearch = (contentType, params) => {
     }}`;
 
     const fetchParams = {
-        LANGUAGEIDVALUE: params.LANGUAGEIDVALUE ? params.LANGUAGEIDVALUE : '1',
-        SORTBYVALUE: params.SORTBYVALUE ? params.SORTBYVALUE : 'title',
-        SORTTYPEVALUE: params.SORTTYPEVALUE ? params.SORTTYPEVALUE : 'asc',
-        OFFSETVALUE: params.OFFSETVALUE ? params.OFFSETVALUE : '0',
-        SIZEPERPAGE: params.PAGINATION
-            ? params.SIZEPERPAGE
-                ? params.SIZEPERPAGE
+        LANGUAGEIDVALUE: params.languageId ? params.languageId : '1',
+        SORTBYVALUE:
+            params.sortResultsBy && params.sortResultsBy === 'title'
+                ? 'title_dotraw'
+                : params.sortResultsBy,
+        SORTTYPEVALUE: params.sortOrder1 ? params.sortOrder1 : 'asc',
+        OFFSETVALUE: params.offSet ? params.offSet : '0',
+        SIZEPERPAGE: params.pagination
+            ? params.itemsPerPage
+                ? params.itemsPerPage
                 : 20
-            : params.NUMBEROFRESULTS
-            ? params.NUMBEROFRESULTS
+            : params.numberOfResults
+            ? params.numberOfResults
             : 40
     };
 

@@ -24,7 +24,7 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
                     ''
                 )}
                 {displayedFields.includes('publishDate') ? (
-                    <h5>news.sysPublishDate</h5>
+                    <h5>{news.sysPublishDate}</h5>
                 ) : (
                     ''
                 )}
