@@ -2,14 +2,13 @@ import { spawn } from 'child_process';
 
 import {
     DOTCMS,
-    questions,
-    rl,
     printHeading,
     createEnvFile,
     getParsedEnvFile,
-    printBright,
     getToken,
-    printError
+    printError,
+    getAnswersBasic,
+    getAnswersAuth
 } from './utils';
 
 const createEnvVars = (vars, separator) => {
@@ -19,6 +18,13 @@ const createEnvVars = (vars, separator) => {
                 .join(separator)
         : '';
 };
+
+const printAuthError = (err) => {
+    console.log('\n');
+    printError('Problem with your DotCMS instance');
+    printError('ERROR: ' + err.message);
+    process.exit(1);
+}
 
 const setEnvVarsAndStartApp = vars => {
     let prep = createEnvVars(vars, ' ');
@@ -34,81 +40,55 @@ const printWelcome = () => {
     console.log('This utility will walk you through setting up\nall the necessary environmental variables\n');
 };
 
-const DEFAULT_ENV_VARS = {
-    PUBLIC_URL: 'http://localhost:5000/',
-    REACT_APP_DOTCMS_HOST: 'http://localhost:8080'
-};
-
 const main = async () => {
-    if (process.env.REACT_APP_BEARER_TOKEN) {
+    if (process.env.REACT_APP_BEARER_TOKEN && process.env.REACT_APP_DOTCMS_HOST && process.env.PUBLIC_URL) {
         setEnvVarsAndStartApp();
     } else {
-        let cliValues = {
-            expirationDays: 10,
-            writeEnv: true,
-            env: DEFAULT_ENV_VARS
-        };
-
         printWelcome();
 
         const parsedEnvFile = await getParsedEnvFile();
-
-        if (parsedEnvFile) {
-            cliValues.env = {
-                ...cliValues.env,
-                ...parsedEnvFile
-            };
-            printBright('We found a .env file in your system');
-        } else {
-            printBright('No .env file in your system');
-        }
-
-        cliValues.writeEnv = await questions.writeEnv(!!parsedEnvFile);
-
-        cliValues.env.REACT_APP_DOTCMS_HOST = await questions.dotCmsInstance(cliValues.env.REACT_APP_DOTCMS_HOST);
-
-        cliValues.env.PUBLIC_URL = await questions.nodePreviewURL(cliValues.env.PUBLIC_URL);
+        let cliValues = await getAnswersBasic(parsedEnvFile);
 
         let token;
         while (!token) {
             printHeading('Authorization');
 
-            cliValues.user = await questions.user();
-            cliValues.password = await questions.password();
-            cliValues.expirationDays = await questions.expirationDays();
+            const auth = await getAnswersAuth(parsedEnvFile);
+
+            cliValues = {
+                ...cliValues,
+                ...auth
+            };
 
             token = await getToken({
-                host: cliValues.env.REACT_APP_DOTCMS_HOST,
+                host: cliValues.REACT_APP_DOTCMS_HOST,
                 user: cliValues.user,
                 password: cliValues.password,
                 expirationDays: cliValues.expirationDays
-            }).catch(err => {
-                console.log('\n');
-                printError(
-                    `Looks like there is a problem with your DotCMS instance at: ${cliValues.env.REACT_APP_DOTCMS_HOST}`
-                );
-                printError('ERROR: ' + err.message);
-                process.exit(1);
-            });
+            }).catch(printAuthError);
         }
 
         if (token) {
-            rl.close();
-            cliValues.env.REACT_APP_BEARER_TOKEN = token;
+            cliValues.REACT_APP_BEARER_TOKEN = token;
+
+            const envVars = {
+                REACT_APP_DOTCMS_HOST: cliValues.REACT_APP_DOTCMS_HOST,
+                REACT_APP_BEARER_TOKEN: cliValues.REACT_APP_BEARER_TOKEN,
+                PUBLIC_URL: cliValues.PUBLIC_URL
+            };
 
             if (cliValues.writeEnv) {
-                createEnvFile(cliValues.env).then(() => {
-                    setEnvVarsAndStartApp(cliValues.env);
+                createEnvFile(envVars).then(() => {
+                    setEnvVarsAndStartApp(envVars);
 
                     printHeading('.env file created with:');
-                    console.log(createEnvVars(cliValues.env, '\n\n'))
-
+                    console.log(createEnvVars(envVars, '\n\n'));
                 });
             } else {
                 printHeading('Starting the app with the following variables:');
-                console.log(createEnvVars(cliValues.env, '\n\n'))
+                console.log(createEnvVars(envVars, '\n\n'));
 
-                setEnvVarsAndStartApp(cliValues.env);
+                setEnvVarsAndStartApp(envVars);
             }
         }
     }

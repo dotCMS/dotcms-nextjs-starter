@@ -1,44 +1,44 @@
-import readline from 'readline';
-import { DOTCMS, getQuestionHint } from './print';
+import { DOTCMS } from './print';
 
-const getQuestion = label => {
-    return new Promise((resolve, reject) => {
-        rl.question(`${label}: `, answer => {
-            resolve(answer);
-        });
-    });
-};
+import inquirer from 'inquirer';
 
-export const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+const questionsBasic = param => [
+    {
+        message: !!param
+            ? '.env FILE FOUND! Would you like to overwrite the env variables in the file?'
+            : 'NO .env FILE FOUND! Would you like to create one?',
+        type: 'confirm',
+        name: 'writeEnv'
+    },
+    {
+        message: `${DOTCMS} URL`,
+        name: 'REACT_APP_DOTCMS_HOST',
+        default: (param && param.REACT_APP_DOTCMS_HOST) || 'http://localhost:8080'
+    },
+    {
+        message: `Node Preview URL`,
+        name: 'PUBLIC_URL',
+        default: (param && param.PUBLIC_URL) || 'http://localhost:5000'
+    }
+];
 
-const dotCmsInstance = async current =>
-    (await getQuestion(`${DOTCMS} URL ${getQuestionHint(current, 'current')}`)) || current;
+const questionsAuth = [
+    {
+        message: `${DOTCMS} Email / User Id`,
+        name: 'user'
+    },
+    {
+        message: `${DOTCMS} Password`,
+        name: 'password',
+        type: 'password',
+        mask: '*'
+    },
+    {
+        message: 'Token Valid for (in days)',
+        name: 'expirationDays',
+        default: 10
+    }
+];
 
-const nodePreviewURL = async current =>
-    (await getQuestion(`Node Preview URL ${getQuestionHint(current, 'current')}`)) || current;
-
-const user = async () => await getQuestion(`${DOTCMS} Email / User Id`);
-const password = async () => await getQuestion(`${DOTCMS} Password`);
-const expirationDays = async () => (await getQuestion(`Token Valid for (in days) ${getQuestionHint('10')}`)) || 10;
-
-const writeEnv = async existing => {
-    const label = existing
-        ? 'Would you like to overwrite the env variables in the file?'
-        : 'Would you like to create one?';
-
-    return await getQuestion(`${label} (y/n) ${getQuestionHint('y')}`).then(
-        res => res === 'y' || res === 'Y' || res === ''
-    );
-};
-
-export const questions = {
-    dotCmsInstance,
-    expirationDays,
-    nodePreviewURL,
-    password,
-    user,
-    writeEnv
-};
+export const getAnswersBasic = params => inquirer.prompt(questionsBasic(params));
+export const getAnswersAuth = () => inquirer.prompt(questionsAuth);
