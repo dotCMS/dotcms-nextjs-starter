@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Pagination /> renders pagination correctly 1`] = `
+<Fragment>
+  <Pagination
+    aria-label="Page navigation"
+    className="dot-pagination"
+    listTag="ul"
+    tag="nav"
+  >
+    <PaginationItem
+      active={true}
+      key="0"
+      tag="li"
+    >
+      <PaginationLink
+        onClick={[Function]}
+        tag="a"
+      >
+        1
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem
+      active={false}
+      key="1"
+      tag="li"
+    >
+      <PaginationLink
+        onClick={[Function]}
+        tag="a"
+      >
+        2
+      </PaginationLink>
+    </PaginationItem>
+    <PaginationItem
+      active={false}
+      key="2"
+      tag="li"
+    >
+      <PaginationLink
+        onClick={[Function]}
+        tag="a"
+      >
+        3
+      </PaginationLink>
+    </PaginationItem>
+  </Pagination>
+</Fragment>
+`;

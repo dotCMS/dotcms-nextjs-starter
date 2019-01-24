@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Page from './Page';
 import Layout from './Components/Layout';
 import CantRender from './Components/CantRender';
+import NewsDetailPage from './Pages/NewsDetail';
 
 import DotCMSApi from './libs/dotcms.api';
 
@@ -79,6 +80,7 @@ class PageFetchWrapper extends Component {
 const App = data => {
     return (
         <Switch>
+            <Route path="/news-events/news/:id" component={NewsDetailPage} />
             <Route render={props => <PageFetchWrapper {...props} {...data} />} />
         </Switch>
     );

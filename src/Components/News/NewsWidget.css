@@ -1,0 +1,17 @@
+.news-list {
+    margin-top: 16px;
+}
+
+.news-list-row {
+    margin-bottom: 16px;
+}
+
+.news-list-row h5 {
+    color: lightgray;
+    font-size: 10px;
+}
+
+.news-list-row img {
+    margin-right: 8px;
+    width: 64px;
+}

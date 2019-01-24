@@ -1,8 +1,12 @@
 const { login, isLogin, logout } = require('./dotcms.auth');
+const { getCurrentSite } = require('./dotcms.sites');
 const fetch = require('node-fetch');
 
 const getUrl = pathname => {
-    const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DEFAULT_HOST : '';
+    const host =
+        process.env.NODE_ENV !== 'development'
+            ? process.env.REACT_APP_DEFAULT_HOST
+            : '';
     return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
 };
 
@@ -13,10 +17,15 @@ const translate = page => {
                 return {
                     ...container,
                     ...page.containers[container.identifier].container,
-                    acceptTypes: page.containers[container.identifier].containerStructures
+                    acceptTypes: page.containers[
+                        container.identifier
+                    ].containerStructures
                         .map(structure => structure.contentTypeVar)
                         .join(','),
-                    contentlets: page.containers[container.identifier].contentlets[`uuid-${container.uuid}`]
+                    contentlets:
+                        page.containers[container.identifier].contentlets[
+                            `uuid-${container.uuid}`
+                        ]
                 };
             });
         });
@@ -24,12 +33,65 @@ const translate = page => {
     return page;
 };
 
-const request = ({ url, method }) => {
+const request = ({ url, method, body }) => {
     return fetch(url, {
         method: method || 'GET',
         headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`
-        }
+            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+            'Content-type': 'application/json'
+        },
+        body: body
+    });
+};
+
+const fillESQuery = (query, fetchParams) => {
+    Object.keys(fetchParams).forEach(key => {
+        query = query.replace(key, fetchParams[key]);
+    });
+    return query;
+};
+
+const esSearch = (contentType, params) => {
+    const url = '/api/es/search';
+    const queryTemplate = `{
+        "query": {
+            "bool": {
+                "must": {
+                    "query_string" : {
+                        "query" : "+contentType:${contentType} +languageId:LANGUAGEIDVALUE"
+                    }
+                }
+            }
+        },
+        "sort" : [
+            { "SORTBYVALUE" : {"order" : "SORTTYPEVALUE"}}
+        ],
+        "from": OFFSETVALUE,
+        "size": SIZEPERPAGE
+    }}`;
+
+    const fetchParams = {
+        LANGUAGEIDVALUE: params.languageId ? params.languageId : '1',
+        SORTBYVALUE:
+            params.sortResultsBy && params.sortResultsBy === 'title'
+                ? 'title_dotraw'
+                : params.sortResultsBy,
+        SORTTYPEVALUE: params.sortOrder1 ? params.sortOrder1 : 'asc',
+        OFFSETVALUE: params.offSet ? params.offSet : '0',
+        SIZEPERPAGE: params.pagination
+            ? params.itemsPerPage
+                ? params.itemsPerPage
+                : 20
+            : params.numberOfResults
+            ? params.numberOfResults
+            : 40
+    };
+
+    const query = fillESQuery(queryTemplate, fetchParams);
+    return request({
+        url: url,
+        method: 'POST',
+        body: query
     });
 };
 
@@ -53,7 +115,7 @@ const get = async ({ pathname }) => {
         .catch(err => {
             return {
                 error: err.message
-            }
+            };
         });
 };
 
@@ -79,5 +141,9 @@ export default {
         get,
         emitNavigationEnd
     },
+    sites: {
+        getCurrentSite
+    },
+    esSearch,
     request
 };

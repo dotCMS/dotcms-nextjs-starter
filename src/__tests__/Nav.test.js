@@ -43,7 +43,7 @@ describe('<Nav />', () => {
 
     it('should call api correctly', () => {
         expect(DotCMSApi.request).toHaveBeenCalledWith({
-            url: '/api/v1/nav//?depth=2'
+            url: `${process.env.REACT_APP_DEFAULT_HOST}/api/v1/nav//?depth=2`
         });
     });
 
