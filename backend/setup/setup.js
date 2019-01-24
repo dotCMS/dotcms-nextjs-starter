@@ -61,7 +61,7 @@ const main = async () => {
 
             cliValues.user = await questions.user();
             cliValues.password = await questions.password();
-            // cliValues.expirationDays = await questions.expirationDays();
+            cliValues.expirationDays = await questions.expirationDays();
 
             token = await getToken({
                 host: cliValues.env.REACT_APP_DOTCMS_HOST,

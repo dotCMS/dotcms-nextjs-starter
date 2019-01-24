@@ -22,7 +22,7 @@ const nodePreviewURL = async current =>
 
 const user = getQuestion(`${DOTCMS} Email / User Id`);
 const password = getQuestion(`${DOTCMS} Password`);
-const expirationDays = getQuestion(`Token Valid for (in days) ${getQuestionHint('10')}`);
+const expirationDays = async () => (await getQuestion(`Token Valid for (in days) ${getQuestionHint('10')}`)()) || 10;
 
 const writeEnv = async existing => {
     const label = existing
