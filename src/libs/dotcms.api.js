@@ -32,7 +32,7 @@ const request = ({ url, method, body }) => {
     return fetch(url, {
         method: method || 'GET',
         headers: {
-            'Authorization': `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+            'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
             'Content-type': 'application/json'
         },
         body: body
