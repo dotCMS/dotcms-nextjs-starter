@@ -65,12 +65,17 @@ const esSearch = (contentType, params) => {
         "size": SIZEPERPAGE
     }}`;
 
+    const sortResultsByMap = {
+        title: 'title_dotraw',
+        date: 'news.syspublishdate',
+        comments: 'news.commentscount'
+    };
+
     const fetchParams = {
         LANGUAGEIDVALUE: params.languageId ? params.languageId : '1',
-        SORTBYVALUE:
-            params.sortResultsBy && params.sortResultsBy === 'title'
-                ? 'title_dotraw'
-                : params.sortResultsBy,
+        SORTBYVALUE: params.sortResultsBy
+            ? sortResultsByMap[params.sortResultsBy]
+            : sortResultsByMap.title,
         SORTTYPEVALUE: params.sortOrder1 ? params.sortOrder1 : 'asc',
         OFFSETVALUE: params.offSet ? params.offSet : '0',
         SIZEPERPAGE: params.pagination
