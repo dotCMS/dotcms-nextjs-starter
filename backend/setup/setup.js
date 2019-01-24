@@ -1,12 +1,22 @@
 import { spawn } from 'child_process';
 
-import { DOTCMS, questions, rl, printHeading, createEnvFile, getParsedEnvFile, printBright, getToken } from './utils';
+import {
+    DOTCMS,
+    questions,
+    rl,
+    printHeading,
+    createEnvFile,
+    getParsedEnvFile,
+    printBright,
+    getToken,
+    printError
+} from './utils';
 
 const setEnvVarsAndStartApp = vars => {
     let prep = vars
         ? Object.keys(vars)
-                .map(key => `${key}=${vars[key]}`)
-                .join(' ')
+              .map(key => `${key}=${vars[key]}`)
+              .join(' ')
         : '';
 
     spawn(`${prep} npm run ${process.argv[2]}`, {
@@ -68,6 +78,13 @@ const main = async () => {
                 user: cliValues.user,
                 password: cliValues.password,
                 expirationDays: cliValues.expirationDays
+            }).catch(err => {
+                console.log('\n');
+                printError(
+                    `Looks like there is a problem with your DotCMS instance at: ${cliValues.env.REACT_APP_DOTCMS_HOST}`
+                );
+                printError('ERROR: ' + err.message);
+                process.exit(1);
             });
         }
 

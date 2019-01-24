@@ -12,4 +12,8 @@ export const printHeading = title => {
     console.log(line);
 };
 
+export const printError = error => {
+    console.log(`\x1b[41m\x1b[37m${error}${getResetColors()}`);
+}
+
 export const getQuestionHint = (text, label) => getDim(`(${label || 'default'}: ${text})`) + getResetColors();
