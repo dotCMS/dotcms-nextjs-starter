@@ -11,6 +11,7 @@ describe('<Nav />', () => {
     let wrapper;
 
     beforeEach(async () => {
+        process.env.REACT_APP_DOTCMS_HOST = 'http://demo.dotcms.com';
         DotCMSApi.request = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve({
@@ -43,7 +44,7 @@ describe('<Nav />', () => {
 
     it('should call api correctly', () => {
         expect(DotCMSApi.request).toHaveBeenCalledWith({
-            url: `${process.env.REACT_APP_DEFAULT_HOST}/api/v1/nav//?depth=2`
+            url: 'http://demo.dotcms.com/api/v1/nav//?depth=2'
         });
     });
 
