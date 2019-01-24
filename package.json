@@ -9,8 +9,8 @@
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject",
     "serve": "npm run build && nodemon --inspect=0.0.0.0:9229 backend/server/index.js",
-    "auth:start": "node backend/setup/index.js start",
-    "auth:serve": "node backend/setup/index.js serve"
+    "setup:start": "node backend/setup/index.js start",
+    "setup:serve": "node backend/setup/index.js serve"
   },
   "eslintConfig": {
     "extends": "react-app"
