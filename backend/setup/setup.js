@@ -5,8 +5,8 @@ import { DOTCMS, questions, rl, printHeading, createEnvFile, getParsedEnvFile, p
 const setEnvVarsAndStartApp = vars => {
     let prep = vars
         ? Object.keys(vars)
-            .map(key => `${key}=${vars[key]}`)
-            .join(' ')
+                .map(key => `${key}=${vars[key]}`)
+                .join(' ')
         : '';
 
     spawn(`${prep} npm run ${process.argv[2]}`, {
