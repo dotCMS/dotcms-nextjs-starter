@@ -1,10 +1,18 @@
 # Backend (SSR)
 Node server for Server Side Render the pages.
 
-### `npm run auth:serve`
+### `npm run setup:serve`
 
-If `REACT_APP_BEARER_TOKEN` is not set in the `.env` file, this script prompt to ask you for the DotCMS email/user and password to:
+This script will walk you to create all the necessary node environmental variables to run the React App in Server Side Rendering mode.
 
+You'll be able to choose between create a `.env` file or just run the app by setting the environmental variables just for this time.
+
+*It will ask you for:*
+1. DotCMS Instance
+2. Node Preview URL
+3. Email / User id and password
+
+*And then the script will*
 1. Get the token api from `/api/v1/authentication/api-token`
 2. Set the the token as an node env variable
 4. Then run `npm run serve`
@@ -22,14 +30,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm run auth:start`
-
-If `REACT_APP_BEARER_TOKEN` is not set in the `.env` file, this script prompt to ask you for the DotCMS email/user and password to:
-
-1. Get the token api from `/api/v1/authentication/api-token`
-2. Set the the token as an node env variable
-4. Then run `npm run start`
-3. Pass the token as header in all the request to the DotCMS instance
+### `npm run setup:start`
+It will do the same as `npm run setup:serve` but at the end to run the app will run `npm run start` instead of `serve`.
 
 ### `npm start`
 

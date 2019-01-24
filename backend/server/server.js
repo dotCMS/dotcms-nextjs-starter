@@ -8,9 +8,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
-import DotCMSApi from '../src/libs/dotcms.api';
+import DotCMSApi from '../../src/libs/dotcms.api';
 
-import App from '../src/App';
+import App from '../../src/App';
 
 const STATIC_FOLDER = './build';
 
@@ -71,6 +71,7 @@ const server = http.createServer((request, response) => {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
             const page = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
+
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, page.layout));

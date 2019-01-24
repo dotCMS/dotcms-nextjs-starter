@@ -12,7 +12,7 @@ export default class Nav extends Component {
 
     async componentDidMount() {
         DotCMSApi.request({
-            url: `${process.env.REACT_APP_DEFAULT_HOST}/api/v1/nav//?depth=2`
+            url: `${process.env.REACT_APP_DOTCMS_HOST}/api/v1/nav//?depth=2`
         })
             .then(response => response.json())
             .then(data => data.entity.children)

@@ -3,33 +3,28 @@ const { getCurrentSite } = require('./dotcms.sites');
 const fetch = require('node-fetch');
 
 const getUrl = pathname => {
-    const host =
-        process.env.NODE_ENV !== 'development'
-            ? process.env.REACT_APP_DEFAULT_HOST
-            : '';
+    const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DOTCMS_HOST : '';
     return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
 };
 
 const translate = page => {
-    page.layout.body.rows.forEach(row => {
-        row.columns.forEach(col => {
-            col.containers = col.containers.map(container => {
-                return {
-                    ...container,
-                    ...page.containers[container.identifier].container,
-                    acceptTypes: page.containers[
-                        container.identifier
-                    ].containerStructures
-                        .map(structure => structure.contentTypeVar)
-                        .join(','),
-                    contentlets:
-                        page.containers[container.identifier].contentlets[
-                            `uuid-${container.uuid}`
-                        ]
-                };
+    if (page.layout) {
+        page.layout.body.rows.forEach(row => {
+            row.columns.forEach(col => {
+                col.containers = col.containers.map(container => {
+                    return {
+                        ...container,
+                        ...page.containers[container.identifier].container,
+                        acceptTypes: page.containers[container.identifier].containerStructures
+                            .map(structure => structure.contentTypeVar)
+                            .join(','),
+                        contentlets: page.containers[container.identifier].contentlets[`uuid-${container.uuid}`]
+                    };
+                });
             });
         });
-    });
+    }
+
     return page;
 };
 
@@ -37,7 +32,7 @@ const request = ({ url, method, body }) => {
     return fetch(url, {
         method: method || 'GET',
         headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_AUTH_TOKEN}`,
+            'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
             'Content-type': 'application/json'
         },
         body: body
