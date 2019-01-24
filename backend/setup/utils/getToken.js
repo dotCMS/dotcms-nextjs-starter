@@ -1,4 +1,4 @@
-import DotCMSApi from '../../src/libs/dotcms.api';
+import DotCMSApi from '../../../src/libs/dotcms.api';
 
 export const getToken = ({ user, password, expirationDays, host }) => {
     return DotCMSApi.auth.login({ user, password, expirationDays, host })

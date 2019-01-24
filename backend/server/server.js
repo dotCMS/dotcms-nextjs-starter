@@ -8,9 +8,9 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
-import DotCMSApi from '../src/libs/dotcms.api';
+import DotCMSApi from '../../src/libs/dotcms.api';
 
-import App from '../src/App';
+import App from '../../src/App';
 
 const STATIC_FOLDER = './build';
 

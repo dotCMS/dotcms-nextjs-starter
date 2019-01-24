@@ -2,8 +2,6 @@ import { spawn } from 'child_process';
 
 import { DOTCMS, questions, rl, printHeading, createEnvFile, getParsedEnvFile, printBright, getToken } from './utils';
 
-require('dotenv').config();
-
 const setEnvVarsAndStartApp = vars => {
     let prep = vars
         ? Object.keys(vars)
