@@ -12,12 +12,16 @@ import {
     printError
 } from './utils';
 
-const setEnvVarsAndStartApp = vars => {
-    let prep = vars
+const createEnvVars = (vars, separator) => {
+    return vars
         ? Object.keys(vars)
-              .map(key => `${key}=${vars[key]}`)
-              .join(' ')
+                .map(key => `${key}=${vars[key]}`)
+                .join(separator)
         : '';
+};
+
+const setEnvVarsAndStartApp = vars => {
+    let prep = createEnvVars(vars, ' ');
 
     spawn(`${prep} npm run ${process.argv[2]}`, {
         stdio: 'inherit',
@@ -95,8 +99,15 @@ const main = async () => {
             if (cliValues.writeEnv) {
                 createEnvFile(cliValues.env).then(() => {
                     setEnvVarsAndStartApp(cliValues.env);
+
+                    printHeading('.env file created with:');
+                    console.log(createEnvVars(cliValues.env, '\n\n'))
+
                 });
             } else {
+                printHeading('Starting the app with the following variables:');
+                console.log(createEnvVars(cliValues.env, '\n\n'))
+
                 setEnvVarsAndStartApp(cliValues.env);
             }
         }
