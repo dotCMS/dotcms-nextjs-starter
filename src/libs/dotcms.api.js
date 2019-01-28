@@ -1,5 +1,6 @@
 const { login, isLogin, logout } = require('./dotcms.auth');
 const { getCurrentSite } = require('./dotcms.sites');
+const { esSearch } = require('./dotcms.esSearch');
 const fetch = require('node-fetch');
 
 const getUrl = pathname => {
@@ -36,62 +37,6 @@ const request = ({ url, method, body }) => {
             'Content-type': 'application/json'
         },
         body: body
-    });
-};
-
-const fillESQuery = (query, fetchParams) => {
-    Object.keys(fetchParams).forEach(key => {
-        query = query.replace(key, fetchParams[key]);
-    });
-    return query;
-};
-
-const esSearch = (contentType, params) => {
-    const url = '/api/es/search';
-    const queryTemplate = `{
-        "query": {
-            "bool": {
-                "must": {
-                    "query_string" : {
-                        "query" : "+contentType:${contentType} +languageId:LANGUAGEIDVALUE"
-                    }
-                }
-            }
-        },
-        "sort" : [
-            { "SORTBYVALUE" : {"order" : "SORTTYPEVALUE"}}
-        ],
-        "from": OFFSETVALUE,
-        "size": SIZEPERPAGE
-    }}`;
-
-    const sortResultsByMap = {
-        title: 'title_dotraw',
-        date: 'news.syspublishdate',
-        comments: 'news.commentscount'
-    };
-
-    const fetchParams = {
-        LANGUAGEIDVALUE: params.languageId ? params.languageId : '1',
-        SORTBYVALUE: params.sortResultsBy
-            ? sortResultsByMap[params.sortResultsBy]
-            : sortResultsByMap.title,
-        SORTTYPEVALUE: params.sortOrder1 ? params.sortOrder1 : 'asc',
-        OFFSETVALUE: params.offSet ? params.offSet : '0',
-        SIZEPERPAGE: params.pagination
-            ? params.itemsPerPage
-                ? params.itemsPerPage
-                : 20
-            : params.numberOfResults
-            ? params.numberOfResults
-            : 40
-    };
-
-    const query = fillESQuery(queryTemplate, fetchParams);
-    return request({
-        url: url,
-        method: 'POST',
-        body: query
     });
 };
 
