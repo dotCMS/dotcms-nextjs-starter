@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import wait from 'waait';
 import DotCMSApi from '../../libs/dotcms.api';
 import Pagination from '../../Components/Shared/Pagination';
-import NewsWidget from '../../Components/News/NewsWidget';
+import NewsWidgets from '../../Components/DotCMS/NewsWidgets';
 
-describe('<NewsWidget />', () => {
+describe('<NewsWidgets />', () => {
     let wrapper;
     let newsPageData;
     let newsSearchData;
@@ -66,7 +66,7 @@ describe('<NewsWidget />', () => {
 
     it('should render NewsList & Pagination components', async () => {
         wrapper = shallow(
-            <NewsWidget data={newsPageData} fieldsToDisplay={''} />
+            <NewsWidgets {...newsPageData} fieldsToDisplay={''} />
         );
         await wait();
 
@@ -102,7 +102,7 @@ describe('<NewsWidget />', () => {
     it('should render NewsList & NO Pagination components', async () => {
         newsPageData = { ...newsPageData, pagination: false };
         wrapper = shallow(
-            <NewsWidget data={newsPageData} fieldsToDisplay={''} />
+            <NewsWidgets {...newsPageData} fieldsToDisplay={''} />
         );
         await wait();
 
@@ -141,7 +141,7 @@ describe('<NewsWidget />', () => {
             });
         });
 
-        wrapper = shallow(<NewsWidget data={newsPageData} />);
+        wrapper = shallow(<NewsWidgets {...newsPageData} />);
         await wait();
         expect(wrapper.find('NoResults').exists()).toBeTruthy();
         expect(wrapper.find('NewsList').exists()).toBeFalsy();
