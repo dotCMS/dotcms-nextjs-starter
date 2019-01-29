@@ -74,7 +74,7 @@ class NewsWidget extends React.Component {
                 <>
                     {news && news.length ? (
                         <>
-                            <NewsList news={news} fieldsToDisplay={fieldsToDisplay} />
+                            <NewsList news={news} fieldsToDisplay={fieldsToDisplay || ''} />
                             {showPagination ? (
                                 <Pagination
                                     totalItems={pagination.totalItems}

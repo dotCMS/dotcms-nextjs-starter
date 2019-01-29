@@ -51,7 +51,6 @@ class BannerCarousel extends Component {
         const slides = this.props.items.map(item => {
             const showTitle = displayedFields.includes('title');
             const showCaption = displayedFields.includes('caption1');
-
             return (
                 <CarouselItem
                     onExiting={this.onExiting}

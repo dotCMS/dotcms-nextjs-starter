@@ -4,6 +4,11 @@ import { Spinner } from 'reactstrap';
 import NoResults from '../Shared/NoResults';
 import BannerCarousel from './BannerCarousel';
 
+const sortResultsByMap = {
+    title: 'title_dotraw',
+    modDate: 'modDate'
+};
+
 class BannerCarouselWidgets extends React.Component {
     constructor(props, context) {
         super(props, context);
@@ -24,8 +29,15 @@ class BannerCarouselWidgets extends React.Component {
         });
     }
 
-    getBannersItems(fetchParams) {
-        DotCMSApi.esSearch('banner', fetchParams)
+    getBannersItems() {
+        const defaultEsParams = {
+            languageId: this.props.data.languageId,
+            numberOfResults: this.props.data.numberOfResults,
+            sortOrder1: this.props.data.sortOrder1,
+            sortResultsBy: sortResultsByMap[this.props.data.sortResultsBy]
+        };
+
+        DotCMSApi.esSearch('banner', defaultEsParams)
             .then(response => response.json())
             .then(bannerData => {
                 this.setState(state => ({
@@ -37,8 +49,7 @@ class BannerCarouselWidgets extends React.Component {
     }
 
     componentDidMount() {
-        console.log('---this.props.data', this.props.data);
-        this.getBannersItems(this.props.data);
+        this.getBannersItems();
     }
 
     render() {
