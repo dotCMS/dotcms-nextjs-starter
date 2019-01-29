@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavOption /> renders NavOption correctly 1`] = `
+<NavItem
+  key="456"
+  tag="li"
+>
+  <NavLink
+    active={false}
+    tag={[Function]}
+    to="/products"
+  >
+    Products
+  </NavLink>
+</NavItem>
+`;

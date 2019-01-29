@@ -3,9 +3,48 @@ import { shallow } from 'enzyme';
 import wait from 'waait';
 import { Link } from 'react-router-dom';
 
+
 import Nav from '../Components/Nav';
 
 import DotCMSApi from '../libs/dotcms.api';
+import toJSON from "enzyme-to-json";
+
+const NavResponse = {
+    entity: {
+        children: [
+            {
+                href: '/about',
+                title: 'About Us',
+                folder: '123',
+                children: []
+
+            },
+            {
+                href: '/products',
+                title: 'Products',
+                folder: '456',
+                children: []
+            },
+            {
+                href: '/resources',
+                title: 'Resources',
+                folder: '789',
+                children: [
+                    {
+                        href: '/videos',
+                        title: 'Videos',
+                        folder: null
+                    },
+                    {
+                        href: '/blog',
+                        title: 'Blog',
+                        folder: null
+                    }
+                ]
+            }
+        ]
+    }
+};
 
 describe('<Nav />', () => {
     let wrapper;
@@ -18,22 +57,7 @@ describe('<Nav />', () => {
                     status: 200,
                     json: () =>
                         new Promise((resolve, reject) => {
-                            resolve({
-                                entity: {
-                                    children: [
-                                        {
-                                            href: '/about',
-                                            title: 'About Us',
-                                            folder: '123'
-                                        },
-                                        {
-                                            href: '/products',
-                                            title: 'Products',
-                                            folder: '456'
-                                        }
-                                    ]
-                                }
-                            });
+                            resolve(NavResponse);
                         })
                 });
             });
@@ -44,22 +68,12 @@ describe('<Nav />', () => {
 
     it('should call api correctly', () => {
         expect(DotCMSApi.request).toHaveBeenCalledWith({
-            url: 'http://demo.dotcms.com/api/v1/nav//?depth=2'
+            url: 'http://demo.dotcms.com/api/v1/nav//?depth=3'
         });
     });
 
     it('renders nav correctly', async () => {
-        await wrapper.update();
-        await wait();
-
-        const navItems = wrapper.find('NavItem');
-        expect(navItems.length).toEqual(2);
-
-        const navLinks = wrapper.find('NavLink');
-        expect(navLinks.map(item => item.props())).toEqual([
-            { active: false, children: 'About Us', to: '/about', tag: Link },
-            { active: false, children: 'Products', to: '/products', tag: Link }
-        ]);
+        expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
     it('should have BootstrapNav and pill in true', () => {
