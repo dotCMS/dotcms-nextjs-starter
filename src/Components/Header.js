@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Navbar, NavbarBrand } from 'reactstrap';
 
-import Nav from './Nav';
+import Nav from './Nav/Nav';
 
 const Header = () => {
     return (

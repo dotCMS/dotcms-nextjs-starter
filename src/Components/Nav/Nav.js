@@ -2,14 +2,11 @@ import React, { Component } from "react";
 import {
     Nav as BootstrapNav,
     NavbarToggler,
-    Collapse,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownItem,
-    DropdownMenu
+    Collapse
 } from "reactstrap";
-import DotCMSApi from "../libs/dotcms.api";
-import NavOption from "./NavOption";
+import DotCMSApi from "../../libs/dotcms.api";
+import NavOption from "../../Components/Nav/NavOption";
+import NavDropDown from "./NavDropDown";
 
 export default class Nav extends Component {
     state = {
@@ -18,7 +15,7 @@ export default class Nav extends Component {
         items: []
     };
 
-    async componentDidMount() {
+    componentDidMount() {
         DotCMSApi.request({
             url: `${process.env.REACT_APP_DOTCMS_HOST}/api/v1/nav//?depth=3`
         })
@@ -55,23 +52,9 @@ export default class Nav extends Component {
                     <BootstrapNav pills={true}>
                         {this.state.items.map(item => {
                             if (item.children.length && item.type === 'folder'){
-                                return(  <UncontrolledDropdown nav inNavbar>
-                                        <DropdownToggle nav caret>
-                                            {item.title}
-                                        </DropdownToggle>
-                                        <DropdownMenu right>
-                                            {item.children.map( subItem => {
-                                                return (
-                                                    <DropdownItem>
-                                                        <NavOption item={subItem}/>
-                                                    </DropdownItem>
-                                                )
-                                            })}
-                                        </DropdownMenu>
-                                    </UncontrolledDropdown>
-                                )
+                                return <NavDropDown options={item}/>
                             }else{
-                                return(<NavOption item={item}/>)
+                                return <NavOption item={item}/>
                             }
                         })}
                     </BootstrapNav>

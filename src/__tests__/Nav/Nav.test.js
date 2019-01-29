@@ -4,9 +4,9 @@ import wait from 'waait';
 import { Link } from 'react-router-dom';
 
 
-import Nav from '../Components/Nav';
+import Nav from '../../Components/Nav/Nav';
 
-import DotCMSApi from '../libs/dotcms.api';
+import DotCMSApi from '../../libs/dotcms.api';
 import toJSON from "enzyme-to-json";
 
 const NavResponse = {
