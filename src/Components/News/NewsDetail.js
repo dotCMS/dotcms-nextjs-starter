@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Parser from 'html-react-parser';
 
 const NewsDetail = ({ news }) => {
     const { title, sysPublishDate, image, story } = news;
@@ -9,7 +8,7 @@ const NewsDetail = ({ news }) => {
             <h3>{title}</h3>
             <h5>{sysPublishDate}</h5>
             <img alt="" src={image} />
-            <div>{Parser(story)}</div>
+            <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );
 };

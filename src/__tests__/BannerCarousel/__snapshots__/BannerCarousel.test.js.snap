@@ -38,7 +38,13 @@ exports[`<BannerCarousel /> renders banners carousel correctly 1`] = `
       <h1>
         tile test
       </h1>
-      caption test
+      <div
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "caption test",
+          }
+        }
+      />
     </div>
   </CarouselItem>
   <CarouselControl
@@ -188,7 +194,13 @@ exports[`<BannerCarousel /> renders banners, without "title" 1`] = `
     <div
       className="carousel-caption d-none d-md-block"
     >
-      caption test
+      <div
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "caption test",
+          }
+        }
+      />
     </div>
   </CarouselItem>
   <CarouselControl

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Parser from 'html-react-parser';
 import { Carousel, CarouselItem, CarouselControl } from 'reactstrap';
 
 class BannerCarousel extends Component {
@@ -56,7 +55,7 @@ class BannerCarousel extends Component {
                     {showTitle || showCaption ? (
                         <div className="carousel-caption d-none d-md-block">
                             {showTitle ? <h1>{item.title}</h1> : ''}
-                            {showCaption ? Parser(item.caption) : ''}
+                            {showCaption ? <div dangerouslySetInnerHTML={{ __html: item.caption }} /> : ''}
                         </div>
                     ) : (
                         ''
