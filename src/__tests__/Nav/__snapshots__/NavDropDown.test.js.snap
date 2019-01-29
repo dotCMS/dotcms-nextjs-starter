@@ -19,6 +19,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
     tag="div"
   >
     <DropdownItem
+      key="0"
       tag="button"
       toggle={true}
     >
@@ -28,11 +29,13 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
             "folder": null,
             "href": "/videos",
             "title": "Videos",
+            "type": "htmlpage",
           }
         }
       />
     </DropdownItem>
     <DropdownItem
+      key="1"
       tag="button"
       toggle={true}
     >
@@ -42,6 +45,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
             "folder": null,
             "href": "/blog",
             "title": "Blog",
+            "type": "htmlpage",
           }
         }
       />

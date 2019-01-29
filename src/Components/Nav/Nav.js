@@ -1,12 +1,8 @@
-import React, { Component } from "react";
-import {
-    Nav as BootstrapNav,
-    NavbarToggler,
-    Collapse
-} from "reactstrap";
-import DotCMSApi from "../../libs/dotcms.api";
-import NavOption from "../../Components/Nav/NavOption";
-import NavDropDown from "./NavDropDown";
+import React, { Component } from 'react';
+import { Nav as BootstrapNav, NavbarToggler, Collapse } from 'reactstrap';
+import DotCMSApi from '../../libs/dotcms.api';
+import NavOption from '../../Components/Nav/NavOption';
+import NavDropDown from './NavDropDown';
 
 export default class Nav extends Component {
     state = {
@@ -50,11 +46,11 @@ export default class Nav extends Component {
                 <NavbarToggler onClick={this.toggleCollapsed} />
                 <Collapse isOpen={this.state.collapsed} navbar>
                     <BootstrapNav pills={true}>
-                        {this.state.items.map(item => {
+                        {this.state.items.map((item, index) => {
                             if (item.children.length && item.type === 'folder'){
-                                return <NavDropDown options={item}/>
+                                return <NavDropDown key={index} options={item}/>
                             }else{
-                                return <NavOption item={item}/>
+                                return <NavOption key={index} item={item}/>
                             }
                         })}
                     </BootstrapNav>

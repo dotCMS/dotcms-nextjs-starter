@@ -2,15 +2,15 @@
 
 exports[`<NavOption /> renders NavOption correctly 1`] = `
 <NavItem
-  key="456"
+  key="123"
   tag="li"
 >
   <NavLink
     active={false}
     tag={[Function]}
-    to="/products"
+    to="/about"
   >
-    Products
+    About Us
   </NavLink>
 </NavItem>
 `;

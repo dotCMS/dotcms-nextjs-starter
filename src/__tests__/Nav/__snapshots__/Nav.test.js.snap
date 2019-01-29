@@ -37,8 +37,10 @@ exports[`<Nav /> renders nav correctly 1`] = `
             "folder": "123",
             "href": "/about",
             "title": "About Us",
+            "type": "htmlpage",
           }
         }
+        key="0"
       />
       <NavOption
         item={
@@ -47,27 +49,33 @@ exports[`<Nav /> renders nav correctly 1`] = `
             "folder": "456",
             "href": "/products",
             "title": "Products",
+            "type": "htmlpage",
           }
         }
+        key="1"
       />
-      <NavOption
-        item={
+      <NavDropDown
+        key="2"
+        options={
           Object {
             "children": Array [
               Object {
                 "folder": null,
                 "href": "/videos",
                 "title": "Videos",
+                "type": "htmlpage",
               },
               Object {
                 "folder": null,
                 "href": "/blog",
                 "title": "Blog",
+                "type": "htmlpage",
               },
             ],
             "folder": "789",
             "href": "/resources",
             "title": "Resources",
+            "type": "folder",
           }
         }
       />

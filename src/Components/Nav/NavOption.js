@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavItem, NavLink } from 'reactstrap';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const NavOption = ({ item }) => {
     return (
@@ -13,8 +13,12 @@ const NavOption = ({ item }) => {
     );
 };
 
-NavItem.propTypes = {
-    item: PropTypes.object.isRequired
+NavOption.propTypes = {
+    item: PropTypes.shape({
+        folder: PropTypes.string,
+        href: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired
+    }).isRequired
 };
 
 export default NavOption;

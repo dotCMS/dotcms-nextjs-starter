@@ -1,50 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import wait from 'waait';
-import { Link } from 'react-router-dom';
-
-
 import Nav from '../../Components/Nav/Nav';
-
 import DotCMSApi from '../../libs/dotcms.api';
-import toJSON from "enzyme-to-json";
-
-const NavResponse = {
-    entity: {
-        children: [
-            {
-                href: '/about',
-                title: 'About Us',
-                folder: '123',
-                children: []
-
-            },
-            {
-                href: '/products',
-                title: 'Products',
-                folder: '456',
-                children: []
-            },
-            {
-                href: '/resources',
-                title: 'Resources',
-                folder: '789',
-                children: [
-                    {
-                        href: '/videos',
-                        title: 'Videos',
-                        folder: null
-                    },
-                    {
-                        href: '/blog',
-                        title: 'Blog',
-                        folder: null
-                    }
-                ]
-            }
-        ]
-    }
-};
+import toJSON from 'enzyme-to-json';
+import { NavResponse } from '../../TestUtils/navResponse';
 
 describe('<Nav />', () => {
     let wrapper;
