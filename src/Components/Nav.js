@@ -27,7 +27,6 @@ export default class Nav extends Component {
             .then(data => {
                 this.setState({
                     ...this.state,
-                    collapsed: !this.state.collapsed,
                     items: data
                 });
             })
