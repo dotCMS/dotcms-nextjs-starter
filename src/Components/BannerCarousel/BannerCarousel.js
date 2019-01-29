@@ -94,7 +94,14 @@ class BannerCarousel extends Component {
 
 BannerCarousel.propTypes = {
     fieldsToDisplay: PropTypes.string.isRequired,
-    items: PropTypes.array.isRequired
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+            src: PropTypes.string.isRequired,
+            altText: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            caption: PropTypes.string.isRequired
+        })
+    ).isRequired
 };
 
 export default BannerCarousel;
