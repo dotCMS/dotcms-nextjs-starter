@@ -51,7 +51,7 @@ describe('<NewsWidget />', () => {
             sortOrder1: 'asc',
             pagination: true,
             itemsPerPage: 30,
-            numberOfResults: 9
+            numberOfResults: 9,
         };
     });
 
@@ -62,15 +62,16 @@ describe('<NewsWidget />', () => {
         await wait();
 
         const fetchParams = {
-            fieldsToDisplay: '',
-            sortResultsBy: newsPageData.sortResultsBy,
+            sortResultsBy: 'title_dotraw',
             sortOrder1: newsPageData.sortOrder1,
             itemsPerPage: newsPageData.pagination
                 ? newsPageData.itemsPerPage
                 : newsPageData.numberOfResults,
                 languageId: newsPageData.languageId,
             pagination: newsPageData.pagination,
-            numberOfResults: newsPageData.numberOfResults
+            numberOfResults: newsPageData.numberOfResults,
+            offset: 0,
+            totalItems: 0
         };
 
         expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', fetchParams);

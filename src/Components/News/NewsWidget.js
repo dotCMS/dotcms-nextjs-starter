@@ -6,24 +6,46 @@ import Pagination from '../Shared/Pagination';
 import DotCMSApi from '../../libs/dotcms.api';
 import './NewsWidget.css';
 
+const sortResultsByMap = {
+    title: 'title_dotraw',
+    date: 'news.syspublishdate',
+    comments: 'news.commentscount'
+};
+
 class NewsWidget extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             loading: true,
-            news: []
+            news: [],
+            pagination: {
+                offset: 0,
+                totalItems: 0
+            }
         };
     }
 
-    getNewsItems(fetchParams) {
-        DotCMSApi.esSearch('news', fetchParams)
+    getNewsItems(pagination) {
+        const defaultEsParams = {
+            itemsPerPage: this.props.data.itemsPerPage,
+            languageId: this.props.data.languageId,
+            numberOfResults: this.props.data.numberOfResults,
+            pagination: this.props.data.pagination,
+            sortOrder1: this.props.data.sortOrder1,
+            sortResultsBy: sortResultsByMap[this.props.data.sortResultsBy]
+        };
+
+        DotCMSApi.esSearch('news', {
+            ...pagination,
+            ...defaultEsParams
+        })
             .then(response => response.json())
             .then(newsData => {
                 this.setState(state => ({
                     ...state,
                     loading: false,
-                    fetchParams: {
-                        ...fetchParams,
+                    pagination: {
+                        ...pagination,
                         totalItems: newsData.esresponse[0].hits.total
                     },
                     news: newsData.contentlets
@@ -32,17 +54,19 @@ class NewsWidget extends React.Component {
     }
 
     componentDidMount() {
-        this.getNewsItems(this.props.data);
+        this.getNewsItems(this.state.pagination);
     }
 
     pageChange = pageNumber => {
-        const offSet = this.state.fetchParams.itemsPerPage * pageNumber;
-        const fetchParams = { ...this.state.fetchParams, offSet: offSet };
-        this.getNewsItems(fetchParams);
+        const offset = this.props.data.itemsPerPage * pageNumber;
+        const pagination = { ...this.state.pagination, offset };
+        this.getNewsItems(pagination);
     };
 
     render() {
-        const { loading, news, fetchParams } = this.state;
+        const { loading, news, pagination } = this.state;
+        const { fieldsToDisplay, itemsPerPage, pagination: showPagination } = this.props.data;
+
         if (loading) {
             return <Spinner color="primary" />;
         } else {
@@ -50,16 +74,11 @@ class NewsWidget extends React.Component {
                 <>
                     {news && news.length ? (
                         <>
-                            <NewsList
-                                news={news}
-                                fieldsToDisplay={
-                                    this.props.data.fieldsToDisplay
-                                }
-                            />
-                            {this.props.data.pagination ? (
+                            <NewsList news={news} fieldsToDisplay={fieldsToDisplay} />
+                            {showPagination ? (
                                 <Pagination
-                                    totalItems={fetchParams.totalItems}
-                                    pageSize={fetchParams.itemsPerPage}
+                                    totalItems={pagination.totalItems}
+                                    pageSize={itemsPerPage}
                                     onPageChange={this.pageChange}
                                 />
                             ) : (
