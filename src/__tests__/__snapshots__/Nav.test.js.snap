@@ -50,53 +50,27 @@ exports[`<Nav /> renders nav correctly 1`] = `
           }
         }
       />
-      <UncontrolledDropdown
-        inNavbar={true}
-        nav={true}
-      >
-        <DropdownToggle
-          aria-haspopup={true}
-          caret={true}
-          color="secondary"
-          nav={true}
-        >
-          Resources
-        </DropdownToggle>
-        <DropdownMenu
-          flip={true}
-          right={true}
-          tag="div"
-        >
-          <DropdownItem
-            tag="button"
-            toggle={true}
-          >
-            <NavOption
-              item={
-                Object {
-                  "folder": null,
-                  "href": "/videos",
-                  "title": "Videos",
-                }
-              }
-            />
-          </DropdownItem>
-          <DropdownItem
-            tag="button"
-            toggle={true}
-          >
-            <NavOption
-              item={
-                Object {
-                  "folder": null,
-                  "href": "/blog",
-                  "title": "Blog",
-                }
-              }
-            />
-          </DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
+      <NavOption
+        item={
+          Object {
+            "children": Array [
+              Object {
+                "folder": null,
+                "href": "/videos",
+                "title": "Videos",
+              },
+              Object {
+                "folder": null,
+                "href": "/blog",
+                "title": "Blog",
+              },
+            ],
+            "folder": "789",
+            "href": "/resources",
+            "title": "Resources",
+          }
+        }
+      />
     </Nav>
   </Collapse>
 </Fragment>

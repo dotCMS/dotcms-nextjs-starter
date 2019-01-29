@@ -54,7 +54,7 @@ export default class Nav extends Component {
             <Collapse isOpen={this.state.collapsed} navbar>
                 <BootstrapNav pills={true}>
                     {this.state.items.map(item => {
-                        if (item.children.length){
+                        if (item.children.length && item.type === 'folder'){
                             return(  <UncontrolledDropdown nav inNavbar>
                                     <DropdownToggle nav caret>
                                         {item.title}
