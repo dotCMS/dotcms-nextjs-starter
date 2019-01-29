@@ -7,50 +7,45 @@ class BannerCarousel extends Component {
     constructor(props) {
         super(props);
         this.state = { activeIndex: 0 };
-        this.next = this.next.bind(this);
-        this.previous = this.previous.bind(this);
-        this.goToIndex = this.goToIndex.bind(this);
-        this.onExiting = this.onExiting.bind(this);
-        this.onExited = this.onExited.bind(this);
     }
 
-    onExiting() {
+    onExiting = () => {
         this.animating = true;
-    }
+    };
 
-    onExited() {
+    onExited = () => {
         this.animating = false;
-    }
+    };
 
-    next() {
+    next = () => {
         if (this.animating) return;
         const nextIndex =
             this.state.activeIndex === this.props.items.length - 1
                 ? 0
                 : this.state.activeIndex + 1;
         this.setState({ activeIndex: nextIndex });
-    }
+    };
 
-    previous() {
+    previous = () => {
         if (this.animating) return;
         const nextIndex =
             this.state.activeIndex === 0
                 ? this.props.items.length - 1
                 : this.state.activeIndex - 1;
         this.setState({ activeIndex: nextIndex });
-    }
+    };
 
-    goToIndex(newIndex) {
+    goToIndex = newIndex => {
         if (this.animating) return;
         this.setState({ activeIndex: newIndex });
-    }
+    };
 
     render() {
-        const displayedFields = this.props.fieldsToDisplay.split(',');
         const { activeIndex } = this.state;
+        const displayedFields = this.props.fieldsToDisplay.split(',');
+        const showTitle = displayedFields.includes('title');
+        const showCaption = displayedFields.includes('caption1');
         const slides = this.props.items.map(item => {
-            const showTitle = displayedFields.includes('title');
-            const showCaption = displayedFields.includes('caption1');
             return (
                 <CarouselItem
                     onExiting={this.onExiting}
@@ -102,6 +97,10 @@ BannerCarousel.propTypes = {
             caption: PropTypes.string.isRequired
         })
     ).isRequired
+};
+
+BannerCarousel.defaultProps = {
+    fieldsToDisplay: '',
 };
 
 export default BannerCarousel;

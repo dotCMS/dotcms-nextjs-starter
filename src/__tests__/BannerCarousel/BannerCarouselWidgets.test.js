@@ -20,6 +20,20 @@ describe('<BannerCarouselWidgets />', () => {
         });
     }
 
+    const mockEsSearch = (response) => {
+        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
+            return new Promise((resolve, reject) => {
+                resolve({
+                    status: 200,
+                    json: () =>
+                        new Promise((resolve, reject) => {
+                            resolve(response);
+                        })
+                });
+            });
+        });
+    }
+
     beforeEach(async () => {
         bannerResponseData = {
             contentlets: [
@@ -48,17 +62,7 @@ describe('<BannerCarouselWidgets />', () => {
             ]
         };
 
-        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve(bannerResponseData);
-                        })
-                });
-            });
-        });
+        mockEsSearch(bannerResponseData);
 
         bannersPageData = {
             fieldsToDisplay: 'title, caption1',
@@ -105,17 +109,7 @@ describe('<BannerCarouselWidgets />', () => {
             ]
         };
 
-        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve(bannerResponseData);
-                        })
-                });
-            });
-        });
+        mockEsSearch(bannerResponseData);
 
         wrapper = shallow(<BannerCarouselWidgets data={bannersPageData} />);
         await wait();

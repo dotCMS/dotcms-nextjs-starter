@@ -30,4 +30,8 @@ NewsList.propTypes = {
     ).isRequired
 };
 
+NewsList.defaultProps = {
+    fieldsToDisplay: '',
+};
+
 export default NewsList;

@@ -43,7 +43,10 @@ NewsListItem.propTypes = {
         title: PropTypes.string.isRequired,
         lead: PropTypes.string.isRequired
     }).isRequired
-    
+};
+
+NewsListItem.defaultProps = {
+    fieldsToDisplay: '',
 };
 
 export default NewsListItem;

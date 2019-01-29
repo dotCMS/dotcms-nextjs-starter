@@ -57,21 +57,13 @@ class BannerCarouselWidgets extends React.Component {
         if (loading) {
             return <Spinner color="primary" />;
         } else {
-            return (
-                <>
-                    {banners && banners.length ? (
-                        <>
-                            <BannerCarousel
-                                items={banners}
-                                fieldsToDisplay={
-                                    this.props.data.fieldsToDisplay || ''
-                                }
-                            />
-                        </>
-                    ) : (
-                        <NoResults />
-                    )}
-                </>
+            return banners && banners.length ? (
+                <BannerCarousel
+                    items={banners}
+                    fieldsToDisplay={this.props.data.fieldsToDisplay}
+                />
+            ) : (
+                <NoResults />
             );
         }
     }
