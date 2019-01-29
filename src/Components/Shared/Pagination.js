@@ -43,6 +43,6 @@ export default class DotPagination extends React.Component {
 }
 
 DotPagination.propTypes = {
-    pageSize: PropTypes.number,
-    totalItems: PropTypes.number
+    pageSize: PropTypes.number.isRequired,
+    totalItems: PropTypes.number.isRequired
 };

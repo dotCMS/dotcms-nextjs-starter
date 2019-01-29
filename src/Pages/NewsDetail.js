@@ -49,14 +49,8 @@ class NewsDetailPage extends React.Component {
     };
   }
 
-  stripHtmlTags(rawText) {
-    const div = document.createElement('div');
-    div.innerHTML = rawText;
-    return div.textContent || div.innerText || '';
-  }
-
   async componentDidMount() {
-    const storyText = this.stripHtmlTags(this.state.news.story);
+    const storyText = this.state.news.story;
 
     this.setState(state => ({
       ...state,

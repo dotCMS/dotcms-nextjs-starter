@@ -8,13 +8,18 @@ const NewsDetail = ({ news }) => {
             <h3>{title}</h3>
             <h5>{sysPublishDate}</h5>
             <img alt="" src={image} />
-            <p>{story}</p>
+            <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );
 };
 
 NewsDetail.propTypes = {
-    news: PropTypes.object.isRequired
+    news: PropTypes.shape({
+        image: PropTypes.string,
+        sysPublishDate: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        story: PropTypes.string.isRequired
+    }).isRequired
 };
 
 export default NewsDetail;

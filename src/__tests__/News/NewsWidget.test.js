@@ -14,13 +14,22 @@ describe('<NewsWidget />', () => {
         newsSearchData = {
             contentlets: [
                 {
-                    title: 'news1'
+                    title: 'news1',
+                    identifier: '1',
+                    sysPublishDate: 'today',
+                    lead: 'test'
                 },
                 {
-                    title: 'news2'
+                    title: 'news2',
+                    identifier: '2',
+                    sysPublishDate: 'today',
+                    lead: 'test'
                 },
                 {
-                    title: 'news3'
+                    title: 'news3',
+                    identifier: '3',
+                    sysPublishDate: 'today',
+                    lead: 'test'
                 }
             ],
             esresponse: [

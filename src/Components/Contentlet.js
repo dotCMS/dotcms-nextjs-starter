@@ -1,6 +1,7 @@
 import React from 'react';
 import DotContentlet from '../libs/DotContentlet';
 import NewsWidget from './News/NewsWidget'
+import BannerCarouselWidgets from './BannerCarousel/BannerCarouselWidgets'
 
 function createMarkup(html) { return {__html: html}; };
 
@@ -33,15 +34,17 @@ const SimpleWidget = ({data}) => {
 }
 
 const getComponent = (data) => {
-    switch (data.contentType) {
-        case 'webPageContent':
+    switch (data.contentType.toUpperCase()) {
+        case 'WEBPAGECONTENT':
             return ContentGeneric;
-        case 'calendarEvent':
+        case 'CALENDAREVENT':
             return CalendarEvent;
-        case 'SimpleWidget':
+        case 'SIMPLEWIDGET':
             return SimpleWidget;
-        case 'NewsWidgets':
+        case 'NEWSWIDGETS':
             return NewsWidget;
+        case 'BANNERCAROUSELWIDGETS':
+            return BannerCarouselWidgets;
         default: 
             return ContentGeneric;
     }

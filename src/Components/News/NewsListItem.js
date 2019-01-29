@@ -36,7 +36,17 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
 
 NewsListItem.propTypes = {
     fieldsToDisplay: PropTypes.string,
-    news: PropTypes.object.isRequired
+    news: PropTypes.shape({
+        identifier: PropTypes.string.isRequired,
+        image: PropTypes.string,
+        sysPublishDate: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        lead: PropTypes.string.isRequired
+    }).isRequired
+};
+
+NewsListItem.defaultProps = {
+    fieldsToDisplay: '',
 };
 
 export default NewsListItem;
