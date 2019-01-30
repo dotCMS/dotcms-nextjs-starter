@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import BannerCarousel from '../../Components/BannerCarousel/BannerCarousel';
+import BannerCarousel from '../../Components/BannerCarousel';
 import toJSON from 'enzyme-to-json';
 
 const bannersMock = [{

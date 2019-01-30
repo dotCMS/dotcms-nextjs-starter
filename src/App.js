@@ -8,6 +8,7 @@ import CantRender from './Components/CantRender';
 import NewsDetailPage from './Pages/NewsDetail';
 
 import DotCMSApi from './libs/dotcms.api';
+import PageContext from './PageContext';
 
 const ERROR_UNAUTHORIZED_USER = '400';
 
@@ -25,7 +26,8 @@ class PageFetchWrapper extends Component {
         this.state = {
             layout: {},
             pathname: null,
-            error: null
+            error: null,
+            mode: null
         };
     }
 
@@ -42,7 +44,8 @@ class PageFetchWrapper extends Component {
                 this.setState({
                     layout: data.layout,
                     pathname: pathname,
-                    error: data.error
+                    error: data.error,
+                    mode: 'EDIT_MODE'
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
             });
@@ -70,9 +73,15 @@ class PageFetchWrapper extends Component {
 
     render() {
         return (
-            <Layout>
-                {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
-            </Layout>
+            <PageContext.Provider
+                value={{
+                    mode: this.state.mode
+                }}
+            >
+                <Layout>
+                    {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
+                </Layout>
+            </PageContext.Provider>
         );
     }
 }
