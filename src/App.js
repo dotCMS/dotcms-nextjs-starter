@@ -80,7 +80,7 @@ class PageFetchWrapper extends Component {
 const App = data => {
     return (
         <Switch>
-            <Route path="/news-events/news/:id" component={NewsDetailPage} />
+            <Route path="/news-events/news/:slug" component={NewsDetailPage} />
             <Route render={props => <PageFetchWrapper {...props} {...data} />} />
         </Switch>
     );

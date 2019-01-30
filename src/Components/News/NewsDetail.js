@@ -7,7 +7,7 @@ const NewsDetail = ({ news }) => {
         <>
             <h3>{title}</h3>
             <h5>{sysPublishDate}</h5>
-            <img alt="" src={image} />
+            <img className='news-detail-img' alt={title} src={image} />
             <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );
@@ -16,10 +16,19 @@ const NewsDetail = ({ news }) => {
 NewsDetail.propTypes = {
     news: PropTypes.shape({
         image: PropTypes.string,
-        sysPublishDate: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        story: PropTypes.string.isRequired
-    }).isRequired
+        sysPublishDate: PropTypes.string,
+        title: PropTypes.string,
+        story: PropTypes.string
+    })
+};
+
+NewsDetail.defaultProps = {
+    news: {
+        image: '',
+        sysPublishDate: '',
+        title: '',
+        story: ''
+    }
 };
 
 export default NewsDetail;

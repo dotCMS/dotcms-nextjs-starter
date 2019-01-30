@@ -1,24 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Media } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
     return (
         <Media className="news-list-row" tag="li">
             {displayedFields.includes('image') ? (
-                <Media left href={`/news-events/news/${news.identifier}`}>
-                    <Media object src={news.image} alt="image" />
-                </Media>
+                <Link
+                    to={{
+                        pathname: `/news-events/news/${news.urlTitle}`,
+                        state: { news: news }
+                    }}
+                >
+                    <Media left>
+                        <Media object src={news.image} alt="image" />
+                    </Media>
+                </Link>
             ) : (
                 ''
             )}
             <Media body>
                 {displayedFields.includes('title') ? (
                     <Media heading>
-                        <a href={`/news-events/news/${news.identifier}`}>
+                        <Link
+                            to={{
+                                pathname: `/news-events/news/${news.urlTitle}`,
+                                state: { news: news }
+                            }}
+                        >
                             {news.title}
-                        </a>
+                        </Link>
                     </Media>
                 ) : (
                     ''
@@ -46,7 +59,7 @@ NewsListItem.propTypes = {
 };
 
 NewsListItem.defaultProps = {
-    fieldsToDisplay: '',
+    fieldsToDisplay: ''
 };
 
 export default NewsListItem;
