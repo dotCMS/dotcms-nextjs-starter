@@ -46,11 +46,11 @@ export default class Nav extends Component {
                 <NavbarToggler onClick={this.toggleCollapsed} />
                 <Collapse isOpen={this.state.collapsed} navbar>
                     <BootstrapNav pills={true}>
-                        {this.state.items.map((item, index) => {
-                            if (item.children.length && item.type === 'folder'){
-                                return <NavDropDown key={index} options={item}/>
-                            }else{
-                                return <NavOption key={index} item={item}/>
+                        {this.state.items.map((item) => {
+                            if (item.children.length && item.type === 'folder') {
+                                return <NavDropDown key={item.hash} options={item} />;
+                            } else {
+                                return <NavOption key={item.hash} item={item} />;
                             }
                         })}
                     </BootstrapNav>

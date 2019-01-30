@@ -27,6 +27,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
         item={
           Object {
             "folder": null,
+            "hash": 4563,
             "href": "/videos",
             "title": "Videos",
             "type": "htmlpage",
@@ -43,6 +44,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
         item={
           Object {
             "folder": null,
+            "hash": 1249,
             "href": "/blog",
             "title": "Blog",
             "type": "htmlpage",
