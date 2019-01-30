@@ -7,27 +7,23 @@ import './NewsDetail.css';
 class NewsDetailPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        const { news } = props.location.state || {};
-        this.state = {
-            news: news
-        };
+        this.state = props.location.state ? props.location.state.news : null;
     }
 
     getNews() {
         DotCMSApi.esSearch('news', {
-            detailedSearchQuery: `+News.urlTitle:${this.props.match.params.slug}`
+            detailedSearchQuery: `+News.urlTitle:${
+                this.props.match.params.slug
+            }`
         })
             .then(response => response.json())
             .then(newsData => {
-                this.setState(state => ({
-                    ...state,
-                    news: newsData.contentlets[0]
-                }));
+                this.setState(state => newsData.contentlets[0]);
             });
     }
 
     componentDidMount() {
-        if (!this.state.news) {
+        if (!this.state) {
             this.getNews();
         }
     }
@@ -35,7 +31,7 @@ class NewsDetailPage extends React.Component {
     render() {
         return (
             <Layout>
-                <NewsDetail news={this.state.news} />
+                <NewsDetail {...this.state} />
             </Layout>
         );
     }

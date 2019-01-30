@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NewsDetail = ({ news }) => {
-    const { title, sysPublishDate, image, story } = news;
+const NewsDetail = ({ title, sysPublishDate, image, story }) => {
     return (
         <>
             <h3>{title}</h3>
@@ -14,21 +13,17 @@ const NewsDetail = ({ news }) => {
 };
 
 NewsDetail.propTypes = {
-    news: PropTypes.shape({
-        image: PropTypes.string,
-        sysPublishDate: PropTypes.string,
-        title: PropTypes.string,
-        story: PropTypes.string
-    })
+    image: PropTypes.string,
+    sysPublishDate: PropTypes.string,
+    title: PropTypes.string,
+    story: PropTypes.string
 };
 
 NewsDetail.defaultProps = {
-    news: {
-        image: '',
-        sysPublishDate: '',
-        title: '',
-        story: ''
-    }
+    image: '',
+    sysPublishDate: '',
+    title: '',
+    story: ''
 };
 
 export default NewsDetail;

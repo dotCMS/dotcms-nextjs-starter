@@ -3,35 +3,44 @@ import PropTypes from 'prop-types';
 import { Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
+const Links = props => {
+    return (
+        <Link
+            to={{
+                pathname: props.pathname,
+                state: props.state
+            }}
+        >
+            {props.children}
+        </Link>
+    );
+};
+
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
     return (
         <Media className="news-list-row" tag="li">
             {displayedFields.includes('image') ? (
-                <Link
-                    to={{
-                        pathname: `/news-events/news/${news.urlTitle}`,
-                        state: { news: news }
-                    }}
+                <Links
+                    pathname={`/news-events/news/${news.urlTitle}`}
+                    state={news}
                 >
                     <Media left>
                         <Media object src={news.image} alt="image" />
                     </Media>
-                </Link>
+                </Links>
             ) : (
                 ''
             )}
             <Media body>
                 {displayedFields.includes('title') ? (
                     <Media heading>
-                        <Link
-                            to={{
-                                pathname: `/news-events/news/${news.urlTitle}`,
-                                state: { news: news }
-                            }}
+                        <Links
+                            pathname={`/news-events/news/${news.urlTitle}`}
+                            state={news}
                         >
                             {news.title}
-                        </Link>
+                        </Links>
                     </Media>
                 ) : (
                     ''
