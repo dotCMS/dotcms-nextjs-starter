@@ -64,7 +64,8 @@ class PageFetchWrapper extends Component {
             this.setState({
                 ...this.state,
                 layout: this.props.data,
-                pathname: this.props.location.pathname
+                pathname: this.props.location.pathname,
+                mode: 'EDIT_MODE'
             });
         } else {
             this.setPage(this.props.location.pathname);
