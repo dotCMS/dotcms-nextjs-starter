@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
+import './Pagination.css';
 
 export default class DotPagination extends React.Component {
     constructor(props, context) {
@@ -26,7 +27,7 @@ export default class DotPagination extends React.Component {
         return (
             <>
                 <Pagination
-                    className="dot-pagination"
+                    className="text-center"
                     aria-label="Page navigation"
                 >
                     {[...Array(pages)].map((x, i) => (
