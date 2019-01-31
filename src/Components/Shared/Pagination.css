@@ -1,0 +1,34 @@
+.pagination {
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px 0;
+    padding-left: 0;
+}
+
+.pagination .page-item {
+    display: inline-block;
+}
+
+.pagination li button {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px;
+    color: #000;
+    line-height: 1.42857;
+    margin: 2px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.pagination li.active button.page-link {
+    background: #4aca85;
+    border: 1px solid #4aca85;
+}
+
+.pagination li button:hover,
+.pagination li button:focus {
+    background: #4aca85;
+    border: 1px solid #4aca85;
+    color: #fff;
+    transition: 0.5s;
+}
