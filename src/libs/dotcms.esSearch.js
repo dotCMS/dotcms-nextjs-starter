@@ -2,29 +2,33 @@ import DotCMSApi from './dotcms.api';
 
 const getEsQuery = (
     contentType,
-    { languageId, sortResultsBy, sortOrder1, offset, pagination, itemsPerPage, numberOfResults }
+    { languageId, sortResultsBy, sortOrder1, offset, pagination, itemsPerPage, numberOfResults, detailedSearchQuery }
 ) => {
+
+    const paginationQuery = `,
+        "from": OFFSETVALUE,
+        "size": SIZEPERPAGE`;
+
     let query = `{
         "query": {
             "bool": {
                 "must": {
                     "query_string" : {
-                        "query" : "+contentType:CONTENTTYPE +languageId:LANGUAGEIDVALUE"
+                        "query" : "+contentType:CONTENTTYPE +languageId:LANGUAGEIDVALUE ${detailedSearchQuery || '' }"
                     }
                 }
             }
         },
         "sort" : [
             { "SORTBYVALUE" : {"order" : "SORTTYPEVALUE"}}
-        ],
-        "from": OFFSETVALUE,
-        "size": SIZEPERPAGE
+        ]
+        ${pagination || numberOfResults ? paginationQuery : ''}
     }`;
 
     const esParams = {
         CONTENTTYPE: contentType,
         LANGUAGEIDVALUE: languageId || '1',
-        SORTBYVALUE: sortResultsBy,
+        SORTBYVALUE: sortResultsBy || 'title_dotraw',
         SORTTYPEVALUE: sortOrder1 || 'asc',
         OFFSETVALUE: offset || '0',
         SIZEPERPAGE: pagination ? itemsPerPage || 20 : numberOfResults || 40
@@ -38,7 +42,7 @@ const getEsQuery = (
 
 export const esSearch = (
     contentType,
-    { languageId, sortResultsBy, sortOrder1, offset, pagination, itemsPerPage, numberOfResults }
+    { languageId, sortResultsBy, sortOrder1, offset, pagination, itemsPerPage, numberOfResults, detailedSearchQuery }
 ) => {
     return DotCMSApi.request({
         url: '/api/es/search',
@@ -50,7 +54,8 @@ export const esSearch = (
             offset,
             pagination,
             itemsPerPage,
-            numberOfResults
+            numberOfResults,
+            detailedSearchQuery
         })
     });
 };

@@ -1,25 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NewsDetail = ({ news }) => {
-    const { title, sysPublishDate, image, story } = news;
+const NewsDetail = ({ title, sysPublishDate, image, story }) => {
     return (
         <>
             <h3>{title}</h3>
             <h5>{sysPublishDate}</h5>
-            <img alt="" src={image} />
+            <img className="news-detail-img" alt={title} src={image} />
             <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );
 };
 
 NewsDetail.propTypes = {
-    news: PropTypes.shape({
-        image: PropTypes.string,
-        sysPublishDate: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired,
-        story: PropTypes.string.isRequired
-    }).isRequired
+    image: PropTypes.string,
+    sysPublishDate: PropTypes.string,
+    title: PropTypes.string,
+    story: PropTypes.string
+};
+
+NewsDetail.defaultProps = {
+    image: '',
+    sysPublishDate: '',
+    title: '',
+    story: ''
 };
 
 export default NewsDetail;

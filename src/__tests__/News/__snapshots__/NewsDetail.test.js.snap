@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NewsDetail /> renders NewsDetail correctly 1`] = `
+<Fragment>
+  <h3 />
+  <h5 />
+  <img
+    alt=""
+    className="news-detail-img"
+    src=""
+  />
+  <div
+    dangerouslySetInnerHTML={
+      Object {
+        "__html": "",
+      }
+    }
+  />
+</Fragment>
+`;
