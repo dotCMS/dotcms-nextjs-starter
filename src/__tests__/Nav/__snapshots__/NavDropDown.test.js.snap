@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavDropDown /> renders NavOption correctly 1`] = `
+<UncontrolledDropdown
+  inNavbar={true}
+  nav={true}
+>
+  <DropdownToggle
+    aria-haspopup={true}
+    caret={true}
+    color="secondary"
+    nav={true}
+  >
+    Resources
+  </DropdownToggle>
+  <DropdownMenu
+    flip={true}
+    right={true}
+    tag="div"
+  >
+    <DropdownItem
+      active={false}
+      class="dropdown-item"
+      href="/videos"
+      key="0"
+      tag="a"
+      toggle={true}
+    >
+      Videos
+    </DropdownItem>
+    <DropdownItem
+      active={false}
+      class="dropdown-item"
+      href="/blog"
+      key="1"
+      tag="a"
+      toggle={true}
+    >
+      Blog
+    </DropdownItem>
+  </DropdownMenu>
+</UncontrolledDropdown>
+`;

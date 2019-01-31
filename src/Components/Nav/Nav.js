@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Nav as BootstrapNav, NavItem, NavLink, NavbarToggler, Collapse } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import DotCMSApi from '../libs/dotcms.api';
+import { Nav as BootstrapNav, NavbarToggler, Collapse } from 'reactstrap';
+import DotCMSApi from '../../libs/dotcms.api';
+import NavOption from '../../Components/Nav/NavOption';
+import NavDropDown from './NavDropDown';
 
 export default class Nav extends Component {
     state = {
@@ -10,9 +11,9 @@ export default class Nav extends Component {
         items: []
     };
 
-    async componentDidMount() {
+    componentDidMount() {
         DotCMSApi.request({
-            url: `${process.env.REACT_APP_DOTCMS_HOST}/api/v1/nav//?depth=2`
+            url: `${process.env.REACT_APP_DOTCMS_HOST}/api/v1/nav//?depth=3`
         })
             .then(response => response.json())
             .then(data => data.entity.children)
@@ -45,14 +46,12 @@ export default class Nav extends Component {
                 <NavbarToggler onClick={this.toggleCollapsed} />
                 <Collapse isOpen={this.state.collapsed} navbar>
                     <BootstrapNav pills={true}>
-                        {this.state.items.map(item => {
-                            return (
-                                <NavItem key={item.folder}>
-                                    <NavLink tag={Link} active={item.href === window.location.pathname} to={item.href}>
-                                        {item.title}
-                                    </NavLink>
-                                </NavItem>
-                            );
+                        {this.state.items.map((item) => {
+                            if (item.children.length && item.type === 'folder') {
+                                return <NavDropDown key={item.hash} options={item} />;
+                            } else {
+                                return <NavOption key={item.hash} item={item} />;
+                            }
                         })}
                     </BootstrapNav>
                 </Collapse>
