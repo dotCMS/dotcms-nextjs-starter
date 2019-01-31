@@ -5,7 +5,7 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
   className="news-list-row"
   tag="li"
 >
-  <Links
+  <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
     state={
       Object {
@@ -53,14 +53,14 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
         src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       />
     </Media>
-  </Links>
+  </ItemLink>
   <Media
     body={true}
   >
     <Media
       heading={true}
     >
-      <Links
+      <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
         state={
           Object {
@@ -100,7 +100,7 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
         }
       >
         The Gas Price Rollercoaster
-      </Links>
+      </ItemLink>
     </Media>
     <h5>
       2011-06-29 11:00:00.0
@@ -121,7 +121,7 @@ exports[`<NewsListItem /> renders news, without "image" 1`] = `
     <Media
       heading={true}
     >
-      <Links
+      <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
         state={
           Object {
@@ -161,7 +161,7 @@ exports[`<NewsListItem /> renders news, without "image" 1`] = `
         }
       >
         The Gas Price Rollercoaster
-      </Links>
+      </ItemLink>
     </Media>
     <h5>
       2011-06-29 11:00:00.0
@@ -176,7 +176,7 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
   className="news-list-row"
   tag="li"
 >
-  <Links
+  <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
     state={
       Object {
@@ -224,14 +224,14 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
         src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       />
     </Media>
-  </Links>
+  </ItemLink>
   <Media
     body={true}
   >
     <Media
       heading={true}
     >
-      <Links
+      <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
         state={
           Object {
@@ -271,7 +271,7 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
         }
       >
         The Gas Price Rollercoaster
-      </Links>
+      </ItemLink>
     </Media>
     Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
   </Media>
@@ -283,7 +283,7 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
   className="news-list-row"
   tag="li"
 >
-  <Links
+  <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
     state={
       Object {
@@ -331,14 +331,14 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
         src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       />
     </Media>
-  </Links>
+  </ItemLink>
   <Media
     body={true}
   >
     <Media
       heading={true}
     >
-      <Links
+      <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
         state={
           Object {
@@ -378,7 +378,7 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
         }
       >
         The Gas Price Rollercoaster
-      </Links>
+      </ItemLink>
     </Media>
     <h5>
       2011-06-29 11:00:00.0
@@ -393,7 +393,7 @@ exports[`<NewsListItem /> renders news, without "title" 1`] = `
   className="news-list-row"
   tag="li"
 >
-  <Links
+  <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
     state={
       Object {
@@ -441,7 +441,7 @@ exports[`<NewsListItem /> renders news, without "title" 1`] = `
         src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       />
     </Media>
-  </Links>
+  </ItemLink>
   <Media
     body={true}
   >

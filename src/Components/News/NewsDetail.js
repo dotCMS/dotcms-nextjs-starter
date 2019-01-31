@@ -6,7 +6,7 @@ const NewsDetail = ({ title, sysPublishDate, image, story }) => {
         <>
             <h3>{title}</h3>
             <h5>{sysPublishDate}</h5>
-            <img className='news-detail-img' alt={title} src={image} />
+            <img className="news-detail-img" alt={title} src={image} />
             <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );

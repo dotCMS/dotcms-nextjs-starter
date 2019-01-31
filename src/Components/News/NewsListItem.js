@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const Links = props => {
+const ItemLink = props => {
     return (
         <Link
             to={{
@@ -21,26 +21,26 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
     return (
         <Media className="news-list-row" tag="li">
             {displayedFields.includes('image') ? (
-                <Links
+                <ItemLink
                     pathname={`/news-events/news/${news.urlTitle}`}
                     state={news}
                 >
                     <Media left>
                         <Media object src={news.image} alt="image" />
                     </Media>
-                </Links>
+                </ItemLink>
             ) : (
                 ''
             )}
             <Media body>
                 {displayedFields.includes('title') ? (
                     <Media heading>
-                        <Links
+                        <ItemLink
                             pathname={`/news-events/news/${news.urlTitle}`}
                             state={news}
                         >
                             {news.title}
-                        </Links>
+                        </ItemLink>
                     </Media>
                 ) : (
                     ''
