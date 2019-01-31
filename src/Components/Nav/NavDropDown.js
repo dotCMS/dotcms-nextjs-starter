@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
-import NavOption from './NavOption';
 
 const NavDropDown = ({ options }) => {
     return (
@@ -12,8 +11,14 @@ const NavDropDown = ({ options }) => {
             <DropdownMenu right>
                 {options.children.map((subItem, index) => {
                     return (
-                        <DropdownItem key={index}>
-                            <NavOption item={subItem} />
+                        <DropdownItem
+                            tag="a"
+                            class="dropdown-item"
+                            href={subItem.href}
+                            active={subItem.href === window.location.pathname}
+                            key={index}
+                        >
+                            {subItem.title}
                         </DropdownItem>
                     );
                 })}

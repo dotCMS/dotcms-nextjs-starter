@@ -19,38 +19,24 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
     tag="div"
   >
     <DropdownItem
+      active={false}
+      class="dropdown-item"
+      href="/videos"
       key="0"
-      tag="button"
+      tag="a"
       toggle={true}
     >
-      <NavOption
-        item={
-          Object {
-            "folder": null,
-            "hash": 4563,
-            "href": "/videos",
-            "title": "Videos",
-            "type": "htmlpage",
-          }
-        }
-      />
+      Videos
     </DropdownItem>
     <DropdownItem
+      active={false}
+      class="dropdown-item"
+      href="/blog"
       key="1"
-      tag="button"
+      tag="a"
       toggle={true}
     >
-      <NavOption
-        item={
-          Object {
-            "folder": null,
-            "hash": 1249,
-            "href": "/blog",
-            "title": "Blog",
-            "type": "htmlpage",
-          }
-        }
-      />
+      Blog
     </DropdownItem>
   </DropdownMenu>
 </UncontrolledDropdown>
