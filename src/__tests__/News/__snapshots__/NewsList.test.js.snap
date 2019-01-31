@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NewsList /> renders NewsList correctly 1`] = `
-<Media
-  className="news-list"
-  list={true}
+<CardColumns
+  tag="div"
 >
   <NewsListItem
     fieldsToDisplay=""
@@ -205,5 +204,5 @@ exports[`<NewsList /> renders NewsList correctly 1`] = `
       }
     }
   />
-</Media>
+</CardColumns>
 `;

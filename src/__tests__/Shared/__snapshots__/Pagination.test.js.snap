@@ -4,7 +4,7 @@ exports[`<Pagination /> renders pagination correctly 1`] = `
 <Fragment>
   <Pagination
     aria-label="Page navigation"
-    className="dot-pagination"
+    className="text-center"
     listTag="ul"
     tag="nav"
   >

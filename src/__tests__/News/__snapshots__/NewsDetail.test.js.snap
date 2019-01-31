@@ -3,7 +3,9 @@
 exports[`<NewsDetail /> renders NewsDetail correctly 1`] = `
 <Fragment>
   <h3 />
-  <h5 />
+  <h5>
+    Invalid Date
+  </h5>
   <img
     alt=""
     className="news-detail-img"

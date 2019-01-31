@@ -1,9 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NewsListItem /> renders news correctly 1`] = `
-<Media
-  className="news-list-row"
-  tag="li"
+<Card
+  tag="div"
 >
   <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -44,21 +43,19 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
       }
     }
   >
-    <Media
-      left={true}
-    >
-      <Media
-        alt="image"
-        object={true}
-        src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
-      />
-    </Media>
+    <CardImg
+      alt="image"
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+      tag="img"
+      top={true}
+      width="100%"
+    />
   </ItemLink>
-  <Media
-    body={true}
+  <CardBody
+    tag="div"
   >
-    <Media
-      heading={true}
+    <CardTitle
+      tag="div"
     >
       <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -101,25 +98,30 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
       >
         The Gas Price Rollercoaster
       </ItemLink>
-    </Media>
-    <h5>
-      2011-06-29 11:00:00.0
-    </h5>
-    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
-  </Media>
-</Media>
+    </CardTitle>
+    <CardSubtitle
+      tag="div"
+    >
+      June 29, 2011
+    </CardSubtitle>
+    <CardText
+      tag="p"
+    >
+      Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+    </CardText>
+  </CardBody>
+</Card>
 `;
 
 exports[`<NewsListItem /> renders news, without "image" 1`] = `
-<Media
-  className="news-list-row"
-  tag="li"
+<Card
+  tag="div"
 >
-  <Media
-    body={true}
+  <CardBody
+    tag="div"
   >
-    <Media
-      heading={true}
+    <CardTitle
+      tag="div"
     >
       <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -162,19 +164,24 @@ exports[`<NewsListItem /> renders news, without "image" 1`] = `
       >
         The Gas Price Rollercoaster
       </ItemLink>
-    </Media>
-    <h5>
-      2011-06-29 11:00:00.0
-    </h5>
-    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
-  </Media>
-</Media>
+    </CardTitle>
+    <CardSubtitle
+      tag="div"
+    >
+      June 29, 2011
+    </CardSubtitle>
+    <CardText
+      tag="p"
+    >
+      Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+    </CardText>
+  </CardBody>
+</Card>
 `;
 
 exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
-<Media
-  className="news-list-row"
-  tag="li"
+<Card
+  tag="div"
 >
   <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -215,21 +222,19 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
       }
     }
   >
-    <Media
-      left={true}
-    >
-      <Media
-        alt="image"
-        object={true}
-        src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
-      />
-    </Media>
+    <CardImg
+      alt="image"
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+      tag="img"
+      top={true}
+      width="100%"
+    />
   </ItemLink>
-  <Media
-    body={true}
+  <CardBody
+    tag="div"
   >
-    <Media
-      heading={true}
+    <CardTitle
+      tag="div"
     >
       <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -272,16 +277,19 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
       >
         The Gas Price Rollercoaster
       </ItemLink>
-    </Media>
-    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
-  </Media>
-</Media>
+    </CardTitle>
+    <CardText
+      tag="p"
+    >
+      Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+    </CardText>
+  </CardBody>
+</Card>
 `;
 
 exports[`<NewsListItem /> renders news, without "summary" 1`] = `
-<Media
-  className="news-list-row"
-  tag="li"
+<Card
+  tag="div"
 >
   <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -322,21 +330,19 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
       }
     }
   >
-    <Media
-      left={true}
-    >
-      <Media
-        alt="image"
-        object={true}
-        src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
-      />
-    </Media>
+    <CardImg
+      alt="image"
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+      tag="img"
+      top={true}
+      width="100%"
+    />
   </ItemLink>
-  <Media
-    body={true}
+  <CardBody
+    tag="div"
   >
-    <Media
-      heading={true}
+    <CardTitle
+      tag="div"
     >
       <ItemLink
         pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -379,19 +385,24 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
       >
         The Gas Price Rollercoaster
       </ItemLink>
-    </Media>
-    <h5>
-      2011-06-29 11:00:00.0
-    </h5>
-    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
-  </Media>
-</Media>
+    </CardTitle>
+    <CardSubtitle
+      tag="div"
+    >
+      June 29, 2011
+    </CardSubtitle>
+    <CardText
+      tag="p"
+    >
+      Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+    </CardText>
+  </CardBody>
+</Card>
 `;
 
 exports[`<NewsListItem /> renders news, without "title" 1`] = `
-<Media
-  className="news-list-row"
-  tag="li"
+<Card
+  tag="div"
 >
   <ItemLink
     pathname="/news-events/news/the-gas-price-rollercoaster"
@@ -432,23 +443,27 @@ exports[`<NewsListItem /> renders news, without "title" 1`] = `
       }
     }
   >
-    <Media
-      left={true}
-    >
-      <Media
-        alt="image"
-        object={true}
-        src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
-      />
-    </Media>
+    <CardImg
+      alt="image"
+      src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
+      tag="img"
+      top={true}
+      width="100%"
+    />
   </ItemLink>
-  <Media
-    body={true}
+  <CardBody
+    tag="div"
   >
-    <h5>
-      2011-06-29 11:00:00.0
-    </h5>
-    Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
-  </Media>
-</Media>
+    <CardSubtitle
+      tag="div"
+    >
+      June 29, 2011
+    </CardSubtitle>
+    <CardText
+      tag="p"
+    >
+      Historically, the price of gasoline has been tied to changes in the cost of crude oil; as crude prices rise, consumers can expect to pay more at the pump, and the reverse is also true.
+    </CardText>
+  </CardBody>
+</Card>
 `;
