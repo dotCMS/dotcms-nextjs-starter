@@ -13,7 +13,7 @@ if (window.dotcmsPage) {
     Loadable.preloadReady().then(() => {
         ReactDOM.hydrate(
             <Router>
-                <App data={window.dotcmsPage} />
+                <App {...window.dotcmsPage} />
             </Router>,
             document.getElementById('root')
         );

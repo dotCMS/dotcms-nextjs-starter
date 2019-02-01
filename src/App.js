@@ -45,7 +45,7 @@ class PageFetchWrapper extends Component {
                     layout: data.layout,
                     pathname: pathname,
                     error: data.error,
-                    mode: 'EDIT_MODE'
+                    mode: data.viewAs.mode
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
             });
@@ -60,12 +60,12 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        if (this.props.data) {
+        if (this.props.layout) {
             this.setState({
                 ...this.state,
-                layout: this.props.data,
+                layout: this.props.layout,
                 pathname: this.props.location.pathname,
-                mode: 'EDIT_MODE'
+                mode: this.props.viewAs.mode
             });
         } else {
             this.setPage(this.props.location.pathname);
@@ -87,11 +87,11 @@ class PageFetchWrapper extends Component {
     }
 }
 
-const App = data => {
+const App = page => {
     return (
         <Switch>
             <Route path="/news-events/news/:slug" component={NewsDetailPage} />
-            <Route render={props => <PageFetchWrapper {...props} {...data} />} />
+            <Route render={props => <PageFetchWrapper {...props} {...page} />} />
         </Switch>
     );
 };
