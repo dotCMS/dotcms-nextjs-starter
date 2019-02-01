@@ -10,7 +10,7 @@
 }
 
 .pagination li button {
-    background: #fff;
+    background: var(--white);
     border: 1px solid #e6e6e6;
     border-radius: 0.125rem;
     color: #000;
@@ -21,14 +21,14 @@
 }
 
 .pagination li.active button.page-link {
-    background: #4aca85;
-    border: 1px solid #4aca85;
+    background: var(--background-color);
+    border: 1px solid var(--background-color);
 }
 
 .pagination li button:hover,
 .pagination li button:focus {
-    background: #4aca85;
-    border: 1px solid #4aca85;
-    color: #fff;
+    background: var(--background-color);
+    border: 1px solid var(--background-color);
+    color: var(--white);
     transition: 0.5s;
 }

@@ -15,7 +15,7 @@
 .card-title a:hover,
 .card-title a:active,
 .card-title a:focus {
-    color: #4aca85;
+    color: var(--background-color);
 }
 
 .card-subtitle {
