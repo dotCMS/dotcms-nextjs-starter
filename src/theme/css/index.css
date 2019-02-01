@@ -66,6 +66,7 @@
 
 :root {
     --background-color: #4aca85;
+    --text-color: #303133;
 }
 
 body {
@@ -101,7 +102,7 @@ h4,
 h5,
 h6,
 figure {
-    color: #303133;
+    color: var(--text-color);
     font-family: 'Nunito', Arial, sans-serif;
     font-weight: 400;
     margin: 0 0 1.25rem 0;

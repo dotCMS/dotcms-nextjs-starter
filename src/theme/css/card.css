@@ -9,7 +9,7 @@
 }
 
 .card-title a {
-    color: #303133;
+    color: var(--text-color);
 }
 
 .card-title a:hover,
@@ -19,7 +19,7 @@
 }
 
 .card-subtitle {
-    color: #303133;
+    color: var(--text-color);
     font-size: 0.75rem;
     margin-bottom: 1.25rem;
 }
@@ -29,7 +29,7 @@
 }
 
 .card-title {
-    color: #303133;
+    color: var(--text-color);
     font-family: 'Nunito', Arial, sans-serif;
     font-size: 1.875rem;
     font-weight: 400;
