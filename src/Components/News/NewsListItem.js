@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { dateFormat } from '../../utils';
-import './NewsListItem.css';
+import DateFormat from '../Shared/DateFormat';
+import '../../theme/css/card.css';
 
 const ItemLink = (props) => {
     return (
@@ -40,7 +40,9 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
                     ''
                 )}
                 {displayedFields.includes('publishDate') ? (
-                    <CardSubtitle>{dateFormat(news.sysPublishDate)}</CardSubtitle>
+                    <CardSubtitle>
+                        <DateFormat dateString={news.sysPublishDate} />
+                    </CardSubtitle>
                 ) : (
                     ''
                 )}

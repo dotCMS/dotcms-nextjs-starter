@@ -13,7 +13,6 @@ const NavDropDown = ({ options }) => {
                     return (
                         <DropdownItem
                             tag="a"
-                            className="dropdown-item"
                             href={subItem.href}
                             active={subItem.href === window.location.pathname}
                             key={index}

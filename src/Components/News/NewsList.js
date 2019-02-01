@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NewsListItem from './NewsListItem';
-import { CardColumns } from 'reactstrap';
 import './NewsList.css';
 
 const NewsList = ({ news, fieldsToDisplay }) => {
     return (
-        <CardColumns>
+        <div className="news-list">
             {news.map((item, index) => (
                 <NewsListItem
                     news={item}
@@ -14,7 +13,7 @@ const NewsList = ({ news, fieldsToDisplay }) => {
                     fieldsToDisplay={fieldsToDisplay}
                 />
             ))}
-        </CardColumns>
+        </div>
     );
 };
 

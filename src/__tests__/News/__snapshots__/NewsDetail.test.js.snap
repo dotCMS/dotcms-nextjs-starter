@@ -4,7 +4,9 @@ exports[`<NewsDetail /> renders NewsDetail correctly 1`] = `
 <Fragment>
   <h3 />
   <h5>
-    Invalid Date
+    <DateFormat
+      dateString=""
+    />
   </h5>
   <img
     alt=""
