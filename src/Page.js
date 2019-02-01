@@ -1,9 +1,6 @@
 import React from 'react';
-
 import RowContainer from './Components/RowContainer';
 import CantRender from './Components/CantRender';
-
-import './Page.css';
 
 const Page = ({ data }) => {
     return data && data.body && data.body.rows ? (
