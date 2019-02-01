@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Media } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import DateFormat from '../Shared/DateFormat';
 
-const ItemLink = props => {
+const ItemLink = (props) => {
     return (
         <Link
             to={{
@@ -19,40 +20,34 @@ const ItemLink = props => {
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
     return (
-        <Media className="news-list-row" tag="li">
+        <Card>
             {displayedFields.includes('image') ? (
-                <ItemLink
-                    pathname={`/news-events/news/${news.urlTitle}`}
-                    state={news}
-                >
-                    <Media left>
-                        <Media object src={news.image} alt="image" />
-                    </Media>
+                <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
+                    <CardImg top width="100%" src={news.image} alt="image" />
                 </ItemLink>
             ) : (
                 ''
             )}
-            <Media body>
+            <CardBody>
                 {displayedFields.includes('title') ? (
-                    <Media heading>
-                        <ItemLink
-                            pathname={`/news-events/news/${news.urlTitle}`}
-                            state={news}
-                        >
+                    <CardTitle>
+                        <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
                             {news.title}
                         </ItemLink>
-                    </Media>
+                    </CardTitle>
                 ) : (
                     ''
                 )}
                 {displayedFields.includes('publishDate') ? (
-                    <h5>{news.sysPublishDate}</h5>
+                    <CardSubtitle>
+                        <DateFormat dateString={news.sysPublishDate} />
+                    </CardSubtitle>
                 ) : (
                     ''
                 )}
-                {displayedFields.includes('summary') ? news.lead : ''}
-            </Media>
-        </Media>
+                {displayedFields.includes('summary') ? <CardText>{news.lead}</CardText> : ''}
+            </CardBody>
+        </Card>
     );
 };
 

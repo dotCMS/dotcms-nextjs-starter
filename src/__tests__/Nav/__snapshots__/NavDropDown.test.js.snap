@@ -20,18 +20,18 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
   >
     <DropdownItem
       active={false}
-      href="/videos"
       key="0"
-      tag="a"
+      tag={[Function]}
+      to="/videos"
       toggle={true}
     >
       Videos
     </DropdownItem>
     <DropdownItem
       active={false}
-      href="/blog"
       key="1"
-      tag="a"
+      tag={[Function]}
+      to="/blog"
       toggle={true}
     >
       Blog
