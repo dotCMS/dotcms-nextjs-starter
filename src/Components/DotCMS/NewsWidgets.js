@@ -1,6 +1,6 @@
 import React from 'react';
 import { Spinner } from 'reactstrap';
-import NewsList from './NewsList';
+import NewsList from '../News/NewsList';
 import NoResults from '../Shared/NoResults';
 import Pagination from '../Shared/Pagination';
 import DotCMSApi from '../../libs/dotcms.api';
@@ -26,12 +26,12 @@ class NewsWidget extends React.Component {
 
     getNewsItems(pagination) {
         const defaultEsParams = {
-            itemsPerPage: this.props.data.itemsPerPage,
-            languageId: this.props.data.languageId,
-            numberOfResults: this.props.data.numberOfResults,
-            pagination: this.props.data.pagination,
-            sortOrder1: this.props.data.sortOrder1,
-            sortResultsBy: sortResultsByMap[this.props.data.sortResultsBy]
+            itemsPerPage: this.props.itemsPerPage,
+            languageId: this.props.languageId,
+            numberOfResults: this.props.numberOfResults,
+            pagination: this.props.pagination,
+            sortOrder1: this.props.sortOrder1,
+            sortResultsBy: sortResultsByMap[this.props.sortResultsBy]
         };
 
         DotCMSApi.esSearch('news', {
@@ -57,14 +57,14 @@ class NewsWidget extends React.Component {
     }
 
     pageChange = pageNumber => {
-        const offset = this.props.data.itemsPerPage * pageNumber;
+        const offset = this.props.itemsPerPage * pageNumber;
         const pagination = { ...this.state.pagination, offset };
         this.getNewsItems(pagination);
     };
 
     render() {
         const { loading, news, pagination } = this.state;
-        const { fieldsToDisplay, itemsPerPage, pagination: showPagination } = this.props.data;
+        const { fieldsToDisplay, itemsPerPage, pagination: showPagination } = this.props;
 
         if (loading) {
             return <Spinner color="primary" />;

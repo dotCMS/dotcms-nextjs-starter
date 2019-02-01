@@ -2,19 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
+import Loadable from 'react-loadable';
+import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './theme/css/index.css';
-import App from './App';
-
 
 if (window.dotcmsPage) {
-    ReactDOM.hydrate(
-        <Router>
-            <App data={window.dotcmsPage} />
-        </Router>,
-        document.getElementById('root')
-    );
+    Loadable.preloadReady().then(() => {
+        ReactDOM.hydrate(
+            <Router>
+                <App {...window.dotcmsPage} />
+            </Router>,
+            document.getElementById('root')
+        );
+    });
 } else {
     ReactDOM.render(
         <Router>
@@ -23,7 +25,6 @@ if (window.dotcmsPage) {
         document.getElementById('root')
     );
 }
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import wait from 'waait';
 import DotCMSApi from '../../libs/dotcms.api';
-import BannerCarouselWidgets from '../../Components/BannerCarousel/BannerCarouselWidgets';
+import BannerCarouselWidgets from '../../Components/DotCMS/BannerCarouselWidgets';
 
 describe('<BannerCarouselWidgets />', () => {
     let wrapper;
@@ -75,7 +75,7 @@ describe('<BannerCarouselWidgets />', () => {
 
     it('should render BannerCarousel component', async () => {
         wrapper = shallow(
-            <BannerCarouselWidgets data={bannersPageData} />
+            <BannerCarouselWidgets {...bannersPageData} />
         );
         await wait();
 

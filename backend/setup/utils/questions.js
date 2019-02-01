@@ -2,6 +2,8 @@ import { DOTCMS } from './print';
 
 import inquirer from 'inquirer';
 
+const defaultNodeUrl = process.argv[2] === 'serve' ? 'http://localhost:5000' : 'http://localhost:3000';
+
 const questionsBasic = param => [
     {
         message: !!param
@@ -18,7 +20,7 @@ const questionsBasic = param => [
     {
         message: `Node Preview URL`,
         name: 'PUBLIC_URL',
-        default: (param && param.PUBLIC_URL) || 'http://localhost:5000'
+        default: (param && param.PUBLIC_URL) || defaultNodeUrl
     }
 ];
 

@@ -2,14 +2,14 @@ import React from 'react';
 import DotCMSApi from '../../libs/dotcms.api';
 import { Spinner } from 'reactstrap';
 import NoResults from '../Shared/NoResults';
-import BannerCarousel from './BannerCarousel';
+import BannerCarousel from '../BannerCarousel';
 
 const sortResultsByMap = {
     title: 'title_dotraw',
     modDate: 'modDate'
 };
 
-class BannerCarouselWidgets extends React.Component {
+class Bannercarouselwidgets extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
@@ -31,10 +31,10 @@ class BannerCarouselWidgets extends React.Component {
 
     getBannersItems() {
         const defaultEsParams = {
-            languageId: this.props.data.languageId,
-            numberOfResults: this.props.data.numberOfResults,
-            sortOrder1: this.props.data.sortOrder1,
-            sortResultsBy: sortResultsByMap[this.props.data.sortResultsBy]
+            languageId: this.props.languageId,
+            numberOfResults: this.props.numberOfResults,
+            sortOrder1: this.props.sortOrder1,
+            sortResultsBy: sortResultsByMap[this.props.sortResultsBy]
         };
 
         DotCMSApi.esSearch('banner', defaultEsParams)
@@ -60,7 +60,7 @@ class BannerCarouselWidgets extends React.Component {
             return banners && banners.length ? (
                 <BannerCarousel
                     items={banners}
-                    fieldsToDisplay={this.props.data.fieldsToDisplay}
+                    fieldsToDisplay={this.props.fieldsToDisplay}
                 />
             ) : (
                 <NoResults />
@@ -69,4 +69,4 @@ class BannerCarouselWidgets extends React.Component {
     }
 }
 
-export default BannerCarouselWidgets;
+export default Bannercarouselwidgets;
