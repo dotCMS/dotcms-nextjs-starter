@@ -20,25 +20,28 @@ const isThisAPage = pathname => {
     return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
 };
 
-const getScript = data => {
-    if (data) {
+const getScript = page => {
+    if (page) {
         return `
         <script type="${mimeType['.js']}">
-            var dotcmsPage = ${JSON.stringify(data)}
+            var dotcmsPage = ${JSON.stringify({
+                layout: page.layout,
+                viewAs: page.viewAs
+            })}
         </script>`;
     } else {
         return '';
     }
 };
 
-const getMainComponent = (url, layout) => {
+const getMainComponent = (url, page) => {
     const modules = [];
     const context = {};
 
     return (
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
-                <App data={layout} />
+                <App {...page} />
             </StaticRouter>
         </Loadable.Capture>
     );
@@ -78,9 +81,9 @@ const server = http.createServer((request, response) => {
             const page = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const app = renderToString(getMainComponent(request.url, page.layout));
+                const app = renderToString(getMainComponent(request.url, page));
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                data = data.replace('<div id="script"></div>', getScript(page.layout));
+                data = data.replace('<div id="script"></div>', getScript(page));
 
                 response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                 response.end(data);

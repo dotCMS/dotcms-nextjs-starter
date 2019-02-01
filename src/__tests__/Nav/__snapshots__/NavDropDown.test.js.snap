@@ -20,7 +20,6 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
   >
     <DropdownItem
       active={false}
-      class="dropdown-item"
       href="/videos"
       key="0"
       tag="a"
@@ -30,7 +29,6 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
     </DropdownItem>
     <DropdownItem
       active={false}
-      class="dropdown-item"
       href="/blog"
       key="1"
       tag="a"
