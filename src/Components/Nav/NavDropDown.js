@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 const NavDropDown = ({ options }) => {
     return (
@@ -12,8 +13,8 @@ const NavDropDown = ({ options }) => {
                 {options.children.map((subItem, index) => {
                     return (
                         <DropdownItem
-                            tag="a"
-                            href={subItem.href}
+                            tag={Link}
+                            to={subItem.href}
                             active={subItem.href === window.location.pathname}
                             key={index}
                         >
