@@ -32,15 +32,11 @@ header.header__menu {
     top: 0;
 }
 
-.navbar-light a.navbar-brand {
+.header__brand-logo.navbar-brand {
     color: var(--white);
     font-size: 1.25rem;
     font-weight: 700;
     text-transform: uppercase;
-}
-
-.navbar-light a.navbar-brand:hover {
-    color: var(--white);
 }
 
 .header__page-title,
@@ -63,7 +59,7 @@ header.header__menu {
 
 .header__breadcrumbs {
     color: var(--white);
-    font-family: 'Nunito', Arial, sans-serif;
+    font-family: var(--header-font);
     font-size: 0.875rem;
     font-weight: 200;
     text-align: center;

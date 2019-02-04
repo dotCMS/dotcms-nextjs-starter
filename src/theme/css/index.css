@@ -67,10 +67,12 @@
 :root {
     --background-color: #4aca85;
     --text-color: #303133;
+    --body-font: 'Poppins', Arial, sans-serif;
+    --header-font: 'Nunito', Arial, sans-serif;
 }
 
 body {
-    font-family: 'Poppins', Arial, sans-serif;
+    font-family: var(--body-font);
     font-weight: 300;
     font-size: 16px;
     line-height: 2;
@@ -103,7 +105,7 @@ h5,
 h6,
 figure {
     color: var(--text-color);
-    font-family: 'Nunito', Arial, sans-serif;
+    font-family: var(--header-font);
     font-weight: 400;
     margin: 0 0 1.25rem 0;
     line-height: 1.3;

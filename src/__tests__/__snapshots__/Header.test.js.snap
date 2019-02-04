@@ -4,12 +4,11 @@ exports[`<Header /> renders and matches snapshot 1`] = `
 <Fragment>
   <Navbar
     className="header__menu"
-    color="light"
     expand="md"
-    light={true}
     tag="header"
   >
     <NavbarBrand
+      className="header__brand-logo"
       href="/"
       tag="a"
     >

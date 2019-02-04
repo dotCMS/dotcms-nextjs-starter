@@ -21,9 +21,9 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
     return (
         <Card>
-            {displayedFields.includes('image') ? (
+            {displayedFields.includes('image') && news.image ? (
                 <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
-                    <CardImg className="news-list__image" top width="100%" src={news.image} alt="" />
+                    <CardImg top width="100%" src={news.image} alt="" />
                 </ItemLink>
             ) : (
                 ''

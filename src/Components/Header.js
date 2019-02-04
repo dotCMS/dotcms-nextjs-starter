@@ -7,8 +7,8 @@ import './Header.css';
 const Header = () => {
     return (
         <>
-            <Navbar tag="header" className="header__menu" color="light" light expand="md">
-                <NavbarBrand href="/">DotCMS - SPA</NavbarBrand>
+            <Navbar tag="header" className="header__menu" expand="md">
+                <NavbarBrand className="header__brand-logo" href="/">DotCMS - SPA</NavbarBrand>
                 <Nav />
             </Navbar>
             <section className="header__extend">
