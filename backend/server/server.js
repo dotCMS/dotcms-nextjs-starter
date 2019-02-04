@@ -15,12 +15,12 @@ import App from '../../src/App';
 
 const STATIC_FOLDER = './build';
 
-const isThisAPage = pathname => {
+const isThisAPage = (pathname) => {
     const ext = path.parse(pathname).ext;
     return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
 };
 
-const getScript = payload => {
+const getScript = (payload) => {
     if (payload) {
         return `
         <script type="${mimeType['.js']}">
@@ -39,7 +39,7 @@ const getMainComponent = (url, payload) => {
     const context = {};
 
     return (
-        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+        <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
                 <App {...payload.layout} {...payload.viewAs} />
             </StaticRouter>
@@ -104,7 +104,7 @@ const server = http.createServer((request, response) => {
                     .get({
                         pathname: sanitizePath
                     })
-                    .then(payload => {
+                    .then((payload) => {
                         const app = renderToString(getMainComponent(request.url, payload));
                         data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
                         data = data.replace('<div id="script"></div>', getScript(payload));
@@ -114,9 +114,17 @@ const server = http.createServer((request, response) => {
                     });
             });
         } else {
+            response.setHeader('Access-Control-Allow-Origin', '*');
+            response.setHeader('Access-Control-Allow-Credentials', 'true');
+            response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+            response.setHeader(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
-            fs.exists(pathname, exist => {
+            fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
                     let proxy = http.request(
@@ -128,7 +136,7 @@ const server = http.createServer((request, response) => {
                             headers: request.headers,
                             body: request.body
                         },
-                        res => {
+                        (res) => {
                             res.pipe(
                                 response,
                                 {
@@ -170,7 +178,7 @@ const server = http.createServer((request, response) => {
 
 // We tell React Loadable to load all required assets and start listening.
 Loadable.preloadAll().then(() => {
-    server.listen(5000, err => {
+    server.listen(5000, (err) => {
         console.log('Server running http://localhost:5000');
     });
 });
