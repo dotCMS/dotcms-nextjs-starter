@@ -29,7 +29,7 @@ export default class Contentlet extends Component {
     static contextType = PageContext;
 
     render() {
-        const isEditMode = this.context.mode === 'EDIT_MODE';
+        const isEditMode = this.context.mode === 'EDIT_MODE' || 'PREVIEW_MODE';
 
         const Component = Loadable({
             loader: () => import(`./DotCMS/${this.props.data.contentType}`),

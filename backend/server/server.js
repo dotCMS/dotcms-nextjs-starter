@@ -20,13 +20,13 @@ const isThisAPage = pathname => {
     return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
 };
 
-const getScript = page => {
-    if (page) {
+const getScript = payload => {
+    if (payload) {
         return `
         <script type="${mimeType['.js']}">
             var dotcmsPage = ${JSON.stringify({
-                layout: page.layout,
-                viewAs: page.viewAs
+                layout: payload.layout,
+                viewAs: payload.viewAs
             })}
         </script>`;
     } else {
@@ -34,14 +34,14 @@ const getScript = page => {
     }
 };
 
-const getMainComponent = (url, page) => {
+const getMainComponent = (url, payload) => {
     const modules = [];
     const context = {};
 
     return (
         <Loadable.Capture report={moduleName => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
-                <App {...page} />
+                <App {...payload.layout} {...payload.viewAs} />
             </StaticRouter>
         </Loadable.Capture>
     );
@@ -104,10 +104,10 @@ const server = http.createServer((request, response) => {
                     .get({
                         pathname: sanitizePath
                     })
-                    .then(page => {
-                        const app = renderToString(getMainComponent(request.url, page.layout));
+                    .then(payload => {
+                        const app = renderToString(getMainComponent(request.url, payload));
                         data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                        data = data.replace('<div id="script"></div>', getScript(page.layout));
+                        data = data.replace('<div id="script"></div>', getScript(payload));
 
                         response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                         response.end(data);
