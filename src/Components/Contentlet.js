@@ -29,14 +29,14 @@ export default class Contentlet extends Component {
     static contextType = PageContext;
 
     render() {
-        const isEditMode = this.context.mode === 'EDIT_MODE' || 'PREVIEW_MODE';
+        const showWarning = this.context.mode !== 'ADMIN_MODE';
 
         const Component = Loadable({
             loader: () => import(`./DotCMS/${this.props.data.contentType}`),
-            loading: props => (isEditMode ? <Loading contentlet={this.props.data} {...props} /> : null)
+            loading: props => (showWarning ? <Loading contentlet={this.props.data} {...props} /> : null)
         });
 
-        return isEditMode ? (
+        return showWarning ? (
             <DotContentlet data={this.props.data}>
                 <Component {...this.props.data} />
             </DotContentlet>
