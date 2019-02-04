@@ -40,12 +40,12 @@ class PageFetchWrapper extends Component {
             .get({
                 pathname: pathname
             })
-            .then(data => {
+            .then(({layout, error, viewAs}) => {
                 this.setState({
-                    layout: data.layout,
+                    layout: layout,
                     pathname: pathname,
-                    error: data.error,
-                    mode: data.viewAs.mode
+                    error: error,
+                    mode: viewAs.mode || ''
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
             });
@@ -60,12 +60,14 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        if (this.props.layout) {
+        const { layout, viewAs } = this.props;
+
+        if (layout) {
             this.setState({
                 ...this.state,
-                layout: this.props.layout,
+                layout: layout,
                 pathname: this.props.location.pathname,
-                mode: this.props.viewAs.mode
+                mode: viewAs ? viewAs.mode : ''
             });
         } else {
             this.setPage(this.props.location.pathname);
