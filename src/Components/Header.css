@@ -1,7 +1,6 @@
 header.header__menu {
     background: transparent !important;
     justify-content: space-between;
-    margin: 0 0.9375rem;
     position: absolute;
     top: 0;
     width: 100%;
@@ -55,17 +54,4 @@ header.header__menu {
     .header__page-title {
         font-size: 2.125rem;
     }
-}
-
-.header__breadcrumbs {
-    color: var(--white);
-    font-family: var(--header-font);
-    font-size: 0.875rem;
-    font-weight: 200;
-    text-align: center;
-}
-
-.header__home-link {
-    color: rgba(255, 255, 255, 0.5);
-    padding-right: 0.625rem;
 }

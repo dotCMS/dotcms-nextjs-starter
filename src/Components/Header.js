@@ -15,16 +15,6 @@ const Header = () => {
                 <div className="header__overlay" />
                 <div className="header__content">
                     <h2 className="header__page-title">Page Title</h2>
-                    <p className="header__breadcrumbs">
-                        <Link
-                            to={{
-                                pathname: '/'
-                            }}
-                        >
-                            <span className="header__home-link">Home</span>
-                        </Link>
-                        Page-Title
-                    </p>
                 </div>
             </section>
         </>
