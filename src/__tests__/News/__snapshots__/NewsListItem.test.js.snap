@@ -44,7 +44,8 @@ exports[`<NewsListItem /> renders news correctly 1`] = `
     }
   >
     <CardImg
-      alt="image"
+      alt=""
+      className="news-list__image"
       src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       tag="img"
       top={true}
@@ -227,7 +228,8 @@ exports[`<NewsListItem /> renders news, without "publishDate" 1`] = `
     }
   >
     <CardImg
-      alt="image"
+      alt=""
+      className="news-list__image"
       src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       tag="img"
       top={true}
@@ -335,7 +337,8 @@ exports[`<NewsListItem /> renders news, without "summary" 1`] = `
     }
   >
     <CardImg
-      alt="image"
+      alt=""
+      className="news-list__image"
       src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       tag="img"
       top={true}
@@ -450,7 +453,8 @@ exports[`<NewsListItem /> renders news, without "title" 1`] = `
     }
   >
     <CardImg
-      alt="image"
+      alt=""
+      className="news-list__image"
       src="/dA/2943b5eb-9105-4dcf-a1c7-87a9d4dc92a6/image/gas-pump.jpg"
       tag="img"
       top={true}

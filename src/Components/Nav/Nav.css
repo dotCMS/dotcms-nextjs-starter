@@ -1,0 +1,8 @@
+div.nav-menu__links {
+    flex-grow: unset;
+}
+
+button.nav-menu__toggle-button.navbar-toggler {
+    color: var(--white);
+    border-color: transparent;
+}

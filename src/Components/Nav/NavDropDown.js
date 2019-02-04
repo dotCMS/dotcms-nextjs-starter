@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NavDropDown = ({ options }) => {
     return (
         <UncontrolledDropdown nav inNavbar>
-            <DropdownToggle nav caret>
+            <DropdownToggle nav caret className="nav-option">
                 {options.title}
             </DropdownToggle>
             <DropdownMenu right>

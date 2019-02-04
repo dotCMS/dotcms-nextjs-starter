@@ -23,7 +23,7 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
         <Card>
             {displayedFields.includes('image') ? (
                 <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
-                    <CardImg top width="100%" src={news.image} alt="image" />
+                    <CardImg className="news-list__image" top width="100%" src={news.image} alt="" />
                 </ItemLink>
             ) : (
                 ''

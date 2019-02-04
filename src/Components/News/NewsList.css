@@ -5,3 +5,13 @@
     grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
     margin-top: 7em;
 }
+
+.news-list__image:after {  
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 30px;
+    background-color: #fff;
+  }

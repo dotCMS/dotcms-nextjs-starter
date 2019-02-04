@@ -7,6 +7,7 @@ exports[`<NavOption /> renders NavOption correctly 1`] = `
 >
   <NavLink
     active={false}
+    className="nav-option"
     tag={[Function]}
     to="/about"
   >

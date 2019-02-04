@@ -8,6 +8,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
   <DropdownToggle
     aria-haspopup={true}
     caret={true}
+    className="nav-option"
     color="secondary"
     nav={true}
   >
