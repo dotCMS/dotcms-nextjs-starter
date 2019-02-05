@@ -15,6 +15,7 @@ exports[`<NavDropDown /> renders NavOption correctly 1`] = `
     Resources
   </DropdownToggle>
   <DropdownMenu
+    className="nav-dropdown"
     flip={true}
     right={true}
     tag="div"

@@ -8,7 +8,7 @@ import CantRender from './CantRender';
 
 import PageContext from '../PageContext';
 
-const Loading = props => {
+const Loading = (props) => {
     const divStyle = {
         textAlign: 'center',
         padding: '2rem'
@@ -29,15 +29,19 @@ export default class Contentlet extends Component {
     static contextType = PageContext;
 
     render() {
+        const showLoadableContentletWarning = this.context.mode !== 'ADMIN_MODE';
         const isEditMode = this.context.mode === 'EDIT_MODE';
 
         const Component = Loadable({
             loader: () => import(`./DotCMS/${this.props.data.contentType}`),
-            loading: props => (isEditMode ? <Loading contentlet={this.props.data} {...props} /> : null)
+            loading: (props) =>
+                showLoadableContentletWarning ? (
+                    <Loading contentlet={this.props.data} {...props} />
+                ) : null
         });
 
         return isEditMode ? (
-            <DotContentlet data={this.props.data}>
+            <DotContentlet {...this.props.data}>
                 <Component {...this.props.data} />
             </DotContentlet>
         ) : (

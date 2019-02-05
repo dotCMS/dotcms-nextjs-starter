@@ -1,9 +1,6 @@
 header.header__menu {
     background: transparent !important;
     justify-content: space-between;
-    position: absolute;
-    top: 0;
-    width: 100%;
     z-index: 1;
 }
 
@@ -17,6 +14,9 @@ header.header__menu {
     display: flex;
     height: 500px;
     justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
     z-index: 0;
 }
 

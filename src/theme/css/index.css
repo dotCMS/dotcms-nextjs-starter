@@ -66,6 +66,7 @@
 
 :root {
     --background-color: #4aca85;
+    --black: #000;
     --text-color: #303133;
     --body-font: 'Poppins', Arial, sans-serif;
     --header-font: 'Nunito', Arial, sans-serif;
@@ -118,4 +119,8 @@ figure {
 
 .alert {
     margin-top: 2rem;
+}
+
+.layout__content {
+    margin-top: 434px;
 }

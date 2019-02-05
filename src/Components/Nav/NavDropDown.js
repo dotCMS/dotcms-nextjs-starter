@@ -9,7 +9,7 @@ const NavDropDown = ({ options }) => {
             <DropdownToggle nav caret className="nav-option">
                 {options.title}
             </DropdownToggle>
-            <DropdownMenu right>
+            <DropdownMenu className="nav-dropdown" right>
                 {options.children.map((subItem, index) => {
                     return (
                         <DropdownItem

@@ -40,12 +40,13 @@ class PageFetchWrapper extends Component {
             .get({
                 pathname: pathname
             })
-            .then(data => {
+            .then(({layout, error, viewAs, page}) => {
                 this.setState({
-                    layout: data.layout,
+                    layout: layout,
+                    title: page ? page.title : '',
                     pathname: pathname,
-                    error: data.error,
-                    mode: data.viewAs ? data.viewAs.mode : 'EDIT'
+                    error: error,
+                    mode: viewAs.mode || ''
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
             });
@@ -60,12 +61,15 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        if (this.props.layout) {
+        const { layout, viewAs, title } = this.props;
+
+        if (layout) {
             this.setState({
                 ...this.state,
-                layout: this.props.layout,
+                layout: layout,
+                title: title || 'Home',
                 pathname: this.props.location.pathname,
-                mode: this.props.viewAs.mode
+                mode: viewAs ? viewAs.mode : ''
             });
         } else {
             this.setPage(this.props.location.pathname);
@@ -79,7 +83,7 @@ class PageFetchWrapper extends Component {
                     mode: this.state.mode
                 }}
             >
-                <Layout>
+                <Layout title={this.state.title}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
                 </Layout>
             </PageContext.Provider>

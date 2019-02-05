@@ -30,7 +30,6 @@ exports[`<Nav /> renders nav correctly 1`] = `
     unmountOnExit={false}
   >
     <Nav
-      pills={true}
       tag="ul"
       vertical={false}
     >

@@ -36,10 +36,6 @@ describe('<Nav />', () => {
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 
-    it('should have BootstrapNav and pill in true', () => {
-        expect(wrapper.find('Nav').props().pills).toBe(true);
-    });
-
     it('should expand menu', async () => {
         expect(wrapper.find('Collapse').props().isOpen).toBe(false);
 

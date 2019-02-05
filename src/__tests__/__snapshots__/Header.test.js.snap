@@ -3,7 +3,7 @@
 exports[`<Header /> renders and matches snapshot 1`] = `
 <Fragment>
   <Navbar
-    className="header__menu"
+    className="header__menu container"
     expand="md"
     tag="header"
   >
@@ -27,28 +27,7 @@ exports[`<Header /> renders and matches snapshot 1`] = `
     >
       <h2
         className="header__page-title"
-      >
-        Page Title
-      </h2>
-      <p
-        className="header__breadcrumbs"
-      >
-        <Link
-          replace={false}
-          to={
-            Object {
-              "pathname": "/",
-            }
-          }
-        >
-          <span
-            className="header__home-link"
-          >
-            Home
-          </span>
-        </Link>
-        Page-Title
-      </p>
+      />
     </div>
   </section>
 </Fragment>
