@@ -3,12 +3,16 @@
 exports[`<Nav /> renders nav correctly 1`] = `
 <Fragment>
   <NavbarToggler
+    className="nav-menu__toggle-button"
     onClick={[Function]}
     tag="button"
     type="button"
-  />
+  >
+    ☰
+  </NavbarToggler>
   <Collapse
     appear={false}
+    className="nav-menu__links"
     enter={true}
     exit={true}
     in={false}
@@ -26,7 +30,6 @@ exports[`<Nav /> renders nav correctly 1`] = `
     unmountOnExit={false}
   >
     <Nav
-      pills={true}
       tag="ul"
       vertical={false}
     >

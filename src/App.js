@@ -40,9 +40,10 @@ class PageFetchWrapper extends Component {
             .get({
                 pathname: pathname
             })
-            .then(({layout, error, viewAs}) => {
+            .then(({layout, error, viewAs, page}) => {
                 this.setState({
                     layout: layout,
+                    title: page ? page.title : '',
                     pathname: pathname,
                     error: error,
                     mode: viewAs.mode || ''
@@ -60,12 +61,13 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        const { layout, viewAs } = this.props;
+        const { layout, viewAs, title } = this.props;
 
         if (layout) {
             this.setState({
                 ...this.state,
                 layout: layout,
+                title: title || 'Home',
                 pathname: this.props.location.pathname,
                 mode: viewAs ? viewAs.mode : ''
             });
@@ -81,7 +83,7 @@ class PageFetchWrapper extends Component {
                     mode: this.state.mode
                 }}
             >
-                <Layout>
+                <Layout title={this.state.title}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
                 </Layout>
             </PageContext.Provider>

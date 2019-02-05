@@ -37,11 +37,10 @@ const getScript = (payload) => {
 const getMainComponent = (url, payload) => {
     const modules = [];
     const context = {};
-
     return (
         <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
-                <App {...payload.layout} {...payload.viewAs} />
+                <App {...payload.layout} {...payload.viewAs} {...payload.page} />
             </StaticRouter>
         </Loadable.Capture>
     );

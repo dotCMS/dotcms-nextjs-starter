@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NavOption = ({ item }) => {
     return (
         <NavItem key={item.folder}>
-            <NavLink tag={Link} active={item.href === window.location.pathname} to={item.href}>
+            <NavLink className="nav-option" tag={Link} active={item.href === window.location.pathname} to={item.href}>
                 {item.title}
             </NavLink>
         </NavItem>

@@ -1,18 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Header /> renders and matches snapshot 1`] = `
-<Navbar
-  color="light"
-  expand="md"
-  light={true}
-  tag="header"
->
-  <NavbarBrand
-    href="/"
-    tag="a"
+<Fragment>
+  <Navbar
+    className="header__menu container"
+    expand="md"
+    tag="header"
   >
-    DotCMS - SPA
-  </NavbarBrand>
-  <Nav />
-</Navbar>
+    <NavbarBrand
+      className="header__brand-logo"
+      href="/"
+      tag="a"
+    >
+      DotCMS - SPA
+    </NavbarBrand>
+    <Nav />
+  </Navbar>
+  <section
+    className="header__extend"
+  >
+    <div
+      className="header__overlay"
+    />
+    <div
+      className="header__content"
+    >
+      <h2
+        className="header__page-title"
+      />
+    </div>
+  </section>
+</Fragment>
 `;

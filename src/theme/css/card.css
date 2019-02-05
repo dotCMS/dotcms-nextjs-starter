@@ -30,7 +30,7 @@
 
 .card-title {
     color: var(--text-color);
-    font-family: 'Nunito', Arial, sans-serif;
+    font-family: var(--header-font);
     font-size: 1.875rem;
     font-weight: 400;
     line-height: 1.3;

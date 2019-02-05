@@ -4,6 +4,7 @@ exports[`<Layout /> should render  correctly 1`] = `
 <Fragment>
   <Header />
   <Container
+    className="layout__content"
     tag="div"
   >
     <p>

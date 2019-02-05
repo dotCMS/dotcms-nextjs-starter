@@ -8,11 +8,6 @@ exports[`<NewsDetail /> renders NewsDetail correctly 1`] = `
       dateString=""
     />
   </h5>
-  <img
-    alt=""
-    className="news-detail-img"
-    src=""
-  />
   <div
     dangerouslySetInnerHTML={
       Object {
