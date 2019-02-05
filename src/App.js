@@ -27,7 +27,7 @@ class PageFetchWrapper extends Component {
             layout: {},
             pathname: null,
             error: null,
-            mode: null
+            mode: "LIVE_MODE"
         };
     }
 

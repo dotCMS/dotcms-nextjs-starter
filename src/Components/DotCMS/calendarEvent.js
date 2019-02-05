@@ -6,10 +6,14 @@ function createMarkup(html) {
 
 export default class calendarEvent extends Component {
     render() {
+        
+        var startDate = new Date(this.props.startDate);
+        var endDate = new Date(this.props.startEndDate);
+        console.log(startDate)
         return (
             <div className="event">
                 <h2>{this.props.title}</h2>
-                <time>{this.props.startDate}</time>
+                <time>{startDate + " "}</time>
                 <time>{this.props.startEndDate}</time>
                 <span dangerouslySetInnerHTML={createMarkup(this.props.description)} />
             </div>

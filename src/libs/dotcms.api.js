@@ -53,7 +53,7 @@ const get = async ({ pathname }) => {
         })
         .then(data => {
             if (data.entity) {
-                return data.entity.layout ? translate(data.entity) : {};
+                return data.entity.layout ? translate(data.entity) : {viewAs:"LIVE_MODE"};
             }
             throw new Error(data.status);
         })
