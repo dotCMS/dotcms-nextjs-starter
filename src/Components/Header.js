@@ -1,5 +1,7 @@
 import React from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar, NavbarBrand, Container as BootstrapContainer } from 'reactstrap';
+import { Link } from 'react-router-dom';
+
 import Nav from './Nav/Nav';
 import './Header.css';
 
@@ -7,7 +9,7 @@ const Header = (props) => {
     return (
         <>
             <Navbar tag="header" className="header__menu container" expand="md">
-                <NavbarBrand className="header__brand-logo" href="/">
+                <NavbarBrand className="header__brand-logo" tag={Link} to='/'>
                     DotCMS - SPA
                 </NavbarBrand>
                 <Nav />
@@ -15,7 +17,9 @@ const Header = (props) => {
             <section className="header__extend">
                 <div className="header__overlay" />
                 <div className="header__content">
-                    <h2 className="header__page-title">{props.title}</h2>
+                    <BootstrapContainer>
+                        <h2 className="header__page-title">{props.title}</h2>
+                    </BootstrapContainer>
                 </div>
             </section>
         </>
