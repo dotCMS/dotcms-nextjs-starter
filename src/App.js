@@ -46,7 +46,7 @@ class PageFetchWrapper extends Component {
                     title: page ? page.title : '',
                     pathname: pathname,
                     error: error,
-                    mode: viewAs.mode || ''
+                    mode: viewAs ? viewAs.mode : ''
                 });
                 DotCMSApi.page.emitNavigationEnd(pathname);
             });
