@@ -9,8 +9,8 @@ exports[`<Header /> renders and matches snapshot 1`] = `
   >
     <NavbarBrand
       className="header__brand-logo"
-      href="/"
-      tag="a"
+      tag={[Function]}
+      to="/"
     >
       DotCMS - SPA
     </NavbarBrand>
@@ -25,9 +25,13 @@ exports[`<Header /> renders and matches snapshot 1`] = `
     <div
       className="header__content"
     >
-      <h2
-        className="header__page-title"
-      />
+      <Container
+        tag="div"
+      >
+        <h2
+          className="header__page-title"
+        />
+      </Container>
     </div>
   </section>
 </Fragment>
