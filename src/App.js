@@ -40,7 +40,7 @@ class PageFetchWrapper extends Component {
             .get({
                 pathname: pathname
             })
-            .then(({layout, error, viewAs, page}) => {
+            .then(({ layout, error, viewAs, page }) => {
                 this.setState({
                     layout: layout,
                     title: page ? page.title : '',
@@ -61,13 +61,14 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        const { layout, viewAs, title } = this.props;
+        console.log(this.props);
+        const { layout, viewAs, page } = this.props;
 
         if (layout) {
             this.setState({
                 ...this.state,
                 layout: layout,
-                title: title || 'Home',
+                title: page ? page.title : '',
                 pathname: this.props.location.pathname,
                 mode: viewAs ? viewAs.mode : ''
             });
@@ -84,18 +85,22 @@ class PageFetchWrapper extends Component {
                 }}
             >
                 <Layout title={this.state.title}>
-                    {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
+                    {this.state.error === ERROR_UNAUTHORIZED_USER ? (
+                        <NoAuth />
+                    ) : (
+                        <Page data={this.state.layout} />
+                    )}
                 </Layout>
             </PageContext.Provider>
         );
     }
 }
 
-const App = page => {
+const App = (page) => {
     return (
         <Switch>
             <Route path="/news-events/news/:slug" component={NewsDetailPage} />
-            <Route render={props => <PageFetchWrapper {...props} {...page} />} />
+            <Route render={(props) => <PageFetchWrapper {...props} {...page} />} />
         </Switch>
     );
 };
