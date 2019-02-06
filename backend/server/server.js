@@ -21,12 +21,15 @@ const isThisAPage = (pathname) => {
 };
 
 const getScript = (payload) => {
+    const { rendered, ...page } = payload.page;
+
     if (payload) {
         return `
         <script type="${mimeType['.js']}">
             var dotcmsPage = ${JSON.stringify({
                 layout: payload.layout,
-                viewAs: payload.viewAs
+                viewAs: payload.viewAs,
+                page: page
             })}
         </script>`;
     } else {
