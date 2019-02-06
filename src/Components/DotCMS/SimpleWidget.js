@@ -12,7 +12,6 @@ export default class SimpleWidget extends Component {
         })
         .then(response =>  response.text())
         .then(text => {
-            console.log(text)
             this.setState({
                 ...this.state,
                 widgetCode: text

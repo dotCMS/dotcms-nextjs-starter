@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DateFormat from '../Shared/DateFormat';
 
-const NewsDetail = ({ title, sysPublishDate, image, story }) => {
+const News = ({ title, sysPublishDate, image, story }) => {
     var desc = (story + "") ;
     desc = desc.length>200 ? story.substring(0,200) : story
     desc+="...";
@@ -17,18 +17,18 @@ const NewsDetail = ({ title, sysPublishDate, image, story }) => {
     );
 };
 
-NewsDetail.propTypes = {
+News.propTypes = {
     image: PropTypes.string,
     sysPublishDate: PropTypes.string,
     title: PropTypes.string,
     story: PropTypes.string
 };
 
-NewsDetail.defaultProps = {
+News.defaultProps = {
     image: '',
     sysPublishDate: '',
     title: '',
     story: ''
 };
 
-export default NewsDetail;
+export default News;
