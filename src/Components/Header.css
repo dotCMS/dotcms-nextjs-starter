@@ -12,7 +12,7 @@ header.header__menu {
     background-attachment: fixed;
     background-repeat: no-repeat;
     display: flex;
-    height: 500px;
+    height: var(--header-height);
     justify-content: center;
     position: absolute;
     top: 0;
@@ -23,7 +23,7 @@ header.header__menu {
 .header__overlay {
     background: linear-gradient(135deg, #499bea 0%, #798eea 100%);
     bottom: 0;
-    height: 500px;
+    height: var(--header-height);
     left: 0;
     opacity: 0.95;
     position: absolute;
@@ -48,6 +48,7 @@ header.header__menu {
     font-size: 3.75rem;
     font-weight: 300;
     margin-bottom: 1.25rem;
+    text-align: center;
 }
 
 

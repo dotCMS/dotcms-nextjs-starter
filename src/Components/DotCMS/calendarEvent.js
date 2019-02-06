@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+
 import Moment from 'react-moment';
+
+import DateFormat from '../Shared/DateFormat';
 
 function createMarkup(html) {
     return { __html: html };
@@ -16,8 +19,11 @@ export default class calendarEvent extends Component {
         return (
             <div className="event">
                 <h2>{this.props.title}</h2>
+
                 <time><b><Moment format="MMM, D">{startDate}</Moment></b>: <Moment format="H:mm">{startDate}</Moment>-<Moment format="H:mm">{endDate}</Moment></time>
                 <span dangerouslySetInnerHTML={createMarkup(desc)} />
+
+
             </div>
         );
     }
