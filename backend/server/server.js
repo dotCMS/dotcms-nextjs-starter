@@ -68,7 +68,9 @@ const mimeType = {
 };
 
 const server = http.createServer((request, response) => {
-    if (request.method === 'POST' && !request.url.startsWith('/api')) {
+    const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
+
+    if (isEditModeFromDotCMS) {
         var postData = '';
 
         // Get all post data when receive data event.
@@ -80,12 +82,21 @@ const server = http.createServer((request, response) => {
         request.on('end', function() {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
-            const page = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
+            let payload = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
+            
+            // The post request should have remoteRendered, double check with Will.
+            payload = {
+                ...payload,
+                page: {
+                    ...payload.page,
+                    remoteRendered: isEditModeFromDotCMS
+                }
+            }
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const app = renderToString(getMainComponent(request.url, page));
+                const app = renderToString(getMainComponent(request.url, payload));
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                data = data.replace('<div id="script"></div>', getScript(page));
+                data = data.replace('<div id="script"></div>', getScript(payload));
 
                 response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                 response.end(data);

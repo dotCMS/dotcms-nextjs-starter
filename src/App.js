@@ -36,6 +36,13 @@ class PageFetchWrapper extends Component {
     }
 
     setPage(pathname) {
+        const isEditModeFromDotCMS = this.props.page && this.props.page.remoteRendered;
+
+        if (isEditModeFromDotCMS) {
+            DotCMSApi.page.emitNavigationEnd(pathname);
+            return;
+        }
+
         DotCMSApi.page
             .get({
                 pathname: pathname
@@ -48,7 +55,6 @@ class PageFetchWrapper extends Component {
                     error: error,
                     mode: viewAs ? viewAs.mode : ''
                 });
-                DotCMSApi.page.emitNavigationEnd(pathname);
             });
     }
 
@@ -61,7 +67,6 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         const { layout, viewAs, page } = this.props;
 
         if (layout) {
