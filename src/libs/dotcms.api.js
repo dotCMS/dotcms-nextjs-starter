@@ -3,23 +3,26 @@ const { getCurrentSite } = require('./dotcms.sites');
 const { esSearch } = require('./dotcms.esSearch');
 const fetch = require('node-fetch');
 
-const getUrl = pathname => {
+const getUrl = (pathname) => {
     const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DOTCMS_HOST : '';
     return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=1`;
 };
 
-const translate = page => {
+const translate = (page) => {
     if (page.layout) {
-        page.layout.body.rows.forEach(row => {
-            row.columns.forEach(col => {
-                col.containers = col.containers.map(container => {
+        page.layout.body.rows.forEach((row) => {
+            row.columns.forEach((col) => {
+                col.containers = col.containers.map((container) => {
                     return {
                         ...container,
                         ...page.containers[container.identifier].container,
                         acceptTypes: page.containers[container.identifier].containerStructures
-                            .map(structure => structure.contentTypeVar)
+                            .map((structure) => structure.contentTypeVar)
                             .join(','),
-                        contentlets: page.containers[container.identifier].contentlets[`uuid-${container.uuid}`]
+                        contentlets:
+                            page.containers[container.identifier].contentlets[
+                                `uuid-${container.uuid}`
+                            ]
                     };
                 });
             });
@@ -33,7 +36,7 @@ const request = ({ url, method, body }) => {
     return fetch(url, {
         method: method || 'GET',
         headers: {
-            'Authorization': `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
+            Authorization: `Bearer ${process.env.REACT_APP_BEARER_TOKEN}`,
             'Content-type': 'application/json'
         },
         body: body
@@ -44,33 +47,32 @@ const get = async ({ pathname }) => {
     const url = getUrl(pathname);
 
     return request({ url })
-        .then(data => {
+        .then((data) => {
             if (data.ok) {
                 return data.json();
             } else {
                 return data;
             }
         })
-        .then(data => {
+        .then((data) => {
             if (data.entity) {
                 return data.entity.layout ? translate(data.entity) : {};
             }
             throw new Error(data.status);
         })
-        .catch(err => {
+        .catch((err) => {
             return {
                 error: err.message
             };
         });
 };
 
-const emitNavigationEnd = pathname => {
+const emitCustomEvent = (eventName, eventData, eventType) => {
+    console.log('--emitNgEvent', eventName, eventData, eventType);
     const customEvent = window.top.document.createEvent('CustomEvent');
-    customEvent.initCustomEvent('ng-event', false, false, {
-        name: 'remote-render-edit',
-        data: {
-            pathname
-        }
+    customEvent.initCustomEvent(eventType, false, false, {
+        name: eventName,
+        data: eventData
     });
     window.top.document.dispatchEvent(customEvent);
 };
@@ -84,7 +86,7 @@ export default {
     page: {
         translate,
         get,
-        emitNavigationEnd
+        emitCustomEvent
     },
     sites: {
         getCurrentSite

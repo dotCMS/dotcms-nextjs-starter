@@ -40,15 +40,23 @@ class PageFetchWrapper extends Component {
             .get({
                 pathname: pathname
             })
-            .then(({layout, error, viewAs, page}) => {
-                this.setState({
-                    layout: layout,
-                    title: page ? page.title : '',
-                    pathname: pathname,
-                    error: error,
-                    mode: viewAs ? viewAs.mode : ''
+            .then(({ layout, error, viewAs, page }) => {
+                console.log('*--layout', layout);
+                console.log('*--viewAs', viewAs);
+                console.log('*--page', page);
+
+                DotCMSApi.sites.getCurrentSite().then((site) => {
+                    this.setState({
+                        layout: layout,
+                        title: page ? page.title : '',
+                        site: site,
+                        pathname: pathname,
+                        error: error,
+                        mode: viewAs ? viewAs.mode : ''
+                    });
                 });
-                DotCMSApi.page.emitNavigationEnd(pathname);
+                
+                DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname }, 'ng-event');
             });
     }
 
@@ -62,6 +70,9 @@ class PageFetchWrapper extends Component {
 
     componentDidMount() {
         const { layout, viewAs, title } = this.props;
+        console.log('--layout', layout);
+        console.log('--viewAs', viewAs);
+        console.log('--title', title);
 
         if (layout) {
             this.setState({
@@ -80,22 +91,27 @@ class PageFetchWrapper extends Component {
         return (
             <PageContext.Provider
                 value={{
-                    mode: this.state.mode
+                    mode: this.state.mode,
+                    site: this.state.site
                 }}
             >
                 <Layout title={this.state.title}>
-                    {this.state.error === ERROR_UNAUTHORIZED_USER ? <NoAuth /> : <Page data={this.state.layout} />}
+                    {this.state.error === ERROR_UNAUTHORIZED_USER ? (
+                        <NoAuth />
+                    ) : (
+                        <Page data={this.state.layout} />
+                    )}
                 </Layout>
             </PageContext.Provider>
         );
     }
 }
 
-const App = page => {
+const App = (page) => {
     return (
         <Switch>
             <Route path="/news-events/news/:slug" component={NewsDetailPage} />
-            <Route render={props => <PageFetchWrapper {...props} {...page} />} />
+            <Route render={(props) => <PageFetchWrapper {...props} {...page} />} />
         </Switch>
     );
 };
