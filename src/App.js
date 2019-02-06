@@ -36,6 +36,11 @@ class PageFetchWrapper extends Component {
     }
 
     setPage(pathname) {
+        if (this.props.page.remoteRendered) {
+            DotCMSApi.page.emitNavigationEnd(pathname);
+            return;
+        }
+
         DotCMSApi.page
             .get({
                 pathname: pathname
@@ -48,7 +53,6 @@ class PageFetchWrapper extends Component {
                     error: error,
                     mode: viewAs ? viewAs.mode : ''
                 });
-                DotCMSApi.page.emitNavigationEnd(pathname);
             });
     }
 
@@ -61,7 +65,6 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         const { layout, viewAs, page } = this.props;
 
         if (layout) {
