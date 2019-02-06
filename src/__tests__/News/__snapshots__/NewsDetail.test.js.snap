@@ -2,7 +2,6 @@
 
 exports[`<NewsDetail /> renders NewsDetail correctly 1`] = `
 <Fragment>
-  <h3 />
   <h5>
     <DateFormat
       dateString=""

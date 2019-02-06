@@ -67,9 +67,11 @@
 :root {
     --background-color: #4aca85;
     --black: #000;
-    --text-color: #303133;
     --body-font: 'Poppins', Arial, sans-serif;
+    --card-shadow: 0px 3px 38px -13px rgba(0, 0, 0, 0.2);
     --header-font: 'Nunito', Arial, sans-serif;
+    --header-height: 300px;
+    --text-color: #303133;
 }
 
 body {
@@ -117,10 +119,6 @@ figure {
     background: var(--background-color);
 }
 
-.alert {
-    margin-top: 2rem;
-}
-
 .layout__content {
-    margin-top: 434px;
+    margin-top: calc(var(--header-height) - 20px);
 }

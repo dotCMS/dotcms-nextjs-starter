@@ -47,15 +47,15 @@ class PageFetchWrapper extends Component {
 
                 DotCMSApi.sites.getCurrentSite().then((site) => {
                     this.setState({
-                        layout: layout,
-                        title: page ? page.title : '',
-                        site: site,
-                        pathname: pathname,
                         error: error,
-                        mode: viewAs ? viewAs.mode : ''
+                        layout: layout,
+                        mode: viewAs ? viewAs.mode : '',
+                        pathname: pathname,
+                        site: site,
+                        title: page ? page.title : ''
                     });
                 });
-                
+
                 DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname }, 'ng-event');
             });
     }
@@ -69,16 +69,17 @@ class PageFetchWrapper extends Component {
     }
 
     componentDidMount() {
-        const { layout, viewAs, title } = this.props;
+        const { layout, viewAs, page } = this.props;
         console.log('--layout', layout);
         console.log('--viewAs', viewAs);
-        console.log('--title', title);
+        console.log('--page', page);
+        console.log(this.props);
 
         if (layout) {
             this.setState({
                 ...this.state,
                 layout: layout,
-                title: title || 'Home',
+                title: page ? page.title : '',
                 pathname: this.props.location.pathname,
                 mode: viewAs ? viewAs.mode : ''
             });

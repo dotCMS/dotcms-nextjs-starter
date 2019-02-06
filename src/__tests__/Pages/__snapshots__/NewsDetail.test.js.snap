@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<NewsDetailPage /> renders NewsDetailPage correctly with Api fetch 1`] = `
-<Layout>
+<Layout
+  title=""
+>
   <NewsDetail
     image=""
     story=""
@@ -12,7 +14,9 @@ exports[`<NewsDetailPage /> renders NewsDetailPage correctly with Api fetch 1`] 
 `;
 
 exports[`<NewsDetailPage /> renders NewsDetailPage correctly with NO Api fetch 1`] = `
-<Layout>
+<Layout
+  title="The Gas Price Rollercoaster"
+>
   <NewsDetail
     baseType="CONTENT"
     byline="Jean Folger"
