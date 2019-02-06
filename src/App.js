@@ -36,6 +36,13 @@ class PageFetchWrapper extends Component {
     }
 
     setPage(pathname) {
+        const isEditModeFromDotCMS = this.props.page && this.props.page.remoteRendered;
+
+        if (isEditModeFromDotCMS) {
+            DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname }, 'ng-event');
+            return;
+        }
+
         DotCMSApi.page
             .get({
                 pathname: pathname
@@ -57,7 +64,6 @@ class PageFetchWrapper extends Component {
                     });
                 });
 
-                DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname }, 'ng-event');
             });
     }
 
