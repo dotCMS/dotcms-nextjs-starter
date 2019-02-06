@@ -121,6 +121,28 @@ figure {
     margin-top: 2rem;
 }
 
+.widget{
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:5px;
+    border:1px solid lightgray;
+}
+
+.content{
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:5px;
+    border:1px solid lightgray;
+}
+
+.event{
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:5px;
+    border:1px solid lightgray;
+}
+
+
 .layout__content {
     margin-top: 434px;
 }
