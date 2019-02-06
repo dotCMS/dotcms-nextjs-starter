@@ -46,13 +46,14 @@ class PageFetchWrapper extends Component {
                 console.log('*--page', page);
 
                 DotCMSApi.sites.getCurrentSite().then((site) => {
+                    console.log('--site loaded')
                     this.setState({
                         error: error,
                         layout: layout,
                         mode: viewAs ? viewAs.mode : '',
                         pathname: pathname,
                         site: site,
-                        title: page ? page.title : ''
+                        page: page
                     });
                 });
 
@@ -79,7 +80,7 @@ class PageFetchWrapper extends Component {
             this.setState({
                 ...this.state,
                 layout: layout,
-                title: page ? page.title : '',
+                page: page,
                 pathname: this.props.location.pathname,
                 mode: viewAs ? viewAs.mode : ''
             });
@@ -93,10 +94,11 @@ class PageFetchWrapper extends Component {
             <PageContext.Provider
                 value={{
                     mode: this.state.mode,
+                    page: this.state.page,
                     site: this.state.site
                 }}
             >
-                <Layout title={this.state.title}>
+                <Layout title={this.state.page ? this.state.page.title : ''}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? (
                         <NoAuth />
                     ) : (
