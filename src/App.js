@@ -48,22 +48,13 @@ class PageFetchWrapper extends Component {
                 pathname: pathname
             })
             .then(({ layout, error, viewAs, page }) => {
-                console.log('*--layout', layout);
-                console.log('*--viewAs', viewAs);
-                console.log('*--page', page);
-
-                DotCMSApi.sites.getCurrentSite().then((site) => {
-                    console.log('--site loaded')
-                    this.setState({
-                        error: error,
-                        layout: layout,
-                        mode: viewAs ? viewAs.mode : '',
-                        pathname: pathname,
-                        site: site,
-                        page: page
-                    });
+                this.setState({
+                    error,
+                    layout,
+                    mode: viewAs ? viewAs.mode : '',
+                    pathname,
+                    page
                 });
-
             });
     }
 
@@ -77,18 +68,14 @@ class PageFetchWrapper extends Component {
 
     componentDidMount() {
         const { layout, viewAs, page } = this.props;
-        console.log('--layout', layout);
-        console.log('--viewAs', viewAs);
-        console.log('--page', page);
-        console.log(this.props);
-
         if (layout) {
             this.setState({
                 ...this.state,
-                layout: layout,
-                page: page,
+                layout,
+                page,
                 pathname: this.props.location.pathname,
-                mode: viewAs ? viewAs.mode : ''
+                mode: viewAs ? viewAs.mode : '',
+                site: this.props.site
             });
         } else {
             this.setPage(this.props.location.pathname);

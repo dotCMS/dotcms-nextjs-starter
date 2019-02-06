@@ -68,7 +68,6 @@ const get = async ({ pathname }) => {
 };
 
 const emitCustomEvent = (eventName, eventData, eventType) => {
-    console.log('--emitNgEvent', eventName, eventData, eventType);
     const customEvent = window.top.document.createEvent('CustomEvent');
     customEvent.initCustomEvent(eventType, false, false, {
         name: eventName,
