@@ -12,13 +12,11 @@ class NewsDetailPage extends React.Component {
 
     getNews() {
         DotCMSApi.esSearch('news', {
-            detailedSearchQuery: `+News.urlTitle:${
-                this.props.match.params.slug
-            }`
+            detailedSearchQuery: `+News.urlTitle:${this.props.match.params.slug}`
         })
-            .then(response => response.json())
-            .then(newsData => {
-                this.setState(state => newsData.contentlets[0]);
+            .then((response) => response.json())
+            .then((newsData) => {
+                this.setState((state) => newsData.contentlets[0]);
             });
     }
 
@@ -30,7 +28,7 @@ class NewsDetailPage extends React.Component {
 
     render() {
         return (
-            <Layout>
+            <Layout title={this.state ? this.state.title : ''}>
                 <NewsDetail {...this.state} />
             </Layout>
         );

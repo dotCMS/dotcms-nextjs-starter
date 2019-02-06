@@ -5,11 +5,8 @@ import DateFormat from '../Shared/DateFormat';
 const NewsDetail = ({ title, sysPublishDate, image, story }) => {
     return (
         <>
-            <h3>{title}</h3>
-            <h5>
-                <DateFormat dateString={sysPublishDate} />
-            </h5>
-            {image ? <img className="news-detail-img" alt={title} src={image} /> : ''}
+            {image ? <img className="news-detail__image" alt={title} src={image} /> : ''}
+            <h5><DateFormat dateString={sysPublishDate} /></h5>
             <div dangerouslySetInnerHTML={{ __html: story }} />
         </>
     );

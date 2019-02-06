@@ -3,7 +3,7 @@ import { Alert } from 'reactstrap';
 
 const CantRender = (props) => {
     return (
-        <Alert className="alert" color={props.color || 'danger'}>
+        <Alert fade={false} className="alert" color={props.color || 'danger'}>
             <h4 className="alert-heading">{props.title}</h4>
             {props.children}
         </Alert>

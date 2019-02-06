@@ -4,6 +4,8 @@ import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reac
 import { Link } from 'react-router-dom';
 import DateFormat from '../Shared/DateFormat';
 
+import IMAGE_PLACEHOLDER from '../../theme/images/placeholder.jpg';
+
 const ItemLink = (props) => {
     return (
         <Link
@@ -21,9 +23,9 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
     return (
         <Card>
-            {displayedFields.includes('image') && news.image ? (
+            {displayedFields.includes('image') ? (
                 <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
-                    <CardImg top width="100%" src={news.image} alt="" />
+                    <CardImg top width="100%" src={news.image || IMAGE_PLACEHOLDER} alt={news.urlTitle} />
                 </ItemLink>
             ) : (
                 ''
