@@ -36,7 +36,9 @@ class PageFetchWrapper extends Component {
     }
 
     setPage(pathname) {
-        if (this.props.page.remoteRendered) {
+        const isEditModeFromDotCMS = this.props.page && this.props.page.remoteRendered;
+
+        if (isEditModeFromDotCMS) {
             DotCMSApi.page.emitNavigationEnd(pathname);
             return;
         }
