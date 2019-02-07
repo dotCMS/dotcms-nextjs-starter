@@ -118,7 +118,3 @@ figure {
     color: var(--white);
     background: var(--background-color);
 }
-
-.layout__content {
-    margin-top: calc(var(--header-height) - 20px);
-}
