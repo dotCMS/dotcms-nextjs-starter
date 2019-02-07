@@ -5,9 +5,12 @@ import PageContext from '../../PageContext';
 class NavSort extends Component {
     static contextType = PageContext;
 
-    emitEvent(siteId, pageUrl) {
+    emitEvent() {
+        const siteId = this.context.site ? this.context.site.identifier : '';
+        const pageUrl = this.context.page ? this.context.page.pageURI : '';
+        const PORLET_ID = 'b7ab5d3c-5ee0-4195-a17e-8f5579d718dd';
         const url = [
-            `/c/portal/layout?p_l_id=b7ab5d3c-5ee0-4195-a17e-8f5579d718dd&p_p_id=site-browser`,
+            `/c/portal/layout?p_l_id=${PORLET_ID}&p_p_id=site-browser`,
             `&p_p_action=1&p_p_state=maximized&_site_browser_struts_action=%2Fext%2Ffolders%2Forder_menu`,
             `&startLevel=1&depth=2&pagePath=${pageUrl}&hostId=${siteId}`
         ].join('');
@@ -16,10 +19,8 @@ class NavSort extends Component {
     }
 
     render() {
-        const siteId = this.context.site ? this.context.site.identifier : '';
-        const pageUrl = this.context.page ? this.context.page.pageURI : '';
         return (
-            <button className="btn btn-light" onClick={() => this.emitEvent(siteId, pageUrl)}>
+            <button className="btn btn-light" onClick={() => this.emitEvent()}>
                 <i className="icon-arrow-up3" />
                 <i className="icon-arrow-down3" />
             </button>

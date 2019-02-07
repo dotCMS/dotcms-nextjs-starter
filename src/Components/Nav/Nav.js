@@ -45,12 +45,12 @@ export default class Nav extends Component {
     };
 
     render() {
-        const isEditMode = this.context && this.context.mode && this.context.mode === 'EDIT_MODE';
+        const isEditModeFromDotCMS = this.context && this.context.mode && this.context.mode === 'EDIT_MODE';
         const remoteRendered = this.context && this.context.page && this.context.page.remoteRendered;
 
         return (
             <>
-                {remoteRendered && isEditMode ? (<NavSort></NavSort>) : ''}
+                {remoteRendered && isEditModeFromDotCMS ? (<NavSort></NavSort>) : ''}
                 <NavbarToggler className="nav-menu__toggle-button" onClick={this.toggleCollapsed} >&#9776;</NavbarToggler>
                 <Collapse className="nav-menu__links" isOpen={this.state.collapsed} navbar>
                     <BootstrapNav>
