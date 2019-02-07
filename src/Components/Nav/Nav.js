@@ -50,7 +50,6 @@ export default class Nav extends Component {
 
         return (
             <>
-                {remoteRendered && isEditModeFromDotCMS ? (<NavSort></NavSort>) : ''}
                 <NavbarToggler className="nav-menu__toggle-button" onClick={this.toggleCollapsed} >&#9776;</NavbarToggler>
                 <Collapse className="nav-menu__links" isOpen={this.state.collapsed} navbar>
                     <BootstrapNav>
@@ -63,6 +62,7 @@ export default class Nav extends Component {
                         })}
                     </BootstrapNav>
                 </Collapse>
+                {remoteRendered && isEditModeFromDotCMS ? (<NavSort></NavSort>) : ''}
             </>
         );
     }

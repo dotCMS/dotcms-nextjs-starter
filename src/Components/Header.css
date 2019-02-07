@@ -1,7 +1,11 @@
 header.header__menu {
     background: transparent !important;
-    justify-content: space-between;
+    display: block;
     z-index: 1;
+}
+
+header.header__menu > button {
+    float: right;
 }
 
 .header__extend {

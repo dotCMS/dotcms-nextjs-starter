@@ -1,5 +1,5 @@
 .nav-menu__links.navbar-collapse {
-    flex-grow: unset;
+    float: right;
 }
 
 .nav-menu__toggle-button.navbar-toggler {
@@ -32,18 +32,6 @@
     padding: 1.25rem;
 }
 
-.nav-dropdown::before {
-    content: '';
-    border-bottom: solid 0.625rem var(--black);
-    border-left: solid 0.625rem transparent;
-    border-right: solid 0.625rem transparent;
-    height: 0.625rem;
-    width: 1.25rem;
-    position: absolute;
-    top: -9px;
-    right: 45px;
-}
-
 .nav-dropdown .dropdown-item {
     color: #999999;
     font-size: 0.8125rem;
@@ -56,4 +44,74 @@
 .nav-dropdown .dropdown-item:hover {
     background-color: unset;
     color: var(--white);
+}
+
+.nav-sort__button {
+    margin-right: 0.5rem;
+}
+
+@media screen and (min-width: 992px) {
+    
+    .nav-dropdown::before {
+        content: '';
+        border-bottom: solid 0.625rem var(--black);
+        border-left: solid 0.625rem transparent;
+        border-right: solid 0.625rem transparent;
+        height: 0.625rem;
+        width: 1.25rem;
+        position: absolute;
+        top: -9px;
+        right: 45px;
+    }
+}
+
+@media (max-width: 992px) {
+    
+    .navbar-expand-md .nav-menu__links.navbar-collapse {
+        display: none!important;
+    }
+
+    .navbar-expand-md .nav-menu__links.navbar-collapse.show {
+        display: unset!important;
+    }
+
+    .navbar-expand-md .nav-menu__toggle-button.navbar-toggler {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .nav-menu__links.navbar-collapse ul {
+        background-color: var(--gray);
+        border-radius: 0.25rem;
+        display: inline-block;
+        position: absolute;
+        right: 60px;
+    }
+
+
+    .nav-menu__links .nav-dropdown {
+        background-color: var(--white);
+        border: none;
+        box-shadow: none;
+        color: var(--black);
+        float: none;
+        margin: 16px;
+        padding: 0;
+        position: static;
+    }
+
+    .nav-dropdown .dropdown-item {
+        color: var(--black);
+    }
+
+    .nav-dropdown .dropdown-item.active,
+    .nav-dropdown .dropdown-item:hover {
+        color: var(--gray);
+    }
+
+    .nav-dropdown .dropdown-item:hover {
+        background-color: var(--gray);
+        color: var(--black);
+    }
 }

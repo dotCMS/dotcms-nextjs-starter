@@ -20,7 +20,7 @@ class NavSort extends Component {
 
     render() {
         return (
-            <button className="btn btn-light" onClick={() => this.emitEvent()}>
+            <button className="nav-sort__button btn btn-light" onClick={() => this.emitEvent()}>
                 <i className="icon-arrow-up3" />
                 <i className="icon-arrow-down3" />
             </button>
