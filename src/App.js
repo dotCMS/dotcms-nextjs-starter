@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Page from './Page';
-import Layout from './Components/Layout';
+import { Layout } from './Components/Layout';
 import CantRender from './Components/CantRender';
 import NewsDetailPage from './Pages/NewsDetail';
 
@@ -24,10 +24,11 @@ class PageFetchWrapper extends Component {
     constructor() {
         super();
         this.state = {
-            layout: {},
-            pathname: null,
             error: null,
-            mode: null
+            layout: {},
+            mode: null,
+            pathname: null,
+            title: ''
         };
     }
 
@@ -49,11 +50,11 @@ class PageFetchWrapper extends Component {
             })
             .then(({ layout, error, viewAs, page }) => {
                 this.setState({
-                    layout: layout,
-                    title: page ? page.title : '',
-                    pathname: pathname,
                     error: error,
-                    mode: viewAs ? viewAs.mode : ''
+                    layout: layout,
+                    mode: viewAs ? viewAs.mode : '',
+                    pathname: pathname,
+                    title: page ? page.title : ''
                 });
             });
     }
@@ -73,9 +74,9 @@ class PageFetchWrapper extends Component {
             this.setState({
                 ...this.state,
                 layout: layout,
-                title: page ? page.title : '',
+                mode: viewAs ? viewAs.mode : '',
                 pathname: this.props.location.pathname,
-                mode: viewAs ? viewAs.mode : ''
+                title: page ? page.title : ''
             });
         } else {
             this.setPage(this.props.location.pathname);
@@ -89,7 +90,7 @@ class PageFetchWrapper extends Component {
                     mode: this.state.mode
                 }}
             >
-                <Layout title={this.state.title}>
+                <Layout {...this.state.layout} title={this.state.title}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? (
                         <NoAuth />
                     ) : (
