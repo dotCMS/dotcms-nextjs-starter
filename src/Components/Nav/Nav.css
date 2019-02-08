@@ -81,12 +81,19 @@
 }
 
 @media screen and (max-width: 992px) {
+
+    .navbar-expand-md .navbar-nav .dropdown-menu.show {
+        position: relative;
+    }
+
     .nav-menu__links.navbar-collapse ul {
         background-color: var(--gray);
-        border-radius: 0.25rem;
+        bottom: 0;
         display: inline-block;
-        position: absolute;
-        right: 60px;
+        left: 0;
+        padding: 0.5rem;
+        position: fixed;
+        top: 0;
     }
 
 
@@ -96,7 +103,7 @@
         box-shadow: none;
         color: var(--black);
         float: none;
-        margin: 16px;
+        margin: 0 1rem 1rem;
         padding: 0;
         position: static;
     }
@@ -111,7 +118,7 @@
     }
 
     .nav-dropdown .dropdown-item:hover {
-        background-color: var(--gray);
-        color: var(--black);
+        background-color: var(--blue);
+        color: var(--white);
     }
 }

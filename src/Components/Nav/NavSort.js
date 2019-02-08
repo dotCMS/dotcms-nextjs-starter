@@ -15,7 +15,7 @@ class NavSort extends Component {
             `&startLevel=1&depth=2&pagePath=${pageUrl}&hostId=${siteId}`
         ].join('');
 
-        DotCMSApi.page.emitCustomEvent('reorder-menu', url, 'ng-event');
+        DotCMSApi.page.emitCustomEvent('reorder-menu', url);
     }
 
     render() {

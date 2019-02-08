@@ -67,9 +67,9 @@ const get = async ({ pathname }) => {
         });
 };
 
-const emitCustomEvent = (eventName, eventData, eventType) => {
+const emitCustomEvent = (eventName, eventData) => {
     const customEvent = window.top.document.createEvent('CustomEvent');
-    customEvent.initCustomEvent(eventType, false, false, {
+    customEvent.initCustomEvent('ng-event', false, false, {
         name: eventName,
         data: eventData
     });
