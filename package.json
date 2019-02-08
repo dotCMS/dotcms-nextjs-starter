@@ -8,7 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject",
-    "serve": "npm run build && nodemon backend/server/index.js",
+    "serve": "npm run build && node backend/server/index.js",
     "setup:start": "node backend/setup/index.js start",
     "setup:serve": "node backend/setup/index.js serve"
   },
