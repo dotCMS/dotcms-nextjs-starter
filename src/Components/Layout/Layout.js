@@ -1,11 +1,9 @@
 import React from 'react';
-import {
-    Container as BootstrapContainer,
-} from 'reactstrap';
+import { Container as BootstrapContainer } from 'reactstrap';
 
 import Header from '../Header';
 import Footer from '../Footer';
-import LayoutWithSidebar from './LayoutWithSidebar';
+import { LayoutWithSidebar } from './';
 
 import './Layout.css';
 
@@ -27,4 +25,3 @@ export const Layout = (props) => {
         </>
     );
 };
-

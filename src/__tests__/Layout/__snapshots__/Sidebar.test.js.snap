@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar /> should render correctly 1`] = `
+Array [
+  <Container
+    container={Object {}}
+  />,
+  <Container
+    container={Object {}}
+  />,
+]
+`;

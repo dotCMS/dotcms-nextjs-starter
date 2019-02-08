@@ -36,8 +36,6 @@ const translate = (page) => {
                 contentlets
             };
         });
-
-        console.log(page.layout.sidebar.containers);
     }
 
     return page;

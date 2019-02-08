@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LayoutWithSidebar /> should render correctly 1`] = `
+<Row
+  tag="div"
+>
+  <Col
+    md={9}
+    tag="div"
+    widths={
+      Array [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+      ]
+    }
+  >
+    <p>
+      Hola Mundo
+    </p>
+  </Col>
+  <Col
+    md={3}
+    tag="div"
+    widths={
+      Array [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+      ]
+    }
+  >
+    <Sidebar
+      containers={
+        Array [
+          Object {},
+          Object {},
+        ]
+      }
+      location="right"
+      width="medium"
+    />
+  </Col>
+</Row>
+`;
