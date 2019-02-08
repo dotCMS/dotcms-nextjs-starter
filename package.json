@@ -2,7 +2,7 @@
   "name": "dotcms-spa-edit-mode-round",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:8080",
+  "proxy": "https://starter.dotcms.com",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
