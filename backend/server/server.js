@@ -22,7 +22,6 @@ const isThisAPage = (pathname) => {
 };
 
 const getScript = (payload) => {
-    console.log(payload);
     const { rendered, ...page } = payload.page;
 
     if (payload) {
@@ -71,6 +70,17 @@ const mimeType = {
 
 const server = http.createServer((request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
+    var httpProxy = require('http-proxy');
+    var proxy = httpProxy.createProxyServer({
+        target: {
+          protocol: 'https:',
+          host: 'starter.dotcms.com',
+          port: 443,
+          pfx: fs.readFileSync('./backend/server/fakecert.txt'),
+          passphrase: 'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a',
+        },
+        changeOrigin: true,
+      })
 
     if (isEditModeFromDotCMS) {
         var postData = '';
@@ -129,48 +139,19 @@ const server = http.createServer((request, response) => {
                     });
             });
         } else {
-            response.setHeader('Access-Control-Allow-Origin', '*');
-            response.setHeader('Access-Control-Allow-Credentials', 'true');
-            response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
-            response.setHeader(
-                'Access-Control-Allow-Headers',
-                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
-            );
+
 
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
             const fullUrl = new URL(process.env.REACT_APP_DOTCMS_HOST + request.url);
             
-            let options = {...fullUrl,
-                method: request.method,
-                headers: request.headers,
-                body: request.body,
-            }
+
         
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
-    
-                    let proxy = https.request(options,
-                        (res) => {
-                            res.pipe(
-                                response,
-                                {
-                                    end: true
-                                }
-                            );
-                        }
-                    ).on('error', (e) => {
-                        console.error(`Got error: ${e}`);
-                        response.end(e.message);
-                      });
-
-                    request.pipe(
-                        proxy,
-                        {
-                            end: true
-                        }
-                    );
+                    proxy.web(request, response);
+                    
                     return;
                 }
 
