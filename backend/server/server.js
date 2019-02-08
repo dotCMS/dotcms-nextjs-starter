@@ -2,7 +2,7 @@ import fs from 'fs';
 import https from 'https';
 import http from 'http';
 import path from 'path';
-import url from 'url';
+import url, { URL } from 'url';
 import { parse } from 'querystring';
 import Loadable from 'react-loadable';
 
@@ -69,7 +69,7 @@ const mimeType = {
     '.ttf': 'aplication/font-sfnt'
 };
 
-const server = https.createServer((request, response) => {
+const server = http.createServer((request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
 
     if (isEditModeFromDotCMS) {
@@ -139,15 +139,19 @@ const server = https.createServer((request, response) => {
 
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
+            const fullUrl = new URL(process.env.REACT_APP_DOTCMS_HOST + request.url);
+            
+            let options = {...fullUrl,
+                method: request.method,
+                headers: request.headers,
+                body: request.body,
+            }
+        
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
-                    let proxy = https.request(process.env.REACT_APP_DOTCMS_HOST + request.url,
-                        {
-                            method: request.method,
-                            headers: request.headers,
-                            body: request.body
-                        },
+    
+                    let proxy = https.request(options,
                         (res) => {
                             res.pipe(
                                 response,
@@ -156,7 +160,10 @@ const server = https.createServer((request, response) => {
                                 }
                             );
                         }
-                    );
+                    ).on('error', (e) => {
+                        console.error(`Got error: ${e}`);
+                        response.end(e.message);
+                      });
 
                     request.pipe(
                         proxy,

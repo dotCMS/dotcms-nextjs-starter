@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import moment from 'react-moment';
+import Moment from 'react-moment';
 
 
 
