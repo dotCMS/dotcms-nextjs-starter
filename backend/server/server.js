@@ -1,4 +1,5 @@
 import fs from 'fs';
+import https from 'https';
 import http from 'http';
 import path from 'path';
 import url from 'url';
@@ -21,6 +22,7 @@ const isThisAPage = (pathname) => {
 };
 
 const getScript = (payload) => {
+    console.log(payload);
     const { rendered, ...page } = payload.page;
 
     if (payload) {
@@ -140,11 +142,8 @@ const server = http.createServer((request, response) => {
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
-                    let proxy = http.request(
+                    let proxy = https.request(process.env.REACT_APP_DOTCMS_HOST + request.url,
                         {
-                            hostname: 'localhost',
-                            port: 8080,
-                            path: request.url,
                             method: request.method,
                             headers: request.headers,
                             body: request.body
