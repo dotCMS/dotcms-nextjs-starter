@@ -69,7 +69,7 @@ const mimeType = {
     '.ttf': 'aplication/font-sfnt'
 };
 
-const server = http.createServer((request, response) => {
+const server = https.createServer((request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
 
     if (isEditModeFromDotCMS) {
