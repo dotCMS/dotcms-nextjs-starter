@@ -1,0 +1,8 @@
+footer {
+    background-color: var(--black);
+    padding: 7rem 0;
+}
+
+footer p {
+    margin: 0;
+}

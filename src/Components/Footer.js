@@ -1,13 +1,15 @@
 import React from 'react';
 import { Container as BootstrapContainer } from 'reactstrap';
 
-import './Header.css';
+import './Footer.css';
 
 const Footer = (props) => {
     return (
-        <BootstrapContainer>
-            <h2>Footer</h2>
-        </BootstrapContainer>
+        <footer>
+            <BootstrapContainer>
+                <p className="text-center">DotCMS SPA Starter Site 2019</p>
+            </BootstrapContainer>
+        </footer>
     );
 };
 
