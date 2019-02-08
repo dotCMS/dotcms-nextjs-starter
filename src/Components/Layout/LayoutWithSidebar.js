@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Row as BootstrapRow, Col as BootstrapCol } from 'reactstrap';
 
-import { Sidebar } from './';
+import Sidebar from './Sidebar';
 
 const COLUMS_TOTAL = 12;
 
@@ -28,7 +28,7 @@ const getSidebarLayoutColumns = (sidebar) => {
     };
 };
 
-export const LayoutWithSidebar = ({ sidebar, children }) => {
+const LayoutWithSidebar = ({ sidebar, children }) => {
     const columns = getSidebarLayoutColumns(sidebar);
 
     return (
@@ -42,3 +42,5 @@ export const LayoutWithSidebar = ({ sidebar, children }) => {
         </BootstrapRow>
     );
 };
+
+export default LayoutWithSidebar;

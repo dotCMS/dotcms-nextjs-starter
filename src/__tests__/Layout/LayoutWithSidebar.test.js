@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 
-import { LayoutWithSidebar } from '../../Components/Layout';
+import LayoutWithSidebar from '../../Components/Layout/LayoutWithSidebar';
 
 describe('<LayoutWithSidebar />', () => {
     it('should render correctly', () => {

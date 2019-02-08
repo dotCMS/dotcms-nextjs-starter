@@ -3,7 +3,7 @@ import { Container as BootstrapContainer } from 'reactstrap';
 
 import Header from '../Header';
 import Footer from '../Footer';
-import { LayoutWithSidebar } from './';
+import LayoutWithSidebar from './LayoutWithSidebar';
 
 import './Layout.css';
 
