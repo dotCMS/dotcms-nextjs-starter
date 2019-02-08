@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Page from './Page';
-import Layout from './Components/Layout';
+import { Layout } from './Components/Layout';
 import CantRender from './Components/CantRender';
 import NewsDetailPage from './Pages/NewsDetail';
 
