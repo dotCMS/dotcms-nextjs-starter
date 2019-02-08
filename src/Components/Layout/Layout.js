@@ -11,11 +11,13 @@ export const Layout = (props) => {
     const contentClass = `layout__content ${!props.header && 'layout__content--no-header'}`;
     const { sidebar } = props;
 
+    console.log(sidebar);
+
     return (
         <>
             {props.header ? <Header title={props.title} /> : null}
             <BootstrapContainer className={contentClass}>
-                {sidebar ? (
+                {sidebar && !!sidebar.location ? (
                     <LayoutWithSidebar sidebar={sidebar}>{props.children}</LayoutWithSidebar>
                 ) : (
                     props.children
