@@ -197,7 +197,7 @@ const server = http.createServer((request, response) => {
 
 // We tell React Loadable to load all required assets and start listening.
 Loadable.preloadAll().then(() => {
-    server.listen(5000, (err) => {
-        console.log('Server running http://localhost:5000');
+    server.listen(process.env.PORT || 5000, (err) => {
+        console.log('Server running http://localhost:'+(process.env.PORT || 5000));
     });
 });
