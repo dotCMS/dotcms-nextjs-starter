@@ -1,6 +1,6 @@
 import React from 'react';
 import DotCMSApi from '../libs/dotcms.api';
-import Layout from '../Components/Layout';
+import { Layout } from '../Components/Layout';
 import NewsDetail from '../Components/News/NewsDetail';
 import './NewsDetail.css';
 

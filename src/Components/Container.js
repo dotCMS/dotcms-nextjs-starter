@@ -4,10 +4,10 @@ import Contentlet from './Contentlet';
 
 import PageContext from '../PageContext';
 
-const Contentlets = container => {
-    return container.contentlets.map(contentlet => {
+const Contentlets = ({ contentlets }) => {
+    return contentlets ? contentlets.map((contentlet) => {
         return <Contentlet key={contentlet.identifier} data={contentlet} />;
-    });
+    }) : null;
 };
 
 class Container extends Component {
