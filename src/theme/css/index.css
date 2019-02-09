@@ -1,4 +1,4 @@
-src/theme/css/index.css@import './card.css';
+@import './card.css';
 
 /* poppins-300 - latin */
 @font-face {
