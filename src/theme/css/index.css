@@ -1,4 +1,4 @@
-@import './card.css';
+src/theme/css/index.css@import './card.css';
 
 /* poppins-300 - latin */
 @font-face {
@@ -138,4 +138,11 @@ figure {
     margin-bottom:10px;
     padding:5px;
     border:1px solid lightgray;
+}
+
+.promotion__image{
+    max-height:100px;
+    overflow: hidden;
+
+
 }
