@@ -21,7 +21,7 @@ const isThisAPage = (pathname) => {
 };
 
 const getScript = (payload) => {
-    const { rendered, ...page } = payload.page;
+    const { rendered, ...page } = payload.page || {};
 
     if (payload) {
         return `
