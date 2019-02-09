@@ -1,8 +1,7 @@
 import fs from 'fs';
-import https from 'https';
 import http from 'http';
 import path from 'path';
-import url, { URL } from 'url';
+import url from 'url';
 import { parse } from 'querystring';
 import Loadable from 'react-loadable';
 
@@ -22,12 +21,7 @@ const isThisAPage = (pathname) => {
 };
 
 const getScript = (payload) => {
-
-    if(payload.page===null || payload.page=== undefined){
-        return '';
-    }
-
-    const { rendered, ...page } = payload.page;
+    const { rendered, ...page } = payload.page || {};
 
     if (payload) {
         return `
@@ -78,14 +72,15 @@ const server = http.createServer((request, response) => {
     var httpProxy = require('http-proxy');
     var proxy = httpProxy.createProxyServer({
         target: {
-          protocol: 'https:',
-          host: 'starter.dotcms.com',
-          port: 443,
-          pfx: fs.readFileSync('./backend/server/fakecert.txt'),
-          passphrase: 'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a',
+            protocol: 'https:',
+            host: 'starter.dotcms.com',
+            port: 443,
+            pfx: fs.readFileSync('./backend/server/fakecert.txt'),
+            passphrase:
+                'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
         },
-        changeOrigin: true,
-      })
+        changeOrigin: true
+    });
 
     if (isEditModeFromDotCMS) {
         var postData = '';
@@ -100,7 +95,7 @@ const server = http.createServer((request, response) => {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
             let payload = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
-            
+
             // The post request should have remoteRendered, double check with Will.
             payload = {
                 ...payload,
@@ -108,7 +103,7 @@ const server = http.createServer((request, response) => {
                     ...payload.page,
                     remoteRendered: isEditModeFromDotCMS
                 }
-            }
+            };
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, payload));
@@ -144,19 +139,13 @@ const server = http.createServer((request, response) => {
                     });
             });
         } else {
-
-
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
-            const fullUrl = new URL(process.env.REACT_APP_DOTCMS_HOST + request.url);
-            
-
-        
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
                     proxy.web(request, response);
-                    
+
                     return;
                 }
 
@@ -184,6 +173,6 @@ const server = http.createServer((request, response) => {
 // We tell React Loadable to load all required assets and start listening.
 Loadable.preloadAll().then(() => {
     server.listen(process.env.PORT || 5000, (err) => {
-        console.log('Server running http://localhost:'+(process.env.PORT || 5000));
+        console.log('Server running http://localhost:' + (process.env.PORT || 5000));
     });
 });
