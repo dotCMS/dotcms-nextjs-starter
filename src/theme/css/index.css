@@ -124,6 +124,7 @@ figure {
     margin-bottom:10px;
     padding:5px;
     border:1px solid lightgray;
+    overflow: hidden;
 }
 
 .content{
@@ -131,6 +132,7 @@ figure {
     margin-bottom:10px;
     padding:5px;
     border:1px solid lightgray;
+    overflow: hidden;
 }
 
 .event{
@@ -138,11 +140,13 @@ figure {
     margin-bottom:10px;
     padding:5px;
     border:1px solid lightgray;
+    overflow: hidden;
 }
 
 .promotion__image{
     max-height:100px;
     overflow: hidden;
-
+    padding:10px;
+    margin-bottom:10px;
 
 }

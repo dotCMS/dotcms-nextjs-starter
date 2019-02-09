@@ -14,7 +14,18 @@ import DotCMSApi from '../../src/libs/dotcms.api';
 import App from '../../src/App';
 
 const STATIC_FOLDER = './build';
-
+const httpProxy = require('http-proxy');
+const proxy = httpProxy.createProxyServer({
+    target: {
+        protocol: 'https:',
+        host: 'starter.dotcms.com',
+        port: 443,
+        pfx: fs.readFileSync('./backend/server/fakecert.txt'),
+        passphrase:
+            'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
+    },
+    changeOrigin: true
+});
 const isThisAPage = (pathname) => {
     const ext = path.parse(pathname).ext;
     return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
@@ -69,18 +80,8 @@ const mimeType = {
 
 const server = http.createServer((request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
-    var httpProxy = require('http-proxy');
-    var proxy = httpProxy.createProxyServer({
-        target: {
-            protocol: 'https:',
-            host: 'starter.dotcms.com',
-            port: 443,
-            pfx: fs.readFileSync('./backend/server/fakecert.txt'),
-            passphrase:
-                'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
-        },
-        changeOrigin: true
-    });
+
+
 
     if (isEditModeFromDotCMS) {
         var postData = '';

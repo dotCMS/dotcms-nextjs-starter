@@ -31,7 +31,7 @@ export default class Contentlet extends Component {
     render() {
         const showLoadableContentletWarning = this.context.mode !== 'ADMIN_MODE';
         const isEditMode = this.context.mode === 'EDIT_MODE';
-
+        //console.log(this.props.data.baseType)
         const Component = Loadable({
             loader: () => import(`./DotCMS/${this.props.data.contentType}`),
             loading: (props) =>
