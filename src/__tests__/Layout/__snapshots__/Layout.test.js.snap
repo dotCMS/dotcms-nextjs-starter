@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Layout /> should render correctly 1`] = `
+<Fragment>
+  <Header />
+  <Container
+    className="layout__content"
+    tag="div"
+  >
+    <p>
+      Hola Mundo
+    </p>
+  </Container>
+  <Footer />
+</Fragment>
+`;
+
+exports[`<Layout /> should render header, footer and title 1`] = `
+<Fragment>
+  <Header
+    title="This is a title"
+  />
+  <Container
+    className="layout__content"
+    tag="div"
+  >
+    <p>
+      Hola Mundo
+    </p>
+  </Container>
+  <Footer />
+</Fragment>
+`;
+
+exports[`<Layout /> should render sidebar 1`] = `
+<Fragment>
+  <Header />
+  <Container
+    className="layout__content"
+    tag="div"
+  >
+    <LayoutWithSidebar
+      sidebar={
+        Object {
+          "containers": Array [],
+          "location": "left",
+          "width": "small",
+        }
+      }
+    >
+      <p>
+        Hola Mundo
+      </p>
+    </LayoutWithSidebar>
+  </Container>
+  <Footer />
+</Fragment>
+`;

@@ -27,6 +27,21 @@ const translate = (page) => {
                 });
             });
         });
+
+        if (
+            page.layout.sidebar &&
+            page.layout.sidebar.containers &&
+            page.layout.sidebar.containers.length
+        ) {
+            page.layout.sidebar.containers = page.layout.sidebar.containers.map((container) => {
+                const contentlets =
+                    page.containers[container.identifier].contentlets[`uuid-${container.uuid}`];
+                return {
+                    ...container,
+                    contentlets
+                };
+            });
+        }
     }
 
     return page;

@@ -10,7 +10,7 @@ header.header__menu > button {
 
 .header__extend {
     align-items: center;
-    background-image: url(../theme/images/cover_img_1.jpg);
+    background-image: url(../../theme/images/cover_img_1.jpg);
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Page from './Page';
-import Layout from './Components/Layout';
+import { Layout } from './Components/Layout';
 import CantRender from './Components/CantRender';
 import NewsDetailPage from './Pages/NewsDetail';
 
@@ -24,10 +24,11 @@ class PageFetchWrapper extends Component {
     constructor() {
         super();
         this.state = {
-            layout: {},
-            pathname: null,
             error: null,
-            mode: null
+            layout: null,
+            mode: null,
+            pathname: null,
+            title: ''
         };
     }
 
@@ -49,11 +50,11 @@ class PageFetchWrapper extends Component {
             })
             .then(({ layout, error, viewAs, page }) => {
                 this.setState({
-                    error,
-                    layout,
+                    error: error,
+                    layout: layout,
                     mode: viewAs ? viewAs.mode : '',
-                    pathname,
-                    page
+                    pathname: pathname,
+                    title: page ? page.title : ''
                 });
             });
     }
@@ -83,6 +84,7 @@ class PageFetchWrapper extends Component {
     }
 
     render() {
+        const { layout } = this.state || this.props;
         return (
             <PageContext.Provider
                 value={{
@@ -91,11 +93,11 @@ class PageFetchWrapper extends Component {
                     site: this.state.site
                 }}
             >
-                <Layout title={this.state.page ? this.state.page.title : ''}>
+                <Layout {...layout} title={this.state.title}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? (
                         <NoAuth />
                     ) : (
-                        <Page data={this.state.layout} />
+                        <Page {...layout} />
                     )}
                 </Layout>
             </PageContext.Provider>

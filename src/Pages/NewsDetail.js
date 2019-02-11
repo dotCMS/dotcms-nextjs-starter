@@ -1,6 +1,6 @@
 import React from 'react';
 import DotCMSApi from '../libs/dotcms.api';
-import Layout from '../Components/Layout';
+import { Layout } from '../Components/Layout';
 import NewsDetail from '../Components/News/NewsDetail';
 import './NewsDetail.css';
 
@@ -28,7 +28,7 @@ class NewsDetailPage extends React.Component {
 
     render() {
         return (
-            <Layout title={this.state ? this.state.title : ''}>
+            <Layout {...{ header: true, footer: true }} title={this.state ? this.state.title : ''}>
                 <NewsDetail {...this.state} />
             </Layout>
         );
