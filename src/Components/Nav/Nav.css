@@ -24,6 +24,10 @@
     text-transform: uppercase;
 }
 
+.navbar-expand-md .nav-menu__links .nav-option.nav-link {
+    padding-left: 1rem;
+}
+
 .nav-menu__links .nav-option.nav-link.active {
     background-color: transparent;
     color: rgba(255, 255, 255, 0.5);
@@ -34,6 +38,7 @@
     bottom: 0;
     display: inline-block;
     left: 0;
+    min-width: 208px;
     padding: 0.5rem;
     position: fixed;
     top: 0;
