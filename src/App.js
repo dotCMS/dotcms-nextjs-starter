@@ -25,7 +25,7 @@ class PageFetchWrapper extends Component {
         super();
         this.state = {
             error: null,
-            layout: {},
+            layout: null,
             mode: null,
             pathname: null,
             title: ''
@@ -84,17 +84,18 @@ class PageFetchWrapper extends Component {
     }
 
     render() {
+        const { layout } = this.state || this.props;
         return (
             <PageContext.Provider
                 value={{
                     mode: this.state.mode
                 }}
             >
-                <Layout {...this.state.layout} title={this.state.title}>
+                <Layout {...layout} title={this.state.title}>
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? (
                         <NoAuth />
                     ) : (
-                        <Page data={this.state.layout} />
+                        <Page {...layout} />
                     )}
                 </Layout>
             </PageContext.Provider>

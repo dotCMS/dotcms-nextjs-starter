@@ -8,12 +8,16 @@ import LayoutWithSidebar from './LayoutWithSidebar';
 import './Layout.css';
 
 export const Layout = (props) => {
-    const contentClass = `layout__content ${!props.header && 'layout__content--no-header'}`;
+    const includeHeader = props.header !== false;
+    const includeFooter = props.footer !== false;
+
+    const contentClass = `layout__content${!includeHeader ? ' layout__content--no-header' : ''}`;
+
     const { sidebar } = props;
 
     return (
         <>
-            {props.header ? <Header title={props.title} /> : null}
+            {includeHeader ? <Header title={props.title} /> : null}
             <BootstrapContainer className={contentClass}>
                 {sidebar && !!sidebar.location ? (
                     <LayoutWithSidebar sidebar={sidebar}>{props.children}</LayoutWithSidebar>
@@ -21,7 +25,7 @@ export const Layout = (props) => {
                     props.children
                 )}
             </BootstrapContainer>
-            {props.footer ? <Footer /> : null}
+            {includeFooter ? <Footer /> : null}
         </>
     );
 };

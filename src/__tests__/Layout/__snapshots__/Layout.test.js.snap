@@ -2,14 +2,16 @@
 
 exports[`<Layout /> should render correctly 1`] = `
 <Fragment>
+  <Header />
   <Container
-    className="layout__content layout__content--no-header"
+    className="layout__content"
     tag="div"
   >
     <p>
       Hola Mundo
     </p>
   </Container>
+  <Footer />
 </Fragment>
 `;
 
@@ -19,7 +21,7 @@ exports[`<Layout /> should render header, footer and title 1`] = `
     title="This is a title"
   />
   <Container
-    className="layout__content false"
+    className="layout__content"
     tag="div"
   >
     <p>
@@ -32,8 +34,9 @@ exports[`<Layout /> should render header, footer and title 1`] = `
 
 exports[`<Layout /> should render sidebar 1`] = `
 <Fragment>
+  <Header />
   <Container
-    className="layout__content layout__content--no-header"
+    className="layout__content"
     tag="div"
   >
     <LayoutWithSidebar
@@ -50,5 +53,6 @@ exports[`<Layout /> should render sidebar 1`] = `
       </p>
     </LayoutWithSidebar>
   </Container>
+  <Footer />
 </Fragment>
 `;
