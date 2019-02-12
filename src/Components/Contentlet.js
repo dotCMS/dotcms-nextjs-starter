@@ -39,8 +39,9 @@ export default class Contentlet extends Component {
                     <Loading contentlet={this.props.data} {...props} />
                 ) : null
         });
+        const isEditModeFromDotCMS = isEditMode && this.context.page && this.context.page.remoteRendered;
 
-        return isEditMode ? (
+        return isEditModeFromDotCMS ? (
             <DotContentlet {...this.props.data}>
                 <Component {...this.props.data} />
             </DotContentlet>

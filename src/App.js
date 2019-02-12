@@ -93,13 +93,15 @@ class PageFetchWrapper extends Component {
                     site: this.state.site
                 }}
             >
-                <Layout {...layout} title={this.state.title}>
-                    {this.state.error === ERROR_UNAUTHORIZED_USER ? (
-                        <NoAuth />
-                    ) : (
-                        <Page {...layout} />
-                    )}
-                </Layout>
+                {layout ? (
+                    <Layout {...layout} title={this.state.title}>
+                        {this.state.error === ERROR_UNAUTHORIZED_USER ? (
+                            <NoAuth />
+                        ) : (
+                            <Page {...layout} />
+                        )}
+                    </Layout>
+                ) : null}
             </PageContext.Provider>
         );
     }
