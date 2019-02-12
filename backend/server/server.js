@@ -5,13 +5,26 @@ import url from 'url';
 import { parse } from 'querystring';
 import Loadable from 'react-loadable';
 
+import httpProxy from 'http-proxy';
+
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 
 import DotCMSApi from '../../src/libs/dotcms.api';
-
 import App from '../../src/App';
+
+const proxy = httpProxy.createProxyServer({
+    target: {
+        protocol: 'https:',
+        host: url.parse(process.env.REACT_APP_DOTCMS_HOST).hostname,
+        port: 443,
+        pfx: fs.readFileSync('./backend/server/fakecert.txt'),
+        passphrase:
+            'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
+    },
+    changeOrigin: true
+});
 
 let currentSite;
 
@@ -140,31 +153,8 @@ const server = http.createServer((request, response) => {
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
-                    let proxy = http.request(
-                        {
-                            hostname: 'localhost',
-                            port: 8080,
-                            path: request.url,
-                            method: request.method,
-                            headers: request.headers,
-                            body: request.body
-                        },
-                        (res) => {
-                            res.pipe(
-                                response,
-                                {
-                                    end: true
-                                }
-                            );
-                        }
-                    );
 
-                    request.pipe(
-                        proxy,
-                        {
-                            end: true
-                        }
-                    );
+                    proxy.web(request, response);
                     return;
                 }
 

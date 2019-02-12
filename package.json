@@ -24,6 +24,7 @@
   "dependencies": {
     "bootstrap": "^4.2.1",
     "dotenv": "^6.2.0",
+    "http-proxy": "^1.17.0",
     "inquirer": "^6.2.1",
     "node-fetch": "^2.3.0",
     "react": "^16.6.3",
