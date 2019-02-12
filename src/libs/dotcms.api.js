@@ -82,13 +82,11 @@ const get = async ({ pathname }) => {
         });
 };
 
-const emitNavigationEnd = (pathname) => {
+const emitCustomEvent = (eventName, eventData) => {
     const customEvent = window.top.document.createEvent('CustomEvent');
     customEvent.initCustomEvent('ng-event', false, false, {
-        name: 'remote-render-edit',
-        data: {
-            pathname
-        }
+        name: eventName,
+        data: eventData
     });
     window.top.document.dispatchEvent(customEvent);
 };
@@ -102,7 +100,7 @@ export default {
     page: {
         translate,
         get,
-        emitNavigationEnd
+        emitCustomEvent
     },
     sites: {
         getCurrentSite
