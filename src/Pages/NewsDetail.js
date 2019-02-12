@@ -28,7 +28,7 @@ class NewsDetailPage extends React.Component {
 
     render() {
         return (
-            <Layout {...{header: true, footer: true}} title={this.state ? this.state.title : ''}>
+            <Layout {...{ header: true, footer: true }} title={this.state ? this.state.title : ''}>
                 <NewsDetail {...this.state} />
             </Layout>
         );

@@ -11,7 +11,8 @@ export const Layout = (props) => {
     const includeHeader = props.header !== false;
     const includeFooter = props.footer !== false;
 
-    const contentClass = `layout__content ${!includeHeader && 'layout__content--no-header'}`;
+    const contentClass = `layout__content${!includeHeader ? ' layout__content--no-header' : ''}`;
+
     const { sidebar } = props;
 
     return (

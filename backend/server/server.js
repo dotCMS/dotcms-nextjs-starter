@@ -54,7 +54,7 @@ const getMainComponent = (url, payload) => {
     return (
         <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
-                <App {...payload.layout} {...payload.viewAs} {...payload.page} />
+                <App layout={payload.layout} {...payload.viewAs} {...payload.page} />
             </StaticRouter>
         </Loadable.Capture>
     );
