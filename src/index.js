@@ -18,7 +18,6 @@ if (window.dotcmsPage) {
         );
     });
 } else {
-   
     ReactDOM.render(
         <Router>
             <App />
