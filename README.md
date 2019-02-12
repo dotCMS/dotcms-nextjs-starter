@@ -3,7 +3,7 @@ This SPA demonstration includes both a traditional client side SPA written in Re
 
 ## Setting up the Universal App
 
-`npm run setup:serve`
+### `npm run setup:serve`
 
 The setup script will walk you to create all the necessary node environmental variables to run the React App in Server Side Rendering mode.
 
