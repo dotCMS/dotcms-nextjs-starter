@@ -46,7 +46,11 @@ const getMainComponent = (url, payload) => {
     return (
         <Loadable.Capture report={(moduleName) => modules.push(moduleName)}>
             <StaticRouter location={url} context={context}>
-                <App layout={payload.layout} {...payload.viewAs} {...payload.page} />
+                {payload ? (
+                    <App layout={payload.layout} {...payload.viewAs} {...payload.page} />
+                ) : (
+                    <App />
+                )}
             </StaticRouter>
         </Loadable.Capture>
     );
@@ -86,7 +90,7 @@ const server = http.createServer((request, response) => {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
             let payload = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
-            
+
             // The post request should have remoteRendered, double check with Will.
             payload = {
                 ...payload,
@@ -94,7 +98,7 @@ const server = http.createServer((request, response) => {
                     ...payload.page,
                     remoteRendered: isEditModeFromDotCMS
                 }
-            }
+            };
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, payload));
@@ -116,18 +120,11 @@ const server = http.createServer((request, response) => {
 
         if (isThisAPage(sanitizePath)) {
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                DotCMSApi.page
-                    .get({
-                        pathname: sanitizePath
-                    })
-                    .then((payload) => {
-                        const app = renderToString(getMainComponent(request.url, payload));
-                        data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                        data = data.replace('<div id="script"></div>', getScript(payload));
+                const app = renderToString(getMainComponent(request.url));
+                data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
 
-                        response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
-                        response.end(data);
-                    });
+                response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
+                response.end(data);
             });
         } else {
             response.setHeader('Access-Control-Allow-Origin', '*');
@@ -193,7 +190,7 @@ const server = http.createServer((request, response) => {
 });
 
 // We tell React Loadable to load all required assets and start listening.
-Loadable.preloadAll().then(async() => {
+Loadable.preloadAll().then(async () => {
     currentSite = await DotCMSApi.sites.getCurrentSite();
     server.listen(5000, (err) => {
         console.log('Server running http://localhost:5000');
