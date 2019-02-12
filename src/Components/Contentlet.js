@@ -40,7 +40,7 @@ export default class Contentlet extends Component {
                 ) : null
         });
 
-        return isEditMode ? (
+        return isEditMode && this.context.page && this.context.page.remoteRendered ? (
             <DotContentlet {...this.props.data}>
                 <Component {...this.props.data} />
             </DotContentlet>
