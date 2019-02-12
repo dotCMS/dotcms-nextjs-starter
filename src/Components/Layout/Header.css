@@ -1,7 +1,11 @@
 header.header__menu {
     background: transparent !important;
-    justify-content: space-between;
+    display: block;
     z-index: 1;
+}
+
+header.header__menu > button {
+    float: right;
 }
 
 .header__extend {
@@ -45,15 +49,14 @@ header.header__menu {
 }
 
 .header__page-title {
-    font-size: 3.75rem;
+    font-size: 2.125rem;
     font-weight: 300;
     margin-bottom: 1.25rem;
     text-align: center;
 }
 
-
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
     .header__page-title {
-        font-size: 2.125rem;
+        font-size: 3.75rem;
     }
 }

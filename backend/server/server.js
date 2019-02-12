@@ -13,19 +13,10 @@ import DotCMSApi from '../../src/libs/dotcms.api';
 
 import App from '../../src/App';
 
+let currentSite;
+
 const STATIC_FOLDER = './build';
-const httpProxy = require('http-proxy');
-const proxy = httpProxy.createProxyServer({
-    target: {
-        protocol: 'https:',
-        host: 'starter.dotcms.com',
-        port: 443,
-        pfx: fs.readFileSync('./backend/server/fakecert.txt'),
-        passphrase:
-            'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
-    },
-    changeOrigin: true
-});
+
 const isThisAPage = (pathname) => {
     const ext = path.parse(pathname).ext;
     return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
@@ -40,7 +31,8 @@ const getScript = (payload) => {
             var dotcmsPage = ${JSON.stringify({
                 layout: payload.layout,
                 viewAs: payload.viewAs,
-                page: page
+                page,
+                site: currentSite
             })}
         </script>`;
     } else {
@@ -81,8 +73,6 @@ const mimeType = {
 const server = http.createServer((request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
 
-
-
     if (isEditModeFromDotCMS) {
         var postData = '';
 
@@ -96,7 +86,7 @@ const server = http.createServer((request, response) => {
             // Parse the post data and get client sent username and password.
             // let postDataObject = JSON.parse(postData);
             let payload = DotCMSApi.page.translate(JSON.parse(parse(postData).dotPageData).entity);
-
+            
             // The post request should have remoteRendered, double check with Will.
             payload = {
                 ...payload,
@@ -104,7 +94,7 @@ const server = http.createServer((request, response) => {
                     ...payload.page,
                     remoteRendered: isEditModeFromDotCMS
                 }
-            };
+            }
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 const app = renderToString(getMainComponent(request.url, payload));
@@ -140,13 +130,44 @@ const server = http.createServer((request, response) => {
                     });
             });
         } else {
+            response.setHeader('Access-Control-Allow-Origin', '*');
+            response.setHeader('Access-Control-Allow-Credentials', 'true');
+            response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
+            response.setHeader(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers'
+            );
+
             const pathname = path.join(STATIC_FOLDER, sanitizePath);
 
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
                     // if the file is not found un build folder, proxy to dotcms instance
-                    proxy.web(request, response);
+                    let proxy = http.request(
+                        {
+                            hostname: 'localhost',
+                            port: 8080,
+                            path: request.url,
+                            method: request.method,
+                            headers: request.headers,
+                            body: request.body
+                        },
+                        (res) => {
+                            res.pipe(
+                                response,
+                                {
+                                    end: true
+                                }
+                            );
+                        }
+                    );
 
+                    request.pipe(
+                        proxy,
+                        {
+                            end: true
+                        }
+                    );
                     return;
                 }
 
@@ -172,8 +193,9 @@ const server = http.createServer((request, response) => {
 });
 
 // We tell React Loadable to load all required assets and start listening.
-Loadable.preloadAll().then(() => {
-    server.listen(process.env.PORT || 5000, (err) => {
-        console.log('Server running http://localhost:' + (process.env.PORT || 5000));
+Loadable.preloadAll().then(async() => {
+    currentSite = await DotCMSApi.sites.getCurrentSite();
+    server.listen(5000, (err) => {
+        console.log('Server running http://localhost:5000');
     });
 });
