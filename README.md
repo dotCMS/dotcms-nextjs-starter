@@ -1,7 +1,9 @@
-# Backend (SSR/Isomorphic Renderer)
-Node server for Server Side Render the pages.
+# SPA with Universial/Isomorphic Rendering
+This SPA demonstration includes both a traditional client side SPA written in React and a node server that can provide the same application as a server side rendered app.
 
-### `npm run setup:serve`
+### Running the Universal App
+
+`npm run setup:serve`
 
 This script will walk you to create all the necessary node environmental variables to run the React App in Server Side Rendering mode.
 
@@ -22,7 +24,9 @@ You'll be able to choose between create a `.env` file or just run the app by set
 
 Compiles the react app and runs the node server to SSR the app.
 
-# Frontend
+# Client Side / Frontend
+
+`npm start`
 
 The client side project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
