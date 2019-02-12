@@ -182,7 +182,7 @@ const server = http.createServer((request, response) => {
 // We tell React Loadable to load all required assets and start listening.
 Loadable.preloadAll().then(async () => {
     currentSite = await DotCMSApi.sites.getCurrentSite();
-    server.listen(5000, (err) => {
+    server.listen(process.env.PORT || 5000, (err) => {
         console.log('Server running http://localhost:5000');
     });
 });
