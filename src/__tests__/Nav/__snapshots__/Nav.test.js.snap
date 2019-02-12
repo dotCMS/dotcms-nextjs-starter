@@ -30,6 +30,7 @@ exports[`<Nav /> renders nav correctly 1`] = `
     unmountOnExit={false}
   >
     <Nav
+      navbar={true}
       tag="ul"
       vertical={false}
     >
