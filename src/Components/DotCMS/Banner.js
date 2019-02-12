@@ -26,7 +26,7 @@ export default class SimpleWidget extends Component {
         const divStyle = {
             backgroundColor: '40px',
             border: '5px solid white',
-            backgroundImage: `url('/dA/${this.props.identifier}/image/1200h/jpegp/retiree-banner.jpeg)`,
+            backgroundImage: `url('/dA/${this.props.identifier}/image/1200h/jpegp/banner.jpeg)`,
             height: "400px",
             marginTop:`-150px`,
             backgroundSize:"cover"
@@ -37,9 +37,9 @@ export default class SimpleWidget extends Component {
         return (
             <div className="bg-wrapper" style={divStyle}>
                 <div className="container">
-                    <div className="row flex-row-reverse">
-                        <div className="col-md-7 col-md-offset-5 " style={{ marginTop: `30px` }}>
-                            <div style={{  background: `rgba(255,255,255,.5)`, textAlign:"center",padding:'10px' }} dangerouslySetInnerHTML={{ __html: this.state.widgetCode }} />
+                    <div >
+                        <div style={{ marginTop: `30px`,width:`50%`,marginLeft:`auto`,marginRight:`auto`}}>
+                            <div style={{  background: `rgba(255,255,255,.6)`, textAlign:"center",padding:'10px',marginLeft:`auto`,marginRight:`auto` }} dangerouslySetInnerHTML={{ __html: this.state.widgetCode }} />
 
                         </div>
                     </div>
