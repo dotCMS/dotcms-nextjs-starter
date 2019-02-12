@@ -1,11 +1,13 @@
-# Backend (SSR/Isomorphic Renderer)
-Node server for Server Side Render the pages.
+# SPA with Universial/Isomorphic Rendering
+This SPA demonstration includes both a traditional client side SPA written in React and a node server that can provide the same application as a server side rendered app.  Unlike traditional Universal SPAs, this SPA listens for HTTP POST methods with a json data payload that contains a `{dotPageData:xx}` property and if that is available, will render the SPA page server side.  This allows the SPA to act as a mirror for when a dotCMS installation wants to proxy the SPA's source to a dotCMS edit mode user. 
+
+## Setting up the Universal App
 
 ### `npm run setup:serve`
 
-This script will walk you to create all the necessary node environmental variables to run the React App in Server Side Rendering mode.
+The setup script will walk you to create all the necessary node environmental variables to run the React App in Server Side Rendering mode.
 
-You'll be able to choose between create a `.env` file or just run the app by setting the environmental variables just for this time.
+You'll be able to choose to create a `.env` file or just run the app by setting the environmental variables just for this time.
 
 *It will ask you for:*
 1. DotCMS Instance
@@ -18,13 +20,16 @@ You'll be able to choose between create a `.env` file or just run the app by set
 4. Then run `npm run serve`
 3. Pass the token as header in all the request to the DotCMS instance
 
+## Running the server side app
 ### `npm run serve`
 
-Compiles the react app and runs the node server to SSR the app.
+Compiles the react app and runs the node server with both the client side and the server side app.
 
-# Frontend
+## Client Side / Frontend App
 
-The client side project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### `npm start`
+
+Running `npm start` will launch the client side SPA without universal rendering.  This app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
