@@ -15,7 +15,8 @@ class Container extends Component {
 
     render() {
         const { container } = this.props;
-        return this.context.mode === 'EDIT_MODE' && this.context.page && this.context.page.remoteRendered ? (
+        const isEditModeFromDotCMS = this.context.mode === 'EDIT_MODE' && this.context.page && this.context.page.remoteRendered;
+        return isEditModeFromDotCMS ? (
             <DotContainer data={container}>
                 <Contentlets {...container} />
             </DotContainer>
