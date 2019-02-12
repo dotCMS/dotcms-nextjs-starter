@@ -13,6 +13,8 @@ import DotCMSApi from '../../src/libs/dotcms.api';
 
 import App from '../../src/App';
 
+let currentSite;
+
 const STATIC_FOLDER = './build';
 
 const isThisAPage = (pathname) => {
@@ -29,7 +31,8 @@ const getScript = (payload) => {
             var dotcmsPage = ${JSON.stringify({
                 layout: payload.layout,
                 viewAs: payload.viewAs,
-                page: page
+                page,
+                site: currentSite
             })}
         </script>`;
     } else {
@@ -190,7 +193,8 @@ const server = http.createServer((request, response) => {
 });
 
 // We tell React Loadable to load all required assets and start listening.
-Loadable.preloadAll().then(() => {
+Loadable.preloadAll().then(async() => {
+    currentSite = await DotCMSApi.sites.getCurrentSite();
     server.listen(5000, (err) => {
         console.log('Server running http://localhost:5000');
     });
