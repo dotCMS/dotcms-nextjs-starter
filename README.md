@@ -21,13 +21,13 @@ You'll be able to choose to create a `.env` file or just run the app by setting 
 3. Pass the token as header in all the request to the DotCMS instance
 
 ## Running the server side app
-`npm run serve`
+### `npm run serve`
 
 Compiles the react app and runs the node server with both the client side and the server side app.
 
 ## Client Side / Frontend App
 
-`npm start`
+### `npm start`
 
 Running `npm start` will launch the client side SPA without universal rendering.  This app was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
