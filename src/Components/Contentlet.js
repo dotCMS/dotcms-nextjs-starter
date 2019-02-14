@@ -5,6 +5,7 @@ import { Spinner } from 'reactstrap';
 import DotContentlet from '../libs/DotContentlet';
 import SimpleWidget from './DotCMS/SimpleWidget';
 import PageContext from '../PageContext';
+import CantRender from './CantRender';
 
 const Loading = (props) => {
     const divStyle = {
@@ -12,7 +13,13 @@ const Loading = (props) => {
         padding: '2rem'
     };
     return props.error ? (
-        <SimpleWidget identifier={props.contentlet.identifier} />
+        props.contentlet.baseType === 'WIDGET' ? (
+            <SimpleWidget identifier={props.contentlet.identifier} />
+        ) : (
+            <CantRender color="warning" title={props.contentlet.title}>
+                <p>{props.error.message}</p>
+            </CantRender>
+        )
     ) : (
         <div style={divStyle}>
             <Spinner color="primary" />
