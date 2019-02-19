@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PageContext from '../../PageContext';
 import PropTypes from 'prop-types';
 import { NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const NavOption = ({ item }) => {
-    return (
-        <NavItem key={item.folder}>
-            <NavLink className="nav-option" tag={Link} active={item.href === window.location.pathname} to={item.href}>
-                {item.title}
-            </NavLink>
-        </NavItem>
-    );
-};
+export default class NavOption extends Component {
+    static contextType = PageContext;
+    languagePrefix = '';
+
+    render() {
+        const { item } = this.props;
+        this.languagePrefix =
+            this.context.language && this.context.language.code
+                ? `/${this.context.language.code}`
+                : '';
+        return (
+            <NavItem key={item.folder}>
+                <NavLink
+                    className="nav-option"
+                    tag={Link}
+                    active={item.href === window.location.pathname}
+                    to={this.languagePrefix + item.href}
+                >
+                    {item.title}
+                </NavLink>
+            </NavItem>
+        );
+    }
+}
 
 NavOption.propTypes = {
     item: PropTypes.shape({
@@ -20,5 +36,3 @@ NavOption.propTypes = {
         title: PropTypes.string.isRequired
     }).isRequired
 };
-
-export default NavOption;

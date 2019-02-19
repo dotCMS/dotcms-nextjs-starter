@@ -2,12 +2,17 @@ import React from 'react';
 import DotCMSApi from '../libs/dotcms.api';
 import { Layout } from '../Components/Layout';
 import NewsDetail from '../Components/News/NewsDetail';
+import PageContext from '../PageContext';
 import './NewsDetail.css';
 
 class NewsDetailPage extends React.Component {
     constructor(props, context) {
         super(props, context);
-        this.state = props.location.state ? props.location.state.news : null;
+        this.state = {
+            news:
+                props.location.state && props.location.state.news ? props.location.state.news : '',
+            language: ''
+        };
     }
 
     getNews() {
@@ -16,21 +21,34 @@ class NewsDetailPage extends React.Component {
         })
             .then((response) => response.json())
             .then((newsData) => {
-                this.setState((state) => newsData.contentlets[0]);
+                this.setState((state) => ({ ...state, news: newsData.contentlets[0] }));
             });
     }
 
     componentDidMount() {
-        if (!this.state) {
-            this.getNews();
-        }
+        DotCMSApi.getConfiguration().then(() => {
+            const language = DotCMSApi.page.setLanguage(this.props.location.pathname);
+            this.setState((state) => ({ ...state, language }));
+            if (!this.state.news) {
+                this.getNews();
+            }
+        });
     }
 
     render() {
         return (
-            <Layout {...{ header: true, footer: true }} title={this.state ? this.state.title : ''}>
-                <NewsDetail {...this.state} />
-            </Layout>
+            <PageContext.Provider
+                value={{
+                    language: this.state.language
+                }}
+            >
+                <Layout
+                    {...{ header: true, footer: true }}
+                    title={this.state && this.state.news ? this.state.news.title : ''}
+                >
+                    <NewsDetail {...this.state.news} />
+                </Layout>
+            </PageContext.Provider>
         );
     }
 }

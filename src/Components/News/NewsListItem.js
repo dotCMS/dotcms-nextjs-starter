@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PageContext from '../../PageContext';
 import PropTypes from 'prop-types';
 import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -6,18 +7,26 @@ import DateFormat from '../Shared/DateFormat';
 
 import IMAGE_PLACEHOLDER from '../../theme/images/placeholder.jpg';
 
-const ItemLink = (props) => {
-    return (
-        <Link
-            to={{
-                pathname: props.pathname,
-                state: props.state
-            }}
-        >
-            {props.children}
-        </Link>
-    );
-};
+class ItemLink extends Component {
+    static contextType = PageContext;
+    languagePrefix = '';
+    render() {
+        this.languagePrefix =
+            this.context.language && this.context.language.code
+                ? `/${this.context.language.code}`
+                : '';
+        return (
+            <Link
+                to={{
+                    pathname: this.languagePrefix + this.props.pathname,
+                    state: this.props.state
+                }}
+            >
+                {this.props.children}
+            </Link>
+        );
+    }
+}
 
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
@@ -25,7 +34,12 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
         <Card>
             {displayedFields.includes('image') ? (
                 <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
-                    <CardImg top width="100%" src={news.image || IMAGE_PLACEHOLDER} alt={news.urlTitle} />
+                    <CardImg
+                        top
+                        width="100%"
+                        src={news.image || IMAGE_PLACEHOLDER}
+                        alt={news.urlTitle}
+                    />
                 </ItemLink>
             ) : (
                 ''

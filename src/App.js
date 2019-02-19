@@ -36,7 +36,7 @@ class PageFetchWrapper extends Component {
         return prevState.pathname && nextProps.location.pathname !== prevState.pathname;
     }
 
-    setPage(pathname) {
+    setPage(pathname, language) {
         const isEditModeFromDotCMS = this.props.page && this.props.page.remoteRendered;
 
         if (isEditModeFromDotCMS) {
@@ -52,6 +52,7 @@ class PageFetchWrapper extends Component {
                 this.setState({
                     error: error,
                     layout: layout,
+                    language: language || this.state.language,
                     mode: viewAs ? viewAs.mode : '',
                     pathname: pathname,
                     title: page ? page.title : ''
@@ -79,7 +80,10 @@ class PageFetchWrapper extends Component {
                 site: this.props.site
             });
         } else {
-            this.setPage(this.props.location.pathname);
+            DotCMSApi.getConfiguration().then(() => {
+                const language = DotCMSApi.page.setLanguage(this.props.location.pathname);
+                this.setPage(this.props.location.pathname, language);
+            });
         }
     }
 
@@ -88,20 +92,19 @@ class PageFetchWrapper extends Component {
         return (
             <PageContext.Provider
                 value={{
+                    language: this.state.language,
                     mode: this.state.mode,
                     page: this.state.page,
                     site: this.state.site
                 }}
             >
-                {layout ? (
-                    <Layout {...layout} title={this.state.title}>
-                        {this.state.error === ERROR_UNAUTHORIZED_USER ? (
-                            <NoAuth />
-                        ) : (
-                            <Page {...layout} />
-                        )}
-                    </Layout>
-                ) : null}
+                <Layout {...layout} title={this.state.title}>
+                    {this.state.error === ERROR_UNAUTHORIZED_USER ? (
+                        <NoAuth />
+                    ) : (
+                        <Page {...layout} />
+                    )}
+                </Layout>
             </PageContext.Provider>
         );
     }
@@ -111,6 +114,7 @@ const App = (page) => {
     return (
         <Switch>
             <Route path="/news-events/news/:slug" component={NewsDetailPage} />
+            <Route path="/:language/news-events/news/:slug" component={NewsDetailPage} />
             <Route render={(props) => <PageFetchWrapper {...props} {...page} />} />
         </Switch>
     );
