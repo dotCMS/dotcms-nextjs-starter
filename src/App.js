@@ -102,7 +102,7 @@ class PageFetchWrapper extends Component {
                             <Page {...layout} />
                         )}
                     </Layout>
-                ) : null}
+                ) : <NoAuth />}
             </PageContext.Provider>
         );
     }
