@@ -11,6 +11,8 @@ describe('<NewsWidgets />', () => {
     let newsSearchData;
 
     beforeEach(async () => {
+        window.history.pushState({}, 'Test Title', '/test.html?lang=en');
+
         newsSearchData = {
             contentlets: [
                 {
@@ -53,6 +55,14 @@ describe('<NewsWidgets />', () => {
             });
         });
 
+        DotCMSApi.languages.getCode = jest.fn().mockImplementation(() => {
+            return 'en';
+        });
+
+        DotCMSApi.languages.getId = jest.fn().mockImplementation(() => {
+            return '1';
+        });
+
         newsPageData = {
             fieldsToDisplay: '',
             languageId: '1',
@@ -83,6 +93,8 @@ describe('<NewsWidgets />', () => {
             totalItems: 0
         };
 
+        expect(DotCMSApi.languages.getCode).toHaveBeenCalledWith('?lang=en');
+        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('en');
         expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', fetchParams);
         expect(wrapper.find('NoResults').exists()).toBeFalsy();
 

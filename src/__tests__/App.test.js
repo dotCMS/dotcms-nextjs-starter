@@ -9,25 +9,16 @@ import PAGE_MOCK_FORMATTED from '../TestUtils/data';
 
 describe('<App />', () => {
     beforeEach(() => {
-        DotCMSApi.getConfiguration = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve();
-                        })
-                });
-            });
+        DotCMSApi.languages.getCode = jest.fn().mockImplementation(() => {
+            return 'en';
         });
 
-        DotCMSApi.page.setLanguage = jest.fn().mockImplementation(() => {
-            return { code: 'en', id: 1 };
-        });
-
-        DotCMSApi.page.get = jest.fn().mockImplementation(() => new Promise((resolve, reject) => {
-            resolve({...PAGE_MOCK_FORMATTED});
-        }));
+        DotCMSApi.page.get = jest.fn().mockImplementation(
+            () =>
+                new Promise((resolve, reject) => {
+                    resolve({ ...PAGE_MOCK_FORMATTED });
+                })
+        );
     });
 
     it('renders with page data (SSR)', () => {
@@ -44,17 +35,20 @@ describe('<App />', () => {
 
     it('renders Client Side with page', async () => {
         const context = {};
+        const location = { pathname: 'someLocation', search: '?lang=en' };
         const div = document.createElement('div');
         ReactDOM.render(
-            <StaticRouter location="someLocation" context={context}>
+            <StaticRouter location={location} context={context}>
                 <App />
             </StaticRouter>,
             div
         );
-        expect(DotCMSApi.getConfiguration).toHaveBeenCalled();
         await wait();
-        expect(DotCMSApi.page.setLanguage).toHaveBeenCalledWith('someLocation');
-        expect(DotCMSApi.page.get).toHaveBeenCalledWith({pathname: 'someLocation'});
+        expect(DotCMSApi.languages.getCode).toHaveBeenCalledWith('?lang=en');
+        expect(DotCMSApi.page.get).toHaveBeenCalledWith({
+            langCode: 'en',
+            pathname: 'someLocation'
+        });
         ReactDOM.unmountComponentAtNode(div);
     });
 });

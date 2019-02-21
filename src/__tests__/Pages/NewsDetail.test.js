@@ -10,6 +10,7 @@ describe('<NewsDetailPage />', () => {
     let newsSearchData;
 
     beforeEach(() => {
+        window.history.pushState({}, 'Test Title', '/test.html?lang=en');
         newsSearchData = {
             contentlets: [
                 {
@@ -40,20 +41,12 @@ describe('<NewsDetailPage />', () => {
             });
         });
 
-        DotCMSApi.getConfiguration = jest.fn().mockImplementation(() => {
-            return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve();
-                        })
-                });
-            });
+        DotCMSApi.languages.getCode = jest.fn().mockImplementation(() => {
+            return 'en';
         });
 
-        DotCMSApi.page.setLanguage = jest.fn().mockImplementation(() => {
-            return { code: 'en', id: 1 };
+        DotCMSApi.languages.getId = jest.fn().mockImplementation(() => {
+            return '1';
         });
     });
 
@@ -80,11 +73,12 @@ describe('<NewsDetailPage />', () => {
             />
         );
         expect(toJSON(wrapper)).toMatchSnapshot();
-        expect(DotCMSApi.getConfiguration).toHaveBeenCalled();
         await wait();
-        expect(wrapper.state().language).toEqual({ code: 'en', id: 1 });
+        expect(DotCMSApi.languages.getCode).toHaveBeenCalledWith('?lang=en');
+        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('en');
         expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', {
-            detailedSearchQuery: `+News.urlTitle:${newsMock.urlTitle}`
+            detailedSearchQuery: `+News.urlTitle:${newsMock.urlTitle}`,
+            languageId: '1'
         });
     });
 });
