@@ -1,33 +1,14 @@
 const { login, isLogin, logout } = require('./dotcms.auth');
 const { getCurrentSite } = require('./dotcms.sites');
 const { esSearch } = require('./dotcms.esSearch');
+const { getId, getCode } = require('./dotcms.languages');
 const fetch = require('node-fetch');
-let languagesConf;
-let language = {
-    code: '',
-    id: ''
-};
 
-const setLanguage = (pathname) => {
-    language.code = pathname.split('/')[1];
-    const langId = languagesConf.find((lang) => lang.languageCode === language.code);
-    if (langId) {
-        language.id = langId.id;
-    } else {
-        language.code = null;
-        language.id = 1;
-    }
-    return language;
-};
-
-const getUrl = (pathname) => {
-    if (language.code) {
-        let pathnameSplitted = pathname.split('/');
-        pathnameSplitted.splice(1, 1);
-        pathname = pathnameSplitted.join('/');
-    }
+const getUrl = async (langCode, pathname) => {
+    const langId = await getId(langCode);
     const host = process.env.NODE_ENV !== 'development' ? process.env.REACT_APP_DOTCMS_HOST : '';
-    return `${host}/api/v1/page/json/${pathname.slice(1)}?language_id=${language.id}`;
+    const url = `${host}/api/v1/page/json/${pathname.slice(1)}`;
+    return langId ? `${url}?language_id=${langId}` : url;
 };
 
 const translate = (page) => {
@@ -80,8 +61,8 @@ const request = ({ url, method, body }) => {
     });
 };
 
-const get = async ({ pathname }) => {
-    const url = getUrl(pathname);
+const get = async ({ langCode, pathname }) => {
+    const url = await getUrl(langCode, pathname);
 
     return request({ url })
         .then((data) => {
@@ -119,7 +100,6 @@ const getConfiguration = () => {
     })
         .then((response) => response.json())
         .then((data) => {
-            languagesConf = data.entity.languages;
             return data.entity;
         });
 };
@@ -136,11 +116,14 @@ export default {
         logout,
         isLogin
     },
+    languages: {
+        getId,
+        getCode,
+    },
     page: {
         emitCustomEvent,
         get,
         getWidgetHtml,
-        setLanguage,
         translate
     },
     sites: {

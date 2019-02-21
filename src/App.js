@@ -27,34 +27,34 @@ class PageFetchWrapper extends Component {
             error: null,
             layout: null,
             mode: null,
-            pathname: null,
+            location: null,
             title: ''
         };
     }
 
     doesUrlChange(nextProps, prevState) {
-        return prevState.pathname && nextProps.location.pathname !== prevState.pathname;
+        return prevState.location.pathname && nextProps.location.pathname !== prevState.location.pathname;
     }
 
-    setPage(pathname, language) {
+    setPage(location) {
         const isEditModeFromDotCMS = this.props.page && this.props.page.remoteRendered;
 
         if (isEditModeFromDotCMS) {
-            DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname });
+            DotCMSApi.page.emitCustomEvent('remote-render-edit', { pathname: location.pathname });
             return;
         }
 
         DotCMSApi.page
             .get({
-                pathname: pathname
+                langCode: DotCMSApi.languages.getCode(location.search),
+                pathname: location.pathname
             })
             .then(({ layout, error, viewAs, page }) => {
                 this.setState({
                     error: error,
-                    layout: layout,
-                    language: language || this.state.language,
+                    layout,
                     mode: viewAs ? viewAs.mode : '',
-                    pathname: pathname,
+                    location,
                     title: page ? page.title : ''
                 });
             });
@@ -62,7 +62,7 @@ class PageFetchWrapper extends Component {
 
     shouldComponentUpdate(nextProps, prevState) {
         if (this.doesUrlChange(nextProps, prevState)) {
-            this.setPage(nextProps.location.pathname);
+            this.setPage(nextProps.location);
         }
 
         return true;
@@ -75,15 +75,12 @@ class PageFetchWrapper extends Component {
                 ...this.state,
                 layout,
                 page,
-                pathname: this.props.location.pathname,
+                location: this.props.location,
                 mode: viewAs ? viewAs.mode : '',
                 site: this.props.site
             });
         } else {
-            DotCMSApi.getConfiguration().then(() => {
-                const language = DotCMSApi.page.setLanguage(this.props.location.pathname);
-                this.setPage(this.props.location.pathname, language);
-            });
+            this.setPage(this.props.location);
         }
     }
 
@@ -92,7 +89,6 @@ class PageFetchWrapper extends Component {
         return (
             <PageContext.Provider
                 value={{
-                    language: this.state.language,
                     mode: this.state.mode,
                     page: this.state.page,
                     site: this.state.site
@@ -114,7 +110,6 @@ const App = (page) => {
     return (
         <Switch>
             <Route path="/news-events/news/:slug" component={NewsDetailPage} />
-            <Route path="/:language/news-events/news/:slug" component={NewsDetailPage} />
             <Route render={(props) => <PageFetchWrapper {...props} {...page} />} />
         </Switch>
     );

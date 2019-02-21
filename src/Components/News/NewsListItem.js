@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PageContext from '../../PageContext';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap';
 import { Link } from 'react-router-dom';
@@ -7,33 +6,26 @@ import DateFormat from '../Shared/DateFormat';
 
 import IMAGE_PLACEHOLDER from '../../theme/images/placeholder.jpg';
 
-class ItemLink extends Component {
-    static contextType = PageContext;
-    languagePrefix = '';
-    render() {
-        this.languagePrefix =
-            this.context.language && this.context.language.code
-                ? `/${this.context.language.code}`
-                : '';
-        return (
-            <Link
-                to={{
-                    pathname: this.languagePrefix + this.props.pathname,
-                    state: this.props.state
-                }}
-            >
-                {this.props.children}
-            </Link>
-        );
-    }
-}
+const ItemLink = (props) => {
+    return (
+        <Link
+            to={{
+                pathname: props.pathname,
+                state: props.state
+            }}
+        >
+            {props.children}
+        </Link>
+    );
+};
 
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
+    const searchParams = window.location.search;
     return (
         <Card>
             {displayedFields.includes('image') ? (
-                <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
+                <ItemLink pathname={`/news-events/news/${news.urlTitle}${searchParams}`} state={news}>
                     <CardImg
                         top
                         width="100%"
@@ -47,7 +39,7 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
             <CardBody>
                 {displayedFields.includes('title') ? (
                     <CardTitle>
-                        <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
+                        <ItemLink pathname={`/news-events/news/${news.urlTitle}${searchParams}`} state={news}>
                             {news.title}
                         </ItemLink>
                     </CardTitle>

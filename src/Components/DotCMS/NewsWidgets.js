@@ -24,10 +24,13 @@ class NewsWidget extends React.Component {
         };
     }
 
-    getNewsItems(pagination) {
+    async getNewsItems(pagination) {
+        const langId = await DotCMSApi.languages.getId(
+            DotCMSApi.languages.getCode(window.location.search)
+        );
         const defaultEsParams = {
             itemsPerPage: this.props.itemsPerPage,
-            languageId: this.props.languageId,
+            languageId: langId || this.props.languageId,
             numberOfResults: this.props.numberOfResults,
             pagination: this.props.pagination,
             sortOrder1: this.props.sortOrder1,
@@ -38,9 +41,9 @@ class NewsWidget extends React.Component {
             ...pagination,
             ...defaultEsParams
         })
-            .then(response => response.json())
-            .then(newsData => {
-                this.setState(state => ({
+            .then((response) => response.json())
+            .then((newsData) => {
+                this.setState((state) => ({
                     ...state,
                     loading: false,
                     pagination: {
@@ -56,7 +59,7 @@ class NewsWidget extends React.Component {
         this.getNewsItems(this.state.pagination);
     }
 
-    pageChange = pageNumber => {
+    pageChange = (pageNumber) => {
         const offset = this.props.itemsPerPage * pageNumber;
         const pagination = { ...this.state.pagination, offset };
         this.getNewsItems(pagination);
