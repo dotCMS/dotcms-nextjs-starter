@@ -3,7 +3,7 @@ import { Spinner } from 'reactstrap';
 import NewsList from '../News/NewsList';
 import NoResults from '../Shared/NoResults';
 import Pagination from '../Shared/Pagination';
-import DotCMSApi from '../../libs/dotcms.api';
+import dotcmsApi from '../../dotcmsApi';
 
 const sortResultsByMap = {
     title: 'title_dotraw',
@@ -35,20 +35,24 @@ class NewsWidget extends React.Component {
             sortResultsBy: sortResultsByMap[this.props.sortResultsBy]
         };
 
-        DotCMSApi.esSearch('news', {
-            ...pagination,
-            ...defaultEsParams
-        })
+        dotcmsApi.esSearch
+            .search({
+                contentType: 'news',
+                queryParams: {
+                    ...pagination,
+                    ...defaultEsParams
+                }
+            })
             .then((response) => response.json())
-            .then((newsData) => {
+            .then((result) => {
                 this.setState((state) => ({
                     ...state,
                     loading: false,
                     pagination: {
                         ...pagination,
-                        totalItems: newsData.esresponse[0].hits.total
+                        totalItems: result.esresponse[0].hits.total
                     },
-                    news: newsData.contentlets
+                    news: result.contentlets
                 }));
             });
     }
