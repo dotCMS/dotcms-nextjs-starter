@@ -25,9 +25,7 @@ class NewsWidget extends React.Component {
     }
 
     async getNewsItems(pagination) {
-        const langId = await DotCMSApi.languages.getId(
-            DotCMSApi.languages.getCode(window.location.search)
-        );
+        const langId = await DotCMSApi.languages.getId(window.location.search);
         const defaultEsParams = {
             itemsPerPage: this.props.itemsPerPage,
             languageId: langId || this.props.languageId,

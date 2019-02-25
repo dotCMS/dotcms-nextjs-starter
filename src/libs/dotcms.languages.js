@@ -6,7 +6,8 @@ export const getCode = (locationSearch) => {
     return query.get('lang');
 };
 
-export const getId = async (langCode) => {
+export const getId = async (locationSearch) => {
+    const langCode = getCode(locationSearch);
     languagesConf =
         languagesConf.length === 0
             ? await DotCMSApi.getConfiguration().then((data) => data.languages)

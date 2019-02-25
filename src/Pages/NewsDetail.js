@@ -13,9 +13,7 @@ class NewsDetailPage extends React.Component {
     async getNews() {
         DotCMSApi.esSearch('news', {
             detailedSearchQuery: `+News.urlTitle:${this.props.match.params.slug.split('?')[0]}`,
-            languageId: await DotCMSApi.languages.getId(
-                DotCMSApi.languages.getCode(window.location.search)
-            )
+            languageId: await DotCMSApi.languages.getId(window.location.search)
         })
             .then((response) => response.json())
             .then((newsData) => {

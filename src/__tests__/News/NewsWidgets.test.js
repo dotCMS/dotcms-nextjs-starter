@@ -55,10 +55,6 @@ describe('<NewsWidgets />', () => {
             });
         });
 
-        DotCMSApi.languages.getCode = jest.fn().mockImplementation(() => {
-            return 'en';
-        });
-
         DotCMSApi.languages.getId = jest.fn().mockImplementation(() => {
             return '1';
         });
@@ -93,8 +89,7 @@ describe('<NewsWidgets />', () => {
             totalItems: 0
         };
 
-        expect(DotCMSApi.languages.getCode).toHaveBeenCalledWith('?lang=en');
-        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('en');
+        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('?lang=en');
         expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', fetchParams);
         expect(wrapper.find('NoResults').exists()).toBeFalsy();
 

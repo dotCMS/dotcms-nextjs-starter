@@ -1,31 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, CardImg, CardTitle, CardText, CardSubtitle, CardBody } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import ItemLink from '../Shared/ItemLink';
 import DateFormat from '../Shared/DateFormat';
 
 import IMAGE_PLACEHOLDER from '../../theme/images/placeholder.jpg';
 
-const ItemLink = (props) => {
-    return (
-        <Link
-            to={{
-                pathname: props.pathname,
-                state: props.state
-            }}
-        >
-            {props.children}
-        </Link>
-    );
-};
-
 const NewsListItem = ({ news, fieldsToDisplay }) => {
     const displayedFields = fieldsToDisplay.split(',');
-    const searchParams = window.location.search;
     return (
         <Card>
             {displayedFields.includes('image') ? (
-                <ItemLink pathname={`/news-events/news/${news.urlTitle}${searchParams}`} state={news}>
+                <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
                     <CardImg
                         top
                         width="100%"
@@ -39,7 +25,7 @@ const NewsListItem = ({ news, fieldsToDisplay }) => {
             <CardBody>
                 {displayedFields.includes('title') ? (
                     <CardTitle>
-                        <ItemLink pathname={`/news-events/news/${news.urlTitle}${searchParams}`} state={news}>
+                        <ItemLink pathname={`/news-events/news/${news.urlTitle}`} state={news}>
                             {news.title}
                         </ItemLink>
                     </CardTitle>
