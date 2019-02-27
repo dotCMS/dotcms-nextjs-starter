@@ -4,6 +4,7 @@ import NewsList from '../News/NewsList';
 import NoResults from '../Shared/NoResults';
 import Pagination from '../Shared/Pagination';
 import dotcmsApi from '../../dotcmsApi';
+import DotCMSApi from '../../libs/dotcms.api';
 
 const sortResultsByMap = {
     title: 'title_dotraw',
