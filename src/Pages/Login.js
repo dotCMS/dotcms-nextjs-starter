@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-
 import { Redirect } from 'react-router-dom';
-
-import './Login.css';
-import DotCMSApi from '../libs/dotcms.api';
 import LoginForm from '../Components/LoginForm';
+import './Login.css';
+
+import dotCMSApi from '../dotcmsApi';
 
 export default class Login extends Component {
     constructor() {
@@ -15,13 +14,13 @@ export default class Login extends Component {
     }
 
     render() {
-        return this.state.auth || DotCMSApi.auth.isLogin() ? (
+        return this.state.auth || dotCMSApi.auth.isLogin() ? (
             <Redirect to="/about-us" />
         ) : (
             <div className="wrapper">
                 <LoginForm
                     onSubmit={({ user, password }) => {
-                        DotCMSApi.auth.login({ user, password }).then(() => {
+                        dotCMSApi.auth.login({ user, password }).then(() => {
                             this.setState({
                                 auth: true
                             });

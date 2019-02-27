@@ -3,8 +3,8 @@ import { Spinner } from 'reactstrap';
 import NewsList from '../News/NewsList';
 import NoResults from '../Shared/NoResults';
 import Pagination from '../Shared/Pagination';
+import getLangCode from '../../utils/getLangCode';
 import dotcmsApi from '../../dotcmsApi';
-import DotCMSApi from '../../libs/dotcms.api';
 
 const sortResultsByMap = {
     title: 'title_dotraw',
@@ -26,7 +26,8 @@ class NewsWidget extends React.Component {
     }
 
     async getNewsItems(pagination) {
-        const langId = await DotCMSApi.languages.getId(window.location.search);
+        const langId = await dotcmsApi.language.getId(getLangCode(window.location.search));
+
         const defaultEsParams = {
             itemsPerPage: this.props.itemsPerPage,
             languageId: langId || this.props.languageId,

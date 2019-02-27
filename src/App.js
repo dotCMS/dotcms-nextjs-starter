@@ -10,6 +10,8 @@ import PageContext from './PageContext';
 import transformPage from './utils/transformPage';
 import dotcmsApi from './dotcmsApi';
 
+import getLangCode from './utils/getLangCode';
+
 const ERROR_UNAUTHORIZED_USER = '400';
 
 const NoAuth = () => (
@@ -49,7 +51,7 @@ class PageFetchWrapper extends Component {
 
         dotcmsApi.page
             .get({
-                langCode: '', // DotCMSApi.languages.getCode(location.search),
+                language: getLangCode(location.search),
                 url: location.pathname
             })
             .then((pageAsset) => {
