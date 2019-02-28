@@ -26,6 +26,7 @@ class PageFetchWrapper extends Component {
         this.state = {
             error: null,
             layout: null,
+            loading: true,
             mode: null,
             location: null,
             title: ''
@@ -53,6 +54,7 @@ class PageFetchWrapper extends Component {
                 this.setState({
                     error: error,
                     layout,
+                    loading: false,
                     mode: viewAs ? viewAs.mode : '',
                     location,
                     title: page ? page.title : ''
@@ -74,6 +76,7 @@ class PageFetchWrapper extends Component {
             this.setState({
                 ...this.state,
                 layout,
+                loading: false,
                 page,
                 location: this.props.location,
                 mode: viewAs ? viewAs.mode : '',
@@ -99,7 +102,7 @@ class PageFetchWrapper extends Component {
                     {this.state.error === ERROR_UNAUTHORIZED_USER ? (
                         <NoAuth />
                     ) : (
-                        <Page {...layout} />
+                        <Page {...layout} loading={this.state.loading} />
                     )}
                 </Layout>
             </PageContext.Provider>
