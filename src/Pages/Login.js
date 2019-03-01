@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import LoginForm from '../Components/LoginForm';
 import './Login.css';
 
-import dotCMSApi from '../dotcmsApi';
+import dotcmsApi from '../dotcmsApi';
 
 export default class Login extends Component {
     constructor() {
@@ -14,13 +14,13 @@ export default class Login extends Component {
     }
 
     render() {
-        return this.state.auth || dotCMSApi.auth.isLogin() ? (
+        return this.state.auth || dotcmsApi.auth.isLogin() ? (
             <Redirect to="/about-us" />
         ) : (
             <div className="wrapper">
                 <LoginForm
                     onSubmit={({ user, password }) => {
-                        dotCMSApi.auth.login({ user, password }).then(() => {
+                        dotcmsApi.auth.login({ user, password }).then(() => {
                             this.setState({
                                 auth: true
                             });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dotcms from '../../dotcmsApi'
+import dotcmsApi from '../../dotcmsApi'
 
 export default class SimpleWidget extends Component {
     state = {
@@ -7,11 +7,13 @@ export default class SimpleWidget extends Component {
     };
 
     componentDidMount() {
-        dotcms.widget.getHtml(this.props.identifier).then((content) => {
+        dotcmsApi.widget.getHtml(this.props.identifier).then((content) => {
             this.setState({
                 ...this.state,
                 widgetCode: content
             });
+        }).catch(err => {
+            console.error(err.message);
         });
     }
 

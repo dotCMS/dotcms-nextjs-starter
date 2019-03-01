@@ -45,7 +45,6 @@ class NewsWidget extends React.Component {
                     ...defaultEsParams
                 }
             })
-            .then((response) => response.json())
             .then((result) => {
                 this.setState((state) => ({
                     ...state,

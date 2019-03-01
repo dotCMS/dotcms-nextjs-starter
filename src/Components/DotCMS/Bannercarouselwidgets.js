@@ -3,7 +3,7 @@ import { Spinner } from 'reactstrap';
 import NoResults from '../Shared/NoResults';
 import BannerCarousel from '../BannerCarousel';
 
-import dotCMSApi from '../../dotcmsApi';
+import dotcmsApi from '../../dotcmsApi';
 
 const sortResultsByMap = {
     title: 'title_dotraw',
@@ -38,7 +38,7 @@ class Bannercarouselwidgets extends React.Component {
             sortResultsBy: sortResultsByMap[this.props.sortResultsBy]
         };
 
-        dotCMSApi.esSearch
+        dotcmsApi.esSearch
             .search({
                 contentType: 'banner',
                 queryParams: defaultEsParams
