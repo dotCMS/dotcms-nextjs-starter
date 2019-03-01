@@ -27,7 +27,7 @@ export default class Nav extends Component {
                     items
                 });
             })
-            .catch((e) => console.error(`.catch(${e})`));
+            .catch((e) => console.error(e.message));
     }
 
     toggleCollapsed = (e) => {

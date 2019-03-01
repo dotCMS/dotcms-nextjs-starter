@@ -12,7 +12,7 @@ import dotcmsApi from './dotcmsApi';
 
 import getLangCode from './utils/getLangCode';
 
-const ERROR_UNAUTHORIZED_USER = '400';
+const ERROR_UNAUTHORIZED_USER = 400;
 
 const NoAuth = () => (
     <CantRender title="Invalid Authorization Token" color="warning">
@@ -26,10 +26,10 @@ class PageFetchWrapper extends Component {
     constructor() {
         super();
         this.state = {
-            error: null,
-            layout: null,
-            mode: null,
-            location: null,
+            error: '',
+            layout: {},
+            mode: {},
+            location: {},
             title: ''
         };
     }
@@ -63,6 +63,12 @@ class PageFetchWrapper extends Component {
                     mode: viewAs ? viewAs.mode : '',
                     location,
                     title: page ? page.title : ''
+                });
+            })
+            .catch((err) => {
+                this.setState({
+                    ...this.state,
+                    error: err.status
                 });
             });
     }
