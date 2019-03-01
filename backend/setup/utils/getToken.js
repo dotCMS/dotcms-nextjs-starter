@@ -1,4 +1,4 @@
-import dotcmsApi from '../../../src/dotcmsApi';
+import dotcmsApi from '../../dotcmsApi';
 import { printError } from './index';
 
 export const getToken = ({ user, password, expirationDays, host }) => {

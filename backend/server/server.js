@@ -10,7 +10,7 @@ import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import httpProxy from 'http-proxy';
 
-import dotcmsApi from '../../src/dotcmsApi';
+import dotcmsApi from '../dotcmsApi';
 import transformPage from '../../src/utils/transformPage';
 
 import App from '../../src/App';
