@@ -13,7 +13,6 @@ export default class Nav extends Component {
     static contextType = PageContext;
     state = {
         collapsed: false,
-        showLogin: false,
         items: []
     };
 
@@ -34,13 +33,6 @@ export default class Nav extends Component {
         this.setState({
             ...this.state,
             collapsed: !this.state.collapsed
-        });
-    };
-
-    toggleLogin = (e) => {
-        this.setState({
-            ...this.state,
-            showLogin: !this.state.showLogin
         });
     };
 
