@@ -45,7 +45,10 @@ class PageFetchWrapper extends Component {
         const isEditModeFromDotCMS = this.props.payload && this.props.payload.page && this.props.payload.page.remoteRendered;
 
         if (isEditModeFromDotCMS) {
-            dotcmsApi.event.emit('remote-render-edit', { pathname: location.pathname });
+            dotcmsApi.event.emit({
+                name: 'remote-render-edit',
+                data: { pathname: location.pathname }
+            });
             return;
         }
 
