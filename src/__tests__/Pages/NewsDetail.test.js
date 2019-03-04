@@ -1,10 +1,14 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import DotCMSApi from '../../libs/dotcms.api';
 import NewsDetailPage from '../../Pages/NewsDetail';
 import { newsMock } from '../../TestUtils/news';
 import wait from 'waait';
+
+const dotCMSApi = {
+    esSearch: {},
+    language: {}
+};
 
 describe('<NewsDetailPage />', () => {
     let newsSearchData;
@@ -29,7 +33,7 @@ describe('<NewsDetailPage />', () => {
             ]
         };
 
-        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
+        dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve({
                     status: 200,
@@ -41,7 +45,7 @@ describe('<NewsDetailPage />', () => {
             });
         });
 
-        DotCMSApi.languages.getId = jest.fn().mockImplementation(() => {
+        dotCMSApi.language.getId = jest.fn().mockImplementation(() => {
             return '1';
         });
     });
@@ -54,7 +58,7 @@ describe('<NewsDetailPage />', () => {
             />
         );
         expect(toJSON(wrapper)).toMatchSnapshot();
-        expect(DotCMSApi.esSearch).not.toHaveBeenCalled();
+        expect(dotCMSApi.esSearch.search).not.toHaveBeenCalled();
     });
 
     it('renders NewsDetailPage correctly with Api fetch', async () => {
@@ -70,8 +74,8 @@ describe('<NewsDetailPage />', () => {
         );
         expect(toJSON(wrapper)).toMatchSnapshot();
         await wait();
-        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('?lang=en');
-        expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', {
+        expect(dotCMSApi.languages.getId).toHaveBeenCalledWith('?lang=en');
+        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith('news', {
             detailedSearchQuery: `+News.urlTitle:${newsMock.urlTitle}`,
             languageId: '1'
         });

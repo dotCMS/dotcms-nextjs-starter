@@ -1,9 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import wait from 'waait';
-import DotCMSApi from '../../libs/dotcms.api';
 import Pagination from '../../Components/Shared/Pagination';
 import NewsWidgets from '../../Components/DotCMS/NewsWidgets';
+
+const dotCMSApi = {
+    esSearch: {},
+    language: {}
+};
 
 describe('<NewsWidgets />', () => {
     let wrapper;
@@ -43,7 +47,7 @@ describe('<NewsWidgets />', () => {
             ]
         };
 
-        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
+        dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve({
                     status: 200,
@@ -55,7 +59,7 @@ describe('<NewsWidgets />', () => {
             });
         });
 
-        DotCMSApi.languages.getId = jest.fn().mockImplementation(() => {
+        dotCMSApi.language.getCode = jest.fn().mockImplementation(() => {
             return '1';
         });
 
@@ -89,8 +93,8 @@ describe('<NewsWidgets />', () => {
             totalItems: 0
         };
 
-        expect(DotCMSApi.languages.getId).toHaveBeenCalledWith('?lang=en');
-        expect(DotCMSApi.esSearch).toHaveBeenCalledWith('news', fetchParams);
+        expect(dotCMSApi.language.getCode).toHaveBeenCalledWith('?lang=en');
+        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith('news', fetchParams);
         expect(wrapper.find('NoResults').exists()).toBeFalsy();
 
         const newsList = wrapper.find('NewsList');
@@ -135,8 +139,7 @@ describe('<NewsWidgets />', () => {
                 }
             ]
         };
-
-        DotCMSApi.esSearch = jest.fn().mockImplementation(() => {
+        dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve({
                     status: 200,
