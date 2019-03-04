@@ -29,7 +29,7 @@
     "@babel/runtime": "^7.2.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "bootstrap": "^4.2.1",
-    "dotcms": "file:../core-web/dist-lib/dotcms/dotcms-0.0.1.tgz",
+    "dotcms": "file:dotcms-0.0.1.tgz",
     "dotenv": "^6.2.0",
     "http-proxy": "^1.17.0",
     "ignore-styles": "^5.0.1",
