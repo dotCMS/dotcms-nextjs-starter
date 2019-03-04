@@ -20,7 +20,6 @@ class NewsDetailPage extends React.Component {
                 languageId: await dotcmsApi.language.getId(getLangCode(window.location.search))
             }
         })
-            .then((response) => response.json())
             .then((newsData) => {
                 this.setState((state) => newsData.contentlets[0]);
             });
