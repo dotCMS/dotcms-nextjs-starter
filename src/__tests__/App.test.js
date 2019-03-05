@@ -14,6 +14,14 @@ describe('<App />', () => {
                     resolve({ ...PAGE_MOCK_FORMATTED });
                 })
         );
+
+        dotCMSApi.widget.getHtml = () => new Promise((resolve, reject) => {
+            resolve('');
+        });
+
+        dotCMSApi.nav.get = () => new Promise((resolve, reject) => {
+            resolve({children: []});
+        });
     });
 
     it('renders with page data (SSR)', () => {
@@ -25,7 +33,6 @@ describe('<App />', () => {
             </StaticRouter>,
             div
         );
-        ReactDOM.unmountComponentAtNode(div);
     });
 
     it('renders client side with page', async () => {
@@ -40,9 +47,8 @@ describe('<App />', () => {
         );
         await wait();
         expect(dotCMSApi.page.get).toHaveBeenCalledWith({
-            langCode: null,
+            language: 'en',
             url: 'someLocation'
         });
-        ReactDOM.unmountComponentAtNode(div);
     });
 });

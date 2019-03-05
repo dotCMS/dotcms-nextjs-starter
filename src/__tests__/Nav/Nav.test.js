@@ -10,7 +10,6 @@ describe('<Nav />', () => {
     let wrapper;
 
     beforeEach(async () => {
-        process.env.REACT_APP_DOTCMS_HOST = 'http://demo.dotcms.com';
         dotCMSApi.nav.get = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
                 resolve(NavResponse.entity);
