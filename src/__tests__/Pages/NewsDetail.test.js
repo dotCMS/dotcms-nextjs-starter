@@ -4,11 +4,7 @@ import toJSON from 'enzyme-to-json';
 import NewsDetailPage from '../../Pages/NewsDetail';
 import { newsMock } from '../../TestUtils/news';
 import wait from 'waait';
-
-const dotCMSApi = {
-    esSearch: {},
-    language: {}
-};
+import dotCMSApi from '../../dotcmsApi';
 
 describe('<NewsDetailPage />', () => {
     let newsSearchData;
@@ -35,13 +31,7 @@ describe('<NewsDetailPage />', () => {
 
         dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve(newsSearchData);
-                        })
-                });
+                resolve(newsSearchData);
             });
         });
 
@@ -74,10 +64,12 @@ describe('<NewsDetailPage />', () => {
         );
         expect(toJSON(wrapper)).toMatchSnapshot();
         await wait();
-        expect(dotCMSApi.languages.getId).toHaveBeenCalledWith('?lang=en');
-        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith('news', {
-            detailedSearchQuery: `+News.urlTitle:${newsMock.urlTitle}`,
-            languageId: '1'
+        expect(dotCMSApi.language.getId).toHaveBeenCalledWith('en');
+        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith({
+            contentType: 'news', queryParams: {
+                detailedSearchQuery: `+News.urlTitle:${newsMock.urlTitle}`,
+                languageId: '1'
+            }
         });
     });
 });

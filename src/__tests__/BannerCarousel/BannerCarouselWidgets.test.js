@@ -3,9 +3,7 @@ import { shallow } from 'enzyme';
 import wait from 'waait';
 import BannerCarouselWidgets from '../../Components/DotCMS/BannerCarouselWidgets';
 
-const dotCMSApi = {
-    esSearch: {}
-};
+import dotCMSApi from '../../dotcmsApi';
 
 describe('<BannerCarouselWidgets />', () => {
     let wrapper;
@@ -89,7 +87,7 @@ describe('<BannerCarouselWidgets />', () => {
             numberOfResults: bannersPageData.numberOfResults,
         };
 
-        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith('banner', fetchParams);
+        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith({contentType: 'banner', queryParams: fetchParams});
         expect(wrapper.find('NoResults').exists()).toBeFalsy();
 
         const bannerFormatData = formatBannersData(bannerResponseData.contentlets);

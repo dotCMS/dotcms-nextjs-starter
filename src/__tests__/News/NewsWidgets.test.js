@@ -3,11 +3,7 @@ import { shallow } from 'enzyme';
 import wait from 'waait';
 import Pagination from '../../Components/Shared/Pagination';
 import NewsWidgets from '../../Components/DotCMS/NewsWidgets';
-
-const dotCMSApi = {
-    esSearch: {},
-    language: {}
-};
+import dotCMSApi from '../../dotcmsApi';
 
 describe('<NewsWidgets />', () => {
     let wrapper;
@@ -49,17 +45,11 @@ describe('<NewsWidgets />', () => {
 
         dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve(newsSearchData);
-                        })
-                });
+                resolve(newsSearchData);
             });
         });
 
-        dotCMSApi.language.getCode = jest.fn().mockImplementation(() => {
+        dotCMSApi.language.getId = jest.fn().mockImplementation(() => {
             return '1';
         });
 
@@ -93,8 +83,11 @@ describe('<NewsWidgets />', () => {
             totalItems: 0
         };
 
-        expect(dotCMSApi.language.getCode).toHaveBeenCalledWith('?lang=en');
-        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith('news', fetchParams);
+        expect(dotCMSApi.language.getId).toHaveBeenCalledWith('en');
+        expect(dotCMSApi.esSearch.search).toHaveBeenCalledWith({
+            contentType: 'news',
+            queryParams: fetchParams
+        });
         expect(wrapper.find('NoResults').exists()).toBeFalsy();
 
         const newsList = wrapper.find('NewsList');
@@ -141,13 +134,7 @@ describe('<NewsWidgets />', () => {
         };
         dotCMSApi.esSearch.search = jest.fn().mockImplementation(() => {
             return new Promise((resolve, reject) => {
-                resolve({
-                    status: 200,
-                    json: () =>
-                        new Promise((resolve, reject) => {
-                            resolve(newsSearchData);
-                        })
-                });
+                resolve(newsSearchData);
             });
         });
 

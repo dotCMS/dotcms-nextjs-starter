@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from '../App';
-import DotCMSApi from '../libs/dotcms.api';
 import { StaticRouter } from 'react-router';
 import wait from 'waait';
-
 import PAGE_MOCK_FORMATTED from '../TestUtils/data';
+import dotCMSApi from '../dotcmsApi';
 
 describe('<App />', () => {
     beforeEach(() => {
-        DotCMSApi.languages.getCode = jest.fn().mockImplementation(() => {
-            return 'en';
-        });
-
-        DotCMSApi.page.get = jest.fn().mockImplementation(
+        dotCMSApi.page.get = jest.fn().mockImplementation(
             () =>
                 new Promise((resolve, reject) => {
                     resolve({ ...PAGE_MOCK_FORMATTED });
@@ -33,7 +28,7 @@ describe('<App />', () => {
         ReactDOM.unmountComponentAtNode(div);
     });
 
-    it('renders Client Side with page', async () => {
+    it('renders client side with page', async () => {
         const context = {};
         const location = { pathname: 'someLocation', search: '?lang=en' };
         const div = document.createElement('div');
@@ -44,10 +39,9 @@ describe('<App />', () => {
             div
         );
         await wait();
-        expect(DotCMSApi.languages.getCode).toHaveBeenCalledWith('?lang=en');
-        expect(DotCMSApi.page.get).toHaveBeenCalledWith({
-            langCode: 'en',
-            pathname: 'someLocation'
+        expect(dotCMSApi.page.get).toHaveBeenCalledWith({
+            langCode: null,
+            url: 'someLocation'
         });
         ReactDOM.unmountComponentAtNode(div);
     });
