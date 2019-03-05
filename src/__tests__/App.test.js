@@ -29,10 +29,12 @@ describe('<App />', () => {
         const div = document.createElement('div');
         ReactDOM.render(
             <StaticRouter location="someLocation" context={context}>
-                <App {...PAGE_MOCK_FORMATTED} />
+                <App payload={PAGE_MOCK_FORMATTED} />
             </StaticRouter>,
             div
         );
+
+        expect(dotCMSApi.page.get).not.toHaveBeenCalled();
     });
 
     it('renders client side with page', async () => {
