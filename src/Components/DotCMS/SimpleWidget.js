@@ -2,17 +2,25 @@ import React, { Component } from 'react';
 import DotCMSApi from '../../libs/dotcms.api';
 
 export default class SimpleWidget extends Component {
+    _isMounted = false;
     state = {
         widgetCode: ''
     };
 
     componentDidMount() {
+        this._isMounted = true;
         DotCMSApi.page.getWidgetHtml(this.props.identifier).then((content) => {
-            this.setState({
-                ...this.state,
-                widgetCode: content
-            });
+            if (this._isMounted) {
+                this.setState({
+                    ...this.state,
+                    widgetCode: content
+                });
+            }
         });
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     render() {

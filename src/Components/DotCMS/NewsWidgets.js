@@ -14,6 +14,7 @@ const sortResultsByMap = {
 class NewsWidget extends React.Component {
     constructor(props, context) {
         super(props, context);
+        this._isMounted = false;
         this.state = {
             loading: true,
             news: [],
@@ -41,20 +42,27 @@ class NewsWidget extends React.Component {
         })
             .then((response) => response.json())
             .then((newsData) => {
-                this.setState((state) => ({
-                    ...state,
-                    loading: false,
-                    pagination: {
-                        ...pagination,
-                        totalItems: newsData.esresponse[0].hits.total
-                    },
-                    news: newsData.contentlets
-                }));
+                if (this._isMounted) {
+                    this.setState((state) => ({
+                        ...state,
+                        loading: false,
+                        pagination: {
+                            ...pagination,
+                            totalItems: newsData.esresponse[0].hits.total
+                        },
+                        news: newsData.contentlets
+                    }));
+                }
             });
     }
 
     componentDidMount() {
+        this._isMounted = true;
         this.getNewsItems(this.state.pagination);
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     pageChange = (pageNumber) => {
