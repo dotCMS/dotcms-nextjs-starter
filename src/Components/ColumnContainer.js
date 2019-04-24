@@ -6,7 +6,7 @@ import Container from './Container';
 
 const ColumnContainer = ({ col }) => {
     return (
-        <BootstrapCol md={{ size: col.width, offset: col.offset }}>
+        <BootstrapCol md={{ size: col.width, offset: col.offset }} className={col.styleClass || ''}>
             {col.containers.map(container => {
                 return <Container container={container} key={container.identifier} />;
             })}

@@ -24,7 +24,7 @@ const RowContainer = ({ row }) => {
     const cols = getColumnsWithOffset(row);
 
     return (
-        <BootstrapRow>
+        <BootstrapRow className={row.styleClass || ''}>
             {cols.map((col, k) => {
                 return <ColumnContainer col={col} key={k} />;
             })}
