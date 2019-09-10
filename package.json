@@ -8,9 +8,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
     "eject": "react-scripts eject",
-    "serve": "npm run build && nodemon --inspect=0.0.0.0:9229 backend/server/index.js",
-    "setup:start": "node backend/setup/index.js start",
-    "setup:serve": "node backend/setup/index.js serve"
+    "serve": "npm run build && node -r esm backend/server/index.js",
+    "setup:start": "node -r esm backend/setup/index.js start",
+    "setup:serve": "node -r esm backend/setup/index.js serve"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -29,8 +29,10 @@
     "@babel/runtime": "^7.2.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "bootstrap": "^4.2.1",
-    "dotcms": "0.0.1",
+    "dotcms": "0.0.5",
+    "dotcms-field-elements": "0.0.15",
     "dotenv": "^6.2.0",
+    "esm": "^3.2.25",
     "http-proxy": "^1.17.0",
     "ignore-styles": "^5.0.1",
     "node-fetch": "^2.3.0",
