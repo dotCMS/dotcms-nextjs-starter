@@ -7,17 +7,19 @@ import SimpleWidget from './DotCMS/SimpleWidget';
 import PageContext from '../PageContext';
 import CantRender from './CantRender';
 
-const Loading = (props) => {
+import dotCMSApi from '../dotcmsApi';
+
+const Loading = ({ error, showContentletWarning, contentlet }) => {
     const divStyle = {
         textAlign: 'center',
         padding: '2rem'
     };
-    return props.error ? (
-        props.contentlet.baseType === 'WIDGET' ? (
-            <SimpleWidget identifier={props.contentlet.identifier} />
-        ) : props.showContentletWarning ? (
-            <CantRender color="warning" title={props.contentlet.title}>
-                <p>{props.error.message}</p>
+    return error ? (
+        contentlet.baseType === 'WIDGET' ? (
+            <SimpleWidget identifier={contentlet.identifier} />
+        ) : showContentletWarning ? (
+            <CantRender color="warning" title={contentlet.title}>
+                <p>{error.message}</p>
             </CantRender>
         ) : (
             ''
@@ -32,11 +34,35 @@ const Loading = (props) => {
 export default class Contentlet extends Component {
     static contextType = PageContext;
 
+    constructor() {
+        super();
+        this.state = {
+            form: null
+        };
+    }
+
+    componentDidMount() {
+        if (this.props.data.contentType === 'forms') {
+            dotCMSApi.form
+                .get({
+                    contentType: this.props.data.formId,
+                    identifier: this.props.data.formId,
+                    win: window
+                })
+                .create()
+                .then((form) => {
+                    this.setState({
+                        form: form
+                    });
+                });
+        }
+    }
+
     render() {
         const showLoadableContentletWarning = this.context.mode !== 'ADMIN_MODE';
         const isEditMode = this.context.mode === 'EDIT_MODE';
 
-        const Component = Loadable({
+        let Component = Loadable({
             loader: () => import(`./DotCMS/${this.props.data.contentType}`),
             loading: (props) => (
                 <Loading
@@ -46,7 +72,13 @@ export default class Contentlet extends Component {
                 />
             )
         });
-        const isEditModeFromDotCMS = isEditMode && this.context.page && this.context.page.remoteRendered;
+
+        if (this.state.form) {
+            Component = () => <div ref={(ref) => ref && ref.appendChild(this.state.form)} />
+        }
+
+        const isEditModeFromDotCMS =
+            isEditMode && this.context.page && this.context.page.remoteRendered;
 
         return isEditModeFromDotCMS ? (
             <DotContentlet {...this.props.data}>
