@@ -55,7 +55,7 @@ class PageFetchWrapper extends Component {
         dotcmsApi.page
             .get({
                 language: getLangCode(location.search),
-                url: location.pathname
+                url: location.pathname + "?fireRules=true"
             })
             .then((pageAsset) => {
                 const { layout, error, viewAs, page } = transformPage(pageAsset);
