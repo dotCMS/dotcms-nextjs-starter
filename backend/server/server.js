@@ -102,8 +102,9 @@ const mimeType = {
 
 const serverRenderer = (request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
-
+    console.log('----------------');
     if (isEditModeFromDotCMS) {
+        console.log('---llego1', request.url)
         var postData = '';
 
         // Get all post data when receive data event.
@@ -145,7 +146,10 @@ const serverRenderer = (request, response) => {
         const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
 
         if (isThisAPage(sanitizePath)) {
+            console.log('---llego2', request.url)
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
+                console.log('---err', err)
+                console.log('---data', data)
                 const app = renderToString(getMainComponent(request.url));
                 data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
 
@@ -153,6 +157,7 @@ const serverRenderer = (request, response) => {
                 response.end(data);
             });
         } else {
+            console.log('---llego3', request.url)
             response.setHeader('Access-Control-Allow-Origin', '*');
             response.setHeader('Access-Control-Allow-Credentials', 'true');
             response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
@@ -165,12 +170,13 @@ const serverRenderer = (request, response) => {
 
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
-                    // if the file is not found un build folder, proxy to dotcms instance
+                    console.log('---llego4', request.url)
+                    // if the file is not found in build folder, proxy to dotcms instance
 
                     proxy.web(request, response);
                     return;
                 }
-
+                console.log('---llego5', request.url)
                 // read file from file system (build folder)
                 fs.readFile(pathname, (err, data) => {
                     if (err) {
@@ -192,8 +198,8 @@ const serverRenderer = (request, response) => {
     }
 };
 
-router.use('^/$', serverRenderer);
 router.use(express.static(STATIC_FOLDER));
+router.use('*', serverRenderer);
 server.use(router);
 
 // We tell React Loadable to load all required assets and start listening.
