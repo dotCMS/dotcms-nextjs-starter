@@ -126,13 +126,19 @@ const serverRenderer = (request, response, next) => {
             };
 
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
-                const app = renderToString(getMainComponent(request.url, payload));
-                data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                data = data.replace('<div id="script"></div>', getScript(payload));
+                if (err) {
+                    response.statusCode = 500;
+                    response.end(`Error getting the file: ${err}.`);
+                    next(err);
+                } else {
+                    const app = renderToString(getMainComponent(request.url, payload));
+                    data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
+                    data = data.replace('<div id="script"></div>', getScript(payload));
 
-                response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
-                response.end(data);
-                next();
+                    response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
+                    response.end(data);
+                    next();
+                }
             });
         });
     } else {
