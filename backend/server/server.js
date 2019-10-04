@@ -102,9 +102,7 @@ const mimeType = {
 
 const serverRenderer = (request, response, next) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
-    // console.log('----------------');
     if (isEditModeFromDotCMS) {
-        // console.log('---llego1', request.url);
         var postData = '';
 
         // Get all post data when receive data event.
@@ -145,11 +143,8 @@ const serverRenderer = (request, response, next) => {
         // e.g curl --path-as-is http://localhost:9000/../fileInDanger.txt
         // by limiting the path to current directory only
         const sanitizePath = path.normalize(parsedUrl.pathname).replace(/^(\.\.[\/\\])+/, '');
-        // console.log('---llego2', sanitizePath, parsedUrl);
-        // console.log('---isThisAPage(sanitizePath)', isThisAPage(sanitizePath));
 
         if (isThisAPage(sanitizePath)) {
-            console.log('---llego2a', request.url);
             fs.readFile(`${STATIC_FOLDER}/index.html`, 'utf8', (err, data) => {
                 if (err) {
                     response.statusCode = 500;
@@ -158,16 +153,13 @@ const serverRenderer = (request, response, next) => {
                 } else {
                     const app = renderToString(getMainComponent(request.url));
                     data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`);
-                    // console.log('---llego2b', request.url);
                     response.setHeader('Content-type', mimeType['.html'] || 'text/plain');
                     response.end(data);
                     // when done, call next()
-                    // console.log('---final next 2z');
                     next();
                 }
             });
         } else {
-            // console.log('---llego3', request.url);
             response.setHeader('Access-Control-Allow-Origin', '*');
             response.setHeader('Access-Control-Allow-Credentials', 'true');
             response.setHeader('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT');
@@ -180,13 +172,11 @@ const serverRenderer = (request, response, next) => {
 
             fs.exists(pathname, (exist) => {
                 if (!exist || request.url.startsWith('/api')) {
-                    // console.log('---llego4', request.url);
                     // if the file is not found in build folder, proxy to dotcms instance
 
                     proxy.web(request, response);
                     return;
                 }
-                // console.log('---llego5', request.url);
                 // read file from file system (build folder)
                 fs.readFile(pathname, (err, data) => {
                     if (err) {
@@ -203,7 +193,6 @@ const serverRenderer = (request, response, next) => {
                         response.setHeader('Content-type', mimeType[ext] || 'text/plain');
                         response.end(data);
                         // when done, call next()
-                        // console.log('---final next 5z');
                         next();
                     }
                 });
