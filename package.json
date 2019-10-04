@@ -33,6 +33,7 @@
     "dotcms-field-elements": "0.0.15",
     "dotenv": "^6.2.0",
     "esm": "^3.2.25",
+    "express": "^4.17.1",
     "http-proxy": "^1.17.0",
     "ignore-styles": "^5.0.1",
     "node-fetch": "^2.3.0",
@@ -46,10 +47,10 @@
     "reactstrap": "^7.1.0"
   },
   "devDependencies": {
-    "inquirer": "^6.2.1",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
     "enzyme-to-json": "^3.3.5",
+    "inquirer": "^6.2.1",
     "waait": "^1.0.2"
   }
 }

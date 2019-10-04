@@ -1,10 +1,9 @@
 import fs from 'fs';
-import http from 'http';
 import path from 'path';
 import url from 'url';
 import { parse } from 'querystring';
 import Loadable from 'react-loadable';
-
+import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -27,6 +26,9 @@ const proxy = httpProxy.createProxyServer({
     },
     changeOrigin: true
 });
+
+const server = express();
+const router = express.Router();
 
 let currentSite;
 
@@ -98,7 +100,7 @@ const mimeType = {
     '.ttf': 'aplication/font-sfnt'
 };
 
-const server = http.createServer((request, response) => {
+const serverRenderer = (request, response) => {
     const isEditModeFromDotCMS = request.method === 'POST' && !request.url.startsWith('/api');
 
     if (isEditModeFromDotCMS) {
@@ -188,12 +190,16 @@ const server = http.createServer((request, response) => {
             });
         }
     }
-});
+};
+
+router.use('^/$', serverRenderer);
+router.use(express.static(STATIC_FOLDER));
+server.use(router);
 
 // We tell React Loadable to load all required assets and start listening.
 Loadable.preloadAll().then(async () => {
     currentSite = await dotcmsApi.site.getCurrentSite();
-    server.listen(process.env.PORT || 5000, (err) => {
+    server.listen(process.env.PORT || 5000, () => {
         console.log('Server running http://localhost:5000');
     });
 });
