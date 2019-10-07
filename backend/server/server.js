@@ -4,6 +4,7 @@ import url from 'url';
 import { parse } from 'querystring';
 import Loadable from 'react-loadable';
 import express from 'express';
+import cors from 'cors';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
@@ -207,6 +208,7 @@ const serverRenderer = (request, response, next) => {
     }
 };
 
+server.use(cors());
 router.use(express.static(STATIC_FOLDER));
 router.use(serverRenderer);
 server.use(router);

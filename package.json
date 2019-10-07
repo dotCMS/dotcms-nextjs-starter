@@ -29,6 +29,7 @@
     "@babel/runtime": "^7.2.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "bootstrap": "^4.2.1",
+    "cors": "^2.8.5",
     "dotcms": "0.0.6",
     "dotcms-field-elements": "0.0.15",
     "dotenv": "^6.2.0",
