@@ -1,5 +1,7 @@
 @import './card.css';
 @import './icomoon.css';
+@import 'http://127.0.0.1:8080/application/themes/travel/css/styles.dotsass';
+@import '//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira';
 
 /* poppins-300 - latin */
 @font-face {
