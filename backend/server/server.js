@@ -21,6 +21,12 @@ const proxy = httpProxy.createProxyServer({
         protocol: protocol,
         host: hostname,
         port: port,
+        xfwd:true,
+        changeOrigin:true,
+        secure:false,
+        cookieDomainRewrite:{
+            "webinar.dotcms.io":"webinar.dotcms.io"
+        },
         pfx: fs.readFileSync('./backend/server/fakecert.txt'),
         passphrase:
             'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
