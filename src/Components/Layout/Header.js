@@ -15,6 +15,7 @@ const Header = (props) => {
                         dotCMS SPA
                         <div style={{fontSize:'14px',marginLeft:'7px'}}>{props.title}</div>
                     </NavbarBrand>
+                    
                     <Nav />
                 </Navbar>
             </div>

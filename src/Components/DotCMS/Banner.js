@@ -27,10 +27,10 @@ export default class Banner extends Component {
                             </span>
                         </h2>
                         
-                        
+                        {this.props.buttonText && this.props.link && 
                         <div className="group-lg">
                             <a className="button button-primary button-leaf" href={this.props.link}>{this.props.buttonText}</a>
-                        </div>
+                        </div>}
                         
                     </div>
                 </div>
