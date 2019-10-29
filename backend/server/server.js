@@ -34,7 +34,10 @@ const STATIC_FOLDER = './build';
 
 const isThisAPage = (pathname) => {
     const ext = path.parse(pathname).ext;
-    return (!pathname.startsWith('/api') && ext.length === 0) || ext === '.html';
+    return (!pathname.startsWith('/api') 
+    && !pathname.startsWith('/dA')  
+    && !pathname.startsWith('/contentAsset')  
+    && ext.length === 0) || ext === '.html';
 };
 
 const getScript = (payload) => {
