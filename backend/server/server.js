@@ -25,11 +25,11 @@ const proxy = httpProxy.createProxyServer({
         passphrase:
             'atProxyServer.28039964-5615-4ccf-bb96-ded62adbcc6a28039964-5615-4ccf-bb96-ded62adbcc6a'
     },
-    xfwd:true,
-    changeOrigin:true,
-    secure:false,
-    cookieDomainRewrite:{
-        "webinar.dotcms.io":"webinar.dotcms.io"
+    xfwd: true,
+    changeOrigin: true,
+    secure: false,
+    cookieDomainRewrite: {
+        [process.env.PUBLIC_URL]: process.env.PUBLIC_URL
     },
     changeOrigin: true
 });
@@ -40,10 +40,14 @@ const STATIC_FOLDER = './build';
 
 const isThisAPage = (pathname) => {
     const ext = path.parse(pathname).ext;
-    return (!pathname.startsWith('/api') 
-    && !pathname.startsWith('/dA')  
-    && !pathname.startsWith('/contentAsset')  
-    && ext.length === 0) || ext === '.html';
+    return (
+        (!pathname.startsWith('/api') &&
+            !pathname.startsWith('/dA') &&
+            !pathname.startsWith('/contentAsset') &&
+            !pathname.startsWith('/application') &&
+            ext.length === 0) ||
+        ext === '.html'
+    );
 };
 
 const getScript = (payload) => {
