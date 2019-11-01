@@ -1,5 +1,7 @@
 @import './card.css';
 @import './icomoon.css';
+@import '/application/themes/travel/css/styles.dotsass';
+@import '//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira';
 
 /* poppins-300 - latin */
 @font-face {
@@ -71,7 +73,7 @@
     --body-font: 'Poppins', Arial, sans-serif;
     --card-shadow: 0px 3px 38px -13px rgba(0, 0, 0, 0.2);
     --header-font: 'Nunito', Arial, sans-serif;
-    --header-height: 300px;
+    --header-height: 100px;
     --text-color: #303133;
 }
 

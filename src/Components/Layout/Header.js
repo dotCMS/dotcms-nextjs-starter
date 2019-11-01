@@ -5,23 +5,20 @@ import { Link } from 'react-router-dom';
 import Nav from '../Nav/Nav';
 import './Header.css';
 
+
 const Header = (props) => {
     return (
         <>
-            <Navbar tag="header" className="header__menu container" expand="md">
-                <NavbarBrand className="header__brand-logo" tag={Link} to="/">
-                    DotCMS - SPA
-                </NavbarBrand>
-                <Nav />
-            </Navbar>
-            <section className="header__extend">
-                <div className="header__overlay" />
-                <div className="header__content">
-                    <BootstrapContainer>
-                        <h2 className="header__page-title">{props.title}</h2>
-                    </BootstrapContainer>
-                </div>
-            </section>
+            <div className="header">
+                <Navbar tag="header" className="container" expand="md" >
+                    <NavbarBrand className="header__brand-logo" tag={Link} to="/">
+                        dotCMS SPA
+                        <div style={{fontSize:'14px',marginLeft:'7px'}}>{props.title}</div>
+                    </NavbarBrand>
+                    
+                    <Nav />
+                </Navbar>
+            </div>
         </>
     );
 };

@@ -7,7 +7,7 @@ const Footer = (props) => {
     return (
         <footer>
             <BootstrapContainer>
-                <p className="text-center">DotCMS SPA Starter Site 2019</p>
+                <p className="text-center">DotCMS SPA Starter Site &copy;2019 &nbsp; | &nbsp; <a href="/login/profile">My Profile</a></p>
             </BootstrapContainer>
         </footer>
     );
