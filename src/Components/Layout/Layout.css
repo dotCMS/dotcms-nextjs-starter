@@ -1,7 +1,0 @@
-.layout__content {
-    margin-top: calc(var(--header-height) - 20px);
-}
-
-.layout__content--no-header {
-    margin-top: 0;
-}

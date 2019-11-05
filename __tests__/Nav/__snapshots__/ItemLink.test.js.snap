@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ItemLink /> renders and matches snapshot 1`] = `
+<Link
+  className="testCss"
+  to={
+    Object {
+      "pathname": "testPath",
+      "state": Object {
+        "id": "testId",
+        "name": "testName",
+      },
+    }
+  }
+/>
+`;
