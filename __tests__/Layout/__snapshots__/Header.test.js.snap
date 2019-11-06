@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> renders and matches snapshot 1`] = `
+<Fragment>
+  <JSXStyle
+    id="2474724828"
+  >
+    header.header__menu{background:transparent !important;display:block;z-index:1;}header.header__menu&gt;button{float:right;}.header__extend{-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;background-image:url(/static/theme/images/cover_img_1.jpg);background-size:cover;background-position:center center;background-attachment:fixed;background-repeat:no-repeat;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;height:var(--header-height);-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;position:absolute;top:0;width:100%;z-index:0;}.header__overlay{background:linear-gradient(135deg,#499bea 0%,#798eea 100%);bottom:0;height:var(--header-height);left:0;opacity:0.95;position:absolute;right:0;top:0;}.header__brand-logo.navbar-brand{color:var(--white);font-size:1.25rem;font-weight:700;text-transform:uppercase;}.header__page-title,.header__breadcrumbs{color:var(--white);position:relative;}.header__page-title{font-size:2.125rem;font-weight:300;margin-bottom:1.25rem;text-align:center;}@media screen and (min-width:768px){.header__page-title{font-size:3.75rem;}}
+  </JSXStyle>
+  <Navbar
+    className="header__menu container"
+    expand="md"
+    tag="header"
+  >
+    <NavbarBrand
+      className="header__brand-logo"
+      tag="a"
+      to="/"
+    >
+      DotCMS - SPA
+    </NavbarBrand>
+    <Nav />
+  </Navbar>
+  <section
+    className="jsx-2474724828 header__extend"
+  >
+    <div
+      className="jsx-2474724828 header__overlay"
+    />
+    <div
+      className="jsx-2474724828 header__content"
+    >
+      <Container
+        tag="div"
+      >
+        <h2
+          className="jsx-2474724828 header__page-title"
+        />
+      </Container>
+    </div>
+  </section>
+</Fragment>
+`;

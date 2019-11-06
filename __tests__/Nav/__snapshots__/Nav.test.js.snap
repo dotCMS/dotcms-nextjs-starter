@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Nav /> renders nav correctly 1`] = `
+<Fragment>
+  <JSXStyle
+    id="3435437959"
+  >
+    .nav-menu__links.navbar-collapse{float:right;}.navbar-expand-md .navbar-nav .dropdown-menu.show{position:relative;}.nav-menu__toggle-button.navbar-toggler{color:var(--white);border-color:transparent;}.nav-option{font-size:0.75rem;font-weight:500;-webkit-letter-spacing:2px;-moz-letter-spacing:2px;-ms-letter-spacing:2px;letter-spacing:2px;}.nav-option,.nav-option:focus,.nav-option:hover{color:var(--white);text-transform:uppercase;}.navbar-expand-md .nav-menu__links .nav-option.nav-link{padding-left:1rem;}.nav-menu__links .nav-option.nav-link.active{background-color:transparent;color:rgba(255,255,255,0.5);}.nav-menu__links.navbar-collapse ul{background-color:var(--gray);bottom:0;display:inline-block;left:0;min-width:208px;padding:0.5rem;position:fixed;top:0;}.nav-menu__links .nav-dropdown{background-color:var(--white);border:none;box-shadow:none;color:var(--black);float:none;margin:0 1rem 1rem;padding:0;position:static;}.nav-dropdown .dropdown-item{color:var(--black);font-size:0.8125rem;font-weight:500;line-height:1.2;padding:0.5rem;}.nav-dropdown .dropdown-item.active,.nav-dropdown .dropdown-item:hover{color:var(--white);}.nav-dropdown .dropdown-item:hover{background-color:var(--blue);color:var(--white);}.nav-sort__button{margin-right:0.5rem;}@media (max-width:992px) and (min-width:768px){.navbar-expand-md .nav-menu__links.navbar-collapse{display:none !important;}.navbar-expand-md .nav-menu__links.navbar-collapse.show{display:unset !important;}.nav-menu__toggle-button.navbar-toggler{display:block !important;}}@media screen and (min-width:992px){.nav-dropdown::before{content:'';border-bottom:solid 0.625rem var(--black);border-left:solid 0.625rem transparent;border-right:solid 0.625rem transparent;height:0.625rem;width:1.25rem;position:absolute;top:-9px;right:45px;}.nav-menu__links.navbar-collapse ul{background-color:transparent;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;padding:0;position:relative;}.navbar-expand-md .nav-menu__links.navbar-collapse{display:unset !important;}.navbar-expand-md .navbar-nav .dropdown-menu.show{position:absolute;}.nav-menu__links .nav-dropdown{background-color:var(--black);box-shadow:0px 14px 33px -9px rgba(0,0,0,0.75);min-width:unset;padding:1.25rem;}.nav-dropdown .dropdown-item{color:#999999;}.nav-dropdown .dropdown-item.active{background-color:transparent;color:var(--white);}.nav-dropdown .dropdown-item:hover{background-color:unset;color:var(--white);}}
+  </JSXStyle>
+  <ContextConsumer>
+    <Component />
+  </ContextConsumer>
+</Fragment>
+`;
