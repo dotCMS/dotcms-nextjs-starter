@@ -1,4 +1,4 @@
-export default function Image(props) {
+export default function Video(props) {
     return (
         <a
             className="video-cover bg-overlay-30 mb-5"

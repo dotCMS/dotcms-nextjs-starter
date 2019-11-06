@@ -1,4 +1,4 @@
-export default function Image(props) {
+export default function Product(props) {
     return (
         <div className="box-product box-product-modern">
             {props.salePrice != null && <span className="badge badge-primary">Sale</span>}
