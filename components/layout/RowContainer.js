@@ -3,7 +3,7 @@ import ColumnContainer from './ColumnContainer';
 import { Container as BootstrapContainer } from 'reactstrap';
 
 const calcColumnOffset = (prev, col) => {
-    return prev ? col.left - (prev.width + prev.left) : null;
+    return prev ? col.left - (prev.width + prev.left) : col.left > 0 ? col.left : null;
 };
 
 const getColumnsWithOffset = row => {
