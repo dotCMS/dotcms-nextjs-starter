@@ -122,14 +122,13 @@ app.prepare()
             logger('DOTCMS EDIT MODE');
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
-            // TODO: need to set this prefix dynamically
-            app.setAssetPrefix('http://localhost:3000');
+            app.setAssetPrefix(process.env.PUBLIC_URL);
             app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
         });
 
         server.listen(3000, err => {
             if (err) throw err;
-            console.log('> Ready on http://localhost:3000');
+            console.log(`> Ready on ${process.env.PUBLIC_URL}`);
         });
     })
     .catch(ex => {
