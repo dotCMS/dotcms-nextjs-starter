@@ -5,13 +5,15 @@ const dotCMSApi = require('./dotcmsApi');
 const logger = require('../logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 
-function getPage(url) {
-    logger('DOTCMS PAGE', url);
+async function getPage(url, lang) {
+    let languageId = await dotCMSApi.language.getId(lang);
+
+    logger('DOTCMS PAGE', url, lang || 'en');
 
     return dotCMSApi.page
         .get({
             url: url,
-            language: 1 // TODO: need to allow multilanguage
+            language: languageId || 1
         })
         .then(async pageRender => {
             /*

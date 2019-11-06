@@ -3,7 +3,6 @@ import Nav from './Nav/Nav';
 const Header = () => {
     return (
         <>
-            {/* TODO: needs to fix the background-image */}
             <header>
                 {/* RD Navbar */}
                 <div className="rd-navbar-wrap">

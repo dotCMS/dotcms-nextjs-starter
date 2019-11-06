@@ -24,7 +24,7 @@ function dotCMSRequestHandler(req, res) {
     const url = req.path;
 
     if (dotcms.isPage(url)) {
-        return dotcms.getPage(url);
+        return dotcms.getPage(url, req.query.lang);
     } else {
         return dotcms.proxyToStaticFile(req, res);
     }
