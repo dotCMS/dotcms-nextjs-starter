@@ -1,40 +1,26 @@
-import { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import BannerCarousel from './BannerCarousel';
 
-class BannerCarouselWidget extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const BannerCarouselWidget = props => {
+    const [items, setItems] = useState([]);
 
-    state = {
-        items: []
-    };
+    useEffect(() => {
+        if (!items.length) {
+            fetch(`/api/content/id/${props.identifier}/depth/1`)
+                .then(response => response.json())
+                .then(({ contentlets }) => {
+                    if (contentlets) {
+                        setItems(contentlets[0].banners);
+                        
+                    }
+                })
+                .catch(error => console.error(error));
+        }
+    });
 
-    componentDidMount() {
-        fetch(`/api/content/id/${this.props.identifier}/depth/1`)
-            .then(response => response.json())
-            .then(({ contentlets }) => {
-                this.setState({
-                    ...this.state,
-                    items: contentlets ? contentlets[0].banners : []
-                });
-            })
-            .catch(error => console.error(error));
-    }
-
-    render() {
-        return this.state.items ? <BannerCarousel {...this.state} /> : '';
-    }
-}
-
-BannerCarouselWidget.propTypes = {
-    identifier: PropTypes.string.isRequired
-};
-
-BannerCarouselWidget.defaultProps = {
-    identifier: ''
+    return (
+        items.length ? <BannerCarousel items={items} /> : ''
+    );
 };
 
 export default BannerCarouselWidget;
