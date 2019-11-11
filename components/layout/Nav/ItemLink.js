@@ -1,16 +1,17 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ItemLink = props => {
     return (
-        <Link
-            className={props.className}
+        <NavLink
+            activeClassName="active"
+            className="rd-nav-item"
             to={{
                 pathname: props.pathname,
                 state: props.state
             }}
         >
-            {props.children}
-        </Link>
+            <span className={props.className}>{props.children}</span>
+        </NavLink>
     );
 };
 
