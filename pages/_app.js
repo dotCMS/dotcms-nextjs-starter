@@ -28,7 +28,7 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, location: { pathname } }) {
+function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, lang, location: { pathname } }) {
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
@@ -83,7 +83,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, lo
         return <Error message={message} statusCode={statusCode} />;
     }
 
-    return <Component pageRender={requestedPage || pageRender} nav={nav} />;
+    return <Component pageRender={requestedPage || pageRender} nav={nav} lang={lang} />;
 }
 
 class MyApp extends App {
@@ -114,6 +114,7 @@ class MyApp extends App {
                                         Component={Component}
                                         pageRender={query.pageRender}
                                         nav={query.nav}
+                                        lang={query.lang}
                                         {...routerProps}
                                     ></RoutedComponent>
                                 </>

@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom';
+import {PageContext} from "../../../pages/dotcms";
 
 const ItemLink = props => {
     return (
-        <Link
-            className={props.className}
-            to={{
-                pathname: props.pathname,
-                state: props.state
-            }}
-        >
-            {props.children}
-        </Link>
+        <PageContext.Consumer>
+            {({ lang }) => (
+                <Link
+                    className={props.className}
+                    to={{
+                        pathname: props.pathname,
+                        state: props.state,
+                        search: `?lang=${lang}`
+                    }}
+                >
+                    {props.children}
+                </Link>
+            )}
+        </PageContext.Consumer>
     );
 };
 

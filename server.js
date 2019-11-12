@@ -19,6 +19,7 @@ const formUrlEncodedParser = bodyParser.raw({
 });
 
 let nav = null;
+let lang = 'en';
 
 function dotCMSRequestHandler(req, res) {
     const url = req.path;
@@ -66,7 +67,11 @@ app.prepare()
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
                 if (pageRender) {
-                    app.render(req, res, '/dotcms', { pageRender, nav });
+                    if (req.query.lang){
+                        lang = req.query.lang;
+                        console.log('LANG SET: ', lang);
+                    }
+                    app.render(req, res, '/dotcms', { pageRender, nav, lang});
                 }
             } catch (error) {
                 /* 

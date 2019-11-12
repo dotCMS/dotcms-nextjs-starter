@@ -6,7 +6,8 @@ import Layout from '../components/layout/Layout';
 
 export const PageContext = React.createContext({
     isEditMode: false,
-    nav: []
+    nav: [],
+    lang: ''
 });
 
 /*
@@ -14,8 +15,11 @@ export const PageContext = React.createContext({
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
 function Home(props) {
-    const { nav, pageRender } = props;
+    console.log('Beto', props);
+    const { nav, pageRender, lang } = props;
+    console.log('-----LANG-----', lang);
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
+
 
     useEffect(() => {
         if (process.browser) {
@@ -40,7 +44,7 @@ function Home(props) {
     });
 
     return (
-        <PageContext.Provider value={{ isEditMode, nav }}>
+        <PageContext.Provider value={{ isEditMode, nav, lang }}>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
