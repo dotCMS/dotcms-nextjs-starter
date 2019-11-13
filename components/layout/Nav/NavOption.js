@@ -4,11 +4,11 @@ import ItemLink from './ItemLink';
 
 const NavOption = ({ item }) => {
     return (
-        <ItemLink className="rd-nav-link" pathname={item.href}>
-            <li className="rd-nav-item" key={item.folder}>
+        <li className="rd-nav-item" key={item.folder}>
+            <ItemLink className="rd-nav-link" pathname={item.href}>
                 {item.title}
-            </li>
-        </ItemLink>
+            </ItemLink>
+        </li>
     );
 };
 
