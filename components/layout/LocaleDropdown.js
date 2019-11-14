@@ -1,7 +1,7 @@
-import Cookies from 'universal-cookie';
 import {PageContext} from "../../pages/dotcms";
 import React from "react";
 import { useState } from 'react';
+import { setCookie } from "../../utils/dotcms/utilities";
 
 const cookies = new Cookies();
 
@@ -20,11 +20,12 @@ const LocaleDropdown = () => {
 
     const [languageCookie, setLanguageCookie] = useState(cookies.get('dotSPALang'));
 
-    const aa = (event) => {
-        debugger;
-        console.log(event.target.value);
-        cookies.set('dotSPALang', event.target.value, { path: '/' });
+    const updateLanguage = (event) => {
+        //debugger;
+        //console.log(event.target.value);
+        //cookies.set('dotSPALang', event.target.value, { path: '/' });
         //currentLang = ;
+        setCookie('dotSPALang', event.target.value);
         setLanguageCookie(event.target.value);
         location.reload();
     };
@@ -34,7 +35,7 @@ const LocaleDropdown = () => {
             {({ languages }) => (
                 <>
                     current: {languageCookie}
-                    <select value={languageCookie} onChange={aa}>
+                    <select value={languageCookie} onChange={updateLanguage}>
                         <option>Select One</option>
                        <Options languages={languages} />
                     </select>

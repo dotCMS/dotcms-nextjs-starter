@@ -28,7 +28,6 @@
         "react-router-dom": "^5.1.2",
         "reactify-wc": "^1.0.5",
         "reactstrap": "^8.0.1",
-        "universal-cookie": "^4.0.2",
         "url-loader": "^2.2.0"
     },
     "devDependencies": {

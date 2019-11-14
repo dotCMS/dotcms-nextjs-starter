@@ -4,8 +4,7 @@ const express = require('express');
 const next = require('next');
 const querystring = require('query-string');
 const bodyParser = require('body-parser');
-const cookies = require('universal-cookie');
-
+const { getCookie } = require('./utils/dotcms/utilities');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -24,13 +23,13 @@ let nav = null;
 let languages = null;
 
 function getCurrentLanguage(req){
-    const c = new cookies(req.headers.cookie);
-    return c.get('dotSPALang') || 'en';
+    return  getCookie(req.headers.cookie, 'dotSPALang') || 'en';
 }
 
 function dotCMSRequestHandler(req, res) {
     const url = req.path;
     if (dotcms.isPage(url)) {
+        console.log('getCurrentLanguage(req)', getCurrentLanguage(req));
         return dotcms.getPage(url, getCurrentLanguage(req));
     } else {
         return dotcms.proxyToStaticFile(req, res);
@@ -50,7 +49,7 @@ app.prepare()
                     nav = [];
                 }
             }
-            languages = languages ? languages : await dotcms.getLanguages()
+            languages = languages ? languages : await dotcms.getLanguages();
             next();
         });
 
