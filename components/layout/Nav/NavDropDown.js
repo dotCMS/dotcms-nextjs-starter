@@ -1,21 +1,13 @@
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 import ItemLink from './ItemLink';
 
 const NavDropDown = ({ options }) => (
-    <ItemLink
-        pathname={options.href}
-        dropDown="true"
-        topMenu="true"
-    >
+    <ItemLink pathname={options.href} dropDown="true" topMenu="true">
         <a href={options.href} className="rd-nav-link">
             {options.title}
         </a>
         <span className="rd-navbar-submenu-toggle"></span>
-
-        <ul
-            className="rd-menu rd-navbar-megamenu rd-navbar-open-left rd-navbar-open-right"
-        >
+        <ul className="rd-menu rd-navbar-megamenu rd-navbar-open-left rd-navbar-open-right">
             {options.children.map((subItem, index) => {
                 return (
                     <li className="rd-megamenu-item" key={index}>

@@ -1,23 +1,23 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 
-const getLink = (props, p) => (
-    <a href={p.href} className={props.className}>
-        {props.children}
+const getLink = (parentProps, props) => (
+    <a href={props.href} className={parentProps.className}>
+        {parentProps.children}
     </a>
 );
 
-const getList = (props, p) => {
+const getListItem = (parentProps, props) => {
     const [focus, setFocus] = useState(false);
 
     const dropDownClasses = `${
-        p.className
+        props.className
     } rd-navbar--has-megamenu rd-navbar-submenu ${focus ? 'focus' : ''}`;
 
     return (
         <li
             className={
-                props.topMenu && props.dropDown ? dropDownClasses : p.className
+                parentProps.topMenu && parentProps.dropDown ? dropDownClasses : props.className
             }
             onMouseOver={() => {
                 setFocus(true);
@@ -26,26 +26,26 @@ const getList = (props, p) => {
                 setFocus(false);
             }}
         >
-            {!Array.isArray(props.children) ? (
-                getLink(props, p)
+            {!Array.isArray(parentProps.children) ? (
+                getLink(parentProps, props)
             ) : (
-                <>{props.children}</>
+                <>{parentProps.children}</>
             )}
         </li>
     );
 };
 
-const ItemLink = props => {
+const ItemLink = parentProps => {
     return (
         <NavLink
-            component={p => {
-                return props.topMenu ? getList(props, p) : getLink(props, p);
+            component={props => {
+                return parentProps.topMenu ? getListItem(parentProps, props) : getLink(parentProps, props);
             }}
             activeClassName="active"
             className="rd-nav-item"
             to={{
-                pathname: props.pathname,
-                state: props.state
+                pathname: parentProps.pathname,
+                state: parentProps.state
             }}
         />
     );
