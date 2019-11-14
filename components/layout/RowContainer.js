@@ -20,7 +20,7 @@ const getColumnsWithOffset = row => {
 };
 
 const RowContainer = ({ row }) => {
-    const cols = getColumnsWithOffset(row);
+    const cols = getColumnsWithOffset(row);``
 
     return (
         <BootstrapContainer>

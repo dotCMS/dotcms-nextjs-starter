@@ -1,4 +1,5 @@
 import Nav from './Nav/Nav';
+import LocaleDropdown from "./LocaleDropdown";
 
 const Header = () => {
     return (
@@ -73,6 +74,7 @@ const Header = () => {
                                         <span className="basket-count">3</span>
                                     </a>
                                 </div>
+                                <LocaleDropdown/>
                             </div>
                         </div>
 
