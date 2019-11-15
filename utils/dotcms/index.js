@@ -6,7 +6,6 @@ const logger = require('../logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 
 async function getPage(url, lang) {
-    console.log('===GET PAGE LANG===', lang);
     let languageId = await dotCMSApi.language.getId(lang);
 
     logger('DOTCMS PAGE', url, lang || 'en');

@@ -72,7 +72,8 @@ app.prepare()
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
                 if (pageRender) {
-                    app.render(req, res, '/dotcms', { pageRender, nav, languages });
+                    const currentLang = getCurrentLanguage(req);
+                    app.render(req, res, '/dotcms', { pageRender, nav, languages, currentLang });
                 }
             } catch (error) {
                 /* 
