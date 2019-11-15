@@ -1,7 +1,7 @@
 import Error from '../components/layout/Error';
 
-function ErrorPage({ message, statusCode }) {
-    return <Error message={message} statusCode={statusCode} />;
+function ErrorPage(error) {
+    return <Error message={error.message} statusCode={error.statusCode} stack={error.traceError} />;
 }
 
 export default ErrorPage;
