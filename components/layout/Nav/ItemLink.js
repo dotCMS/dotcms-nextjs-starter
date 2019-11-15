@@ -1,45 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
-
-const getLink = (parentProps, props) => (
-    <a href={props.href} className={parentProps.className}>
-        {parentProps.children}
-    </a>
-);
-
-const getListItem = (parentProps, props) => {
-    const [focus, setFocus] = useState(false);
-
-    const dropDownClasses = `${
-        props.className
-    } rd-navbar--has-megamenu rd-navbar-submenu ${focus ? 'focus' : ''}`;
-
-    return (
-        <li
-            className={
-                parentProps.topMenu && parentProps.dropDown ? dropDownClasses : props.className
-            }
-            onMouseOver={() => {
-                setFocus(true);
-            }}
-            onMouseOut={() => {
-                setFocus(false);
-            }}
-        >
-            {!Array.isArray(parentProps.children) ? (
-                getLink(parentProps, props)
-            ) : (
-                <>{parentProps.children}</>
-            )}
-        </li>
-    );
-};
+import ListItem from './ListItem';
+import AnchorLink from './AnchorLink';
 
 const ItemLink = parentProps => {
     return (
         <NavLink
             component={props => {
-                return parentProps.topMenu ? getListItem(parentProps, props) : getLink(parentProps, props);
+                return parentProps.topMenu ? (
+                    <ListItem parentProps={parentProps} props={props} />
+                ) : (
+                    <AnchorLink parentProps={parentProps} props={props} />
+                );
             }}
             activeClassName="active"
             className="rd-nav-item"
