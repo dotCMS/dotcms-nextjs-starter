@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import AnchorLink from './AnchorLink';
 
-const ListItem = ({ parentProps, props } = props) => {
+const ListItem = ({
+    href,
+    navLinkClassName,
+    children,
+    topMenu,
+    dropDown,
+    className
+} = props) => {
     const [focus, setFocus] = useState(false);
 
-    const dropDownClasses = `${
-        props.className
-    } rd-navbar--has-megamenu rd-navbar-submenu ${focus ? 'focus' : ''}`;
-
+    const dropDownClasses = `${className} rd-navbar--has-megamenu rd-navbar-submenu ${
+        focus ? 'focus' : ''
+    }`;
     return (
         <li
-            className={
-                parentProps.topMenu && parentProps.dropDown
-                    ? dropDownClasses
-                    : props.className
-            }
+            className={topMenu && dropDown ? dropDownClasses : className}
             onMouseOver={() => {
                 setFocus(true);
             }}
@@ -22,10 +24,14 @@ const ListItem = ({ parentProps, props } = props) => {
                 setFocus(false);
             }}
         >
-            {!Array.isArray(parentProps.children) ? (
-                <AnchorLink parentProps={parentProps} props={props} />
+            {!Array.isArray(children) ? (
+                <AnchorLink
+                    href={href}
+                    navLinkClassName={navLinkClassName}
+                    children={children}
+                />
             ) : (
-                parentProps.children
+                children
             )}
         </li>
     );

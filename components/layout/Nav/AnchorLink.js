@@ -1,6 +1,6 @@
-const AnchorLink = ({ parentProps, props } = props) => (
-    <a href={props.href} className={parentProps.className}>
-        {parentProps.children}
+const AnchorLink = ({ href, navLinkClassName, children } = props) => (
+    <a href={href} className={navLinkClassName}>
+        {children}
     </a>
 );
 

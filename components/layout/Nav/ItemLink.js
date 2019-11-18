@@ -6,10 +6,15 @@ const ItemLink = parentProps => {
     return (
         <NavLink
             component={props => {
+                const allProps = {
+                    ...parentProps,
+                    ...props,
+                    navLinkClassName: parentProps.className
+                };
                 return parentProps.topMenu ? (
-                    <ListItem parentProps={parentProps} props={props} />
+                    <ListItem {...allProps} />
                 ) : (
-                    <AnchorLink parentProps={parentProps} props={props} />
+                    <AnchorLink {...allProps} />
                 );
             }}
             activeClassName="active"
