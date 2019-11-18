@@ -51,9 +51,7 @@ function getNav() {
 function getLanguages() {
     return dotCMSApi.httpClient.request({url: '/api/v1/languages'})
         .then( async (response) => {
-            const data = await response.json();
-            console.log('===getting data from /api/v1/languages===', data);
-            return data;
+            return await response.json();;
         })
         .catch(err => {console.log('ERROR', err.message)});
 }

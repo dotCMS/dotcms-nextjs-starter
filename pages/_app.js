@@ -4,6 +4,7 @@ import withReactRouter from '../components/router/with-react-router';
 import { Route, Switch } from 'react-router-dom';
 import Error from '../components/layout/Error';
 import dotcms from '../utils/dotcms';
+import { setCookie } from "../utils/dotcms/utilities";
 
 const { logger } = require('../utils');
 
@@ -32,6 +33,12 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
+    const [lang, setLang] = useState(currentLang);
+
+    const setLanguage = (event) => {
+        setLang(event.target.value);
+        setCookie('dotSPALang', lang);
+    };
 
     useEffect(() => {
         if (isFirstRun.current) {
@@ -48,7 +55,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
             logger('DOTCMS CLIENT PAGE REQUEST', pathname);
 
             try {
-                const requestedPage = await dotcms.getPage(pathname);
+                const requestedPage = await dotcms.getPage(pathname, lang);
                 setRequestedPage(requestedPage);
 
                 /*
@@ -76,14 +83,14 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
             }
         }
         fetchDotCMSPage();
-    }, [pathname]);
+    }, [pathname, lang]);
 
     if (clientRequestError) {
         const { statusCode, message } = clientRequestError;
         return <Error message={message} statusCode={statusCode} />;
     }
 
-    return <Component pageRender={requestedPage || pageRender} nav={nav} languages={languages} currentLang={currentLang} />;
+    return <Component pageRender={requestedPage || pageRender} nav={nav} languages={languages} currentLang={lang} setLanguage={setLanguage}  />;
 }
 
 class MyApp extends App {
@@ -108,7 +115,7 @@ class MyApp extends App {
                 <Switch>
                     <Route
                         component={routerProps => {
-                           // console.log(routerProps);
+                           console.log('routerProps', routerProps);
                             return (
                                 <>
                                     <RoutedComponent
@@ -117,6 +124,7 @@ class MyApp extends App {
                                         nav={query.nav}
                                         languages={query.languages}
                                         currentLang={query.currentLang}
+                                        setLanguage={query.setLanguage}
                                         {...routerProps}
                                     ></RoutedComponent>
                                 </>

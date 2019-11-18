@@ -8,7 +8,8 @@ export const PageContext = React.createContext({
     isEditMode: false,
     nav: [],
     languages: {},
-    currentLang: () => {}
+    currentLang: '',
+    setLanguage: () => {}
 });
 
 /*
@@ -16,9 +17,8 @@ export const PageContext = React.createContext({
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
 function Home(props) {
-    const { nav, pageRender, languages, currentLang } = props;
+    const { nav, pageRender, languages, currentLang, setLanguage} = props;
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
-
 
     useEffect(() => {
         if (process.browser) {
@@ -43,7 +43,7 @@ function Home(props) {
     });
 
     return (
-        <PageContext.Provider value={{ isEditMode, nav, languages, currentLang }}>
+        <PageContext.Provider value={{ isEditMode, nav, languages, currentLang, setLanguage }}>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
