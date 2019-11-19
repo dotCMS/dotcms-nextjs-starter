@@ -2,13 +2,13 @@ const proxy = require('express-http-proxy');
 
 const transformPage = require('./transformPage');
 const dotCMSApi = require('./dotcmsApi');
-const logger = require('../logger');
+const { loggerLog } = require('../logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 
 async function getPage(url, lang) {
     let languageId = await dotCMSApi.language.getId(lang);
 
-    logger('DOTCMS PAGE', url, lang || 'en');
+    loggerLog('DOTCMS PAGE', url, lang || 'en');
 
     return dotCMSApi.page
         .get({
@@ -44,7 +44,7 @@ async function getPage(url, lang) {
 }
 
 function getNav() {
-    logger('DOTCMS NAV');
+    loggerLog('DOTCMS NAV');
 
     return dotCMSApi.nav.get('4').then(({ children }) => children);
 }
@@ -53,7 +53,7 @@ function proxyToStaticFile(req, res) {
     let proxyOptions;
 
     if (isAPIRequest(req.url)) {
-        logger('DOTCMS PROXY API REQUEST', req.url);
+        loggerLog('DOTCMS PROXY API REQUEST', req.url);
         proxyOptions = {
             proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
                 proxyReqOpts.headers = {
@@ -64,7 +64,7 @@ function proxyToStaticFile(req, res) {
             }
         };
     } else {
-        logger('DOTCMS PROXY', req.url);
+        loggerLog('DOTCMS PROXY', req.url);
     }
 
     return proxy(`${process.env.DOTCMS_HOST}${req.url}`, proxyOptions)(req, res);

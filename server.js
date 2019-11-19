@@ -9,7 +9,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const { isNextInternalFile, logger } = require('./utils');
+const { isNextInternalFile, loggerLog } = require('./utils');
 const dotcms = require('./utils/dotcms');
 
 const formUrlEncodedParser = bodyParser.raw({
@@ -130,7 +130,7 @@ app.prepare()
             3. Render the page using nextjs api
         */
         server.post('*', formUrlEncodedParser, async (req, res) => {
-            logger('DOTCMS EDIT MODE');
+            loggerLog('DOTCMS EDIT MODE');
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             app.setAssetPrefix(process.env.PUBLIC_URL);

@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Error from '../components/layout/Error';
 import dotcms from '../utils/dotcms';
 
-const { logger } = require('../utils');
+const { loggerLog } = require('../utils');
 
 function DotCMSStatus({ status }) {
     return (
@@ -45,7 +45,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, lo
         }
 
         async function fetchDotCMSPage() {
-            logger('DOTCMS CLIENT PAGE REQUEST', pathname);
+            loggerLog('DOTCMS CLIENT PAGE REQUEST', pathname);
 
             try {
                 const requestedPage = await dotcms.getPage(pathname);
