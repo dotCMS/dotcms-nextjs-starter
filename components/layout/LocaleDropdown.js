@@ -1,17 +1,17 @@
-import { PageContext } from "../../pages/dotcms";
+import { PageContext } from "../../pages/_app";
 import React from "react";
 
 const Options = ({languages}) => {
-    return  Object.keys(languages).map(key => <option key={key} value={key}>{languages[key].name}</option>)
+    return  languages.map(lang => <option key={lang.languageCode} value={lang.languageCode}>{lang.language}</option>)
 }
 
 const LocaleDropdown = () => {
 
     return (
         <PageContext.Consumer>
-            {({ languages, currentLang, setLanguage }) => (
-                <select defaultValue={currentLang} onChange={setLanguage}>
-                   <Options languages={languages} />
+            {({ language }) => (
+                <select defaultValue={language.current} onChange={language.set}>
+                   <Options languages={language.options} />
                 </select>
             )}
         </PageContext.Consumer>

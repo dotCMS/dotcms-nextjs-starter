@@ -20,7 +20,11 @@ const formUrlEncodedParser = bodyParser.raw({
 });
 
 let nav = null;
-let languages = null;
+let language = {
+    options: null,
+    current: '',
+    set: ()=> {}
+}
 
 function getCurrentLanguage(req){
     return  getCookie(req.headers.cookie, 'dotSPALang') || 'en';
@@ -48,7 +52,7 @@ app.prepare()
                     nav = [];
                 }
             }
-            languages = languages ? languages : await dotcms.getLanguages();
+            language.options = language.options ? language.options : await dotcms.getLanguages();
             next();
         });
 
@@ -71,8 +75,8 @@ app.prepare()
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
                 if (pageRender) {
-                    const currentLang = getCurrentLanguage(req);
-                    app.render(req, res, '/dotcms', { pageRender, nav, languages, currentLang });
+                    language.current = getCurrentLanguage(req);
+                    app.render(req, res, '/dotcms', { pageRender, nav, language });
                 }
             } catch (error) {
                 /* 

@@ -6,6 +6,12 @@ import Error from '../components/layout/Error';
 import dotcms from '../utils/dotcms';
 import { setCookie } from "../utils/dotcms/utilities";
 
+export const PageContext = React.createContext({
+    isEditMode: false,
+    nav: [],
+    language: {},
+});
+
 const { logger } = require('../utils');
 
 function DotCMSStatus({ status }) {
@@ -29,15 +35,16 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, languages, currentLang, location: { pathname } }) {
+function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, language, location: { pathname } }) {
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
-    const [lang, setLang] = useState(currentLang);
+    const [lang, setLang] = useState(language.current);
 
-    const setLanguage = (event) => {
-        setLang(event.target.value);
+    language.set  = (event) => {
+        language.current = event.target.value
         setCookie('dotSPALang', event.target.value);
+        setLang(event.target.value);
     };
 
     useEffect(() => {
@@ -90,7 +97,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
         return <Error message={message} statusCode={statusCode} />;
     }
 
-    return <Component pageRender={requestedPage || pageRender} nav={nav} languages={languages} currentLang={lang} setLanguage={setLanguage}  />;
+    return <Component pageRender={requestedPage || pageRender} nav={nav} language={language} />;
 }
 
 class MyApp extends App {
@@ -107,6 +114,8 @@ class MyApp extends App {
             and it fail, normally it will be a 404.
         */
         const error = query.error || nextJsRenderError;
+        const { pageRender, nav, language } = query;
+        const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>
             error ? (
@@ -119,11 +128,9 @@ class MyApp extends App {
                                 <>
                                     <RoutedComponent
                                         Component={Component}
-                                        pageRender={query.pageRender}
-                                        nav={query.nav}
-                                        languages={query.languages}
-                                        currentLang={query.currentLang}
-                                        setLanguage={query.setLanguage}
+                                        pageRender={pageRender}
+                                        nav={nav}
+                                        language={language}
                                         {...routerProps}
                                     ></RoutedComponent>
                                 </>
@@ -134,7 +141,7 @@ class MyApp extends App {
             );
 
         return (
-            <>
+            <PageContext.Provider value={{ isEditMode, nav, language }}>
                 <style global jsx>
                     {`
                         @import url('application/themes/travel/css/styles.dotsass');
@@ -143,7 +150,7 @@ class MyApp extends App {
                 </style>
                 <DotCMSStatus status={query.dotcmsStatus} />
                 <FinalComponentToRender />
-            </>
+            </PageContext.Provider>
         );
     }
 }
