@@ -13,7 +13,7 @@ function DotCMSStatus({ status }) {
         <>
             <style jsx>
                 {`
-                    p { 
+                    p {
                         background-color: var(--black);
                         color: var(--white);
                         font-size: 0.75em;
@@ -37,7 +37,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
 
     const setLanguage = (event) => {
         setLang(event.target.value);
-        setCookie('dotSPALang', lang);
+        setCookie('dotSPALang', event.target.value);
     };
 
     useEffect(() => {
@@ -115,7 +115,6 @@ class MyApp extends App {
                 <Switch>
                     <Route
                         component={routerProps => {
-                           console.log('routerProps', routerProps);
                             return (
                                 <>
                                     <RoutedComponent

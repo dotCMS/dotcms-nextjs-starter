@@ -29,7 +29,6 @@ function getCurrentLanguage(req){
 function dotCMSRequestHandler(req, res) {
     const url = req.path;
     if (dotcms.isPage(url)) {
-        console.log('getCurrentLanguage(req)', getCurrentLanguage(req));
         return dotcms.getPage(url, getCurrentLanguage(req));
     } else {
         return dotcms.proxyToStaticFile(req, res);
