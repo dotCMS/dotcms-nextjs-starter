@@ -1,16 +1,29 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import ListItem from './ListItem';
+import AnchorLink from './AnchorLink';
 
-const ItemLink = props => {
+const ItemLink = parentProps => {
     return (
-        <Link
-            className={props.className}
-            to={{
-                pathname: props.pathname,
-                state: props.state
+        <NavLink
+            component={props => {
+                const allProps = {
+                    ...parentProps,
+                    ...props,
+                    navLinkClassName: parentProps.className
+                };
+                return parentProps.topMenu ? (
+                    <ListItem {...allProps} />
+                ) : (
+                    <AnchorLink {...allProps} />
+                );
             }}
-        >
-            {props.children}
-        </Link>
+            activeClassName="active"
+            className="rd-nav-item"
+            to={{
+                pathname: parentProps.pathname,
+                state: parentProps.state
+            }}
+        />
     );
 };
 
