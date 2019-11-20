@@ -1,4 +1,5 @@
 import Head from 'next/head';
+const { loggerError } = require('../../utils');
 
 const defaultMessages = {
     400: 'Bad Request',
@@ -7,8 +8,9 @@ const defaultMessages = {
     500: 'Internal Server Error'
 };
 
-function Error({ statusCode, message }) {
+function Error({ statusCode, message, stack }) {
     const displayMessage = message || defaultMessages[statusCode];
+    loggerError(stack);
 
     return (
         <>

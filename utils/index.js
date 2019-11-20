@@ -1,7 +1,8 @@
-const logger = require('./logger');
+const { loggerError, loggerLog} = require('./logger');
 const { isNextInternalFile } = require('./next');
 
 module.exports = {
     isNextInternalFile,
-    logger
+    loggerLog,
+    loggerError
 };
