@@ -131,6 +131,8 @@ app.prepare()
             }
         });
 
+        server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+
         /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
             server with the page object in the body, so:
