@@ -23,7 +23,7 @@ let nav = null;
 let language = {
     options: null,
     current: '',
-    set: ()=> {}
+    set: () => {}
 }
 
 function getCurrentLanguage(req){
