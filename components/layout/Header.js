@@ -74,7 +74,7 @@ const Header = () => {
                                         <span className="basket-count">3</span>
                                     </a>
                                 </div>
-                                <LocaleDropdown/>
+                                <LocaleDropdown />
                             </div>
                         </div>
 
