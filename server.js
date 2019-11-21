@@ -27,7 +27,7 @@ let language = {
 }
 
 function getCurrentLanguage(req){
-    return  getCookie(req.headers.cookie, 'dotSPALang') || 'en';
+    return  getCookie(req.headers.cookie, 'dotSPALang') || '1';
 }
 
 function dotCMSRequestHandler(req, res) {

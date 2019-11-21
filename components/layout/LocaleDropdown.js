@@ -3,7 +3,7 @@ import React from "react";
 
 const Options = ({ languages }) => {
   return languages.map(lang => (
-    <option key={lang.languageCode} value={lang.languageCode}>
+    <option key={lang.languageCode} value={lang.id}>
       {lang.language}
     </option>
   ));

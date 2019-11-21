@@ -6,14 +6,11 @@ const logger = require('../logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 
 async function getPage(url, lang) {
-    let languageId = await dotCMSApi.language.getId(lang);
-
-    logger('DOTCMS PAGE', url, lang || 'en');
-
+    logger('DOTCMS PAGE', url, lang || '1');
     return dotCMSApi.page
         .get({
             url: url,
-            language: languageId || 1
+            language: lang || 1
         })
         .then(async pageRender => {
             /*
