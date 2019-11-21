@@ -28,7 +28,7 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, location: { pathname } }) {
+function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, location: { pathname }, pageProps }) {
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
@@ -83,7 +83,20 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, lo
         return <Error message={message} statusCode={statusCode} />;
     }
 
-    return <Component pageRender={requestedPage || pageRender} nav={nav} />;
+    // NextJS props from getInitialProps
+    const props = { ...pageProps };
+
+    // DotCMS page object
+    if (requestedPage || pageRender) {
+        props.pageRender = requestedPage || pageRender;
+    }
+
+    // DotCMS nav object
+    if (nav) {
+        props.nav = nav;
+    }
+
+    return <Component {...props} />;
 }
 
 class MyApp extends App {
@@ -91,7 +104,8 @@ class MyApp extends App {
         const {
             Component,
             router: { query },
-            nextJsRenderError
+            nextJsRenderError,
+            pageProps
         } = this.props;
 
         /*
@@ -112,8 +126,9 @@ class MyApp extends App {
                                 <>
                                     <RoutedComponent
                                         Component={Component}
-                                        pageRender={query.pageRender}
                                         nav={query.nav}
+                                        pageProps={pageProps}
+                                        pageRender={query.pageRender}
                                         {...routerProps}
                                     ></RoutedComponent>
                                 </>
