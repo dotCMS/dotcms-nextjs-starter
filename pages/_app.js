@@ -35,7 +35,7 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, language, location: { pathname } }) {
+function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, language, location: { pathname }, pageProps }) {
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
@@ -97,7 +97,23 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
         return <Error message={message} statusCode={statusCode} />;
     }
 
-    return <Component pageRender={requestedPage || pageRender} nav={nav} language={language} />;
+    // NextJS props from getInitialProps
+    const props = { ...pageProps };
+
+    // DotCMS page object
+    if (requestedPage || pageRender) {
+        props.pageRender = requestedPage || pageRender;
+    }
+
+    // DotCMS nav object
+    if (nav) {
+        props.nav = nav;
+    }
+
+    // DotCMS language object
+    props.language = language;
+
+    return <Component {...props} />;
 }
 
 class MyApp extends App {
@@ -105,7 +121,8 @@ class MyApp extends App {
         const {
             Component,
             router: { query },
-            nextJsRenderError
+            nextJsRenderError,
+            pageProps
         } = this.props;
 
         /*
@@ -128,8 +145,9 @@ class MyApp extends App {
                                 <>
                                     <RoutedComponent
                                         Component={Component}
-                                        pageRender={pageRender}
                                         nav={nav}
+                                        pageProps={pageProps}
+                                        pageRender={pageRender}
                                         language={language}
                                         {...routerProps}
                                     ></RoutedComponent>

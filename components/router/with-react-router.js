@@ -5,11 +5,13 @@ const isServer = typeof window === 'undefined';
 export default App => {
     return class AppWithReactRouter extends React.Component {
         static async getInitialProps(appContext) {
-            let nextJsRenderError;
+            const { pageProps } = await App.getInitialProps(appContext);
+
             /*
                 If we fallback to nexjs to render a page and throws an error in the response,
                 we catche it here and pass it to the props of the _app.js
             */
+            let nextJsRenderError;
             if (appContext.ctx.res.statusCode > 200) {
                 nextJsRenderError = {
                     statusCode: appContext.ctx.res.statusCode
@@ -25,7 +27,8 @@ export default App => {
             return {
                 originalUrl,
                 context: locals.context || {},
-                nextJsRenderError
+                nextJsRenderError,
+                pageProps
             };
         }
 
