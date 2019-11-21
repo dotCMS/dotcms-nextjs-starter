@@ -66,7 +66,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                 </ul>
-
+                                <LocaleDropdown />
                                 <div>
                                     {/* CART */}
                                     <a className="basket" href="/store/cart">
@@ -74,7 +74,6 @@ const Header = () => {
                                         <span className="basket-count">3</span>
                                     </a>
                                 </div>
-                                <LocaleDropdown />
                             </div>
                         </div>
 

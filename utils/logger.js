@@ -1,7 +1,17 @@
-function logger() {
-    if (process.env.NODE_ENV !== 'production') {
+function isDev() {
+    return process.env.NODE_ENV !== 'production';
+}
+
+function loggerLog() {
+    if (isDev()) {
         console.log(...arguments);
     }
 }
 
-module.exports = logger;
+function loggerError() {
+    if (isDev()) {
+        console.error(...arguments);
+    }
+}
+
+module.exports = { loggerLog, loggerError };

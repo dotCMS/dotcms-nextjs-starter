@@ -12,7 +12,7 @@ export const PageContext = React.createContext({
     language: {},
 });
 
-const { logger } = require('../utils');
+const { loggerLog } = require('../utils');
 
 function DotCMSStatus({ status }) {
     return (
@@ -59,7 +59,7 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
         }
 
         async function fetchDotCMSPage() {
-            logger('DOTCMS CLIENT PAGE REQUEST', pathname);
+            loggerLog('DOTCMS CLIENT PAGE REQUEST', pathname);
 
             try {
                 const requestedPage = await dotcms.getPage(pathname, lang);

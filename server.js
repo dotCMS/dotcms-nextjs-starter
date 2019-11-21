@@ -10,7 +10,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const { isNextInternalFile, logger } = require('./utils');
+const { isNextInternalFile, loggerLog } = require('./utils');
 const dotcms = require('./utils/dotcms');
 
 const formUrlEncodedParser = bodyParser.raw({
@@ -80,8 +80,8 @@ app.prepare()
                 }
             } catch (error) {
                 /* 
-                If the request to DotCMS fail we have a fallaback chain in place.
-            */
+                    If the request to DotCMS fail we have a fallback chain in place.
+                */
                 switch (error.statusCode) {
                     /*
                         If the page doesn't have a layout we render the error using next right away.
@@ -89,6 +89,17 @@ app.prepare()
                     case dotcms.errors.DOTCMS_NO_LAYOUT:
                         res.statusCode = 406; // Not Acceptable
                         error.statusCode = res.statusCode;
+                        error.traceError = error.stack;
+
+                        app.renderError(null, req, res, req.path, {
+                            error
+                        });
+                        break;
+
+                    case dotcms.errors.DOTCMS_CUSTOM_ERROR:
+                        res.statusCode = 406; // Not Acceptable
+                        error.statusCode = 'Error: 500';
+                        error.traceError = error.stack;
 
                         app.renderError(null, req, res, req.path, {
                             error
@@ -101,7 +112,7 @@ app.prepare()
                         If the page exist in next all good but if not next will render a 404.
 
                         Also we are setting in dev mode a dotcmsStatus message that we will render
-                        in all the pages just in edit mode to want developers that something is up
+                        in all the pages just in edit mode to tell developers that something is up
                         with the DotCMS instance they are trying to reach. 
                     */
                     case dotcms.errors.DOTCMS_DOWN:
@@ -129,7 +140,7 @@ app.prepare()
             3. Render the page using nextjs api
         */
         server.post('*', formUrlEncodedParser, async (req, res) => {
-            logger('DOTCMS EDIT MODE');
+            loggerLog('DOTCMS EDIT MODE');
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             app.setAssetPrefix(process.env.PUBLIC_URL);
