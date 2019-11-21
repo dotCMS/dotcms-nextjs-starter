@@ -1,4 +1,5 @@
 import Nav from './Nav/Nav';
+import LocaleDropdown from "./LocaleDropdown";
 
 const Header = () => {
     return (
@@ -65,7 +66,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                 </ul>
-
+                                <LocaleDropdown />
                                 <div>
                                     {/* CART */}
                                     <a className="basket" href="/store/cart">

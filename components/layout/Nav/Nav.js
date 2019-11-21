@@ -2,7 +2,7 @@ import NavOption from './NavOption';
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
-import { PageContext } from '../../../pages/dotcms';
+import { PageContext } from '../../../pages/_app';
 
 export default function Nav() {
     return (

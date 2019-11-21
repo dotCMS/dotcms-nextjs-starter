@@ -4,17 +4,12 @@ import Head from 'next/head';
 import DotCMSPage from '../components/layout/DotCMSPage';
 import Layout from '../components/layout/Layout';
 
-export const PageContext = React.createContext({
-    isEditMode: false,
-    nav: []
-});
-
 /*
     This component will receive the page object from DotCMS and render the page using the layout
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
 function Home(props) {
-    const { nav, pageRender } = props;
+    const { pageRender } = props;
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
 
     useEffect(() => {
@@ -40,7 +35,7 @@ function Home(props) {
     });
 
     return (
-        <PageContext.Provider value={{ isEditMode, nav }}>
+        <>
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
@@ -49,7 +44,7 @@ function Home(props) {
             <Layout {...pageRender.layout}>
                 <DotCMSPage body={pageRender.layout.body} />
             </Layout>
-        </PageContext.Provider>
+        </>
     );
 }
 

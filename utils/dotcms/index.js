@@ -6,14 +6,11 @@ const { loggerLog } = require('../logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 
 async function getPage(url, lang) {
-    let languageId = await dotCMSApi.language.getId(lang);
-
-    loggerLog('DOTCMS PAGE', url, lang || 'en');
-
+    loggerLog('DOTCMS PAGE', url, lang || '1');
     return dotCMSApi.page
         .get({
             url: url,
-            language: languageId || 1
+            language: lang || 1
         })
         .then(async pageRender => {
             /*
@@ -49,6 +46,10 @@ function getNav() {
     return dotCMSApi.nav.get('4').then(({ children }) => children);
 }
 
+function getLanguages() {
+    return dotCMSApi.language.getLanguages();
+}
+
 function proxyToStaticFile(req, res) {
     let proxyOptions;
 
@@ -77,4 +78,4 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-module.exports = { getPage, getNav, transformPage, isPage, proxyToStaticFile, emitRemoteRenderEdit, errors };
+module.exports = { getPage, getNav, transformPage, isPage, proxyToStaticFile, emitRemoteRenderEdit, getLanguages, errors };
