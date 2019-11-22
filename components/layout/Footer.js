@@ -1,6 +1,6 @@
 import { Container as BootstrapContainer, Row as BootstrapRow, Col as BootstrapCol } from 'reactstrap';
 
-import BlogListing from './BlogListing';
+import BlogListing from '../BlogListing';
 
 const Footer = props => {
     return (
