@@ -131,6 +131,10 @@ app.prepare()
             }
         });
 
+        /*
+            If we hit the server with a POST request to /api/* we proxy to DotCMS right away
+            we can assume that all requests to proxy are meant to DotCMS instance.
+        */
         server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
 
         /*

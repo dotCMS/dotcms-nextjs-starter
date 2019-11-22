@@ -1,32 +1,13 @@
-const dotCMSApi = require('../utils/dotcms/dotcmsApi');
+const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
 import Link from 'next/link';
-import DotcmsImage from './DotcmsImage';
-import Loader from './Loader';
-import useDotCMSApi from '../hooks/useDotCMSApi';
-
-const DateText = ({ value }) => {
-    const monthNames = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-    ];
-    const d = new Date(value);
-
-    return <time dateTime={value}>{`${monthNames[d.getMonth()]} ${d.getUTCDate()}, ${d.getFullYear()}`}</time>;
-};
+import DateFormat from '../../Shared/DateFormat';
+import Loader from '../../Shared/Loader';
+import DotcmsImage from '../../Shared/DotcmsImage';
+import useDotCMSApi from '../../../hooks/useDotCMSApi';
 
 const BlogListing = () => {
-    const [loading, posts] = useDotCMSApi(async () => {
+    const [loading, posts] = useDotCMSApi(() => {
         return dotCMSApi.esSearch
             .search({
                 contentType: 'Blog',
@@ -58,7 +39,7 @@ const BlogListing = () => {
                         <a>{title}</a>
                     </Link>
                 </h6>
-                <DateText value={postingDate} />
+                <DateFormat value={postingDate} />
             </div>
         </div>
     ));
