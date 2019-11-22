@@ -24,10 +24,10 @@ let language = {
     options: null,
     current: '',
     set: () => {}
-}
+};
 
-function getCurrentLanguage(req){
-    return  getCookie(req.headers.cookie, 'dotSPALang') || '1';
+function getCurrentLanguage(req) {
+    return getCookie(req.headers.cookie, 'dotSPALang') || '1';
 }
 
 function dotCMSRequestHandler(req, res) {
@@ -132,8 +132,8 @@ app.prepare()
         });
 
         /*
-            If we hit the server with a POST request to /api/* we proxy to DotCMS right away
-            we can assume that all requests to proxy are meant to DotCMS instance.
+            We can assume (at least for now) that all requests to /api/* are meant
+            to DotCMS instance, so we just proxy them.
         */
         server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
 
@@ -153,12 +153,12 @@ app.prepare()
             app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
         });
 
-        server.listen(3000, err => {
+        server.listen(3000, (err) => {
             if (err) throw err;
             console.log(`> Ready on ${process.env.PUBLIC_URL}`);
         });
     })
-    .catch(ex => {
+    .catch((ex) => {
         console.error(ex.stack);
         process.exit(1);
     });
