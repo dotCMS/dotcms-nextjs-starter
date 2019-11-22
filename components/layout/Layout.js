@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import Header from './Header';
-import Footer from './Footer';
+import Footer from './Footer/Footer';
 import LayoutWithSidebar from './LayoutWithSidebar';
 
 export default function Layout({ sidebar, body, children }) {

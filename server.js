@@ -24,10 +24,10 @@ let language = {
     options: null,
     current: '',
     set: () => {}
-}
+};
 
-function getCurrentLanguage(req){
-    return  getCookie(req.headers.cookie, 'dotSPALang') || '1';
+function getCurrentLanguage(req) {
+    return getCookie(req.headers.cookie, 'dotSPALang') || '1';
 }
 
 function dotCMSRequestHandler(req, res) {
@@ -132,6 +132,12 @@ app.prepare()
         });
 
         /*
+            We can assume (at least for now) that all requests to /api/* are meant
+            to DotCMS instance, so we just proxy them.
+        */
+        server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+
+        /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
             server with the page object in the body, so:
 
@@ -147,12 +153,12 @@ app.prepare()
             app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
         });
 
-        server.listen(3000, err => {
+        server.listen(3000, (err) => {
             if (err) throw err;
             console.log(`> Ready on ${process.env.PUBLIC_URL}`);
         });
     })
-    .catch(ex => {
+    .catch((ex) => {
         console.error(ex.stack);
         process.exit(1);
     });

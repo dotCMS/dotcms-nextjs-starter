@@ -8,8 +8,8 @@ export default function calendarEvent(props) {
     return (
         <div className="event">
             <h2>{props.title}</h2>
-            <DateFormat dateString={props.startDate} />
-            <DateFormat dateString={props.endDate} />
+            <DateFormat value={props.startDate} />
+            <DateFormat value={props.endDate} />
             <span dangerouslySetInnerHTML={createMarkup(props.description)} />
         </div>
     );
