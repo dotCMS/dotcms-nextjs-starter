@@ -39,13 +39,13 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
-    const [lang, setLang] = useState(language.current);
+    // const [lang, setLang] = useState(language.current);
 
-    language.set  = (event) => {
-        language.current = event.target.value
-        setCookie('dotSPALang', event.target.value);
-        setLang(event.target.value);
-    };
+    // language.set  = () => {
+    //     // language.current = event.target.value
+    //     // setCookie('dotSPALang', event.target.value);
+    //     setLang(1);
+    // };
 
     useEffect(() => {
         if (isFirstRun.current) {
@@ -90,7 +90,8 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
             }
         }
         fetchDotCMSPage();
-    }, [pathname, lang]);
+    }, [pathname]);
+//  }, [pathname, lang]);
 
     if (clientRequestError) {
         const { statusCode, message } = clientRequestError;
@@ -121,6 +122,7 @@ class MyApp extends App {
         const {
             Component,
             router: { query },
+            nav,
             nextJsRenderError,
             pageProps
         } = this.props;
@@ -131,7 +133,7 @@ class MyApp extends App {
             and it fail, normally it will be a 404.
         */
         const error = query.error || nextJsRenderError;
-        const { pageRender, nav, language } = query;
+        const { pageRender, language } = query;
         const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>

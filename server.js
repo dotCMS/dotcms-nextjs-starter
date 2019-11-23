@@ -24,10 +24,10 @@ let language = {
     options: null,
     current: '',
     set: () => {}
-}
+};
 
-function getCurrentLanguage(req){
-    return  getCookie(req.headers.cookie, 'dotSPALang') || '1';
+function getCurrentLanguage(req) {
+    return getCookie(req.headers.cookie, 'dotSPALang') || '1';
 }
 
 function dotCMSRequestHandler(req, res) {
@@ -37,6 +37,10 @@ function dotCMSRequestHandler(req, res) {
     } else {
         return dotcms.proxyToStaticFile(req, res);
     }
+}
+
+function isBlogDetailPage(path) {
+    return path.startsWith('/blog/post');
 }
 
 app.prepare()
@@ -74,9 +78,11 @@ app.prepare()
             */
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
-                if (pageRender) {
+                if (pageRender && !isBlogDetailPage(req.path)) {
                     language.current = getCurrentLanguage(req);
                     app.render(req, res, '/dotcms', { pageRender, nav, language });
+                } else if (pageRender && isBlogDetailPage(req.path)) {
+                    return handle(req, res);
                 }
             } catch (error) {
                 /* 
@@ -147,12 +153,12 @@ app.prepare()
             app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
         });
 
-        server.listen(3000, err => {
+        server.listen(3000, (err) => {
             if (err) throw err;
             console.log(`> Ready on ${process.env.PUBLIC_URL}`);
         });
     })
-    .catch(ex => {
+    .catch((ex) => {
         console.error(ex.stack);
         process.exit(1);
     });

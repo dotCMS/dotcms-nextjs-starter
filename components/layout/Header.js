@@ -66,7 +66,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                 </ul>
-                                <LocaleDropdown />
+                                {/* <LocaleDropdown /> */}
                                 <div>
                                     {/* CART */}
                                     <a className="basket" href="/store/cart">
