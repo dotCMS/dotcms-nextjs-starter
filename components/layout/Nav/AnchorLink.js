@@ -1,7 +1,9 @@
+import { Link } from 'react-router-dom';
+
 const AnchorLink = ({ href, navLinkClassName, children } = props) => (
-    <a href={href} className={navLinkClassName}>
+    <Link to={href} className={navLinkClassName}>
         {children}
-    </a>
+    </Link>
 );
 
 export default AnchorLink;

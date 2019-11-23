@@ -48,7 +48,6 @@ class CustomError extends Error {
 
 module.exports = {
     isPage,
-    isAPIRequest,
     CustomError,
     getCookie,
     setCookie,

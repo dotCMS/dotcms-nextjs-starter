@@ -1,5 +1,7 @@
 import { Container as BootstrapContainer, Row as BootstrapRow, Col as BootstrapCol } from 'reactstrap';
 
+import BlogListing from './BlogListing';
+
 const Footer = props => {
     return (
         <footer
@@ -29,6 +31,7 @@ const Footer = props => {
 
                         <BootstrapCol sm={8} md={6} lg={4}>
                             <h2>Latest blog posts</h2>
+                            <BlogListing />
                         </BootstrapCol>
                         <BootstrapCol sm={8} md={6} lg={4}>
                             <h2>Get in touch</h2>
