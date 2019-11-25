@@ -1,5 +1,4 @@
 import BlogDetail from '../blogDetail';
-import fetch from 'isomorphic-unfetch';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
 
@@ -32,23 +31,11 @@ BlogDetailPage.getInitialProps = async (props) => {
         .split('/')
         .filter((e) => e)
         .slice(-1)[0];
-    /*
-    const { contentlets } = await dotCMSApi.esSearch.search({
-        contentType: 'Blog',
-        queryParams: {
-            detailedSearchQuery: `+Blog.title:${slug.replace('-', ' ')}`,
-            depth: 1,
-            languageId: 1
-        }
-    });
-*/
-
-    const response = await fetch(
-        `https://starter.dotcms.com/api/content/render/false/type/json/query/-contentType:blogs%20+contentType:Blog%20+title:'${slug.replace(
-            '-',
-            ' '
-        )}'%5E15%20+languageId:1/depth/1`
-    );
+    const params = {
+        query: `+contentType:Blog%20+title:'${slug.replace('-', ' ')}'%5E15%20+languageId:1`,
+        depth: 3
+    };
+    const response = await dotCMSApi.content.query(params);
     const { contentlets } = await response.json();
     return { ...contentlets[0] };
 };
