@@ -1,3 +1,5 @@
+import DateTimeFormat from '../../components/Shared/DateTimeFormat';
+
 const BlogDetail = (props) => {
     console.log('----props', props);
     return (
@@ -8,34 +10,38 @@ const BlogDetail = (props) => {
                     <div className="post-bottom-panel">
                         <div>
                             <div className="group-xl">
-                                {/* #if( ${URLMapContent.author.size()} > 0) #set
-                                ($author= ${URLMapContent.author.get(0)})
-                                <div className="post-modern-author">
-                                    <span className="post-icon icon mdi mdi-account"></span>
-                                    <span>
-                                        by $!{author.firstName} $!
-                                        {author.lastName}
-                                    </span>
-                                </div>
-                                #end */}
+                                {props && props.author ? (
+                                    <div className="post-modern-author">
+                                        <span className="post-icon icon mdi mdi-account"></span>
+                                        <span>
+                                            {`by ${props.author[0].firstName} ${props.author[0].lastName}`}
+                                        </span>
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
                                 <div className="post-modern-time">
                                     <span className="post-icon icon mdi mdi-calendar-clock"></span>
-                                    <time dateTime={props.postingDate}>{props.postingDate}</time>
+                                    <DateTimeFormat value={props.postingDate} format='DateTime' />
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="d-none d-md-block">
+                        <div className="d-none d-md-block">
                             <div className="group-xl">
                                 <div className="post-modern-views">
                                     <span className="post-icon icon mdi mdi-eye"></span>
                                     <span>193</span>
                                 </div>
-                                <div className="post-modern-comment">
-                                    <span className="post-icon icon mdi mdi-comment"></span>
-                                    <a href="#comments">3</a>
-                                </div>
+                                {props && props.blogComment ? (
+                                    <div className="post-modern-comment">
+                                        <span className="post-icon icon mdi mdi-comment"></span>
+                                        <a href="#comments">{props.blogComment.length}</a>
+                                    </div>
+                                ) : (
+                                    ''
+                                )}
                             </div>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
 

@@ -62,7 +62,8 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
             loggerLog('DOTCMS CLIENT PAGE REQUEST', pathname);
 
             try {
-                const requestedPage = await dotcms.getPage(pathname, lang);
+                // const requestedPage = await dotcms.getPage(pathname, lang);
+                const requestedPage = await dotcms.getPage(pathname);
                 setRequestedPage(requestedPage);
 
                 /*
