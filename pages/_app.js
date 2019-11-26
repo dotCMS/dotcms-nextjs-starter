@@ -4,12 +4,12 @@ import withReactRouter from '../components/router/with-react-router';
 import { Route, Switch } from 'react-router-dom';
 import Error from '../components/layout/Error';
 import dotcms from '../utils/dotcms';
-import { setCookie } from "../utils/dotcms/utilities";
+import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 export const PageContext = React.createContext({
     isEditMode: false,
     nav: [],
-    language: {},
+    language: {}
 });
 
 const { loggerLog } = require('../utils');
@@ -35,16 +35,24 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, language, location: { pathname }, pageProps }) {
+function RoutedComponent({
+    Component,
+    pageRender,
+    nav,
+    isBeingEditFromDotCMS,
+    language,
+    location: { pathname },
+    pageProps
+}) {
     const isFirstRun = useRef(true);
     const [requestedPage, setRequestedPage] = useState(null);
     const [clientRequestError, setClientRequestError] = useState(null);
     const [lang, setLang] = useState(language.current);
 
-    language.set  = (event) => {
-        language.current = event.target.value
-        setCookie('dotSPALang', event.target.value);
-        setLang(event.target.value);
+    language.set = (value) => {
+        language.current = value;
+        setLang(value);
+        setCookie(LANG_COOKIE_NAME, value);
     };
 
     useEffect(() => {
@@ -110,9 +118,6 @@ function RoutedComponent({ Component, pageRender, nav, isBeingEditFromDotCMS, la
         props.nav = nav;
     }
 
-    // DotCMS language object
-    props.language = language;
-
     return <Component {...props} />;
 }
 
@@ -125,13 +130,17 @@ class MyApp extends App {
             pageProps
         } = this.props;
 
+        const language = {
+            current: getCookie(LANG_COOKIE_NAME)
+        };
+
         /*
             query.error: is the error we get from DotCMS instance
             nextJsRenderError: is the error we get if we fallback to render a page using NextJS
             and it fail, normally it will be a 404.
         */
         const error = query.error || nextJsRenderError;
-        const { pageRender, nav, language } = query;
+        const { pageRender, nav } = query;
         const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>
@@ -140,7 +149,7 @@ class MyApp extends App {
             ) : (
                 <Switch>
                     <Route
-                        component={routerProps => {
+                        component={(routerProps) => {
                             return (
                                 <>
                                     <RoutedComponent

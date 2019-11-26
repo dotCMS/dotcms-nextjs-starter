@@ -1,8 +1,11 @@
 import { PageContext } from '../../pages/_app';
+import useDotCMSApi from '../../hooks/useDotCMSApi';
+import { getLanguages } from '../../utils/dotcms';
+
 import React from 'react';
 
 const Options = ({ languages }) => {
-    return languages.map(lang => (
+    return languages.map((lang) => (
         <option key={lang.languageCode} value={lang.id}>
             {lang.language}
         </option>
@@ -18,17 +21,24 @@ const LocaleDropdown = () => {
         appearance: 'none',
         WebkitAppearance: 'none',
         borderRadius: '0',
-        border:'0',
-        outline:'none',
-        borderLeft: '1px solid #aeb1be',
-        borderRight: '1px solid #aeb1be'
+        border: '0',
+        outline: 'none',
+        borderLeft: '1px solid #aeb1be'
     };
+
+    const [loading, languages] = useDotCMSApi(getLanguages);
 
     return (
         <PageContext.Consumer>
             {({ language }) => (
-                <select style={tempStyle} defaultValue={language.current} onChange={language.set}>
-                    <Options languages={language.options} />
+                <select
+                    style={tempStyle}
+                    defaultValue={language.current}
+                    onChange={({ target }) => {
+                        language.set(target.value);
+                    }}
+                >
+                    <Options languages={languages} />
                 </select>
             )}
         </PageContext.Consumer>
