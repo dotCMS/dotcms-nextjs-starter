@@ -49,7 +49,7 @@ const BlogDetail = (props) => {
                 {/* <!-- BLOG IMAGE --> */}
                 <div className="section-blog-post-figure">
                     <img src={props.image} alt="" />
-                    <span className="badge badge-primary">{props.tags}</span>
+                    <span className="badge badge-primary">{props.tags.split(',')[0]}</span>
                 </div>
 
                 {/* <!-- BLOG BODY --> */}
