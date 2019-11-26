@@ -1,7 +1,8 @@
 import DateTimeFormat from '../../components/Shared/DateTimeFormat';
+import CommentList from '../../components/comments/commentList';
+import CommentForm from '../../components/comments/commentForm';
 
 const BlogDetail = (props) => {
-    console.log('----props', props);
     return (
         <>
             <div className="section-blog-post">
@@ -22,7 +23,7 @@ const BlogDetail = (props) => {
                                 )}
                                 <div className="post-modern-time">
                                     <span className="post-icon icon mdi mdi-calendar-clock"></span>
-                                    <DateTimeFormat value={props.postingDate} format='DateTime' />
+                                    <DateTimeFormat value={props.postingDate} format="DateTime" />
                                 </div>
                             </div>
                         </div>
@@ -55,9 +56,7 @@ const BlogDetail = (props) => {
                 <div
                     className="section-blog-post-content"
                     dangerouslySetInnerHTML={{ __html: props.body }}
-                >
-                    {/* $!markdown.parse(${URLMapContent.getRaw('body')}) */}
-                </div>
+                ></div>
 
                 {/* <!-- SOCIAL SHARES --> */}
                 <div className="group-xl text-center">
@@ -84,7 +83,8 @@ const BlogDetail = (props) => {
 
             {/* <!-- COMMENTS --> */}
             <div id="comments" className="pt-5 mt-5">
-                {/* #dotParse("/application/vtl/blog/comments/comments.vtl") */}
+                <CommentList value={props.blogComment} />
+                <CommentForm {...props}/>
             </div>
         </>
     );

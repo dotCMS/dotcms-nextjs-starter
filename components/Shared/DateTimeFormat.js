@@ -7,8 +7,8 @@ const getDateLocale = (date, locale = 'en-us') =>
 
 const getTimeLocale = (date, locale = 'en-us') =>
     date.toLocaleTimeString(locale, {
-        hour: '2-digit',
-        minute: '2-digit'
+        hour: 'numeric',
+        minute: 'numeric'
     });
 
 const DateTimeFormat = ({ value, format = 'Date', locale = 'en-us' }) => {
