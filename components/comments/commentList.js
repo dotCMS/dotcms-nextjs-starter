@@ -12,7 +12,6 @@ const CommentList = ({ value }) => {
                     <a
                         href="#"
                         className="button button-md button-primary button-leaf"
-                        id="addComment"
                     >
                         <span className="mdi mdi-plus"></span> Comment
                     </a>

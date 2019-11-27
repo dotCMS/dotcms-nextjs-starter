@@ -34,7 +34,7 @@ BlogDetailPage.getInitialProps = async (props) => {
         .slice(-1)[0];
     const params = {
         query: `+contentType:Blog%20+title:'${slug.replace('-', ' ')}'%5E15%20+languageId:1`,
-        depth: 3
+        options: { depth: 3 }
     };
     const response = await dotCMSApi.content.query(params);
     const { contentlets } = await response.json();
