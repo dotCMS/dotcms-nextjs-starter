@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import CommentItem from './commentItem';
 
 const CommentList = ({ value }) => {
@@ -22,6 +23,12 @@ const CommentList = ({ value }) => {
             })}
         </>
     );
+};
+
+CommentList.propTypes = {
+    comment: PropTypes.shape({
+        identifier: PropTypes.string.isRequired
+    })
 };
 
 export default CommentList;

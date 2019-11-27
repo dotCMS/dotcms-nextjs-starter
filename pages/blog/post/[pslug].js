@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import BlogDetail from '../blogDetail';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
@@ -38,6 +39,12 @@ BlogDetailPage.getInitialProps = async (props) => {
     const response = await dotCMSApi.content.query(params);
     const { contentlets } = await response.json();
     return { ...contentlets[0] };
+};
+
+BlogDetailPage.propTypes = {
+    props: PropTypes.shape({
+        body: PropTypes.string.isRequired
+    })
 };
 
 export default BlogDetailPage;

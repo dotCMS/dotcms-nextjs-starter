@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import DateTimeFormat from '../../components/Shared/DateTimeFormat';
 
 const CommentItem = ({ comment }) => {
@@ -33,6 +34,18 @@ const CommentItem = ({ comment }) => {
             </div>
         </div>
     );
+};
+
+CommentItem.propTypes = {
+    comment: PropTypes.shape({
+        commentAuthor: PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+            profilePhoto: PropTypes.string.isRequired
+        }),
+        postDate: PropTypes.string.isRequired,
+        body: PropTypes.string.isRequired
+    })
 };
 
 export default CommentItem;

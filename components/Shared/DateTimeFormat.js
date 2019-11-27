@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const getDateLocale = (date, locale = 'en-us') =>
     date.toLocaleDateString(locale, {
         year: 'numeric',
@@ -28,6 +30,12 @@ const DateTimeFormat = ({ value, format = 'Date', locale = 'en-us' }) => {
     }
 
     return <time dateTime={value}>{formatString}</time>;
+};
+
+DateTimeFormat.propTypes = {
+    value: PropTypes.string.isRequired,
+    format: PropTypes.string,
+    locale: PropTypes.string
 };
 
 export default DateTimeFormat;

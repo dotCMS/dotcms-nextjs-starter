@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const CommentForm = ({ title, identifier, urlTitle }) => {
     return (
         <div className="row mt-5 pt-5">
@@ -36,6 +38,12 @@ const CommentForm = ({ title, identifier, urlTitle }) => {
             </div>
         </div>
     );
+};
+
+CommentForm.propTypes = {
+    title: PropTypes.string.isRequired,
+    identifier: PropTypes.string.isRequired,
+    urlTitle: PropTypes.string.isRequired
 };
 
 export default CommentForm;

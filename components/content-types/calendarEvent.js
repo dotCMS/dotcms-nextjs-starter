@@ -1,16 +1,26 @@
+import PropTypes from 'prop-types';
 import DateTimeFormat from '../Shared/DateTimeFormat';
 
 function createMarkup(html) {
     return { __html: html };
 }
 
-export default function calendarEvent(props) {
+const calendarEvent = ({ title, startDate, endDate, description }) => {
     return (
         <div className="event">
-            <h2>{props.title}</h2>
-            <DateTimeFormat value={props.startDate} />
-            <DateTimeFormat value={props.endDate} />
-            <span dangerouslySetInnerHTML={createMarkup(props.description)} />
+            <h2>{title}</h2>
+            <DateTimeFormat value={startDate} />
+            <DateTimeFormat value={endDate} />
+            <span dangerouslySetInnerHTML={createMarkup(description)} />
         </div>
     );
-}
+};
+
+calendarEvent.propTypes = {
+    description: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+};
+
+export default calendarEvent;
