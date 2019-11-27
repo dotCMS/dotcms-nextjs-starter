@@ -10,7 +10,9 @@ const defaultMessages = {
 
 function Error({ statusCode, message, stack }) {
     const displayMessage = message || defaultMessages[statusCode];
-    loggerError(stack);
+    if (stack) {
+        loggerError(stack);
+    }
 
     return (
         <>
