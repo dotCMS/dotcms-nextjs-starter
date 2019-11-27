@@ -19,7 +19,6 @@ const formUrlEncodedParser = bodyParser.raw({
     extended: true
 });
 
-let nav = null;
 let language = {
     options: null,
     current: '',
@@ -47,15 +46,8 @@ app.prepare()
     .then(() => {
         const server = express();
 
-        // Getting navigation from DotCMS
+        // Getting language from DotCMS
         server.all('*', async (req, res, next) => {
-            if (nav === null) {
-                try {
-                    nav = await dotcms.getNav();
-                } catch (error) {
-                    nav = [];
-                }
-            }
             language.options = language.options ? language.options : await dotcms.getLanguages();
             next();
         });
@@ -80,7 +72,7 @@ app.prepare()
                 const pageRender = await dotCMSRequestHandler(req, res);
                 if (pageRender && !isBlogDetailPage(req.path)) {
                     language.current = getCurrentLanguage(req);
-                    app.render(req, res, '/dotcms', { pageRender, nav, language });
+                    app.render(req, res, '/dotcms', { pageRender, language });
                 } else if (pageRender && isBlogDetailPage(req.path)) {
                     return handle(req, res);
                 }
@@ -156,7 +148,7 @@ app.prepare()
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             app.setAssetPrefix(process.env.PUBLIC_URL);
-            app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
+            app.render(req, res, '/dotcms', { pageRender, isBeingEditFromDotCMS: true });
         });
 
         server.listen(3000, (err) => {
