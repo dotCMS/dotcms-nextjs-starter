@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { PageContext } from '../../pages/_app';
 import useDotCMSApi from '../../hooks/useDotCMSApi';
 import { getLanguages } from '../../utils/dotcms';
@@ -10,6 +11,16 @@ const Options = ({ languages }) => {
             {lang.language}
         </option>
     ));
+};
+
+Options.propTypes = {
+    languages: PropTypes.arrayOf(
+        PropTypes.shape({
+            languageCode: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
+            language: PropTypes.string.isRequired
+        }).isRequired
+    ).isRequired
 };
 
 const LocaleDropdown = () => {
