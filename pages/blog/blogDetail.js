@@ -3,20 +3,30 @@ import DateTimeFormat from '../../components/Shared/DateTimeFormat';
 import CommentList from '../../components/comments/commentList';
 import CommentForm from '../../components/comments/commentForm';
 
-const BlogDetail = (props) => {
+const BlogDetail = ({
+    author,
+    postingDate,
+    blogComment,
+    image,
+    body,
+    tags,
+    title,
+    identifier,
+    urlTitle
+}) => {
     return (
         <>
             <div className="section-blog-post">
                 <div className="section-blog-post-header">
-                    <h1>{props.title}</h1>
+                    <h1>{title}</h1>
                     <div className="post-bottom-panel">
                         <div>
                             <div className="group-xl">
-                                {props && props.author ? (
+                                {author ? (
                                     <div className="post-modern-author">
                                         <span className="post-icon icon mdi mdi-account"></span>
                                         <span>
-                                            {`by ${props.author[0].firstName} ${props.author[0].lastName}`}
+                                            {`by ${author[0].firstName} ${author[0].lastName}`}
                                         </span>
                                     </div>
                                 ) : (
@@ -24,7 +34,7 @@ const BlogDetail = (props) => {
                                 )}
                                 <div className="post-modern-time">
                                     <span className="post-icon icon mdi mdi-calendar-clock"></span>
-                                    <DateTimeFormat value={props.postingDate} format="DateTime" />
+                                    <DateTimeFormat value={postingDate} format="DateTime" />
                                 </div>
                             </div>
                         </div>
@@ -34,10 +44,10 @@ const BlogDetail = (props) => {
                                     <span className="post-icon icon mdi mdi-eye"></span>
                                     <span>193</span>
                                 </div>
-                                {props && props.blogComment ? (
+                                {blogComment ? (
                                     <div className="post-modern-comment">
                                         <span className="post-icon icon mdi mdi-comment"></span>
-                                        <a href="#comments">{props.blogComment.length}</a>
+                                        <a href="#comments">{blogComment.length}</a>
                                     </div>
                                 ) : (
                                     ''
@@ -49,14 +59,14 @@ const BlogDetail = (props) => {
 
                 {/* <!-- BLOG IMAGE --> */}
                 <div className="section-blog-post-figure">
-                    <img src={props.image} alt="" />
-                    <span className="badge badge-primary">{props.tags.split(',')[0]}</span>
+                    <img src={image} alt="" />
+                    <span className="badge badge-primary">{tags.split(',')[0]}</span>
                 </div>
 
                 {/* <!-- BLOG BODY --> */}
                 <div
                     className="section-blog-post-content"
-                    dangerouslySetInnerHTML={{ __html: props.body }}
+                    dangerouslySetInnerHTML={{ __html: body }}
                 ></div>
 
                 {/* <!-- SOCIAL SHARES --> */}
@@ -84,28 +94,26 @@ const BlogDetail = (props) => {
 
             {/* <!-- COMMENTS --> */}
             <div id="comments" className="pt-5 mt-5">
-                <CommentList value={props.blogComment} />
-                <CommentForm {...props} />
+                <CommentList comments={blogComment} />
+                <CommentForm title={title} identifier={identifier} urlTitle={urlTitle} />
             </div>
         </>
     );
 };
 
 BlogDetail.propTypes = {
-    props: PropTypes.shape({
-        author: PropTypes.arrayOf(
-            PropTypes.shape({
-                firstName: PropTypes.string.isRequired,
-                lastName: PropTypes.string.isRequired
-            })
-        ),
-        blogComment: PropTypes.arrayOf(PropTypes.object),
-        body: PropTypes.string.isRequired,
-        image: PropTypes.string.isRequired,
-        postingDate: PropTypes.string.isRequired,
-        tags: PropTypes.string.isRequired,
-        title: PropTypes.string.isRequired
-    })
+    author: PropTypes.arrayOf(
+        PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired
+        })
+    ),
+    blogComment: PropTypes.arrayOf(PropTypes.object),
+    body: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    postingDate: PropTypes.string.isRequired,
+    tags: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
 };
 
 export default BlogDetail;

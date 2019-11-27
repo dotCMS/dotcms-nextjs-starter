@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import DateTimeFormat from '../../components/Shared/DateTimeFormat';
 
-const CommentItem = ({ comment }) => {
+const CommentItem = ({ commentAuthor, postDate, body }) => {
     return (
         <div className="box-comment">
             <div className="unit flex-column flex-md-row">
                 <div className="unit-left">
                     <img
                         className="img-circles"
-                        src={`${comment.commentAuthor.profilePhoto}/80w80h`}
+                        src={`${commentAuthor.profilePhoto}/80w80h`}
                         alt=""
                         width="80"
                         height="80"
@@ -18,14 +18,14 @@ const CommentItem = ({ comment }) => {
                     <div className="group-xl">
                         <h4 className="box-comment-author">
                             <a href="#">
-                                {comment.commentAuthor.firstName} {comment.commentAuthor.lastName}
+                                {commentAuthor.firstName} {commentAuthor.lastName}
                             </a>
                         </h4>
                         <span className="box-comment-time">
-                            {<DateTimeFormat value={comment.postDate} format="DateTime" />}
+                            {<DateTimeFormat value={postDate} format="DateTime" />}
                         </span>
                     </div>
-                    <div className="box-comment-text">{comment.body}</div>
+                    <div className="box-comment-text">{body}</div>
                     <div className="box-comment-reply">
                         <span className="icon mdi mdi-reply"></span>
                         <a href="#">Reply</a>
@@ -37,15 +37,13 @@ const CommentItem = ({ comment }) => {
 };
 
 CommentItem.propTypes = {
-    comment: PropTypes.shape({
-        commentAuthor: PropTypes.shape({
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired,
-            profilePhoto: PropTypes.string.isRequired
-        }),
-        postDate: PropTypes.string.isRequired,
-        body: PropTypes.string.isRequired
-    })
+    commentAuthor: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        profilePhoto: PropTypes.string.isRequired
+    }).isRequired,
+    postDate: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired
 };
 
 export default CommentItem;

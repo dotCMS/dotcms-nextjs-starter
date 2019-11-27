@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import CommentItem from './commentItem';
 
-const CommentList = ({ value }) => {
+const CommentList = ({ comments }) => {
     return (
         <>
             <div className="row">
@@ -9,25 +9,24 @@ const CommentList = ({ value }) => {
                     <h2>Comments</h2>
                 </div>
                 <div className="col text-right">
-                    <a
-                        href="#"
-                        className="button button-md button-primary button-leaf"
-                    >
+                    <a href="#" className="button button-md button-primary button-leaf">
                         <span className="mdi mdi-plus"></span> Comment
                     </a>
                 </div>
             </div>
-            {value.map((comment) => {
-                return <CommentItem comment={comment} key={comment.identifier} />;
+            {comments.map((comment) => {
+                return <CommentItem {...comment} key={comment.identifier} />;
             })}
         </>
     );
 };
 
 CommentList.propTypes = {
-    comment: PropTypes.shape({
-        identifier: PropTypes.string.isRequired
-    })
+    comments: PropTypes.arrayOf(
+        PropTypes.shape({
+            identifier: PropTypes.string.isRequired
+        })
+    ).isRequired
 };
 
 export default CommentList;
