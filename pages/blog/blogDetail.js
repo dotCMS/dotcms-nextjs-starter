@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import DateTimeFormat from '../../components/Shared/DateTimeFormat';
-import CommentList from '../../components/comments/commentList';
-import CommentForm from '../../components/comments/commentForm';
+import CommentList from '../../components/comments/CommentList';
+import CommentForm from '../../components/comments/CommentForm';
 
 const BlogDetail = ({
     author,

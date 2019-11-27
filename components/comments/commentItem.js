@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import DateTimeFormat from '../../components/Shared/DateTimeFormat';
+import DateTimeFormat from '../Shared/DateTimeFormat';
 
 const CommentItem = ({ commentAuthor, postDate, body }) => {
     return (
