@@ -9,10 +9,11 @@ export const commentItemType = {
         lastName: string.isRequired,
         profilePhoto: string.isRequired
     }).isRequired,
+    identifier: string.isRequired,
     postDate: string.isRequired
 };
 
-export const commentListType = arrayOf(shape({ commentItemType })).isRequired;
+export const commentListType = arrayOf(shape(commentItemType)).isRequired;
 
 export const blogDetailType = {
     author: arrayOf(

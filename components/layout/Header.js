@@ -1,5 +1,5 @@
 import Nav from './Nav/Nav';
-import LocaleDropdown from "./LocaleDropdown";
+import LocaleDropdown from './LocaleDropdown';
 
 const Header = () => {
     return (
@@ -41,7 +41,10 @@ const Header = () => {
                                                 <span className="icon mdi mdi-map-marker"></span>
                                             </div>
                                             <div className="unit-body">
-                                                <a href="#">3059 Grand Avenue, Suite 300 Miami, FL, 33133 USA</a>
+                                                <a href="#">
+                                                    3059 Grand Avenue, Suite 300 Miami, FL, 33133
+                                                    USA
+                                                </a>
                                             </div>
                                         </div>
                                     </li>
@@ -61,13 +64,16 @@ const Header = () => {
                                                 <span className="icon mdi mdi-email-outline"></span>
                                             </div>
                                             <div className="unit-body">
-                                                <a href="mailto: info@dotcms.com">info@dotcms.com</a>
+                                                <a href="mailto: info@dotcms.com">
+                                                    info@dotcms.com
+                                                </a>
                                             </div>
                                         </div>
                                     </li>
                                 </ul>
-                                {/* <LocaleDropdown /> */}
                                 <div>
+                                    <LocaleDropdown />
+
                                     {/* CART */}
                                     <a className="basket" href="/store/cart">
                                         <span className="icon mdi mdi-cart-outline"></span>

@@ -1,5 +1,6 @@
 import CommentItem from './CommentItem';
-import { commentListType } from '../types';
+import { commentListType, commentItemType } from '../types';
+import PropTypes from 'prop-types';
 
 const CommentList = ({ comments }) => {
     return (
