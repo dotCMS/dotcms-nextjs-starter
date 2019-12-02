@@ -29,6 +29,7 @@ const DOTCMS_DOWN = 'DOTCMS_DOWN';
 const DOTCMS_NO_LAYOUT = 'DOTCMS_NO_LAYOUT';
 const DOTCMS_NO_AUTH = 'DOTCMS_NO_AUTH';
 const DOTCMS_CUSTOM_ERROR = 'DOTCMS_CUSTOM_ERROR';
+const LANG_COOKIE_NAME = 'dotSPALang';
 
 class CustomError extends Error {
     constructor(message = '', statusCode = DOTCMS_CUSTOM_ERROR, ...params) {
@@ -52,5 +53,7 @@ module.exports = {
     CustomError,
     getCookie,
     setCookie,
-    errors: { DOTCMS_DOWN, DOTCMS_NO_LAYOUT, DOTCMS_NO_AUTH, DOTCMS_CUSTOM_ERROR }
+    LANG_COOKIE_NAME,
+    errors: { DOTCMS_DOWN, DOTCMS_NO_LAYOUT, DOTCMS_NO_AUTH, DOTCMS_CUSTOM_ERROR },
+    isAPIRequest
 };
