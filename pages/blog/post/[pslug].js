@@ -3,6 +3,7 @@ import BlogDetail from '../blogDetail';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
 import { blogDetailType } from '../../../components/types';
+import { getCookie, LANG_COOKIE_NAME } from '../../../utils/dotcms/utilities';
 
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
@@ -29,12 +30,16 @@ const BlogDetailPage = (props) => {
 };
 
 BlogDetailPage.getInitialProps = async (props) => {
+    const languageId = getCookie(props.req.headers.cookie, LANG_COOKIE_NAME) || '1';
     const slug = props.req.originalUrl
         .split('/')
         .filter((e) => e)
         .slice(-1)[0];
     const params = {
-        query: `+contentType:Blog%20+title:'${slug.replace('-', ' ')}'%5E15%20+languageId:1`,
+        query: `+contentType:Blog%20+title:'${slug.replace(
+            '-',
+            ' '
+        )}'%5E15%20+languageId:${languageId}`,
         options: { depth: 3 }
     };
     const response = await dotCMSApi.content.query(params);
