@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
 import CommentItem from './CommentItem';
+import { commentListType } from '../types';
 
 const CommentList = ({ comments }) => {
     return (
@@ -22,11 +22,7 @@ const CommentList = ({ comments }) => {
 };
 
 CommentList.propTypes = {
-    comments: PropTypes.arrayOf(
-        PropTypes.shape({
-            identifier: PropTypes.string.isRequired
-        })
-    ).isRequired
+    comments: commentListType
 };
 
 export default CommentList;

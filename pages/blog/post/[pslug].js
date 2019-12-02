@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import BlogDetail from '../blogDetail';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
+import { blogDetailType } from '../../../components/types';
 
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
@@ -42,9 +43,7 @@ BlogDetailPage.getInitialProps = async (props) => {
 };
 
 BlogDetailPage.propTypes = {
-    props: PropTypes.shape({
-        body: PropTypes.string.isRequired
-    })
+    props: PropTypes.shape(blogDetailType)
 };
 
 export default BlogDetailPage;

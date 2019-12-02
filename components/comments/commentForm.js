@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
+import { blogDetailType } from '../types';
 
-const CommentForm = ({ title, identifier, urlTitle }) => {
+const CommentForm = ({ identifier, title, urlTitle }) => {
     return (
         <div className="row mt-5 pt-5">
             <div className="col-lg-12">
@@ -36,9 +36,9 @@ const CommentForm = ({ title, identifier, urlTitle }) => {
 };
 
 CommentForm.propTypes = {
-    title: PropTypes.string.isRequired,
-    identifier: PropTypes.string.isRequired,
-    urlTitle: PropTypes.string.isRequired
+    identifier: blogDetailType.identifier,
+    title: blogDetailType.title,
+    urlTitle: blogDetailType.urlTitle
 };
 
 export default CommentForm;

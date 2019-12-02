@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import DateTimeFormat from '../../components/Shared/DateTimeFormat';
 import CommentList from '../../components/comments/CommentList';
 import CommentForm from '../../components/comments/CommentForm';
+import { blogDetailType } from '../../components/types';
 
 const BlogDetail = ({
     author,
@@ -102,18 +102,15 @@ const BlogDetail = ({
 };
 
 BlogDetail.propTypes = {
-    author: PropTypes.arrayOf(
-        PropTypes.shape({
-            firstName: PropTypes.string.isRequired,
-            lastName: PropTypes.string.isRequired
-        })
-    ),
-    blogComment: PropTypes.arrayOf(PropTypes.object),
-    body: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    postingDate: PropTypes.string.isRequired,
-    tags: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    author: blogDetailType.author,
+    postingDate: blogDetailType.postingDate,
+    blogComment: blogDetailType.blogComment,
+    image: blogDetailType.image,
+    body: blogDetailType.body,
+    tags: blogDetailType.tags,
+    title: blogDetailType.title,
+    identifier: blogDetailType.identifier,
+    urlTitle: blogDetailType.urlTitle
 };
 
 export default BlogDetail;

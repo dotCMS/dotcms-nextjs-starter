@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
 import DateTimeFormat from '../Shared/DateTimeFormat';
+import { commentItemType } from '../types';
 
-const CommentItem = ({ commentAuthor, postDate, body }) => {
+const CommentItem = ({ body, commentAuthor, postDate }) => {
     return (
         <div className="box-comment">
             <div className="unit flex-column flex-md-row">
@@ -37,13 +37,9 @@ const CommentItem = ({ commentAuthor, postDate, body }) => {
 };
 
 CommentItem.propTypes = {
-    commentAuthor: PropTypes.shape({
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        profilePhoto: PropTypes.string.isRequired
-    }).isRequired,
-    postDate: PropTypes.string.isRequired,
-    body: PropTypes.string.isRequired
+    body: commentItemType.body,
+    commentAuthor: commentItemType.commentAuthor,
+    postDate: commentItemType.postDate
 };
 
 export default CommentItem;
