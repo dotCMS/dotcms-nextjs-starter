@@ -2,6 +2,7 @@ import DateTimeFormat from '../../components/Shared/DateTimeFormat';
 import CommentList from '../../components/comments/CommentList';
 import CommentForm from '../../components/comments/CommentForm';
 import { blogDetailType } from '../../components/types';
+import DotcmsImage from '../../components/Shared/DotcmsImage';
 
 const BlogDetail = ({
     author,
@@ -59,7 +60,7 @@ const BlogDetail = ({
 
                 {/* <!-- BLOG IMAGE --> */}
                 <div className="section-blog-post-figure">
-                    <img src={image} alt="" />
+                    <DotcmsImage alt={title} width="960" identifier={identifier} />
                     <span className="badge badge-primary">{tags.split(',')[0]}</span>
                 </div>
 
