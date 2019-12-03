@@ -17,7 +17,7 @@ Options.propTypes = {
     languages: PropTypes.arrayOf(
         PropTypes.shape({
             languageCode: PropTypes.string.isRequired,
-            id: PropTypes.string.isRequired,
+            id: PropTypes.number.isRequired,
             language: PropTypes.string.isRequired
         }).isRequired
     ).isRequired
