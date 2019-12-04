@@ -1,7 +1,7 @@
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
 import Link from 'next/link';
-import DateFormat from '../../Shared/DateFormat';
+import DateTimeFormat from '../../Shared/DateTimeFormat';
 import Loader from '../../Shared/Loader';
 import DotcmsImage from '../../Shared/DotcmsImage';
 import useDotCMSApi from '../../../hooks/useDotCMSApi';
@@ -39,7 +39,7 @@ const BlogListing = () => {
                         <a>{title}</a>
                     </Link>
                 </h6>
-                <DateFormat value={postingDate} />
+                <DateTimeFormat value={postingDate} />
             </div>
         </div>
     ));

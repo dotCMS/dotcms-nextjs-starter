@@ -1,9 +1,10 @@
 import App from 'next/app';
+import Error from '../components/layout/Error';
+import DotCMS from '../pages/dotcms';
 import React, { useRef, useEffect, useState } from 'react';
+import dotcms from '../utils/dotcms';
 import withReactRouter from '../components/router/with-react-router';
 import { Route, Switch } from 'react-router-dom';
-import Error from '../components/layout/Error';
-import dotcms from '../utils/dotcms';
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 export const PageContext = React.createContext({
@@ -118,6 +119,14 @@ function RoutedComponent({
         props.nav = nav;
     }
 
+    /*
+        When you render a static page or a dynamic route with next js and then try to go to a 
+        dotcms page we need to manually render the custom DotCMS page component
+    */
+    if (props.pageRender) {
+        return <DotCMS {...props} />;
+    }
+
     return <Component {...props} />;
 }
 
@@ -126,12 +135,13 @@ class MyApp extends App {
         const {
             Component,
             router: { query },
+            nav,
             nextJsRenderError,
             pageProps
         } = this.props;
 
         const language = {
-            current: getCookie(LANG_COOKIE_NAME)
+            current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''
         };
 
         /*
@@ -140,7 +150,7 @@ class MyApp extends App {
             and it fail, normally it will be a 404.
         */
         const error = query.error || nextJsRenderError;
-        const { pageRender, nav } = query;
+        const { pageRender } = query;
         const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>

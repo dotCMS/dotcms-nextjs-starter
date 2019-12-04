@@ -44,7 +44,7 @@ const LocaleDropdown = () => {
             {({ language }) => (
                 <select
                     style={tempStyle}
-                    defaultValue={language.current}
+                    value={language.current}
                     onChange={({ target }) => {
                         language.set(target.value);
                     }}

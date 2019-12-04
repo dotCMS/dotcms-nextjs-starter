@@ -1,9 +1,12 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 const isServer = typeof window === 'undefined';
+import dotcms from '../../utils/dotcms';
 
 export default App => {
-    return class AppWithReactRouter extends React.Component {
+
+    let nav = [];
+    return class AppWithReactRouter extends React.Component {        
         static async getInitialProps(appContext) {
             const { pageProps } = await App.getInitialProps(appContext);
 
@@ -24,9 +27,18 @@ export default App => {
                 }
             } = appContext;
 
+            if (!nav.length) {
+                try {
+                    nav = await dotcms.getNav();
+                } catch (error) {
+                    nav = [];
+                }
+            }
+
             return {
                 originalUrl,
                 context: locals.context || {},
+                nav,
                 nextJsRenderError,
                 pageProps
             };

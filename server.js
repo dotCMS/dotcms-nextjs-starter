@@ -19,8 +19,6 @@ const formUrlEncodedParser = bodyParser.raw({
     extended: true
 });
 
-let nav = null;
-
 function getCurrentLanguage(cookie) {
     return getCookie(cookie, LANG_COOKIE_NAME) || '1';
 }
@@ -34,21 +32,13 @@ function dotCMSRequestHandler(req, res) {
     }
 }
 
+function isBlogDetailPage(path) {
+    return path.startsWith('/blog/post');
+}
+
 app.prepare()
     .then(() => {
         const server = express();
-
-        // Getting navigation from DotCMS
-        server.all('*', async (req, res, next) => {
-            if (nav === null) {
-                try {
-                    nav = await dotcms.getNav();
-                } catch (error) {
-                    nav = [];
-                }
-            }
-            next();
-        });
 
         server.get('*', async (req, res) => {
             req.locals = {};
@@ -68,8 +58,10 @@ app.prepare()
             */
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
-                if (pageRender) {
-                    app.render(req, res, '/dotcms', { pageRender, nav });
+                if (pageRender && !isBlogDetailPage(req.path)) {
+                    app.render(req, res, '/dotcms', { pageRender });
+                } else if (pageRender && isBlogDetailPage(req.path)) {
+                    return handle(req, res);
                 }
             } catch (error) {
                 /* 
@@ -143,7 +135,7 @@ app.prepare()
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             app.setAssetPrefix(process.env.PUBLIC_URL);
-            app.render(req, res, '/dotcms', { pageRender, nav, isBeingEditFromDotCMS: true });
+            app.render(req, res, '/dotcms', { pageRender, isBeingEditFromDotCMS: true });
         });
 
         server.listen(3000, (err) => {

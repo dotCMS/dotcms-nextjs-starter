@@ -8,7 +8,7 @@ import Layout from '../components/layout/Layout';
     This component will receive the page object from DotCMS and render the page using the layout
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
-function Home(props) {
+function DotCMS(props) {
     const { pageRender } = props;
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
 
@@ -25,7 +25,7 @@ function Home(props) {
                 We are only importing and unsing this Web Components in EDIT_MODE.
             */
             if (isEditMode) {
-                import('dotcms-ema-elements/loader').then(module => {
+                import('dotcms-ema-elements/loader').then((module) => {
                     module.applyPolyfills().then(() => {
                         module.defineCustomElements(window);
                     });
@@ -48,4 +48,4 @@ function Home(props) {
     );
 }
 
-export default Home;
+export default DotCMS;
