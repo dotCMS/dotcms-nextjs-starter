@@ -1,9 +1,10 @@
 import App from 'next/app';
+import Error from '../components/layout/Error';
+import DotCMS from '../pages/dotcms';
 import React, { useRef, useEffect, useState } from 'react';
+import dotcms from '../utils/dotcms';
 import withReactRouter from '../components/router/with-react-router';
 import { Route, Switch } from 'react-router-dom';
-import Error from '../components/layout/Error';
-import dotcms from '../utils/dotcms';
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 export const PageContext = React.createContext({
@@ -116,6 +117,14 @@ function RoutedComponent({
     // DotCMS nav object
     if (nav) {
         props.nav = nav;
+    }
+
+    /*
+        When you render a static page or a dynamic route with next js and then try to go to a 
+        dotcms page we need to manually render the custom DotCMS page component
+    */
+    if (props.pageRender) {
+        return <DotCMS {...props} />;
     }
 
     return <Component {...props} />;
