@@ -9,11 +9,6 @@ const CommentForm = ({ identifier, title, urlTitle }) => {
                 <form>
                     <input type="hidden" name="blogTitle" value={title} />
                     <input type="hidden" name="blogId" value={identifier} />
-                    <input
-                        type="hidden"
-                        name="commenterId"
-                        // value="$!{commenterIdentifier}"
-                    />
                     <input type="hidden" name="today" value="$today" />
                     <input
                         type="hidden"
