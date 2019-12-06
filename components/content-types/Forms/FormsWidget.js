@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import Forms from './Forms';
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
@@ -25,6 +26,11 @@ const FormsWidget = ({ formId, rendered }) => {
     });
 
     return items.length ? <Forms layout={items} variable={variable} /> : '';
+};
+
+FormsWidget.propTypes = {
+    formId: PropTypes.string.isRequired,
+    rendered: PropTypes.string
 };
 
 export default FormsWidget;
