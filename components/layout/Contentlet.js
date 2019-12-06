@@ -2,6 +2,7 @@ import Activity from '../content-types/Activity';
 import Banner from '../content-types/Banner';
 import BannerCarouselWidget from '../content-types/BannerCarousel/BannerCarouselWidget';
 import calendarEvent from '../content-types/calendarEvent';
+import FormsWidget from '../content-types/Forms/FormsWidget';
 import Image from '../content-types/Image';
 import Product from '../content-types/Product';
 import SimpleWidget from '../content-types/SimpleWidget';
@@ -13,6 +14,7 @@ const map = {
     Banner,
     BannerCarousel: BannerCarouselWidget,
     calendarEvent,
+    forms: FormsWidget,
     Image,
     Product,
     SimpleWidget,
@@ -20,7 +22,7 @@ const map = {
     webPageContent
 };
 
-const getComponent = contentType => map[contentType] || webPageContent;
+const getComponent = (contentType) => map[contentType] || webPageContent;
 
 export default function Contentlet({ data }) {
     let Component;
