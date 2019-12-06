@@ -3,8 +3,8 @@ import reactifyWc from 'reactify-wc';
 
 const DotFormWC = reactifyWc('dot-form');
 
-const Forms = ({ layout }) => {
-    return <DotFormWC variable="Contact" layout={layout}></DotFormWC>;
+const Forms = ({ layout, variable }) => {
+    return <DotFormWC variable={variable} layout={layout}></DotFormWC>;
 };
 
 export default Forms;

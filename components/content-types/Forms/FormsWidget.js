@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react';
 import Forms from './Forms';
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
-const FormsWidget = (props) => {
+const FormsWidget = ({ formId, rendered }) => {
     const [items, setItems] = useState([]);
+    let variable;
+
+    if (rendered) {
+        variable = rendered.match(/variable='[^']+('*)/g)[0].split("'")[1];
+    }
 
     useEffect(() => {
         if (!items.length) {
             dotCMSApi
-                .form({ identifier: props.formId })
+                .form({ identifier: formId })
                 .get()
                 .then(({ fields }) => {
                     const layout = fields.map((item) => {
@@ -19,7 +24,7 @@ const FormsWidget = (props) => {
         }
     });
 
-    return items.length ? <Forms layout={items} /> : '';
+    return items.length ? <Forms layout={items} variable={variable} /> : '';
 };
 
 export default FormsWidget;
