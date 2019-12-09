@@ -3,18 +3,11 @@ import reactifyWc from 'reactify-wc';
 import PropTypes from 'prop-types';
 
 const DotFormWC = reactifyWc('dot-form');
-
-if (process.browser) {
-    import('dotcms-field-elements/dist/loader').then((module) => {
-        module.defineCustomElements(window);
-    });
-}
-
-const Forms = ({ layout, variable }) => {
+const Form = ({ layout, variable }) => {
     return <DotFormWC variable={variable} layout={layout}></DotFormWC>;
 };
 
-Forms.propTypes = {
+Form.propTypes = {
     layout: PropTypes.arrayOf(
         PropTypes.shape({
             columns: PropTypes.arrayOf(
@@ -51,4 +44,4 @@ Forms.propTypes = {
     variable: PropTypes.string.isRequired
 };
 
-export default Forms;
+export default Form;

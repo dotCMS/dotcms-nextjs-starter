@@ -4,6 +4,12 @@ import Head from 'next/head';
 import DotCMSPage from '../components/layout/DotCMSPage';
 import Layout from '../components/layout/Layout';
 
+if (process.browser && !window.dotcmsFields) {
+    import('dotcms-field-elements/dist/loader').then((module) => {
+        module.defineCustomElements(window);
+    });
+}
+
 /*
     This component will receive the page object from DotCMS and render the page using the layout
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
