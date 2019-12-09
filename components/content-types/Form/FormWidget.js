@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
+function getFormVariableFromContent(renderedContent) {
+    return renderedContent.match(/variable='[^']+('*)/g)[0].split("'")[1];
+}
+
 const FormWidget = ({ formId, rendered }) => {
     const [items, setItems] = useState([]);
     let variable;
 
     if (rendered) {
-        variable = rendered.match(/variable='[^']+('*)/g)[0].split("'")[1];
+        variable = getFormVariableFromContent(rendered);
     }
 
     useEffect(() => {
