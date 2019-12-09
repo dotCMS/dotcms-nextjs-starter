@@ -4,6 +4,12 @@ import PropTypes from 'prop-types';
 
 const DotFormWC = reactifyWc('dot-form');
 
+if (process.browser) {
+    import('dotcms-field-elements/dist/loader').then((module) => {
+        module.defineCustomElements(window);
+    });
+}
+
 const Forms = ({ layout, variable }) => {
     return <DotFormWC variable={variable} layout={layout}></DotFormWC>;
 };
