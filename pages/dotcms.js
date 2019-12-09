@@ -39,7 +39,6 @@ function DotCMS(props) {
             <Head>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
-                <script src="/custom-elements/dotcmsfields.js"></script>
                 <title>{`${pageRender.page.title} | ${pageRender.page.friendlyName}`}</title>
             </Head>
             <Layout {...pageRender.layout}>
