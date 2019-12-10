@@ -24,33 +24,22 @@ Options.propTypes = {
 };
 
 const LocaleDropdown = () => {
-    //TODO: Remove this after work on select component.
-    const tempStyle = {
-        minHeight: '56px',
-        padding: '15px 22px',
-        backgroundColor: 'transparent',
-        appearance: 'none',
-        WebkitAppearance: 'none',
-        borderRadius: '0',
-        border: '0',
-        outline: 'none',
-        borderLeft: '1px solid #aeb1be'
-    };
-
     const [loading, languages] = useDotCMSApi(getLanguages);
 
     return (
         <PageContext.Consumer>
             {({ language }) => (
-                <select
-                    style={tempStyle}
-                    value={language.current}
-                    onChange={({ target }) => {
-                        language.set(target.value);
-                    }}
-                >
-                    <Options languages={languages} />
-                </select>
+                <div className="form-wrap-select">
+                    <select
+                        className="form-input"
+                        value={language.current}
+                        onChange={({target}) => {
+                            language.set(target.value);
+                        }}
+                    >
+                        <Options languages={languages}/>
+                    </select>
+                </div>
             )}
         </PageContext.Consumer>
     );
