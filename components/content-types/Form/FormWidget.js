@@ -3,36 +3,28 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
-function getFormVariableFromContent(renderedContent) {
-    return renderedContent.match(/variable='[^']+('*)/g)[0].split("'")[1];
-}
-
-const FormWidget = ({ formId, rendered }) => {
+const FormWidget = ({ formId }) => {
     const [items, setItems] = useState([]);
-    let variable;
-
-    if (rendered) {
-        variable = getFormVariableFromContent(rendered);
-    }
+    const [formVariable, setFormVariable] = useState('');
 
     useEffect(() => {
         dotCMSApi
             .form({ identifier: formId })
             .get()
-            .then(({ fields }) => {
+            .then(({ fields, variable }) => {
                 const layout = fields.map((item) => {
                     return { columns: [{ fields: [item] }] };
                 });
                 setItems(layout);
+                setFormVariable(variable);
             });
     }, [formId]);
 
-    return items.length ? <Form layout={items} variable={variable} /> : '';
+    return items.length && formVariable ? <Form layout={items} variable={formVariable} /> : '';
 };
 
 FormWidget.propTypes = {
-    formId: PropTypes.string.isRequired,
-    rendered: PropTypes.string
+    formId: PropTypes.string.isRequired
 };
 
 export default FormWidget;
