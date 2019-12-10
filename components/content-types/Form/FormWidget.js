@@ -4,23 +4,21 @@ import Form from './Form';
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
 const FormWidget = ({ formId }) => {
-    const [items, setItems] = useState([]);
-    const [formVariable, setFormVariable] = useState('');
+    const [state, setState] = useState({});
 
     useEffect(() => {
         dotCMSApi
             .form({ identifier: formId })
             .get()
-            .then(({ fields, variable }) => {
-                const layout = fields.map((item) => {
-                    return { columns: [{ fields: [item] }] };
+            .then(({ layout, variable }) => {
+                setState({
+                    layout,
+                    variable
                 });
-                setItems(layout);
-                setFormVariable(variable);
             });
     }, [formId]);
 
-    return items.length && formVariable ? <Form layout={items} variable={formVariable} /> : '';
+    return state.layout && state.variable ? <Form {...state} /> : '';
 };
 
 FormWidget.propTypes = {
