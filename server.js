@@ -121,6 +121,7 @@ app.prepare()
             to DotCMS instance, so we just proxy them.
         */
         server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+        server.put('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
 
         /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
