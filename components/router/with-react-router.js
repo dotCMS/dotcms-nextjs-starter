@@ -3,10 +3,9 @@ import { BrowserRouter } from 'react-router-dom';
 const isServer = typeof window === 'undefined';
 import dotcms from '../../utils/dotcms';
 
-export default App => {
-
+export default (App) => {
     let nav = [];
-    return class AppWithReactRouter extends React.Component {        
+    return class AppWithReactRouter extends React.Component {
         static async getInitialProps(appContext) {
             const { pageProps } = await App.getInitialProps(appContext);
 
@@ -29,7 +28,16 @@ export default App => {
 
             if (!nav.length) {
                 try {
-                    nav = await dotcms.getNav();
+                    nav = [
+                        {
+                            children: [],
+                            exact: true,
+                            hash: 0,
+                            href: '/',
+                            target: '_self',
+                            title: 'Home'
+                        }
+                    ].concat(await dotcms.getNav());
                 } catch (error) {
                     nav = [];
                 }

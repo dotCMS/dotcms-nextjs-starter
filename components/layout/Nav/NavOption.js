@@ -5,6 +5,7 @@ import ItemLink from './ItemLink';
 const NavOption = ({ item }) => {
     return (
         <ItemLink
+            exact={item.exact}
             key={item.folder}
             className="rd-nav-link"
             pathname={item.href}

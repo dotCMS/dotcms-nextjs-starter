@@ -2,10 +2,10 @@ import { NavLink } from 'react-router-dom';
 import ListItem from './ListItem';
 import AnchorLink from './AnchorLink';
 
-const ItemLink = parentProps => {
+const ItemLink = (parentProps) => {
     return (
         <NavLink
-            component={props => {
+            component={(props) => {
                 const allProps = {
                     ...parentProps,
                     ...props,
@@ -19,6 +19,7 @@ const ItemLink = parentProps => {
             }}
             activeClassName="active"
             className="rd-nav-item"
+            exact={parentProps.exact}
             to={{
                 pathname: parentProps.pathname,
                 state: parentProps.state
