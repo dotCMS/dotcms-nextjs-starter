@@ -1,5 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -75,10 +76,10 @@ const Header = () => {
                                     <LocaleDropdown />
 
                                     {/* CART */}
-                                    <a className="basket" href="/store/cart">
+                                    <Link className="basket" to="/store/cart">
                                         <span className="icon mdi mdi-cart-outline"></span>
                                         <span className="basket-count">3</span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +95,11 @@ const Header = () => {
                                         <span></span>
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <a className="brand" href="/" aria-label="TravelLux Home">
+                                        <Link
+                                            className="brand"
+                                            to="/"
+                                            aria-label="TravelLux Home"
+                                        >
                                             <img
                                                 className="brand-logo-dark"
                                                 src="/application/themes/travel/images/logo.png"
@@ -102,7 +107,7 @@ const Header = () => {
                                                 height="40"
                                                 alt="TravelLux Home"
                                             />
-                                        </a>
+                                        </Link>
                                     </div>
                                 </div>
 
