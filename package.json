@@ -16,6 +16,7 @@
         "bootstrap": "^4.3.1",
         "dotcms": "^0.0.10",
         "dotcms-ema-elements": "0.0.2",
+        "dotcms-field-elements": "0.0.20",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.0",
