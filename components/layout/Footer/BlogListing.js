@@ -39,7 +39,7 @@ const BlogListing = () => {
                         <a>{title}</a>
                     </Link>
                 </h6>
-                <DateTimeFormat value={postingDate} />
+                {postingDate ? <DateTimeFormat value={postingDate} /> : ''}
             </div>
         </div>
     ));
