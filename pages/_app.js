@@ -3,8 +3,7 @@ import Error from '../components/layout/Error';
 import DotCMS from '../pages/dotcms';
 import React, { useRef, useEffect, useState } from 'react';
 import dotcms from '../utils/dotcms';
-import withReactRouter from '../components/router/with-react-router';
-import { Route, Switch } from 'react-router-dom';
+
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 export const PageContext = React.createContext({
@@ -36,101 +35,22 @@ function DotCMSStatus({ status }) {
     );
 }
 
-function RoutedComponent({
-    Component,
-    pageRender,
-    nav,
-    isBeingEditFromDotCMS,
-    language,
-    location: { pathname },
-    pageProps
-}) {
-    const isFirstRun = useRef(true);
-    const [requestedPage, setRequestedPage] = useState(null);
-    const [clientRequestError, setClientRequestError] = useState(null);
-    const [lang, setLang] = useState(language.current);
-
-    language.set = (value) => {
-        language.current = value;
-        setLang(value);
-        setCookie(LANG_COOKIE_NAME, value);
-    };
-
-    useEffect(() => {
-        if (isFirstRun.current) {
-            isFirstRun.current = false;
-            return;
-        }
-
-        if (isBeingEditFromDotCMS) {
-            dotcms.emitRemoteRenderEdit(pathname);
-            return;
-        }
-
-        async function fetchDotCMSPage() {
-            loggerLog('DOTCMS CLIENT PAGE REQUEST', pathname);
-
-            try {
-                const requestedPage = await dotcms.getPage(pathname, lang);
-                setRequestedPage(requestedPage);
-
-                /*
-                    We were getting a warning from next router when we hit the back button.
-
-                    Since we're usig react-router the state of the window.history is not
-                    getting updated as next router expect so we're getting this error:
-                    https://err.sh/zeit/next.js/popstate-state-empty
-
-                    This makes that when user hits the back button the browser hits the
-                    node/express to render the page like it was first load.
-
-                    This is to fix that until next give us a better option.
-                */
-                history.replaceState(
-                    {
-                        as: pathname,
-                        url: pathname
-                    },
-                    null,
-                    pathname
-                );
-            } catch (e) {
-                setClientRequestError(e);
-            }
-        }
-        fetchDotCMSPage();
-    }, [pathname, lang]);
-
-    if (clientRequestError) {
-        const { statusCode, message } = clientRequestError;
-        return <Error message={message} statusCode={statusCode} />;
-    }
-
-    // NextJS props from getInitialProps
-    const props = { ...pageProps };
-
-    // DotCMS page object
-    if (requestedPage || pageRender) {
-        props.pageRender = requestedPage || pageRender;
-    }
-
-    // DotCMS nav object
-    if (nav) {
-        props.nav = nav;
-    }
-
-    /*
-        When you render a static page or a dynamic route with next js and then try to go to a 
-        dotcms page we need to manually render the custom DotCMS page component
-    */
-    if (props.pageRender) {
-        return <DotCMS {...props} />;
-    }
-
-    return <Component {...props} />;
-}
-
 class MyApp extends App {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nav: []
+        };
+    }
+
+    componentDidMount() {
+        dotcms.getNav().then((res) => {
+            this.setState({
+                nav: res
+            });
+        });
+    }
+
     render() {
         const {
             Component,
@@ -157,39 +77,26 @@ class MyApp extends App {
             error ? (
                 <Component {...error} />
             ) : (
-                <Switch>
-                    <Route
-                        component={(routerProps) => {
-                            return (
-                                <>
-                                    <RoutedComponent
-                                        Component={Component}
-                                        nav={nav}
-                                        pageProps={pageProps}
-                                        pageRender={pageRender}
-                                        language={language}
-                                        {...routerProps}
-                                    ></RoutedComponent>
-                                </>
-                            );
-                        }}
-                    />
-                </Switch>
+                <Component
+                    nav={this.state.nav}
+                    pageRender={pageProps.pageRender}
+                    language={language}
+                ></Component>
             );
 
         return (
-            <PageContext.Provider value={{ isEditMode, nav, language }}>
+            <PageContext.Provider value={{ isEditMode, nav: this.state.nav || [], language }}>
                 <style global jsx>
                     {`
                         @import url('/application/themes/travel/css/styles.dotsass');
                         @import url('//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira');
                     `}
                 </style>
-                <DotCMSStatus status={query.dotcmsStatus} />
+                {/* <DotCMSStatus status={query.dotcmsStatus} /> */}
                 <FinalComponentToRender />
             </PageContext.Provider>
         );
     }
 }
 
-export default withReactRouter(MyApp);
+export default MyApp;

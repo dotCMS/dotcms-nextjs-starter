@@ -12,7 +12,7 @@ async function getPage(url, lang) {
             url: url,
             language: lang || 1
         })
-        .then(async pageRender => {
+        .then(async (pageRender) => {
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
@@ -20,7 +20,7 @@ async function getPage(url, lang) {
             const transformedPage = await transformPage(pageRender);
             return transformedPage;
         })
-        .catch(error => {
+        .catch((error) => {
             /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
@@ -78,4 +78,13 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-module.exports = { getPage, getNav, transformPage, isPage, proxyToStaticFile, emitRemoteRenderEdit, getLanguages, errors };
+module.exports = {
+    getPage,
+    getNav,
+    transformPage,
+    isPage,
+    proxyToStaticFile,
+    emitRemoteRenderEdit,
+    getLanguages,
+    errors
+};

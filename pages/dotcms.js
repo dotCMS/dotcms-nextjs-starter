@@ -3,6 +3,7 @@ import Head from 'next/head';
 
 import DotCMSPage from '../components/layout/DotCMSPage';
 import Layout from '../components/layout/Layout';
+import { getPage } from '../utils/dotcms';
 
 if (process.browser && !window.dotcmsFields) {
     import('dotcms-field-elements/dist/loader').then((module) => {
@@ -15,6 +16,7 @@ if (process.browser && !window.dotcmsFields) {
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
 function DotCMS(props) {
+    console.log('props', props);
     const { pageRender } = props;
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
 
@@ -53,5 +55,10 @@ function DotCMS(props) {
         </>
     );
 }
+
+DotCMS.getInitialProps = async ({ asPath }) => {
+    const pageRender = await getPage(asPath, 1).catch(() => {});
+    return { pageRender };
+};
 
 export default DotCMS;

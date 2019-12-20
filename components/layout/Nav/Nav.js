@@ -13,11 +13,7 @@ export default function Nav() {
                         <div className="rd-navbar-nav-wrap">
                             <ul className="rd-navbar-nav">
                                 {nav.map((item) => {
-                                    if (item.children.length && item.type === 'folder') {
-                                        return <NavDropDown key={item.hash} options={item} />;
-                                    } else {
-                                        return <NavOption key={item.hash} item={item} />;
-                                    }
+                                    return <NavOption key={item.hash} item={item} />;
                                 })}
                             </ul>
                         </div>

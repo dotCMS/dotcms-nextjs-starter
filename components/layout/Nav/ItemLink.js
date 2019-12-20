@@ -1,29 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
 import ListItem from './ListItem';
 import AnchorLink from './AnchorLink';
 
-const ItemLink = parentProps => {
+const ItemLink = ({ pathname, children }) => {
     return (
-        <NavLink
-            component={props => {
-                const allProps = {
-                    ...parentProps,
-                    ...props,
-                    navLinkClassName: parentProps.className
-                };
-                return parentProps.topMenu ? (
-                    <ListItem {...allProps} />
-                ) : (
-                    <AnchorLink {...allProps} />
-                );
-            }}
-            activeClassName="active"
-            className="rd-nav-item"
-            to={{
-                pathname: parentProps.pathname,
-                state: parentProps.state
-            }}
-        />
+        <Link href="/dotcms" as={pathname}>
+            {children}
+        </Link>
     );
 };
 
