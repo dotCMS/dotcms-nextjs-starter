@@ -56,20 +56,15 @@ class MyApp extends App {
             Component,
             router: { query },
             nav,
-            nextJsRenderError,
             pageProps
         } = this.props;
+        console.log('_app', this.props);
 
         const language = {
             current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''
         };
 
-        /*
-            query.error: is the error we get from DotCMS instance
-            nextJsRenderError: is the error we get if we fallback to render a page using NextJS
-            and it fail, normally it will be a 404.
-        */
-        const error = query.error || nextJsRenderError;
+        const error = pageProps.error;
         const { pageRender } = query;
         const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 

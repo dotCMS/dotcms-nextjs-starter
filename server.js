@@ -41,8 +41,6 @@ app.prepare()
         const server = express();
 
         server.get('*', async (req, res) => {
-            console.log('isNextInternalFile', req.path, isNextInternalFile(req.path));
-
             if (isNextInternalFile(req.path)) {
                 return handle(req, res);
             }
@@ -58,8 +56,59 @@ app.prepare()
                 } else {
                     return dotcms.proxyToStaticFile(req, res);
                 }
-            } catch {
-                app.renderError(null, req, res, req.path);
+            } catch (error) {
+                /*
+                    If the request to DotCMS fail we have a fallback chain in place.
+                */
+                switch (error.statusCode) {
+                    /*
+                    If the page doesn't have a layout we render the error using next right away.
+                */
+                    case dotcms.errors.DOTCMS_NO_LAYOUT:
+                        res.statusCode = 406; // Not Acceptable
+                        error.statusCode = res.statusCode;
+                        error.traceError = error.stack;
+
+                        app.renderError(null, req, res, req.path, {
+                            error
+                        });
+                        break;
+
+                    case dotcms.errors.DOTCMS_CUSTOM_ERROR:
+                        res.statusCode = 406; // Not Acceptable
+                        error.statusCode = 'Error: 500';
+                        error.traceError = error.stack;
+
+                        app.renderError(null, req, res, req.path, {
+                            error
+                        });
+                        break;
+                    /*
+                    But if the request to DotCMS fail because the instance is down or auth
+                    wasn't sucessufl, we try to render the page using next static page feature.
+
+                    If the page exist in next all good but if not next will render a 404.
+
+                    Also we are setting in dev mode a dotcmsStatus message that we will render
+                    in all the pages just in edit mode to tell developers that something is up
+                    with the DotCMS instance they are trying to reach.
+                */
+                    case dotcms.errors.DOTCMS_DOWN:
+                    case dotcms.errors.DOTCMS_NO_AUTH:
+                        let dotcmsStatus;
+
+                        if (dev) {
+                            dotcmsStatus = error.message;
+                        }
+
+                        app.render(req, res, req.path, { dotcmsStatus });
+                        break;
+                    default:
+                        console.log('defffff', error);
+                        app.renderError(null, req, res, req.path, {
+                            error
+                        });
+                }
             }
 
             if (req.path === '/destinations') {
