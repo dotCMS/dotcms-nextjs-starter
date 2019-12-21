@@ -32,8 +32,8 @@ function dotCMSRequestHandler(req, res) {
     }
 }
 
-function isBlogDetailPage(path) {
-    return path.startsWith('/blog/post');
+function isStaticPage(path) {
+    return path.startsWith('/blog/post') || path.startsWith('/store');
 }
 
 app.prepare()
@@ -58,9 +58,9 @@ app.prepare()
             */
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
-                if (pageRender && !isBlogDetailPage(req.path)) {
+                if (pageRender && !isStaticPage(req.path)) {
                     app.render(req, res, '/dotcms', { pageRender });
-                } else if (pageRender && isBlogDetailPage(req.path)) {
+                } else if (pageRender && isStaticPage(req.path)) {
                     return handle(req, res);
                 }
             } catch (error) {
