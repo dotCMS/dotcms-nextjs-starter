@@ -1,4 +1,4 @@
-import NavOption from './NavOption';
+import ItemLink from './ItemLink';
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
@@ -13,7 +13,21 @@ export default function Nav() {
                         <div className="rd-navbar-nav-wrap">
                             <ul className="rd-navbar-nav">
                                 {nav.map((item) => {
-                                    return <NavOption key={item.hash} item={item} />;
+                                    if (item.children.length && item.type === 'folder') {
+                                        return <NavDropDown key={item.hash} options={item} />;
+                                    } else {
+                                        return (
+                                            <li className="rd-nav-item">
+                                                <ItemLink
+                                                    key={item.hash}
+                                                    className="rd-nav-link"
+                                                    pathname={item.href}
+                                                >
+                                                    {item.title}
+                                                </ItemLink>
+                                            </li>
+                                        );
+                                    }
                                 })}
                             </ul>
                         </div>

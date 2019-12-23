@@ -1,11 +1,9 @@
 import Link from 'next/link';
-import ListItem from './ListItem';
-import AnchorLink from './AnchorLink';
 
-const ItemLink = ({ pathname, children }) => {
+const ItemLink = ({ pathname, children, className }) => {
     return (
         <Link href="/dotcms" as={pathname}>
-            {children}
+            <a className={className}>{children}</a>
         </Link>
     );
 };
