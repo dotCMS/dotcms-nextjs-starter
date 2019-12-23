@@ -1,8 +1,7 @@
 import App from 'next/app';
-import Error from '../components/layout/Error';
-import DotCMS from '../pages/dotcms';
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import dotcms from '../utils/dotcms';
+import Router from 'next/router';
 
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
@@ -11,8 +10,6 @@ export const PageContext = React.createContext({
     nav: [],
     language: {}
 });
-
-const { loggerLog } = require('../utils');
 
 function DotCMSStatus({ status }) {
     return (
@@ -42,6 +39,25 @@ class MyApp extends App {
         return { ...appProps, nav };
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            language: {
+                current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''
+            }
+        };
+    }
+
+    setLanguage(value) {
+        setCookie(LANG_COOKIE_NAME, value);
+        this.setState({
+            language: {
+                current: value
+            }
+        });
+        Router.reload();
+    }
+
     render() {
         const {
             Component,
@@ -50,23 +66,24 @@ class MyApp extends App {
             nav
         } = this.props;
 
-        const language = {
-            current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''
-        };
-
         const error = pageProps.error;
         const { pageRender } = query;
         const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>
-            error ? (
-                <Component {...error} />
-            ) : (
-                <Component pageRender={pageProps.pageRender} language={language}></Component>
-            );
+            error ? <Component {...error} /> : <Component {...pageRender}></Component>;
 
         return (
-            <PageContext.Provider value={{ isEditMode, nav: nav || [], language }}>
+            <PageContext.Provider
+                value={{
+                    isEditMode,
+                    nav: nav || [],
+                    language: {
+                        current: this.state.language.current,
+                        set: this.setLanguage.bind(this)
+                    }
+                }}
+            >
                 <style global jsx>
                     {`
                         @import url('/application/themes/travel/css/styles.dotsass');

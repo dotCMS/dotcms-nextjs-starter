@@ -4,6 +4,7 @@ import Head from 'next/head';
 import DotCMSPage from '../components/layout/DotCMSPage';
 import Layout from '../components/layout/Layout';
 import { getPage } from '../utils/dotcms';
+import { getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 if (process.browser && !window.dotcmsFields) {
     import('dotcms-field-elements/dist/loader').then((module) => {
@@ -15,8 +16,7 @@ if (process.browser && !window.dotcmsFields) {
     This component will receive the page object from DotCMS and render the page using the layout
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
-function DotCMS(props) {
-    const { pageRender } = props;
+function DotCMS(pageRender) {
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
 
     useEffect(() => {
@@ -55,8 +55,14 @@ function DotCMS(props) {
     );
 }
 
-DotCMS.getInitialProps = async ({ asPath }) => {
-    const pageRender = await getPage(asPath, 1).catch(() => {});
+DotCMS.getInitialProps = async ({ asPath, req }) => {
+    const cookie = req ? req.headers.cookie : document.cookie;
+    const lang = getCookie(cookie, LANG_COOKIE_NAME);
+    const pageRender = await getPage(asPath, lang).catch((e) => {
+        console.log('ERROR', e);
+        return {};
+    });
+
     return { pageRender };
 };
 
