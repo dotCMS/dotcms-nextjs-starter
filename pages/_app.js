@@ -58,7 +58,6 @@ class MyApp extends App {
             nav,
             pageProps
         } = this.props;
-        console.log('_app', this.props);
 
         const language = {
             current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''

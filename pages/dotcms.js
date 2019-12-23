@@ -16,7 +16,6 @@ if (process.browser && !window.dotcmsFields) {
     object which contain rows > columns > containers > contentlets, forms and/or widgets.
 */
 function DotCMS(props) {
-    console.log('props', props);
     const { pageRender } = props;
     const isEditMode = pageRender.viewAs.mode === 'EDIT_MODE';
 

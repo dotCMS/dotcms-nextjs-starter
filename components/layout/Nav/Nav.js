@@ -17,9 +17,8 @@ export default function Nav() {
                                         return <NavDropDown key={item.hash} options={item} />;
                                     } else {
                                         return (
-                                            <li className="rd-nav-item">
+                                            <li className="rd-nav-item" key={item.hash}>
                                                 <ItemLink
-                                                    key={item.hash}
                                                     className="rd-nav-link"
                                                     pathname={item.href}
                                                 >
