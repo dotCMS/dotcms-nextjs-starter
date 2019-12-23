@@ -36,27 +36,18 @@ function DotCMSStatus({ status }) {
 }
 
 class MyApp extends App {
-    constructor(props) {
-        super(props);
-        this.state = {
-            nav: []
-        };
-    }
-
-    componentDidMount() {
-        dotcms.getNav().then((res) => {
-            this.setState({
-                nav: res
-            });
-        });
+    static async getInitialProps(appContext) {
+        const appProps = await App.getInitialProps(appContext);
+        const nav = await dotcms.getNav();
+        return { ...appProps, nav };
     }
 
     render() {
         const {
             Component,
             router: { query },
-            nav,
-            pageProps
+            pageProps,
+            nav
         } = this.props;
 
         const language = {
@@ -71,15 +62,11 @@ class MyApp extends App {
             error ? (
                 <Component {...error} />
             ) : (
-                <Component
-                    nav={this.state.nav}
-                    pageRender={pageProps.pageRender}
-                    language={language}
-                ></Component>
+                <Component pageRender={pageProps.pageRender} language={language}></Component>
             );
 
         return (
-            <PageContext.Provider value={{ isEditMode, nav: this.state.nav || [], language }}>
+            <PageContext.Provider value={{ isEditMode, nav: nav || [], language }}>
                 <style global jsx>
                     {`
                         @import url('/application/themes/travel/css/styles.dotsass');
