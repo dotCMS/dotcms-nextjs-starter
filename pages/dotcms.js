@@ -58,12 +58,18 @@ function DotCMS(pageRender) {
 DotCMS.getInitialProps = async ({ asPath, req }) => {
     const cookie = req ? req.headers.cookie : document.cookie;
     const lang = getCookie(cookie, LANG_COOKIE_NAME);
-    const pageRender = await getPage(asPath, lang).catch((e) => {
-        console.log('ERROR', e);
-        return {};
-    });
 
-    return { pageRender };
+    try {
+        const pageRender = await getPage(asPath, lang);
+
+        return { pageRender };
+    } catch {
+        return {
+            error: {
+                statusCode: 404
+            }
+        };
+    }
 };
 
 export default DotCMS;

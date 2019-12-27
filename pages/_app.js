@@ -17,7 +17,7 @@ function DotCMSStatus({ status }) {
             <style jsx>
                 {`
                     p {
-                        background-color: var(--black);
+                        background-color: var(--dark);
                         color: var(--white);
                         font-size: 0.75em;
                         padding: 0.5rem 1rem;
@@ -35,7 +35,12 @@ function DotCMSStatus({ status }) {
 class MyApp extends App {
     static async getInitialProps(appContext) {
         const appProps = await App.getInitialProps(appContext);
-        const nav = await dotcms.getNav();
+        let nav;
+        try {
+            nav = await dotcms.getNav();
+        } catch {
+            nav = [];
+        }
         return { ...appProps, nav };
     }
 
@@ -86,11 +91,20 @@ class MyApp extends App {
             >
                 <style global jsx>
                     {`
+                        :root {
+                            --dark: #343a40;
+                            --white: #fff;
+                        }
+                        body {
+                            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                                Roboto, 'Helvetica Neue', Arial, sans-serif;
+                            font-size: 14px;
+                        }
                         @import url('/application/themes/travel/css/styles.dotsass');
                         @import url('//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira');
                     `}
                 </style>
-                {/* <DotCMSStatus status={query.dotcmsStatus} /> */}
+                <DotCMSStatus status={query.dotcmsStatus} />
                 <FinalComponentToRender />
             </PageContext.Provider>
         );
