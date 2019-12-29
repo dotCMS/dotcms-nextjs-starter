@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import Head from 'next/head';
+
 import BlogDetail from '../BlogDetail';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
@@ -9,6 +11,11 @@ import { getPage } from '../../../utils/dotcms';
 function BlogDetailPage(contentlet) {
     return contentlet ? (
         <>
+            <Head>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
+                <title>{contentlet.title}</title>
+            </Head>
             <Header />
             <div className="body-wrapper">
                 <section id="section-1" className="section section-xxl">

@@ -13,7 +13,7 @@ export const commentItemType = {
     postDate: string.isRequired
 };
 
-export const commentListType = arrayOf(shape(commentItemType)).isRequired;
+export const commentListType = arrayOf(shape(commentItemType));
 
 export const blogDetailType = {
     author: arrayOf(

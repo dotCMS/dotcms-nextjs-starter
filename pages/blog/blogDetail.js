@@ -25,7 +25,10 @@ const BlogDetail = ({ author, postingDate, blogComment, body, tags, title, ident
                                 )}
                                 <div className="post-modern-time">
                                     <span className="post-icon icon mdi mdi-calendar-clock"></span>
-                                    <DateTimeFormat value={postingDate} format="DateTime" />
+                                    <DateTimeFormat
+                                        value={postingDate.toString()}
+                                        format="DateTime"
+                                    />
                                 </div>
                             </div>
                         </div>
