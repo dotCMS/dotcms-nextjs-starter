@@ -66,17 +66,18 @@ class MyApp extends App {
     render() {
         const {
             Component,
-            router: { query },
+            router: {
+                query: { dotcmsStatus }
+            },
             pageProps,
             nav
         } = this.props;
 
-        const error = pageProps.error;
-        const { pageRender } = query;
-        const isEditMode = pageRender ? pageRender.viewAs.mode === 'EDIT_MODE' : false;
+        const { error } = pageProps;
+        const isEditMode = pageProps.pageProps ? pageProps.viewAs.mode === 'EDIT_MODE' : false;
 
         const FinalComponentToRender = () =>
-            error ? <Component {...error} /> : <Component {...pageRender}></Component>;
+            error ? <Component {...error} /> : <Component {...pageProps}></Component>;
 
         return (
             <PageContext.Provider
@@ -104,7 +105,7 @@ class MyApp extends App {
                         @import url('//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira');
                     `}
                 </style>
-                <DotCMSStatus status={query.dotcmsStatus} />
+                <DotCMSStatus status={dotcmsStatus} />
                 <FinalComponentToRender />
             </PageContext.Provider>
         );

@@ -55,14 +55,17 @@ function DotCMS(pageRender) {
     );
 }
 
-DotCMS.getInitialProps = async ({ asPath, req }) => {
+DotCMS.getInitialProps = async ({ asPath, req, query }) => {
+    if (query.pageRender) {
+        return query.pageRender;
+    }
+
     const cookie = req ? req.headers.cookie : document.cookie;
     const lang = getCookie(cookie, LANG_COOKIE_NAME);
 
     try {
         const pageRender = await getPage(asPath, lang);
-
-        return { pageRender };
+        return pageRender;
     } catch {
         return {
             error: {

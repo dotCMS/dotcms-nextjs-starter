@@ -43,6 +43,11 @@ app.prepare()
                         url,
                         getCurrentLanguage(req.headers.cookie)
                     );
+
+                    if (isBlogDetailPage(url)) {
+                        return handle(req, res);
+                    }
+
                     return app.render(req, res, '/dotcms', { pageRender });
                 } else {
                     return dotcms.proxyToStaticFile(req, res, next);

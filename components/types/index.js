@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const { arrayOf, shape, string } = PropTypes;
+const { arrayOf, shape, string, number } = PropTypes;
 
 export const commentItemType = {
     body: string.isRequired,
@@ -26,7 +26,7 @@ export const blogDetailType = {
     body: string.isRequired,
     identifier: string.isRequired,
     image: string.isRequired,
-    postingDate: string.isRequired,
+    postingDate: number.isRequired,
     tags: string.isRequired,
     title: string.isRequired,
     urlTitle: string.isRequired
