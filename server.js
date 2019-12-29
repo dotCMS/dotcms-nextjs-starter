@@ -23,8 +23,9 @@ function getCurrentLanguage(cookie) {
     return getCookie(cookie, LANG_COOKIE_NAME) || '1';
 }
 
-function isBlogDetailPage(path) {
-    return path.startsWith('/blog/post');
+function isStaticPage(path) {
+    const staticPages = ['/blog/post'];
+    return !!staticPages.filter((item) => path.startsWith(item)).length;
 }
 
 app.prepare()
@@ -39,14 +40,14 @@ app.prepare()
             try {
                 const url = req.path;
                 if (dotcms.isPage(url)) {
+                    if (isStaticPage(url)) {
+                        return handle(req, res);
+                    }
+
                     const pageRender = await dotcms.getPage(
                         url,
                         getCurrentLanguage(req.headers.cookie)
                     );
-
-                    if (isBlogDetailPage(url)) {
-                        return handle(req, res);
-                    }
 
                     return app.render(req, res, '/dotcms', { pageRender });
                 } else {
