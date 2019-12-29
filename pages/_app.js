@@ -2,8 +2,14 @@ import App from 'next/app';
 import React from 'react';
 import dotcms from '../utils/dotcms';
 import Router from 'next/router';
+import NProgress from 'nprogress';
+import GlobalStyles from '../components/GlobalStyles';
 
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
+
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 export const PageContext = React.createContext({
     isEditMode: false,
@@ -90,21 +96,7 @@ class MyApp extends App {
                     }
                 }}
             >
-                <style global jsx>
-                    {`
-                        :root {
-                            --dark: #343a40;
-                            --white: #fff;
-                        }
-                        body {
-                            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-                                Roboto, 'Helvetica Neue', Arial, sans-serif;
-                            font-size: 14px;
-                        }
-                        @import url('/application/themes/travel/css/styles.dotsass');
-                        @import url('//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira');
-                    `}
-                </style>
+                <GlobalStyles />
                 <DotCMSStatus status={dotcmsStatus} />
                 <FinalComponentToRender />
             </PageContext.Provider>
