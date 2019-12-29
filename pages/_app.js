@@ -41,31 +41,20 @@ function DotCMSStatus({ status }) {
 class MyApp extends App {
     static async getInitialProps(appContext) {
         const appProps = await App.getInitialProps(appContext);
-        let nav;
+        let nav = [];
         try {
             nav = await dotcms.getNav();
         } catch {
             nav = [];
         }
-        return { ...appProps, nav };
-    }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            language: {
-                current: process.browser ? getCookie(document.cookie, LANG_COOKIE_NAME) : ''
-            }
-        };
+        const cookie = process.browser ? document.cookie : appContext.ctx.req.headers.cookie;
+        const language = getCookie(cookie, LANG_COOKIE_NAME);
+        return { ...appProps, nav, language };
     }
 
     setLanguage(value) {
         setCookie(LANG_COOKIE_NAME, value);
-        this.setState({
-            language: {
-                current: value
-            }
-        });
         Router.reload();
     }
 
@@ -76,7 +65,8 @@ class MyApp extends App {
                 query: { dotcmsStatus }
             },
             pageProps,
-            nav
+            nav,
+            language
         } = this.props;
 
         const { error } = pageProps;
@@ -89,9 +79,9 @@ class MyApp extends App {
             <PageContext.Provider
                 value={{
                     isEditMode,
-                    nav: nav || [],
+                    nav,
                     language: {
-                        current: this.state.language.current,
+                        current: language,
                         set: this.setLanguage.bind(this)
                     }
                 }}
