@@ -38,12 +38,23 @@ function DotCMSStatus({ status }) {
     );
 }
 
+let navigation = [];
+async function getNavigation() {
+    if (navigation.length) {
+        return Promise.resolve(navigation);
+    } else {
+        navigation = await dotcms.getNav();
+    }
+
+    return navigation;
+}
+
 class MyApp extends App {
     static async getInitialProps(appContext) {
         const appProps = await App.getInitialProps(appContext);
         let nav = [];
         try {
-            nav = await dotcms.getNav();
+            nav = await getNavigation();
         } catch {
             nav = [];
         }
