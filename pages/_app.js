@@ -79,7 +79,16 @@ class MyApp extends App {
             <PageContext.Provider
                 value={{
                     isEditMode,
-                    nav,
+                    nav: [
+                        {
+                            href: '/',
+                            title: 'Home',
+                            children: [],
+                            folder: false,
+                            hash: 'home'
+                        },
+                        ...nav
+                    ],
                     language: {
                         current: language,
                         set: this.setLanguage.bind(this)
