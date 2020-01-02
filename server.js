@@ -23,48 +23,38 @@ function getCurrentLanguage(cookie) {
     return getCookie(cookie, LANG_COOKIE_NAME) || '1';
 }
 
-function dotCMSRequestHandler(req, res) {
-    const url = req.path;
-    if (dotcms.isPage(url)) {
-        return dotcms.getPage(url, getCurrentLanguage(req.headers.cookie));
-    } else {
-        return dotcms.proxyToStaticFile(req, res);
-    }
-}
-
-function isBlogDetailPage(path) {
-    return path.startsWith('/blog/post');
+function isStaticPage(path) {
+    const staticPages = ['/blog/post'];
+    return !!staticPages.filter((item) => path.startsWith(item)).length;
 }
 
 app.prepare()
     .then(() => {
         const server = express();
 
-        server.get('*', async (req, res) => {
-            req.locals = {};
-            req.locals.context = {};
-
+        server.get('*', async (req, res, next) => {
             if (isNextInternalFile(req.path)) {
                 return handle(req, res);
             }
 
-            /*
-                Trying to render the requested page from DotCMS, if the page exist and have a
-                layout:
-                
-                1. We use NextJS to server side render the page
-                2. We use the NextJS page component in /pages/dotcms.js
-                3. We pass the page object to that component
-            */
             try {
-                const pageRender = await dotCMSRequestHandler(req, res);
-                if (pageRender && !isBlogDetailPage(req.path)) {
-                    app.render(req, res, '/dotcms', { pageRender });
-                } else if (pageRender && isBlogDetailPage(req.path)) {
-                    return handle(req, res);
+                const url = req.path;
+                if (dotcms.isPage(url)) {
+                    if (isStaticPage(url)) {
+                        return handle(req, res);
+                    }
+
+                    const pageRender = await dotcms.getPage(
+                        url,
+                        getCurrentLanguage(req.headers.cookie)
+                    );
+
+                    return app.render(req, res, '/dotcms', { pageRender });
+                } else {
+                    return dotcms.proxyToStaticFile(req, res, next);
                 }
             } catch (error) {
-                /* 
+                /*
                     If the request to DotCMS fail we have a fallback chain in place.
                 */
                 switch (error.statusCode) {
@@ -77,28 +67,28 @@ app.prepare()
                         error.traceError = error.stack;
 
                         app.renderError(null, req, res, req.path, {
-                            error
+                            customError: error
                         });
                         break;
 
                     case dotcms.errors.DOTCMS_CUSTOM_ERROR:
                         res.statusCode = 406; // Not Acceptable
-                        error.statusCode = 'Error: 500';
+                        error.statusCode = 500;
                         error.traceError = error.stack;
 
                         app.renderError(null, req, res, req.path, {
-                            error
+                            customError: error
                         });
                         break;
                     /*
-                        But if the request to DotCMS fail because the instance is down or auth 
-                        wasn't sucessufl, we try to render the page using next static page feature.
+                        But if the request to DotCMS fail because the instance is down or auth
+                        wasn't sucessuful, we try to render the page using next static page feature.
 
                         If the page exist in next all good but if not next will render a 404.
 
                         Also we are setting in dev mode a dotcmsStatus message that we will render
                         in all the pages just in edit mode to tell developers that something is up
-                        with the DotCMS instance they are trying to reach. 
+                        with the DotCMS instance they are trying to reach.
                     */
                     case dotcms.errors.DOTCMS_DOWN:
                     case dotcms.errors.DOTCMS_NO_AUTH:
@@ -111,9 +101,13 @@ app.prepare()
                         app.render(req, res, req.path, { dotcmsStatus });
                         break;
                     default:
-                        app.render(req, res, req.path);
+                        app.renderError(null, req, res, req.path, {
+                            customError: error
+                        });
                 }
             }
+
+            return handle(req, res);
         });
 
         /*

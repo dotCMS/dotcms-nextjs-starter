@@ -1,22 +1,28 @@
 import PropTypes from 'prop-types';
-import BlogDetail from '../blogDetail';
+import Head from 'next/head';
+
+import BlogDetail from '../BlogDetail';
 import Header from '../../../components/layout/Header';
 import Footer from '../../../components/layout/Footer/Footer';
 import { blogDetailType } from '../../../components/types';
 import { getCookie, LANG_COOKIE_NAME } from '../../../utils/dotcms/utilities';
+import { getPage } from '../../../utils/dotcms';
 
-const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
-
-const BlogDetailPage = (props) => {
-    return props && props.body ? (
+function BlogDetailPage(contentlet) {
+    return contentlet ? (
         <>
+            <Head>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
+                <title>{contentlet.title}</title>
+            </Head>
             <Header />
             <div className="body-wrapper">
                 <section id="section-1" className="section section-xxl">
                     <div className="container">
                         <div className="row">
                             <div className=" col-lg-10 offset-lg-1 ">
-                                <BlogDetail {...props} />
+                                <BlogDetail {...contentlet} />
                             </div>
                         </div>
                     </div>
@@ -27,25 +33,22 @@ const BlogDetailPage = (props) => {
     ) : (
         ''
     );
-};
+}
 
-BlogDetailPage.getInitialProps = async (props) => {
-    const languageId = getCookie(props.req.headers.cookie, LANG_COOKIE_NAME) || '1';
-    const slug = props.req.originalUrl
-        .split('/')
-        .filter((e) => e)
-        .slice(-1)[0];
-    const params = {
-        contentType: 'Blog',
-        queryParams: {
-            title: `'${slug.replace('-', ' ')}'%5E15`,
-            languageId: languageId
-        },
-        options: { depth: 3 }
-    };
-    const response = await dotCMSApi.content.query(params);
-    const { contentlets } = await response.json();
-    return { ...contentlets[0] };
+BlogDetailPage.getInitialProps = async ({ req, asPath }) => {
+    const cookie = req ? req.headers.cookie : document.cookie;
+    const lang = getCookie(cookie, LANG_COOKIE_NAME);
+
+    try {
+        const pageRender = await getPage(asPath, lang);
+        return pageRender.urlContentMap;
+    } catch (error) {
+        return {
+            error: {
+                statusCode: 404
+            }
+        };
+    }
 };
 
 BlogDetailPage.propTypes = {
