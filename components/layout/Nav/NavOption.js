@@ -4,12 +4,7 @@ import ItemLink from './ItemLink';
 
 const NavOption = ({ item }) => {
     return (
-        <ItemLink
-            key={item.folder}
-            className="rd-nav-link"
-            pathname={item.href}
-            topMenu="true"
-        >
+        <ItemLink key={item.folder} className="rd-nav-link" pathname={item.href}>
             {item.title}
         </ItemLink>
     );

@@ -1,5 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
+import Link from 'next/link';
 
 const Header = () => {
     return (
@@ -94,15 +95,17 @@ const Header = () => {
                                         <span></span>
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <a className="brand" href="/" aria-label="TravelLux Home">
-                                            <img
-                                                className="brand-logo-dark"
-                                                src="/application/themes/travel/images/logo.png"
-                                                width="195"
-                                                height="40"
-                                                alt="TravelLux Home"
-                                            />
-                                        </a>
+                                        <Link href="/dotcms" as="/">
+                                            <a className="brand" aria-label="TravelLux Home">
+                                                <img
+                                                    className="brand-logo-dark"
+                                                    src="/application/themes/travel/images/logo.png"
+                                                    width="195"
+                                                    height="40"
+                                                    alt="TravelLux Home"
+                                                />
+                                            </a>
+                                        </Link>
                                     </div>
                                 </div>
 

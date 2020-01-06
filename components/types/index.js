@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-const { arrayOf, shape, string } = PropTypes;
+const { arrayOf, shape, string, number } = PropTypes;
 
 export const commentItemType = {
     body: string.isRequired,
@@ -13,7 +13,7 @@ export const commentItemType = {
     postDate: string.isRequired
 };
 
-export const commentListType = arrayOf(shape(commentItemType)).isRequired;
+export const commentListType = arrayOf(shape(commentItemType));
 
 export const blogDetailType = {
     author: arrayOf(
@@ -26,7 +26,7 @@ export const blogDetailType = {
     body: string.isRequired,
     identifier: string.isRequired,
     image: string.isRequired,
-    postingDate: string.isRequired,
+    postingDate: number.isRequired,
     tags: string.isRequired,
     title: string.isRequired,
     urlTitle: string.isRequired

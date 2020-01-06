@@ -4,16 +4,7 @@ import CommentForm from '../../components/comments/CommentForm';
 import { blogDetailType } from '../../components/types';
 import DotcmsImage from '../../components/Shared/DotcmsImage';
 
-const BlogDetail = ({
-    author,
-    postingDate,
-    blogComment,
-    body,
-    tags,
-    title,
-    identifier,
-    urlTitle
-}) => {
+const BlogDetail = ({ author, postingDate, blogComment, body, tags, title, identifier }) => {
     return (
         <>
             <div className="section-blog-post">
@@ -34,7 +25,10 @@ const BlogDetail = ({
                                 )}
                                 <div className="post-modern-time">
                                     <span className="post-icon icon mdi mdi-calendar-clock"></span>
-                                    <DateTimeFormat value={postingDate} format="DateTime" />
+                                    <DateTimeFormat
+                                        value={postingDate.toString()}
+                                        format="DateTime"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -93,10 +87,10 @@ const BlogDetail = ({
             </div>
 
             {/* <!-- COMMENTS --> */}
-            <div id="comments" className="pt-5 mt-5">
+            {/* <div id="comments" className="pt-5 mt-5">
                 <CommentList comments={blogComment} />
                 <CommentForm title={title} identifier={identifier} urlTitle={urlTitle} />
-            </div>
+            </div> */}
         </>
     );
 };
