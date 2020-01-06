@@ -1,4 +1,6 @@
 require('dotenv').config();
+const fs = require('fs');
+var cert = fs.readFileSync('./utils/dotcms/fakecert.txt');
 
 const express = require('express');
 const next = require('next');
@@ -28,7 +30,7 @@ function dotCMSRequestHandler(req, res) {
     if (dotcms.isPage(url)) {
         return dotcms.getPage(url, getCurrentLanguage(req.headers.cookie));
     } else {
-        return dotcms.proxyToStaticFile(req, res);
+        return dotcms.proxyToStaticFile(req, res, cert);
     }
 }
 
@@ -58,6 +60,7 @@ app.prepare()
             */
             try {
                 const pageRender = await dotCMSRequestHandler(req, res);
+                console.log('-------page RENDER---', pageRender);
                 if (pageRender && !isBlogDetailPage(req.path)) {
                     app.render(req, res, '/dotcms', { pageRender });
                 } else if (pageRender && isBlogDetailPage(req.path)) {
@@ -120,8 +123,8 @@ app.prepare()
             We can assume (at least for now) that all requests to /api/* are meant
             to DotCMS instance, so we just proxy them.
         */
-        server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
-        server.put('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+        server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res, cert));
+        server.put('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res, cert));
 
         /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
