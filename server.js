@@ -12,6 +12,10 @@ const handle = app.getRequestHandler();
 
 const { isNextInternalFile, loggerLog } = require('./utils');
 const dotcms = require('./utils/dotcms');
+const fs = require('fs');
+var cert = fs.readFileSync('./utils/dotcms/fakecert.txt');
+const httpProxy = require('http-proxy');
+const url = require('url');
 
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
@@ -114,8 +118,45 @@ app.prepare()
             We can assume (at least for now) that all requests to /api/* are meant
             to DotCMS instance, so we just proxy them.
         */
-        server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+        // server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
         server.put('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res));
+
+        server.post('/api/*', async (req, res) => {
+            const { protocol, hostname, port } = url.parse(process.env.DOTCMS_HOST);
+            console.log('---- SERVER POST ----')
+
+
+            try {
+                const proxyConfig = {
+                    target: {
+                        protocol: protocol,
+                        host: hostname,
+                        port: port
+                    },
+                    xfwd: true,
+                    changeOrigin: true,
+                    secure: true,
+                    cookieDomainRewrite: {
+                        [process.env.PUBLIC_URL]: process.env.PUBLIC_URL
+                    },
+                    headers: {
+                        'Authorization': `Bearer ${process.env.BEARER_TOKEN}`,
+                        'Content-Type': 'application/json'
+                    }
+                }
+                console.log(proxyConfig);
+                const proxy = httpProxy.createProxyServer(proxyConfig);
+
+                proxy.web(req, res);
+            }catch {
+                console.log('-----------ERROR--------');
+            }
+            return;
+        });
+
+
+       // server.post('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res, cert));
+       // server.put('/api/*', async (req, res) => dotcms.proxyToStaticFile(req, res, cert));
 
         /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
