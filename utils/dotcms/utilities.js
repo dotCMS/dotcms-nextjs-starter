@@ -17,7 +17,7 @@ function isPage(url) {
 }
 
 function getCookie(cookies, name) {
-    const match = cookies.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    const match = cookies ? cookies.match(new RegExp('(^| )' + name + '=([^;]+)')) : null;
     return match ? match[2] : '';
 }
 
