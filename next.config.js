@@ -12,5 +12,14 @@ module.exports = withCss({
             }
         });
         return config;
+    },
+
+    exportTrailingSlash: true,
+    exportPathMap: function() {
+      return {
+        '/': { page: '/' },
+        '/index': { page: '/index' },
+      };
     }
+
 });

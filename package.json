@@ -8,6 +8,7 @@
         "dev": "nodemon server.js",
         "build": "next build",
         "start": "next start",
+        "export": "next export",
         "setup:dev": "node setup/index.js dev",
         "setup:build": "node setup/index.js build"
     },
@@ -21,12 +22,12 @@
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
-        "next": "^9.1.1",
+        "next": "^9.3.4",
         "node-sass": "^4.12.0",
         "nprogress": "^0.2.0",
         "prop-types": "^15.7.2",
-        "react": "^16.10.2",
-        "react-dom": "^16.10.2",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
         "reactify-wc": "^1.0.5",
         "reactstrap": "^8.0.1",
         "url-loader": "^2.2.0"
