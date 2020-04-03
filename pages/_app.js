@@ -81,7 +81,7 @@ class MyApp extends App {
         } = this.props;
 
         const { error } = pageProps;
-        const isEditMode = pageProps.viewAs.mode === 'EDIT_MODE';
+        const isEditMode = pageProps.viewAs && pageProps.viewAs.mode === 'EDIT_MODE';
 
         const FinalComponentToRender = () =>
             error ? <Component {...error} /> : <Component {...pageProps}></Component>;
