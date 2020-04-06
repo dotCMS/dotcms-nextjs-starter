@@ -3,7 +3,7 @@ import DotCMSPage from '../components/layout/DotCMSPage';
 import Layout from '../components/layout/Layout';
 
 import dotCMSApi from '../utils/dotcms/dotcmsApi';
-import { getPage } from '../utils/dotcms';
+import { transformPage } from '../utils/dotcms';
 
 import fetch from 'node-fetch';
 
@@ -25,15 +25,6 @@ function TestingPage({ pageRender }) {
 }
 
 export async function getStaticProps({ params }) {
-    console.log('getStaticProps', params);
-    // return {
-    //     props: {
-    //         page: {
-    //             title: 'Hola Mundo',
-    //             friendlyName: 'Hello World'
-    //         }
-    //     }
-    // };
     try {
         const pageRender = await fetch(
             `https://starter.dotcms.com/api/v1/page/json/${params.slug}`,
@@ -46,10 +37,9 @@ export async function getStaticProps({ params }) {
         )
             .then((res) => res.json())
             .then((res) => res.entity);
-        // const pageRender = await getPage(params.slug);
         return {
             props: {
-                pageRender: pageRender
+                pageRender: await transformPage(pageRender)
             }
         };
     } catch (e) {
@@ -80,7 +70,6 @@ export async function getStaticPaths() {
             })
         );
 
-    console.log(data);
     return {
         paths: data,
         fallback: true
