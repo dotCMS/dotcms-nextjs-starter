@@ -6,6 +6,7 @@
     "scripts": {
         "test": "jest",
         "dev": "nodemon server.js",
+        "dev1": "next dev",
         "build": "next build",
         "start": "next start",
         "export": "next export",
