@@ -8,7 +8,10 @@ import GlobalStyles from '../components/GlobalStyles';
 import { setCookie, getCookie, LANG_COOKIE_NAME } from '../utils/dotcms/utilities';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeComplete', (url) => {
+    dotcms.emitRemoteRenderEdit(url);
+    NProgress.done();
+});
 Router.events.on('routeChangeError', () => NProgress.done());
 
 export const PageContext = React.createContext({

@@ -1,6 +1,6 @@
 const withCss = require('@zeit/next-css');
 module.exports = withCss({
-    webpack: function(config) {
+    webpack: function (config) {
         config.module.rules.push({
             test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
             use: {
@@ -12,14 +12,5 @@ module.exports = withCss({
             }
         });
         return config;
-    },
-
-    exportTrailingSlash: true,
-    exportPathMap: function() {
-      return {
-        '/': { page: '/' },
-        '/index': { page: '/index' },
-      };
     }
-
 });
