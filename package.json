@@ -22,8 +22,8 @@
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
+        "isomorphic-fetch": "^2.2.1",
         "next": "^9.3.4",
-        "node-fetch": "^2.6.0",
         "node-sass": "^4.12.0",
         "nprogress": "^0.2.0",
         "prop-types": "^15.7.2",
@@ -36,6 +36,7 @@
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "babel-jest": "^24.9.0",
+        "dotenv-webpack": "^1.7.0",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",

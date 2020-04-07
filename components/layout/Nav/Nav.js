@@ -2,7 +2,7 @@ import ItemLink from './ItemLink';
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
-import { PageContext } from '../../../pages/_app';
+import PageContext from '../../../context/PageContext';
 
 export default function Nav() {
     return (
