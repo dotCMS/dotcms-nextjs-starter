@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const ItemLink = ({ pathname, children, className }) => {
     return (
-        <Link href={pathname}>
+        <Link href="/[...slug]" as={pathname}>
             <a className={className}>{children}</a>
         </Link>
     );

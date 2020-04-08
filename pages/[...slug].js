@@ -5,6 +5,7 @@ import Layout from '../components/layout/Layout';
 import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
 import PageContext from '../context/PageContext';
 import GlobalStyles from '../components/GlobalStyles';
+import BlogDetail from '../components/Blog/BlogDetail';
 
 function TestingPage({ pageRender, nav }) {
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
@@ -28,7 +29,11 @@ function TestingPage({ pageRender, nav }) {
             </Head>
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    <DotCMSPage body={pageRender?.layout?.body} />
+                    {pageRender?.urlContentMap?.contentType === 'Blog' ? (
+                        <BlogDetail {...pageRender.urlContentMap} />
+                    ) : (
+                        <DotCMSPage body={pageRender?.layout?.body} />
+                    )}
                 </Layout>
             ) : (
                 <h2>{pageRender?.page?.title}</h2>
@@ -42,10 +47,21 @@ export async function getStaticProps({ params }) {
         const url = `/${params.slug.join('/')}`;
         const pageRender = await getPage(url);
         const nav = await getNav();
+        const finalNav = [
+            {
+                href: '/index',
+                title: 'Home',
+                children: [],
+                folder: false,
+                hash: 'home'
+            },
+            ...nav.filter((item) => item.href !== '/store')
+        ];
+
         return {
             props: {
                 pageRender,
-                nav
+                nav: finalNav
             }
         };
     } catch ({ message }) {
@@ -62,15 +78,18 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    let data = await getAllPagesContentlets().then((pages) =>
-        pages.map(({ URL_MAP_FOR_CONTENT }) => {
+    let data = await getAllPagesContentlets().then((pages) => {
+        return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
+            const finalPath = URL_MAP_FOR_CONTENT || path;
+            const slug = finalPath.split('/').filter((partial) => !!partial);
+
             return {
                 params: {
-                    slug: URL_MAP_FOR_CONTENT.split('/').filter((partial) => !!partial)
+                    slug
                 }
             };
-        })
-    );
+        });
+    });
     return {
         paths: data,
         fallback: true

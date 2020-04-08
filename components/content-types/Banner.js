@@ -1,4 +1,5 @@
 import { Col as BootstrapCol } from 'reactstrap';
+import ItemLink from '../layout/Nav/ItemLink';
 
 export default function Banner(props) {
     return (
@@ -23,9 +24,12 @@ export default function Banner(props) {
 
                         {props.buttonText && props.link && (
                             <div className="group-lg">
-                                <a className="button button-primary button-leaf" href={props.link}>
+                                <ItemLink
+                                    className="button button-primary button-leaf"
+                                    pathname={props.link}
+                                >
                                     {props.buttonText}
-                                </a>
+                                </ItemLink>
                             </div>
                         )}
                     </BootstrapCol>

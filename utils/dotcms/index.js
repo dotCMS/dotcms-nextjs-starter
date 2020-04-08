@@ -18,7 +18,7 @@ const getPageList = async (from = 0) =>
         body: JSON.stringify({
             query: {
                 query_string: {
-                    query: '+urlmap:?*'
+                    query: '+(urlmap:?* basetype:5)'
                 }
             },
             size: PAGE_SIZE,

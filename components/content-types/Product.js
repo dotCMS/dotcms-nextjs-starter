@@ -1,15 +1,20 @@
+import ItemLink from '../layout/Nav/ItemLink';
+
 export default function Product(props) {
     return (
         <div className="box-product box-product-modern">
             {props.salePrice != null && <span className="badge badge-primary">Sale</span>}
             <div className="box-product-body">
                 <div className="box-product-button">
-                    <a className="button button-sm button-primary" href="/store/cart">
+                    <ItemLink className="button button-sm button-primary" pathname="/store/cart">
                         Add to cart
-                    </a>
-                    <a className="button button-sm button-gray-400" href="/store/products/{props.urlTitle}">
+                    </ItemLink>
+                    <ItemLink
+                        className="button button-sm button-gray-400"
+                        pathname="/store/products/{props.urlTitle}"
+                    >
                         View details
-                    </a>
+                    </ItemLink>
                 </div>
                 <div className="img-wrapper">
                     <img
@@ -20,7 +25,7 @@ export default function Product(props) {
                 </div>
             </div>
             <p className="box-product-name">
-                <a href={'/store/products/' + props.urlTitle}>{props.title}</a>
+                <ItemLink pathname={'/store/products/' + props.urlTitle}>{props.title}</ItemLink>
             </p>
             <div className="box-product-prices">
                 {props.salePrice != null ? (
