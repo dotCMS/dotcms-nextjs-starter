@@ -47,21 +47,11 @@ export async function getStaticProps({ params }) {
         const url = `/${params.slug.join('/')}`;
         const pageRender = await getPage(url);
         const nav = await getNav();
-        const finalNav = [
-            {
-                href: '/index',
-                title: 'Home',
-                children: [],
-                folder: false,
-                hash: 'home'
-            },
-            ...nav.filter((item) => item.href !== '/store')
-        ];
 
         return {
             props: {
                 pageRender,
-                nav: finalNav
+                nav
             }
         };
     } catch ({ message }) {

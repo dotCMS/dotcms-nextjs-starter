@@ -77,9 +77,21 @@ async function getPage(url, lang) {
         });
 }
 
-function getNav() {
+async function getNav() {
     loggerLog('DOTCMS NAV');
-    return dotCMSApi.nav.get('4').then(({ children }) => children);
+    const nav = await dotCMSApi.nav.get('4').then(({ children }) => children);
+
+    const finalNav = [
+        {
+            href: '/index',
+            title: 'Home',
+            children: [],
+            folder: false,
+            hash: 'home'
+        },
+        ...nav.filter((item) => item.href !== '/store')
+    ];
+    return finalNav;
 }
 
 function getLanguages() {
