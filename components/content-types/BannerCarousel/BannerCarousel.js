@@ -33,7 +33,7 @@ const BannerCarousel = (props) => {
                       <div
                           className="banner bg-image-full bg-overlay-30 context-dark"
                           style={{
-                              backgroundImage: `url(${process.env.DOTCMS_HOST}${item.image}/40q)`
+                              backgroundImage: `url(${process.env.DOTCMS_HOST}/${item.image}/40q)`
                           }}
                       >
                           <div className="container">
