@@ -26,6 +26,7 @@ function TestingPage({ pageRender, nav }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
                 <title>{`${pageRender?.page?.title} | ${pageRender?.page?.friendlyName}`}</title>
+                
             </Head>
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
@@ -72,6 +73,10 @@ export async function getStaticPaths() {
         return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
             const finalPath = URL_MAP_FOR_CONTENT || path;
             const slug = finalPath.split('/').filter((partial) => !!partial);
+
+            if (!slug.includes('index')) {
+                slug.push('index');
+            }
 
             return {
                 params: {

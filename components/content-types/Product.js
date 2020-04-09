@@ -19,7 +19,7 @@ export default function Product(props) {
                 <div className="img-wrapper">
                     <img
                         className="box-product-img"
-                        src={'/dA/' + props.identifier + '/image1/189h/50q/' + props.title}
+                        src={`${process.env.DOTCMS_HOST}/dA/${props.identifier}/image1/189h/50q/${props.title}`}
                         alt={props.title}
                     />
                 </div>

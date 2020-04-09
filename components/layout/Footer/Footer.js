@@ -7,7 +7,7 @@ const Footer = props => {
         <footer
             className="footer-classic bg-footer bg-overlay-80 context-dark"
             style={{
-                backgroundImage: "url('/dA/a9f30020-54ef-494e-92ed-645e757171c2/image/WebP/1200w/footer-image.jpg')"
+                backgroundImage: `url('${process.env.DOTCMS_HOST}/dA/a9f30020-54ef-494e-92ed-645e757171c2/image/WebP/1200w/footer-image.jpg')`
             }}
         >
             <div className="section-xxl">
