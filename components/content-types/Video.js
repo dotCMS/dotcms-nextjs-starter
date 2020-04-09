@@ -5,7 +5,12 @@ export default function Video(props) {
             data-lightbox="iframe"
             href={'https://www.youtube.com/watch?v=' + props.id}
         >
-            <div className="video-img" style={{ backgroundImage: 'url(' + props.thumbnailLarge + ')' }}></div>
+            <div
+                className="video-img"
+                style={{
+                    backgroundImage: `url(${process.env.BACKEND_URL}/${props.thumbnailLarge})`
+                }}
+            ></div>
             <span className="icon mdi mdi-play video-cover-icon"></span>
         </a>
     );
