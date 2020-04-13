@@ -116,7 +116,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY', req.url);
     }
 
-    return proxy(`${`https://starter.dotcms.com`}${req.url}`, proxyOptions)(req, res, next);
+    return proxy(`${`https://demo.dotcms.com`}${req.url}`, proxyOptions)(req, res, next);
 }
 
 function emitRemoteRenderEdit(url) {

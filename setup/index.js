@@ -41,7 +41,7 @@ const printWelcome = () => {
 };
 
 const main = async () => {
-    if (process.env.BEARER_TOKEN && `https://starter.dotcms.com` && process.env.PUBLIC_URL) {
+    if (process.env.BEARER_TOKEN && `https://demo.dotcms.com` && process.env.PUBLIC_URL) {
         setEnvVarsAndStartApp();
     } else {
         printWelcome();

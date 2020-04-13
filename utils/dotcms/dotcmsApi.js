@@ -1,6 +1,6 @@
 const { initDotCMS } = require('dotcms');
 
 module.exports = initDotCMS({
-    host: `https://starter.dotcms.com`,
+    host: `https://demo.dotcms.com`,
     token: process.env.BEARER_TOKEN
 });

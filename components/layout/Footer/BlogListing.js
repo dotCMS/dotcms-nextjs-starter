@@ -28,16 +28,12 @@ const BlogListing = () => {
         <div className="unit unit-spacing-lg" key={identifier}>
             <div className="unit-left">
                 <ItemLink pathname={`/blog/post/${urlTitle}`}>
-                    <a>
-                        <DotcmsImage alt={title} width="70" identifier={identifier} />
-                    </a>
+                    <DotcmsImage alt={title} width="70" identifier={identifier} />
                 </ItemLink>
             </div>
             <div className="unit-body">
                 <h6>
-                    <ItemLink pathname={`/blog/post/${urlTitle}`}>
-                        <a>{title}</a>
-                    </ItemLink>
+                    <ItemLink pathname={`/blog/post/${urlTitle}`}>{title}</ItemLink>
                 </h6>
                 {postingDate ? <DateTimeFormat value={postingDate} /> : ''}
             </div>
