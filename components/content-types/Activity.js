@@ -3,7 +3,7 @@ import ItemLink from '../layout/Nav/ItemLink';
 export default function Activity(props) {
     const description =
         props.description.length > 120 ? props.description.substring(0, 120) : props.description;
-    const imageUrl = `${process.env.DOTCMS_HOST}/dA/${props.identifier}/image/270w/50q`;
+    const imageUrl = `${`https://starter.dotcms.com`}/dA/${props.identifier}/image/270w/50q`;
     const myHref = '/activities/' + props.urlTitle;
     return (
         <ItemLink className="box-info" pathname={myHref}>

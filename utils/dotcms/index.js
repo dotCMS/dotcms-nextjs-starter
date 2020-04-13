@@ -9,7 +9,7 @@ const fetch = require('isomorphic-fetch');
 const PAGE_SIZE = 10;
 
 const getPageList = async (from = 0) =>
-    await fetch(`${process.env.DOTCMS_HOST}/api/es/search`, {
+    await fetch(`${`https://starter.dotcms.com`}/api/es/search`, {
         method: 'POST',
         headers: {
             Authorization: process.env.TOKEN,
@@ -116,7 +116,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY', req.url);
     }
 
-    return proxy(`${process.env.DOTCMS_HOST}${req.url}`, proxyOptions)(req, res, next);
+    return proxy(`${`https://starter.dotcms.com`}${req.url}`, proxyOptions)(req, res, next);
 }
 
 function emitRemoteRenderEdit(url) {

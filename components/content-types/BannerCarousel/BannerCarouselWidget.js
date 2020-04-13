@@ -6,7 +6,7 @@ const BannerCarouselWidget = props => {
 
     useEffect(() => {
         if (!items.length) {
-            fetch(`${process.env.DOTCMS_HOST}/api/content/id/${props.identifier}/depth/1`)
+            fetch(`${`https://starter.dotcms.com`}/api/content/id/${props.identifier}/depth/1`)
                 .then(response => response.json())
                 .then(({ contentlets }) => {
                     if (contentlets) {
