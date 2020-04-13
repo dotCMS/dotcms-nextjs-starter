@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/dA"
-  to = "https://starter.dotcms.com/dA"
+  from = "/dA/*"
+  to = "https://starter.dotcms.com/dA/:splat"
   status = 200
   force = true
