@@ -98,7 +98,7 @@ const Header = () => {
                                         <ItemLink pathname="/index" className="brand">
                                             <img
                                                 className="brand-logo-dark"
-                                                src={`https://starter.dotcms.com/application/themes/travel/images/logo.png`}
+                                                src={`/application/themes/travel/images/logo.png`}
                                                 width="195"
                                                 height="40"
                                                 alt="TravelLux Home"

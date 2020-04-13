@@ -8,7 +8,7 @@ export default function Video(props) {
             <div
                 className="video-img"
                 style={{
-                    backgroundImage: `url(${`https://starter.dotcms.com`}/${props.thumbnailLarge})`
+                    backgroundImage: `url(/dA/${props.thumbnailLarge})/40q)`
                 }}
             ></div>
             <span className="icon mdi mdi-play video-cover-icon"></span>

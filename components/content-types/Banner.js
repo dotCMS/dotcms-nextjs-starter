@@ -7,7 +7,7 @@ export default function Banner(props) {
             className="banner bg-image-full bg-overlay-30 context-dark"
             style={{
                 color: 'blue',
-                backgroundImage: `url("${`https://starter.dotcms.com`}/dA/${props.identifier}/image/1200w/50q/banner")`
+                backgroundImage: `url("/dA/${props.identifier}/image/1200w/50q/banner")`
             }}
         >
             <div className="container">

@@ -3,3 +3,15 @@
   to = "https://starter.dotcms.com/dA/:splat"
   status = 200
   force = true
+
+ [[redirects]]
+  from = "/api/*"
+  to = "https://starter.dotcms.com/api/:splat"
+  status = 200
+  force = true
+
+ [[redirects]]
+  from = "/application/*"
+  to = "https://starter.dotcms.com/application/:splat"
+  status = 200
+  force = true
