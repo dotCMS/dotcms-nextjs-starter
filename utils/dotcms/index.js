@@ -9,7 +9,7 @@ const fetch = require('isomorphic-fetch');
 const PAGE_SIZE = 10;
 
 const getPageList = async (from = 0) =>
-    await fetch(`/api/es/search`, {
+    await fetch(`${process.env.DOTCMS_HOST}/api/es/search`, {
         method: 'POST',
         headers: {
             Authorization: process.env.TOKEN,
