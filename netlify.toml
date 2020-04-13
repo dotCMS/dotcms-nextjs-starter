@@ -15,3 +15,10 @@
   to = "https://demo.dotcms.com/application/:splat"
   status = 200
   force = true
+
+
+ [[redirects]]
+  from = "/custom-elements/*"
+  to = "https://demo.dotcms.com/custom-elements/:splat"
+  status = 200
+  force = true
