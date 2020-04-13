@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/dA"
+  to = "https://starter.dotcms.com/dA"
+  status = 200
+  force = true
