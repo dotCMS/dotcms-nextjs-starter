@@ -45,7 +45,7 @@ function TestingPage({ pageRender, nav }) {
 
 export async function getStaticProps({ params }) {
     try {
-        const url = `/${params.slug.join('/')}`;
+        const url = `/${params.slug.filter(item => item !== 'index').join('/')}`;
         const pageRender = await getPage(url);
         const nav = await getNav();
 
