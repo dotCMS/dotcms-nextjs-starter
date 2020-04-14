@@ -1,10 +1,10 @@
 const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 
-import Link from 'next/link';
 import DateTimeFormat from '../../Shared/DateTimeFormat';
 import Loader from '../../Shared/Loader';
 import DotcmsImage from '../../Shared/DotcmsImage';
 import useDotCMSApi from '../../../hooks/useDotCMSApi';
+import RouterLink from '../../Shared/RouterLink';
 
 const BlogListing = () => {
     const [loading, posts] = useDotCMSApi(() => {
@@ -27,17 +27,13 @@ const BlogListing = () => {
     return posts.map(({ title, postingDate, identifier, urlTitle }) => (
         <div className="unit unit-spacing-lg" key={identifier}>
             <div className="unit-left">
-                <Link href={`/blog/post/${urlTitle}`}>
-                    <a>
-                        <DotcmsImage alt={title} width="70" identifier={identifier} />
-                    </a>
-                </Link>
+                <RouterLink pathname={`/blog/post/${urlTitle}`}>
+                    <DotcmsImage alt={title} width="70" identifier={identifier} />
+                </RouterLink>
             </div>
             <div className="unit-body">
                 <h6>
-                    <Link href={`/blog/post/${urlTitle}`}>
-                        <a>{title}</a>
-                    </Link>
+                    <RouterLink pathname={`/blog/post/${urlTitle}`}>{title}</RouterLink>
                 </h6>
                 {postingDate ? <DateTimeFormat value={postingDate} /> : ''}
             </div>

@@ -7,10 +7,11 @@
         "test": "jest",
         "dev": "nodemon server.js",
         "build": "next build",
-        "start": "next start",
+        "start": "NODE_ENV=production node server.js",
         "export": "next export",
         "setup:dev": "node setup/index.js dev",
-        "setup:build": "node setup/index.js build"
+        "setup:build": "node setup/index.js build",
+        "deploy-to-gh-pages": "next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
     },
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
@@ -22,6 +23,7 @@
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
+        "isomorphic-fetch": "^2.2.1",
         "next": "^9.3.4",
         "node-sass": "^4.12.0",
         "nprogress": "^0.2.0",
@@ -35,6 +37,7 @@
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "babel-jest": "^24.9.0",
+        "dotenv-webpack": "^1.7.0",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",

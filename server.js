@@ -32,24 +32,11 @@ app.prepare()
     .then(() => {
         const server = express();
 
-        server.get('*', async (req, res, next) => {
-            if (isNextInternalFile(req.path)) {
-                return handle(req, res);
-            }
-
+        server.get('*', async (req, res, _next) => {
             try {
                 const url = req.path;
-                if (dotcms.isPage(url)) {
-                    if (isStaticPage(url)) {
-                        return handle(req, res);
-                    }
-
-                    const pageRender = await dotcms.getPage(
-                        url,
-                        getCurrentLanguage(req.headers.cookie)
-                    );
-
-                    return app.render(req, res, '/dotcms', { pageRender });
+                if (dotcms.isPage(url) || isNextInternalFile(url)) {
+                    return handle(req, res);
                 } else {
                     return dotcms.proxyToStaticFile(req, res, next);
                 }
@@ -106,8 +93,6 @@ app.prepare()
                         });
                 }
             }
-
-            return handle(req, res);
         });
 
         /*

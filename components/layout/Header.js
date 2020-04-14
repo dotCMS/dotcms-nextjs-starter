@@ -1,6 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
-import Link from 'next/link';
+import RouterLink from '../Shared/RouterLink';
 
 const Header = () => {
     return (
@@ -76,10 +76,10 @@ const Header = () => {
                                     <LocaleDropdown />
 
                                     {/* CART */}
-                                    <a className="basket" href="/store/cart">
+                                    {/* <a className="basket" href="/store/cart">
                                         <span className="icon mdi mdi-cart-outline"></span>
                                         <span className="basket-count">3</span>
-                                    </a>
+                                    </a> */}
                                 </div>
                             </div>
                         </div>
@@ -95,17 +95,15 @@ const Header = () => {
                                         <span></span>
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <Link href="/dotcms" as="/">
-                                            <a className="brand" aria-label="TravelLux Home">
-                                                <img
-                                                    className="brand-logo-dark"
-                                                    src="/application/themes/travel/images/logo.png"
-                                                    width="195"
-                                                    height="40"
-                                                    alt="TravelLux Home"
-                                                />
-                                            </a>
-                                        </Link>
+                                        <RouterLink pathname="/index" className="brand">
+                                            <img
+                                                className="brand-logo-dark"
+                                                src={`/application/themes/travel/images/logo.png`}
+                                                width="195"
+                                                height="40"
+                                                alt="TravelLux Home"
+                                            />
+                                        </RouterLink>
                                     </div>
                                 </div>
 

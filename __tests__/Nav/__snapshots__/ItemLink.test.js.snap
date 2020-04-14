@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ItemLink /> renders and matches snapshot 1`] = `
+exports[`<RouterLink /> renders and matches snapshot 1`] = `
 <Link
   className="testCss"
   to={

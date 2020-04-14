@@ -2,7 +2,7 @@ import Activity from '../content-types/Activity';
 import Banner from '../content-types/Banner';
 import BannerCarouselWidget from '../content-types/BannerCarousel/BannerCarouselWidget';
 import calendarEvent from '../content-types/calendarEvent';
-import FormWidget from '../content-types/Form/FormWidget';
+import Form from '../content-types/Form';
 import Image from '../content-types/Image';
 import Product from '../content-types/Product';
 import SimpleWidget from '../content-types/SimpleWidget';
@@ -14,7 +14,7 @@ const map = {
     Banner,
     BannerCarousel: BannerCarouselWidget,
     calendarEvent,
-    forms: FormWidget,
+    forms: Form,
     Image,
     Product,
     SimpleWidget,

@@ -16,7 +16,7 @@ with Web Components: https://www.npmjs.com/package/reactify-wc
 const DotCMSEditContainerWrapper = reactifyWc('dotcms-ema-container');
 const DotCMSEditContentletWrapper = reactifyWc('dotcms-ema-contentlet');
 
-import { PageContext } from '../../pages/_app';
+import PageContext from '../../context/PageContext';
 
 const Contentlets = ({ contentlets }) => {
     return contentlets ? (

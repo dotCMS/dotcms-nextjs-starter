@@ -1,8 +1,8 @@
-import ItemLink from './ItemLink';
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
-import { PageContext } from '../../../pages/_app';
+import PageContext from '../../../context/PageContext';
+import RouterLink from '../../Shared/RouterLink';
 
 export default function Nav() {
     return (
@@ -13,17 +13,17 @@ export default function Nav() {
                         <div className="rd-navbar-nav-wrap">
                             <ul className="rd-navbar-nav">
                                 {nav.map((item) => {
-                                    if (item.children.length && item.type === 'folder') {
+                                    if (item.type === 'folder' && item?.children?.length) {
                                         return <NavDropDown key={item.hash} options={item} />;
                                     } else {
                                         return (
                                             <li className="rd-nav-item" key={item.hash}>
-                                                <ItemLink
+                                                <RouterLink
                                                     className="rd-nav-link"
                                                     pathname={item.href}
                                                 >
                                                     {item.title}
-                                                </ItemLink>
+                                                </RouterLink>
                                             </li>
                                         );
                                     }

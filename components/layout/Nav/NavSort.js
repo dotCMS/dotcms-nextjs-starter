@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageContext from '../../PageContext';
+import PageContext from '../../../context/PageContext';
 import dotcmsApi from '../../dotcmsApi';
 
 class NavSort extends Component {

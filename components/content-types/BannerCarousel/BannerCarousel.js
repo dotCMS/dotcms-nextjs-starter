@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Carousel, CarouselItem, CarouselControl } from 'reactstrap';
 
-const BannerCarousel = props => {
+const BannerCarousel = (props) => {
     const [activeIndex, setActiveIndex] = useState(0);
 
     let animating = false;
@@ -16,38 +16,30 @@ const BannerCarousel = props => {
 
     const next = () => {
         if (animating) return;
-        const nextIndex =
-            activeIndex === props.items.length - 1 ? 0 : activeIndex + 1;
+        const nextIndex = activeIndex === props.items.length - 1 ? 0 : activeIndex + 1;
         setActiveIndex(nextIndex);
     };
 
     const previous = () => {
         if (animating) return;
-        const nextIndex =
-            activeIndex === 0 ? props.items.length - 1 : activeIndex - 1;
+        const nextIndex = activeIndex === 0 ? props.items.length - 1 : activeIndex - 1;
         setActiveIndex(nextIndex);
     };
 
     const slides = props.items
-        ? props.items.map(item => {
+        ? props.items.map((item) => {
               return (
-                  <CarouselItem
-                      onExiting={onExiting}
-                      onExited={onExited}
-                      key={item.identifier}
-                  >
+                  <CarouselItem onExiting={onExiting} onExited={onExited} key={item.identifier}>
                       <div
                           className="banner bg-image-full bg-overlay-30 context-dark"
                           style={{
-                              backgroundImage: `url(${item.image})`
+                              backgroundImage: `url("${item.image}/40q)")`
                           }}
                       >
                           <div className="container">
                               <div className="row justify-content-lg-center">
                                   <div className="col-lg-9 text-center">
-                                      <p className="banner-title">
-                                          {item.title}
-                                      </p>
+                                      <p className="banner-title">{item.title}</p>
                                       <h2 className="text-decoration-lines-2">
                                           <span>
                                               {item.caption}
@@ -84,16 +76,8 @@ const BannerCarousel = props => {
             previous={previous}
         >
             {slides}
-            <CarouselControl
-                direction="prev"
-                directionText="Previous"
-                onClickHandler={previous}
-            />
-            <CarouselControl
-                direction="next"
-                directionText="Next"
-                onClickHandler={next}
-            />
+            <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
+            <CarouselControl direction="next" directionText="Next" onClickHandler={next} />
         </Carousel>
     );
 };
