@@ -7,7 +7,7 @@ import PageContext from '../context/PageContext';
 import GlobalStyles from '../components/GlobalStyles';
 import BlogDetail from '../components/Blog/BlogDetail';
 
-function TestingPage({ pageRender, nav }) {
+function DotCMSStaticPage({ pageRender, nav }) {
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
 
     return (
@@ -91,4 +91,4 @@ export async function getStaticPaths() {
     };
 }
 
-export default TestingPage;
+export default DotCMSStaticPage;
