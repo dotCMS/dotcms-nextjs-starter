@@ -1,4 +1,4 @@
-import ItemLink from '../layout/Nav/ItemLink';
+import RouterLink from "../Shared/RouterLink";
 
 export default function Activity(props) {
     const description =
@@ -6,7 +6,7 @@ export default function Activity(props) {
     const imageUrl = `/dA/${props.identifier}/image/270w/50q`;
     const myHref = '/activities/' + props.urlTitle;
     return (
-        <ItemLink className="box-info" pathname={myHref}>
+        <RouterLink className="box-info" pathname={myHref}>
             <img
                 className="box-info-img"
                 src={imageUrl}
@@ -18,6 +18,6 @@ export default function Activity(props) {
                 <h4 className="box-info-title">{props.title}</h4>
                 <p className="box-info-text">{description}</p>
             </div>
-        </ItemLink>
+        </RouterLink>
     );
 }

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ItemLink from './ItemLink';
+import RouterLink from '../../Shared/RouterLink';
 
 const NavOption = ({ item }) => {
     return (
-        <ItemLink key={item.folder} className="rd-nav-link" pathname={item.href}>
+        <RouterLink key={item.folder} className="rd-nav-link" pathname={item.href}>
             {item.title}
-        </ItemLink>
+        </RouterLink>
     );
 };
 

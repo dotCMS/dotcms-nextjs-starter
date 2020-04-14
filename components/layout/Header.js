@@ -1,6 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
-import ItemLink from '../layout/Nav/ItemLink';
+import RouterLink from '../Shared/RouterLink';
 
 const Header = () => {
     return (
@@ -95,7 +95,7 @@ const Header = () => {
                                         <span></span>
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <ItemLink pathname="/index" className="brand">
+                                        <RouterLink pathname="/index" className="brand">
                                             <img
                                                 className="brand-logo-dark"
                                                 src={`/application/themes/travel/images/logo.png`}
@@ -103,7 +103,7 @@ const Header = () => {
                                                 height="40"
                                                 alt="TravelLux Home"
                                             />
-                                        </ItemLink>
+                                        </RouterLink>
                                     </div>
                                 </div>
 

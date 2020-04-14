@@ -1,4 +1,4 @@
-import ItemLink from '../layout/Nav/ItemLink';
+import RouterLink from '../Shared/RouterLink';
 
 export default function Product(props) {
     return (
@@ -6,15 +6,15 @@ export default function Product(props) {
             {props.salePrice != null && <span className="badge badge-primary">Sale</span>}
             <div className="box-product-body">
                 <div className="box-product-button">
-                    <ItemLink className="button button-sm button-primary" pathname="/store/cart">
+                    <RouterLink className="button button-sm button-primary" pathname="/store/cart">
                         Add to cart
-                    </ItemLink>
-                    <ItemLink
+                    </RouterLink>
+                    <RouterLink
                         className="button button-sm button-gray-400"
                         pathname="/store/products/{props.urlTitle}"
                     >
                         View details
-                    </ItemLink>
+                    </RouterLink>
                 </div>
                 <div className="img-wrapper">
                     <img
@@ -25,7 +25,9 @@ export default function Product(props) {
                 </div>
             </div>
             <p className="box-product-name">
-                <ItemLink pathname={'/store/products/' + props.urlTitle}>{props.title}</ItemLink>
+                <RouterLink pathname={'/store/products/' + props.urlTitle}>
+                    {props.title}
+                </RouterLink>
             </p>
             <div className="box-product-prices">
                 {props.salePrice != null ? (

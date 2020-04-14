@@ -1,5 +1,5 @@
 import { Col as BootstrapCol } from 'reactstrap';
-import ItemLink from '../layout/Nav/ItemLink';
+import RouterLink from '../Shared/RouterLink';
 
 export default function Banner(props) {
     return (
@@ -24,12 +24,12 @@ export default function Banner(props) {
 
                         {props.buttonText && props.link && (
                             <div className="group-lg">
-                                <ItemLink
+                                <RouterLink
                                     className="button button-primary button-leaf"
                                     pathname={props.link}
                                 >
                                     {props.buttonText}
-                                </ItemLink>
+                                </RouterLink>
                             </div>
                         )}
                     </BootstrapCol>

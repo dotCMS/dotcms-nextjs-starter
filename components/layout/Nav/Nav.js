@@ -1,8 +1,8 @@
-import ItemLink from './ItemLink';
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
 import PageContext from '../../../context/PageContext';
+import RouterLink from '../../Shared/RouterLink';
 
 export default function Nav() {
     return (
@@ -18,12 +18,12 @@ export default function Nav() {
                                     } else {
                                         return (
                                             <li className="rd-nav-item" key={item.hash}>
-                                                <ItemLink
+                                                <RouterLink
                                                     className="rd-nav-link"
                                                     pathname={item.href}
                                                 >
                                                     {item.title}
-                                                </ItemLink>
+                                                </RouterLink>
                                             </li>
                                         );
                                     }

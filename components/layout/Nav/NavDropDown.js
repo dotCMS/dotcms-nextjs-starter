@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import ItemLink from './ItemLink';
+import RouterLink from '../../Shared/RouterLink';
 
 const NavDropDown = ({ options }) => {
     const [focus, setFocus] = useState(false);
@@ -18,27 +18,27 @@ const NavDropDown = ({ options }) => {
                 setFocus(false);
             }}
         >
-            <ItemLink pathname={options.href} className="rd-nav-link">
+            <RouterLink pathname={options.href} className="rd-nav-link">
                 {options.title}
-            </ItemLink>
+            </RouterLink>
             <span className="rd-navbar-submenu-toggle"></span>
             <ul className="rd-menu rd-navbar-megamenu rd-navbar-open-left rd-navbar-open-right">
                 {options.children.map((subItem, index) => {
                     return (
                         <li className="rd-megamenu-item" key={index}>
                             <div className="rd-megamenu-title">
-                                <ItemLink pathname={subItem.href}>{subItem.title}</ItemLink>
+                                <RouterLink pathname={subItem.href}>{subItem.title}</RouterLink>
                             </div>
                             <ul className="rd-megamenu-list">
                                 {subItem.children.map((extraItem, k) => {
                                     return (
                                         <li className="rd-megamenu-list-item" key={k}>
-                                            <ItemLink
+                                            <RouterLink
                                                 className="rd-dropdown-link"
                                                 pathname={extraItem.href}
                                             >
                                                 {extraItem.title}
-                                            </ItemLink>
+                                            </RouterLink>
                                         </li>
                                     );
                                 })}

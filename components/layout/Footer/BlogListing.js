@@ -4,7 +4,7 @@ import DateTimeFormat from '../../Shared/DateTimeFormat';
 import Loader from '../../Shared/Loader';
 import DotcmsImage from '../../Shared/DotcmsImage';
 import useDotCMSApi from '../../../hooks/useDotCMSApi';
-import ItemLink from '../Nav/ItemLink';
+import RouterLink from '../../Shared/RouterLink';
 
 const BlogListing = () => {
     const [loading, posts] = useDotCMSApi(() => {
@@ -27,13 +27,13 @@ const BlogListing = () => {
     return posts.map(({ title, postingDate, identifier, urlTitle }) => (
         <div className="unit unit-spacing-lg" key={identifier}>
             <div className="unit-left">
-                <ItemLink pathname={`/blog/post/${urlTitle}`}>
+                <RouterLink pathname={`/blog/post/${urlTitle}`}>
                     <DotcmsImage alt={title} width="70" identifier={identifier} />
-                </ItemLink>
+                </RouterLink>
             </div>
             <div className="unit-body">
                 <h6>
-                    <ItemLink pathname={`/blog/post/${urlTitle}`}>{title}</ItemLink>
+                    <RouterLink pathname={`/blog/post/${urlTitle}`}>{title}</RouterLink>
                 </h6>
                 {postingDate ? <DateTimeFormat value={postingDate} /> : ''}
             </div>

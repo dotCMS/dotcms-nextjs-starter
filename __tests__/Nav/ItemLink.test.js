@@ -2,9 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 
-import ItemLink from '../../components/layout/nav/ItemLink';
 
-describe('<ItemLink />', () => {
+describe('<RouterLink />', () => {
     it('renders and matches snapshot', () => {
         window.history.pushState({}, 'Test Title', '/test.html?lang=en');
         const props = {
@@ -15,7 +14,7 @@ describe('<ItemLink />', () => {
                 name: 'testName'
             }
         };
-        const wrapper = shallow(<ItemLink {...props} />);
+        const wrapper = shallow(<RouterLink {...props} />);
         expect(toJSON(wrapper)).toMatchSnapshot();
     });
 });
