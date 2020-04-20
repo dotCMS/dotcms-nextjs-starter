@@ -34,8 +34,8 @@ async function getAllPagesContentlets() {
     let results = current;
 
     while (current.length > 0) {
-        counter = counter + 1;
         current = await getPageList(counter * PAGE_SIZE);
+        counter = counter + 1;
         results = [...results, ...current];
     }
 
