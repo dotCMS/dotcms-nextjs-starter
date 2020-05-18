@@ -1,10 +1,8 @@
 require('dotenv').config();
-
 const express = require('express');
 const next = require('next');
 const querystring = require('query-string');
 const bodyParser = require('body-parser');
-const { getCookie, LANG_COOKIE_NAME } = require('./utils/dotcms/utilities');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -18,15 +16,6 @@ const formUrlEncodedParser = bodyParser.raw({
     limit: '10mb',
     extended: true
 });
-
-function getCurrentLanguage(cookie) {
-    return getCookie(cookie, LANG_COOKIE_NAME) || '1';
-}
-
-function isStaticPage(path) {
-    const staticPages = ['/blog/post'];
-    return !!staticPages.filter((item) => path.startsWith(item)).length;
-}
 
 app.prepare()
     .then(() => {

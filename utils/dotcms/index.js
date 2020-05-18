@@ -12,7 +12,7 @@ const getPageList = async (from = 0) =>
     await fetch(`${process.env.DOTCMS_HOST}/api/es/search`, {
         method: 'POST',
         headers: {
-            Authorization: process.env.TOKEN,
+            Authorization: process.env.BEARER_TOKEN,
             'Content-type': 'application/json'
         },
         body: JSON.stringify({
@@ -26,7 +26,9 @@ const getPageList = async (from = 0) =>
         })
     })
         .then((res) => res.json())
-        .then(({ contentlets }) => contentlets);
+        .then(({ contentlets }) => {
+            return contentlets;
+        });
 
 async function getAllPagesContentlets() {
     let counter = 0;
@@ -103,6 +105,7 @@ function proxyToStaticFile(req, res, next) {
 
     if (isAPIRequest(req.url)) {
         loggerLog('DOTCMS PROXY API REQUEST', req.url);
+        loggerLog(`${process.env.DOTCMS_HOST}${req.url}`);
         proxyOptions = {
             proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
                 proxyReqOpts.headers = {
