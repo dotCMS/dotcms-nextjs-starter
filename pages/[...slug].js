@@ -53,7 +53,8 @@ export async function getStaticProps({ params }) {
             props: {
                 pageRender,
                 nav
-            }
+            },
+            unstable_revalidate: 1
         };
     } catch ({ message }) {
         return {

@@ -6,6 +6,8 @@
     "scripts": {
         "test": "jest",
         "dev": "nodemon server.js",
+        "next:dev": "next dev",
+        "next:start": "next start",
         "build": "next build",
         "start": "NODE_ENV=production node server.js",
         "export": "next export",
@@ -24,7 +26,7 @@
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
         "isomorphic-fetch": "^2.2.1",
-        "next": "^9.3.4",
+        "next": "^9.4",
         "node-sass": "^4.12.0",
         "nprogress": "^0.2.0",
         "prop-types": "^15.7.2",
