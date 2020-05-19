@@ -34,6 +34,7 @@
         "react-dom": "^16.13.1",
         "reactify-wc": "^1.0.5",
         "reactstrap": "^8.0.1",
+        "styled-components": "^5.1.0",
         "url-loader": "^2.2.0"
     },
     "devDependencies": {

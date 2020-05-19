@@ -1,11 +1,10 @@
 import Head from 'next/head';
-
-import DotCMSPage from '../components/layout/DotCMSPage';
-import Layout from '../components/layout/Layout';
 import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
-import PageContext from '../context/PageContext';
 import GlobalStyles from '../components/GlobalStyles';
 import BlogDetail from '../components/Blog/BlogDetail';
+import Layout from '../components/layout/Layout';
+import DotCMSPage from '../components/layout/DotCMSPage';
+import PageContext from '../context/PageContext';
 
 function DotCMSStaticPage({ pageRender, nav }) {
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
@@ -26,7 +25,7 @@ function DotCMSStaticPage({ pageRender, nav }) {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
                 <title>{`${pageRender?.page?.title} | ${pageRender?.page?.friendlyName}`}</title>
-                
+
             </Head>
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
