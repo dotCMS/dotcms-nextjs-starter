@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
   :root {
 	--primary-black: #444444;
 	--primary-purple: #C336E5;
-	--primary-spacing: 1.6rem;
+	--primary-spacing: 2rem;
   }
   ${reset}
   * {
@@ -26,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	h1, h2, h3, h4 {
-		margin-bottom: var(--primary-spacing);
+		margin-bottom: 1.6rem;
 		font-weight: bold;
 	}
 
@@ -48,8 +48,9 @@ const GlobalStyle = createGlobalStyle`
 		line-height: .8rem;
 	}
 
-	p {
+	p, ul {
 		margin-bottom: 1.2rem;
+		color: #4f4f4f;
 	}
 
   a {

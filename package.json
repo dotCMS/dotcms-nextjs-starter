@@ -17,6 +17,7 @@
     },
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
+        "babel-plugin-styled-components": "^1.10.7",
         "bootstrap": "^4.3.1",
         "chokidar": "^3.4.0",
         "dotcms": "^0.0.10",

@@ -129,6 +129,7 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
+
 module.exports = {
     getPage,
     getNav,
@@ -138,5 +139,5 @@ module.exports = {
     emitRemoteRenderEdit,
     getLanguages,
     errors,
-    getAllPagesContentlets
+    getAllPagesContentlets,
 };

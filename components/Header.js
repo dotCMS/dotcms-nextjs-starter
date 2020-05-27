@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../public/logo.png';
 import styled from 'styled-components'
 import { Container } from '../styles/shared.styles';
+import Link from 'next/link'
 
 const MainNav = styled.header`
 	display: flex;
@@ -34,9 +35,11 @@ function Header() {
 	return (
 		<Container>
 			<MainNav className='main-nav'>
-				<a className="main-nav__logo" href="#">
-					<img src={logo} alt="" width={135} height={41}/>
-				</a>
+				<Link href="/home" className="main-nav__logo">
+					<a>
+						<img src={logo} alt="" width={135} height={41}/>
+					</a>
+				</Link>
 				<NavMenu className="main-nav__menu">
 					<nav className="menu__list">
 						<a className="active" href="#">Home</a>
