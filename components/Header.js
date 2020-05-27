@@ -1,39 +1,29 @@
 import React from 'react';
 import logo from '../public/logo.png';
 import styled from 'styled-components'
+import { Container } from '../styles/shared.styles';
 
 const MainNav = styled.header`
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
-	padding: 1rem 0;
-`
+	padding: var(--primary-spacing) 0;
 
-const Container = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 2rem;
+	.main-nav {
+		&__logo {
+			img {
+					vertical-align: middle;
+			}
+		}
+	}
 `
 
 const NavMenu = styled.div`
    display: flex;
-   nav {
-      &> a {
-       font-weight: bold;
-       text-decoration: none;
-      }
-  	  &> * + *  {
-       margin-left: 1.5rem;
-      }
-      a:active,
-      a:hover,
-      .active {
-        color: var(--primary-purple);
-      }
-  	}
   .menu {
     &__list {}
   	&__list:not(:only-child) {
-	  margin-right: 4rem;
+	 	 margin-right: 4rem;
   	}
 
   	&__icons {}
