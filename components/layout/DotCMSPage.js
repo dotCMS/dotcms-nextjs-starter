@@ -4,6 +4,7 @@ const DotCMSPage = ({ body }) => {
     return body && body.rows ? (
         body.rows.map((row, i) => (
             <section key={i} id={`section-${i + 1}`} className={`section ${row.styleClass || ''}`}>
+                {console.log(`section-${i + 1}`)}
                 <RowContainer row={row} />
             </section>
         ))

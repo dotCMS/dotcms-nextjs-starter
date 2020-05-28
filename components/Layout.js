@@ -8,7 +8,7 @@ function Layout(props) {
 		<div className='layout'>
 			<Header />
 			{children}
-			<Footer />
+
 		</div>
 		
 	);

@@ -87,7 +87,7 @@ function product({product: prod}) {
                       disableImagesLoaded={false} // default false
                       reloadOnUpdate // default false
                       static // default false
-                  >
+                  > 
                       <img src={`//${product?.hostName}/${product?.image}`} alt={product?.title} />
                       <img src={`//${product?.hostName}/${product?.image2}`} alt={product?.title} />
                       <img src={`//${product?.hostName}/${product?.image3}`} alt={product?.title} />
