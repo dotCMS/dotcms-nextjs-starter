@@ -1,3 +1,3 @@
-export default function SimpleWidget({ rendered, widgetTitle }) {
-    return <div dangerouslySetInnerHTML={{ __html: rendered }} />;
+export default function SimpleWidget(props) {
+    return <div dangerouslySetInnerHTML={{ __html: props.rendered }} />;
 }

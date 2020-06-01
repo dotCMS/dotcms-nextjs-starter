@@ -45,6 +45,8 @@ async function getAllPagesContentlets() {
 }
 
 async function getPage(url, lang) {
+
+
     loggerLog('DOTCMS PAGE', url, lang || '1');
     return dotCMSApi.page
         .get({
@@ -52,6 +54,8 @@ async function getPage(url, lang) {
             language: lang || 1
         })
         .then(async (pageRender) => {
+
+            console.log({ pageRender });
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.

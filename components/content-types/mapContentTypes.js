@@ -1,21 +1,19 @@
-import loadable from '@loadable/component';
-const Activity = loadable(() => import('../content-types/Activity'))  ;
-const Banner  = loadable(() => import('../content-types/Banner')) ;
-const BannerCarouselWidget = loadable(() => import('../content-types/BannerCarousel/BannerCarouselWidget'));
-const calendarEvent = loadable(() => import('../content-types/calendarEvent'))  ;
-const Form  = loadable(() => import('../content-types/Form')) ;
-const Image  = loadable(() => import('../content-types/Image')) ;
-const Product = loadable(() => import('../content-types/Product'))  ;
-const SimpleWidget = loadable(() => import('../content-types/SimpleWidget')) ;
-const Video  = loadable(() => import('../content-types/Video'));
-const webPageContent = loadable(() => import('../content-types/webPageContent'));
-const StoreProductList = loadable(() => import('../content-types/StoreProductList'));
+import dynamic from 'next/dynamic';
+const Activity = dynamic(() => import('../content-types/Activity'));
+const Banner = dynamic(() => import('./Banner'));
+const calendarEvent = dynamic(() => import('../content-types/calendarEvent'));
+const Form = dynamic(() => import('../content-types/Form'));
+const Image = dynamic(() => import('../content-types/Image'));
+const Product = dynamic(() => import('../content-types/Product'));
+const SimpleWidget = dynamic(() => import('../content-types/SimpleWidget'));
+const Video = dynamic(() => import('../content-types/Video'));
+const StoreProductList = dynamic(() => import('../content-types/StoreProductList'), {ssr: false});
+const webPageContent = dynamic(() => import('../content-types/webPageContent'));
 
 export const mapContentTypes = (contentType) => {
   const components = {
       Activity,
       Banner,
-      BannerCarousel: BannerCarouselWidget,
       calendarEvent,
       forms: Form,
       Image,

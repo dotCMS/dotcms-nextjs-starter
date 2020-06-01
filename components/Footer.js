@@ -63,7 +63,7 @@ const FooterSection = styled.section`
 function Footer() {
   return (
     <FooterContainer>
-      <Container>
+      <div className="container">
         <FooterSection className="footer__section">
           <a className="main-nav__logo" href="#">
             <img src={logo} alt="" width={135} height={41}/>
@@ -95,7 +95,7 @@ function Footer() {
           </nav>
           <p>&copy; 2020 dotCMS. MIT.</p>
         </FooterSection>
-      </Container>
+      </div>
     </FooterContainer>
   )
 }

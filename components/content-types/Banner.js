@@ -1,40 +1,71 @@
-import { Col as BootstrapCol } from 'reactstrap';
-import RouterLink from '../Shared/RouterLink';
+import React from 'react';
+import styled from 'styled-components';
+import { Button } from '../../styles/shared.styles';
+import dots from '../../public/dots.svg';
+const BannerWrapper = styled.div`
+ background: white;
+ width: 100%;
+ display: flex;
+ flex-wrap: wrap;
+ padding-left: 2rem;
+ overflow: hidden;
+	.banner-wrapper {
+		&__figure {
+			flex: 2 1 20rem;
+		}
+		&__content {
+			margin: 5rem 0;
+			padding-right: 2rem;
+			flex: 1 1 20rem;
+			position: relative;
+			p {
+				margin-bottom: 1.6rem;
+			}
+				&--dots {
+					position: absolute;
+					top: -100px;
+					right: -50px;
+					z-index: 0;
+					&.--bottom {
+						top: 75px;
+					}
+				}
+		}
+		&__figure img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			z-index: 1;
+			position: relative;
+		}
+	}
+`
 
-export default function Banner(props) {
-    return (
-        <div
-            className="banner bg-image-full bg-overlay-30 context-dark"
-            style={{
-                color: 'blue',
-                backgroundImage: `url("/dA/${props.identifier}/image/1200w/50q/banner")`
-            }}
-        >
-            <div className="container">
-                <div className="row justify-content-lg-center">
-                    <BootstrapCol lg={9} className="text-center">
-                        <p className="banner-title">{props.title}</p>
-                        <h2 className="text-decoration-lines-2">
-                            <span>
-                                {props.caption}
-                                <span className="text-decoration-line text-decoration-line-left"></span>
-                                <span className="text-decoration-line text-decoration-line-right"></span>
-                            </span>
-                        </h2>
+function Banner({buttonText, image, hostName, caption, link, textColor, title}) {
 
-                        {props.buttonText && props.link && (
-                            <div className="group-lg">
-                                <RouterLink
-                                    className="button button-primary button-leaf"
-                                    pathname={props.link}
-                                >
-                                    {props.buttonText}
-                                </RouterLink>
-                            </div>
-                        )}
-                    </BootstrapCol>
-                </div>
-            </div>
-        </div>
+	return (
+		<BannerWrapper className="banner-wrapper">
+				<div className="banner-wrapper__content">
+						<img className="banner-wrapper__content--dots" src={dots} alt="Dots SVG" />
+						<img
+								className="banner-wrapper__content--dots --bottom"
+								src={dots}
+								alt="Dots SVG"
+						/>
+						<h1>{title}</h1>
+						<p>{caption}</p>
+						<Button color={textColor} href={link}>
+								{buttonText}
+						</Button>
+				</div>
+				<div className="banner-wrapper__figure">
+						<img
+								src={`https://${hostName}:8443${image}`}
+								alt={title}
+						/>
+				</div>
+		</BannerWrapper>
     );
 }
+
+export default Banner;

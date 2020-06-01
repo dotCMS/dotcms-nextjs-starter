@@ -1,9 +1,9 @@
 import React from 'react';
 import Banner from '../../components/Banner';
-import Sidebar from '../../components/Sidebar'
-import ProductList from '../../components/ProductList';
-import withApollo from '../../setup/withApollo'
-import { Container } from '../../styles/shared.styles';
+import Sidebar from '../../../components/Sidebar'
+import ProductList from '../../../components/ProductList';
+import withApollo from '../../../setup/withApollo'
+import { Container } from '../../../styles/shared.styles';
 import styled from 'styled-components'
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';

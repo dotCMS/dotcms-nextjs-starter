@@ -6,9 +6,7 @@ function Layout(props) {
 	const { children } = props
 	return (
 		<div className='layout'>
-			<Header />
 			{children}
-
 		</div>
 		
 	);

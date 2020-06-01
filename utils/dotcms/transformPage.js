@@ -1,7 +1,7 @@
 const dotCMSApi = require('./dotcmsApi');
 const { errors, CustomError } = require('./utilities');
 
-function haveLayout(page) {
+function hasLayout(page) {
     return page.layout && page.layout.body;
 }
 
@@ -12,7 +12,7 @@ function getAcceptTypes(containers, identifier) {
         .join(',');
 }
 
-function itHaveSidebar(page) {
+function hasSidebar(page) {
     return (
         page.layout.sidebar &&
         page.layout.sidebar.containers &&
@@ -78,10 +78,10 @@ async function getRows(page) {
 
 async function transformPage(page) {
     try {
-        if (haveLayout(page)) {
+        if (hasLayout(page)) {
             page.layout.body.rows = await getRows(page);
 
-            if (itHaveSidebar(page)) {
+            if (hasSidebar(page)) {
                 page.layout.sidebar.containers = await Promise.all(
                     getContainers(page.layout.sidebar.containers, page)
                 );

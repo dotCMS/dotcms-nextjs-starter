@@ -48,21 +48,21 @@ const ProductContainer = styled.div`
 
 function Product({product, options}) {
   
-  const show = options.show.split(",")
-
-  console.log({show})
+  const show = options.show.split(",");
 
   const { retailPrice, urlTitle, tags, image, title, salePrice, host, productLine } = product;
   return (
       <ProductContainer>
-          {show.includes('image') && <img src={`//${host.hostName}/${image.idPath}`} alt={title} />}
+          {show.includes('image') && (
+              <img src={`https://${host.hostName}:8443${image.idPath}`} alt={title} />
+          )}
           <div className="meta">
               <h4 className="meta__category">
                   <a href="#">{productLine[0].title}</a>
               </h4>
               {show.includes('title') && (
                   <h3 className="meta__title">
-                      <Link href={`/store/product/${urlTitle}`}>
+                      <Link href={`/store/products/${urlTitle}`}>
                           <a>{title}</a>
                       </Link>
                   </h3>

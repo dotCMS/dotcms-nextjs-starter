@@ -1,6 +1,6 @@
 import RowContainer from './RowContainer';
 
-const DotCMSPage = ({ body, products }) => {
+const DotCMSPage = ({ body }) => {
     return body && body.rows ? (
         body.rows.map((row, i) => (
             <section key={i} id={`section-${i + 1}`} className={`section ${row.styleClass || ''}`}>

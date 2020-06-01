@@ -33,7 +33,7 @@ const NavMenu = styled.div`
 
 function Header() {
 	return (
-		<Container>
+		<div className="container">
 			<MainNav className='main-nav'>
 				<Link href="/store">
 					<a className="main-nav__logo">
@@ -54,7 +54,7 @@ function Header() {
 					</nav>
 				</NavMenu>
 			</MainNav>
-		</Container>
+		</div>
 	);
 }
 

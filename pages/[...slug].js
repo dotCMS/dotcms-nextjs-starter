@@ -3,11 +3,11 @@ import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
 import Layout from '../components/layout/Layout';
 import PageContext from '../context/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
-import ProductList from '../components/ProductList';
+import Banner from '../components/content-types/Banner';
 
 function DotCMSStaticPage({ pageRender }) {
+    console.log(pageRender, 'something')
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
-    console.log({ pageRender });
     return (
         <PageContext.Provider
             value={{
@@ -33,35 +33,34 @@ function DotCMSStaticPage({ pageRender }) {
 }
 
 export async function getStaticPaths() {
-    // let data = await getAllPagesContentlets().then((pages) => {
-    //     return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
-    //         const finalPath = URL_MAP_FOR_CONTENT || path;
-    //         const slug = finalPath.split('/').filter((partial) => !!partial);
+    let data = await getAllPagesContentlets().then((pages) => {
+        return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
+            const finalPath = URL_MAP_FOR_CONTENT || path;
+            const slug = finalPath.split('/').filter((partial) => !!partial);
 
-    //         console.log(slug);
+            if (!slug.includes('index')) {
+                slug.push('index');
+            }
 
-    //         if (!slug.includes('index')) {
-    //             slug.push('index');
-    //         }
-
-    //         return {
-    //             params: {
-    //                 slug
-    //             }
-    //         };
-    //     });
-    // });
+            return {
+                params: {
+                    slug
+                }
+            };
+        });
+    });
+    console.log({ data: JSON.stringify(data) });
     return {
-        paths: [{ params: { slug: ['store', 'index'] } }, { params: { slug: [''] } }],
+        paths: data,
         fallback: true
     };
 }
 
-
 export const getStaticProps = async ({params}) => {
- 
     const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
     const pageRender = await getPage(url);
+
+    console.log({ pageRender });
 
     return {
         props: {

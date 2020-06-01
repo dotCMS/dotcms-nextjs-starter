@@ -16,7 +16,7 @@ const PRODUCT_QUERY = gql`
                 title
             }
             host {
-                hostName
+              hostName
             }
             image {
                 idPath
@@ -40,11 +40,13 @@ const ProductGrid = styled.div`
 ` 
 
 function ProductList({quantity, order, orderBy, show}) {
-  const { loading, data } = useQuery(PRODUCT_QUERY, {
+  const { loading, error, data } = useQuery(PRODUCT_QUERY, {
       variables: {
           limit: quantity
       }
   });
+
+  console.log({ loading, data, error });
   return (
       <ProductGrid>
           {data?.ProductCollection.map((product) => (
