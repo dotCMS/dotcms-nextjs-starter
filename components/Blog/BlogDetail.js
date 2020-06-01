@@ -8,7 +8,7 @@ const BlogDetail = ({ author, postingDate, blogComment, body, tags, title, ident
             <section id="section-1" className="section section-xxl">
                 <div className="container">
                     <div className="row">
-                        <div className=" col-lg-10 offset-lg-1 ">
+                        <div className="col-lg-10 offset-lg-1">
                             <div className="section-blog-post">
                                 <div className="section-blog-post-header">
                                     <h1>{title}</h1>
@@ -89,12 +89,6 @@ const BlogDetail = ({ author, postingDate, blogComment, body, tags, title, ident
                                     </a>
                                 </div>
                             </div>
-
-                            {/* <!-- COMMENTS --> */}
-                            {/* <div id="comments" className="pt-5 mt-5">
-                <CommentList comments={blogComment} />
-                <CommentForm title={title} identifier={identifier} urlTitle={urlTitle} />
-            </div> */}
                         </div>
                     </div>
                 </div>

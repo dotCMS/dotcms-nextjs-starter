@@ -35,7 +35,7 @@ function Header() {
 	return (
 		<Container>
 			<MainNav className='main-nav'>
-				<Link href="/home">
+				<Link href="/store">
 					<a className="main-nav__logo">
 						<img src={logo} alt="" width={135} height={41}/>
 					</a>

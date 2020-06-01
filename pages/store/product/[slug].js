@@ -1,9 +1,9 @@
 import React from 'react'
-import { Container, Button } from '../../styles/shared.styles';
+import { Container, Button } from '../../../styles/shared.styles';
 import Flickity from 'react-flickity-component';
 import styled from 'styled-components'
-import {currencyFormatter} from '../../components/Product'
-import fetch from 'isomorphic-fetch'
+import {currencyFormatter} from '../../../components/Product'
+import fetch from 'isomorphic-fetch';
 
 const flickityOptions = {
     contain: true,

@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import Head from 'next/head';
 import { createGlobalStyle } from 'styled-components';
 import {reset} from '../styles/reset';
+import {reflex} from '../styles/reflex';
 import { modularScale } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
@@ -73,6 +74,7 @@ const GlobalStyle = createGlobalStyle`
 			color: var(--primary-purple);
 		}
 	}
+	${reflex}
 `;
 export default class MyApp extends App {
 	render () {

@@ -5,15 +5,8 @@ import { ApolloProvider } from '@apollo/react-hooks';
 export default withApollo(
     ({ initialState }) => {
         return new ApolloClient({
-            uri: 'https://starter.dotcms.com/api/v1/graphql',
-            cache: new InMemoryCache().restore(initialState || {}),
-            credentials: 'include',
-            headers: {
-                'Access-Control-Allow-Origin': '*',
-                Origin: 'https://demo.dotcms.com',
-                'Access-Control-Request-Method': 'POST',
-                'Access-Control-Allow-Headers': 'Accept'
-            }
+            uri: 'https://starter.dotcms.com:8443/api/v1/graphql',
+            cache: new InMemoryCache().restore(initialState || {})
         });
     },
     {

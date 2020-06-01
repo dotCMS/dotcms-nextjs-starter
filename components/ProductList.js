@@ -1,6 +1,35 @@
 import React from 'react'
 import styled from 'styled-components'
 import Product from '../components/Product'
+import withApollo from '../setup/withApollo';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+
+const PRODUCT_QUERY = gql`
+    query PRODUCT_QUERY($limit: Int!){
+        ProductCollection(limit: $limit) {
+            title
+            retailPrice
+            salePrice
+            urlTitle
+            productLine {
+                title
+            }
+            host {
+                hostName
+            }
+            image {
+                idPath
+            }
+            image2 {
+                idPath
+            }
+            image3 {
+                idPath
+            }
+        }
+    }
+`;
 
 const ProductGrid = styled.div`
   display: grid;
@@ -10,12 +39,19 @@ const ProductGrid = styled.div`
   gap: var(--primary-spacing);
 ` 
 
-function ProductList({products}) {
+function ProductList({quantity, order, orderBy, show}) {
+  const { loading, data } = useQuery(PRODUCT_QUERY, {
+      variables: {
+          limit: quantity
+      }
+  });
   return (
       <ProductGrid>
-          {products.map(product => <Product product={product} />)}
+          {data?.ProductCollection.map((product) => (
+              <Product product={product} options={{ order, orderBy, show }} />
+          ))}
       </ProductGrid>
   );
 }
 
-export default ProductList
+export default withApollo(ProductList);

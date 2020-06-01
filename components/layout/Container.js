@@ -1,4 +1,4 @@
-import Contentlet from './Contentlet';
+import { Contentlet } from './Contentlet';
 import reactifyWc from 'reactify-wc';
 
 /*
