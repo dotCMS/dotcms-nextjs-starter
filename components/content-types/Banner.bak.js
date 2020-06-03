@@ -26,7 +26,7 @@ export default function Banner(props) {
                             <div className="group-lg">
                                 <RouterLink
                                     className="button button-primary button-leaf"
-                                    pathname={props.link}
+                                    hred={props.link}
                                 >
                                     {props.buttonText}
                                 </RouterLink>

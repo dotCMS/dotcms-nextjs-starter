@@ -18,7 +18,7 @@ const NavDropDown = ({ options }) => {
                 setFocus(false);
             }}
         >
-            <RouterLink pathname={options.href} className="rd-nav-link">
+            <RouterLink href={options.href} className="rd-nav-link">
                 {options.title}
             </RouterLink>
             <span className="rd-navbar-submenu-toggle"></span>
@@ -27,7 +27,7 @@ const NavDropDown = ({ options }) => {
                     return (
                         <li className="rd-megamenu-item" key={index}>
                             <div className="rd-megamenu-title">
-                                <RouterLink pathname={subItem.href}>{subItem.title}</RouterLink>
+                                <RouterLink href={subItem.href}>{subItem.title}</RouterLink>
                             </div>
                             <ul className="rd-megamenu-list">
                                 {subItem.children.map((extraItem, k) => {
@@ -35,7 +35,7 @@ const NavDropDown = ({ options }) => {
                                         <li className="rd-megamenu-list-item" key={k}>
                                             <RouterLink
                                                 className="rd-dropdown-link"
-                                                pathname={extraItem.href}
+                                                href={extraItem.href}
                                             >
                                                 {extraItem.title}
                                             </RouterLink>

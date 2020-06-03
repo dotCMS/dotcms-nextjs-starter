@@ -20,7 +20,7 @@ export default function Nav() {
                                             <li className="rd-nav-item" key={item.hash}>
                                                 <RouterLink
                                                     className="rd-nav-link"
-                                                    pathname={item.href}
+                                                    href={item.href}
                                                 >
                                                     {item.title}
                                                 </RouterLink>

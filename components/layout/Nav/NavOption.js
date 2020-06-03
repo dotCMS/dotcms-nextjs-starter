@@ -4,7 +4,7 @@ import RouterLink from '../../Shared/RouterLink';
 
 const NavOption = ({ item }) => {
     return (
-        <RouterLink key={item.folder} className="rd-nav-link" pathname={item.href}>
+        <RouterLink key={item.folder} className="rd-nav-link" href={item.href}>
             {item.title}
         </RouterLink>
     );

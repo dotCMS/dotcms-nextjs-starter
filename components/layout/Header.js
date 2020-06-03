@@ -95,7 +95,7 @@ const Header = () => {
                                         <span></span>
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <RouterLink pathname="/index" className="brand">
+                                        <RouterLink href="/index" className="brand">
                                             <img
                                                 className="brand-logo-dark"
                                                 src={`/application/themes/travel/images/logo.png`}

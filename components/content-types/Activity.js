@@ -6,7 +6,7 @@ export default function Activity(props) {
     const imageUrl = `/dA/${props.identifier}/image/270w/50q`;
     const myHref = '/activities/' + props.urlTitle;
     return (
-        <RouterLink className="box-info" pathname={myHref}>
+        <RouterLink className="box-info" href={myHref}>
             <img
                 className="box-info-img"
                 src={imageUrl}

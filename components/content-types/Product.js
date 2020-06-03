@@ -6,12 +6,12 @@ export default function Product(props) {
             {props.salePrice != null && <span className="badge badge-primary">Sale</span>}
             <div className="box-product-body">
                 <div className="box-product-button">
-                    <RouterLink className="button button-sm button-primary" pathname="/store/cart">
+                    <RouterLink className="button button-sm button-primary" href="/store/cart">
                         Add to cart
                     </RouterLink>
                     <RouterLink
                         className="button button-sm button-gray-400"
-                        pathname="/store/products/{props.urlTitle}"
+                        href="/store/products/{props.urlTitle}"
                     >
                         View details
                     </RouterLink>
@@ -25,7 +25,7 @@ export default function Product(props) {
                 </div>
             </div>
             <p className="box-product-name">
-                <RouterLink pathname={'/store/products/' + props.urlTitle}>
+                <RouterLink href={'/store/products/' + props.urlTitle}>
                     {props.title}
                 </RouterLink>
             </p>

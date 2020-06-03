@@ -27,13 +27,13 @@ const BlogListing = () => {
     return posts.map(({ title, postingDate, identifier, urlTitle }) => (
         <div className="unit unit-spacing-lg" key={identifier}>
             <div className="unit-left">
-                <RouterLink pathname={`/blog/post/${urlTitle}`}>
+                <RouterLink href={`/blog/post/${urlTitle}`}>
                     <DotcmsImage alt={title} width="70" identifier={identifier} />
                 </RouterLink>
             </div>
             <div className="unit-body">
                 <h6>
-                    <RouterLink pathname={`/blog/post/${urlTitle}`}>{title}</RouterLink>
+                    <RouterLink href={`/blog/post/${urlTitle}`}>{title}</RouterLink>
                 </h6>
                 {postingDate ? <DateTimeFormat value={postingDate} /> : ''}
             </div>
