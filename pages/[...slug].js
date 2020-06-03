@@ -3,16 +3,19 @@ import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
 import Layout from '../components/layout/Layout';
 import PageContext from '../context/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
+import BlogDetail from '../components/Blog/BlogDetail';
 import Banner from '../components/content-types/Banner';
 
-function DotCMSStaticPage({ pageRender }) {
-    console.log(pageRender, 'something')
+function DotCMSStaticPage({ pageRender, nav }) {
+
+    console.log({ nav, pageRender });
+
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
             value={{
                 isEditMode,
-                nav: [],
+                nav: nav || [],
                 language: {
                     current: '1', // needs to make this dynamic, check _app.js
                     set: () => {}
@@ -21,9 +24,7 @@ function DotCMSStaticPage({ pageRender }) {
         >
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    <DotCMSPage
-                        body={pageRender?.layout?.body}
-                    />
+                    <DotCMSPage pageRender={pageRender} />
                 </Layout>
             ) : (
                 <h2>{pageRender?.page?.title}</h2>
@@ -33,41 +34,55 @@ function DotCMSStaticPage({ pageRender }) {
 }
 
 export async function getStaticPaths() {
-    let data = await getAllPagesContentlets().then((pages) => {
-        return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
-            const finalPath = URL_MAP_FOR_CONTENT || path;
-            const slug = finalPath.split('/').filter((partial) => !!partial);
 
-            if (!slug.includes('index')) {
-                slug.push('index');
-            }
+    const PAGES_QUERY = {
+        query:
+            '{ search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") { urlMap } }'
+    };
 
-            return {
-                params: {
-                    slug
-                }
-            };
-        });
+    let data = await fetch(`${process.env.DOTCMS_HOST}/api/v1/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.BEARER_TOKEN}`
+        },
+        body: JSON.stringify(PAGES_QUERY)
     });
-    console.log({ data: JSON.stringify(data) });
+
+    ({data} = await data.json());
+
+    const paths = data.search
+        .filter(({ urlMap }) => Boolean(urlMap))
+        .reduce((acc, curr) => {
+            acc = [...acc, { params: { slug: curr.urlMap?.split('/').filter(Boolean) } }];
+            return acc;
+        }, []);
+
     return {
-        paths: data,
+        paths,
         fallback: true
     };
 }
 
 export const getStaticProps = async ({params}) => {
-    const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
-    const pageRender = await getPage(url);
+   try {
+        const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
+        const pageRender = await getPage(url);
+        const nav = await getNav('4', 'store');
 
-    console.log({ pageRender });
+        return {
+            props: {
+                pageRender,
+                nav
+            },
+            unstable_revalidate: 1
+        };
+   } catch (error) {
 
     return {
-        props: {
-            pageRender
-        },
-        unstable_revalidate: 1
-    };
+        props: {}
+    }
+   }
 };
 
 

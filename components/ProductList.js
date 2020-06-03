@@ -43,10 +43,13 @@ function ProductList({quantity, order, orderBy, show}) {
   const { loading, error, data } = useQuery(PRODUCT_QUERY, {
       variables: {
           limit: quantity
-      }
+      },
+      fetchPolicy: 'cache-and-network'
   });
 
-  console.log({ loading, data, error });
+  if (loading) return null;
+  if (error) return `Error! ${error}`;
+
   return (
       <ProductGrid>
           {data?.ProductCollection.map((product) => (

@@ -6,7 +6,7 @@
     "scripts": {
         "test": "jest",
         "dev": "nodemon server.js",
-        "next:dev": "next dev",
+        "next:dev": "NODE_ENV=dev next dev",
         "next:start": "next start",
         "build": "next build",
         "start": "NODE_ENV=production node server.js",

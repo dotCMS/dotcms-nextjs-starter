@@ -9,6 +9,8 @@ const SimpleWidget = dynamic(() => import('../content-types/SimpleWidget'));
 const Video = dynamic(() => import('../content-types/Video'));
 const StoreProductList = dynamic(() => import('../content-types/StoreProductList'), {ssr: false});
 const webPageContent = dynamic(() => import('../content-types/webPageContent'));
+const ProductSingle = dynamic(() => import('../content-types/ProductSingle'));
+const CategoryFilter = dynamic(() => import('../content-types/CategoryFilter'));
 
 export const mapContentTypes = (contentType) => {
   const components = {
@@ -21,8 +23,14 @@ export const mapContentTypes = (contentType) => {
       SimpleWidget,
       Video,
       webPageContent,
-      StoreProductList
+      StoreProductList,
+      ProductSingle,
+      CategoryFilter
   };
+
+  if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {
+      throw new Error(`The component ${contentType} does not exist.`);
+  }
 
   return components[contentType];
 };
