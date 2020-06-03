@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import PageContext from '../../context/PageContext';
-import useDotCMSApi from '../../hooks/useDotCMSApi';
+import useDotCMSApi from '../hooks/useDotCMSApi';
 import { getLanguages } from '../../utils/dotcms';
 
 import React from 'react';

@@ -32,8 +32,8 @@ function Error({ statusCode, message, stack }) {
                 <title>{`${statusCode} | ${displayMessage}`}</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <h3>{statusCode}</h3>
-            <p>{displayMessage}</p>
+            {statusCode && <h3>{statusCode}</h3>}
+            {displayMessage && <p>{displayMessage}</p>}
         </>
     );
 }

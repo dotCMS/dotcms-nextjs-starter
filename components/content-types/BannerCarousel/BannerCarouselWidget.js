@@ -11,7 +11,6 @@ const BannerCarouselWidget = props => {
                 .then(({ contentlets }) => {
                     if (contentlets) {
                         setItems(contentlets[0].banners);
-                        
                     }
                 })
                 .catch(error => console.error(error));

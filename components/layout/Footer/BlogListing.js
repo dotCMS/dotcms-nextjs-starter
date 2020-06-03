@@ -3,7 +3,7 @@ const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
 import DateTimeFormat from '../../Shared/DateTimeFormat';
 import Loader from '../../Shared/Loader';
 import DotcmsImage from '../../Shared/DotcmsImage';
-import useDotCMSApi from '../../../hooks/useDotCMSApi';
+import useDotCMSApi from '../../hooks/useDotCMSApi';
 import RouterLink from '../../Shared/RouterLink';
 
 const BlogListing = () => {

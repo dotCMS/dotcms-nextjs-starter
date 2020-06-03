@@ -1,40 +1,32 @@
-import { Col as BootstrapCol } from 'reactstrap';
-import RouterLink from '../Shared/RouterLink';
+import React from 'react';
+import { Button } from '../../styles/shared.styles';
+import dots from '../../public/dots.svg';
+import { BannerWrapper } from '../../styles/banner'
 
-export default function Banner(props) {
-    return (
-        <div
-            className="banner bg-image-full bg-overlay-30 context-dark"
-            style={{
-                color: 'blue',
-                backgroundImage: `url("/dA/${props.identifier}/image/1200w/50q/banner")`
-            }}
-        >
-            <div className="container">
-                <div className="row justify-content-lg-center">
-                    <BootstrapCol lg={9} className="text-center">
-                        <p className="banner-title">{props.title}</p>
-                        <h2 className="text-decoration-lines-2">
-                            <span>
-                                {props.caption}
-                                <span className="text-decoration-line text-decoration-line-left"></span>
-                                <span className="text-decoration-line text-decoration-line-right"></span>
-                            </span>
-                        </h2>
-
-                        {props.buttonText && props.link && (
-                            <div className="group-lg">
-                                <RouterLink
-                                    className="button button-primary button-leaf"
-                                    pathname={props.link}
-                                >
-                                    {props.buttonText}
-                                </RouterLink>
-                            </div>
-                        )}
-                    </BootstrapCol>
-                </div>
-            </div>
-        </div>
+function Banner({buttonText, image, hostName, caption, link, textColor, title}) {
+	return (
+		<BannerWrapper className="banner-wrapper">
+				<div className="banner-wrapper__content">
+						<img className="banner-wrapper__content--dots" src={dots} alt="Dots SVG" />
+						<img
+								className="banner-wrapper__content--dots --bottom"
+								src={dots}
+								alt="Dots SVG"
+						/>
+						<h1>{title}</h1>
+						<p>{caption}</p>
+						<Button color={textColor} href={link}>
+								{buttonText}
+						</Button>
+				</div>
+				<div className="banner-wrapper__figure">
+						<img
+								src={`https://${hostName}:8443${image}`}
+								alt={title}
+						/>
+				</div>
+		</BannerWrapper>
     );
 }
+
+export default Banner;

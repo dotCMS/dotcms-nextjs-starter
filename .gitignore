@@ -27,5 +27,6 @@ yarn-error.log*
 
 #next
 .next/*
+_next/*
 out
 .now

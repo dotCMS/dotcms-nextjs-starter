@@ -24,11 +24,11 @@ const RowContainer = ({ row }) => {
 
     return (
         <BootstrapContainer>
-            <BootstrapRow>
+            <div className="row">
                 {cols.map((col, k) => (
                     <ColumnContainer {...col} key={k} />
                 ))}
-            </BootstrapRow>
+            </div>
         </BootstrapContainer>
     );
 };

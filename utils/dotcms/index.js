@@ -8,6 +8,7 @@ const fetch = require('isomorphic-fetch');
 
 const PAGE_SIZE = 10;
 
+// TODO: Remove
 const getPageList = async (from = 0) =>
     await fetch(`${process.env.DOTCMS_HOST}/api/es/search`, {
         method: 'POST',
@@ -18,7 +19,7 @@ const getPageList = async (from = 0) =>
         body: JSON.stringify({
             query: {
                 query_string: {
-                    query: '+(urlmap:?* basetype:5)'
+                    query: '+(urlmap:?* basetype:5) +contentType:Product'
                 }
             },
             size: PAGE_SIZE,
@@ -45,6 +46,7 @@ async function getAllPagesContentlets() {
 }
 
 async function getPage(url, lang) {
+
     loggerLog('DOTCMS PAGE', url, lang || '1');
     return dotCMSApi.page
         .get({
@@ -52,6 +54,7 @@ async function getPage(url, lang) {
             language: lang || 1
         })
         .then(async (pageRender) => {
+
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
@@ -79,9 +82,9 @@ async function getPage(url, lang) {
         });
 }
 
-async function getNav() {
+async function getNav(depth, location) {
     loggerLog('DOTCMS NAV');
-    const nav = await dotCMSApi.nav.get('4').then(({ children }) => children);
+    const nav = await dotCMSApi.nav.get(depth, location).then(({ children }) => children);
 
     const finalNav = [
         {
@@ -129,6 +132,7 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
+
 module.exports = {
     getPage,
     getNav,
@@ -138,5 +142,5 @@ module.exports = {
     emitRemoteRenderEdit,
     getLanguages,
     errors,
-    getAllPagesContentlets
+    getAllPagesContentlets,
 };

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import DateTimeFormat from '../Shared/DateTimeFormat';
+import DateTimeFormat from '../shared/DateTimeFormat';
 
 function createMarkup(html) {
     return { __html: html };

@@ -1,15 +1,14 @@
 import Head from 'next/head';
-
-import DotCMSPage from '../components/layout/DotCMSPage';
-import Layout from '../components/layout/Layout';
 import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
+import Layout from '../components/layout/Layout';
 import PageContext from '../context/PageContext';
-import GlobalStyles from '../components/GlobalStyles';
-import BlogDetail from '../components/Blog/BlogDetail';
+import DotCMSPage from '../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
-    const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
 
+    console.log({ nav, pageRender });
+
+    const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
             value={{
@@ -21,20 +20,9 @@ function DotCMSStaticPage({ pageRender, nav }) {
                 }
             }}
         >
-            <GlobalStyles />
-            <Head>
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                <script src="https://unpkg.com/current-device/umd/current-device.min.js"></script>
-                <title>{`${pageRender?.page?.title} | ${pageRender?.page?.friendlyName}`}</title>
-                
-            </Head>
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    {pageRender?.urlContentMap?.contentType === 'Blog' ? (
-                        <BlogDetail {...pageRender.urlContentMap} />
-                    ) : (
-                        <DotCMSPage body={pageRender?.layout?.body} />
-                    )}
+                    <DotCMSPage pageRender={pageRender} />
                 </Layout>
             ) : (
                 <h2>{pageRender?.page?.title}</h2>
@@ -43,11 +31,42 @@ function DotCMSStaticPage({ pageRender, nav }) {
     );
 }
 
-export async function getStaticProps({ params }) {
-    try {
-        const url = `/${params.slug.filter(item => item !== 'index').join('/')}`;
+export async function getStaticPaths() {
+
+    const PAGES_QUERY = {
+        query:
+            '{ search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") { urlMap } }'
+    };
+
+    let data = await fetch(`${process.env.DOTCMS_HOST}/api/v1/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.BEARER_TOKEN}`
+        },
+        body: JSON.stringify(PAGES_QUERY)
+    });
+
+    ({data} = await data.json());
+
+    const paths = data.search
+        .filter(({ urlMap }) => Boolean(urlMap))
+        .reduce((acc, curr) => {
+            acc = [...acc, { params: { slug: curr.urlMap?.split('/').filter(Boolean) } }];
+            return acc;
+        }, []);
+
+    return {
+        paths,
+        fallback: true
+    };
+}
+
+export const getStaticProps = async ({params}) => {
+   try {
+        const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
         const pageRender = await getPage(url);
-        const nav = await getNav();
+        const nav = await getNav('4', 'store');
 
         return {
             props: {
@@ -56,40 +75,12 @@ export async function getStaticProps({ params }) {
             },
             unstable_revalidate: 1
         };
-    } catch ({ message }) {
-        return {
-            props: {
-                pageRender: {
-                    page: {
-                        title: message
-                    }
-                }
-            }
-        };
-    }
-}
+   } catch (error) {
 
-export async function getStaticPaths() {
-    let data = await getAllPagesContentlets().then((pages) => {
-        return pages.map(({ URL_MAP_FOR_CONTENT, path }) => {
-            const finalPath = URL_MAP_FOR_CONTENT || path;
-            const slug = finalPath.split('/').filter((partial) => !!partial);
-
-            if (!slug.includes('index')) {
-                slug.push('index');
-            }
-
-            return {
-                params: {
-                    slug
-                }
-            };
-        });
-    });
     return {
-        paths: data,
-        fallback: true
-    };
-}
+        props: {}
+    }
+   }
+};
 
 export default DotCMSStaticPage;
