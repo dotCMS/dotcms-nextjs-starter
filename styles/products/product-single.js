@@ -61,7 +61,7 @@ export const Price = styled.span`
     text-decoration: ${(props) => (props.salePrice ? 'line-through' : 'none')};
     color: ${(props) => (props.salePrice ? '#666' : 'inherit')};
     font-style: ${(props) => (props.salePrice ? 'italic' : 'normal')};
-    margin-right: ${(props) => (props.salePrice ? '0.5rem' : '0')};
+    margin-right: ${(props) => (props.salePrice ? '0' : '0.5rem')};
 `;
 
 export const Quantity = styled.input`

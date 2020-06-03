@@ -83,6 +83,4 @@ export const getStaticProps = async ({params}) => {
    }
 };
 
-
-
 export default DotCMSStaticPage;

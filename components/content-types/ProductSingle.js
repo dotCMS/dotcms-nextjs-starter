@@ -37,9 +37,9 @@ function ProductSingle({
                   reloadOnUpdate // default false
                   static // default false
               >
-                  <img src={`https://${hostName}:8443/dA/${identifier}/image`} alt={title} />
-                  <img src={`https://${hostName}:8443/dA/${identifier}/image2`} alt={title} />
-                  <img src={`https://${hostName}:8443/dA/${identifier}/image3`} alt={title} />
+                  <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image`} alt={title} />
+                  <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image2`} alt={title} />
+                  <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image3`} alt={title} />
               </Flickity>
           </Carousel>
           <ProductDetail>
@@ -48,8 +48,8 @@ function ProductSingle({
                       <a href="#">product?.productLine[0].title</a>
                   </h4>
                   <h3 className="meta__title">{title}</h3>
-                  {salePrice && <Price salePrice={!!salePrice}>{currencyFormatter.format(salePrice)}</Price>}
-                  <Price>{currencyFormatter.format(retailPrice)}</Price>
+                  <Price salePrice={!!salePrice}>{currencyFormatter.format(retailPrice)}</Price>
+                  {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
               </div>
 
               <div dangerouslySetInnerHTML={{ __html: description }} />

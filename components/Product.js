@@ -20,7 +20,7 @@ function Product({product, options}) {
               </h4>
               {show.includes('title') && (
                   <h3 className="meta__title">
-                      <Link href={`/store/products/${urlTitle}`}>
+                      <Link href={`/store/products/${urlTitle}`} as={`/store/products/${urlTitle}`}>
                           <a>{title}</a>
                       </Link>
                   </h3>
@@ -28,12 +28,10 @@ function Product({product, options}) {
 
               {show.includes('price') && (
                   <>
-                      {salePrice && (
-                          <Price salePrice={!!salePrice} small>
-                              {currencyFormatter.format(salePrice)}
-                          </Price>
-                      )}
-                      <Price small>{currencyFormatter.format(retailPrice)}</Price>
+                      {salePrice && <Price small>{currencyFormatter.format(salePrice)}</Price>}
+                      <Price salePrice={!!salePrice} small>
+                          {currencyFormatter.format(retailPrice)}
+                      </Price>{' '}
                   </>
               )}
           </div>
