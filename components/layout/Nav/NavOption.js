@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RouterLink from '../../Shared/RouterLink';
+import RouterLink from '../../shared/RouterLink';
 
 const NavOption = ({ item }) => {
     return (

@@ -13,6 +13,7 @@ const PRODUCT_QUERY = gql`
             retailPrice
             salePrice
             urlTitle
+            identifier
             productLine {
                 title
             }
@@ -46,7 +47,7 @@ function ProductList({ quantity, order, orderBy, show }) {
     return (
         <ProductGrid>
             {data?.ProductCollection.map((product, i) => (
-                <Product product={product} options={{ order, orderBy, show }} />
+                <Product key={product.identifier} product={product} options={{ order, orderBy, show }} />
             ))}
         </ProductGrid>
     );

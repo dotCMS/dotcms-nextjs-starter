@@ -82,9 +82,9 @@ async function getPage(url, lang) {
         });
 }
 
-async function getNav(depth, location) {
+async function getNav(depth) {
     loggerLog('DOTCMS NAV');
-    const nav = await dotCMSApi.nav.get(depth, location).then(({ children }) => children);
+    const nav = await dotCMSApi.nav.get(depth).then(({ children }) => children);
 
     const finalNav = [
         {
@@ -94,7 +94,7 @@ async function getNav(depth, location) {
             folder: false,
             hash: 'home'
         },
-        ...nav.filter((item) => item.href !== '/store')
+        ...nav
     ];
     return finalNav;
 }

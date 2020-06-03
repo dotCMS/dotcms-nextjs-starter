@@ -5,9 +5,7 @@ import PageContext from '../context/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
-
-    console.log({ nav, pageRender });
-
+    
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
@@ -66,12 +64,12 @@ export const getStaticProps = async ({params}) => {
    try {
         const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
         const pageRender = await getPage(url);
-        const nav = await getNav('4', 'store');
+        const nav = await getNav('4');
 
         return {
             props: {
                 pageRender,
-                nav
+                nav,
             },
             unstable_revalidate: 1
         };

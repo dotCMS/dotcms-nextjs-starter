@@ -1,5 +1,5 @@
 import { Col as BootstrapCol } from 'reactstrap';
-import RouterLink from '../Shared/RouterLink';
+import RouterLink from '../shared/RouterLink';
 
 export default function Banner(props) {
     return (

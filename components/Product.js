@@ -1,5 +1,5 @@
 import React from 'react';
-import RouterLink from '../components/Shared/RouterLink';
+import RouterLink from './shared/RouterLink';
 import { ProductContainer } from '../styles/products/product';
 import { Price } from '../styles/products/product-single';
 const { currencyFormatter } = require('../utils/index');

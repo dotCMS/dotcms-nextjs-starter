@@ -1,7 +1,9 @@
 import React from 'react';
 import logo from '../public/logo.png';
 import styled from 'styled-components';
-import RouterLink from '../components/Shared/RouterLink';
+import RouterLink from '../components/shared/RouterLink';
+import PageContext  from '../context/PageContext'
+import { useRouter } from 'next/router';
 
 const MainNav = styled.header`
     display: flex;
@@ -33,6 +35,13 @@ const NavMenu = styled.div`
 `;
 
 function Header() {
+
+    let {nav} = React.useContext(PageContext);
+    nav = nav.map((nav => ({title: nav.title, href: nav.href})));
+    const router = useRouter();
+
+    console.log()
+
     return (
         <div className="container">
             <MainNav className="main-nav">
@@ -41,13 +50,15 @@ function Header() {
                 </RouterLink>
                 <NavMenu className="main-nav__menu">
                     <nav className="menu__list">
-                        <a className="active" href="#">
-                            Home
-                        </a>
-                        <a href="#">Shop</a>
-                        <a href="#">About</a>
-                        <a href="#">Team</a>
-                        <a href="#">Contact</a>
+                        {nav.map((item) => (
+                            <RouterLink
+                                key={item.href}
+                                className={`${router.asPath === item.href ? 'active' : ''}`}
+                                href={item.href}
+                            >
+                                {item.title}
+                            </RouterLink>
+                        ))}
                     </nav>
                     <nav className="menu__icons">
                         <a href="#">Search</a>

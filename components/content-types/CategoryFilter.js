@@ -1,11 +1,13 @@
 import React from 'react';
 import PageContext from '../../context/PageContext';
-import RouterLink from '../Shared/RouterLink';
+import RouterLink from '../shared/RouterLink';
 import { SidebarContainer } from '../../styles/category-filter';
 
 function CategoryFilter(props) {
     const { nav } = React.useContext(PageContext);
-    const data = nav.reduce(function (acc, curr) {
+    const [storeNav] = nav.filter((nav) => nav.href === '/store');
+
+    const data = storeNav.children.reduce(function (acc, curr) {
         if (curr.children.length > 0) {
             acc = [
                 ...acc,
@@ -20,7 +22,7 @@ function CategoryFilter(props) {
             <h4 className="sidebar-title">{props.title}</h4>
             <ul>
                 {data.map((item, i) => (
-                    <li>
+                    <li key={item.href}>
                         <RouterLink href={item.href} prefetch>
                             {item.title}
                         </RouterLink>
