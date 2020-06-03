@@ -4,6 +4,7 @@ import Product from '../components/Product'
 import withApollo from '../setup/withApollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { ProductGrid } from '../styles/products/product'
 
 const PRODUCT_QUERY = gql`
     query PRODUCT_QUERY($limit: Int!){
@@ -30,14 +31,6 @@ const PRODUCT_QUERY = gql`
         }
     }
 `;
-
-const ProductGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  flex: 1 0 80%;
-  margin-top: var(--primary-spacing);
-  gap: var(--primary-spacing);
-` 
 
 function ProductList({quantity, order, orderBy, show}) {
   const { loading, error, data } = useQuery(PRODUCT_QUERY, {

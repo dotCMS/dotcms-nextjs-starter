@@ -3,8 +3,6 @@ import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
 import Layout from '../components/layout/Layout';
 import PageContext from '../context/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
-import BlogDetail from '../components/Blog/BlogDetail';
-import Banner from '../components/content-types/Banner';
 
 function DotCMSStaticPage({ pageRender, nav }) {
 

@@ -1,9 +1,8 @@
-import DateTimeFormat from '../Shared/DateTimeFormat';
+import DateTimeFormat from '../shared/DateTimeFormat';
 import { blogDetailType } from '../types';
-import DotcmsImage from '../Shared/DotcmsImage';
+import DotcmsImage from '../shared/DotcmsImage';
 
 const BlogDetail = (props) => {
-    console.log(props)
     return (
         <h1>Hello</h1>
     );
