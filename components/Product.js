@@ -8,7 +8,7 @@ function Product({ product, options }) {
     const show = options.show.split(',');
 
     const { retailPrice, urlTitle, tags, image, title, salePrice, host, productLine } = product;
-    console.log(image)
+
     return (
         <ProductContainer>
             {show.includes('image') && (
