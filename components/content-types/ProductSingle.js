@@ -16,7 +16,7 @@ const flickityOptions = {
     fullscreen: true
 };
 
-function ProductSingle({ hostName, title, description, retailPrice, salePrice, tags, identifier }) {
+function ProductSingle({ title, description, retailPrice, salePrice, tags, identifier, image, image2, image3 }) {
     return (
         <ProductContainer className="product-container container">
             <Carousel>
@@ -28,9 +28,24 @@ function ProductSingle({ hostName, title, description, retailPrice, salePrice, t
                     reloadOnUpdate // default false
                     static // default false
                 >
-                    <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image`} alt={title} />
-                    <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image2`} alt={title} />
-                    <img src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image3`} alt={title} />
+                    {image && (
+                        <img
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image`}
+                            alt={title}
+                        />
+                    )}
+                    {image2 && (
+                        <img
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image2`}
+                            alt={title}
+                        />
+                    )}
+                    {image3 && (
+                        <img
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image3`}
+                            alt={title}
+                        />
+                    )}
                 </Flickity>
             </Carousel>
             <ProductDetail>
