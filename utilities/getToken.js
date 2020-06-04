@@ -1,5 +1,5 @@
-const dotcmsApi = require('../../utils/dotcms/dotcmsApi');
-const { printError } = require('./index');
+const dotcmsApi = require('../config/dotcms/dotcmsApi');
+const { printError } = require('../server/print');
 
 const getToken = ({ user, password, expirationDays, host }) => {
     return dotcmsApi.auth

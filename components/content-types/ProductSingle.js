@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../styles/shared.styles';
 import Flickity from 'react-flickity-component';
-const { currencyFormatter } = require('../../utils/index')
+const { currencyFormatter } = require('../../utilities/shared')
 import {
   Carousel,
   ProductContainer,

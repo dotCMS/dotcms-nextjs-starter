@@ -1,8 +1,8 @@
 {
     "watch": [
-        "server.js",
+        "./server/server.js",
         "static"
     ],
-    "exec": "node server.js",
+    "exec": "node ./server/server.js",
     "ext": "js"
 }

@@ -2,7 +2,7 @@ const proxy = require('express-http-proxy');
 
 const transformPage = require('./transformPage');
 const dotCMSApi = require('./dotcmsApi');
-const { loggerLog } = require('../logger');
+const { loggerLog } = require('../../utilities/logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
 const fetch = require('isomorphic-fetch');
 

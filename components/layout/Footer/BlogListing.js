@@ -1,10 +1,10 @@
-const dotCMSApi = require('../../../utils/dotcms/dotcmsApi');
+const dotCMSApi = require('../../../config/dotcms/dotcmsApi');
 
-import DateTimeFormat from '../../shared/DateTimeFormat';
+import DateTimeFormat from '../../../utilities/DateTimeFormat';
 import Loader from '../../shared/Loader';
-import DotcmsImage from '../../shared/DotcmsImage';
-import useDotCMSApi from '../../hooks/useDotCMSApi';
-import RouterLink from '../../shared/RouterLink';
+import DotcmsImage from '../../../utilities/DotcmsImage';
+import useDotCMSApi from '../../../hooks/useDotCMSApi';
+import RouterLink from '../../RouterLink';
 
 const BlogListing = () => {
     const [loading, posts] = useDotCMSApi(() => {

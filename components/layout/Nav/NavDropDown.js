@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import PropTypes from 'prop-types';
-import RouterLink from '../../shared/RouterLink';
+import RouterLink from '../../RouterLink';
 
 const NavDropDown = ({ options }) => {
     const [focus, setFocus] = useState(false);

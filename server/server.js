@@ -8,8 +8,9 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
-const { isNextInternalFile, loggerLog } = require('./utils');
-const dotcms = require('./utils/dotcms');
+const { loggerLog } = require('../utilities/logger');
+const { isNextInternalFile } = require('./next');
+const dotcms = require('../config/dotcms');
 
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',

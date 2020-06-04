@@ -1,6 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
-import RouterLink from '../shared/RouterLink';
+import RouterLink from '../RouterLink';
 
 const Header = () => {
     return (

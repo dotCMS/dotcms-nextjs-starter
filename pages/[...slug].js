@@ -1,11 +1,11 @@
 import Head from 'next/head';
-import { getPage, getNav, getAllPagesContentlets } from '../utils/dotcms';
+import { getPage, getNav } from '../config/dotcms';
 import Layout from '../components/layout/Layout';
-import PageContext from '../context/PageContext';
+import PageContext from '../contexts/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
-    
+
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider

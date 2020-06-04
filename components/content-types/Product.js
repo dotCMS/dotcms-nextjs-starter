@@ -1,4 +1,4 @@
-import RouterLink from '../shared/RouterLink';
+import RouterLink from '../RouterLink';
 
 export default function Product(props) {
     return (

@@ -1,8 +1,8 @@
 import NavDropDown from './NavDropDown';
 import NavBarSearch from './NavBarSearch';
 
-import PageContext from '../../../context/PageContext';
-import RouterLink from '../../shared/RouterLink';
+import PageContext from '../../../contexts/PageContext';
+import RouterLink from '../../RouterLink';
 
 export default function Nav() {
     return (

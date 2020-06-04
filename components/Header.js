@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from '../public/logo.png';
 import styled from 'styled-components';
-import RouterLink from '../components/shared/RouterLink';
-import PageContext  from '../context/PageContext'
+import RouterLink from './RouterLink';
+import PageContext  from '../contexts/PageContext'
 import { useRouter } from 'next/router';
 
 const MainNav = styled.header`

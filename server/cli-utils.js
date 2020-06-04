@@ -1,15 +1,9 @@
 const { spawn } = require('child_process');
 
-const {
-    DOTCMS,
-    printHeading,
-    createEnvFile,
-    getParsedEnvFile,
-    getToken,
-    printError,
-    getAnswersBasic,
-    getAnswersAuth
-} = require('./utils');
+const { getAnswersBasic, getAnswersAuth } = require('./questions');
+const { printError, printHeading, DOTCMS } = require('./print');
+const { getToken } = require('../utilities/getToken');
+const { getParsedEnvFile, createEnvFile } = require('../server/envFile');
 
 const createEnvVars = (vars, separator) => {
     return vars

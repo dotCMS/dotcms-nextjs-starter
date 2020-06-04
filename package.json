@@ -5,11 +5,11 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "dev": "nodemon server.js",
+        "dev": "nodemon ./server/server.js",
         "next:dev": "next dev",
         "next:start": "next start",
         "build": "next build",
-        "start": "NODE_ENV=production node server.js",
+        "start": "NODE_ENV=production node ./server/server.js",
         "export": "next export",
         "setup:dev": "node setup/index.js dev",
         "setup:build": "node setup/index.js build",
@@ -21,7 +21,6 @@
         "apollo-boost": "^0.4.9",
         "babel-plugin-styled-components": "^1.10.7",
         "bootstrap": "^4.3.1",
-        "chokidar": "^3.4.0",
         "dotcms": "^0.0.10",
         "dotcms-ema-elements": "0.0.2",
         "dotcms-field-elements": "0.0.20",
@@ -30,6 +29,7 @@
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
         "flickity": "^2.2.1",
+        "fs": "^0.0.1-security",
         "graphql": "^15.0.0",
         "graphql-tag": "^2.10.3",
         "isomorphic-fetch": "^2.2.1",
@@ -54,10 +54,11 @@
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",
-        "inquirer": "^7.0.0",
+        "inquirer": "^7.1.0",
         "jest": "^24.9.0",
         "nodemon": "^1.19.4",
         "react-testing-library": "^8.0.1",
+        "url": "^0.11.0",
         "waait": "^1.0.5"
     }
 }

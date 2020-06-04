@@ -1,8 +1,8 @@
 import React from 'react';
-import RouterLink from './shared/RouterLink';
+import RouterLink from './RouterLink';
 import { ProductContainer } from '../styles/products/product';
 import { Price } from '../styles/products/product-single';
-const { currencyFormatter } = require('../utils/index');
+const { currencyFormatter } = require('../utilities/shared');
 
 function Product({ product, options }) {
     const show = options.show.split(',');

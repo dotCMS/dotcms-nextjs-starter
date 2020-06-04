@@ -13,7 +13,6 @@ export default withApollo(
     },
     {
         render: ({ Page, props }) => {
-            console.log({cache})
             return (
                 <ApolloProvider client={props.apollo}>
                     <Page {...props} />

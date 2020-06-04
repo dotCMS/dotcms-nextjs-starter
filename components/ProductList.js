@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Product from '../components/Product';
-import withApollo from '../setup/withApollo';
+import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid } from '../styles/products/product';

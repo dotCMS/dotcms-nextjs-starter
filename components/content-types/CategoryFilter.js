@@ -1,6 +1,6 @@
 import React from 'react';
-import PageContext from '../../context/PageContext';
-import RouterLink from '../shared/RouterLink';
+import PageContext from '../../contexts/PageContext';
+import RouterLink from '../RouterLink';
 import { SidebarContainer } from '../../styles/category-filter';
 
 function CategoryFilter(props) {
