@@ -1,14 +1,9 @@
 import React from 'react';
 import Flickity from 'react-flickity-component';
 import { CarouselContainer } from '../styles/products/product-single';
+import { flickityOptions } from '../config';
 
 function Carousel({ images, identifier, title }) {
-    const flickityOptions = {
-        contain: true,
-        pageDots: true,
-        fullscreen: true
-    };
-
     const renderImages = (images) => {
         let imgs = [];
         for (const image in images) {
