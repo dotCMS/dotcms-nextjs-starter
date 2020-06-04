@@ -1,5 +1,4 @@
 const { DOTCMS } = require('./print');
-
 const inquirer = require('inquirer');
 
 const defaultNodeUrl =

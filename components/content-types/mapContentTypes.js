@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 const Activity = dynamic(() => import('../content-types/Activity'));
 const calendarEvent = dynamic(() => import('../content-types/calendarEvent'));
+const Banner = dynamic(() => import('../content-types/Banner'));
 const Form = dynamic(() => import('../content-types/Form'));
 const Image = dynamic(() => import('../content-types/Image'));
 const Product = dynamic(() => import('../content-types/Product'));
@@ -18,6 +19,7 @@ export const mapContentTypes = (contentType) => {
         forms: Form,
         Image,
         Product,
+        Banner,
         SimpleWidget,
         Video,
         webPageContent,

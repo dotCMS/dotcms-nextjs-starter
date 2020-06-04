@@ -11,8 +11,8 @@
         "build": "next build",
         "start": "NODE_ENV=production node ./server/server.js",
         "export": "next export",
-        "setup:dev": "node setup/index.js dev",
-        "setup:build": "node setup/index.js build",
+        "setup:dev": "node ./server/cli-utils.js dev",
+        "setup:build": "node ./server/cli-utils.js build",
         "deploy-to-gh-pages": "next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
     },
     "dependencies": {

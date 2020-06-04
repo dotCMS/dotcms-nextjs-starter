@@ -6,6 +6,9 @@ import DotCMSPage from '../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
 
+
+    console.log({ pageRender });
+
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
