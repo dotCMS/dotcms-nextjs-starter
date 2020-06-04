@@ -3,14 +3,25 @@ import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities/shared');
 import Head from 'next/head';
 import Carousel from '../Carousel';
-
+import { useQuery } from '@apollo/react-hooks'
+import withApollo  from '../../hocs/withApollo'
+import gql from 'graphql-tag'
 import {
-    CarouselContainer,
     ProductContainer,
     ProductDetail,
     Price,
     Quantity
 } from '../../styles/products/product-single';
+
+const PRODUCT_QUERY = gql`
+    query PRODUCT_QUERY($identifier: String!) {
+        ProductCollection(query: $identifier) {
+            category {
+            name
+            }
+        }
+    }
+`;
 
 function ProductSingle({
     title,
@@ -26,6 +37,18 @@ function ProductSingle({
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };
+
+    const { data, loading } = useQuery(PRODUCT_QUERY, {
+        variables: {
+            identifier: `+identifier:${identifier}`
+        }
+    });
+
+   if(!loading) {
+        var {
+            ProductCollection: [{category: [{name: categoryName}]}]
+        } = data;  
+   }
 
     return (
         <ProductContainer className="product-container container">
@@ -44,7 +67,7 @@ function ProductSingle({
             <ProductDetail>
                 <div className="meta">
                     <h4 className="meta__category">
-                        <a href="#">product?.productLine[0].title</a>
+                        <a href="#">{loading ? 'loading...' : categoryName}</a>
                     </h4>
                     <h3 className="meta__title">{title}</h3>
                     <Price salePrice={!!salePrice}>{currencyFormatter.format(retailPrice)}</Price>
@@ -65,4 +88,4 @@ function ProductSingle({
     );
 }
 
-export default ProductSingle;
+export default withApollo(ProductSingle);

@@ -9,6 +9,7 @@ function Carousel({ images, identifier, title }) {
         for (const image in images) {
             imgs.push(
                 <img
+                    key={`${identifier}+${image}`}
                     src={`${process.env.DOTCMS_HOST}/dA/${identifier}/${image}/filter/Resize,Jpeg/resize_w/700/jpeg_q/46`}
                     alt={title}
                 />

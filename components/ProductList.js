@@ -6,14 +6,17 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid } from '../styles/products/product';
 
-const PRODUCT_QUERY = gql`
-    query PRODUCT_QUERY($limit: Int!) {
+const PRODUCTS_QUERY = gql`
+    query PRODUCTS_QUERY($limit: Int!) {
         ProductCollection(limit: $limit) {
             title
             retailPrice
             salePrice
             urlTitle
             identifier
+            category {
+                name
+            }
             productLine {
                 title
             }
@@ -34,7 +37,7 @@ const PRODUCT_QUERY = gql`
 `;
 
 function ProductList({ quantity, order, orderBy, show }) {
-    const { loading, error, data } = useQuery(PRODUCT_QUERY, {
+    const { loading, error, data } = useQuery(PRODUCTS_QUERY, {
         variables: {
             limit: quantity
         },
@@ -46,7 +49,7 @@ function ProductList({ quantity, order, orderBy, show }) {
 
     return (
         <ProductGrid>
-            {data?.ProductCollection.map((product, i) => (
+            {data?.ProductCollection.map((product) => (
                 <Product
                     key={product.identifier}
                     product={product}

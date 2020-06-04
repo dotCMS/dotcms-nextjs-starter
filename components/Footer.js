@@ -1,64 +1,11 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Container } from '../styles/shared.styles';
 import logo from '../public/logo.png';
 import fb from '../public/fb.svg';
 import instagram from '../public/instagram.svg';
 import linkedin from '../public/linkedin.svg';
 import twitter from '../public/twitter.svg';
 import pinterest from '../public/pinterest.svg';
-
-const FooterContainer = styled.div`
-    margin-top: var(--primary-spacing);
-    background: white;
-    width: 100%;
-    padding: var(--primary-spacing);
-
-    & > div > * + * {
-        padding: 1rem 0;
-        margin-top: 5rem;
-        p {
-            margin: 0;
-        }
-    }
-`;
-
-const FooterSection = styled.section`
-    display: flex;
-    flex-wrap: wrap;
-    &:first-child {
-        justify-content: space-between;
-        nav {
-            margin-right: 1.69rem;
-        }
-        span {
-            font-size: 0.8rem;
-            color: grey;
-        }
-    }
-    &:last-child {
-        flex-direction: column;
-        text-align: center;
-        nav {
-            padding-bottom: 1rem;
-            a {
-                font-weight: normal;
-                font-size: 0.8rem;
-            }
-        }
-        p {
-            font-size: 0.8rem;
-            color: grey;
-        }
-    }
-    &:not(:first-child) {
-        justify-content: center;
-    }
-    nav > a:hover > img {
-        filter: contrast(50%);
-    }
-`;
-
+import { FooterContainer, FooterSection } from '../styles/footer'
 function Footer() {
     return (
         <FooterContainer>

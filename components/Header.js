@@ -1,45 +1,14 @@
 import React from 'react';
 import logo from '../public/logo.png';
-import styled from 'styled-components';
 import RouterLink from './RouterLink';
 import PageContext from '../contexts/PageContext';
 import { useRouter } from 'next/router';
-
-const MainNav = styled.header`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--primary-spacing) 0;
-
-    .main-nav {
-        &__logo {
-            img {
-                vertical-align: middle;
-            }
-        }
-    }
-`;
-
-const NavMenu = styled.div`
-    display: flex;
-    .menu {
-        &__list {
-        }
-        &__list:not(:only-child) {
-            margin-right: 4rem;
-        }
-
-        &__icons {
-        }
-    }
-`;
+import { MainNav, NavMenu } from '../styles/nav/main-nav'
 
 function Header() {
     let { nav } = React.useContext(PageContext);
     nav = nav.map((nav) => ({ title: nav.title, href: nav.href }));
     const router = useRouter();
-
-    console.log(router.asPath);
 
     return (
         <div className="container">
