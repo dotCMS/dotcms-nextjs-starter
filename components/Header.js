@@ -39,7 +39,7 @@ function Header() {
     nav = nav.map((nav) => ({ title: nav.title, href: nav.href }));
     const router = useRouter();
 
-    console.log();
+    console.log(router.asPath);
 
     return (
         <div className="container">
@@ -52,7 +52,11 @@ function Header() {
                         {nav.map((item) => (
                             <RouterLink
                                 key={item.href}
-                                className={`${router.asPath === item.href ? 'active' : ''}`}
+                                className={`${
+                                    router.asPath.split('/').filter(Boolean)[0] === item.href.split("/")[1]
+                                        ? 'active'
+                                        : ''
+                                }`}
                                 href={item.href}
                             >
                                 {item.title}
