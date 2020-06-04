@@ -8,10 +8,14 @@ function Product({ product, options }) {
     const show = options.show.split(',');
 
     const { retailPrice, urlTitle, tags, image, title, salePrice, host, productLine } = product;
+    console.log(image)
     return (
         <ProductContainer>
             {show.includes('image') && (
-                <img src={`https://${host.hostName}:8443${image.idPath}`} alt={title} />
+                <img
+                    src={`https://${host.hostName}:8443${image.idPath.split("?")[0]}/filter/Resize,Jpeg/resize_w/250/jpeg_q/16`}
+                    alt={title}
+                />
             )}
             <div className="meta">
                 <h4 className="meta__category">

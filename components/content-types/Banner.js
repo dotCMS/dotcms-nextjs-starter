@@ -16,7 +16,10 @@ function Banner({ buttonText, image, hostName, caption, link, textColor, title }
                 </Button>
             </div>
             <div className="banner-wrapper__figure">
-                <img src={`https://${hostName}:8443${image}`} alt={title} />
+                <img
+                    src={`https://${hostName}:8443${image}/filter/Resize,Jpeg/resize_w/600/jpeg_q/50`}
+                    alt={title}
+                />
             </div>
         </BannerWrapper>
     );

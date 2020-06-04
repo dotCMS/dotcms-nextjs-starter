@@ -30,19 +30,19 @@ function ProductSingle({ title, description, retailPrice, salePrice, tags, ident
                 >
                     {image && (
                         <img
-                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image`}
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image/filter/Resize,Jpeg/resize_w/700/jpeg_q/46`}
                             alt={title}
                         />
                     )}
                     {image2 && (
                         <img
-                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image2`}
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image2/filter/Resize,Jpeg/resize_w/700/jpeg_q/46`}
                             alt={title}
                         />
                     )}
                     {image3 && (
                         <img
-                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image3`}
+                            src={`${process.env.DOTCMS_HOST}/dA/${identifier}/image3/filter/Resize,Jpeg/resize_w/700/jpeg_q/46`}
                             alt={title}
                         />
                     )}
