@@ -3,8 +3,8 @@ import App from 'next/app';
 import Layout from '../components/Layout';
 import Head from 'next/head';
 import { createGlobalStyle } from 'styled-components';
-import {reset} from '../styles/reset';
-import {reflex} from '../styles/reflex';
+import { reset } from '../styles/reset';
+import { reflex } from '../styles/reflex';
 import { modularScale } from 'polished';
 
 const GlobalStyle = createGlobalStyle`
@@ -77,20 +77,23 @@ const GlobalStyle = createGlobalStyle`
 	${reflex}
 `;
 export default class MyApp extends App {
-	render () {
-		const { Component, pageProps } = this.props
-		return (
-			<Layout>
-					<Head>
-							<link
-									href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-									rel="stylesheet"
-							/>
-							<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
-					</Head>
-					<GlobalStyle />
-					<Component {...pageProps} />
-			</Layout>
-    );
-	}
+    render() {
+        const { Component, pageProps } = this.props;
+        return (
+            <Layout>
+                <Head>
+                    <link
+                        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+                        rel="stylesheet"
+                    />
+                    <link
+                        rel="stylesheet"
+                        href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+                    />
+                </Head>
+                <GlobalStyle />
+                <Component {...pageProps} />
+            </Layout>
+        );
+    }
 }

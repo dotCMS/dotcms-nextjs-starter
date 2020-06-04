@@ -33,11 +33,11 @@ const LocaleDropdown = () => {
                     <select
                         className="form-input"
                         value={language.current}
-                        onChange={({target}) => {
+                        onChange={({ target }) => {
                             language.set(target.value);
                         }}
                     >
-                        <Options languages={languages}/>
+                        <Options languages={languages} />
                     </select>
                 </div>
             )}

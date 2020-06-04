@@ -1,4 +1,4 @@
-import RouterLink from "../RouterLink";
+import RouterLink from '../RouterLink';
 
 export default function Activity(props) {
     const description =

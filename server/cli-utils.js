@@ -8,19 +8,19 @@ const { getParsedEnvFile, createEnvFile } = require('../server/envFile');
 const createEnvVars = (vars, separator) => {
     return vars
         ? Object.keys(vars)
-              .map(key => `${key}=${vars[key]}`)
+              .map((key) => `${key}=${vars[key]}`)
               .join(separator)
         : '';
 };
 
-const printAuthError = err => {
+const printAuthError = (err) => {
     console.log('\n');
     printError('Problem with your DotCMS instance');
     printError('ERROR: ' + err.message);
     process.exit(1);
 };
 
-const setEnvVarsAndStartApp = vars => {
+const setEnvVarsAndStartApp = (vars) => {
     let prep = createEnvVars(vars, ' ');
 
     spawn(`${prep} npm run ${process.argv[2]}`, {
@@ -31,7 +31,9 @@ const setEnvVarsAndStartApp = vars => {
 
 const printWelcome = () => {
     printHeading(`Welcome to ${DOTCMS} SPA starter`);
-    console.log('This utility will walk you through setting up\nall the necessary environmental variables\n');
+    console.log(
+        'This utility will walk you through setting up\nall the necessary environmental variables\n'
+    );
 };
 
 const main = async () => {

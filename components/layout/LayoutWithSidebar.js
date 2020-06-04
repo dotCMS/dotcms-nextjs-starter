@@ -10,7 +10,7 @@ const SIDEBAR_SIZE_MAP = {
     large: 4
 };
 
-const getSidebarLayoutColumns = sidebar => {
+const getSidebarLayoutColumns = (sidebar) => {
     const sidebarSize = SIDEBAR_SIZE_MAP[sidebar.width];
 
     if (sidebar.location === 'right') {

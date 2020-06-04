@@ -1,4 +1,4 @@
-import { mapContentTypes, getComponent } from '../content-types/mapContentTypes'
+import { mapContentTypes, getComponent } from '../content-types/mapContentTypes';
 
 export const Contentlet = ({ data }) => {
     let Component;
@@ -10,4 +10,4 @@ export const Contentlet = ({ data }) => {
     }
 
     return <Component {...data} />;
-}
+};

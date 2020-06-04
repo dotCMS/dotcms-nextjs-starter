@@ -25,9 +25,7 @@ export default function Product(props) {
                 </div>
             </div>
             <p className="box-product-name">
-                <RouterLink href={'/store/products/' + props.urlTitle}>
-                    {props.title}
-                </RouterLink>
+                <RouterLink href={'/store/products/' + props.urlTitle}>{props.title}</RouterLink>
             </p>
             <div className="box-product-prices">
                 {props.salePrice != null ? (

@@ -12,25 +12,26 @@ const ProductSingle = dynamic(() => import('../content-types/ProductSingle'));
 const CategoryFilter = dynamic(() => import('../content-types/CategoryFilter'));
 
 export const mapContentTypes = (contentType) => {
-  const components = {
-      Activity,
-      calendarEvent,
-      forms: Form,
-      Image,
-      Product,
-      SimpleWidget,
-      Video,
-      webPageContent,
-      StoreProductList,
-      ProductSingle,
-      CategoryFilter
-  };
+    const components = {
+        Activity,
+        calendarEvent,
+        forms: Form,
+        Image,
+        Product,
+        SimpleWidget,
+        Video,
+        webPageContent,
+        StoreProductList,
+        ProductSingle,
+        CategoryFilter
+    };
 
-  if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {
-      throw new Error(`The component ${contentType} does not exist.`);
-  }
+    if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {
+        throw new Error(`The component ${contentType} does not exist.`);
+    }
 
-  return components[contentType];
+    return components[contentType];
 };
 
-export const getComponent = (contentType) => mapContentTypes(contentType) || mapContentTypes('webPageContent');
+export const getComponent = (contentType) =>
+    mapContentTypes(contentType) || mapContentTypes('webPageContent');

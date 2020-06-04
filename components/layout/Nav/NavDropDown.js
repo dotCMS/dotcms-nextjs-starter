@@ -21,7 +21,7 @@ const NavDropDown = ({ options }) => {
             <RouterLink href={options.href} className="rd-nav-link">
                 {options.title}
             </RouterLink>
-            <span className="rd-navbar-submenu-toggle"></span>
+            <span className="rd-navbar-submenu-toggle" />
             <ul className="rd-menu rd-navbar-megamenu rd-navbar-open-left rd-navbar-open-right">
                 {options.children.map((subItem, index) => {
                     return (

@@ -633,6 +633,6 @@ export const getFullPageLayout = () => {
     return PAGE_MOCK_FORMMATED.layout;
 };
 
-export const getMockRow = index => {
+export const getMockRow = (index) => {
     return { ...PAGE_MOCK_FORMMATED.layout.body.rows[index || 0] };
 };

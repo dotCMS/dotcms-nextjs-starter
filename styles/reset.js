@@ -18,4 +18,4 @@ b, u, i, center,
 \tfont: inherit;
 \tvertical-align: baseline;
 }
-`
+`;

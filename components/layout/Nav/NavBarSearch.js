@@ -16,7 +16,7 @@ export default function NavBarSearch() {
                     setActive(!active);
                 }}
             >
-                <span></span>
+                <span />
             </button>
             <form className="rd-search" action="/search/" method="GET">
                 <div className="form-wrap">
@@ -43,7 +43,7 @@ export default function NavBarSearch() {
                     className="rd-search-form-submit fa-search"
                     type="submit"
                     aria-label="Submit"
-                ></button>
+                />
             </form>
         </div>
     );

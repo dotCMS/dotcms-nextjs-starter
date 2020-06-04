@@ -46,4 +46,4 @@ export const ProductGrid = styled.div`
     flex: 1 0 80%;
     margin-top: var(--primary-spacing);
     gap: var(--primary-spacing);
-`; 
+`;

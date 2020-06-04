@@ -2,9 +2,10 @@ const { DOTCMS } = require('./print');
 
 const inquirer = require('inquirer');
 
-const defaultNodeUrl = process.argv[2] === 'serve' ? 'http://localhost:5000' : 'http://localhost:3000';
+const defaultNodeUrl =
+    process.argv[2] === 'serve' ? 'http://localhost:5000' : 'http://localhost:3000';
 
-const questionsBasic = param => [
+const questionsBasic = (param) => [
     {
         message: !!param
             ? '.env FILE FOUND! Would you like to overwrite the env variables in the file?'
@@ -42,7 +43,7 @@ const questionsAuth = [
     }
 ];
 
-const getAnswersBasic = params => inquirer.prompt(questionsBasic(params));
+const getAnswersBasic = (params) => inquirer.prompt(questionsBasic(params));
 const getAnswersAuth = () => inquirer.prompt(questionsAuth);
 
 module.exports = { getAnswersBasic, getAnswersAuth };

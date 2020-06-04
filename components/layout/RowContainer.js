@@ -6,7 +6,7 @@ const calcColumnOffset = (prev, col) => {
     return prev ? col.left - (prev.width + prev.left) : col.left > 0 ? col.left : null;
 };
 
-const getColumnsWithOffset = row => {
+const getColumnsWithOffset = (row) => {
     return row.columns.reduce((acc, col) => {
         const prev = acc[acc.length - 1] || null;
 

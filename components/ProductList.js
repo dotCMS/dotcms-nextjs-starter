@@ -47,7 +47,11 @@ function ProductList({ quantity, order, orderBy, show }) {
     return (
         <ProductGrid>
             {data?.ProductCollection.map((product, i) => (
-                <Product key={product.identifier} product={product} options={{ order, orderBy, show }} />
+                <Product
+                    key={product.identifier}
+                    product={product}
+                    options={{ order, orderBy, show }}
+                />
             ))}
         </ProductGrid>
     );

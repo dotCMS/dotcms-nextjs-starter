@@ -22,10 +22,13 @@ const Contentlets = ({ contentlets }) => {
     return contentlets ? (
         <PageContext.Consumer>
             {({ isEditMode }) => {
-                return contentlets.map(contentlet => {
+                return contentlets.map((contentlet) => {
                     contentlet.dotCanEdit = true;
                     return isEditMode ? (
-                        <DotCMSEditContentletWrapper key={contentlet.identifier} contentlet={contentlet}>
+                        <DotCMSEditContentletWrapper
+                            key={contentlet.identifier}
+                            contentlet={contentlet}
+                        >
                             <Contentlet data={contentlet} />
                         </DotCMSEditContentletWrapper>
                     ) : (

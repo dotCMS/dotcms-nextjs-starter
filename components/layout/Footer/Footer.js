@@ -1,8 +1,12 @@
-import { Container as BootstrapContainer, Row as BootstrapRow, Col as BootstrapCol } from 'reactstrap';
+import {
+    Container as BootstrapContainer,
+    Row as BootstrapRow,
+    Col as BootstrapCol
+} from 'reactstrap';
 
 import BlogListing from './BlogListing';
 
-const Footer = props => {
+const Footer = (props) => {
     return (
         <footer
             className="footer-classic bg-footer bg-overlay-80 context-dark"
@@ -16,9 +20,10 @@ const Footer = props => {
                         <BootstrapCol lg={4}>
                             <h2>About us</h2>
                             <p className="max-width-xl-90 text-gray-400">
-                                We are TravelLux, a community of dedicated travel experts, journalists, and bloggers.
-                                Our aim is to offer you the best insight on where to go for your travel as well as to
-                                give you amazing opportunities with free benefits and bonuses for registered clients.
+                                We are TravelLux, a community of dedicated travel experts,
+                                journalists, and bloggers. Our aim is to offer you the best insight
+                                on where to go for your travel as well as to give you amazing
+                                opportunities with free benefits and bonuses for registered clients.
                             </p>
                             <a className="footer-brand" href="./">
                                 <img
@@ -75,10 +80,13 @@ const Footer = props => {
                                         id="footer-form-message"
                                         name="message"
                                         data-constraints="@Required"
-                                    ></textarea>
+                                    />
                                 </div>
                                 <div className="form-wrap">
-                                    <button className="button button-md button-primary" type="submit">
+                                    <button
+                                        className="button button-md button-primary"
+                                        type="submit"
+                                    >
                                         Send
                                     </button>
                                 </div>
@@ -90,7 +98,10 @@ const Footer = props => {
             <BootstrapContainer>
                 <p className="rights mb-0">
                     <span>©2012 - 2019 All Rights Reserved</span>
-                    <a href="https://dotcms.com/company/policies/privacy-policy">Terms of Use</a> <span>and</span>
+                    <a href="https://dotcms.com/company/policies/privacy-policy">
+                        Terms of Use
+                    </a>{' '}
+                    <span>and</span>
                     <a href="https://dotcms.com/company/policies/privacy-policy">Privacy Policy</a>
                 </p>
             </BootstrapContainer>

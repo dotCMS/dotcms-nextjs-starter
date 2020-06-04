@@ -27,7 +27,7 @@ const CommentItem = ({ body, commentAuthor, postDate }) => {
                     </div>
                     <div className="box-comment-text">{body}</div>
                     <div className="box-comment-reply">
-                        <span className="icon mdi mdi-reply"></span>
+                        <span className="icon mdi mdi-reply" />
                         <a href="#">Reply</a>
                     </div>
                 </div>

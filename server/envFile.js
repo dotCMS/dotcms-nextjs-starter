@@ -1,12 +1,12 @@
 const fs = require('fs');
 
-const parseEnvFile = file => {
+const parseEnvFile = (file) => {
     return Object.assign(
         ...file
             .toString()
             .split('\n')
-            .filter(line => /^([^=:#]+?)[=:](.*)/.test(line))
-            .map(line => {
+            .filter((line) => /^([^=:#]+?)[=:](.*)/.test(line))
+            .map((line) => {
                 const [key, value] = line.split('=');
                 return {
                     [key]: value
@@ -15,9 +15,9 @@ const parseEnvFile = file => {
     );
 };
 
-const createEnvFile = params => {
+const createEnvFile = (params) => {
     const content = Object.keys(params)
-        .map(key => `${key}=${params[key]}`)
+        .map((key) => `${key}=${params[key]}`)
         .join('\n');
 
     return new Promise((resolve, reject) => {

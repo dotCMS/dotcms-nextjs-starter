@@ -10,8 +10,8 @@ export default function Video(props) {
                 style={{
                     backgroundImage: `url(/dA/${props.thumbnailLarge})/40q)`
                 }}
-            ></div>
-            <span className="icon mdi mdi-play video-cover-icon"></span>
+            />
+            <span className="icon mdi mdi-play video-cover-icon" />
         </a>
     );
 }

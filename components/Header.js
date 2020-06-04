@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../public/logo.png';
 import styled from 'styled-components';
 import RouterLink from './RouterLink';
-import PageContext  from '../contexts/PageContext'
+import PageContext from '../contexts/PageContext';
 import { useRouter } from 'next/router';
 
 const MainNav = styled.header`
@@ -35,12 +35,11 @@ const NavMenu = styled.div`
 `;
 
 function Header() {
-
-    let {nav} = React.useContext(PageContext);
-    nav = nav.map((nav => ({title: nav.title, href: nav.href})));
+    let { nav } = React.useContext(PageContext);
+    nav = nav.map((nav) => ({ title: nav.title, href: nav.href }));
     const router = useRouter();
 
-    console.log()
+    console.log();
 
     return (
         <div className="container">

@@ -46,7 +46,6 @@ async function getAllPagesContentlets() {
 }
 
 async function getPage(url, lang) {
-
     loggerLog('DOTCMS PAGE', url, lang || '1');
     return dotCMSApi.page
         .get({
@@ -54,7 +53,6 @@ async function getPage(url, lang) {
             language: lang || 1
         })
         .then(async (pageRender) => {
-
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
@@ -110,7 +108,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY API REQUEST', req.url);
         loggerLog(`${process.env.DOTCMS_HOST}${req.url}`);
         proxyOptions = {
-            proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
+            proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
                 proxyReqOpts.headers = {
                     ['Authorization']: `Bearer ${process.env.BEARER_TOKEN}`,
                     ['Content-Type']: 'application/json'
@@ -132,7 +130,6 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-
 module.exports = {
     getPage,
     getNav,
@@ -142,5 +139,5 @@ module.exports = {
     emitRemoteRenderEdit,
     getLanguages,
     errors,
-    getAllPagesContentlets,
+    getAllPagesContentlets
 };

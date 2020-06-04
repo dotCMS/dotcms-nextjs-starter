@@ -19,7 +19,6 @@ class NavSort extends Component {
             name: 'reorder-menu',
             data: url
         });
-
     }
 
     render() {
