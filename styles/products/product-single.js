@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Carousel = styled.div`
+export const CarouselContainer = styled.div`
     img {
         object-fit: cover;
     }

@@ -82,14 +82,7 @@ export default class MyApp extends App {
         return (
             <Layout>
                 <Head>
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
-                        rel="stylesheet"
-                    />
-                    <link
-                        rel="stylesheet"
-                        href="https://unpkg.com/flickity@2/dist/flickity.min.css"
-                    />
+                    <title>dotCMS Store</title>
                 </Head>
                 <GlobalStyle />
                 <Component {...pageProps} />

@@ -25,7 +25,6 @@ function Product({ product, options }) {
                     <h3 className="meta__title">
                         <RouterLink
                             href={`/store/products/${urlTitle}`}
-                            as={`/store/products/${urlTitle}`}
                         >
                             {title}
                         </RouterLink>
