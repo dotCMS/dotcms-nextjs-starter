@@ -12,10 +12,14 @@ function Product({ product, options }) {
     return (
         <ProductContainer>
             {show.includes('image') && (
-                <img
-                    src={`https://${host.hostName}:8443${image.idPath.split("?")[0]}/filter/Resize,Jpeg/resize_w/250/jpeg_q/16`}
-                    alt={title}
-                />
+                <RouterLink href={`/store/products/${urlTitle}`}>
+                    <img
+                        src={`https://${host.hostName}:8443${
+                            image.idPath.split('?')[0]
+                        }/filter/Resize,Jpeg/resize_w/250/jpeg_q/16`}
+                        alt={title}
+                    />
+                </RouterLink>
             )}
             <div className="meta">
                 <h4 className="meta__category">
@@ -23,11 +27,7 @@ function Product({ product, options }) {
                 </h4>
                 {show.includes('title') && (
                     <h3 className="meta__title">
-                        <RouterLink
-                            href={`/store/products/${urlTitle}`}
-                        >
-                            {title}
-                        </RouterLink>
+                        <RouterLink href={`/store/products/${urlTitle}`}>{title}</RouterLink>
                     </h3>
                 )}
 

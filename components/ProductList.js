@@ -48,7 +48,7 @@ function ProductList({ quantity, order, orderBy, show }) {
     if (error) return `Error! ${error}`;
 
     return (
-        <ProductGrid>
+        <ProductGrid className="product-grid">
             {data?.ProductCollection.map((product) => (
                 <Product
                     key={product.identifier}
