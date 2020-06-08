@@ -5,7 +5,6 @@ import PageContext from '../contexts/PageContext';
 import DotCMSPage from '../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
-
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
@@ -30,10 +29,17 @@ function DotCMSStaticPage({ pageRender, nav }) {
 }
 
 export async function getStaticPaths() {
+    const NOT_BUILD_THIS_PAGES = ['/store/product-line', '/store/product-detail', '/store/cart'];
 
     const PAGES_QUERY = {
-        query:
-            '{ search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") { urlMap } }'
+        query: `{ 
+            search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") {
+                urlMap
+                ... on htmlpageasset {
+                    url
+                }
+            }
+        }`
     };
 
     let data = await fetch(`${process.env.DOTCMS_HOST}/api/v1/graphql`, {
@@ -44,41 +50,53 @@ export async function getStaticPaths() {
         },
         body: JSON.stringify(PAGES_QUERY)
     });
+    
 
-    ({data} = await data.json());
+    ({ data } = await data.json());
 
     const paths = data.search
-        .filter(({ urlMap }) => Boolean(urlMap))
-        .reduce((acc, curr) => {
-            acc = [...acc, { params: { slug: curr.urlMap?.split('/').filter(Boolean) } }];
+        .filter(({ urlMap, url }) => urlMap || url)
+        .map(({ urlMap, url }) => urlMap || url)
+        .filter((url) => !NOT_BUILD_THIS_PAGES.includes(url))
+        .reduce((acc, url) => {
+            acc = [
+                ...acc,
+                {
+                    params: {
+                        slug: url
+                            ?.split('/')
+                            .filter(Boolean)
+                            .filter((item) => item !== 'index')
+                    }
+                }
+            ];
             return acc;
         }, []);
 
     return {
         paths,
-        fallback: true
+        fallback: false
     };
 }
 
-export const getStaticProps = async ({params}) => {
-   try {
-        const url = `/${params.slug.filter((item) => item !== 'index').join('/')}`;
+export const getStaticProps = async ({ params: { slug } }) => {
+    try {
+        const url = `/${slug.join('/')}`;
         const pageRender = await getPage(url);
         const nav = await getNav('4');
 
         return {
             props: {
                 pageRender,
-                nav,
+                nav
             },
             unstable_revalidate: 1
         };
-   } catch (error) {
-
-    return {
-        props: {}
+    } catch (error) {
+        return {
+            props: {}
+        };
     }
-   }
 };
 
 export default DotCMSStaticPage;
