@@ -6,7 +6,9 @@ import Layout from '../../../components/layout/Layout';
 import { getPage, getNav } from '../../../config/dotcms';
 import PageContext from '../../../contexts/PageContext';
 import { ProductGrid } from '../../../styles/products/product.styles';
-import Product from '../../../components/Product'
+import Product from '../../../components/Product';
+import { useRouter } from 'next/router';
+import RouterLink from '../../../components/RouterLink';
 
 const CATEGORY_QUERY = gql`
     query CATEGORY_QUERY($query: String!) {
@@ -35,8 +37,9 @@ const CATEGORY_QUERY = gql`
 `;
 
 function category({ slug, pageRender, nav }) {
+    const router = useRouter();
     let [category, ...rest] = slug.split('-');
-    console.log({pageRender, rest});
+    console.log({ pageRender, rest });
     let query;
     if (rest.length === 0) {
         query = `+categories:${category}`;
@@ -51,7 +54,8 @@ function category({ slug, pageRender, nav }) {
         }
     });
 
-    console.log(data)
+    console.log(data);
+    console.log(router);
 
     if (loading) <p>Loading...</p>;
     if (error) <p>Loading...</p>;
@@ -68,7 +72,18 @@ function category({ slug, pageRender, nav }) {
                             {data.ProductCollection.length > 0 ? (
                                 <>
                                     <h3>Category: {data.ProductCollection[0].category[0].name}</h3>
-                                    <h4>Tags: {data.ProductCollection[0].tags.join(', ')}</h4>
+                                    <h4>Tags:</h4>
+                                    <ul>
+                                        {data.ProductCollection[0].tags.map((tag) => {
+                                            return (
+                                                <li>
+                                                    <RouterLink href={`${router.asPath}-${tag}`}>
+                                                        {`${router.asPath}-${tag}`}
+                                                    </RouterLink>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
                                     <ProductGrid className="product-grid">
                                         {data.ProductCollection.map((product) => (
                                             <Product product={product} />
@@ -87,7 +102,6 @@ function category({ slug, pageRender, nav }) {
 }
 
 export async function getServerSideProps({ req, res, params }) {
-
     const pageRender = await getPage('/');
     const nav = await getNav('4');
 
