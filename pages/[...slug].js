@@ -1,4 +1,3 @@
-import Head from 'next/head';
 import { getPage, getNav } from '../config/dotcms';
 import Layout from '../components/layout/Layout';
 import PageContext from '../contexts/PageContext';
@@ -50,7 +49,6 @@ export async function getStaticPaths() {
         },
         body: JSON.stringify(PAGES_QUERY)
     });
-    
 
     ({ data } = await data.json());
 
