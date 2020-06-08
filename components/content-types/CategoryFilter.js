@@ -1,7 +1,7 @@
 import React from 'react';
 import PageContext from '../../contexts/PageContext';
 import RouterLink from '../RouterLink';
-import { SidebarContainer } from '../../styles/category-filter';
+import { SidebarContainer } from '../../styles/category-filter/category.styles';
 
 function CategoryFilter(props) {
     const { nav } = React.useContext(PageContext);

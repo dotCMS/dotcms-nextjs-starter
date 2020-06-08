@@ -1,6 +1,6 @@
 import React from 'react';
 import Flickity from 'react-flickity-component';
-import { CarouselContainer } from '../styles/products/product-single';
+import { CarouselContainer } from '../styles/products/product.styles';
 import { flickityOptions } from '../config';
 
 function Carousel({ images, identifier, title }) {

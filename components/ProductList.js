@@ -4,7 +4,7 @@ import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { ProductGrid } from '../styles/products/product';
+import { ProductGrid } from '../styles/products/product.styles';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int!) {

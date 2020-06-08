@@ -11,7 +11,7 @@ import {
     ProductDetail,
     Price,
     Quantity
-} from '../../styles/products/product-single';
+} from '../../styles/products/product.styles';
 
 const PRODUCT_QUERY = gql`
     query PRODUCT_QUERY($identifier: String!) {
@@ -51,7 +51,7 @@ function ProductSingle({
    }
 
     return (
-        <ProductContainer className="product-container container">
+        <ProductContainer className="container">
             <Head>
                 <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
             </Head>

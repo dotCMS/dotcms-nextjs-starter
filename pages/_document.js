@@ -36,6 +36,7 @@ export default class MyDocument extends Document {
                         rel="preload"
                         as="font"
                     />
+                    {this.props.styles}
                 </Head>
                 <body>
                     <Main />

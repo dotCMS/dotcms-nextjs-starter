@@ -3,7 +3,7 @@ import logo from '../public/logo.png';
 import RouterLink from './RouterLink';
 import PageContext from '../contexts/PageContext';
 import { useRouter } from 'next/router';
-import { MainNav, NavMenu } from '../styles/nav/main-nav'
+import { MainNav, NavMenu } from '../styles/nav/nav.styles'
 
 function Header() {
     let { nav } = React.useContext(PageContext);

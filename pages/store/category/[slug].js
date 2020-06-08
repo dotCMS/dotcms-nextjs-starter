@@ -5,12 +5,27 @@ import withApollo from '../../../hocs/withApollo';
 import Layout from '../../../components/layout/Layout';
 import { getPage, getNav } from '../../../config/dotcms';
 import PageContext from '../../../contexts/PageContext';
+import { ProductGrid } from '../../../styles/products/product.styles';
+import Product from '../../../components/Product'
 
 const CATEGORY_QUERY = gql`
     query CATEGORY_QUERY($query: String!) {
         ProductCollection(query: $query) {
             title
             tags
+            retailPrice
+            salePrice
+            urlTitle
+            tags
+            image {
+                idPath
+            }
+            host {
+                hostName
+            }
+            productLine {
+                title
+            }
             category {
                 name
                 key
@@ -20,18 +35,14 @@ const CATEGORY_QUERY = gql`
 `;
 
 function category({ slug, pageRender, nav }) {
-
-  console.log(pageRender);
     let [category, ...rest] = slug.split('-');
-
+    console.log({pageRender, rest});
     let query;
-    if (typeof category === 'string') {
+    if (rest.length === 0) {
         query = `+categories:${category}`;
     } else {
-        if (rest) {
-            rest = rest.map((tag) => `+Product.tags:"${tag}"`);
-            query = `+categories:${category} ${rest.join(' ')}`;
-        }
+        rest = rest.map((tag) => `+Product.tags:"${tag}"`);
+        query = `+categories:${category} ${rest.join(' ')}`;
     }
 
     const { data, loading, error } = useQuery(CATEGORY_QUERY, {
@@ -40,22 +51,34 @@ function category({ slug, pageRender, nav }) {
         }
     });
 
+    console.log(data)
+
     if (loading) <p>Loading...</p>;
     if (error) <p>Loading...</p>;
-
     return (
         <div>
             {data && (
-                <PageContext.Provider value={{ 
-                  nav: nav || []
-                 }}>
+                <PageContext.Provider
+                    value={{
+                        nav: nav || []
+                    }}
+                >
                     <Layout>
-                        <h1>Category: {data.ProductCollection[0].category[0].name}</h1>
-                        <h3>Tags: {data.ProductCollection[0].tags.join(', ')}</h3>
-
-                        {data.ProductCollection.map((item) => (
-                            <h3>{item.title}</h3>
-                        ))}
+                        <div className="container">
+                            {data.ProductCollection.length > 0 ? (
+                                <>
+                                    <h3>Category: {data.ProductCollection[0].category[0].name}</h3>
+                                    <h4>Tags: {data.ProductCollection[0].tags.join(', ')}</h4>
+                                    <ProductGrid className="product-grid">
+                                        {data.ProductCollection.map((product) => (
+                                            <Product product={product} />
+                                        ))}
+                                    </ProductGrid>
+                                </>
+                            ) : (
+                                <h3>No products found.</h3>
+                            )}
+                        </div>
                     </Layout>
                 </PageContext.Provider>
             )}

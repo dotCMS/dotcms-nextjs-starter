@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../../styles/shared.styles';
 import dots from '../../public/dots.svg';
-import { BannerWrapper } from '../../styles/banner';
+import { BannerWrapper } from '../../styles/banner/banner.styles';
 
 function Banner({ buttonText, image, hostName, caption, link, textColor, title }) {
     return (
