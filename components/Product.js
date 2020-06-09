@@ -6,8 +6,9 @@ const { currencyFormatter } = require('../utilities/shared');
 
 function Product({ product, options = {} }) {
     const show = options.show?.split(',');
-    const { retailPrice, urlTitle, tags, image, title, salePrice, host, productLine } = product;
+    const { retailPrice, urlTitle, tags, image, title, salePrice, host, category } = product;
 
+    console.log(category)
     return (
         <SingleProductContainer>
             {/* {show.includes('image') && ( )} */}
@@ -22,7 +23,7 @@ function Product({ product, options = {} }) {
 
             <div className="meta">
                 <h4 className="meta__category">
-                    <a href="#">{productLine[0]?.title}</a>
+                    <a href="#">{category[0]?.name}</a>
                 </h4>
                 {/* {show.includes('title') && ()} */}
                 <h3 className="meta__title">

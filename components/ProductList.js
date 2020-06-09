@@ -17,9 +17,6 @@ const PRODUCTS_QUERY = gql`
             category {
                 name
             }
-            productLine {
-                title
-            }
             host {
                 hostName
             }

@@ -23,9 +23,6 @@ const CATEGORY_QUERY = gql`
             host {
                 hostName
             }
-            productLine {
-                title
-            }
             category {
                 name
                 key

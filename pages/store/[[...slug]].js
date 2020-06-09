@@ -64,7 +64,9 @@ export async function getStaticPaths() {
                         slug: url
                             ?.split('/')
                             .filter(Boolean)
-                            .filter((item) => item !== 'index')
+                            .filter((item) => {
+                                return item !== 'index'  && item !== "store";
+                            })
                     }
                 }
             ];
@@ -81,7 +83,13 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     try {
-        let url = slug ? `/${slug.join('/')}` : '/store';
+ 
+        let url = slug
+            ? slug[0] === 'products'
+                ? `/store/${slug.join('/')}`
+                : `/${slug.join('/')}`
+            : '/store';
+
         const pageRender = await getPage(url);
         const nav = await getNav('4');
         
