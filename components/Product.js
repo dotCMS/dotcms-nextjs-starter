@@ -11,7 +11,6 @@ function Product({ product, options = {} }) {
     return (
         <SingleProductContainer>
             {/* {show.includes('image') && ( )} */}
-
             <RouterLink href={`/store/products/${urlTitle}`}>
                 <img
                     src={`https://${host.hostName}:8443${
@@ -23,7 +22,7 @@ function Product({ product, options = {} }) {
 
             <div className="meta">
                 <h4 className="meta__category">
-                    {/* <a href="#">{productLine[0].title}</a> */}
+                    <a href="#">{productLine[0]?.title}</a>
                 </h4>
                 {/* {show.includes('title') && ()} */}
                 <h3 className="meta__title">
