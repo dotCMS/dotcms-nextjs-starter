@@ -3,13 +3,12 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = withCss({
     webpack: (config) => {
-
-         config.node = {
-             fs: 'empty',
-             inquirer: 'empty',
-             child_process: 'empty',
-             readline: 'empty'
-         };
+        config.node = {
+            fs: 'empty',
+            inquirer: 'empty',
+            child_process: 'empty',
+            readline: 'empty'
+        };
 
         config.module.rules.push({
             test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
@@ -23,5 +22,8 @@ module.exports = withCss({
         });
         config.plugins.push(new Dotenv({ silent: false }));
         return config;
+    },
+    experimental: {
+      optionalCatchAll: true
     }
 });

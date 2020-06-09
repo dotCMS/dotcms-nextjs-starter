@@ -1,9 +1,10 @@
-import { getPage, getNav } from '../config/dotcms';
-import Layout from '../components/layout/Layout';
-import PageContext from '../contexts/PageContext';
-import DotCMSPage from '../components/layout/DotCMSPage';
+import { getPage, getNav } from '../../config/dotcms';
+import Layout from '../../components/layout/Layout';
+import PageContext from '../../contexts/PageContext';
+import DotCMSPage from '../../components/layout/DotCMSPage';
 
 function DotCMSStaticPage({ pageRender, nav }) {
+    console.log({ pageRender });
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
@@ -71,6 +72,8 @@ export async function getStaticPaths() {
             return acc;
         }, []);
 
+    paths.push({ params: { slug: [] } });
+
     return {
         paths,
         fallback: false
@@ -79,10 +82,10 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     try {
-        const url = `/${slug.join('/')}`;
+        let url = slug ? `/${slug.join('/')}` : '/store';
         const pageRender = await getPage(url);
         const nav = await getNav('4');
-
+        
         return {
             props: {
                 pageRender,

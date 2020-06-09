@@ -6,7 +6,7 @@ import Layout from '../../../components/layout/Layout';
 import { getPage, getNav } from '../../../config/dotcms';
 import PageContext from '../../../contexts/PageContext';
 import { ProductGrid } from '../../../styles/products/product.styles';
-import Product from '../../../components/Product'
+import Product from '../../../components/Product';
 
 const CATEGORY_QUERY = gql`
     query CATEGORY_QUERY($query: String!) {
@@ -34,15 +34,14 @@ const CATEGORY_QUERY = gql`
     }
 `;
 
-function category({ slug, pageRender, nav }) {
-    let [category, ...rest] = slug.split('-');
-    console.log({pageRender, rest});
-    let query;
-    if (rest.length === 0) {
+function category({ category, tags, pageRender, nav }) {
+
+    let query, tagsMap;
+    if (tags.length === 0) {
         query = `+categories:${category}`;
     } else {
-        rest = rest.map((tag) => `+Product.tags:"${tag}"`);
-        query = `+categories:${category} ${rest.join(' ')}`;
+        tagsMap = tags.map((tag) => `+Product.tags:"${tag}"`);
+        query = `+categories:${category} ${tagsMap.join(' ')}`;
     }
 
     const { data, loading, error } = useQuery(CATEGORY_QUERY, {
@@ -51,49 +50,50 @@ function category({ slug, pageRender, nav }) {
         }
     });
 
-    console.log(data)
-
     if (loading) <p>Loading...</p>;
     if (error) <p>Loading...</p>;
+
     return (
-        <div>
-            {data && (
-                <PageContext.Provider
-                    value={{
-                        nav: nav || []
-                    }}
-                >
-                    <Layout>
-                        <div className="container">
-                            {data.ProductCollection.length > 0 ? (
-                                <>
-                                    <h3>Category: {data.ProductCollection[0].category[0].name}</h3>
-                                    <h4>Tags: {data.ProductCollection[0].tags.join(', ')}</h4>
-                                    <ProductGrid className="product-grid">
-                                        {data.ProductCollection.map((product) => (
-                                            <Product product={product} />
-                                        ))}
-                                    </ProductGrid>
-                                </>
-                            ) : (
-                                <h3>No products found.</h3>
-                            )}
-                        </div>
-                    </Layout>
-                </PageContext.Provider>
-            )}
-        </div>
+      <>
+          {data && (
+              <PageContext.Provider
+                  value={{
+                      nav: nav || []
+                  }}
+              >
+                  <Layout>
+                      <div className="container">
+                          {data.ProductCollection.length > 0 ? (
+                              <>
+                                  <h3>Category: {data.ProductCollection[0].category[0].name}</h3>
+                                  <h4>Tags: {data.ProductCollection[0].tags.join(', ')}</h4>
+                                  <ProductGrid className="product-grid">
+                                      {data.ProductCollection.map((product) => (
+                                          <Product product={product} />
+                                      ))}
+                                  </ProductGrid>
+                              </>
+                          ) : (
+                              <h3>No products found.</h3>
+                          )}
+                      </div>
+                  </Layout>
+              </PageContext.Provider>
+          )}
+      </>
     );
 }
 
 export async function getServerSideProps({ req, res, params }) {
-
-    const pageRender = await getPage('/');
+    
+    const [category, ...tags] = params.slug.split("-")
+    const pageRender = await getPage(`/store/category/${category}/index`);
     const nav = await getNav('4');
 
     return {
         props: {
-            slug: params.slug,
+            category,
+            tags,
             pageRender,
             nav
         }
