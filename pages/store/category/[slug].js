@@ -35,7 +35,6 @@ const CATEGORY_QUERY = gql`
 `;
 
 function category({ category, tags, pageRender, nav }) {
-
     let query, tagsMap;
     if (tags.length === 0) {
         query = `+categories:${category}`;
@@ -85,11 +84,9 @@ function category({ category, tags, pageRender, nav }) {
 }
 
 export async function getServerSideProps({ req, res, params }) {
-    
     const [category, ...tags] = params.slug.split("-")
     const pageRender = await getPage(`/store/category/${category}/index`);
     const nav = await getNav('4');
-
     return {
         props: {
             category,
