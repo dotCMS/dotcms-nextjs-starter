@@ -10,6 +10,9 @@ import Product from '../../../components/Product';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
+import fetch from 'isomorphic-fetch';
+import RouterLink from '../../../components/RouterLink';
+
 const CATEGORY_QUERY = gql`
     query CATEGORY_QUERY($query: String!) {
         ProductCollection(query: $query) {
@@ -41,11 +44,10 @@ const TAGS_QUERY = gql`
     }
 `;
 
-function category({ category, tags, pageRender, nav }) {
+function category({ category, tags, pageRender, nav, tagsList }) {
     let query, tagsMap;
-    const [tagsList, setTagsList] = useState([]);
-    const [selectedTagsList, setSelectedTagsList] = useState([]);
     const router = useRouter();
+    console.log(router);
 
     const contentType = '+contentType:product';
     tagsMap = tags && tags.map((tag) => `+Product.tags:"${tag}"`);
@@ -54,6 +56,8 @@ function category({ category, tags, pageRender, nav }) {
             ? `${contentType} +categories:${category}`
             : `${contentType} +categories:${category} ${tagsMap.join(' ')}`;
 
+    console.log(query);
+
     const { data, loading, error } = useQuery(CATEGORY_QUERY, {
         variables: {
             query
@@ -61,54 +65,10 @@ function category({ category, tags, pageRender, nav }) {
         fetchPolicy: 'network-only'
     });
 
-    const { data: tagData, loading: l, error: e } = useQuery(TAGS_QUERY);
-
-    const handleTagsChange = (e) => {
-        if (e.target.checked) {
-            setSelectedTagsList([...selectedTagsList, e.target.value]);
-        } else {
-            setSelectedTagsList(selectedTagsList.filter((item) => item !== e.target.value));
-        }
-    };
-
-    const setMainTags = (tagData) => {
-        let tagsSet;
-        tagsSet = new Set(
-            tagData.ProductCollection.reduce((acc, curr) => {
-                acc = [...acc, ...curr.tags];
-                return acc;
-            }, [])
-        );
-        tagsSet = Array.from(tagsSet).map((tag) => ({
-            value: tag,
-            checked: false
-        }));
-        setTagsList(tagsSet);
-
-        for (let tag of tagsSet) {
-            if (selectedTagsList.includes(tag.value)) {
-                tag.checked = true;
-            }
-        }
-    };
-
-    useEffect(() => {
-        const baseUrl = window.location.pathname;
-
-        if (!loading) {
-            setMainTags(tagData);
-        }
-        // if tags in URL then changed selectedTagsList/ i.e. set initialState
-        // if tags in URL then set checked
-
-        selectedTagsList.length > 0 &&
-            router.push(`${baseUrl}-${selectedTagsList.join('-')}`, undefined, {
-                shallow: false
-            });
-    }, [tagData, selectedTagsList]);
-
     if (loading) <p>Loading...</p>;
     if (error) <p>Loading...</p>;
+
+    console.log(tags);
 
     return (
         <>
@@ -122,24 +82,33 @@ function category({ category, tags, pageRender, nav }) {
                         <div className="container">
                             {data.ProductCollection.length > 0 ? (
                                 <>
-                                    <h3>Category: {data.ProductCollection[0].category[0].name}</h3>
+                                    <h3>Category: {category}</h3>
                                     <h4>Tags: </h4>
-                                    <form>
-                                        {tagsList.map((tag) => {
-                                            return (
-                                                <>
-                                                    <input
-                                                        type="checkbox"
-                                                        id={tag.value}
-                                                        name={tag.value}
-                                                        value={tag.value}
-                                                        onChange={handleTagsChange}
-                                                    />
-                                                    <label htmlFor={tag.value}>{tag.value}</label>
-                                                </>
-                                            );
-                                        })}
-                                    </form>
+                                    {/* <form> */}
+                                    {tagsList.map(({ key, doc_count }) => {
+                                        const checked = tags.includes(key);
+                                        return (
+                                            <>
+                                                <input
+                                                    type="checkbox"
+                                                    id={key}
+                                                    name={key}
+                                                    value={key}
+                                                    checked={checked}
+                                                    onChange={(e) => {
+                                                        router.push(
+                                                            '/store/category/[slug]',
+                                                            `${router.asPath}-${key}`
+                                                        );
+                                                    }}
+                                                />
+                                                <label htmlFor={key}>
+                                                    {key} ({doc_count})
+                                                </label>
+                                            </>
+                                        );
+                                    })}
+                                    {/* </form> */}
                                     <ProductGrid className="product-grid">
                                         {data.ProductCollection.map((product) => (
                                             <Product product={product} />
@@ -159,6 +128,31 @@ function category({ category, tags, pageRender, nav }) {
 
 export async function getServerSideProps({ req, res, params }) {
     const [category, ...tags] = params.slug.split('-');
+
+    const tagsList = await fetch('https://starter.dotcms.com:8443/api/es/search', {
+        method: 'POST',
+        'Content-Type': 'application/json',
+        body: JSON.stringify({
+            query: {
+                query_string: {
+                    query: `+contentType:product +(categories:${category})`
+                }
+            },
+            aggs: {
+                tag: {
+                    terms: {
+                        field: 'tags',
+                        size: 100
+                    }
+                }
+            },
+            size: 0
+        })
+    })
+        .then((res) => res.json())
+        .then((result) => result.esresponse[0].aggregations['sterms#tag'].buckets);
+
+    console.log(tagsList);
     const pageRender = await getPage(`/store/category/${category}/index`);
     const nav = await getNav('4');
     return {
@@ -166,7 +160,8 @@ export async function getServerSideProps({ req, res, params }) {
             category,
             tags,
             pageRender,
-            nav
+            nav,
+            tagsList
         }
     };
 }

@@ -24,6 +24,6 @@ module.exports = withCss({
         return config;
     },
     experimental: {
-      optionalCatchAll: true
+        optionalCatchAll: true
     }
 });
