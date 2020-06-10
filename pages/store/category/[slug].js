@@ -33,7 +33,6 @@ const CATEGORY_QUERY = gql`
     }
 `;
 
-
 function category({ category, tags, pageRender, nav, tagsList }) {
     let query, tagsMap;
     const router = useRouter();
@@ -53,21 +52,23 @@ function category({ category, tags, pageRender, nav, tagsList }) {
 
     const [selectedTags, setSelectedTags] = useState(tags || []);
 
-    const removeTagFromPath = (value) => {
-        let [storePath, categoryPath, categoryTagsPath] = router.asPath.split('/').filter(Boolean);
-        categoryTagsPath = categoryTagsPath.split('-').filter((t) => t !== value);
-        let newPath = [storePath, categoryPath, categoryTagsPath.join('-')].join('/');
-        router.push('/store/category/[slug]', `/${newPath}`); 
-    }
+    const getFilteredTag = (value) => {
+        const currentTags = router.asPath.split('/').pop().split('-');
+        const newPath = currentTags.filter((item) => item !== value).join('-');
+        return `/store/category/${newPath}`;
+    };
 
     const handleCheckbox = (e) => {
+        let url;
+
         if (e.target.checked) {
             setSelectedTags([...selectedTags, e.target.value]);
-            router.push('/store/category/[slug]', `${router.asPath}-${e.target.value}`);
+            url = `${router.asPath}-${e.target.value}`;
         } else {
             setSelectedTags(selectedTags.filter((tag) => tag !== e.target.value));
-            removeTagFromPath(e.target.value);
+            url = getFilteredTag(e.target.value);
         }
+        router.push('/store/category/[slug]', url);
     };
 
     return (
