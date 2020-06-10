@@ -8,7 +8,6 @@ function Product({ product, options = {} }) {
     const show = options.show?.split(',');
     const { retailPrice, urlTitle, tags, image, title, salePrice, host, category } = product;
 
-    console.log(category)
     return (
         <SingleProductContainer>
             {/* {show.includes('image') && ( )} */}
