@@ -3,9 +3,9 @@ import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities/shared');
 import Head from 'next/head';
 import Carousel from '../Carousel';
-import { useQuery } from '@apollo/react-hooks'
-import withApollo  from '../../hocs/withApollo'
-import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks';
+import withApollo from '../../hocs/withApollo';
+import gql from 'graphql-tag';
 import {
     ProductContainer,
     ProductDetail,
@@ -17,7 +17,7 @@ const PRODUCT_QUERY = gql`
     query PRODUCT_QUERY($identifier: String!) {
         ProductCollection(query: $identifier) {
             category {
-            name
+                name
             }
         }
     }
@@ -44,11 +44,15 @@ function ProductSingle({
         }
     });
 
-   if(!loading) {
+    if (!loading) {
         var {
-            ProductCollection: [{category: [{name: categoryName}]}]
-        } = data;  
-   }
+            ProductCollection: [
+                {
+                    category: [{ name: categoryName }]
+                }
+            ]
+        } = data;
+    }
 
     return (
         <ProductContainer className="container">

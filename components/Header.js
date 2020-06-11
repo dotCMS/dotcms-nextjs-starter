@@ -3,7 +3,7 @@ import logo from '../public/logo.png';
 import RouterLink from './RouterLink';
 import PageContext from '../contexts/PageContext';
 import { useRouter } from 'next/router';
-import { MainNav, NavMenu } from '../styles/nav/nav.styles'
+import { MainNav, NavMenu } from '../styles/nav/nav.styles';
 
 function Header() {
     let { nav } = React.useContext(PageContext);
@@ -22,7 +22,8 @@ function Header() {
                             <RouterLink
                                 key={item.href}
                                 className={`${
-                                    router.asPath.split('/').filter(Boolean)[0] === item.href.split("/")[1]
+                                    router.asPath.split('/').filter(Boolean)[0] ===
+                                    item.href.split('/')[1]
                                         ? 'active'
                                         : ''
                                 }`}
