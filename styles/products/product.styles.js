@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SingleProductContainer = styled.div`
     .meta {
         margin-top: var(--primary-spacing);
+
         &__category,
         &__title {
             margin-bottom: 1rem;
@@ -32,6 +33,13 @@ export const SingleProductContainer = styled.div`
             margin-right: 0.5rem;
         }
     }
+
+    .image__link {
+        display: block;
+        background: #fff;
+        padding: 1rem;
+    }
+
     img {
         width: 100%;
         object-fit: contain;

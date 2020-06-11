@@ -8,11 +8,12 @@ const { currencyFormatter } = require('../utilities/shared');
 function Product({ product, options = {} }) {
     const show = options.show?.split(',');
     const { retailPrice, urlTitle, tags, image, title, salePrice, host, category } = product;
+    const cat = category[0]?.name.toLowerCase();
 
     return (
         <SingleProductContainer>
             {/* {show.includes('image') && ( )} */}
-            <RouterLink href={`/store/products/${urlTitle}`}>
+            <RouterLink className="image__link" href={`/store/products/${urlTitle}`}>
                 <DotCMSImage
                     data={{
                         path: image.idPath.split('?')[0]
@@ -25,7 +26,7 @@ function Product({ product, options = {} }) {
 
             <div className="meta">
                 <h4 className="meta__category">
-                    <a href="#">{category[0]?.name}</a>
+                    <RouterLink href={`/store/category/${cat}`}>{cat}</RouterLink>
                 </h4>
                 {/* {show.includes('title') && ()} */}
                 <h3 className="meta__title">
