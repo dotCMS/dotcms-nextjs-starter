@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import withApollo from '../../../hocs/withApollo';
 import Layout from '../../../components/layout/Layout';
-import { getPage, getNav } from '../../../config/dotcms';
 import PageContext from '../../../contexts/PageContext';
-import { ProductGrid } from '../../../styles/products/product.styles';
 import Product from '../../../components/Product';
-import { useRouter } from 'next/router';
 import fetch from 'isomorphic-fetch';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { getPage, getNav } from '../../../config/dotcms';
+import { ProductGrid } from '../../../styles/products/product.styles';
+import { useRouter } from 'next/router';
 
 const CATEGORY_QUERY = gql`
     query CATEGORY_QUERY($query: String!) {
@@ -43,13 +43,13 @@ function category({ category, tags, pageRender, nav, tagsList }) {
         selectedTags.length === 0
             ? `${contentType} +categories:${category}`
             : `${contentType} +categories:${category} ${tagsMap.join(' ')}`;
-     
-    const [getData, { data, loading, error, refetch }] = useLazyQuery(CATEGORY_QUERY, {
+
+    const [getData, { data, loading, error }] = useLazyQuery(CATEGORY_QUERY, {
         variables: {
             query
         }
-    });   
-    
+    });
+
     const getFilteredTag = (value) => {
         const currentTags = router.asPath.split('/').pop().split('-');
         const newPath = currentTags.filter((item) => item !== value).join('-');
@@ -69,19 +69,20 @@ function category({ category, tags, pageRender, nav, tagsList }) {
     };
 
     // Fetch data on initial render and when `selectedTags` change
-    useEffect(() => {  
+    useEffect(() => {
         getData();
     }, [selectedTags]);
 
-    router?.beforePopState(({ as }) => {
-        const previous = as
-            .split('/')
-            .slice(-1)[0]
-            .split('-')
-            .filter((cat) => cat !== category);
-        setSelectedTags(previous);
-        return true;
-    });
+    typeof window !== 'undefined' &&
+        router?.beforePopState(({ as }) => {
+            const previous = as
+                .split('/')
+                .slice(-1)[0]
+                .split('-')
+                .filter((cat) => cat !== category);
+            setSelectedTags(previous);
+            return true;
+        });
 
     return (
         <>
