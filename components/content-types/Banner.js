@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '../../styles/shared.styles';
 import dots from '../../public/dots.svg';
 import { BannerWrapper } from '../../styles/banner/banner.styles';
+import DotCMSImage from '../DotCMSImage';
 
 function Banner({ buttonText, image, hostName, caption, link, textColor, title }) {
     return (
@@ -16,10 +17,9 @@ function Banner({ buttonText, image, hostName, caption, link, textColor, title }
                 </Button>
             </div>
             <div className="banner-wrapper__figure">
-                <img
-                    src={`https://${hostName}:8443${image}/filter/Resize,Jpeg/resize_w/600/jpeg_q/50`}
-                    alt={title}
-                />
+                <DotCMSImage width={900} alt={title} data={{
+                    path: image
+                }} />
             </div>
         </BannerWrapper>
     );

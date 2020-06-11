@@ -2,6 +2,7 @@ import React from 'react';
 import RouterLink from './RouterLink';
 import { SingleProductContainer } from '../styles/products/product.styles';
 import { Price } from '../styles/products/product.styles';
+import DotCMSImage from '../components/DotCMSImage';
 const { currencyFormatter } = require('../utilities/shared');
 
 function Product({ product, options = {} }) {
@@ -12,10 +13,12 @@ function Product({ product, options = {} }) {
         <SingleProductContainer>
             {/* {show.includes('image') && ( )} */}
             <RouterLink href={`/store/products/${urlTitle}`}>
-                <img
-                    src={`https://${host.hostName}:8443${
-                        image.idPath.split('?')[0]
-                    }/filter/Resize,Jpeg/resize_w/250/jpeg_q/16`}
+                <DotCMSImage
+                    data={{
+                        path: image.idPath.split('?')[0]
+                    }}
+                    width={250}
+                    height={250}
                     alt={title}
                 />
             </RouterLink>

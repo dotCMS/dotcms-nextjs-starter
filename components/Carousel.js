@@ -2,6 +2,7 @@ import React from 'react';
 import Flickity from 'react-flickity-component';
 import { CarouselContainer } from '../styles/products/product.styles';
 import { flickityOptions } from '../config';
+import DotCMSImage from '../components/DotCMSImage'
 
 function Carousel({ images, identifier, title }) {
     const renderImages = (images) => {
@@ -9,11 +10,10 @@ function Carousel({ images, identifier, title }) {
         for (const image in images) {
             if (typeof(images[image]) !== "undefined") {
                  imgs.push(
-                     <img
-                         key={`${identifier}+${image}`}
-                         src={`${process.env.DOTCMS_HOST}/dA/${identifier}/${image}/filter/Resize,Jpeg/resize_w/700/jpeg_q/46`}
-                         alt={title}
-                     />
+                     <DotCMSImage width={700} height={700} data={{
+                         identifier: identifier,
+                         name: image
+                     }} alt={title} />
                  );
             }
                

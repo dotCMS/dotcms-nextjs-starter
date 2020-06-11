@@ -34,8 +34,7 @@ export const SingleProductContainer = styled.div`
     }
     img {
         width: 100%;
-        height: 25rem;
-        object-fit: cover;
+        object-fit: contain;
         display: block;
     }
 `;
