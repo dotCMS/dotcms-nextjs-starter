@@ -11,7 +11,7 @@ const getTimeLocale = (date, locale = 'en-us') =>
         minute: 'numeric'
     });
 
-const DateTimeFormat = ({ value, format = 'Date', locale = 'en-us' }) => {
+const dateTimeFormat = ({ value, format = 'Date', locale = 'en-us' }) => {
     const d = new Date(value);
     let formatString = '';
 
@@ -30,4 +30,4 @@ const DateTimeFormat = ({ value, format = 'Date', locale = 'en-us' }) => {
     return <time dateTime={value}>{formatString}</time>;
 };
 
-export default DateTimeFormat;
+export default dateTimeFormat;
