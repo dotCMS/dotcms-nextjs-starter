@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 import withApollo from '../../../hocs/withApollo';
 import Layout from '../../../components/layout/Layout';
@@ -34,24 +34,22 @@ const CATEGORY_QUERY = gql`
 `;
 
 function category({ category, tags, pageRender, nav, tagsList }) {
-    let query, tagsMap;
     const router = useRouter();
-
     const contentType = '+contentType:product';
-    tagsMap = tags && tags.map((tag) => `+Product.tags:"${tag}"`);
-    query =
-        tags.length === 0
+    const [selectedTags, setSelectedTags] = useState(tags || []);
+    const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
+
+    const query =
+        selectedTags.length === 0
             ? `${contentType} +categories:${category}`
             : `${contentType} +categories:${category} ${tagsMap.join(' ')}`;
-
-    const { data, loading, error } = useQuery(CATEGORY_QUERY, {
+     
+    const [getData, { data, loading, error, refetch }] = useLazyQuery(CATEGORY_QUERY, {
         variables: {
             query
         }
-    });
-
-    const [selectedTags, setSelectedTags] = useState(tags || []);
-
+    });   
+    
     const getFilteredTag = (value) => {
         const currentTags = router.asPath.split('/').pop().split('-');
         const newPath = currentTags.filter((item) => item !== value).join('-');
@@ -60,7 +58,6 @@ function category({ category, tags, pageRender, nav, tagsList }) {
 
     const handleCheckbox = (e) => {
         let url;
-
         if (e.target.checked) {
             setSelectedTags([...selectedTags, e.target.value]);
             url = `${router.asPath}-${e.target.value}`;
@@ -68,8 +65,23 @@ function category({ category, tags, pageRender, nav, tagsList }) {
             setSelectedTags(selectedTags.filter((tag) => tag !== e.target.value));
             url = getFilteredTag(e.target.value);
         }
-        router.push('/store/category/[slug]', url);
+        router.push('/store/category/[slug]', url, { shallow: true });
     };
+
+    // Fetch data on initial render and when `selectedTags` change
+    useEffect(() => {  
+        getData();
+    }, [selectedTags]);
+
+    router?.beforePopState(({ as }) => {
+        const previous = as
+            .split('/')
+            .slice(-1)[0]
+            .split('-')
+            .filter((cat) => cat !== category);
+        setSelectedTags(previous);
+        return true;
+    });
 
     return (
         <>
@@ -85,7 +97,7 @@ function category({ category, tags, pageRender, nav, tagsList }) {
                 >
                     <Layout>
                         <div className="container">
-                            {data.ProductCollection.length > 0 ? (
+                            {data?.ProductCollection.length > 0 ? (
                                 <>
                                     <h3>Category: {category}</h3>
                                     <h4>Tags: </h4>
@@ -123,7 +135,7 @@ function category({ category, tags, pageRender, nav, tagsList }) {
     );
 }
 
-export async function getServerSideProps({ req, res, params }) {
+export async function getServerSideProps({ params }) {
     const [category, ...tags] = params.slug.split('-');
 
     const tagsList = await fetch('https://starter.dotcms.com:8443/api/es/search', {
