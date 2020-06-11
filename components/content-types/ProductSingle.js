@@ -12,6 +12,7 @@ import {
     Price,
     Quantity
 } from '../../styles/products/product.styles';
+import RouterLink from '../RouterLink';
 
 const PRODUCT_QUERY = gql`
     query PRODUCT_QUERY($identifier: String!) {
@@ -71,7 +72,9 @@ function ProductSingle({
             <ProductDetail>
                 <div className="meta">
                     <h4 className="meta__category">
-                        <a href="#">{loading ? 'loading...' : categoryName}</a>
+                        <RouterLink href={`/store/category/${categoryName.toLowerCase()}`}>
+                            {loading ? 'loading...' : categoryName}
+                        </RouterLink>
                     </h4>
                     <h3 className="meta__title">{title}</h3>
                     <Price salePrice={!!salePrice}>{currencyFormatter.format(retailPrice)}</Price>

@@ -56,9 +56,8 @@ export const ProductGrid = styled.div`
 `;
 
 export const CarouselContainer = styled.div`
-    img {
-        object-fit: cover;
-    }
+    max-width: 700px;
+
     .carousel-cell {
         width: 100%; /* full width */
         height: 160px; /* height of carousel */
