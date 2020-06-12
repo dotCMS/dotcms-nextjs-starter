@@ -5,7 +5,8 @@ import Layout from '../../../components/layout/Layout';
 import PageContext from '../../../contexts/PageContext';
 import Product from '../../../components/Product';
 import fetch from 'isomorphic-fetch';
-import { useLazyQuery } from '@apollo/react-hooks';
+import DotCMSPage from '../../../components/layout/DotCMSPage';
+import { useLazyQuery, useQuery } from '@apollo/react-hooks';
 import { getPage, getNav } from '../../../config/dotcms';
 import { ProductGrid } from '../../../styles/products/product.styles';
 import { useRouter } from 'next/router';
@@ -35,101 +36,42 @@ const CATEGORY_QUERY = gql`
 
 function category({ category, tags, pageRender, nav, tagsList }) {
     const router = useRouter();
-    const contentType = '+contentType:product';
-    const [selectedTags, setSelectedTags] = useState(tags || []);
-    const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
-
-    const query =
-        selectedTags.length === 0
-            ? `${contentType} +categories:${category}`
-            : `${contentType} +categories:${category} ${tagsMap.join(' ')}`;
-
-    const [getData, { data, loading, error }] = useLazyQuery(CATEGORY_QUERY, {
+    const { data, loading, error } = useQuery(CATEGORY_QUERY, {
         variables: {
-            query
+            query: '+contentType:product +categories:water'
         }
     });
-
-    const getFilteredTag = (value) => {
-        const currentTags = router.asPath.split('/').pop().split('-');
-        const newPath = currentTags.filter((item) => item !== value).join('-');
-        return `/store/category/${newPath}`;
-    };
-
-    const handleCheckbox = (e) => {
-        let url;
-        if (e.target.checked) {
-            setSelectedTags([...selectedTags, e.target.value]);
-            url = `${router.asPath}-${e.target.value}`;
-        } else {
-            setSelectedTags(selectedTags.filter((tag) => tag !== e.target.value));
-            url = getFilteredTag(e.target.value);
-        }
-        router.push('/store/category/[slug]', url, { shallow: true });
-    };
-
-    // Fetch data on initial render and when `selectedTags` change
-    useEffect(() => {
-        getData();
-    }, [selectedTags]);
-
-    typeof window !== 'undefined' &&
-        router?.beforePopState(({ as }) => {
-            const previous = as
-                .split('/')
-                .slice(-1)[0]
-                .split('-')
-                .filter((cat) => cat !== category);
-            setSelectedTags(previous);
-            return true;
-        });
 
     return (
         <>
             {loading ? (
-                <span>Loading...</span>
+                <Layout>
+                    <div className="container">
+                        <span>Loading...</span>
+                    </div>
+                </Layout>
             ) : error ? (
-                <span>Error...</span>
+                <Layout>
+                    <div className="container">
+                        <span>Error...</span>
+                    </div>
+                </Layout>
             ) : (
                 <PageContext.Provider
                     value={{
-                        nav: nav || []
+                        nav: nav || [],
+                        tags,
+                        category,
+                        tagsList
                     }}
                 >
-                    <Layout>
-                        <div className="container">
-                            {data?.ProductCollection.length > 0 ? (
-                                <>
-                                    <h3>Category: {category}</h3>
-                                    <h4>Tags: </h4>
-                                    {tagsList.map(({ key, doc_count }) => {
-                                        const checked = selectedTags.includes(key);
-                                        return (
-                                            <>
-                                                <input
-                                                    type="checkbox"
-                                                    name={key}
-                                                    value={key}
-                                                    checked={checked}
-                                                    onChange={handleCheckbox}
-                                                />
-                                                <label htmlFor={key}>
-                                                    {key} ({doc_count})
-                                                </label>
-                                            </>
-                                        );
-                                    })}
-                                    <ProductGrid className="product-grid">
-                                        {data.ProductCollection.map((product) => (
-                                            <Product product={product} />
-                                        ))}
-                                    </ProductGrid>
-                                </>
-                            ) : (
-                                <h3>No products found.</h3>
-                            )}
-                        </div>
-                    </Layout>
+                    {pageRender?.layout ? (
+                        <Layout {...pageRender?.layout}>
+                            <DotCMSPage pageRender={pageRender} tags={tags} category={category} />
+                        </Layout>
+                    ) : (
+                        <h2>{pageRender?.page?.title}</h2>
+                    )}
                 </PageContext.Provider>
             )}
         </>

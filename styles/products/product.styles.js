@@ -33,7 +33,6 @@ export const SingleProductContainer = styled.div`
         }
     }
     img {
-        width: 100%;
         object-fit: contain;
         display: block;
     }
