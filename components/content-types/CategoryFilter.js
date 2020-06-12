@@ -6,7 +6,7 @@ import { SidebarContainer } from '../../styles/category-filter/category.styles';
 function CategoryFilter(props) {
     const { nav } = React.useContext(PageContext);
     const [storeNav] = nav.filter((nav) => nav.href === '/Store' || nav.href === '/store');
-    
+
     const data = storeNav.children.reduce(function(acc, curr) {
         if (curr.children.length > 0) {
             acc = [

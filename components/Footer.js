@@ -5,7 +5,7 @@ import instagram from '../public/instagram.svg';
 import linkedin from '../public/linkedin.svg';
 import twitter from '../public/twitter.svg';
 import pinterest from '../public/pinterest.svg';
-import { FooterContainer, FooterSection } from '../styles/footer/footer.styles'
+import { FooterContainer, FooterSection } from '../styles/footer/footer.styles';
 function Footer() {
     return (
         <FooterContainer>

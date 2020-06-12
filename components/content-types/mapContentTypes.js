@@ -4,7 +4,6 @@ const calendarEvent = dynamic(() => import('../content-types/calendarEvent'));
 const Banner = dynamic(() => import('../content-types/Banner'));
 const Form = dynamic(() => import('../content-types/Form'));
 const Image = dynamic(() => import('../content-types/Image'));
-const Product = dynamic(() => import('../content-types/Product'));
 const SimpleWidget = dynamic(() => import('../content-types/SimpleWidget'));
 const Video = dynamic(() => import('../content-types/Video'));
 const StoreProductList = dynamic(() => import('../content-types/StoreProductList'));
@@ -18,7 +17,6 @@ export const mapContentTypes = (contentType) => {
         calendarEvent,
         forms: Form,
         Image,
-        Product,
         Banner,
         SimpleWidget,
         Video,

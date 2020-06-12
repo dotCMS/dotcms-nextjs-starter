@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const SingleProductContainer = styled.div`
     .meta {
         margin-top: var(--primary-spacing);
+
         &__category,
         &__title {
             margin-bottom: 1rem;
@@ -32,6 +33,13 @@ export const SingleProductContainer = styled.div`
             margin-right: 0.5rem;
         }
     }
+
+    .image__link {
+        display: block;
+        background: #fff;
+        padding: 1rem;
+    }
+
     img {
         object-fit: contain;
         display: block;
@@ -47,9 +55,8 @@ export const ProductGrid = styled.div`
 `;
 
 export const CarouselContainer = styled.div`
-    img {
-        object-fit: cover;
-    }
+    max-width: 700px;
+
     .carousel-cell {
         width: 100%; /* full width */
         height: 160px; /* height of carousel */

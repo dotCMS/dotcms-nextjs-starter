@@ -17,9 +17,13 @@ function Banner({ buttonText, image, hostName, caption, link, textColor, title }
                 </Button>
             </div>
             <div className="banner-wrapper__figure">
-                <DotCMSImage width={900} alt={title} data={{
-                    path: image
-                }} />
+                <DotCMSImage
+                    width={900}
+                    alt={title}
+                    data={{
+                        path: image
+                    }}
+                />
             </div>
         </BannerWrapper>
     );

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import DateTimeFormat from '../../utilities/DateTimeFormat';
+import dateTimeFormat from '../../utilities/dateTimeFormat';
 
 function createMarkup(html) {
     return { __html: html };
@@ -9,8 +9,8 @@ const calendarEvent = ({ title, startDate, endDate, description }) => {
     return (
         <div className="event">
             <h2>{title}</h2>
-            <DateTimeFormat value={startDate} />
-            <DateTimeFormat value={endDate} />
+            <dateTimeFormat value={startDate} />
+            <dateTimeFormat value={endDate} />
             <span dangerouslySetInnerHTML={createMarkup(description)} />
         </div>
     );
