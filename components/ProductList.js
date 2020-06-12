@@ -3,11 +3,9 @@ import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { useNProgress } from '@tanem/react-nprogress';
 import { ProductGrid } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
 import PageContext from '../contexts/PageContext';
-import Progress from './nprogress/Progress';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -59,12 +57,6 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
 
     return (
         <>
-            <Progress
-                animationDuration={300}
-                incrementDuration={500}
-                isAnimating={loading}
-                minimum={0.1}
-            />
             {showTagsFilter && (
                 <TagsFilter
                     selectedTags={selectedTags}
