@@ -72,13 +72,6 @@ function ProductSingle({
 
             <ProductDetail>
                 <div className="meta">
-                    <h4 className="meta__category">
-                        <RouterLink
-                            href={`/store/category/${categoryName && categoryName.toLowerCase()}`}
-                        >
-                            {loading ? 'loading...' : categoryName}
-                        </RouterLink>
-                    </h4>
                     <h3 className="meta__title">{title}</h3>
                     <Price salePrice={!!salePrice}>{currencyFormatter.format(retailPrice)}</Price>
                     {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}

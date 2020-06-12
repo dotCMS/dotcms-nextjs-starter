@@ -13,7 +13,7 @@ const RouterLink = ({ href, children, className }) => {
         .join('/');
     const file = slugMap[slug];
     return (
-        <Link href={file} as={`${href}`}>
+        <Link prefetch="true" href={file} as={`${href}`}>
             <a className={className}>{children}</a>
         </Link>
     );

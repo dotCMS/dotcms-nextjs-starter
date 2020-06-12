@@ -34,7 +34,7 @@ const BlogListing = () => {
                 <h6>
                     <RouterLink href={`/blog/post/${urlTitle}`}>{title}</RouterLink>
                 </h6>
-                {postingDate ? <dateTimeFormat value={postingDate} /> : ''}
+                {postingDate ? <CustomDate value={postingDate} /> : ''}
             </div>
         </div>
     ));
