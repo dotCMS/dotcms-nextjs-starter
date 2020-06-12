@@ -4,15 +4,13 @@ import PageContext from '../contexts/PageContext';
 import styled from 'styled-components';
 
 const Tags = styled.div`
-  display: flex;
-`
+    display: flex;
+`;
 
 function TagsFilter({ setSelectedTags, selectedTags }) {
-    const { category, tags, tagsList } = useContext(PageContext);
-
+    const { category, tagsList } = useContext(PageContext);
     const router = useRouter();
     const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
-    const query = `+contentType:product +categories:${category} ${tagsMap.join(' ')}`;
 
     const getFilteredTag = (value) => {
         const currentTags = router.asPath.split('/').pop().split('-');

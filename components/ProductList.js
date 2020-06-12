@@ -1,11 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { ProductGrid } from '../styles/products/product.styles';
-import TagsFilter from './TagsFilter'
-import PageContext from '../contexts/PageContext'
+import TagsFilter from './TagsFilter';
+import PageContext from '../contexts/PageContext';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -44,7 +44,7 @@ function ProductList(props) {
     const { quantity, order, orderBy, show, showTagsFilter } = props;
     const [getProducts, { loading, error, data }] = useLazyQuery(PRODUCTS_QUERY);
     const [selectedTags, setSelectedTags] = useState(tags || []);
-    
+
     //Fetch data on initial render and when `selectedTags` change
     useEffect(() => {
         const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
