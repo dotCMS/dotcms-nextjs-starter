@@ -4,13 +4,14 @@ import PageContext from '../../../contexts/PageContext';
 import fetch from 'isomorphic-fetch';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../../config/dotcms';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 
-function category({ category, tagsFiltered, pageRender, nav, tagsList }) {
+function Category({ category, tagsFiltered, pageRender, nav, tagsList }) {
     const router = useRouter();
     const [path, setPath] = useState();
 
     useEffect(() => {
+        // window && window.history.pushState('', '', path);
         path && router.push('/store/category/[slug]', path);
     }, [path]);
 
@@ -72,4 +73,4 @@ export async function getServerSideProps({ params }) {
     };
 }
 
-export default category;
+export default Category;

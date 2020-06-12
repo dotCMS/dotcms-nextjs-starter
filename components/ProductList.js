@@ -1,9 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
-import { useLazyQuery } from '@apollo/react-hooks';
-import { useNProgress } from '@tanem/react-nprogress';
+import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
 import PageContext from '../contexts/PageContext';
@@ -39,21 +38,22 @@ const PRODUCTS_QUERY = gql`
 `;
 
 function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
-    const { category, tagsFiltered } = useContext(PageContext);
-    const [getProducts, { loading, error, data }] = useLazyQuery(PRODUCTS_QUERY);
-    const [selectedTags, setSelectedTags] = useState(tagsFiltered || []);
-    
-    //Fetch data on initial render and when `selectedTags` change
-    useEffect(() => {
-        const tagsMap = selectedTags && selectedTags.map((tag) => `Product.tags:"${tag}"`);
-        const query = `+contentType:product +categories:${category} ${
-            tagsMap.length > 0 && '+(' + tagsMap.join(' ')
-         + ')'}`;
-        const options = category
-            ? { variables: { limit: quantity, query } }
-            : { variables: { limit: quantity } };
-        getProducts(options);
-    }, [selectedTags]);
+    const { category, tagsFiltered, tagsList, setPath } = useContext(PageContext);
+
+    const getUrl = (category, tags) => {
+        const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';
+        return `/store/category/${category}${tagsUrl}`;
+    };
+
+    const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:"${tag}"`);
+    const query = `+contentType:product +categories:${category} ${
+        tagsMap && tagsMap.length > 0 && '+(' + tagsMap.join(' ') + ')'
+    }`;
+    const options = category
+        ? { variables: { limit: quantity, query } }
+        : { variables: { limit: quantity } };
+
+    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
 
     if (error) return `Error! ${error}`;
 
@@ -67,8 +67,11 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
             />
             {showTagsFilter && (
                 <TagsFilter
-                    selectedTags={selectedTags}
-                    setSelectedTags={setSelectedTags}
+                    list={tagsList}
+                    selected={tagsFiltered}
+                    onFilterChange={(tags) => {
+                        setPath(getUrl(category, tags));
+                    }}
                 />
             )}
             {loading ? (
