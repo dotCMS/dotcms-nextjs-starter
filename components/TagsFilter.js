@@ -25,7 +25,7 @@ function TagsFilter({ setSelectedTags, selectedTags }) {
 
       const getFilteredTag = (value) => {
           const currentTags = router.asPath.split('/').pop().split('-');
-          const newPath = selectedTags.filter((item) => item !== value).join('-');
+          const newPath = currentTags.filter((item) => item !== value).join('-');
           return `/store/category/${newPath}`;
       };
 
