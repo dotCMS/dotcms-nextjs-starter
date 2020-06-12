@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities/shared');
 import Head from 'next/head';
@@ -13,6 +13,7 @@ import {
     Quantity
 } from '../../styles/products/product.styles';
 import RouterLink from '../RouterLink';
+import PageContext from '../../contexts/PageContext';
 
 const PRODUCT_QUERY = gql`
     query PRODUCT_QUERY($identifier: String!) {
@@ -29,7 +30,6 @@ function ProductSingle({
     description,
     retailPrice,
     salePrice,
-    tags,
     identifier,
     image,
     image2,
@@ -45,14 +45,15 @@ function ProductSingle({
         }
     });
 
+    let categoryName;
     if (!loading) {
-        var {
-            ProductCollection: [
-                {
-                    category: [{ name: categoryName }]
-                }
-            ]
-        } = data;
+       ({
+           ProductCollection: [
+               {
+                   category: [{ name: categoryName }]
+               }
+           ]
+       } = data);
     }
 
     return (
@@ -72,7 +73,9 @@ function ProductSingle({
             <ProductDetail>
                 <div className="meta">
                     <h4 className="meta__category">
-                        <RouterLink href={`/store/category/${categoryName.toLowerCase()}`}>
+                        <RouterLink
+                            href={`/store/category/${categoryName && categoryName.toLowerCase()}`}
+                        >
                             {loading ? 'loading...' : categoryName}
                         </RouterLink>
                     </h4>

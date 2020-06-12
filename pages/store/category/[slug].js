@@ -1,24 +1,32 @@
-import React from 'react';
-import gql from 'graphql-tag';
+import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/layout/Layout';
 import PageContext from '../../../contexts/PageContext';
 import fetch from 'isomorphic-fetch';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../../config/dotcms';
+import { useRouter } from 'next/router'
 
-function category({ category, tags, pageRender, nav, tagsList }) {
+function category({ category, tagsFiltered, pageRender, nav, tagsList }) {
+    const router = useRouter();
+    const [path, setPath] = useState();
+
+    useEffect(() => {
+        path && router.push('/store/category/[slug]', path);
+    }, [path]);
+
     return (
         <PageContext.Provider
             value={{
-                nav: nav || [],
-                tags,
+                nav,
+                tagsFiltered,
                 category,
-                tagsList
+                tagsList,
+                setPath
             }}
         >
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    <DotCMSPage pageRender={pageRender} tags={tags} category={category} />
+                    <DotCMSPage pageRender={pageRender} />
                 </Layout>
             ) : (
                 <h2>{pageRender?.page?.title}</h2>
@@ -28,8 +36,7 @@ function category({ category, tags, pageRender, nav, tagsList }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const [category, ...tags] = params.slug.split('-');
-    console.log({category})
+    const [category, ...tagsFiltered] = params.slug.split('-');
     const tagsList = await fetch('https://starter.dotcms.com:8443/api/es/search', {
         method: 'post',
         body: JSON.stringify({
@@ -57,7 +64,7 @@ export async function getServerSideProps({ params }) {
     return {
         props: {
             category,
-            tags,
+            tagsFiltered,
             pageRender,
             nav,
             tagsList

@@ -2,74 +2,66 @@ import React, { useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import PageContext from '../contexts/PageContext';
 import styled from 'styled-components';
+import {capitalize} from '../utilities/shared';
 
-const Tags = styled.div`
+const TagsListContainer = styled.div`
     display: flex;
 `;
 
+const Tags = styled.div`
+    input[type='checkbox'] {
+        vertical-align: middle;
+    }
+
+    border: 1px solid #d5d5d5;
+    border-radius: 3px;
+    padding: .5rem;
+    margin-right: 1rem;
+`;
+
 function TagsFilter({ setSelectedTags, selectedTags }) {
-    const { category, tagsList } = useContext(PageContext);
-    const router = useRouter();
-    const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
+      const { tagsList, setPath } = useContext(PageContext);
+      const router = useRouter();
 
-    const getFilteredTag = (value) => {
-        const currentTags = router.asPath.split('/').pop().split('-');
-        const newPath = currentTags.filter((item) => item !== value).join('-');
-        return `/store/category/${newPath}`;
-    };
+      const getFilteredTag = (value) => {
+          const currentTags = router.asPath.split('/').pop().split('-');
+          const newPath = selectedTags.filter((item) => item !== value).join('-');
+          return `/store/category/${newPath}`;
+      };
 
-    const handleCheckbox = (e) => {
-        let url;
-        if (e.target.checked) {
-            setSelectedTags([...selectedTags, e.target.value]);
-            url = `${router.asPath}-${e.target.value}`;
-        } else {
-            setSelectedTags(selectedTags.filter((tag) => tag !== e.target.value));
-            url = getFilteredTag(e.target.value);
-        }
-        router.push('/store/category/[slug]', url, { shallow: true });
-    };
-
-    // Fetch data on initial render and when `selectedTags` change
-    useEffect(() => {
-        setSelectedTags(selectedTags);
-    }, [selectedTags]);
-
-    typeof window !== 'undefined' &&
-        router?.beforePopState(({ as }) => {
-            const previous = as
-                .split('/')
-                .slice(-1)[0]
-                .split('-')
-                .filter((cat) => cat !== category);
-            setSelectedTags(previous);
-            return true;
-        });
+      const handleCheckbox = (e) => {
+          let path;
+          if (e.target.checked) {
+              setSelectedTags([...selectedTags, e.target.value]);
+              path = `${router.asPath}-${e.target.value}`;
+          } else {
+              setSelectedTags(selectedTags.filter((tag) => tag !== e.target.value));
+              path = getFilteredTag(e.target.value);
+          }
+          setPath(path);
+      };
 
     return (
-        <>
-            <h3>Category: {category}</h3>
-            <h4>Tags: </h4>
-            <Tags>
-                {tagsList?.map(({ key, doc_count }) => {
-                    const checked = selectedTags.includes(key);
-                    return (
-                        <>
-                            <input
-                                type="checkbox"
-                                name={key}
-                                value={key}
-                                checked={checked}
-                                onChange={handleCheckbox}
-                            />
-                            <label htmlFor={key}>
-                                {key} ({doc_count})
-                            </label>
-                        </>
-                    );
-                })}
-            </Tags>
-        </>
+      <TagsListContainer>
+          {tagsList?.map(({ key, doc_count }) => {
+              const checked = selectedTags.includes(key);
+              return (
+                  <Tags>
+                      <input
+                          type="checkbox"
+                          name={key}
+                          id={key}
+                          value={key}
+                          checked={checked}
+                          onChange={handleCheckbox}
+                      />
+                      <label htmlFor={key}>
+                          {capitalize(key)} ({doc_count})
+                      </label>
+                  </Tags>
+              );
+          })}
+      </TagsListContainer>
     );
 }
 

@@ -3,9 +3,11 @@ import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
+import { useNProgress } from '@tanem/react-nprogress';
 import { ProductGrid } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
 import PageContext from '../contexts/PageContext';
+import Progress from './nprogress/Progress';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -16,9 +18,6 @@ const PRODUCTS_QUERY = gql`
             urlTitle
             identifier
             tags
-            category {
-                name
-            }
             host {
                 hostName
             }
@@ -39,19 +38,20 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
-function ProductList(props) {
-    const { category, tags } = useContext(PageContext);
-    const { quantity, order, orderBy, show, showTagsFilter } = props;
+function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
+    const { category, tagsFiltered } = useContext(PageContext);
     const [getProducts, { loading, error, data }] = useLazyQuery(PRODUCTS_QUERY);
-    const [selectedTags, setSelectedTags] = useState(tags || []);
-
+    const [selectedTags, setSelectedTags] = useState(tagsFiltered || []);
+    
     //Fetch data on initial render and when `selectedTags` change
     useEffect(() => {
-        const tagsMap = selectedTags && selectedTags.map((tag) => `+Product.tags:"${tag}"`);
-        const query = `+contentType:product +categories:${category} ${tagsMap.join(' ')}`;
+        const tagsMap = selectedTags && selectedTags.map((tag) => `Product.tags:"${tag}"`);
+        const query = `+contentType:product +categories:${category} ${
+            tagsMap.length > 0 && '+(' + tagsMap.join(' ')
+         + ')'}`;
         const options = category
-            ? { variables: { query } }
-            : { variables: { limit: quantity }, fetchPolicy: 'cache-and-network' };
+            ? { variables: { limit: quantity, query } }
+            : { variables: { limit: quantity } };
         getProducts(options);
     }, [selectedTags]);
 
@@ -59,9 +59,14 @@ function ProductList(props) {
 
     return (
         <>
+            <Progress
+                animationDuration={300}
+                incrementDuration={500}
+                isAnimating={loading}
+                minimum={0.1}
+            />
             {showTagsFilter && (
                 <TagsFilter
-                    {...props}
                     selectedTags={selectedTags}
                     setSelectedTags={setSelectedTags}
                 />
