@@ -7,10 +7,7 @@ const slugMap = {
 };
 
 const RouterLink = ({ href, children, className }) => {
-    const slug = href
-        .split('/')
-        .slice(0, -1)
-        .join('/');
+    const slug = href.split('/').slice(0, -1).join('/');
     const file = slugMap[slug];
     return (
         <Link href={file} as={`${href}`}>

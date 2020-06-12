@@ -1,4 +1,4 @@
-import dateTimeFormat from '../Shared/dateTimeFormat';
+import CustomDate from '../Shared/CustomDate';
 import { commentItemType } from '../types';
 
 const CommentItem = ({ body, commentAuthor, postDate }) => {
@@ -22,7 +22,7 @@ const CommentItem = ({ body, commentAuthor, postDate }) => {
                             </a>
                         </h4>
                         <span className="box-comment-time">
-                            {<dateTimeFormat value={postDate} format="DateTime" />}
+                            {<CustomDate value={postDate} format="DateTime" />}
                         </span>
                     </div>
                     <div className="box-comment-text">{body}</div>
