@@ -4,46 +4,7 @@ const transformPage = require('./transformPage');
 const dotCMSApi = require('./dotcmsApi');
 const { loggerLog } = require('../../utilities/logger');
 const { isPage, isAPIRequest, errors } = require('./utilities');
-const fetch = require('isomorphic-fetch');
 
-const PAGE_SIZE = 10;
-
-// TODO: Remove
-const getPageList = async (from = 0) =>
-    await fetch(`${process.env.DOTCMS_HOST}/api/es/search`, {
-        method: 'POST',
-        headers: {
-            Authorization: process.env.BEARER_TOKEN,
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-            query: {
-                query_string: {
-                    query: '+(urlmap:?* basetype:5) +contentType:Product'
-                }
-            },
-            size: PAGE_SIZE,
-            from: from
-        })
-    })
-        .then((res) => res.json())
-        .then(({ contentlets }) => {
-            return contentlets;
-        });
-
-async function getAllPagesContentlets() {
-    let counter = 0;
-    let current = await getPageList();
-    let results = current;
-
-    while (current.length > 0) {
-        counter = counter + 1;
-        current = await getPageList(counter * PAGE_SIZE);
-        results = [...results, ...current];
-    }
-
-    return results;
-}
 
 async function getPage(url, lang) {
     loggerLog('DOTCMS PAGE', url, lang || '1');
@@ -108,7 +69,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY API REQUEST', req.url);
         loggerLog(`${process.env.DOTCMS_HOST}${req.url}`);
         proxyOptions = {
-            proxyReqOptDecorator: function(proxyReqOpts, srcReq) {
+            proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
                 proxyReqOpts.headers = {
                     ['Authorization']: `Bearer ${process.env.BEARER_TOKEN}`,
                     ['Content-Type']: 'application/json'
@@ -139,5 +100,4 @@ module.exports = {
     emitRemoteRenderEdit,
     getLanguages,
     errors,
-    getAllPagesContentlets
 };

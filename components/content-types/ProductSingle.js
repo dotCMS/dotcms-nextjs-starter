@@ -3,27 +3,13 @@ import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities/shared');
 import Head from 'next/head';
 import Carousel from '../Carousel';
-import { useQuery } from '@apollo/react-hooks';
-import withApollo from '../../hocs/withApollo';
-import gql from 'graphql-tag';
+
 import {
     ProductContainer,
     ProductDetail,
     Price,
     Quantity
 } from '../../styles/products/product.styles';
-import RouterLink from '../RouterLink';
-import PageContext from '../../contexts/PageContext';
-
-const PRODUCT_QUERY = gql`
-    query PRODUCT_QUERY($identifier: String!) {
-        ProductCollection(query: $identifier) {
-            category {
-                name
-            }
-        }
-    }
-`;
 
 function ProductSingle({
     title,
@@ -38,23 +24,6 @@ function ProductSingle({
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };
-
-    const { data, loading } = useQuery(PRODUCT_QUERY, {
-        variables: {
-            identifier: `+identifier:${identifier}`
-        }
-    });
-
-    let categoryName;
-    if (!loading) {
-       ({
-           ProductCollection: [
-               {
-                   category: [{ name: categoryName }]
-               }
-           ]
-       } = data);
-    }
 
     return (
         <ProductContainer className="container">
@@ -91,4 +60,4 @@ function ProductSingle({
     );
 }
 
-export default withApollo(ProductSingle);
+export default ProductSingle;

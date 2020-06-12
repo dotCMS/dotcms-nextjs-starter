@@ -2,6 +2,7 @@ import { getPage, getNav } from '../../config/dotcms';
 import Layout from '../../components/layout/Layout';
 import PageContext from '../../contexts/PageContext';
 import DotCMSPage from '../../components/layout/DotCMSPage';
+import { getPageList } from '../../utilities/dotcms';
 
 function DotCMSStaticPage({ pageRender, nav }) {
     const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
@@ -28,50 +29,23 @@ function DotCMSStaticPage({ pageRender, nav }) {
 }
 
 export async function getStaticPaths() {
-    const NOT_BUILD_THIS_PAGES = ['/store/product-line', '/store/product-detail', '/store/cart'];
-
-    const PAGES_QUERY = {
-        query: `{ 
-            search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") {
-                urlMap
-                ... on htmlpageasset {
-                    url
+    const res = await getPageList();
+    const paths = res.reduce((acc, url) => {
+        acc = [
+            ...acc,
+            {
+                params: {
+                    slug: url
+                        ?.split('/')
+                        .filter(Boolean)
+                        .filter((item) => {
+                            return item !== 'index' && item !== 'store';
+                        })
                 }
             }
-        }`
-    };
-
-    let data = await fetch(`${process.env.DOTCMS_HOST}/api/v1/graphql`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${process.env.BEARER_TOKEN}`
-        },
-        body: JSON.stringify(PAGES_QUERY)
-    });
-
-    ({ data } = await data.json());
-
-    const paths = data.search
-        .filter(({ urlMap, url }) => urlMap || url)
-        .map(({ urlMap, url }) => urlMap || url)
-        .filter((url) => !NOT_BUILD_THIS_PAGES.includes(url))
-        .reduce((acc, url) => {
-            acc = [
-                ...acc,
-                {
-                    params: {
-                        slug: url
-                            ?.split('/')
-                            .filter(Boolean)
-                            .filter((item) => {
-                                return item !== 'index'  && item !== "store";
-                            })
-                    }
-                }
-            ];
-            return acc;
-        }, []);
+        ];
+        return acc;
+    }, []);
 
     paths.push({ params: { slug: [] } });
 
@@ -83,7 +57,6 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params: { slug } }) => {
     try {
- 
         let url = slug
             ? slug[0] === 'products'
                 ? `/store/${slug.join('/')}`
@@ -92,7 +65,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
         const pageRender = await getPage(url);
         const nav = await getNav('4');
-        
+
         return {
             props: {
                 pageRender,
