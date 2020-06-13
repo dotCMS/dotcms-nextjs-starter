@@ -24,7 +24,7 @@ function ProductSingle({
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };
-
+    
     return (
         <ProductContainer className="container">
             {imagesFound() && (
@@ -38,7 +38,9 @@ function ProductSingle({
             <ProductDetail>
                 <div className="meta">
                     <h3 className="meta__title">{title}</h3>
-                    <Price salePrice={!!salePrice}>{currencyFormatter.format(retailPrice)}</Price>
+                    <Price salePrice={!!salePrice}>
+                        {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
+                    </Price>
                     {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
                 </div>
 

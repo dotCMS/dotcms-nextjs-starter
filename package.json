@@ -5,11 +5,9 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "dev": "nodemon ./server/server.js",
-        "next:dev": "next dev",
-        "next:start": "next start",
+        "dev": "next dev",
+        "start": "next start",
         "build": "next build",
-        "start": "NODE_ENV=production node ./server/server.js",
         "export": "next export",
         "setup:dev": "node ./server/cli-utils.js dev",
         "setup:build": "node ./server/cli-utils.js build",

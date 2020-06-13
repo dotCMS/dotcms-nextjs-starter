@@ -30,9 +30,10 @@ const Slider = ({ images, title, id }) => {
                         image && (
                             <li
                                 id={`carousel__slide${index}`}
-                                tabindex="0"
+                                tabIndex="0"
                                 className="carousel__slide"
                                 ref={imageRefs[index]}
+                                key={index}
                             >
                                 <DotCMSImage
                                     width={700}
@@ -52,7 +53,7 @@ const Slider = ({ images, title, id }) => {
                 <ul className="carousel__navigation-list">
                     {values.filter(Boolean).map((item, index) => {
                         return (
-                            <li className="carousel__navigation-item">
+                            <li key={index} className="carousel__navigation-item">
                                 <a
                                     ref={navigatorRefs[index]}
                                     onClick={(e) => {

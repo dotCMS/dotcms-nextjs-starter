@@ -35,10 +35,10 @@ function Product({ product, options = {} }) {
 
                 {/* {show.includes('price') && ( )} */}
                 <>
-                    {salePrice && <Price small>{currencyFormatter.format(salePrice)}</Price>}
                     <Price salePrice={!!salePrice} small>
-                        {currencyFormatter.format(retailPrice)}
+                        {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
                     </Price>{' '}
+                    {salePrice && <Price small>{currencyFormatter.format(salePrice)}</Price>}
                 </>
             </div>
         </SingleProductContainer>
