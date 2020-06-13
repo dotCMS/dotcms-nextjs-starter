@@ -24,7 +24,7 @@ const Slider = ({ images, title, id }) => {
 
     return (
         <>
-            <ol className="carousel__viewport">
+            <ul className="carousel__viewport">
                 {Object.values(images).map((image, index) => {
                     return (
                         image && (
@@ -47,9 +47,9 @@ const Slider = ({ images, title, id }) => {
                         )
                     );
                 })}
-            </ol>
+            </ul>
             <aside className="carousel__navigation">
-                <ol className="carousel__navigation-list">
+                <ul className="carousel__navigation-list">
                     {values.filter(Boolean).map((item, index) => {
                         return (
                             <li className="carousel__navigation-item">
@@ -64,7 +64,7 @@ const Slider = ({ images, title, id }) => {
                             </li>
                         );
                     })}
-                </ol>
+                </ul>
             </aside>
         </>
     );

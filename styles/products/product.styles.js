@@ -75,6 +75,9 @@ export const CarouselContainer = styled.section`
         position: relative;
         flex: 0 0 100%;
         width: 100%;
+        img {
+            width: 100%;
+        }
     }
 
     .carousel__snapper {
