@@ -54,13 +54,126 @@ export const ProductGrid = styled.div`
     gap: var(--primary-spacing);
 `;
 
-export const CarouselContainer = styled.div`
-    max-width: 700px;
+// export const CarouselContainer = styled.div`
+//     max-width: 700px;
+//     scroll-snap-type: mandatory;
+// 	scroll-snap-points-y: repeat(3rem);
+// 	scroll-snap-type: y mandatory;
+//     overflow-y: scroll;
+//     .carousel-cell {
+//         width: 100%; /* full width */
+//         height: 160px; /* height of carousel */
+//         margin-right: 10px;
+//     }
+//     img {
+//         scroll-snap-align: start;
+//     }
+// `;
 
-    .carousel-cell {
-        width: 100%; /* full width */
-        height: 160px; /* height of carousel */
-        margin-right: 10px;
+export const CarouselContainer = styled.section`
+    position: relative;
+    padding-top: 75%;
+
+    .carousel__viewport {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: flex;
+        overflow-x: scroll;
+        counter-reset: item;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+    }
+
+    .carousel__slide {
+        position: relative;
+        flex: 0 0 100%;
+        width: 100%;
+    }
+
+    .carousel__snapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        scroll-snap-align: center;
+    }
+
+    @media (hover: hover) {
+        .carousel__snapper {
+            animation-name: tonext, snap;
+            animation-timing-function: ease;
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+        }
+
+        .carousel__slide:last-child .carousel__snapper {
+            animation-name: tostart, snap;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .carousel__snapper {
+            animation-name: none;
+        }
+    }
+
+    .carousel:hover .carousel__snapper,
+    .carousel:focus-within .carousel__snapper {
+        animation-name: none;
+    }
+
+    .carousel__navigation {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        text-align: center;
+    }
+
+    .carousel__navigation-list,
+    .carousel__navigation-item {
+        display: inline-block;
+    }
+
+    .carousel__navigation-button {
+        display: inline-block;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: #333;
+        background-clip: content-box;
+        border: 0.25rem solid transparent;
+        border-radius: 50%;
+        font-size: 0;
+        transition: transform 0.1s;
+    }
+
+    .carousel::before,
+    .carousel::after,
+    .carousel__prev,
+    .carousel__next {
+        position: absolute;
+        top: 0;
+        margin-top: 37.5%;
+        width: 4rem;
+        height: 4rem;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        font-size: 0;
+        outline: 0;
+    }
+
+    .carousel::before,
+    .carousel__prev {
+        left: -1rem;
+    }
+
+    .carousel::after,
+    .carousel__next {
+        right: -1rem;
     }
 `;
 

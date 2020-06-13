@@ -12,6 +12,7 @@ export const reflex = `
   --reflex-sm-max: 991px;
   --reflex-md-max: 1199px;
   --reflex-lg-max: 1599px;
+  scroll-behavior: smooth;
 }
 
 .container,

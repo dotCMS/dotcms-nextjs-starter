@@ -27,10 +27,6 @@ function ProductSingle({
 
     return (
         <ProductContainer className="container">
-            <Head>
-                <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
-            </Head>
-
             {imagesFound() && (
                 <Carousel
                     images={{ image, image2, image3 }}

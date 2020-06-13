@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../../../components/layout/Layout';
 import PageContext from '../../../contexts/PageContext';
-import fetch from 'isomorphic-fetch';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../../config/dotcms';
 import { useRouter } from 'next/router'
 import getTagsList from '../../../utilities/getTagsList'
+
 function category({ category, tagsFiltered, pageRender, nav, tagsList }) {
     const router = useRouter();
     const [path, setPath] = useState();
