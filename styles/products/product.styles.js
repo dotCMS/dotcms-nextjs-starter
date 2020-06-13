@@ -54,22 +54,6 @@ export const ProductGrid = styled.div`
     gap: var(--primary-spacing);
 `;
 
-// export const CarouselContainer = styled.div`
-//     max-width: 700px;
-//     scroll-snap-type: mandatory;
-// 	scroll-snap-points-y: repeat(3rem);
-// 	scroll-snap-type: y mandatory;
-//     overflow-y: scroll;
-//     .carousel-cell {
-//         width: 100%; /* full width */
-//         height: 160px; /* height of carousel */
-//         margin-right: 10px;
-//     }
-//     img {
-//         scroll-snap-align: start;
-//     }
-// `;
-
 export const CarouselContainer = styled.section`
     position: relative;
     padding-top: 75%;
