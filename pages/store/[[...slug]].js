@@ -1,30 +1,6 @@
-import { getPage, getNav } from '../../config/dotcms';
-import Layout from '../../components/layout/Layout';
-import PageContext from '../../contexts/PageContext';
 import DotCMSPage from '../../components/layout/DotCMSPage';
+import { getPage, getNav } from '../../config/dotcms';
 import { getPageList } from '../../utilities/dotcms';
-
-function DotCMSStaticPage({ pageRender, nav }) {
-    return (
-        <PageContext.Provider
-            value={{
-                nav: nav || [],
-                language: {
-                    current: '1', // needs to make this dynamic, check _app.js
-                    set: () => {}
-                }
-            }}
-        >
-            {pageRender?.layout ? (
-                <Layout {...pageRender?.layout}>
-                    <DotCMSPage pageRender={pageRender} />
-                </Layout>
-            ) : (
-                <h2>{pageRender?.page?.title}</h2>
-            )}
-        </PageContext.Provider>
-    );
-}
 
 export async function getStaticPaths() {
     const res = await getPageList();
@@ -78,4 +54,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
     }
 };
 
-export default DotCMSStaticPage;
+export default function ({ pageRender, nav }) {
+    return <DotCMSPage pageRender={pageRender} nav={nav} />;
+}

@@ -1,5 +1,4 @@
-import Layout from '../components/layout/Layout';
-import PageContext from '../contexts/PageContext';
+
 import DotCMSPage from '../components/layout/DotCMSPage';
 import { useEffect } from 'react';
 
@@ -22,26 +21,7 @@ function DotCMSStaticPage({ pageRender, nav }) {
         }
     });
 
-    return (
-        <PageContext.Provider
-            value={{
-                isEditMode: true,
-                nav: nav || [],
-                language: {
-                    current: '1', // needs to make this dynamic, check _app.js
-                    set: () => {}
-                }
-            }}
-        >
-            {pageRender?.layout ? (
-                <Layout {...pageRender?.layout}>
-                    <DotCMSPage pageRender={pageRender} />
-                </Layout>
-            ) : (
-                <h2>{pageRender?.page?.title}</h2>
-            )}
-        </PageContext.Provider>
-    );
+    return <DotCMSPage pageRender={pageRender} nav={nav} isEditMode={true} />;
 }
 
 export async function getServerSideProps(context) {
