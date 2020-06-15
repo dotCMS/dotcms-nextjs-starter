@@ -49,6 +49,10 @@ export const GlobalStyle = createGlobalStyle`
 		color: #4f4f4f;
 	}
 
+	b {
+		font-weight: bold;
+	}
+
   a {
   	color: var(--primary-black);
 		&:hover {

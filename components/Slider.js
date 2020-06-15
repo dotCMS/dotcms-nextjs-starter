@@ -1,9 +1,9 @@
-import React, { createRef } from 'react'
+import React, { createRef, useRef, useState, useEffect } from 'react'
 import DotCMSImage from '../components/DotCMSImage';
 
 const Slider = ({ images, title, id }) => {
     const keys = Object.keys(images);
-    const values = Object.values(images);
+    const values = Object.values(images).filter(Boolean);
 
     const handleNavigatorClick = (elem) => {
         elem.scrollIntoView({
@@ -13,15 +13,15 @@ const Slider = ({ images, title, id }) => {
     };
 
     const createRefs = (imgs) => {
-        const values = Object.values(imgs).filter(Boolean);
+        const values = Object.values(imgs);
         return values.reduce((acc, value, idx) => {
             acc[idx] = createRef();
             return acc;
-        }, {});
+        }, []);
     };
 
     const navigatorRefs = createRefs(images);
-    const imageRefs = createRefs(images);
+    const slideRefs = createRefs(images);
 
     return (
         <>
@@ -33,8 +33,9 @@ const Slider = ({ images, title, id }) => {
                                 id={`carousel__slide${index}`}
                                 tabIndex="0"
                                 className="carousel__slide"
-                                ref={imageRefs[index]}
+                                ref={slideRefs[index]}
                                 key={index}
+                                data-slide={index}
                             >
                                 <DotCMSImage
                                     width={700}
@@ -52,20 +53,21 @@ const Slider = ({ images, title, id }) => {
             </ul>
             <aside className="carousel__navigation">
                 <ul className="carousel__navigation-list">
-                    {values.filter(Boolean).map((_item, index) => {
-                        return (
-                            <li key={index} className="carousel__navigation-item">
-                                <a
-                                    ref={navigatorRefs[index]}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        handleNavigatorClick(imageRefs[index].current);
-                                    }}
-                                    className="carousel__navigation-button"
-                                ></a>
-                            </li>
-                        );
-                    })}
+                    {values.length > 1 &&
+                        values.map((_item, index) => {
+                            return (
+                                <li key={index} className="carousel__navigation-item active">
+                                    <a
+                                        ref={navigatorRefs[index]}
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleNavigatorClick(slideRefs[index].current);
+                                        }}
+                                        className="carousel__navigation-button"
+                                    ></a>
+                                </li>
+                            );
+                        })}
                 </ul>
             </aside>
         </>

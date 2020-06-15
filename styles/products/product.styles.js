@@ -69,6 +69,7 @@ export const CarouselContainer = styled.section`
         counter-reset: item;
         scroll-behavior: smooth;
         scroll-snap-type: x mandatory;
+        list-style: none;
     }
 
     .carousel__slide {
