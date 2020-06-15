@@ -37,7 +37,7 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
-function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
+function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLine }) {
 
     // Find the category and tags from the URL
     const router = useRouter();
@@ -45,7 +45,8 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
     path = path.split('/').pop();
     
     // Separate category from tags
-    const [category, ...tagsFiltered] = path.split('-');
+    const [_, ...tagsFiltered] = path.split('-');
+    const category = productLine;
 
     // Initialize our state
     const [tagsList, setTagsList] = useState([]);

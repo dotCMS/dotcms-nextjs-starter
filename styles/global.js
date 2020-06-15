@@ -73,5 +73,8 @@ export const GlobalStyle = createGlobalStyle`
 			color: var(--primary-purple);
 		}
 	}
+	#nprogress .bar {
+		background: var(--primary-purple) !important;
+	}
 	${reflex}
 `;
