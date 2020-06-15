@@ -10,8 +10,7 @@
         "build": "next build",
         "export": "next export",
         "ema": "nodemon server.js",
-        "setup:dev": "node ./server/cli-utils.js ema",
-        "setup:build": "node ./server/cli-utils.js build",
+        "setup": "node ./cli/index.js",
         "deploy-to-gh-pages": "next build && next export && touch out/.nojekyll && git add out/ && git commit -m \"Deploy gh-pages\" && git subtree push --prefix out origin gh-pages"
     },
     "dependencies": {

@@ -3,7 +3,7 @@ const { spawn } = require('child_process');
 const { getAnswersBasic, getAnswersAuth } = require('./questions');
 const { printError, printHeading, DOTCMS } = require('./print');
 const { getToken } = require('../utilities/getToken');
-const { getParsedEnvFile, createEnvFile } = require('../server/envFile');
+const { getParsedEnvFile, createEnvFile } = require('./envFile');
 
 const createEnvVars = (vars, separator) => {
     return vars
