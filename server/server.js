@@ -10,6 +10,8 @@ const app = next({ dev });
 const { loggerLog } = require('../utilities/logger');
 const dotcms = require('../config/dotcms');
 
+const handle = app.getRequestHandler();
+
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
     limit: '10mb',
@@ -21,8 +23,8 @@ app.prepare()
         const server = express();
 
         server.get('*', (req, res) => {
-            res.send('DotCMS Edit Mode Server');
-        })
+            handle(req, res);
+        });
 
         /*
             DotCMS Edit Mode Anywhere Plugin works by sending a POST request to the configured
@@ -36,8 +38,10 @@ app.prepare()
             loggerLog('DOTCMS EDIT MODE');
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
-            app.setAssetPrefix(process.env.PUBLIC_URL);
-            app.render(req, res, req.path, { pageRender, isBeingEditFromDotCMS: true });
+            const nav = await dotcms.getNav(4);
+            app.setAssetPrefix('https://8c63217a1028.ngrok.io/');
+            app.render(req, res, '/ema', { pageRender, nav });
+
         });
 
         server.listen(5000, (err) => {

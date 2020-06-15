@@ -36,12 +36,14 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
+
 const StatusIndicator = styled.h3`
     margin: 1rem 0;
 `
 
-function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
-    const { category, tagsFiltered, tagsList, setPath } = useContext(PageContext);
+function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLine }) {
+    console.log('productLine', productLine); // category needs to be change for productLine
+    const { category, tagsFiltered, tagsList, setPath } = useContext(PageContext); // This needs to be created inside this component using the useRouter hook from next.
 
     const getUrl = (category, tags) => {
         const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';

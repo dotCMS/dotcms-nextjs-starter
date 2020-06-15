@@ -5,11 +5,9 @@ import DotCMSPage from '../../components/layout/DotCMSPage';
 import { getPageList } from '../../utilities/dotcms';
 
 function DotCMSStaticPage({ pageRender, nav }) {
-    const isEditMode = pageRender?.viewAs?.mode === 'EDIT_MODE';
     return (
         <PageContext.Provider
             value={{
-                isEditMode,
                 nav: nav || [],
                 language: {
                     current: '1', // needs to make this dynamic, check _app.js
