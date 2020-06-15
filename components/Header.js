@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import logo from '../public/logo.png';
 import RouterLink from './RouterLink';
 import PageContext from '../contexts/PageContext';
@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../styles/nav/nav.styles';
 
 function Header() {
-    let { nav } = React.useContext(PageContext);
+    let { nav } = useContext(PageContext);
     nav = nav.map((nav) => ({ title: nav.title, href: nav.href }));
     const router = useRouter();
 
