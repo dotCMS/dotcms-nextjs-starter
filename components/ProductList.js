@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
-import { useRouter } from 'next/router';
-import getTagsListForCategory from '../utilities/getTagsListForCategory';
+import useTagsList from '../hooks/useTagsList';
+import useTagsFiltered from '../hooks/useTagsFiltered';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -39,38 +39,14 @@ const PRODUCTS_QUERY = gql`
 
 function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLine }) {
 
-    // Find the category and tags from the URL
-    const router = useRouter();
-    let { asPath: path } = router;
-    path = path.split('/').pop();
-    
-    // Separate category from tags
-    const [_, ...tagsFiltered] = path.split('-');
-    const category = productLine;
-
-    // Initialize our state
-    const [tagsList, setTagsList] = useState([]);
-    const [routePath, setRoutePath] = useState("");
-
-    // On first render set the tags list
-    useEffect(() => {
-        (async function getTags() {
-            const tags = await getTagsListForCategory(category);
-            setTagsList(tags);
-        })()
-    }, []);
-
-    // Everytime `routePath` changes push the new path
-    useEffect(() => {
-         routePath && router.push('/store/category/[slug]', routePath);
-    }, [routePath]);
+    const category = productLine?.toLowerCase();
+    const tagsList = useTagsList(category);
+    const [tagsFiltered, setRoutePath, tagsMap] = useTagsFiltered();
 
     const getUrl = (category, tags) => {
         const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';
         return `/store/category/${category}${tagsUrl}`;
     };
-
-    const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:"${tag}"`);
     
     const query = `+contentType:product +categories:${category} ${
         tagsMap && tagsMap.length > 0 && `+(${tagsMap.join(' ')})`
