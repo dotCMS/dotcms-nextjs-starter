@@ -4,8 +4,8 @@ import Layout from '../components/Layout';
 import Head from 'next/head';
 import { GlobalStyle } from '../styles/global';
 import Router from 'next/router';
-import NProgress from 'nprogress'; //nprogress module
-import 'nprogress/nprogress.css'; //styles of nprogress
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 
 //Binding events. 
 Router.events.on('routeChangeStart', () => NProgress.start()); 

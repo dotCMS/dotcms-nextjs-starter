@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
 import PageContext from '../contexts/PageContext';
-
+import styled from 'styled-components'
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
         ProductCollection(limit: $limit, query: $query) {
@@ -35,6 +35,10 @@ const PRODUCTS_QUERY = gql`
         }
     }
 `;
+
+const StatusIndicator = styled.h3`
+    margin: 1rem 0;
+`
 
 function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
     const { category, tagsFiltered, tagsList, setPath } = useContext(PageContext);
@@ -68,9 +72,9 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
                 />
             )}
             {loading ? (
-                <p>Loading...</p>
+                <StatusIndicator>Loading...</StatusIndicator>
             ) : data?.ProductCollection.length === 0 ? (
-                <h3>No products found!</h3>
+                <StatusIndicator>No products found!</StatusIndicator>
             ) : (
                 <ProductGrid className="product-grid">
                     {data?.ProductCollection.map((product) => (

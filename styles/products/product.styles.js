@@ -48,7 +48,7 @@ export const SingleProductContainer = styled.div`
 
 export const ProductGrid = styled.div`
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     flex: 1 0 80%;
     margin-top: var(--primary-spacing);
     gap: var(--primary-spacing);

@@ -4,17 +4,19 @@ import { capitalize } from '../utilities/shared';
 
 const TagsListContainer = styled.div`
     display: flex;
+    flex-wrap: wrap;
+    margin-left: -.5rem;
 `;
 
 const Tags = styled.div`
-    input[type='checkbox'] {
+    input[type='checkbox'], label {
         vertical-align: middle;
-    }
-
+    }   
+  
     border: 1px solid #d5d5d5;
     border-radius: 3px;
     padding: 0.5rem;
-    margin-right: 1rem;
+    margin: .5rem;
 `;
 
 function TagsFilter({ onFilterChange, list, selected }) {

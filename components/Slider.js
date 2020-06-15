@@ -4,6 +4,7 @@ import DotCMSImage from '../components/DotCMSImage';
 const Slider = ({ images, title, id }) => {
     const keys = Object.keys(images);
     const values = Object.values(images);
+
     const handleNavigatorClick = (elem) => {
         elem.scrollIntoView({
             behavior: 'smooth',
@@ -51,7 +52,7 @@ const Slider = ({ images, title, id }) => {
             </ul>
             <aside className="carousel__navigation">
                 <ul className="carousel__navigation-list">
-                    {values.filter(Boolean).map((item, index) => {
+                    {values.filter(Boolean).map((_item, index) => {
                         return (
                             <li key={index} className="carousel__navigation-item">
                                 <a
