@@ -54,6 +54,10 @@ export const ProductGrid = styled.div`
     gap: var(--primary-spacing);
 `;
 
+export const StatusIndicator = styled.h3`
+           margin: 1rem 0;
+       `;
+
 export const CarouselContainer = styled.section`
     position: relative;
     padding-top: 75%;

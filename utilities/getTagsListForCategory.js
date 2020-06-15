@@ -1,10 +1,10 @@
 import fetch from 'isomorphic-fetch';
 
-const getTagsList = async (category) => {
+const getTagsListForCategory = async (category) => {
   const data = {
       query: {
           query_string: {
-              query: `+contentType:product +(categories:${category})`
+              query: `+contentType:product +categories:${category}`
           }
       },
       aggs: {
@@ -20,7 +20,10 @@ const getTagsList = async (category) => {
 
   const options = {
       method: 'post',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
+      headers: {
+          'Content-Type': 'application/json'
+      }
   };
 
   let results = await fetch('https://starter.dotcms.com:8443/api/es/search', options);
@@ -28,4 +31,4 @@ const getTagsList = async (category) => {
   return results.esresponse[0].aggregations['sterms#tag'].buckets
 }
 
-module.exports = getTagsList;
+module.exports = getTagsListForCategory;

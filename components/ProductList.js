@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import Product from '../components/Product';
 import withApollo from '../hocs/withApollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { ProductGrid } from '../styles/products/product.styles';
+import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
-import PageContext from '../contexts/PageContext';
-import styled from 'styled-components'
+import { useRouter } from 'next/router';
+import getTagsListForCategory from '../utilities/getTagsListForCategory';
+
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
         ProductCollection(limit: $limit, query: $query) {
@@ -36,14 +37,32 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
+function ProductList({ quantity, order, orderBy, show, showTagsFilter }) {
 
-const StatusIndicator = styled.h3`
-    margin: 1rem 0;
-`
+    // Find the category and tags from the URL
+    const router = useRouter();
+    let { asPath: path } = router;
+    path = path.split('/').pop();
+    
+    // Separate category from tags
+    const [category, ...tagsFiltered] = path.split('-');
 
-function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLine }) {
-    console.log('productLine', productLine); // category needs to be change for productLine
-    const { category, tagsFiltered, tagsList, setPath } = useContext(PageContext); // This needs to be created inside this component using the useRouter hook from next.
+    // Initialize our state
+    const [tagsList, setTagsList] = useState([]);
+    const [routePath, setRoutePath] = useState("");
+
+    // On first render set the tags list
+    useEffect(() => {
+        (async function getTags() {
+            const tags = await getTagsListForCategory(category);
+            setTagsList(tags);
+        })()
+    }, []);
+
+    // Everytime `routePath` changes push the new path
+    useEffect(() => {
+         routePath && router.push('/store/category/[slug]', routePath);
+    }, [routePath]);
 
     const getUrl = (category, tags) => {
         const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';
@@ -51,9 +70,11 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLi
     };
 
     const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:"${tag}"`);
+    
     const query = `+contentType:product +categories:${category} ${
-        tagsMap && tagsMap.length > 0 && '+(' + tagsMap.join(' ') + ')'
+        tagsMap && tagsMap.length > 0 && `+(${tagsMap.join(' ')})`
     }`;
+
     const options = category
         ? { variables: { limit: quantity, query } }
         : { variables: { limit: quantity } };
@@ -69,7 +90,7 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLi
                     list={tagsList}
                     selected={tagsFiltered}
                     onFilterChange={(tags) => {
-                        setPath(getUrl(category, tags));
+                        setRoutePath(getUrl(category, tags));
                     }}
                 />
             )}

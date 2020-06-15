@@ -3,25 +3,14 @@ import Layout from '../../../components/layout/Layout';
 import PageContext from '../../../contexts/PageContext';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../../config/dotcms';
-import { useRouter } from 'next/router'
-import getTagsList from '../../../utilities/getTagsList'
 
-function category({ category, tagsFiltered, pageRender, nav, tagsList }) {
-    const router = useRouter();
-    const [path, setPath] = useState();
-
-    useEffect(() => {
-        path && router.push('/store/category/[slug]', path);
-    }, [path]);
+function category({ pageRender, nav }) {
 
     return (
         <PageContext.Provider
             value={{
                 nav,
-                tagsFiltered,
-                category,
-                tagsList,
-                setPath
+                pageRender
             }}
         >
             {pageRender?.layout ? (
@@ -36,17 +25,13 @@ function category({ category, tagsFiltered, pageRender, nav, tagsList }) {
 }
 
 export async function getServerSideProps({ params }) {
-    const [category, ...tagsFiltered] = params.slug.split('-');
-    const tagsList = await getTagsList(category);
+    const [category] = params.slug.split('-');
     const pageRender = await getPage(`/store/category/${category}/index`);
     const nav = await getNav('4');
     return {
         props: {
-            category,
-            tagsFiltered,
             pageRender,
             nav,
-            tagsList
         }
     };
 }
