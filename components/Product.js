@@ -21,6 +21,7 @@ function Product({ product, options = {} }) {
                     width={250}
                     height={250}
                     alt={title}
+                    loading="lazy"
                 />
             </RouterLink>
 

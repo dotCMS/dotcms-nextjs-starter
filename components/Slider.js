@@ -40,6 +40,7 @@ const Slider = ({ images, title, id }) => {
                                 <DotCMSImage
                                     width={700}
                                     height={700}
+                                    loading="lazy"
                                     data={{
                                         identifier: id,
                                         name: keys[index]

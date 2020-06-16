@@ -40,6 +40,7 @@
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
+        "react-lazy-load-image-component": "^1.5.0-beta.0",
         "reactify-wc": "^1.0.5",
         "reactstrap": "^8.0.1",
         "styled-components": "^5.1.0",

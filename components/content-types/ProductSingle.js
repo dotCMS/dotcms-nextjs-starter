@@ -1,16 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities/shared');
-import Head from 'next/head';
 import Carousel from '../Carousel';
-
+import styled from 'styled-components'
 import {
     ProductContainer,
     ProductDetail,
     Price,
     Quantity
 } from '../../styles/products/product.styles';
-import { resetWarningCache } from 'prop-types';
+
+const Content = styled.div`
+    margin-bottom: 1.6rem;
+`
 
 function ProductSingle({
     title,
@@ -60,15 +62,21 @@ function ProductSingle({
                         {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
                     </div>
 
-                    <div style={{marginBottom: '1.6rem'}} dangerouslySetInnerHTML={{ __html: description }} />
+                    <Content dangerouslySetInnerHTML={{ __html: description }} />
 
                     {renderSpecs().length > 1 && (
-                        <>  
+                        <>
                             <h4>Specifications</h4>
                             <ul>{renderSpecs()}</ul>
                         </>
                     )}
 
+                    <label
+                        htmlFor="product_quantity"
+                        className="visually-hidden"
+                    >
+                        Quantity
+                    </label>
                     <Quantity
                         type="number"
                         name="product_quantity"
