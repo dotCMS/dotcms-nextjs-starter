@@ -11,7 +11,7 @@ function Footer() {
         <FooterContainer>
             <div className="container">
                 <FooterSection className="footer__section">
-                    <a className="main-nav__logo" href="#">
+                    <a className="main-nav__logo" href="#" aria-label="Footer Logo">
                         <img src={logo} alt="" width={135} height={41} />
                     </a>
                     <nav className="menu__list">

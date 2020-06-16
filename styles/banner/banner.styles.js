@@ -10,6 +10,9 @@ export const BannerWrapper = styled.div`
     .banner-wrapper {
         &__figure {
             flex: 2 1 20rem;
+            @media screen and (max-width: 767px) {
+                margin-left: -2rem;
+            }
         }
         &__content {
             margin: 5rem 0;

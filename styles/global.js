@@ -7,6 +7,7 @@ export const GlobalStyle = createGlobalStyle`
 	--primary-black: #444444;
 	--primary-purple: #C336E5;
 	--primary-spacing: 2rem;
+	--primary-grey: #F1F3F4;
   }
   ${reset}
   * {
@@ -15,7 +16,7 @@ export const GlobalStyle = createGlobalStyle`
 
 	body {
 		line-height: 1.6;
-		background-color: #F1F3F4;
+		background-color: var(--primary-grey);
 		font-family: 'Roboto', sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;

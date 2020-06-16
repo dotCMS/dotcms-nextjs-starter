@@ -12,6 +12,17 @@ const Tags = styled.div`
     input[type='checkbox'],
     label {
         vertical-align: middle;
+        margin-left: 0.3rem;
+        span {
+            background-color: var(--primary-purple);
+            padding: 0rem 0.5rem;
+            font-size: 0.75rem;
+            border-radius: 20px;
+            display: inline-block;
+            text-align: center;
+            line-height: 16px;
+            color: white;
+        }
     }
 
     border: 1px solid #d5d5d5;
@@ -48,7 +59,7 @@ function TagsFilter({ onFilterChange, list, selected }) {
                             onChange={handleCheckbox}
                         />
                         <label htmlFor={key}>
-                            {capitalize(key)} ({doc_count})
+                            {capitalize(key)} <span>{doc_count}</span>
                         </label>
                     </Tags>
                 );
