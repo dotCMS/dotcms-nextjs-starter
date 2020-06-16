@@ -22,6 +22,7 @@ const Tags = styled.div`
             text-align: center;
             line-height: 16px;
             color: white;
+            vertical-align: middle;
         }
     }
 
