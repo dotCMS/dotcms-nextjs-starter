@@ -39,10 +39,12 @@ export const NavMenu = styled.div`
                        display: flex;
                        padding: 1.6rem 2rem;
                        flex-direction: column;
+                       margin-bottom: -.5rem;
                        margin-right: 0 !important;
-                       a {
-                           margin-left: 0;
-                       }
+                        &> a {
+                            margin-left: 0;
+                            margin-bottom: .5rem;
+                        }
                    }
                    &__icons {
                        border-top: 1px solid #e9e9e9;
