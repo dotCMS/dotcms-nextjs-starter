@@ -14,7 +14,7 @@ const Tags = styled.div`
         vertical-align: middle;
         margin-left: 0.3rem;
         span {
-            background-color: var(--primary-purple);
+            background-color: #888;
             padding: 0rem 0.5rem;
             font-size: 0.75rem;
             border-radius: 20px;
