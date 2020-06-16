@@ -45,10 +45,10 @@ function Header() {
                         ))}
                     </nav>
                     <nav className="menu menu__icons">
-                        <a href="#">
+                        <a href="#" aria-label="button">
                             <img src={searchIcon} alt="Search Icon" />
                         </a>
-                        <a href="#">
+                        <a href="#" aria-label="button">
                             <img src={shoppingCart} alt="Shopping Cart Icon" />
                         </a>
                     </nav>
