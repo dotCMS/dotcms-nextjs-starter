@@ -6,6 +6,7 @@ const TagsListContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-left: -0.5rem;
+    margin-top: 2rem;
 `;
 
 const Tags = styled.div`
