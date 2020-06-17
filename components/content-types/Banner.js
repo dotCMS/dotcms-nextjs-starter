@@ -10,11 +10,14 @@ function Banner({ buttonText, image, hostName, caption, link, textColor, title }
             <div className="banner-wrapper__content">
                 <img className="banner-wrapper__content--dots" src={dots} alt="Dots SVG" />
                 <img className="banner-wrapper__content--dots --bottom" src={dots} alt="Dots SVG" />
-                <h1>{title}</h1>
-                <p>{caption}</p>
-                <Button color={textColor} href={link}>
-                    {buttonText}
-                </Button>
+
+                {title && <h1>{title}</h1>}
+                {caption && <p>{caption}</p>}
+                {buttonText && (
+                    <Button color={textColor} href={link}>
+                        {buttonText}
+                    </Button>
+                )}
             </div>
             <div className="banner-wrapper__figure">
                 <DotCMSImage

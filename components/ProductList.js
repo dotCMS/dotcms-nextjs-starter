@@ -17,6 +17,7 @@ const PRODUCTS_QUERY = gql`
             urlTitle
             identifier
             tags
+            modDate
             host {
                 hostName
             }
@@ -37,7 +38,7 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
-function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLine }) {
+function ProductList({ quantity, show, showTagsFilter, productLine }) {
 
     const category = productLine?.toLowerCase();
     const tagsList = useTagsList(category);
@@ -78,11 +79,7 @@ function ProductList({ quantity, order, orderBy, show, showTagsFilter, productLi
             ) : (
                 <ProductGrid className="product-grid">
                     {data?.ProductCollection.map((product) => (
-                        <Product
-                            key={product.identifier}
-                            product={product}
-                            options={{ order, orderBy, show }}
-                        />
+                        <Product key={product.identifier} product={product} show={show} />
                     ))}
                 </ProductGrid>
             )}

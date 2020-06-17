@@ -1,4 +1,3 @@
-import { LazyLoadImage } from 'react-lazy-load-image-component';
 const DotCMSImage = ({ width, height, alt, data: { path, identifier, name }, className, loading }) => {
     let src = `${process.env.DOTCMS_HOST}`;
     let filter = `/filter/resize_w/${width}/20q`;
@@ -12,7 +11,7 @@ const DotCMSImage = ({ width, height, alt, data: { path, identifier, name }, cla
     }
 
     return (
-        <LazyLoadImage
+        <img
             className={className}
             src={`${src}${filter}`}
             alt={alt}
