@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
+
 function useTagsFiltered() {
     // Find the category and tags from the URL
     const router = useRouter();
@@ -14,7 +15,12 @@ function useTagsFiltered() {
     }, [routePath]);
 
     // Separate category from tags
-    const [_, ...tagsFiltered] = path.split('-');
+    let [_, ...tagsFiltered] = path.split('-');
+
+    tagsFiltered = tagsFiltered.map(tag => {
+        const regex = /%20/;
+        return regex.test(tag) ? tag.replace(regex, ' ') : tag;
+    });
 
     const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:"${tag}"`);
 

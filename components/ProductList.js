@@ -7,7 +7,8 @@ import { ProductGrid, StatusIndicator } from '../styles/products/product.styles'
 import TagsFilter from './TagsFilter';
 import useTagsList from '../hooks/useTagsList';
 import useTagsFiltered from '../hooks/useTagsFiltered';
-import Loading from './Loading'
+import Loading from './Loading';
+
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
         ProductCollection(limit: $limit, query: $query) {
@@ -39,18 +40,18 @@ const PRODUCTS_QUERY = gql`
 `;
 
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
-
+    
     const category = productLine?.toLowerCase();
     const tagsList = useTagsList(category);
     const [tagsFiltered, setRoutePath, tagsMap] = useTagsFiltered();
-
+    
     const getUrl = (category, tags) => {
         const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';
         return `/store/category/${category}${tagsUrl}`;
     };
     
     const query = `+contentType:product +categories:${category} ${
-        tagsMap && tagsMap.length > 0 && `+(${tagsMap.join(' ')})`
+        tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
     }`;
 
     const options = category
