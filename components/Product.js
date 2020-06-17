@@ -5,9 +5,9 @@ import { Price } from '../styles/products/product.styles';
 import DotCMSImage from '../components/DotCMSImage';
 const { currencyFormatter } = require('../utilities/shared');
 
-function Product({ product, show }) {
+function Product({ product, show, size }) {
     show = show?.split(',');
-    const { retailPrice, urlTitle, tags, image, title, salePrice, host, category } = product;
+    const { retailPrice, urlTitle, image, title, salePrice, category } = product;
     const cat = category[0]?.name.toLowerCase();
 
     return (
@@ -18,8 +18,7 @@ function Product({ product, show }) {
                         data={{
                             path: image.idPath.split('?')[0]
                         }}
-                        width={250}
-                        height={250}
+                        size={size}
                         alt={title}
                         loading="lazy"
                     />

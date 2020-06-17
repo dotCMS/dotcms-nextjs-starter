@@ -38,6 +38,8 @@ export const SingleProductContainer = styled.div`
         display: block;
         background: #fff;
         padding: 1rem;
+        display: flex;
+        justify-content: center;
     }
 
     img {
@@ -47,16 +49,19 @@ export const SingleProductContainer = styled.div`
 `;
 
 export const ProductGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    flex: 1 0 80%;
-    margin-top: var(--primary-spacing);
-    gap: var(--primary-spacing);
-`;
+           display: grid;
+           grid-template-columns: ${(props) =>
+               props.width
+                   ? `repeat(auto-fill, minmax(${props.width}px, 1fr))`
+                   : `repeat(auto-fill, minmax(250px, 1fr))`};
+           flex: 1 0 80%;
+           margin-top: var(--primary-spacing);
+           gap: var(--primary-spacing);
+       `;
 
 export const StatusIndicator = styled.h3`
-           margin: 1rem 0;
-       `;
+    margin: 1rem 0;
+`;
 
 export const CarouselContainer = styled.section`
     position: relative;

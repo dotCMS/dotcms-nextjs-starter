@@ -1,6 +1,6 @@
-const DotCMSImage = ({ width, height, alt, data: { path, identifier, name }, className, loading }) => {
+const DotCMSImage = ({ size, alt, data: { path, identifier, name }, className, loading }) => {
     let src = `${process.env.DOTCMS_HOST}`;
-    let filter = `/filter/resize_w/${width}/20q`;
+    let filter = `/filter/resize_w/${size?.width}/20q`;
 
     if (path) {
         src += `/${path}`;
@@ -16,9 +16,8 @@ const DotCMSImage = ({ width, height, alt, data: { path, identifier, name }, cla
             src={`${src}${filter}`}
             alt={alt}
             effect="blur"
-            width={width}
-            height={height}
-            loading={loading}
+            width={size?.width ? size.width : '250px'}
+            height={size?.height ? size.height : '250px'}
         />
     );
 };

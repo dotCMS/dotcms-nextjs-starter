@@ -7,7 +7,7 @@ import { ProductGrid, StatusIndicator } from '../styles/products/product.styles'
 import TagsFilter from './TagsFilter';
 import useTagsList from '../hooks/useTagsList';
 import useTagsFiltered from '../hooks/useTagsFiltered';
-
+import Loading from './Loading'
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
         ProductCollection(limit: $limit, query: $query) {
@@ -38,7 +38,7 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
-function ProductList({ quantity, show, showTagsFilter, productLine }) {
+function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
 
     const category = productLine?.toLowerCase();
     const tagsList = useTagsList(category);
@@ -73,13 +73,13 @@ function ProductList({ quantity, show, showTagsFilter, productLine }) {
                 />
             )}
             {loading ? (
-                <StatusIndicator>Loading...</StatusIndicator>
+                <Loading />
             ) : data?.ProductCollection.length === 0 ? (
                 <StatusIndicator>No products found!</StatusIndicator>
             ) : (
-                <ProductGrid className="product-grid">
+                <ProductGrid width={width} className="product-grid">
                     {data?.ProductCollection.map((product) => (
-                        <Product key={product.identifier} product={product} show={show} />
+                        <Product key={product.identifier} product={product} show={show} size={{height, width}} />
                     ))}
                 </ProductGrid>
             )}
