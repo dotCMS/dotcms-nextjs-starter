@@ -1,16 +1,32 @@
 import React, { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { MainNav, NavMenu } from '../styles/nav/nav.styles';
 import logo from '../public/logo.png';
 import searchIcon from '../public/search.svg';
 import shoppingCart from '../public/shopping-cart.svg';
 import menuIcon from '../public/menu.svg';
 import RouterLink from './RouterLink';
 import PageContext from '../contexts/PageContext';
-import { useRouter } from 'next/router';
-import { MainNav, NavMenu } from '../styles/nav/nav.styles';
+
 
 function Header() {
     let { nav } = useContext(PageContext);
-    nav = nav.map((nav) => ({ title: nav.title, href: nav.href }));
+    
+    nav = nav.map((nav) => {
+        let navObj = {
+            title: nav.title,
+            href: nav.href
+        };
+
+        if (nav.children.length > 0) {
+            navObj = {
+                ...navObj,
+                children: nav.children
+            }
+        }  
+        return navObj;
+    })
+   
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -18,6 +34,14 @@ function Header() {
         e.preventDefault()
         setIsMenuOpen(!isMenuOpen)
     }
+
+    const routerLinkClassName = (item) => {
+         return [
+             router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1] ? 'active' : '',
+             item.children ? 'hasChildren' : ''
+         ];
+    }
+
     return (
         <div className="container">
             <MainNav className="main-nav">
@@ -25,22 +49,35 @@ function Header() {
                     <img src={logo} alt="" width={135} height={41} />
                 </RouterLink>
                 <NavMenu className="main-nav__menu" isOpen={isMenuOpen}>
-                    <a className="hamburger" href="#" aria-label="button" onClick={(e) => handleOpenMenu(e)}>
+                    <a
+                        className="hamburger"
+                        href="#"
+                        aria-label="button"
+                        onClick={(e) => handleOpenMenu(e)}
+                    >
                         <img src={menuIcon} alt="Hamburger Icon" />
                     </a>
                     <nav className="menu menu__list">
                         {nav.map((item) => (
                             <RouterLink
                                 key={item.href}
-                                className={`${
-                                    router.asPath.split('/').filter(Boolean)[0] ===
-                                    item.href.split('/')[1]
-                                        ? 'active'
-                                        : ''
-                                }`}
+                                className={routerLinkClassName(item).join(" ")}
                                 href={item.href}
                             >
                                 {item.title}
+                                {item.children && (
+                                    <ul className="submenu">
+                                        {item.children[0].children.map((child, idx) => {
+                                            return (
+                                                <li key={idx}>
+                                                    <RouterLink href={child.href}>
+                                                        {child.title}
+                                                    </RouterLink>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
                             </RouterLink>
                         ))}
                     </nav>

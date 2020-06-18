@@ -34,17 +34,17 @@ export const NavMenu = styled.div`
                flex-direction: column;
                .menu {
                    background: white;
-                   display: ${props => props.isOpen ? 'block' : 'none !important'};
+                   display: ${(props) => (props.isOpen ? 'block' : 'none !important')};
                    &__list {
                        display: flex;
                        padding: 1.6rem 2rem;
                        flex-direction: column;
-                       margin-bottom: -.5rem;
+                       margin-bottom: -0.5rem;
                        margin-right: 0 !important;
-                        &> a {
-                            margin-left: 0;
-                            margin-bottom: .5rem;
-                        }
+                       & > a {
+                           margin-left: 0;
+                           margin-bottom: 0.5rem;
+                       }
                    }
                    &__icons {
                        border-top: 1px solid #e9e9e9;
@@ -75,6 +75,66 @@ export const NavMenu = styled.div`
 
            .menu {
                &__list {
+                   & > a {
+                       position: relative;
+                   }
+                   .submenu {
+                       position: absolute;
+                       display: none;
+                       z-index: 6;
+                       list-style: none;
+                       background: white;
+                       top: 19px;
+                       a {
+                           margin-left: 0;
+                           text-decoration: none;
+                           display: block;
+                           margin: 0;
+                           padding: 0.5rem;
+                           min-width: 9rem;
+                           border-bottom: 1px solid #f1f1f1;
+                           &:hover {
+                               background: #f9f9f9;
+                           }
+                       }
+                       left: 0;
+                   }
+                   @media screen and (max-width: 767px) {
+                       .submenu {
+                           position: static;
+                           a {
+                               margin-left: 0;
+                               text-decoration: none;
+                               display: block;
+                               margin: 0;
+                               padding: 0;
+                               min-width: auto;
+                               border-bottom: none;
+                               &:hover {
+                                   background-color: none;
+                               }
+                           }
+                           left: 0;
+                       }
+                   }
+                   & > a.hasChildren {
+                       &:after {
+                           width: 0;
+                           height: 0;
+                           border-left: 3px solid transparent;
+                           border-right: 3px solid transparent;
+                           border-top: 3px solid #444;
+                           position: absolute;
+                           top: 9px;
+                           right: -10px;
+                           content: '';
+                       }
+                       &:hover {
+                           .submenu {
+                               display: block;
+                           }
+                       }
+                   }
                }
                &__list:not(:only-child) {
                    margin-right: 2rem;

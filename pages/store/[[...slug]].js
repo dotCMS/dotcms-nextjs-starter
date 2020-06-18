@@ -2,6 +2,10 @@ import DotCMSPage from '../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../config/dotcms';
 import { getPageList } from '../../utilities/dotcms';
 
+export default function ({ pageRender, nav }) {
+    return <DotCMSPage pageRender={pageRender} nav={nav} />;
+}
+
 export async function getStaticPaths() {
     const res = await getPageList();
     const paths = res.reduce((acc, url) => {
@@ -53,7 +57,3 @@ export const getStaticProps = async ({ params: { slug } }) => {
         };
     }
 };
-
-export default function ({ pageRender, nav }) {
-    return <DotCMSPage pageRender={pageRender} nav={nav} />;
-}

@@ -4,7 +4,7 @@ import dots from '../../public/dots.svg';
 import { BannerWrapper } from '../../styles/banner/banner.styles';
 import DotCMSImage from '../DotCMSImage';
 
-function Banner({ buttonText, image, hostName, caption, link, textColor, title }) {
+function Banner({ buttonText, image, caption, link, textColor, title }) {
     return (
         <BannerWrapper className="banner-wrapper">
             <div className="banner-wrapper__content">
