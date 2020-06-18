@@ -99,24 +99,6 @@ export const NavMenu = styled.div`
                        }
                        left: 0;
                    }
-                   @media screen and (max-width: 767px) {
-                       .submenu {
-                           position: static;
-                           a {
-                               margin-left: 0;
-                               text-decoration: none;
-                               display: block;
-                               margin: 0;
-                               padding: 0;
-                               min-width: auto;
-                               border-bottom: none;
-                               &:hover {
-                                   background-color: none;
-                               }
-                           }
-                           left: 0;
-                       }
-                   }
                    & > a.hasChildren {
                        &:after {
                            width: 0;
@@ -132,6 +114,26 @@ export const NavMenu = styled.div`
                        &:hover {
                            .submenu {
                                display: block;
+                           }
+                       }
+                   }
+                   @media screen and (max-width: 767px) {
+                       .submenu {
+                           position: static;
+                           a {
+                               margin: 0;
+                               padding: 0;
+                               min-width: auto;
+                               border-bottom: none;
+                               &:hover {
+                                   background-color: none;
+                               }
+                           }
+                       }
+                       a.hasChildren {
+                           &:after {
+                               top: 12px;
+                               right: 40px;
                            }
                        }
                    }
