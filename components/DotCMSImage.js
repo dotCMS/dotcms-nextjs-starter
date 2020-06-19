@@ -15,9 +15,9 @@ const DotCMSImage = ({ size, alt, data: { path, identifier, name }, className, w
             className={className}
             src={`${src}${filter}`}
             alt={alt}
-            effect="blur"
             width={size?.width || '250px'}
             height={size?.height || '250px'}
+            loading="lazy"
         />
     );
 };

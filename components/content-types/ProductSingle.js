@@ -34,7 +34,7 @@ function ProductSingle({
         const specsArr = []
             for (var key in specs) {
               specsArr.push(
-                  <li>
+                  <li key={key}>
                       <b>{key}</b>: {specs[key]}
                   </li>
               );
