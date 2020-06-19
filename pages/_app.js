@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { GlobalStyle } from '../styles/global';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import 'nprogress/nprogress.css';
 import dotcms from '../config/dotcms';
 
 // Binding events.
