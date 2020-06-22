@@ -39,7 +39,7 @@ app.prepare()
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             const nav = await dotcms.getNav(4);
-            app.setAssetPrefix('https://dotcms-spa-sigma.now.sh');
+            app.setAssetPrefix('https://dotcms-spa.herokuapp.com');
             app.render(req, res, '/ema', { pageRender, nav });
         });
 
