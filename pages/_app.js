@@ -7,6 +7,8 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import dotcms from '../config/dotcms';
 
+console.log('hello', process.env)
+
 // Binding events.
 Router.events.on('routeChangeStart', (url) => {
     /*
