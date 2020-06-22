@@ -9,7 +9,7 @@
         "build": "next build",
         "start": "next start -p $PORT",
         "export": "next export",
-        "heroku-postbuild": "npm run build",
+        "heroku-postbuild": "yarn run build",
         "setup": "node ./cli/index.js"
     },
     "dependencies": {
