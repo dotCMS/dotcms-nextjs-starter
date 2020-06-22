@@ -10,7 +10,7 @@
         "test": "jest",
         "dev": "next",
         "build": "next build",
-        "start": "next start",
+        "start": "next start -p $PORT",
         "export": "next export",
         "setup": "node ./cli/index.js"
     },
@@ -46,7 +46,7 @@
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "babel-jest": "^24.9.0",
-        "dotenv-webpack": "^1.8.0",
+        "dotenv-webpack": "^1.7.0",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",
