@@ -4,7 +4,7 @@
     "main": "index.js",
     "license": "MIT",
     "engines": {
-        "node": "12.5.0"
+        "node": "12.5"
     },
     "scripts": {
         "test": "jest",
@@ -24,6 +24,7 @@
         "dotcms-ema-elements": "0.0.2",
         "dotcms-field-elements": "0.0.20",
         "dotenv": "^8.2.0",
+        "dotenv-webpack": "^1.8.0",
         "express": "^4.17.1",
         "express-http-proxy": "^1.6.0",
         "file-loader": "^4.2.0",
@@ -46,7 +47,6 @@
     "devDependencies": {
         "@babel/core": "^7.6.4",
         "babel-jest": "^24.9.0",
-        "dotenv-webpack": "^1.7.0",
         "enzyme": "^3.10.0",
         "enzyme-adapter-react-16": "^1.15.1",
         "enzyme-to-json": "^3.4.3",

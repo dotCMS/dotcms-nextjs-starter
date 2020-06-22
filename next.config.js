@@ -1,5 +1,5 @@
 const withCss = require('@zeit/next-css');
-// const Dotenv = require('dotenv-webpack');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = withCss({
     webpack: (config) => {
@@ -13,7 +13,7 @@ module.exports = withCss({
                 }
             }
         });
-        // config.plugins.push(new Dotenv({ silent: false }));
+        config.plugins.push(new Dotenv({ silent: false }));
         return config;
     },
     experimental: {
