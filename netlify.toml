@@ -22,3 +22,7 @@
   to = "https://demo.dotcms.com/custom-elements/:splat"
   status = 200
   force = true
+
+ [build]
+  command   = "npm run build && npm run export"
+  publish   = "out"

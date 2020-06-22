@@ -21,7 +21,7 @@ const formUrlEncodedParser = bodyParser.raw({
 app.prepare()
     .then(() => {
         const server = express();
-
+        
         server.get('*', (req, res) => {
             handle(req, res);
         });
@@ -39,14 +39,13 @@ app.prepare()
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await dotcms.transformPage(page);
             const nav = await dotcms.getNav(4);
-            app.setAssetPrefix('https://8c63217a1028.ngrok.io/');
+            app.setAssetPrefix('https://dotcms-spa-sigma.now.sh');
             app.render(req, res, '/ema', { pageRender, nav });
-
         });
 
         server.listen(5000, (err) => {
             if (err) throw err;
-            console.log(`> Ready on ${process.env.PUBLIC_URL}`);
+            console.log(`> Ready on http://localhost:5000`);
         });
     })
     .catch((ex) => {
