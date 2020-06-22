@@ -14,13 +14,13 @@ const questionsBasic = (param) => [
     },
     {
         message: `${DOTCMS} URL`,
-        name: 'DOTCMS_HOST',
-        default: (param && param.DOTCMS_HOST) || 'http://localhost:8080'
+        name: 'NEXT_PUBLIC_DOTCMS_HOST',
+        default: (param && param.NEXT_PUBLIC_DOTCMS_HOST) || 'http://localhost:8080'
     },
     {
         message: `Node Preview URL`,
-        name: 'PUBLIC_URL',
-        default: (param && param.PUBLIC_URL) || defaultNodeUrl
+        name: 'NEXT_PUBLIC_APP_URL',
+        default: (param && param.NEXT_PUBLIC_APP_URL) || defaultNodeUrl
     }
 ];
 

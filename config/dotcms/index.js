@@ -67,7 +67,7 @@ function proxyToStaticFile(req, res, next) {
 
     if (isAPIRequest(req.url)) {
         loggerLog('DOTCMS PROXY API REQUEST', req.url);
-        loggerLog(`${process.env.DOTCMS_HOST}${req.url}`);
+        loggerLog(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${req.url}`);
         proxyOptions = {
             proxyReqOptDecorator: function (proxyReqOpts, srcReq) {
                 proxyReqOpts.headers = {
@@ -81,7 +81,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY', req.url);
     }
 
-    return proxy(`${process.env.DOTCMS_HOST}${req.url}`, proxyOptions)(req, res, next);
+    return proxy(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${req.url}`, proxyOptions)(req, res, next);
 }
 
 function emitRemoteRenderEdit(url) {

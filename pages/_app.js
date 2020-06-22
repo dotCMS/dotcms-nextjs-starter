@@ -7,8 +7,6 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 import dotcms from '../config/dotcms';
 
-console.log('hello', process.env.NEXT_PUBLIC_IVOR);
-
 // Binding events.
 Router.events.on('routeChangeStart', (url) => {
     /*
