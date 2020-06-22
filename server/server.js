@@ -17,11 +17,11 @@ const formUrlEncodedParser = bodyParser.raw({
     limit: '10mb',
     extended: true
 });
-
+const port = process.env.PORT || 5000;
 app.prepare()
     .then(() => {
         const server = express();
-        
+
         server.get('*', (req, res) => {
             handle(req, res);
         });
@@ -43,9 +43,9 @@ app.prepare()
             app.render(req, res, '/ema', { pageRender, nav });
         });
 
-        server.listen(5000, (err) => {
+        server.listen(port, (err) => {
             if (err) throw err;
-            console.log(`> Ready on http://localhost:5000`);
+            console.log(`> Ready on http://localhost:${port}`);
         });
     })
     .catch((ex) => {

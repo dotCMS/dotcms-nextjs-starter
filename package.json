@@ -10,7 +10,7 @@
         "test": "jest",
         "dev": "next",
         "build": "next build",
-        "start": "next start -p $PORT",
+        "start": "next start",
         "export": "next export",
         "setup": "node ./cli/index.js"
     },
