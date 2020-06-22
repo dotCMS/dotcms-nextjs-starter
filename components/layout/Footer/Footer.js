@@ -1,12 +1,6 @@
-import {
-    Container as BootstrapContainer,
-    Row as BootstrapRow,
-    Col as BootstrapCol
-} from 'reactstrap';
-
 import BlogListing from './BlogListing';
 
-const Footer = (props) => {
+const Footer = () => {
     return (
         <footer
             className="footer-classic bg-footer bg-overlay-80 context-dark"
@@ -15,9 +9,9 @@ const Footer = (props) => {
             }}
         >
             <div className="section-xxl">
-                <BootstrapContainer>
-                    <BootstrapRow className="row-50 justify-content-center">
-                        <BootstrapCol lg={4}>
+                <div className="container">
+                    <div className="row justify-content-center">
+                        {/* /<BootstrapCol lg={4}> */}
                             <h2>About us</h2>
                             <p className="max-width-xl-90 text-gray-400">
                                 We are TravelLux, a community of dedicated travel experts,
@@ -32,13 +26,13 @@ const Footer = (props) => {
                                     height="40"
                                 />
                             </a>
-                        </BootstrapCol>
+                       {/* /</BootstrapCol> */}
 
-                        <BootstrapCol sm={8} md={6} lg={4}>
+                        {/* <BootstrapCol sm={8} md={6} lg={4}> */}
                             <h2>Latest blog posts</h2>
                             <BlogListing />
-                        </BootstrapCol>
-                        <BootstrapCol sm={8} md={6} lg={4}>
+                        {/* </BootstrapCol> */}
+                        {/* <BootstrapCol sm={8} md={6} lg={4}> */}
                             <h2>Get in touch</h2>
                             <form
                                 className="rd-form form-sm rd-mailform"
@@ -91,11 +85,11 @@ const Footer = (props) => {
                                     </button>
                                 </div>
                             </form>
-                        </BootstrapCol>
-                    </BootstrapRow>
-                </BootstrapContainer>
+                        {/* </BootstrapCol> */}
+                    </div>
+                </div>
             </div>
-            <BootstrapContainer>
+            <div className="container">
                 <p className="rights mb-0">
                     <span>©2012 - 2019 All Rights Reserved</span>
                     <a href="https://dotcms.com/company/policies/privacy-policy">
@@ -104,7 +98,7 @@ const Footer = (props) => {
                     <span>and</span>
                     <a href="https://dotcms.com/company/policies/privacy-policy">Privacy Policy</a>
                 </p>
-            </BootstrapContainer>
+            </div>
         </footer>
     );
 };

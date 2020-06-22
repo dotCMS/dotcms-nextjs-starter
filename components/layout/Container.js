@@ -64,7 +64,7 @@ const Contentlets = ({ contentlets }) => {
     ) : null;
 };
 
-export default function Container({ container }) {
+export default function ContentletContainer({ container }) {
     const { isEditMode } = useContext(PageContext);
 
     return (

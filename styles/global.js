@@ -17,7 +17,7 @@ export const GlobalStyle = createGlobalStyle`
 	body {
 		line-height: 1.6;
 		background-color: var(--primary-grey);
-		font-family: 'Roboto', sans-serif;
+		font-family: 'Helvetica Neue', sans-serif;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 	}
@@ -137,19 +137,19 @@ export const GlobalStyle = createGlobalStyle`
   position: relative;
 }
 
-.nprogress-custom-parent #nprogress .spinner,
-.nprogress-custom-parent #nprogress .bar {
-  position: absolute;
-}
+	.nprogress-custom-parent #nprogress .spinner,
+	.nprogress-custom-parent #nprogress .bar {
+		position: absolute;
+	}
 
-@-webkit-keyframes nprogress-spinner {
-  0%   { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-@keyframes nprogress-spinner {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+	@-webkit-keyframes nprogress-spinner {
+		0%   { -webkit-transform: rotate(0deg); }
+		100% { -webkit-transform: rotate(360deg); }
+	}
+	@keyframes nprogress-spinner {
+		0%   { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
 
 	.visually-hidden { 
     position: absolute !important;

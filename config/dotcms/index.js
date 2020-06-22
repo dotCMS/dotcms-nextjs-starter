@@ -1,5 +1,3 @@
-const proxy = require('express-http-proxy');
-
 const transformPage = require('./transformPage');
 const dotCMSApi = require('./dotcmsApi');
 const { loggerLog } = require('../../utilities/logger');
@@ -81,7 +79,7 @@ function proxyToStaticFile(req, res, next) {
         loggerLog('DOTCMS PROXY', req.url);
     }
 
-    return proxy(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${req.url}`, proxyOptions)(req, res, next);
+    // return proxy(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${req.url}`, proxyOptions)(req, res, next);
 }
 
 function emitRemoteRenderEdit(url) {

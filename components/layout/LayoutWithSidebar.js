@@ -1,4 +1,3 @@
-import { Row as BootstrapRow, Col as BootstrapCol } from 'reactstrap';
 
 import Sidebar from './Sidebar';
 
@@ -30,14 +29,16 @@ const LayoutWithSidebar = ({ sidebar, children }) => {
     const columns = getSidebarLayoutColumns(sidebar);
 
     return (
-        <BootstrapRow>
-            <BootstrapCol md={columns.first}>
-                {sidebar.location === 'left' ? <Sidebar {...sidebar} /> : children}
-            </BootstrapCol>
-            <BootstrapCol md={columns.second}>
-                {sidebar.location === 'right' ? <Sidebar {...sidebar} /> : children}
-            </BootstrapCol>
-        </BootstrapRow>
+        <>
+            {/* <BootstrapRow>
+                <BootstrapCol md={columns.first}>
+                    {sidebar.location === 'left' ? <Sidebar {...sidebar} /> : children}
+                </BootstrapCol>
+                <BootstrapCol md={columns.second}>
+                    {sidebar.location === 'right' ? <Sidebar {...sidebar} /> : children}
+                </BootstrapCol>
+            </BootstrapRow> */}
+        </>
     );
 };
 

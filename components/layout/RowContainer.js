@@ -1,6 +1,4 @@
-import { Row as BootstrapRow } from 'reactstrap';
 import ColumnContainer from './ColumnContainer';
-import { Container as BootstrapContainer } from 'reactstrap';
 
 const calcColumnOffset = (prev, col) => {
     return prev ? col.left - (prev.width + prev.left) : col.left > 0 ? col.left : null;
@@ -23,13 +21,13 @@ const RowContainer = ({ row }) => {
     const cols = getColumnsWithOffset(row);
 
     return (
-        <BootstrapContainer>
+        <div className="container">
             <div className="row">
                 {cols.map((col, k) => (
                     <ColumnContainer {...col} key={k} />
                 ))}
             </div>
-        </BootstrapContainer>
+        </div>
     );
 };
 
