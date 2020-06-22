@@ -8,6 +8,7 @@ export default withApollo(
     ({ initialState }) => {
         return new ApolloClient({
             uri: 'https://starter.dotcms.com:8443/api/v1/graphql',
+            uri: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/v1/graphql`,
             cache: cache.restore(initialState || {})
         });
     },
