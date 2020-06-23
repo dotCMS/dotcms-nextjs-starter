@@ -1,0 +1,5 @@
+export const DOTCMS_DOWN = 'DOTCMS_DOWN';
+export const DOTCMS_NO_LAYOUT = 'DOTCMS_NO_LAYOUT';
+export const DOTCMS_NO_AUTH = 'DOTCMS_NO_AUTH';
+export const DOTCMS_CUSTOM_ERROR = 'DOTCMS_CUSTOM_ERROR';
+export const LANG_COOKIE_NAME = 'dotSPALang';

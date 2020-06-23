@@ -3,7 +3,7 @@ import RouterLink from './RouterLink';
 import { SingleProductContainer } from '../styles/products/product.styles';
 import { Price } from '../styles/products/product.styles';
 import DotCMSImage from '../components/DotCMSImage';
-const { currencyFormatter } = require('../utilities/shared');
+const { currencyFormatter } = require('../utilities');
 
 function Product({ product, show, size }) {
     show = show?.split(',');

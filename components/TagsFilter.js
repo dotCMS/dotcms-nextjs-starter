@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { capitalize } from '../utilities/shared';
+import { capitalize } from '../utilities';
 
 const TagsListContainer = styled.div`
     display: flex;

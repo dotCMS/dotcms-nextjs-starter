@@ -1,5 +1,5 @@
 const dotCMSApi = require('./dotcmsApi');
-const { errors, CustomError } = require('./utilities');
+const { errors, CustomError } = require('./index');
 
 function hasLayout(page) {
     return page.layout && page.layout.body;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../../styles/shared.styles';
-const { currencyFormatter } = require('../../utilities/shared');
+const { currencyFormatter } = require('../../utilities');
 import Carousel from '../Carousel';
 import styled from 'styled-components'
 import {
