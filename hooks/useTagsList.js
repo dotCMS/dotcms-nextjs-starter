@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import getTagsListForCategory from '../utilities/dotcms/getTagsListForCategory';
+import {getTagsListForCategory} from '../utilities/dotcms';
 
 function useTagsList(category) {
     const [tagsList, setTagsList] = useState([]);

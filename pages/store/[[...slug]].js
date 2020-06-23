@@ -1,6 +1,6 @@
 import DotCMSPage from '../../components/layout/DotCMSPage';
 import { getPage, getNav } from '../../utilities/dotcms';
-import  getPageList from '../../utilities/dotcms/getPageList';
+import  { getPageList } from '../../utilities/dotcms';
 
 export default function ({ pageRender, nav }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;

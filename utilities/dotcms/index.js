@@ -1,6 +1,9 @@
-const transformPage = require('./transformPage');
-const dotCMSApi = require('./dotcmsApi');
+const dotCMSApi = require('../../config/dotcmsApi');
 const { loggerLog } = require('../logger');
+const path = require('path');
+const fetch = require('isomorphic-fetch');
+const { printError } = require('../../cli/print');
+import CustomError from '../custom-error'
 import {
     DOTCMS_DOWN,
     DOTCMS_NO_LAYOUT,
@@ -94,7 +97,6 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-const path = require('path');
 
 function isAPIRequest(url) {
     return url.startsWith('/api');
@@ -125,19 +127,174 @@ function setCookie(name, value) {
     document.cookie = `${name}=${value}`;
 }
 
-class CustomError extends Error {
-    constructor(message = '', statusCode = DOTCMS_CUSTOM_ERROR, ...params) {
-        // Pass remaining arguments (including vendor specific ones) to parent constructor
-        super(...params);
+const getPageList = async () => {
+    const NOT_BUILD_THIS_PAGES = ['/store/product-line', '/store/product-detail', '/store/cart'];
 
-        // Maintains proper stack trace for where our error was thrown (only available on V8)
-        if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, CustomError);
+    const PAGES_QUERY = {
+        query: `{ 
+            search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") {
+                urlMap
+                ... on htmlpageasset {
+                    url
+                }
+            }
+        }`
+    };
+
+    let data = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/v1/graphql`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${process.env.BEARER_TOKEN}`
+        },
+        body: JSON.stringify(PAGES_QUERY)
+    });
+
+    ({ data } = await data.json());
+
+    const paths = data.search
+        .filter(({ urlMap, url }) => urlMap || url)
+        .map(({ urlMap, url }) => urlMap || url)
+        .filter((url) => !NOT_BUILD_THIS_PAGES.includes(url));
+
+    return paths;
+};
+
+const getToken = ({ user, password, expirationDays, host }) => {
+    return dotcmsApi.auth
+        .getToken({ user, password, expirationDays, host })
+        .then((res) => res)
+        .catch((err) => {
+            if (err.status === 400 || err.status === 401) {
+                console.log('\n');
+                printError(err.message);
+                return;
+            }
+            throw err;
+        });
+};
+
+const getTagsListForCategory = async (category) => {
+    const data = {
+        query: {
+            query_string: {
+                query: `+contentType:product +categories:${category}`
+            }
+        },
+        aggs: {
+            tag: {
+                terms: {
+                    field: 'tags',
+                    size: 100
+                }
+            }
+        },
+        size: 0
+    };
+
+    const options = {
+        method: 'post',
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
         }
+    };
 
-        this.name = 'CustomError';
-        this.message = message;
-        this.statusCode = statusCode;
+    let results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
+    results = await results.json();
+    return results.esresponse[0].aggregations['sterms#tag'].buckets;
+};
+
+function hasLayout(page) {
+    return page.layout && page.layout.body;
+}
+
+function getAcceptTypes(containers, identifier) {
+    // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
+    return containers[identifier].containerStructures
+        .map((structure) => structure.contentTypeVar)
+        .join(',');
+}
+
+function hasSidebar(page) {
+    return (
+        page.layout.sidebar &&
+        page.layout.sidebar.containers &&
+        page.layout.sidebar.containers.length
+    );
+}
+
+async function getUpdatedContainer(page, container) {
+    const types = ['WIDGET'];
+    const contentlets = page.containers[container.identifier].contentlets[`uuid-${container.uuid}`];
+
+    for (let i = 0; i < contentlets.length; i++) {
+        const contentlet = contentlets[i];
+
+        if (types.includes(contentlet.baseType)) {
+            contentlet.rendered = await dotCMSApi.widget
+                .getHtml(contentlet.identifier)
+                .then((html) => html)
+                .catch(() => {
+                    return 'Widget was not found';
+                });
+        }
+    }
+
+    return {
+        ...container,
+        ...page.containers[container.identifier].container,
+        acceptTypes: getAcceptTypes(page.containers, container.identifier),
+        contentlets: contentlets
+    };
+}
+
+function getContainers(containers, page) {
+    return containers.map((container) => getUpdatedContainer(page, container));
+}
+
+async function getColumns(row, page) {
+    return Promise.all(
+        row.columns.map(async (column) => {
+            return {
+                ...column,
+                containers: await Promise.all(getContainers(column.containers, page))
+            };
+        })
+    );
+}
+
+async function getRows(page) {
+    return await Promise.all(
+        page.layout.body.rows.map(async (row) => {
+            return {
+                ...row,
+                columns: await getColumns(row, page)
+            };
+        })
+    );
+}
+
+async function transformPage(page) {
+    try {
+        if (hasLayout(page)) {
+            page.layout.body.rows = await getRows(page);
+
+            if (hasSidebar(page)) {
+                page.layout.sidebar.containers = await Promise.all(
+                    getContainers(page.layout.sidebar.containers, page)
+                );
+            }
+
+            return page;
+        } else {
+            throw new CustomError(
+                `This page doesn't have a layout to render`,
+                errors.DOTCMS_NO_LAYOUT
+            );
+        }
+    } catch (error) {
+        throw error instanceof CustomError ? error : new CustomError(error.message);
     }
 }
 
@@ -149,10 +306,13 @@ module.exports = {
     LANG_COOKIE_NAME,
     getPage,
     getNav,
-    transformPage,
     isPage,
     proxyToStaticFile,
     emitRemoteRenderEdit,
     getLanguages,
-    errors: { DOTCMS_DOWN, DOTCMS_NO_LAYOUT, DOTCMS_NO_AUTH, DOTCMS_CUSTOM_ERROR }
+    errors: { DOTCMS_DOWN, DOTCMS_NO_LAYOUT, DOTCMS_NO_AUTH, DOTCMS_CUSTOM_ERROR },
+    getToken,
+    transformPage,
+    getTagsListForCategory,
+    getPageList
 };

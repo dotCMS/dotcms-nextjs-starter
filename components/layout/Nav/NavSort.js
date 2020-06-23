@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageContext from '../../../context/PageContext';
-import dotcmsApi from '../../dotcmsApi';
+import dotcmsApi from '../../../config/dotcmsApi';
 
 class NavSort extends Component {
     static contextType = PageContext;

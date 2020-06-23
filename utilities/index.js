@@ -1,5 +1,5 @@
 const { loggerError, loggerLog } = require('./logger');
-const getToken = require('./dotcms/getToken');
+const getToken = require('./dotcms');
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',

@@ -1,8 +1,7 @@
 const { spawn } = require('child_process');
-
 const { getAnswersBasic, getAnswersAuth } = require('./questions');
 const { printError, printHeading, DOTCMS } = require('./print');
-const { getToken } = require('../utilities/getToken');
+const { getToken } = require('../utilities/dotcms');
 const { getParsedEnvFile, createEnvFile } = require('./envFile');
 
 const createEnvVars = (vars, separator) => {
