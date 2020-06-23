@@ -1,6 +1,6 @@
 import React from 'react';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
-import { getPage, getNav } from '../../../config/dotcms';
+import { getPage, getNav } from '../../../utilities/dotcms';
 
 export default function ({ pageRender, nav }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
