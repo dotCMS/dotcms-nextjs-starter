@@ -36,11 +36,7 @@ const printWelcome = () => {
 };
 
 const main = async () => {
-    if (
-        process.env.BEARER_TOKEN &&
-        process.env.NEXT_PUBLIC_DOTCMS_HOST &&
-        process.env.NEXT_PUBLIC_APP_URL
-    ) {
+    if (process.env.BEARER_TOKEN && process.env.NEXT_PUBLIC_DOTCMS_HOST) {
         setEnvVarsAndStartApp();
     } else {
         printWelcome();
@@ -72,8 +68,7 @@ const main = async () => {
 
             const envVars = {
                 NEXT_PUBLIC_DOTCMS_HOST: cliValues.NEXT_PUBLIC_DOTCMS_HOST,
-                BEARER_TOKEN: cliValues.BEARER_TOKEN,
-                NEXT_PUBLIC_APP_URL: cliValues.NEXT_PUBLIC_APP_URL
+                BEARER_TOKEN: cliValues.BEARER_TOKEN
             };
 
             if (cliValues.writeEnv) {
