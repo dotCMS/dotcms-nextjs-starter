@@ -7,7 +7,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 
 const { loggerLog } = require('../utilities/logger');
-const { transformPage } = require('../config/dotcms');
+const transformPage  = require('../utilities/dotcms/transformPage');
 
 const handle = app.getRequestHandler();
 

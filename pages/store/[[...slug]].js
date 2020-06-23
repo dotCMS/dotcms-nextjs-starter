@@ -1,6 +1,5 @@
 import DotCMSPage from '../../components/layout/DotCMSPage';
-import { getPage, getNav } from '../../utilities/dotcms';
-import  { getPageList } from '../../utilities/dotcms';
+import { getPage, getNav, getPageList } from '../../utilities/dotcms';
 
 export default function ({ pageRender, nav }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
@@ -42,6 +41,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
             : '/store';
 
         const pageRender = await getPage(url);
+
         const nav = await getNav('4');
 
         return {

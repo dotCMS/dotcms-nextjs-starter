@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-
 function useTagsFiltered() {
     // Find the category and tags from the URL
     const router = useRouter();

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import PageContext from '../../contexts/PageContext';
 import useDotCMSApi from '../../hooks/useDotCMSApi';
 import { getLanguages } from '../../config/dotcms';
+const dotCMSApi = require('../../config/dotcmsApi');
 
 import React, { useContext } from 'react';
 
@@ -24,7 +25,7 @@ Options.propTypes = {
 };
 
 const LocaleDropdown = () => {
-    const [loading, languages] = useDotCMSApi(getLanguages);
+    const [loading, languages] = useDotCMSApi(dotCMSApi.language.getLanguages);
     const { language } = useContext(PageContext);
 
     return (
