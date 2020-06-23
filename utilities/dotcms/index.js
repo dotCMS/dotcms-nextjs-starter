@@ -66,6 +66,7 @@ async function getNav(depth) {
 }
 
 function emitRemoteRenderEdit(url) {
+    console.log('emitting event')
     dotCMSApi.event.emit({
         name: 'remote-render-edit',
         data: { pathname: url }

@@ -5,7 +5,7 @@ import Head from 'next/head';
 import { GlobalStyle } from '../styles/global';
 import Router from 'next/router';
 import NProgress from 'nprogress';
-import dotcms from '../utilities/dotcms';
+import { emitRemoteRenderEdit } from '../utilities/dotcms';
 
 // Binding events.
 Router.events.on('routeChangeStart', (url) => {
@@ -13,7 +13,7 @@ Router.events.on('routeChangeStart', (url) => {
         To make DotCMS edit mode internal navigation works we need to emit an event,
         we have a method in our library to do this.
     */
-    dotcms.emitRemoteRenderEdit(url);
+    emitRemoteRenderEdit(url);
     NProgress.start();
 });
 Router.events.on('routeChangeComplete', () => NProgress.done());
