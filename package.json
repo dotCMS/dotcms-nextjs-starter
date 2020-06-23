@@ -12,7 +12,7 @@
         "build": "next build",
         "start": "NODE_ENV=production node server/server.js",
         "export": "next export",
-        "setup": "node ./cli/index.js"
+        "setup": "node ./cli/index.js dev"
     },
     "dependencies": {
         "@apollo/react-hooks": "^3.1.5",

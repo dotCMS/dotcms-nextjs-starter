@@ -119,7 +119,7 @@ const getPageList = async () => {
 };
 
 const getToken = ({ user, password, expirationDays, host }) => {
-    return dotcmsApi.auth
+    return dotCMSApi.auth
         .getToken({ user, password, expirationDays, host })
         .then((res) => res)
         .catch((err) => {
