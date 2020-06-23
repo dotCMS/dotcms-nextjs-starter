@@ -8,6 +8,7 @@ const app = next({ dev });
 
 const { loggerLog } = require('../utilities/logger');
 const transformPage  = require('../utilities/dotcms/transformPage');
+const { getNav }  = require('../utilities/dotcms');
 
 const handle = app.getRequestHandler();
 
@@ -37,7 +38,7 @@ app.prepare()
             loggerLog('DOTCMS EDIT MODE');
             const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
             const pageRender = await transformPage(page);
-            const nav = await dotcms.getNav(4);
+            const nav = await getNav(4);
             app.setAssetPrefix(`${process.env.NEXT_PUBLIC_DEPLOY_URL}`);
             app.render(req, res, '/ema', { pageRender, nav });
         });
