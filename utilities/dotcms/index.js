@@ -2,16 +2,16 @@ const dotCMSApi = require('../../config/dotcmsApi');
 const { loggerLog } = require('../logger');
 const { printError } = require('../../cli/print');
 const fetch = require('isomorphic-fetch');
-import CustomError from '../custom-error';
-import transformPage from './transformPage'
+const CustomError = require('../custom-error');
+const transformPage = require('./transformPage')
 
-import {
+const {
     DOTCMS_DOWN,
     DOTCMS_NO_LAYOUT,
     DOTCMS_NO_AUTH,
     DOTCMS_CUSTOM_ERROR,
     LANG_COOKIE_NAME
-} from './constants';
+} = require('./constants');
 
 async function getPage(url, lang) {
     loggerLog('DOTCMS PAGE', url, lang || '1');
