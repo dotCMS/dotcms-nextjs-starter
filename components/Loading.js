@@ -12,7 +12,7 @@ const Ellipsis = styled.div`
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: var(--primary-purple);
+        background: var(--dotcms-purple);
         animation-timing-function: cubic-bezier(0, 1, 1, 0);
     }
     div:nth-child(1) {

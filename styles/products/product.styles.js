@@ -11,7 +11,7 @@ export const SingleProductContainer = styled.div`
         &__category {
             a {
                 text-decoration: none;
-                color: var(--primary-purple);
+                color: var(--dotcms-purple);
                 &:hover {
                     color: var(--primary-black);
                 }
@@ -192,7 +192,7 @@ export const ProductDetail = styled.div`
             margin-bottom: 0.5rem;
             a {
                 text-decoration: none;
-                color: var(--primary-purple);
+                color: var(--dotcms-purple);
                 &:hover {
                     color: var(--primary-black);
                 }

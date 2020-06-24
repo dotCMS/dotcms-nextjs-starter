@@ -5,7 +5,9 @@ import { reflex } from '../styles/reflex';
 export const GlobalStyle = createGlobalStyle`
   :root {
 	--primary-black: #444444;
-	--primary-purple: #C336E5;
+	--dotcms-purple: #C336E5;
+	--dotcms-purple-80: hsla(288, 77%, 80%, 1);
+	--dotcms-purple-20: hsla(288, 77%, 20%, 1);
 	--primary-spacing: 2rem;
 	--primary-grey: #F1F3F4;
   }
@@ -57,7 +59,7 @@ export const GlobalStyle = createGlobalStyle`
   a {
   	color: var(--primary-black);
 		&:hover {
-			color: var(--primary-purple);
+			color: var(--dotcms-purple);
 		}
   }
 	nav.menu__list {
@@ -71,11 +73,11 @@ export const GlobalStyle = createGlobalStyle`
 		a:active,
 		a:hover,
 		.active {
-			color: var(--primary-purple);
+			color: var(--dotcms-purple);
 		}
 	}
 	#nprogress .bar {
-		background: var(--primary-purple) !important;
+		background: var(--dotcms-purple) !important;
 	}
 	/* Make clicks pass-through */
 #nprogress {
