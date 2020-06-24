@@ -133,6 +133,22 @@ const getToken = ({ user, password, expirationDays, host }) => {
         });
 };
 
+const filterPaths = (res) => {
+    return res.reduce((acc, url) => {
+        acc = [
+            ...acc,
+            {
+                params: {
+                    slug: url?.split('/').filter((item) => {
+                        return item.length > 0 && item !== 'index';
+                    })
+                }
+            }
+        ];
+        return acc;
+    }, []);
+};
+
 const getTagsListForCategory = async (category) => {
     const data = {
         query: {
@@ -174,5 +190,6 @@ module.exports = {
     emitRemoteRenderEdit,
     getToken,
     getTagsListForCategory,
-    getPageList
+    getPageList,
+    filterPaths
 };
