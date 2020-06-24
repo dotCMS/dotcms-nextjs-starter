@@ -1,7 +1,11 @@
 import DotCMSPage from '../../components/layout/DotCMSPage';
 import { getPage, getNav, getPageList } from '../../utilities/dotcms';
+import Error from '../../components/layout/Error';
 
-export default function ({ pageRender, nav }) {
+export default function ({ pageRender, nav, error }) {
+    if (error) {
+        return <Error statusCode={error.statusCode} message={error.message} />;
+    }
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 
@@ -40,7 +44,8 @@ export const getStaticProps = async ({ params: { slug } }) => {
                 : `/${slug.join('/')}`
             : '/store';
 
-        const pageRender = await getPage(url);
+        const pageRender = await getPage('/store/test');
+        console.log('pageRender', pageRender);
 
         const nav = await getNav('4');
 
@@ -53,7 +58,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
         };
     } catch (error) {
         return {
-            props: {}
+            props: { error }
         };
     }
 };

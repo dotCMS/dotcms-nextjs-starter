@@ -41,7 +41,7 @@ async function getPage(url, lang) {
             */
             if (error.statusCode === 401) {
                 error.statusCode = DOTCMS_NO_AUTH;
-                error.message = 'DotCMS: Invalid User';
+                error.message = 'DotCMS: Invalid Auth Token';
             }
 
             throw error;
