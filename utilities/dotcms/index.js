@@ -14,44 +14,48 @@ const {
 } = require('./constants');
 
 async function getPage(url, lang) {
-    loggerLog('DOTCMS PAGE', url, lang || '1');
-    return dotCMSApi.page
-        .get({
-            url: url,
-            language: lang || 1
-        })
-        .then(async (pageRender) => {
-            /*
+        if (process.env.NODE_ENV !== 'production') {
+            loggerLog('DOTCMS PAGE', url, lang || '1');
+        }
+        return dotCMSApi.page
+            .get({
+                url: url,
+                language: lang || 1
+            })
+            .then(async (pageRender) => {
+                /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
             */
-            const transformedPage = await transformPage(pageRender);
-            return transformedPage;
-        })
-        .catch((error) => {
-            /* 
+                const transformedPage = await transformPage(pageRender);
+                return transformedPage;
+            })
+            .catch((error) => {
+                /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
-            if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-                error.statusCode = DOTCMS_DOWN;
-                error.message = 'DotCMS: instance is not running or inaccessible';
-            }
-            /* 
+                if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+                    error.statusCode = DOTCMS_DOWN;
+                    error.message = 'DotCMS: instance is not running or inaccessible';
+                }
+                /* 
                 Error coming from the DotCMS server when the authorization failed
             */
-            if (error.statusCode === 401) {
-                error.statusCode = DOTCMS_NO_AUTH;
-                error.message = 'DotCMS: Invalid Auth Token';
-            }
+                if (error.statusCode === 401) {
+                    error.statusCode = DOTCMS_NO_AUTH;
+                    error.message = 'DotCMS: Invalid Auth Token';
+                }
 
-            throw error;
-        });
+                throw error;
+            });
 }
 
 async function getNav(depth) {
-    loggerLog('DOTCMS NAV');
+    if (process.env.NODE_ENV !== 'production') {
+        loggerLog('DOTCMS NAV');
+    }
+    
     const nav = await dotCMSApi.nav.get(depth).then(({ children }) => children);
-
     const finalNav = [
         {
             href: '/index',
@@ -139,7 +143,7 @@ const filterPaths = (res) => {
             ...acc,
             {
                 params: {
-                    slug: url?.split('/').filter((item) => {
+                    slug: url && url.split('/').filter((item) => {
                         return item.length > 0 && item !== 'index';
                     })
                 }
