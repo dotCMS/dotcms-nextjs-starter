@@ -3,7 +3,7 @@ import { getPage, getNav, getPageList, filterPaths } from '../utilities/dotcms';
 import Error from '../components/layout/Error';
 
 export default function ({ pageRender, nav, error }) {
-    if(error?.statusCode) {
+    if(error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
 

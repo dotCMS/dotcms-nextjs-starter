@@ -105,7 +105,7 @@ const getPageList = async () => {
     };
 
     let data = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/v1/graphql`, {
-        method: 'POST',
+        method: 'post',
         headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${process.env.BEARER_TOKEN}`
