@@ -1,5 +1,6 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
-import { getPage, getNav, getPageList, filterPaths } from '../utilities/dotcms';
+import { getPage, getNav, getFilterPaths } from '../utilities/dotcms';
+import getPageList from '../utilities/dotcms/getPageList'
 import Error from '../components/layout/Error';
 
 export default function ({ pageRender, nav, error }) {
@@ -12,7 +13,7 @@ export default function ({ pageRender, nav, error }) {
 
 export async function getStaticPaths() {
     const res = await getPageList();
-    const paths = filterPaths(res);
+    const paths = getFilterPaths(res);
 
     return {
         paths,

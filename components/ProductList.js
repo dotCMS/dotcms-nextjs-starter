@@ -1,6 +1,6 @@
 import React from 'react';
 import Product from '../components/Product';
-import withApollo from '../hocs/withApollo';
+import { useApollo } from '../config/apollo';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
@@ -40,6 +40,8 @@ const PRODUCTS_QUERY = gql`
 `;
 
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
+
+    const client = useApollo();
     
     const category = productLine?.toLowerCase();
     const tagsList = useTagsList(category);
@@ -55,10 +57,10 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
     }`;
 
     const options = category
-        ? { variables: { limit: quantity, query } }
-        : { variables: { limit: quantity } };
+        ? { variables: { limit: quantity, query }, client }
+        : { variables: { limit: quantity }, client };
 
-    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
+    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options   );
 
     if (error) return `Error! ${error}`;
 
@@ -88,4 +90,4 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
     );
 }
 
-export default withApollo(ProductList);
+export default ProductList;
