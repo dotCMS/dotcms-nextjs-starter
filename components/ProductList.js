@@ -56,9 +56,8 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
         tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
     }`;
 
-    const options = category
-        ? { variables: { limit: quantity, query }, client }
-        : { variables: { limit: quantity }, client };
+    let options = { variables: { limit: quantity }, client }
+    if (category) options = {...options, query }
 
     const { loading, error, data } = useQuery(PRODUCTS_QUERY, options   );
 
