@@ -58,7 +58,7 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
 
     let options = { variables: { limit: quantity }, client }
     if (category) options = {...options, query }
-
+    
     const { loading, error, data } = useQuery(PRODUCTS_QUERY, options   );
 
     if (error) return `Error! ${error}`;

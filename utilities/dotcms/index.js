@@ -109,7 +109,7 @@ const getFilterPaths = (res) => {
             {
                 params: {
                     slug: url && url.split('/').filter((item) => {
-                        return item.length > 0 && item !== 'index';
+                        return item.length > 0;
                     })
                 }
             }

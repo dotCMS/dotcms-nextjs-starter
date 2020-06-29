@@ -2,9 +2,9 @@ const gql = require('graphql-tag');
 const { initializeApollo } = require('../../config/apollo');
 
 const PAGES_TO_FILTER = ['/store/product-line', '/store/product-detail', '/store/cart'];
+const apolloClient = initializeApollo();
 
 const getPageList = async () => {
-    const apolloClient = initializeApollo();
     const PAGES_QUERY = gql`
         {
             search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") {
@@ -21,9 +21,8 @@ const getPageList = async () => {
     });
 
     return data.search
-        .filter(({ urlMap, url }) => urlMap || url)
-        .map(({ urlMap, url }) => urlMap || url)
-        .filter((url) => !PAGES_TO_FILTER.includes(url));
+        .filter(({ urlMap, url }) => (urlMap || url) && !PAGES_TO_FILTER.includes(url))
+        .map(({ urlMap, url }) => urlMap || url);
 };
 
 module.exports = getPageList;

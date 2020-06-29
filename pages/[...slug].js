@@ -3,7 +3,7 @@ import { getPage, getNav, getFilterPaths } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList'
 import Error from '../components/layout/Error';
 
-export default function ({ pageRender, nav, error }) {
+export default function ({ pageRender, nav, error}) {
     if(error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
@@ -12,8 +12,8 @@ export default function ({ pageRender, nav, error }) {
 }
 
 export async function getStaticPaths() {
-    const res = await getPageList();
-    const paths = getFilterPaths(res);
+    const pageList = await getPageList(); // API call
+    const paths = getFilterPaths(pageList);
 
     return {
         paths,
@@ -22,11 +22,10 @@ export async function getStaticPaths() {
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
-
     try {
         let url = `/${slug.join('/')}`;
-        const pageRender = await getPage(url);
-        const nav = await getNav('4');
+        const pageRender = await getPage(url); // API call
+        const nav = await getNav('4'); // API call
 
         return {
             props: {
