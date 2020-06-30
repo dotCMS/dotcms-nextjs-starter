@@ -1,31 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useState, memo } from 'react';
 import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
 import logo from '../../../public/logo.png';
 import searchIcon from '../../../public/search.svg';
 import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
-import PageContext from '../../../contexts/PageContext';
 import RouterLink from '../../RouterLink';
+import useNav from '../../../hooks/useNav'
 
 export default function Nav() {
-    let { nav } = useContext(PageContext);
-
-    nav = nav.map((nav) => {
-        let navObj = {
-            title: nav.title,
-            href: nav.href
-        };
-
-        if (nav.children.length > 0) {
-            navObj = {
-                ...navObj,
-                children: nav.children
-            };
-        }
-        return navObj;
-    });
-
+    const nav = useNav();
     const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 

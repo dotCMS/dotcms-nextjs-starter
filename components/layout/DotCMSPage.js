@@ -11,8 +11,6 @@ const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
         SinglePage = getComponent(`${contentMap.contentType}Single`);
     }
 
-    const body = pageRender?.layout?.body;
-
     return (
         <PageContext.Provider
             value={{
@@ -26,7 +24,11 @@ const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
         >
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    {SinglePage ? <SinglePage {...contentMap} /> : <LayoutGrid body={body} />}
+                    {SinglePage ? (
+                        <SinglePage {...contentMap} />
+                    ) : (
+                        <LayoutGrid body={pageRender?.layout?.body} />
+                    )}
                 </Layout>
             ) : (
                 <h1>No layout in this page</h1>
