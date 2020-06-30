@@ -5,4 +5,3 @@ export const StoreProductList = dynamic(() => import('../content-types/StoreProd
 export const webPageContent = dynamic(() => import('../content-types/webPageContent'));
 export const ProductSingle = dynamic(() => import('../content-types/ProductSingle'));
 export const CategoryFilter = dynamic(() => import('../content-types/CategoryFilter'));
-

@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities');
 import Carousel from '../Carousel';
-import styled from 'styled-components'
+import styled from 'styled-components';
 import {
     ProductContainer,
     ProductDetail,
@@ -12,7 +12,7 @@ import {
 
 const Content = styled.div`
     margin-bottom: 1.6rem;
-`
+`;
 
 function ProductSingle({
     title,
@@ -29,64 +29,61 @@ function ProductSingle({
         return !!image || !!image2 || !!image3;
     };
 
-        const renderSpecs = () => {
+    const renderSpecs = () => {
         const specs = Object.entries(specifications1).length > 0 && JSON.parse(specifications1);
-        const specsArr = []
-            for (var key in specs) {
-              specsArr.push(
-                  <li key={key}>
-                      <b>{key}</b>: {specs[key]}
-                  </li>
-              );
-            }
-         
-            return specsArr;
+        const specsArr = [];
+        for (var key in specs) {
+            specsArr.push(
+                <li key={key}>
+                    <b>{key}</b>: {specs[key]}
+                </li>
+            );
         }
 
-        return (
-            <ProductContainer className="container">
-                {imagesFound() && (
-                    <Carousel
-                        images={{ image, image2, image3 }}
-                        identifier={identifier}
-                        title={title}
-                    />
+        return specsArr;
+    };
+
+    return (
+        <ProductContainer className="container">
+            {imagesFound() && (
+                <Carousel
+                    images={{ image, image2, image3 }}
+                    identifier={identifier}
+                    title={title}
+                />
+            )}
+
+            <ProductDetail>
+                <div className="meta">
+                    <h3 className="meta__title">{title}</h3>
+                    <Price salePrice={!!salePrice}>
+                        {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
+                    </Price>
+                    {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
+                </div>
+
+                <Content dangerouslySetInnerHTML={{ __html: description }} />
+
+                {renderSpecs().length > 1 && (
+                    <>
+                        <h4>Specifications</h4>
+                        <ul>{renderSpecs()}</ul>
+                    </>
                 )}
 
-                <ProductDetail>
-                    <div className="meta">
-                        <h3 className="meta__title">{title}</h3>
-                        <Price salePrice={!!salePrice}>
-                            {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
-                        </Price>
-                        {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
-                    </div>
-
-                    <Content dangerouslySetInnerHTML={{ __html: description }} />
-
-                    {renderSpecs().length > 1 && (
-                        <>
-                            <h4>Specifications</h4>
-                            <ul>{renderSpecs()}</ul>
-                        </>
-                    )}
-
-                    <label
-                        htmlFor="product_quantity"
-                        className="visually-hidden"
-                    >
-                        Quantity
-                    </label>
-                    <Quantity
-                        type="number"
-                        name="product_quantity"
-                        id="product_quantity"
-                        placeholder="1"
-                    />
-                    <Button href="#">Add to cart</Button>
-                </ProductDetail>
-            </ProductContainer>
-        );
+                <label htmlFor="product_quantity" className="visually-hidden">
+                    Quantity
+                </label>
+                <Quantity
+                    type="number"
+                    name="product_quantity"
+                    id="product_quantity"
+                    placeholder="1"
+                />
+                <Button href="#">Add to cart</Button>
+            </ProductDetail>
+        </ProductContainer>
+    );
 }
 
 export default ProductSingle;
