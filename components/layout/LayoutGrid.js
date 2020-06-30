@@ -1,5 +1,5 @@
 import RowContainer from './RowContainer';
-const Grid = ({ body }) => {
+const LayoutGrid = ({ body }) => {
     return body && body.rows ? (
         body.rows.map((row, i) => (
             <section key={i} id={`section-${i + 1}`} className={`section ${row.styleClass || ''}`}>
@@ -11,4 +11,4 @@ const Grid = ({ body }) => {
     );
 };
 
-export default Grid;
+export default LayoutGrid;

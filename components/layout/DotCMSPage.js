@@ -1,7 +1,7 @@
 import { getComponent } from '../content-types/mapContentTypes';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
-import Grid from './Grid'
+import LayoutGrid from './LayoutGrid';
 
 const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
     const contentMap = pageRender?.urlContentMap;
@@ -26,7 +26,7 @@ const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
         >
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
-                    {contentMap ? <SinglePage {...contentMap} /> : <Grid body={body} />}
+                    {SinglePage ? <SinglePage {...contentMap} /> : <LayoutGrid body={body} />}
                 </Layout>
             ) : (
                 <h1>No layout in this page</h1>

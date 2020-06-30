@@ -1,25 +1,16 @@
-import dynamic from 'next/dynamic';
-const Activity = dynamic(() => import('../content-types/Activity'));
-const calendarEvent = dynamic(() => import('../content-types/calendarEvent'));
-const Banner = dynamic(() => import('../content-types/Banner'));
-const Form = dynamic(() => import('../content-types/Form'));
-const Image = dynamic(() => import('../content-types/Image'));
-const SimpleWidget = dynamic(() => import('../content-types/SimpleWidget'));
-const Video = dynamic(() => import('../content-types/Video'));
-const StoreProductList = dynamic(() => import('../content-types/StoreProductList'));
-const webPageContent = dynamic(() => import('../content-types/webPageContent'));
-const ProductSingle = dynamic(() => import('../content-types/ProductSingle'));
-const CategoryFilter = dynamic(() => import('../content-types/CategoryFilter'));
+import {
+    Banner,
+    SimpleWidget,
+    StoreProductList,
+    webPageContent,
+    ProductSingle,
+    CategoryFilter
+} from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
     const components = {
-        Activity,
-        calendarEvent,
-        forms: Form,
-        Image,
         Banner,
         SimpleWidget,
-        Video,
         webPageContent,
         StoreProductList,
         ProductSingle,
