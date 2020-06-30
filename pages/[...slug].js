@@ -15,6 +15,9 @@ export async function getStaticPaths() {
     const pageList = await getPageList(); // API call
     const paths = getFilterPaths(pageList);
 
+    paths.push({ params: { slug: ["store"] } });
+    paths.push({ params: { slug: ["store", "test"] } });
+
     return {
         paths,
         fallback: false

@@ -1,19 +1,7 @@
 import { getComponent } from '../content-types/mapContentTypes';
-import RowContainer from './RowContainer';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
-
-const Grid = ({ body }) => {
-    return body && body.rows ? (
-        body.rows.map((row, i) => (
-            <section key={i} id={`section-${i + 1}`} className={`section ${row.styleClass || ''}`}>
-                <RowContainer row={row} />
-            </section>
-        ))
-    ) : (
-        <h1>No body present in this page</h1>
-    );
-};
+import Grid from './Grid'
 
 const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
     const contentMap = pageRender?.urlContentMap;
