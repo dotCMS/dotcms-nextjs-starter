@@ -2,10 +2,12 @@ import { getComponent } from '../content-types/mapContentTypes';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
-
+import { loggerPageRender } from '../../utilities/logger'
 const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
     const contentMap = pageRender?.urlContentMap;
     let SinglePage;
+
+    loggerPageRender(pageRender)
 
     if (contentMap) {
         SinglePage = getComponent(`${contentMap.contentType}Single`);

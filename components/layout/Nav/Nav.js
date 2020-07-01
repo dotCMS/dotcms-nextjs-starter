@@ -8,8 +8,6 @@ import menuIcon from '../../../public/menu.svg';
 import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav'
 
-
-
 export default function Nav() {
     const nav = useNav();
     const router = useRouter();
