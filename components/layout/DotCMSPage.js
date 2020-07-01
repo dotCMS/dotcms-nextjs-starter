@@ -7,7 +7,7 @@ const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
     const contentMap = pageRender?.urlContentMap;
     let SinglePage;
 
-    loggerPageRender(pageRender)
+    //if(typeof(window) !== "undefined") loggerPageRender(pageRender);
 
     if (contentMap) {
         SinglePage = getComponent(`${contentMap.contentType}Single`);

@@ -114,9 +114,6 @@ const getPathsArray = (res) => {
         ];
         return acc;
     }, []);
-
-    console.log(JSON.stringify(paths));
-
     return paths;
 };
 
