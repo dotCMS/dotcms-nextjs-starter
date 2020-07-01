@@ -11,6 +11,9 @@ const getPageList = async () => {
                 urlMap
                 ... on htmlpageasset {
                     url
+                    folder {
+                        folderPath
+                    }
                 }
             }
         }
@@ -21,8 +24,8 @@ const getPageList = async () => {
     });
 
     return data.search
-        .filter(({ urlMap, url }) => (urlMap || url) && !PAGES_TO_FILTER.includes(url))
-        .map(({ urlMap, url }) => urlMap || url);
-};
+        .filter(({ urlMap, url, folder }) => (urlMap || url || folder) && !PAGES_TO_FILTER.includes(url))
+        .map(({ urlMap, url, folder }) => ({url: urlMap ? urlMap : `${folder.folderPath}${url}`}))
+}
 
 module.exports = getPageList;

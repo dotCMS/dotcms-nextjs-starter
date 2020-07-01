@@ -5,54 +5,50 @@ const fetch = require('isomorphic-fetch');
 const CustomError = require('../custom-error');
 const transformPage = require('./transformPage');
 
-const {
-    DOTCMS_DOWN,
-    DOTCMS_NO_AUTH,
-    LANG_COOKIE_NAME
-} = require('./constants');
+const { DOTCMS_DOWN, DOTCMS_NO_AUTH, LANG_COOKIE_NAME } = require('./constants');
 
 async function getPage(url, lang) {
-        if (process.env.NODE_ENV !== 'production') {
-            loggerLog('DOTCMS PAGE', url, lang || '1');
-        }
-        return dotCMSApi.page
-            .get({
-                url: url,
-                language: lang || 1
-            })
-            .then(async (pageRender) => {
-                /*
+    if (process.env.NODE_ENV !== 'production') {
+        loggerLog('DOTCMS PAGE', url, lang || '1');
+    }
+    return dotCMSApi.page
+        .get({
+            url: url,
+            language: lang || 1
+        })
+        .then(async (pageRender) => {
+            /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
             */
-                const transformedPage = await transformPage(pageRender);
-                return transformedPage;
-            })
-            .catch((error) => {
-                /* 
+            const transformedPage = await transformPage(pageRender);
+            return transformedPage;
+        })
+        .catch((error) => {
+            /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
-                if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-                    error.statusCode = DOTCMS_DOWN;
-                    error.message = 'DotCMS: instance is not running or inaccessible';
-                }
-                /* 
+            if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
+                error.statusCode = DOTCMS_DOWN;
+                error.message = 'DotCMS: instance is not running or inaccessible';
+            }
+            /* 
                 Error coming from the DotCMS server when the authorization failed
             */
-                if (error.statusCode === 401) {
-                    error.statusCode = DOTCMS_NO_AUTH;
-                    error.message = 'DotCMS: Invalid Auth Token';
-                }
+            if (error.statusCode === 401) {
+                error.statusCode = DOTCMS_NO_AUTH;
+                error.message = 'DotCMS: Invalid Auth Token';
+            }
 
-                throw error;
-            });
+            throw error;
+        });
 }
 
 async function getNav(depth) {
     if (process.env.NODE_ENV !== 'production') {
         loggerLog('DOTCMS NAV');
     }
-    
+
     const nav = await dotCMSApi.nav.get(depth).then(({ children }) => children);
     const finalNav = [
         {
@@ -68,7 +64,7 @@ async function getNav(depth) {
 }
 
 function emitRemoteRenderEdit(url) {
-    console.log('emitting event')
+    console.log('emitting event');
     dotCMSApi.event.emit({
         name: 'remote-render-edit',
         data: { pathname: url }
@@ -102,20 +98,26 @@ const getToken = ({ user, password, expirationDays, host }) => {
         });
 };
 
-const getFilterPaths = (res) => {
-    return res.reduce((acc, url) => {
+const getPathsArray = (res) => {
+    const paths = res.reduce((acc, { url }) => {
         acc = [
             ...acc,
             {
                 params: {
-                    slug: url && url.split('/').filter((item) => {
-                        return item.length > 0;
-                    })
+                    slug:
+                        url &&
+                        url.split('/').filter((item) => {
+                            return item.length > 0 && item !== 'index';
+                        })
                 }
             }
         ];
         return acc;
     }, []);
+
+    console.log(JSON.stringify(paths));
+
+    return paths;
 };
 
 const getTagsListForCategory = async (category) => {
@@ -159,5 +161,5 @@ module.exports = {
     emitRemoteRenderEdit,
     getToken,
     getTagsListForCategory,
-    getFilterPaths
+    getPathsArray
 };

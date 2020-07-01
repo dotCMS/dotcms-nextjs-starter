@@ -11,17 +11,17 @@ const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
         SinglePage = getComponent(`${contentMap.contentType}Single`);
     }
 
+    const contextValue = {
+        isEditMode,
+        nav,
+        language: {
+            current: '1', // needs to make this dynamic, check _app.js
+            set: () => {}
+        }
+    };
+
     return (
-        <PageContext.Provider
-            value={{
-                isEditMode,
-                nav,
-                language: {
-                    current: '1', // needs to make this dynamic, check _app.js
-                    set: () => {}
-                }
-            }}
-        >
+        <PageContext.Provider value={contextValue}>
             {pageRender?.layout ? (
                 <Layout {...pageRender?.layout}>
                     {SinglePage ? (

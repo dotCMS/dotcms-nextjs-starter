@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
 import logo from '../../../public/logo.png';
@@ -7,6 +7,8 @@ import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
 import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav'
+
+
 
 export default function Nav() {
     const nav = useNav();

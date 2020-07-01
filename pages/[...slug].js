@@ -1,5 +1,5 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
-import { getPage, getNav, getFilterPaths } from '../utilities/dotcms';
+import { getPage, getNav, getPathsArray } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList'
 import Error from '../components/layout/Error';
 
@@ -13,10 +13,7 @@ export default function ({ pageRender, nav, error}) {
 
 export async function getStaticPaths() {
     const pageList = await getPageList(); // API call
-    const paths = getFilterPaths(pageList);
-
-    paths.push({ params: { slug: ["store"] } });
-    paths.push({ params: { slug: ["store", "test"] } });
+    const paths = getPathsArray(pageList);
 
     return {
         paths,
