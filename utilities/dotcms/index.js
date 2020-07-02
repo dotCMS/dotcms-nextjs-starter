@@ -4,7 +4,6 @@ const { printError } = require('../../cli/print');
 const fetch = require('isomorphic-fetch');
 const CustomError = require('../custom-error');
 const transformPage = require('./transformPage');
-
 const { DOTCMS_DOWN, DOTCMS_NO_AUTH, LANG_COOKIE_NAME } = require('./constants');
 
 async function getPage(url, lang) {

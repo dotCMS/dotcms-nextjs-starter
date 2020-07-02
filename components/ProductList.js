@@ -52,14 +52,12 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
         return `/store/category/${category}${tagsUrl}`;
     };
     
-    const query = `+contentType:product +categories:${category} ${
+    const query = `+contentType:product ${category && `+categories:${category}`} ${
         tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
     }`;
 
-    let options = { variables: { limit: quantity }, client }
-    if (category) options = {...options, query }
-    
-    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options   );
+    let options = { variables: { limit: quantity, query }, client }
+    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
 
     if (error) return `Error! ${error}`;
 

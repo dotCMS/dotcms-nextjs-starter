@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button } from '../../styles/shared.styles';
 const { currencyFormatter } = require('../../utilities');
 import Carousel from '../Carousel';
 import styled from 'styled-components';
+import PageContext from '../../contexts/PageContext';
+
 import {
     ProductContainer,
     ProductDetail,
@@ -14,17 +16,23 @@ const Content = styled.div`
     margin-bottom: 1.6rem;
 `;
 
-function ProductSingle({
-    title,
-    description,
-    retailPrice,
-    salePrice,
-    identifier,
-    image,
-    image2,
-    image3,
-    specifications1
-}) {
+function ProductSingle() {
+    const {
+        pageRender: { urlContentMap }
+    } = useContext(PageContext);
+
+    const {
+        title,
+        description,
+        retailPrice,
+        salePrice,
+        identifier,
+        image,
+        image2,
+        image3,
+        specifications1
+    } = urlContentMap;
+
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };

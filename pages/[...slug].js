@@ -7,7 +7,6 @@ export default function ({ pageRender, nav, error}) {
     if(error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
-
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 

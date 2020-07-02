@@ -21,7 +21,7 @@ function useTagsFiltered() {
         return regex.test(tag) ? tag.replace(regex, ' ') : tag;
     });
 
-    const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:"${tag}"`);
+    const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:${tag}`);
 
     return [tagsFiltered, setRoutePath, tagsMap];
 }

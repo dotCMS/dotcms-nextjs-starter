@@ -73,7 +73,6 @@ async function getRows(page) {
 
 async function transformPage(page) {
     try {
-        // if has layout
         if (hasLayout(page)) {
             page.layout.body.rows = await getRows(page);
 

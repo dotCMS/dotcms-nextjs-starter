@@ -14,12 +14,12 @@ function loggerError() {
     }
 }
 
-function loggerPageRender(pageRender) {
+function loggerPageRender({ layout, urlContentMap }) {
     const {
-        layout: {
-            body: { rows }
-        }
-    } = pageRender;
+        body: { rows }
+    } = layout;
+
+    urlContentMap && console.table(urlContentMap);
 
     rows.forEach(({ columns }) => {
         columns.forEach(({ containers, leftOffset, width, widthPercent, styleClass, left }) => {
