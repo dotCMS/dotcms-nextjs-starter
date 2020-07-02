@@ -1,3 +1,4 @@
+import React from 'react';
 import { getComponent } from '../content-types/mapContentTypes';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
@@ -5,13 +6,10 @@ import LayoutGrid from './LayoutGrid';
 import { loggerPageRender } from '../../utilities/logger'
 
 const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
-    let SinglePage;
-
     // if(typeof(window) !== "undefined") loggerPageRender(pageRender);
-
     if (pageRender?.urlContentMap) {
         const { urlContentMap } = pageRender;
-        SinglePage = getComponent(`${urlContentMap.contentType}Single`);
+        var SinglePage = getComponent(`${urlContentMap.contentType}Single`);
     }
 
     const contextValue = {

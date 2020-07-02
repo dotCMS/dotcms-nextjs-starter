@@ -25,7 +25,10 @@ const getPageList = async () => {
 
     return data.search
         .filter(({ urlMap, url, folder }) => (urlMap || url || folder) && !PAGES_TO_FILTER.includes(url))
-        .map(({ urlMap, url, folder }) => ({url: urlMap ? urlMap : `${folder.folderPath}${url}`}))
+        .map(({ urlMap, url, folder }) => {
+        	// console.log(folder?.folderPath, url)
+        	return {url: urlMap || url}
+		})
 }
 
 module.exports = getPageList;

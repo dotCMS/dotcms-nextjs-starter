@@ -40,18 +40,22 @@ const PRODUCTS_QUERY = gql`
 `;
 
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
+	const client = useApollo();
+	let category;
 
-    const client = useApollo();
-    
-    const category = productLine?.toLowerCase();
+	if(productLine) {
+		[category] = productLine;
+		category = Object.values(category)[0].toLowerCase?.();
+	}
+
     const tagsList = useTagsList(category);
     const [tagsFiltered, setRoutePath, tagsMap] = useTagsFiltered();
-    
+
     const getUrl = (category, tags) => {
         const tagsUrl = tags.length > 0 ? `-${tags.join('-')}` : '';
         return `/store/category/${category}${tagsUrl}`;
     };
-    
+
     const query = `+contentType:product ${category && `+categories:${category}`} ${
         tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
     }`;

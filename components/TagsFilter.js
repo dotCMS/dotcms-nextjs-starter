@@ -34,8 +34,8 @@ const Tags = styled.div`
 `;
 
 function TagsFilter({ onFilterChange, list, selected }) {
-    const [currentTags, setCurrentTags] = useState(selected || []);
 
+    const [currentTags, setCurrentTags] = useState(selected || []);
     const handleCheckbox = (e) => {
         const { value } = e.target;
         let result = e.target.checked
@@ -48,7 +48,7 @@ function TagsFilter({ onFilterChange, list, selected }) {
 
     return (
         <TagsListContainer>
-            {list?.map(({ key, doc_count }) => {
+            {list.length > 0 ? list.map(({ key, doc_count }) => {
                 const checked = currentTags.includes(key);
                 return (
                     <Tags key={key}>
@@ -65,7 +65,7 @@ function TagsFilter({ onFilterChange, list, selected }) {
                         </label>
                     </Tags>
                 );
-            })}
+			}) : <p>No tags</p>}
         </TagsListContainer>
     );
 }
