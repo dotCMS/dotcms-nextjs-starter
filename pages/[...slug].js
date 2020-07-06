@@ -10,7 +10,7 @@ export default function ({ pageRender, nav, error}) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 
-export const getStaticPaths = () => {
+export const getStaticPaths = async () => {
     const pageList = await getPageList(); // API call
     const paths = getPathsArray(pageList);
 
