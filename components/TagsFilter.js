@@ -15,14 +15,15 @@ const Tags = styled.div`
         vertical-align: middle;
         margin-left: 0.3rem;
         span {
-            background-color: #888;
+            background-color: var(--dotcms-purple-80);
             padding: 0rem 0.5rem;
             font-size: 0.75rem;
             border-radius: 20px;
             display: inline-block;
             text-align: center;
             line-height: 16px;
-            color: white;
+            color: var(--dotcms-purple-20);
+            font-weight: bold;
             vertical-align: middle;
         }
     }

@@ -8,6 +8,7 @@ export const Contentlet = ({ data }) => {
     } else {
         Component = getComponent(data.contentType);
     }
+sce
 
     return <Component {...data} />;
 };
