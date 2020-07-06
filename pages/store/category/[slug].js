@@ -10,9 +10,9 @@ export default function ({ pageRender, nav, error }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params: { slug } }) {
     try {
-        const [category] = params.slug.split('-');
+        const [category] = slug.split('-');
         const pageRender = await getPage(`/store/category/${category}`);
         const nav = await getNav('4');
         return {

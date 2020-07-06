@@ -11,17 +11,13 @@ async function getPage(url, lang) {
         loggerLog('DOTCMS PAGE', url, lang || '1');
     }
     return dotCMSApi.page
-        .get({
-            url: url,
-            language: lang || 1
-        })
+        .get({ url })
         .then(async (pageRender) => {
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
             */
-            const transformedPage = await transformPage(pageRender);
-            return transformedPage;
+            return await transformPage(pageRender);
         })
         .catch((error) => {
             /* 

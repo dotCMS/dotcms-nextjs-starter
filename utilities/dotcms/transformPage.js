@@ -1,6 +1,6 @@
-const dotCMSApi = require('../../config/dotcmsApi')
+const dotCMSApi = require('../../config/dotcmsApi');
 const { CustomError } = require('../custom-error');
-const { DOTCMS_NO_LAYOUT } = require('./constants'); 
+const { DOTCMS_NO_LAYOUT } = require('./constants');
 function getAcceptTypes(containers, identifier) {
     // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
     return containers[identifier].containerStructures
@@ -74,20 +74,37 @@ async function getRows(page) {
 async function transformPage(page) {
     try {
         if (hasLayout(page)) {
-            page.layout.body.rows = await getRows(page);
+            let transformedPage = {
+                ...page,
+                layout: {
+                    ...page.layout,
+                    body: {
+                        ...page.layout.body,
+                        rows: await getRows(page)
+                    }
+                }
+            };
 
             if (hasSidebar(page)) {
-                page.layout.sidebar.containers = await Promise.all(
+                const containers = await Promise.all(
                     getContainers(page.layout.sidebar.containers, page)
                 );
+
+                transformedPage = {
+                    ...transformedPage,
+                    layout: {
+                        ...page.layout,
+                        sidebar: {
+                            ...page.layout.sidebar,
+                            containers
+                        }
+                    }
+                };
             }
 
-            return page;
+            return transformedPage;
         } else {
-            throw new CustomError(
-                `This page doesn't have a layout to render`,
-                DOTCMS_NO_LAYOUT
-            );
+            throw new CustomError(`This page doesn't have a layout to render`, DOTCMS_NO_LAYOUT);
         }
     } catch (error) {
         throw error instanceof CustomError ? error : new CustomError(error.message);
