@@ -93,8 +93,8 @@ const getToken = ({ user, password, expirationDays, host }) => {
         });
 };
 
-const getPathsArray = (res) => {
-    const paths = res.reduce((acc, { url }) => {
+const getPathsArray = (pageList) => {
+    const paths = pageList.reduce((acc, { url }) => {
         acc = [
             ...acc,
             {

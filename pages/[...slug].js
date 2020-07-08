@@ -1,8 +1,7 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
-import { getPage, getNav, getPathsArray } from '../utilities/dotcms';
-import getPageList from '../utilities/dotcms/getPageList'
 import Error from '../components/layout/Error';
-
+import { getPage, getNav, getPathsArray } from '../utilities/dotcms';
+import getPageList from '../utilities/dotcms/getPageList';
 export default function ({ pageRender, nav, error}) {
     if(error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
@@ -17,12 +16,13 @@ export const getStaticPaths = async () => {
     return {
         paths,
         fallback: false
-    };
+    }
 }
 
-export const getStaticProps = async ({ params: { slug } }) => {
+export const getStaticProps = async (context) => {
+    const { params: { slug } } = context;
     try {
-        let url = `/${slug.join('/')}`;
+        let url = `/${slug.join('/')}`
         const pageRender = await getPage(url); // API call
         const nav = await getNav('4'); // API call
 
@@ -36,6 +36,6 @@ export const getStaticProps = async ({ params: { slug } }) => {
     } catch (error) {
         return {
             props: { error }
-        };
+        }
     }
-};
+}
