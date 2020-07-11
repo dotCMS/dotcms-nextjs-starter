@@ -40,13 +40,13 @@ const PRODUCTS_QUERY = gql`
 `;
 
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
-	const client = useApollo();
-	let category;
+    const client = useApollo();
+    let category;
 
-	if(productLine) {
-		[category] = productLine;
-		category = Object.values(category)[0].toLowerCase?.();
-	}
+    if (productLine) {
+        [category] = productLine;
+        category = Object.values(category)[0].toLowerCase?.();
+    }
 
     const tagsList = useTagsList(category);
     const [tagsFiltered, setRoutePath, tagsMap] = useTagsFiltered();
@@ -60,7 +60,7 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
         tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
     }`;
 
-    let options = { variables: { limit: quantity, query }, client }
+    let options = { variables: { limit: quantity, query }, client };
     const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
 
     if (error) return `Error! ${error}`;
@@ -83,7 +83,12 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             ) : (
                 <ProductGrid width={width} className="product-grid">
                     {data?.ProductCollection.map((product) => (
-                        <Product key={product.identifier} product={product} show={show} size={{height, width}} />
+                        <Product
+                            key={product.identifier}
+                            product={product}
+                            show={show}
+                            size={{ height, width }}
+                        />
                     ))}
                 </ProductGrid>
             )}

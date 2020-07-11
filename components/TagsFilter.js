@@ -35,7 +35,6 @@ const Tags = styled.div`
 `;
 
 function TagsFilter({ onFilterChange, list, selected }) {
-
     const [currentTags, setCurrentTags] = useState(selected || []);
     const handleCheckbox = (e) => {
         const { value } = e.target;
@@ -49,24 +48,28 @@ function TagsFilter({ onFilterChange, list, selected }) {
 
     return (
         <TagsListContainer>
-            {list.length > 0 ? list.map(({ key, doc_count }) => {
-                const checked = currentTags.includes(key);
-                return (
-                    <Tags key={key}>
-                        <input
-                            type="checkbox"
-                            name={key}
-                            id={key}
-                            value={key}
-                            checked={checked}
-                            onChange={handleCheckbox}
-                        />
-                        <label htmlFor={key}>
-                            {capitalize(key)} <span>{doc_count}</span>
-                        </label>
-                    </Tags>
-                );
-			}) : <p>No tags</p>}
+            {list.length > 0 ? (
+                list.map(({ key, doc_count }) => {
+                    const checked = currentTags.includes(key);
+                    return (
+                        <Tags key={key}>
+                            <input
+                                type="checkbox"
+                                name={key}
+                                id={key}
+                                value={key}
+                                checked={checked}
+                                onChange={handleCheckbox}
+                            />
+                            <label htmlFor={key}>
+                                {capitalize(key)} <span>{doc_count}</span>
+                            </label>
+                        </Tags>
+                    );
+                })
+            ) : (
+                <p>No tags</p>
+            )}
         </TagsListContainer>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Column = (props) => {
     const {
@@ -7,4 +7,4 @@ const Column = (props) => {
     return <div className={`col-md-${colSize} offset-md-${offset}`}>{props.children}</div>;
 };
 
-export default Column
+export default Column;

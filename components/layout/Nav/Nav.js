@@ -6,7 +6,7 @@ import searchIcon from '../../../public/search.svg';
 import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
 import RouterLink from '../../RouterLink';
-import useNav from '../../../hooks/useNav'
+import useNav from '../../../hooks/useNav';
 
 export default function Nav() {
     const nav = useNav();

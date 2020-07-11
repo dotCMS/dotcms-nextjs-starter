@@ -1,4 +1,4 @@
-import React, { createRef, useRef, useState, useEffect } from 'react'
+import React, { createRef, useRef, useState, useEffect } from 'react';
 import DotCMSImage from '../components/DotCMSImage';
 
 const Slider = ({ images, title, id }) => {
@@ -65,7 +65,7 @@ const Slider = ({ images, title, id }) => {
                                             handleNavigatorClick(slideRefs[index].current);
                                         }}
                                         className="carousel__navigation-button"
-                                    ></a>
+                                    />
                                 </li>
                             );
                         })}
@@ -75,5 +75,4 @@ const Slider = ({ images, title, id }) => {
     );
 };
 
-
-export default Slider
+export default Slider;

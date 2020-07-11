@@ -113,7 +113,7 @@ const getPathsArray = (pageList) => {
 };
 
 const getCategoryPathsArray = (storeNav) => {
-    return storeNav.children.reduce(function (acc, curr) {
+    return storeNav.children.reduce(function(acc, curr) {
         if (curr.children.length > 0) {
             acc = [
                 ...acc,

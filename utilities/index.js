@@ -7,9 +7,9 @@ const currencyFormatter = new Intl.NumberFormat('en-US', {
 });
 
 const capitalize = (str, lower = false) =>
-  (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
-;
-
+    (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
+        match.toUpperCase()
+    );
 const internalPrefixes = [/^\/_next\//, /^\/static\//, /^\/favicon.ico/];
 function isNextInternalFile(url) {
     for (const prefix of internalPrefixes) {
@@ -20,7 +20,6 @@ function isNextInternalFile(url) {
 
     return false;
 }
-
 
 module.exports = {
     isNextInternalFile,

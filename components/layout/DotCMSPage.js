@@ -3,7 +3,7 @@ import { getComponent } from '../content-types/mapContentTypes';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
-import { loggerPageRender } from '../../utilities/logger'
+import { loggerPageRender } from '../../utilities/logger';
 
 const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
     // if(typeof(window) !== "undefined") loggerPageRender(pageRender);

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {getTagsListForCategory} from '../utilities/dotcms';
+import { getTagsListForCategory } from '../utilities/dotcms';
 
 function useTagsList(category) {
     const [tagsList, setTagsList] = useState([]);
@@ -7,10 +7,10 @@ function useTagsList(category) {
         (async function getTags() {
             const tags = await getTagsListForCategory(category);
             setTagsList(tags);
-        })()
+        })();
     }, []);
 
-  return tagsList;
+    return tagsList;
 }
 
 export default useTagsList;

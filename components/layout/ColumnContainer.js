@@ -1,5 +1,5 @@
 import ContentletContainer from './Container';
-import Column from './Column'
+import Column from './Column';
 
 const ColumnContainer = ({ width, offset, styleClass, containers }) => {
     return (

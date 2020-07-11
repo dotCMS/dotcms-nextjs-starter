@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const Ellipsis = styled.div`
     display: inline-block;
@@ -58,16 +58,16 @@ const Ellipsis = styled.div`
 `;
 
 function Loading() {
-  return (
-      <h3>
-          <Ellipsis>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-          </Ellipsis>
-      </h3>
-  );
+    return (
+        <h3>
+            <Ellipsis>
+                <div />
+                <div />
+                <div />
+                <div />
+            </Ellipsis>
+        </h3>
+    );
 }
 
-export default Loading
+export default Loading;

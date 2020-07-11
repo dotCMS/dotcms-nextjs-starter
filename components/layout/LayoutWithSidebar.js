@@ -1,4 +1,3 @@
-
 import Sidebar from './Sidebar';
 
 const COLUMS_TOTAL = 12;

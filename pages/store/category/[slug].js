@@ -13,13 +13,13 @@ export default function ({ pageRender, nav, error }) {
 export const getStaticPaths = async () => {
     const nav = await getNav('4');
     const [storeNav] = nav.filter((nav) => nav.href === '/Store' || nav.href === '/store');
-    const paths = getCategoryPathsArray(storeNav)
+    const paths = getCategoryPathsArray(storeNav);
 
     return {
         paths,
         fallback: true
-    }
-}
+    };
+};
 
 export const getStaticProps = async ({ params: { slug } }) => {
     try {
@@ -38,4 +38,4 @@ export const getStaticProps = async ({ params: { slug } }) => {
             props: { error }
         };
     }
-}
+};

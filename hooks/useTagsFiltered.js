@@ -9,14 +9,17 @@ function useTagsFiltered() {
 
     const [routePath, setRoutePath] = useState('');
 
-    useEffect(() => {
-         routePath && router.push('/store/category/[slug]', routePath);
-    }, [routePath]);
+    useEffect(
+        () => {
+            routePath && router.push('/store/category/[slug]', routePath);
+        },
+        [routePath]
+    );
 
     // Separate category from tags
     let [_, ...tagsFiltered] = path.split('-');
 
-    tagsFiltered = tagsFiltered.map(tag => {
+    tagsFiltered = tagsFiltered.map((tag) => {
         const regex = /%20/;
         return regex.test(tag) ? tag.replace(regex, ' ') : tag;
     });
