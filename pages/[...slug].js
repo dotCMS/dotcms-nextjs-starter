@@ -11,7 +11,7 @@ export default function ({ pageRender, nav, error }) {
 }
 
 export const getStaticPaths = async () => {
-    const pageList = await getPageList(); // API call
+    const pageList = await getPageList(); // API call to get all pages in DotCMS
     const paths = getPathsArray(pageList);
 
     return {
@@ -26,8 +26,8 @@ export const getStaticProps = async (context) => {
     } = context;
     try {
         let url = `/${slug.join('/')}`;
-        const pageRender = await getPage(url); // API call
-        const nav = await getNav('4'); // API call
+        const pageRender = await getPage(url); // API call to get the page object
+        const nav = await getNav('4'); // API call to get the navigation object
 
         return {
             props: {
