@@ -1,6 +1,6 @@
 import React from 'react';
 import DotCMSPage from '../../../components/layout/DotCMSPage';
-import { getPage, getNav } from '../../../utilities/dotcms';
+import { getPage, getNav, getCategoryPathsArray } from '../../../utilities/dotcms';
 import Error from '../../../components/layout/Error';
 
 export default function ({ pageRender, nav, error }) {
@@ -10,7 +10,18 @@ export default function ({ pageRender, nav, error }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 
-export async function getServerSideProps({ params: { slug } }) {
+export const getStaticPaths = async () => {
+    const nav = await getNav('4');
+    const [storeNav] = nav.filter((nav) => nav.href === '/Store' || nav.href === '/store');
+    const paths = getCategoryPathsArray(storeNav)
+
+    return {
+        paths,
+        fallback: true
+    }
+}
+
+export const getStaticProps = async ({ params: { slug } }) => {
     try {
         const [category] = slug.split('-');
         const pageRender = await getPage(`/store/category/${category}`);
@@ -19,7 +30,8 @@ export async function getServerSideProps({ params: { slug } }) {
             props: {
                 pageRender,
                 nav
-            }
+            },
+            unstable_revalidate: 1
         };
     } catch (error) {
         return {

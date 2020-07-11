@@ -112,6 +112,20 @@ const getPathsArray = (pageList) => {
     return paths;
 };
 
+const getCategoryPathsArray = (storeNav) => {
+    return storeNav.children.reduce(function (acc, curr) {
+        if (curr.children.length > 0) {
+            acc = [
+                ...acc,
+                ...curr.children.map((children) => ({
+                    params: { slug: children.title.toLowerCase() }
+                }))
+            ];
+        }
+        return acc;
+    }, []);
+};
+
 const getTagsListForCategory = async (category) => {
     const data = {
         query: {
@@ -153,5 +167,6 @@ module.exports = {
     emitRemoteRenderEdit,
     getToken,
     getTagsListForCategory,
-    getPathsArray
+    getPathsArray,
+    getCategoryPathsArray
 };

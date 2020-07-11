@@ -2,6 +2,7 @@ import DotCMSPage from '../components/layout/DotCMSPage';
 import Error from '../components/layout/Error';
 import { getPage, getNav, getPathsArray } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
+
 export default function ({ pageRender, nav, error}) {
     if(error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
@@ -12,7 +13,7 @@ export default function ({ pageRender, nav, error}) {
 export const getStaticPaths = async () => {
     const pageList = await getPageList(); // API call
     const paths = getPathsArray(pageList);
-
+    
     return {
         paths,
         fallback: false
