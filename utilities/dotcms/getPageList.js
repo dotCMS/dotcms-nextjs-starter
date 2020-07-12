@@ -25,9 +25,7 @@ const getPageList = async () => {
 
     return data.search
         .filter(({ urlMap, url }) => (urlMap || url) && !PAGES_TO_FILTER.includes(url))
-        .map(({ urlMap, url }) => {
-            return { url: urlMap || url };
-        });
+        .map(({ urlMap, url }) => urlMap || url);
 };
 
 module.exports = getPageList;

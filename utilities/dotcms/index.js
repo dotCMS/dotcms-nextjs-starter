@@ -94,16 +94,13 @@ const getToken = ({ user, password, expirationDays, host }) => {
 };
 
 const getPathsArray = (pageList) => {
-    const paths = pageList.reduce((acc, { url }) => {
+    const paths = pageList.reduce((acc, url) => {
         acc = [
             ...acc,
             {
                 params: {
                     slug:
-                        url &&
-                        url.split('/').filter((item) => {
-                            return item.length > 0 && item !== 'index';
-                        })
+                        url && url.split('/').filter((item) => item.length > 0 && item !== 'index')
                 }
             }
         ];
@@ -113,7 +110,7 @@ const getPathsArray = (pageList) => {
 };
 
 const getCategoryPathsArray = (storeNav) => {
-    return storeNav.children.reduce(function(acc, curr) {
+    return storeNav.children.reduce(function (acc, curr) {
         if (curr.children.length > 0) {
             acc = [
                 ...acc,
