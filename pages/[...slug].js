@@ -11,9 +11,19 @@ export default function ({ pageRender, nav, error }) {
 }
 
 export const getStaticPaths = async () => {
-    const pageList = await getPageList(); // API call to get all pages in DotCMS
+    // Fetch pages from DotCMS and get all the urls in an array of strings, ex:
+    // ['/destinations/index', '/store/index', '/store/category/snow']
+    const pageList = await getPageList();
+
+    // Using the array of urls return a collection of paths, ex:
+    // [
+    //     { params: { slug: '/destinations' } },
+    //     { params: { slug: '/store' } }
+    //     { params: { slug: '/store/category/snow' } }
+    // ]
     const paths = getPathsArray(pageList);
 
+    // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
     return {
         paths,
         fallback: false
@@ -26,8 +36,11 @@ export const getStaticProps = async (context) => {
     } = context;
     try {
         let url = `/${slug.join('/')}`;
-        const pageRender = await getPage(url); // API call to get the page object
-        const nav = await getNav('4'); // API call to get the navigation object
+        // Fetch the page object from DotCMS Page API
+        const pageRender = await getPage(url);
+
+        // Fetch the navigation from DotCMS Navigation API
+        const nav = await getNav('4');
 
         return {
             props: {
