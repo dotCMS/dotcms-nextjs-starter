@@ -7,13 +7,13 @@ export default function ({ pageRender, nav, error }) {
     if (error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
+
     return <DotCMSPage pageRender={pageRender} nav={nav} />;
 }
 
 export const getStaticPaths = async () => {
-    const nav = await getNav('4');
-    const [storeNav] = nav.filter((nav) => nav.href === '/Store' || nav.href === '/store');
-    const paths = getCategoryPathsArray(storeNav);
+    const nav = await getNav('2', 'store/category');
+    const paths = getCategoryPathsArray(nav);
 
     return {
         paths,

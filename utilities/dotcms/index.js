@@ -39,12 +39,12 @@ async function getPage(url, lang) {
         });
 }
 
-async function getNav(depth) {
+async function getNav(depth, location = '/') {
     if (process.env.NODE_ENV !== 'production') {
         loggerLog('DOTCMS NAV');
     }
 
-    const nav = await dotCMSApi.nav.get(depth).then(({ children }) => children);
+    const nav = await dotCMSApi.nav.get(depth, location).then(({ children }) => children);
     const finalNav = [
         {
             href: '/index',
@@ -110,17 +110,9 @@ const getPathsArray = (pageList) => {
 };
 
 const getCategoryPathsArray = (storeNav) => {
-    return storeNav.children.reduce(function (acc, curr) {
-        if (curr.children.length > 0) {
-            acc = [
-                ...acc,
-                ...curr.children.map((children) => ({
-                    params: { slug: children.title.toLowerCase() }
-                }))
-            ];
-        }
-        return acc;
-    }, []);
+    return storeNav
+        .filter((item) => item.hash !== 'home')
+        .reduce((acc, curr) => [...acc, curr.href], []);
 };
 
 const getTagsListForCategory = async (category) => {
