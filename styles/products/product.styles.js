@@ -184,7 +184,7 @@ export const ProductContainer = styled.div`
     margin-bottom: 5rem;
 `;
 
-export const ProductDetail = styled.div`
+export const ProductDetailContainer = styled.div`
     .meta {
         &__category {
             text-transform: uppercase;

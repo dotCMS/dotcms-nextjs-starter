@@ -7,7 +7,8 @@ import PageContext from '../../contexts/PageContext';
 
 import {
     ProductContainer,
-    ProductDetail,
+    ProductSingle,
+    ProductDetailContainer,
     Price,
     Quantity
 } from '../../styles/products/product.styles';
@@ -61,7 +62,7 @@ function ProductDetail() {
                 />
             )}
 
-            <ProductDetail>
+            <ProductDetailContainer>
                 <div className="meta">
                     <h3 className="meta__title">{title}</h3>
                     <Price salePrice={!!salePrice}>
@@ -89,7 +90,7 @@ function ProductDetail() {
                     placeholder="1"
                 />
                 <Button href="#">Add to cart</Button>
-            </ProductDetail>
+            </ProductDetailContainer>
         </ProductContainer>
     );
 }
