@@ -16,7 +16,7 @@ const Content = styled.div`
     margin-bottom: 1.6rem;
 `;
 
-function ProductSingle() {
+function ProductDetail() {
     const {
         pageRender: { urlContentMap }
     } = useContext(PageContext);
@@ -94,4 +94,4 @@ function ProductSingle() {
     );
 }
 
-export default ProductSingle;
+export default ProductDetail;

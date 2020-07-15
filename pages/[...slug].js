@@ -26,7 +26,7 @@ export const getStaticPaths = async () => {
     // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
     return {
         paths,
-        fallback: false
+        fallback: true
     };
 };
 

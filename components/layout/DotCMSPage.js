@@ -4,19 +4,15 @@ import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
 
-const DotCMSPage = ({ pageRender, isEditMode, nav }) => {
+const DotCMSPage = ({ pageRender, nav }) => {
+    let SinglePage;
     if (pageRender?.urlContentMap) {
         const { urlContentMap } = pageRender;
-        var SinglePage = getComponent(`${urlContentMap.contentType}Single`);
+        SinglePage = getComponent(`${urlContentMap.contentType}Detail`);
     }
 
     const contextValue = {
-        isEditMode,
         nav,
-        language: {
-            current: '1', // needs to make this dynamic, check _app.js
-            set: () => {}
-        },
         pageRender
     };
 

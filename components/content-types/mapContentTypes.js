@@ -3,7 +3,7 @@ import {
     SimpleWidget,
     StoreProductList,
     webPageContent,
-    ProductSingle,
+    ProductDetail,
     CategoryFilter
 } from './rootContentTypes';
 
@@ -13,7 +13,7 @@ export const mapContentTypes = (contentType) => {
         SimpleWidget,
         webPageContent,
         StoreProductList,
-        ProductSingle,
+        ProductDetail,
         CategoryFilter
     };
 
