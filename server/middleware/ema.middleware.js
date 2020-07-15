@@ -24,5 +24,4 @@ const DotCMSEmaMiddleware = (app) => {
     };
 };
 
-
 module.exports = DotCMSEmaMiddleware;
