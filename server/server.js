@@ -3,7 +3,6 @@ const next = require('next');
 const bodyParser = require('body-parser');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
-const DotCMSEmaMiddleware = require('./middleware/ema.middleware')
 const handle = app.getRequestHandler();
 
 const formUrlEncodedParser = bodyParser.raw({
