@@ -2,9 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const querystring = require('query-string');
 
-const dev = process.env.NODE_ENV !== 'production';
 const next = require('next');
-const app = next({ dev });
+const app = next({ dev: true });
 const handle = app.getRequestHandler();
 
 const transformPage = require('../utilities/dotcms/transformPage');
@@ -34,7 +33,7 @@ app.prepare()
                 const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
                 const pageRender = await transformPage(page);
                 const nav = await getNav(4);
-                app.setAssetPrefix(`${process.env.NEXT_PUBLIC_DEPLOY_URL}`);
+                app.setAssetPrefix(`${process.env.DEPLOY_URL}`);
                 app.render(req, res, '/ema', { pageRender, nav });
             } catch (error) {
                 res.send(error);

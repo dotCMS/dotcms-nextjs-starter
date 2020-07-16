@@ -9,7 +9,7 @@
         "build": "next build",
         "start": "next start",
         "export": "next export",
-        "ema": "node server/server.js",
+        "heroku-postbuild": "pwd",
         "setup": "node ./cli/index.js dev"
     },
     "dependencies": {
