@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const querystring = require('query-string');
 
+const dev = process.env.NODE_ENV !== 'production';
 const next = require('next');
 const app = next({ dev });
 const handle = app.getRequestHandler();
@@ -10,7 +11,6 @@ const transformPage = require('../utilities/dotcms/transformPage');
 const { getNav } = require('../utilities/dotcms');
 const { loggerLog } = require('../utilities/logger');
 
-const dev = process.env.NODE_ENV !== 'production';
 
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
