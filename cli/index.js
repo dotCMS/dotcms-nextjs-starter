@@ -68,6 +68,7 @@ const main = async () => {
 
             const envVars = {
                 NEXT_PUBLIC_DOTCMS_HOST: cliValues.NEXT_PUBLIC_DOTCMS_HOST,
+                NEXT_PUBLIC_DEPLOY_URL: cliValues.NEXT_PUBLIC_DEPLOY_URL,
                 BEARER_TOKEN: cliValues.BEARER_TOKEN
             };
 

@@ -16,6 +16,11 @@ const questionsBasic = (param) => [
         message: `${DOTCMS} URL`,
         name: 'NEXT_PUBLIC_DOTCMS_HOST',
         default: (param && param.NEXT_PUBLIC_DOTCMS_HOST) || 'http://localhost:8080'
+    },
+    {
+        message: `Public URL`,
+        name: 'NEXT_PUBLIC_DEPLOY_URL',
+        default: (param && param.NEXT_PUBLIC_DEPLOY_URL) || defaultNodeUrl
     }
 ];
 
