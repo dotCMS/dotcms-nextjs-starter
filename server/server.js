@@ -22,7 +22,14 @@ app.prepare()
             handle(req, res);
         });
 
-        server.post('*', formUrlEncodedParser, DotCMSEmaMiddleware(app));
+        server.post('*', formUrlEncodedParser, async function() {
+            loggerLog('DOTCMS EDIT MODE');
+            const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
+            const pageRender = await transformPage(page);
+            const nav = await getNav(4);
+            app.setAssetPrefix(`${process.env.NEXT_PUBLIC_DEPLOY_URL}`);
+            app.render(req, res, '/ema', { pageRender, nav });
+        });
 
         server.listen(port, (err) => {
             if (err) throw err;

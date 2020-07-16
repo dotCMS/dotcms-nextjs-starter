@@ -15,7 +15,7 @@ let apolloClient;
 
 function createApolloClient() {
     return new ApolloClient({
-        uri: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/v1/graphql`,
+        uri: `https://starter.dotcms.com:8443/api/v1/graphql`,
         cache: new InMemoryCache({ fragmentMatcher })
     });
 }
