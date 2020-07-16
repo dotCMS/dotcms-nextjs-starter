@@ -1,8 +1,7 @@
 const { DOTCMS } = require('./print');
 const inquirer = require('inquirer');
 
-const defaultNodeUrl =
-    process.argv[2] === 'serve' ? 'http://localhost:5000' : 'http://localhost:3000';
+const defaultNodeUrl = 'http://localhost:5000';
 
 const questionsBasic = (param) => [
     {

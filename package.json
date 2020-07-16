@@ -5,10 +5,11 @@
     "license": "MIT",
     "scripts": {
         "test": "jest",
-        "dev": "node server/server.js",
+        "dev": "next dev",
         "build": "next build",
-        "start": "NODE_ENV=production node server/server.js",
+        "start": "next start",
         "export": "next export",
+        "ema": "node server/server.js",
         "setup": "node ./cli/index.js dev"
     },
     "dependencies": {

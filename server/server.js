@@ -1,9 +1,16 @@
 const express = require('express');
-const next = require('next');
 const bodyParser = require('body-parser');
-const dev = process.env.NODE_ENV !== 'production';
+const querystring = require('query-string');
+
+const next = require('next');
 const app = next({ dev });
 const handle = app.getRequestHandler();
+
+const transformPage = require('../utilities/dotcms/transformPage');
+const { getNav } = require('../utilities/dotcms');
+const { loggerLog } = require('../utilities/logger');
+
+const dev = process.env.NODE_ENV !== 'production';
 
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
@@ -21,13 +28,17 @@ app.prepare()
             handle(req, res);
         });
 
-        server.post('*', formUrlEncodedParser, async function() {
-            loggerLog('DOTCMS EDIT MODE');
-            const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
-            const pageRender = await transformPage(page);
-            const nav = await getNav(4);
-            app.setAssetPrefix(`${process.env.NEXT_PUBLIC_DEPLOY_URL}`);
-            app.render(req, res, '/ema', { pageRender, nav });
+        server.post('*', formUrlEncodedParser, async (req, res) => {
+            try {
+                loggerLog('DOTCMS EDIT MODE');
+                const page = JSON.parse(querystring.parse(req.body.toString()).dotPageData).entity;
+                const pageRender = await transformPage(page);
+                const nav = await getNav(4);
+                app.setAssetPrefix(`${process.env.NEXT_PUBLIC_DEPLOY_URL}`);
+                app.render(req, res, '/ema', { pageRender, nav });
+            } catch (error) {
+                res.send(error);
+            }
         });
 
         server.listen(port, (err) => {
