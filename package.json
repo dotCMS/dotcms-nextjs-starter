@@ -48,7 +48,6 @@
         "nodemon": "^1.19.4",
         "pnpapi": "^0.0.0",
         "react-testing-library": "^8.0.1",
-        "serverless-next.js": "^1.15.0-alpha.2",
         "url": "^0.11.0",
         "waait": "^1.0.5"
     }
