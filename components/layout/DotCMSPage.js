@@ -4,14 +4,16 @@ import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
 
-const DotCMSPage = ({ pageRender, nav }) => {
-    let SinglePage;
+const DotCMSPage = ({ pageRender, nav, isEditMode }) => {
+    let DetailPage;
+
     if (pageRender?.urlContentMap) {
         const { urlContentMap } = pageRender;
-        SinglePage = getComponent(`${urlContentMap.contentType}Detail`);
+        DetailPage = getComponent(`${urlContentMap.contentType}Detail`);
     }
 
     const contextValue = {
+        isEditMode,
         nav,
         pageRender
     };
@@ -19,7 +21,7 @@ const DotCMSPage = ({ pageRender, nav }) => {
     return (
         <PageContext.Provider value={contextValue}>
             {pageRender?.layout ? (
-                <Layout>{SinglePage ? <SinglePage /> : <LayoutGrid />}</Layout>
+                <Layout>{DetailPage ? <DetailPage /> : <LayoutGrid />}</Layout>
             ) : (
                 <h1>No layout in this page</h1>
             )}

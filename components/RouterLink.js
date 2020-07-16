@@ -1,7 +1,23 @@
+import { useContext } from 'react';
 import Link from 'next/link';
+import PageContext from '../contexts/PageContext';
+import { emitRemoteRenderEdit } from '../utilities/dotcms';
 
 const RouterLink = ({ href, children, className, ariaLabel }) => {
-    return (
+    const { isEditMode } = useContext(PageContext);
+
+    return isEditMode ? (
+        <a
+            style={{ cursor: 'pointer' }}
+            aria-label={ariaLabel}
+            onClick={() => {
+                emitRemoteRenderEdit(href);
+            }}
+            className={className}
+        >
+            {children}
+        </a>
+    ) : (
         <Link
             href={href.includes('/store/category') ? '/store/category/[slug]' : '/[...slug]'}
             as={`${href}`}
