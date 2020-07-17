@@ -3,7 +3,7 @@ const { getAnswersBasic, getAnswersAuth } = require('./questions');
 const { printError, printHeading, DOTCMS } = require('./print');
 const { getToken } = require('../utilities/dotcms');
 const { getParsedEnvFile, createEnvFile } = require('./envFile');
-const { hasYarn } = require('./hasYarn');
+const hasYarn  = require('./hasYarn');
  
 const createEnvVars = (vars, separator) => {
     return vars
@@ -21,11 +21,9 @@ const printAuthError = (err) => {
 };
 
 const setEnvVarsAndStartApp = (vars) => {
-    let prep = createEnvVars(vars, ' ');
+    const packageManager = hasYarn() ? 'yarn' : 'npm';
 
-    const packageManager = hasYarn() ? 'yarn' : 'npm'
-
-    spawn(`${prep} ${packageManager} run ${process.argv[2]}`, {
+    spawn(`${packageManager} run ${process.argv[2]}`, {
         stdio: 'inherit',
         shell: true
     });
