@@ -20,21 +20,41 @@ With the release of NextJS 9.4 you can use its [Static Site Generator](https://n
 
 We are using [NextJS](https://nextjs.org/) but with a [custom](https://nextjs.org/docs#custom-server-and-routing) [NodeJS](https://nodejs.org/en/) with [Express framework](https://expressjs.com/). This server handle the POST request for our [Single-page Application (SPA) Editor](https://www.youtube.com/watch?v=8JhoHHtcj6g&feature=emb_title)
 
-
 ## Getting Started
 
-1. Run `npm i`
-2. Run `npm run setup:dev`
-3. This will promp you with some question about the project
-4. Get DotCMS token
-5. Create the `.env` file and start dev server
+### Deploy to Vercel
 
-## Build and generate pages
+1. Run `yarn install`
+2. Run `yarn setup`
+  2.1 This command will setup a `.env` file for you. 
+    - If you don't have an `.env` file in your project then select 'Y' in the first question.
+    - In `DotCMS URL` enter the DotCMS instance where your data is stored
+    - Public URL is the URL where you deploy your server. (Preferably Heroku or a non-serverless platform)
+    - Enter the username and password of the DotCMS instance.
+   ![Terminal image](https://user-images.githubusercontent.com/52452/87805492-b0128300-c855-11ea-9571-e0b09bfc6a5c.png)
+3. Install the vercel cli with `yarn global add vercel`
+4. Login to Vercel from the terminal with `vercel login`
+5. Deploy with `vercel --prod`
 
-You can run: `npm run buildl npm run export` this will spit out all your pages in `out` folder.
+## Deploy to Heroku
+
+1. Run `yarn install`
+2. Run `yarn setup` if you don't have an `.env` file and follow the steps 2.1 from the section "Deploy to Vercel"
+3. Install the heroku cli with `brew tap heroku/brew && brew install heroku`
+4. Login to Heroku from the terminal with `heroku login`
+5. Run `heroku create` to create a new project in Heroku.
+  5.1. This command will return a URL that we will use as the `DEPLOY_URL` environment variable (e.g. https://app-random-name.herokuapp.com)
+  5.2 Go to the `.env` file and update the `DEPLOY_URL` environment variable
+6. Go to https://dashboard.heroku.com/apps > app-random-name > Settings > Config Vars > Reveal Config Vars and paste all your environment variables.
+
+![Heroku](https://user-images.githubusercontent.com/52452/87805493-b1dc4680-c855-11ea-9880-e9605ea3ee0f.png)
+
+7. Deploy with `git push heroku master`
+
+## Build and start your JAMStack server
+
+You can run: `yarn build` and `yarn start`
 
 ## Tests
 
-Run `npm run test`.
-
-We are using Jest and Enzime for tests.
+Run `yarn test`.
