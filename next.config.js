@@ -13,6 +13,5 @@ module.exports = withCss({
             }
         });
         return config;
-    },
-    target: 'serverless'
+    }
 });
