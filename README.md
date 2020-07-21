@@ -1,7 +1,5 @@
 # DotCMS Single Page App
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/d8219585-5108-44db-9965-b097324bc6a6/deploy-status)](https://app.netlify.com/sites/dotcms-spa-demo/deploys)
-
 DotCMS as a hybrid CMS allows you not only edit regular pages but also Single Page Apps.
 
 This projects works as a starter to create your Single Page App with all the needs to make it ediable by DotCMS edit capabilities.
