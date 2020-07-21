@@ -7,6 +7,7 @@ import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
 import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav';
+import Link from 'next/link';
 
 export default function Nav() {
     const nav = useNav();
@@ -28,9 +29,11 @@ export default function Nav() {
     return (
         <div className="container">
             <MainNav className="main-nav">
-                <RouterLink href="/store" className="main-nav__logo" ariaLabel="Logo">
-                    <img src={logo} alt="" width={135} height={41} />
-                </RouterLink>
+                <Link href="/index">
+                    <a className="main-nav__logo" aria-label="Logo">
+                        <img src={logo} alt="" width={135} height={41} />
+                    </a>
+                </Link>
                 <NavMenu className="main-nav__menu" isOpen={isMenuOpen}>
                     <a
                         className="hamburger"

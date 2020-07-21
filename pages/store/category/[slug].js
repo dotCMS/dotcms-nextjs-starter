@@ -3,7 +3,7 @@ import DotCMSPage from '../../../components/layout/DotCMSPage';
 import { getPage, getNav, getCategoryPathsArray } from '../../../utilities/dotcms';
 import Error from '../../../components/layout/Error';
 
-export default function ({ pageRender, nav, error }) {
+export default function Page({ pageRender, nav, error }) {
     if (error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
@@ -31,7 +31,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
                 pageRender,
                 nav
             },
-            unstable_revalidate: 1
+            revalidate: 1
         };
     } catch (error) {
         return {

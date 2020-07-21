@@ -3,7 +3,7 @@ import Error from '../components/layout/Error';
 import { getPage, getNav, getPathsArray } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
 
-export default function ({ pageRender, nav, error }) {
+export default function Page({ pageRender, nav, error }) {
     if (error) {
         return <Error statusCode={error.statusCode} message={error.message} />;
     }
@@ -38,7 +38,6 @@ export const getStaticProps = async (context) => {
         let url = `/${slug.join('/')}`;
         // Fetch the page object from DotCMS Page API
         const pageRender = await getPage(url);
-
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
 
@@ -47,7 +46,7 @@ export const getStaticProps = async (context) => {
                 pageRender,
                 nav
             },
-            unstable_revalidate: 1
+            revalidate: 1
         };
     } catch (error) {
         return {

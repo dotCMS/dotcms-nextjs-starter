@@ -93,17 +93,39 @@ const getToken = ({ user, password, expirationDays, host }) => {
         });
 };
 
+/*
+* Determines if the path ends with /index but only when the / is preceded by a word
+*
+* This is needed to create the right paths for Next.js getStaticPaths' paths array
+* `/destinations/index` becomes `/destinations`
+*
+* @param {string} str - the path (e.g /destinations/index)  
+*/
+const pathEndsWithIndex = (str) => {
+    const r = /(?<=\w)(\/index)/;
+    return r.test(str)
+} 
+
 const getPathsArray = (pageList) => {
     const paths = pageList.reduce((acc, url) => {
+        let urlArr = url.split('/').filter(Boolean);
+
+        if (pathEndsWithIndex(url)) {
+            urlArr = urlArr.splice(0, urlArr.indexOf("index"));
+        }
+
         acc = [
             ...acc,
             {
                 params: {
                     slug:
-                        url && url.split('/').filter((item) => item.length > 0 && item !== 'index')
+                        url &&
+                        urlArr
+                            .filter((item) => item.length > 0)
                 }
             }
         ];
+
         return acc;
     }, []);
     return paths;

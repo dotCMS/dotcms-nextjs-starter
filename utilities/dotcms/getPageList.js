@@ -7,7 +7,7 @@ const PAGES_TO_FILTER = ['/store/product-line', '/store/product-detail', '/store
 const getPageList = async () => {
     const PAGES_QUERY = gql`
         {
-            search(query: "+(urlmap:/store/* OR (basetype:5 AND path:/store/*))") {
+            search(query: "+(urlmap:/* OR (basetype:5 AND path:/*))") {
                 urlMap
                 ... on htmlpageasset {
                     url
