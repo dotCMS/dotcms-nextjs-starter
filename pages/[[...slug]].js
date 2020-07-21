@@ -21,7 +21,8 @@ export const getStaticPaths = async () => {
     //     { params: { slug: '/store' } }
     //     { params: { slug: '/store/category/snow' } }
     // ]
-    const paths = getPathsArray(pageList);
+     const paths = getPathsArray(pageList);
+     paths.push({ params: { slug: [''] } });
 
     // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
     return {
@@ -35,7 +36,7 @@ export const getStaticProps = async (context) => {
         params: { slug }
     } = context;
     try {
-        let url = `/${slug.join('/')}`;
+        let url = slug ? `/${slug.join('/')}` : '/index';
         // Fetch the page object from DotCMS Page API
         const pageRender = await getPage(url);
         // Fetch the navigation from DotCMS Navigation API

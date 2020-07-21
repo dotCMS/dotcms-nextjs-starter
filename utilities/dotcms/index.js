@@ -109,23 +109,16 @@ const pathEndsWithIndex = (str) => {
 const getPathsArray = (pageList) => {
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
-
-        if (pathEndsWithIndex(url)) {
-            urlArr = urlArr.splice(0, urlArr.indexOf("index"));
-        }
-
         acc = [
             ...acc,
             {
                 params: {
-                    slug:
-                        url &&
-                        urlArr
-                            .filter((item) => item.length > 0)
+                    slug: pathEndsWithIndex(url)
+                        ? urlArr.splice(0, urlArr.indexOf('index'))
+                        : urlArr
                 }
             }
         ];
-
         return acc;
     }, []);
     return paths;
