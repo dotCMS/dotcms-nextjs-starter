@@ -9,7 +9,8 @@
         "build": "next build",
         "start": "next start",
         "export": "next export",
-        "setup": "node ./cli/index.js build"
+        "setup": "node ./cli/index.js build",
+        "ema": "node server/server.js"
     },
     "dependencies": {
         "@apollo/react-hooks": "^3.1.5",
