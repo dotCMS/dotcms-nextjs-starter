@@ -20,6 +20,8 @@ With the release of NextJS 9.4 you can use its [Static Site Generator](https://n
 2. Statically generate each page with React Components
 3. Publish to Vercel
 
+----------------------------
+
 ## NextJS + Express
 
 We are using [NextJS](https://nextjs.org/) but with a [custom](https://nextjs.org/docs#custom-server-and-routing) [NodeJS](https://nodejs.org/en/) with [Express framework](https://expressjs.com/). This server handle the POST request for our [Single-page Application (SPA) Editor](https://www.youtube.com/watch?v=8JhoHHtcj6g&feature=emb_title)
@@ -32,16 +34,20 @@ Run `yarn`
 ### Create environmental variables
 Run `yarn setup` and follow the instructions
 
+----------------------------
+
 ### NextJS
 
 #### Development
 Run `yarn dev` this will start you NextJS application in development mode with hot-code reloading, error reporting, and [more](https://nextjs.org/docs/api-reference/cli#development).
 
-### Build and run in production
+#### Build and run in production
 
 Run `yarn build` creates an optimized production build of your application. The output displays information about each route, [more information](https://nextjs.org/docs/api-reference/cli#build).
 
 Run `yarn start` starts the application in production mode. The application should be compiled with `next build` first, [more information](https://nextjs.org/docs/api-reference/cli#production)
+
+----------------------------
 
 ### NodeJS Server (Edit Mode Anywhere)
 To run locally and test your EMA server, run `yarn ema`
@@ -63,7 +69,7 @@ We have two deploys here, one to [Vercel](https://vercel.com/) (our JamStack Web
 4. Login to Vercel from the terminal with `vercel login`
 5. Deploy with `vercel --prod`
 
-## Deploy NodeJS Server to Heroku
+### Deploy NodeJS Server to Heroku
 
 1. Run `yarn install`
 2. Run `yarn setup` if you don't have an `.env` file and follow the steps 2.1 from the section "Deploy to Vercel"
