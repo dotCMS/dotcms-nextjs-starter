@@ -5,14 +5,14 @@ DotCMS as a hybrid CMS allows you not only edit regular pages but also Single Pa
 This projects works as a starter to create your Single Page App with all the needs to make it ediable by DotCMS edit capabilities.
 
 ## NextJS
-We are using the latest [NextJS](https://nextjs.org/) features to statically render all the DotCMS pages and publish it to [Netlify](https://netlify.com)
+We are using the latest [NextJS](https://nextjs.org/) features to statically render all the DotCMS pages and publish it to [Vercel](https://vercel.com) and [Heroku](https://heroku.com)
 
 ### SSG
 With the release of NextJS 9.4 you can use its [Static Site Generator](https://nextjs.org/blog/next-9-3#next-gen-static-site-generation-ssg-support) feature to create static DotCMS pages in build time, this is the approach we took here, in a overview we:
 
 1. We pull all the pages from DotCMS instance
 2. Generate each page with React Components
-3. Public to Netlify
+3. Publish to Vercel
 
 ## NextJS + Express
 
