@@ -1,6 +1,6 @@
 import Nav from './Nav/Nav';
 import LocaleDropdown from './LocaleDropdown';
-import RouterLink from '../Shared/RouterLink';
+import RouterLink from '../RouterLink';
 
 const Header = () => {
     return (
@@ -29,7 +29,7 @@ const Header = () => {
                             className="rd-navbar-collapse-toggle rd-navbar-fixed-element-1"
                             data-rd-navbar-toggle=".rd-navbar-collapse"
                         >
-                            <span></span>
+                            <span />
                         </div>
 
                         <div className="rd-navbar-aside-outer rd-navbar-collapse bg-default">
@@ -39,7 +39,7 @@ const Header = () => {
                                     <li>
                                         <div className="unit unit-spacing-xs">
                                             <div className="unit-left">
-                                                <span className="icon mdi mdi-map-marker"></span>
+                                                <span className="icon mdi mdi-map-marker" />
                                             </div>
                                             <div className="unit-body">
                                                 <a href="#">
@@ -52,7 +52,7 @@ const Header = () => {
                                     <li>
                                         <div className="unit unit-spacing-xs">
                                             <div className="unit-left">
-                                                <span className="icon mdi mdi-cellphone-android"></span>
+                                                <span className="icon mdi mdi-cellphone-android" />
                                             </div>
                                             <div className="unit-body">
                                                 <a href="tel:+1-888-404-6185">+1-888-404-6185</a>
@@ -62,7 +62,7 @@ const Header = () => {
                                     <li>
                                         <div className="unit unit-spacing-xs">
                                             <div className="unit-left">
-                                                <span className="icon mdi mdi-email-outline"></span>
+                                                <span className="icon mdi mdi-email-outline" />
                                             </div>
                                             <div className="unit-body">
                                                 <a href="mailto: info@dotcms.com">
@@ -92,10 +92,10 @@ const Header = () => {
                                         data-rd-navbar-toggle=".rd-navbar-nav-wrap"
                                         aria-label="Toggle Menu"
                                     >
-                                        <span></span>
+                                        <span />
                                     </button>
                                     <div className="rd-navbar-brand">
-                                        <RouterLink pathname="/index" className="brand">
+                                        <RouterLink href="/index" className="brand">
                                             <img
                                                 className="brand-logo-dark"
                                                 src={`/application/themes/travel/images/logo.png`}

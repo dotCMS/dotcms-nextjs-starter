@@ -21,7 +21,7 @@ const CommentForm = ({ identifier, title, urlTitle }) => {
                             className="form-input form-control-has-validation form-control-last-child"
                             name="commentBody"
                             placeholder="Type a comment about this blog. Your feedback is appreciated"
-                        ></textarea>
+                        />
                     </div>
                     <input type="submit" className="button button-primary" value="Submit" />
                 </form>

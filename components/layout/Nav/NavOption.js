@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import RouterLink from '../../Shared/RouterLink';
+import RouterLink from '../../RouterLink';
 
 const NavOption = ({ item }) => {
     return (
-        <RouterLink key={item.folder} className="rd-nav-link" pathname={item.href}>
+        <RouterLink key={item.folder} className="rd-nav-link" href={item.href}>
             {item.title}
         </RouterLink>
     );

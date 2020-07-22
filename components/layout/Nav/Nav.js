@@ -1,39 +1,82 @@
-import NavDropDown from './NavDropDown';
-import NavBarSearch from './NavBarSearch';
-
-import PageContext from '../../../context/PageContext';
-import RouterLink from '../../Shared/RouterLink';
+import React, { useState, useMemo } from 'react';
+import { useRouter } from 'next/router';
+import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
+import logo from '../../../public/logo.png';
+import searchIcon from '../../../public/search.svg';
+import shoppingCart from '../../../public/shopping-cart.svg';
+import menuIcon from '../../../public/menu.svg';
+import RouterLink from '../../RouterLink';
+import useNav from '../../../hooks/useNav';
+import Link from 'next/link';
 
 export default function Nav() {
+    const nav = useNav();
+    const router = useRouter();
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const handleOpenMenu = (e) => {
+        e.preventDefault();
+        setIsMenuOpen(!isMenuOpen);
+    };
+
+    const routerLinkClassName = (item) => {
+        return [
+            router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1] ? 'active' : '',
+            item.children ? 'hasChildren' : ''
+        ];
+    };
+
     return (
-        <div className="rd-navbar-main-element">
-            <PageContext.Consumer>
-                {({ nav }) => (
-                    <>
-                        <div className="rd-navbar-nav-wrap">
-                            <ul className="rd-navbar-nav">
-                                {nav.map((item) => {
-                                    if (item.type === 'folder' && item?.children?.length) {
-                                        return <NavDropDown key={item.hash} options={item} />;
-                                    } else {
-                                        return (
-                                            <li className="rd-nav-item" key={item.hash}>
-                                                <RouterLink
-                                                    className="rd-nav-link"
-                                                    pathname={item.href}
-                                                >
-                                                    {item.title}
-                                                </RouterLink>
-                                            </li>
-                                        );
-                                    }
-                                })}
-                            </ul>
-                        </div>
-                        <NavBarSearch />
-                    </>
-                )}
-            </PageContext.Consumer>
+        <div className="container">
+            <MainNav className="main-nav">
+                <Link href="/">
+                    <a className="main-nav__logo" aria-label="Logo">
+                        <img src={logo} alt="" width={135} height={41} />
+                    </a>
+                </Link>
+                <NavMenu className="main-nav__menu" isOpen={isMenuOpen}>
+                    <a
+                        className="hamburger"
+                        href="#"
+                        aria-label="button"
+                        onClick={(e) => handleOpenMenu(e)}
+                    >
+                        <img src={menuIcon} alt="Hamburger Icon" />
+                    </a>
+                    <nav className="menu menu__list">
+                        {nav.map((item) => (
+                            <RouterLink
+                                key={item.href}
+                                className={routerLinkClassName(item).join(' ')}
+                                href={item.href}
+                            >
+                                {item.title}
+                                {item.children && (
+                                    <ul className="submenu">
+                                        {item.children[0].children.map((child, idx) => {
+                                            return (
+                                                <li key={idx}>
+                                                    <RouterLink href={child.href}>
+                                                        {child.title}
+                                                    </RouterLink>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                )}
+                            </RouterLink>
+                        ))}
+                    </nav>
+                    <nav className="menu menu__icons">
+                        <a href="#" aria-label="button">
+                            <img src={searchIcon} alt="Search Icon" />
+                        </a>
+                        <a href="#" aria-label="button">
+                            <img src={shoppingCart} alt="Shopping Cart Icon" />
+                        </a>
+                    </nav>
+                </NavMenu>
+            </MainNav>
         </div>
     );
 }

@@ -1,4 +1,7 @@
-import Contentlet from './Contentlet';
+import React, { useContext } from 'react';
+import PageContext from '../../contexts/PageContext';
+
+import { Contentlet } from './Contentlet';
 import reactifyWc from 'reactify-wc';
 
 /*
@@ -16,39 +19,57 @@ with Web Components: https://www.npmjs.com/package/reactify-wc
 const DotCMSEditContainerWrapper = reactifyWc('dotcms-ema-container');
 const DotCMSEditContentletWrapper = reactifyWc('dotcms-ema-contentlet');
 
-import PageContext from '../../context/PageContext';
+const ContentletWrapper = ({ children, contentlet, isEditMode }) => {
+    if (isEditMode) {
+        contentlet.dotCanEdit = true;
+        return (
+            <DotCMSEditContentletWrapper contentlet={contentlet}>
+                {children}
+            </DotCMSEditContentletWrapper>
+        );
+    }
+
+    return <>{children}</>;
+};
+
+const ContainerWrapper = ({ children, container, isEditMode }) => {
+    if (isEditMode) {
+        return (
+            <DotCMSEditContainerWrapper container={container}>
+                {children}
+            </DotCMSEditContainerWrapper>
+        );
+    }
+
+    return <>{children}</>;
+};
 
 const Contentlets = ({ contentlets }) => {
-    return contentlets ? (
-        <PageContext.Consumer>
-            {({ isEditMode }) => {
-                return contentlets.map(contentlet => {
-                    contentlet.dotCanEdit = true;
-                    return isEditMode ? (
-                        <DotCMSEditContentletWrapper key={contentlet.identifier} contentlet={contentlet}>
-                            <Contentlet data={contentlet} />
-                        </DotCMSEditContentletWrapper>
-                    ) : (
-                        <Contentlet key={contentlet.identifier} data={contentlet} />
-                    );
-                });
-            }}
-        </PageContext.Consumer>
+    const { isEditMode } = useContext(PageContext);
+
+    return contentlets.length ? (
+        <>
+            {contentlets.map((contentlet) => {
+                return (
+                    <ContentletWrapper
+                        key={contentlet.identifier}
+                        isEditMode={isEditMode}
+                        contentlet={contentlet}
+                    >
+                        <Contentlet data={contentlet} />
+                    </ContentletWrapper>
+                );
+            })}
+        </>
     ) : null;
 };
 
-export default function Container({ container }) {
+export default function ContentletContainer({ container }) {
+    const { isEditMode } = useContext(PageContext);
+
     return (
-        <PageContext.Consumer>
-            {({ isEditMode }) =>
-                isEditMode ? (
-                    <DotCMSEditContainerWrapper container={container}>
-                        <Contentlets {...container} />
-                    </DotCMSEditContainerWrapper>
-                ) : (
-                    <Contentlets {...container} />
-                )
-            }
-        </PageContext.Consumer>
+        <ContainerWrapper isEditMode={isEditMode} container={container}>
+            <Contentlets {...container} />
+        </ContainerWrapper>
     );
 }

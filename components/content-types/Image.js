@@ -9,17 +9,21 @@ export default function Image(props) {
                 <picture>
                     <source
                         media="(min-width: 800px)"
-                        srcSet={`/dA/${props.identifier}/1200w/50q/${props.fileName}/dA/${props.identifier}/2400w/50q/${props.fileName} 2x`}
+                        srcSet={`/dA/${props.identifier}/1200w/50q/${props.fileName}/dA/${
+                            props.identifier
+                        }/2400w/50q/${props.fileName} 2x`}
                     />
                     <source
                         media="(min-width: 480px)"
-                        srcSet={`/dA/${props.identifier}/600w/50q/${props.fileName}/dA/${props.identifier}/1200w/50q/${props.fileName} 2x`}
+                        srcSet={`/dA/${props.identifier}/600w/50q/${props.fileName}/dA/${
+                            props.identifier
+                        }/1200w/50q/${props.fileName} 2x`}
                     />
                     <img
                         src={`/dA/${props.identifier}/480w/50w/50q/${props.fileName}`}
                         alt={props.description}
                         className="img-fluid"
-                    ></img>
+                    />
                 </picture>
             </a>
             <div className="thumbnail-classic-caption">
@@ -29,7 +33,7 @@ export default function Image(props) {
                     className="thumbnail-classic-link mdi mdi-plus-circle-outline"
                     href={`/dA/${props.identifier}/1200w/50q/${props.fileName}`}
                     data-lightgallery="item"
-                ></a>
+                />
             </div>
         </article>
     );

@@ -1,14 +1,13 @@
-import { Col as BootstrapCol } from 'reactstrap';
-
-import Container from './Container';
+import ContentletContainer from './Container';
+import Column from './Column';
 
 const ColumnContainer = ({ width, offset, styleClass, containers }) => {
     return (
-        <BootstrapCol md={{ size: width, offset: offset }} className={styleClass || ''}>
-            {containers.map(container => {
-                return <Container container={container} key={container.identifier} />;
+        <Column md={{ size: width, offset: offset }} className={styleClass}>
+            {containers.map((container) => {
+                return <ContentletContainer container={container} key={container.identifier} />;
             })}
-        </BootstrapCol>
+        </Column>
     );
 };
 

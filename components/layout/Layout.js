@@ -1,20 +1,18 @@
-import Header from './Header';
-import Footer from './Footer/Footer';
-import LayoutWithSidebar from './LayoutWithSidebar';
-
-export default function Layout({ sidebar, body, children }) {
-    const includeHeader = body.header !== false;
-    const includeFooter = body.footer !== false;
-
+import React, { useContext } from 'react';
+import Header from '../Header';
+import Footer from '../Footer';
+import PageContext from '../../contexts/PageContext';
+export default function Layout({ children }) {
+    const {
+        pageRender: {
+            layout: { header, footer }
+        }
+    } = useContext(PageContext);
     return (
         <>
-            {includeHeader ? <Header /> : null}
-            {sidebar && !!sidebar.location ? (
-                <LayoutWithSidebar sidebar={sidebar}>{children}</LayoutWithSidebar>
-            ) : (
-                children
-            )}
-            {includeFooter ? <Footer /> : null}
+            {header ? <Header /> : null}
+            {children}
+            {footer ? <Footer /> : null}
         </>
     );
 }

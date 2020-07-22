@@ -11,7 +11,7 @@ const CommentList = ({ comments }) => {
                 </div>
                 <div className="col text-right">
                     <a href="#" className="button button-md button-primary button-leaf">
-                        <span className="mdi mdi-plus"></span> Comment
+                        <span className="mdi mdi-plus" /> Comment
                     </a>
                 </div>
             </div>
