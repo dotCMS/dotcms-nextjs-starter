@@ -11,9 +11,15 @@ const getPageList = async () => {
                 urlMap
                 ... on htmlpageasset {
                     url
-                    folder {
-                        folderPath
-                    }
+                }
+                ... on Destination {
+                    url
+                }
+                ...on ProductLineLandingPage {
+                    url
+                }
+                ...on LandingPage {
+                    url
                 }
             }
         }
