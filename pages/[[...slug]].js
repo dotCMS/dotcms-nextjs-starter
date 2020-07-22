@@ -22,7 +22,6 @@ export const getStaticPaths = async () => {
     //     { params: { slug: '/store/category/snow' } }
     // ]
      const paths = getPathsArray(pageList);
-     paths.push({ params: { slug: [''] } });
 
     // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
     return {

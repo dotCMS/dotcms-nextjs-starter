@@ -109,6 +109,7 @@ const pathEndsWithIndex = (str) => {
 const getPathsArray = (pageList) => {
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
+        
         acc = [
             ...acc,
             {
@@ -119,9 +120,12 @@ const getPathsArray = (pageList) => {
                 }
             }
         ];
+
         return acc;
     }, []);
-    return paths;
+
+    // Due to how optional catch-all works, we need to pass an empty slug to generate index.html
+    return paths.concat( { params: { slug: [""] } } );
 };
 
 const getCategoryPathsArray = (storeNav) => {

@@ -29,7 +29,7 @@ export default function Nav() {
     return (
         <div className="container">
             <MainNav className="main-nav">
-                <Link href="/" passHref={true}>
+                <Link href="/">
                     <a className="main-nav__logo" aria-label="Logo">
                         <img src={logo} alt="" width={135} height={41} />
                     </a>
