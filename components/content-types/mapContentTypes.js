@@ -4,7 +4,8 @@ import {
     StoreProductList,
     webPageContent,
     ProductDetail,
-    CategoryFilter
+    CategoryFilter,
+    Activity
 } from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
@@ -14,7 +15,8 @@ export const mapContentTypes = (contentType) => {
         webPageContent,
         StoreProductList,
         ProductDetail,
-        CategoryFilter
+        CategoryFilter,
+        Activity
     };
 
     if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {
