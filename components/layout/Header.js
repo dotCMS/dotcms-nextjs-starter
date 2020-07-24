@@ -1,5 +1,5 @@
 import Nav from './Nav/Nav';
-import LocaleDropdown from './LocaleDropdown';
+import LanguageSelector from './LanguageSelector';
 import RouterLink from '../RouterLink';
 
 const Header = () => {
@@ -73,7 +73,7 @@ const Header = () => {
                                     </li>
                                 </ul>
                                 <div>
-                                    <LocaleDropdown />
+                                    <LanguageSelector />
 
                                     {/* CART */}
                                     {/* <a className="basket" href="/store/cart">

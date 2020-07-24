@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PageContext from '../../contexts/PageContext';
 import Router, { useRouter } from 'next/router';
 
-const LocaleDropdown = () => {
+const LanguageSelector = () => {
     const router = useRouter();
     const [language, setLanguage] = useState('');
     const { languageProps } = useContext(PageContext);
@@ -50,4 +50,4 @@ const LocaleDropdown = () => {
     );
 };
 
-export default LocaleDropdown;
+export default LanguageSelector;

@@ -7,7 +7,7 @@ import logo from '../../../public/logo.png';
 import menuIcon from '../../../public/menu.svg';
 import useNav from '../../../hooks/useNav';
 import Link from 'next/link';
-import LocaleDropdown from '../LocaleDropdown';
+import LanguageSelector from '../LanguageSelector';
 
 export default function Nav() {
     const nav = useNav();
@@ -61,7 +61,7 @@ export default function Nav() {
                     </a>
                     <MenuList navigation={nav} />
                     <SocialMediaMenu />
-                    <LocaleDropdown />
+                    <LanguageSelector />
                 </NavMenu>
             </MainNav>
         </div>
