@@ -18,9 +18,9 @@ const LocaleDropdown = () => {
 
         const newRoute =
             value === 'en'
-                ? router.query.slug.filter((route) => route !== language)
-                : [value, ...router.query.slug.filter((route) => route !== value)];
-
+                ? router.query.slug ? router.query.slug.filter((route) => route !== language) : []
+                : router.query.slug ? [value, ...router.query.slug.filter((route) => route !== value)] : [`${value}`];
+        
         router.replace('/[[...slug]]', `/${newRoute.join('/')}`);
     };
 
