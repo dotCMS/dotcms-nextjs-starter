@@ -34,34 +34,88 @@ export const getStaticPaths = async () => {
     };
 };
 
+// export const getStaticProps = async (context) => {
+//     const {
+//         params: { slug }
+//     } = context;
+//     try {
+//         // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
+//         // and map to a clean array of ISO compatible lang codes.
+//         let languages = await getLanguages();
+
+//         // Determine our head and tail
+//         const [head, ...tail] = slug || [];
+
+//         // Returns either true or false if `head` in a valid language from our languages array
+//         let hasLanguages = languages
+//             .map((language) => language.languageCode)
+//             .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
+//             .includes(head);
+
+//         // Build our URL
+//         // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
+//         let url = slug ? (hasLanguages ? `/${tail.join('/')}` : `/${slug.join('/')}`) : '/index';
+
+//         // If the hasLanguages predicate returns true the find the language in the languages array to pass it in the getPage call
+//         const language = hasLanguages && languages.find((lang) => lang.languageCode === head);
+
+//         // Fetch the page object from DotCMS Page API
+//         const pageRender = await getPage(url, language);
+
+//         // Fetch the navigation from DotCMS Navigation API
+//         const nav = await getNav('4');
+
+//         return {
+//             props: {
+//                 pageRender,
+//                 nav,
+//                 languageProps: { languages, selectedLanguage: hasLanguages && head }
+//             },
+//             revalidate: 1
+//         };
+//     } catch (error) {
+//         return {
+//             props: { error }
+//         };
+//     }
+// };
+
 export const getStaticProps = async (context) => {
-    const {
-        params: { slug }
-    } = context;
-    // Determine our head and tail
-    const [head, ...tail] = slug || [];
-    const languageProps = await getLanguagesProps(head);
+    try {
+        const {
+            params: { slug }
+        } = context;
+        // Determine our head and tail
+        const [head, ...tail] = slug || [];
+        const languageProps = await getLanguagesProps(head);
 
-    // Build our URL
-    // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
-    let url = slug
-        ? languageProps.hasLanguages
-            ? `/${tail.join('/')}`
-            : `/${slug.join('/')}`
-        : '/index';
+        // Build our URL
+        // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
+        let url = slug
+            ? languageProps.hasLanguages
+                ? `/${tail.join('/')}`
+                : `/${slug.join('/')}`
+            : '/index';
 
-    // Fetch the page object from DotCMS Page API
-    const pageRender = await getPage(url, languageProps.languageId);
+        // Fetch the page object from DotCMS Page API
+        const pageRender = await getPage(url, languageProps.languageId);
 
-    // Fetch the navigation from DotCMS Navigation API
-    const nav = await getNav('4');
+        // Fetch the navigation from DotCMS Navigation API
+        const nav = await getNav('4');
 
-    return {
-        props: {
-            pageRender,
-            nav,
-            languageProps
-        },
-        revalidate: 1
-    };
+        return {
+            props: {
+                pageRender,
+                nav,
+                languageProps
+            },
+            revalidate: 1
+        };
+    } catch(error) {
+        return { 
+            props: {
+                error
+            }
+         }
+    }
 };
