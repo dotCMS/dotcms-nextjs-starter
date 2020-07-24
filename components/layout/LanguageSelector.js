@@ -39,7 +39,7 @@ const LanguageSelector = () => {
                     handleChange(target.value);
                 }}
             >
-                {languageProps.languages &&
+                {languageProps &&
                     languageProps.languages.map((lang) => (
                         <option key={lang.id} value={lang.languageCode}>
                             {lang.language}

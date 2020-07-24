@@ -7,7 +7,8 @@ import PageContext from '../../../contexts/PageContext';
 function MenuList({navigation}) {
 
   const router = useRouter();
-  const { languages: { selectedLanguage } = {} } = useContext(PageContext) || {};
+  const { languageProps: { selectedLanguage } = {} } = useContext(PageContext) || {};
+
   const routerLinkClassName = (item) => {
       return [
           router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1] ? 'active' : '',
@@ -15,17 +16,19 @@ function MenuList({navigation}) {
       ];
   };
 
+  const getHref = (selectedLang, item) => {
+    return selectedLang && selectedLang !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
+        ? `${selectedLang}${item.href}`
+        : `${item.href}`;
+  }
+
   return (
       <nav className="menu menu__list">
           {navigation.map((item) => (
               <RouterLink
                   key={item.href}
                   className={routerLinkClassName(item).join(' ')}
-                  href={
-                      selectedLanguage
-                          ? `${selectedLanguage}${item.href}`
-                          : `${item.href}`
-                  }
+                  href={getHref(selectedLanguage, item)}
               >
                   {item.title}
                   {item.children && (
@@ -33,13 +36,7 @@ function MenuList({navigation}) {
                           {item.children[0].children.map((child, idx) => {
                               return (
                                   <li key={idx}>
-                                      <RouterLink
-                                          href={
-                                              selectedLanguage
-                                                  ? `${selectedLanguage}${child.href}`
-                                                  : `${child.href}`
-                                          }
-                                      >
+                                      <RouterLink href={getHref(selectedLanguage, child)}>
                                           {child.title}
                                       </RouterLink>
                                   </li>

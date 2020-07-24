@@ -16,8 +16,7 @@ async function getPage(url, lang) {
     }
     return dotCMSApi.page
         .get({ url, language: lang })
-        .then(async (pageRender) => {  
-            
+        .then(async (pageRender) => {
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
@@ -183,6 +182,40 @@ const getTagsListForCategory = async (category) => {
     return results.esresponse[0].aggregations['sterms#tag'].buckets;
 };
 
+export const getLanguagesProps = async (selectedLanguage) => {
+
+        // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
+        // and map to a clean array of ISO compatible lang codes.
+        let languages = await getLanguages();
+        let results;
+
+        // Returns either true or false if `selectedLanguage` in a valid language from our languages array
+        let hasLanguages = languages
+            .map((language) => language.languageCode)
+            .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
+            .includes(selectedLanguage);
+
+        // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
+        const languageId = hasLanguages
+            ? languages.find((lang) => lang.languageCode === selectedLanguage)
+            : '1';
+
+        results = {
+            hasLanguages,
+            languageId,
+            languages
+        };
+
+        if (hasLanguages) {
+            results = {
+                ...results,
+                selectedLanguage
+            };
+        }
+
+        return results;
+};
+
 module.exports = {
     CustomError,
     getCookie,
@@ -195,5 +228,6 @@ module.exports = {
     getTagsListForCategory,
     getPathsArray,
     getCategoryPathsArray,
-    getLanguages
+    getLanguages,
+    getLanguagesProps
 };
