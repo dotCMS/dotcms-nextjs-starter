@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+import React, { useState, useEffect } from 'react';
+import Router, { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
-import SocialMediaMenu from '../../SocialMediaMenu'
+import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
+import MenuList from '../../layout/Nav/MenuList';
 import logo from '../../../public/logo.png';
 import menuIcon from '../../../public/menu.svg';
-import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav';
 import Link from 'next/link';
 import LocaleDropdown from '../LocaleDropdown';
 
 export default function Nav() {
     const nav = useNav();
-    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleOpenMenu = (e) => {
@@ -19,17 +18,35 @@ export default function Nav() {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const routerLinkClassName = (item) => {
-        return [
-            router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1] ? 'active' : '',
-            item.children ? 'hasChildren' : ''
-        ];
-    };
+    const router = useRouter();
+    
+    const current =
+        typeof localStorage !== 'undefined' &&
+        localStorage.getItem('dotcms_language');
+    const isDefaultLanguage = current !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE;
+    useEffect(() => {
+             if (
+                 current &&
+                 isDefaultLanguage &&
+                 Object.entries(router.query).length > 0 &&
+                 !router.query.slug.includes(current)
+             ) {
+                 console.log('redirecting...');
+
+                 let route =
+                     router.query.slug && router.query.slug.length > 0
+                         ? [current, ...router.query.slug]
+                         : [current];
+                 route = new Set(route);
+                 console.log(route);
+                 router.push('/[[...slug]]', `/${Array.from(route).join('/')}`);
+             }
+    }, []);
 
     return (
         <div className="container">
             <MainNav className="main-nav">
-                <Link href="/">
+                <Link href={current && isDefaultLanguage ? `/${current}` : `/`}>
                     <a className="main-nav__logo" aria-label="Logo">
                         <img src={logo} alt="" width={135} height={41} />
                     </a>
@@ -43,30 +60,7 @@ export default function Nav() {
                     >
                         <img src={menuIcon} alt="Hamburger Icon" />
                     </a>
-                    <nav className="menu menu__list">
-                        {nav.map((item) => (
-                            <RouterLink
-                                key={item.href}
-                                className={routerLinkClassName(item).join(' ')}
-                                href={item.href}
-                            >
-                                {item.title}
-                                {item.children && (
-                                    <ul className="submenu">
-                                        {item.children[0].children.map((child, idx) => {
-                                            return (
-                                                <li key={idx}>
-                                                    <RouterLink href={child.href}>
-                                                        {child.title}
-                                                    </RouterLink>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                )}
-                            </RouterLink>
-                        ))}
-                    </nav>
+                    <MenuList navigation={nav} />
                     <SocialMediaMenu />
                     <LocaleDropdown />
                 </NavMenu>

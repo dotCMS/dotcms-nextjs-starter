@@ -1,10 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PageContext from '../../contexts/PageContext';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 
 const LocaleDropdown = () => {
     const router = useRouter();
-    const [language, setLanguage] = useState(typeof localStorage !== "undefined" && localStorage.getItem('dotcms_language'));
+    const [language, setLanguage] = useState('');
     const { languages } = useContext(PageContext);
 
     useEffect(() => {
@@ -12,15 +12,21 @@ const LocaleDropdown = () => {
     }, []);
 
     const handleChange = (value) => {
-        setLanguage(value);
-
         localStorage.setItem('dotcms_language', value);
+        setLanguage(value);
+        const {
+            query: { slug }
+        } = router;
 
         const newRoute =
-            value === 'en'
-                ? router.query.slug ? router.query.slug.filter((route) => route !== language) : []
-                : router.query.slug ? [value, ...router.query.slug.filter((route) => route !== value)] : [`${value}`];
-        
+            value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
+                ? slug
+                    ? slug.filter((route) => route !== language)
+                    : []
+                : slug
+                ? [value, ...slug.filter((route) => route !== value)]
+                : [`${value}`];
+
         router.replace('/[[...slug]]', `/${newRoute.join('/')}`);
     };
 

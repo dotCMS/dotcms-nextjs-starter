@@ -47,7 +47,7 @@ export const getStaticProps = async (context) => {
         const [head, ...tail] = slug || [];
 
         let hasLanguages = languages
-            .filter((language) => language !== 'en')
+            .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
             .includes(head);
 
         let url = slug ? (hasLanguages ? `/${tail.join('/')}` : `/${slug.join('/')}`) : '/index';

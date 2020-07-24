@@ -121,7 +121,7 @@ const setPathsUrls = (arr, url) => {
 const getPathsArray = (pageList, languages = []) => {
     languages = languages
         .map((language) => language.languageCode)
-        .filter((language) => language !== 'en');
+        .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
 
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
