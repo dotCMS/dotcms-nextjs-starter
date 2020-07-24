@@ -111,10 +111,12 @@ const pathEndsWithIndex = (str) => {
     return r.test(str);
 };
 
-const setPathsUrls = (arr, url) => {
+const getParamsObjectForPath = (pathArray, url) => {
     return {
         params: {
-            slug: pathEndsWithIndex(url) ? arr.splice(0, arr.indexOf('index')) : arr
+            slug: pathEndsWithIndex(url)
+                ? pathArray.splice(0, pathArray.indexOf('index'))
+                : pathArray
         }
     };
 };
@@ -131,11 +133,11 @@ const getPathsArray = (pageList, languages = []) => {
             let [localizedArr] =
                 languages.length > 0 && languages.map((language) => [language, ...urlArr]);
             if (localizedArr.length > 0) {
-                acc = [...acc, setPathsUrls(localizedArr, url)];
+                acc = [...acc, getParamsObjectForPath(localizedArr, url)];
             }
         }
 
-        acc = [...acc, setPathsUrls(urlArr, url)];
+        acc = [...acc, getParamsObjectForPath(urlArr, url)];
 
         return acc;
     }, []);

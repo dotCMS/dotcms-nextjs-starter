@@ -5,11 +5,11 @@ import getPageList from '../utilities/dotcms/getPageList';
 const dotCMSApi = require('../config/dotcmsApi');
 
 export default function Page({ pageRender, nav, error, languageProps }) {
-                   if (error) {
-                       return <Error statusCode={error.statusCode} message={error.message} />;
-                   }
-                   return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
-               }
+    if (error) {
+        return <Error statusCode={error.statusCode} message={error.message} />;
+    }
+    return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
+}
 
 export const getStaticPaths = async () => {
     // Fetch pages from DotCMS and get all the urls in an array of strings, ex:
@@ -39,8 +39,8 @@ export const getStaticProps = async (context) => {
         params: { slug }
     } = context;
     try {
-        // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages 
-        // and map to a clean array of ISO compatible lang codes. 
+        // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
+        // and map to a clean array of ISO compatible lang codes.
         let languages = await getLanguages();
 
         // Determine our head and tail
@@ -51,9 +51,9 @@ export const getStaticProps = async (context) => {
             .map((language) => language.languageCode)
             .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
             .includes(head);
-        
+
         // Build our URL
-        // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array    
+        // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
         let url = slug ? (hasLanguages ? `/${tail.join('/')}` : `/${slug.join('/')}`) : '/index';
 
         // If the hasLanguages predicate returns true the find the language in the languages array to pass it in the getPage call
@@ -69,7 +69,7 @@ export const getStaticProps = async (context) => {
             props: {
                 pageRender,
                 nav,
-                languageProps: {languages, selectedLanguage: hasLanguages && head},
+                languageProps: { languages, selectedLanguage: hasLanguages && head }
             },
             revalidate: 1
         };
