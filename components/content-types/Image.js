@@ -1,40 +1,71 @@
+import styled from 'styled-components';
+import RouterLink from '../RouterLink';
+import DotCMSImage from '../DotCMSImage';
+
+const WapperLink = styled(RouterLink)`
+    display: block;
+    margin: 1rem 0;
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+
+    img {
+        width: 100%;
+    }
+
+    &:hover {
+        .body {
+            color: white;
+            /* transform: translateY(0); */
+            opacity: 1;
+
+            p {
+                color: white;
+            }
+        }
+    }
+
+    .body {
+        background-color: var(--dotcms-purple);
+        bottom: 0;
+        top: 0;
+        padding: 1rem;
+        position: absolute;
+        transition: opacity 200ms;
+        width: 100%;
+        opacity: 0;
+
+
+        h4 {
+            text-transform: uppercase;
+            transition: color 200ms;
+        }
+    }
+`;
+
 export default function Image(props) {
+    const description =
+        props.description.length > 120 ? props.description.substring(0, 120) : props.description;
+
+    const imageUrl = `/dA/${props.identifier}/image/270w/50q`;
+    const myHref = '/activities/' + props.urlTitle;
+
     return (
-        <article className="thumbnail-classic mb-5">
-            <a
-                className="thumbnail-classic-figure"
-                href={`/dA/${props.identifier}/1200x/50q/props.fileName`}
-                data-lightgallery="item"
-            >
-                <picture>
-                    <source
-                        media="(min-width: 800px)"
-                        srcSet={`/dA/${props.identifier}/1200w/50q/${props.fileName}/dA/${
-                            props.identifier
-                        }/2400w/50q/${props.fileName} 2x`}
-                    />
-                    <source
-                        media="(min-width: 480px)"
-                        srcSet={`/dA/${props.identifier}/600w/50q/${props.fileName}/dA/${
-                            props.identifier
-                        }/1200w/50q/${props.fileName} 2x`}
-                    />
-                    <img
-                        src={`/dA/${props.identifier}/480w/50w/50q/${props.fileName}`}
-                        alt={props.description}
-                        className="img-fluid"
-                    />
-                </picture>
-            </a>
-            <div className="thumbnail-classic-caption">
-                <h4 className="thumbnail-classic-title">{props.title}</h4>
-                <p className="thumbnail-classic-text">{props.description}</p>
-                <a
-                    className="thumbnail-classic-link mdi mdi-plus-circle-outline"
-                    href={`/dA/${props.identifier}/1200w/50q/${props.fileName}`}
-                    data-lightgallery="item"
-                />
+        <WapperLink href={myHref}>
+            <DotCMSImage
+                data={{
+                    path: props.fileAsset
+                }}
+                alt={props.title}
+                size={{
+                    width: 370,
+                    height: 'auto'
+                }}
+            />
+            <div className="body">
+                <h4>{props.title}</h4>
+                <p>{description}</p>
             </div>
-        </article>
+        </WapperLink>
     );
 }
