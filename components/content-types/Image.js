@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import RouterLink from '../RouterLink';
 import DotCMSImage from '../DotCMSImage';
 
-const WapperLink = styled(RouterLink)`
+const Wrapper = styled.div`
     display: block;
     margin: 1rem 0;
     overflow: hidden;
@@ -10,35 +9,60 @@ const WapperLink = styled(RouterLink)`
     text-decoration: none;
 
     img {
+        display: block;
         width: 100%;
     }
 
     &:hover {
         .body {
-            color: white;
             /* transform: translateY(0); */
             opacity: 1;
 
-            p {
-                color: white;
+            p,
+            h4 {
+                transform: translateX(0);
             }
+        }
+
+        .overlay {
+            opacity: 0.5;
         }
     }
 
-    .body {
+    .overlay {
         background-color: var(--dotcms-purple);
         bottom: 0;
         top: 0;
-        padding: 1rem;
         position: absolute;
+        opacity: 0;
         transition: opacity 200ms;
         width: 100%;
-        opacity: 0;
+    }
 
+    .body {
+        color: white;
+        bottom: 0;
+        opacity: 0;
+        padding: 3rem;
+        position: absolute;
+        top: 0;
+        transition: opacity 300ms;
+        width: 50%;
+        z-index: 1;
+
+        p,
+        h4 {
+            transform: translateX(3rem);
+        }
+
+        p {
+            color: white;
+            transition: transform 200ms ease-in;
+        }
 
         h4 {
             text-transform: uppercase;
-            transition: color 200ms;
+            transition: transform 100ms ease-in;
         }
     }
 `;
@@ -47,18 +71,15 @@ export default function Image(props) {
     const description =
         props.description.length > 120 ? props.description.substring(0, 120) : props.description;
 
-    const imageUrl = `/dA/${props.identifier}/image/270w/50q`;
-    const myHref = '/activities/' + props.urlTitle;
-
     return (
-        <WapperLink href={myHref}>
+        <Wrapper>
             <DotCMSImage
                 data={{
                     path: props.fileAsset
                 }}
                 alt={props.title}
                 size={{
-                    width: 370,
+                    width: 800,
                     height: 'auto'
                 }}
             />
@@ -66,6 +87,7 @@ export default function Image(props) {
                 <h4>{props.title}</h4>
                 <p>{description}</p>
             </div>
-        </WapperLink>
+            <div className="overlay" />
+        </Wrapper>
     );
 }

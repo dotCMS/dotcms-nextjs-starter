@@ -9,7 +9,5 @@ export const Contentlet = ({ data }) => {
         Component = getComponent(data.contentType);
     }
 
-    console.log(Component);
-
     return <Component {...data} />;
 };
