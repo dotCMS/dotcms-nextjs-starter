@@ -110,6 +110,14 @@ const pathEndsWithIndex = (str) => {
     return r.test(str);
 };
 
+const setPathsUrls = (arr, url) => {
+    return {
+        params: {
+            slug: pathEndsWithIndex(url) ? arr.splice(0, arr.indexOf('index')) : arr
+        }
+    };
+};
+
 const getPathsArray = (pageList, languages = []) => {
     languages = languages
         .map((language) => language.languageCode)
@@ -117,35 +125,16 @@ const getPathsArray = (pageList, languages = []) => {
 
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
-        
+
         {
             let [localizedArr] =
                 languages.length > 0 && languages.map((language) => [language, ...urlArr]);
-
             if (localizedArr.length > 0) {
-                acc = [
-                    ...acc,
-                    {
-                        params: {
-                            slug: pathEndsWithIndex(url)
-                                ? localizedArr.splice(0, urlArr.indexOf('index'))
-                                : localizedArr
-                        }
-                    }
-                ];
+                acc = [...acc, setPathsUrls(localizedArr, url)];
             }
         }
 
-        acc = [
-            ...acc,
-            {
-                params: {
-                    slug: pathEndsWithIndex(url)
-                        ? urlArr.splice(0, urlArr.indexOf('index'))
-                        : urlArr
-                }
-            }
-        ];
+        acc = [...acc, setPathsUrls(urlArr, url)];
 
         return acc;
     }, []);
