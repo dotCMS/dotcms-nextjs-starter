@@ -6,7 +6,8 @@ export default function Layout({ children }) {
     const {
         pageRender: {
             layout: { header, footer }
-        }
+        },
+        selectedLanguage
     } = useContext(PageContext);
     return (
         <>

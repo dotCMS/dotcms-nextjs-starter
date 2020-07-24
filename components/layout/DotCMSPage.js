@@ -4,7 +4,7 @@ import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
 
-const DotCMSPage = ({ pageRender, nav, isEditMode }) => {
+const DotCMSPage = ({ pageRender, nav, isEditMode, languages }) => {
     let DetailPage;
 
     if (pageRender?.urlContentMap) {
@@ -15,7 +15,8 @@ const DotCMSPage = ({ pageRender, nav, isEditMode }) => {
     const contextValue = {
         isEditMode,
         nav,
-        pageRender
+        pageRender,
+        languages
     };
 
     return (

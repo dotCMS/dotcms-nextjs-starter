@@ -1,13 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
+import SocialMediaMenu from '../../SocialMediaMenu'
 import logo from '../../../public/logo.png';
-import searchIcon from '../../../public/search.svg';
-import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
 import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav';
 import Link from 'next/link';
+import LocaleDropdown from '../LocaleDropdown';
 
 export default function Nav() {
     const nav = useNav();
@@ -67,14 +67,8 @@ export default function Nav() {
                             </RouterLink>
                         ))}
                     </nav>
-                    <nav className="menu menu__icons">
-                        <a href="#" aria-label="button">
-                            <img src={searchIcon} alt="Search Icon" />
-                        </a>
-                        <a href="#" aria-label="button">
-                            <img src={shoppingCart} alt="Shopping Cart Icon" />
-                        </a>
-                    </nav>
+                    <SocialMediaMenu />
+                    <LocaleDropdown />
                 </NavMenu>
             </MainNav>
         </div>

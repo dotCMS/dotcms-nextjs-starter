@@ -6,12 +6,16 @@ const CustomError = require('../custom-error');
 const transformPage = require('./transformPage');
 const { DOTCMS_DOWN, DOTCMS_NO_AUTH, LANG_COOKIE_NAME } = require('./constants');
 
+const getLanguages = () => {
+    return dotCMSApi.language.getLanguages();
+};
+
 async function getPage(url, lang) {
     if (process.env.NODE_ENV !== 'production') {
         loggerLog('DOTCMS PAGE', url, lang || '1');
     }
     return dotCMSApi.page
-        .get({ url })
+        .get({ url, language: lang })
         .then(async (pageRender) => {
             /*
                 If the page doesn't have a layout this transformPage function
@@ -94,22 +98,44 @@ const getToken = ({ user, password, expirationDays, host }) => {
 };
 
 /*
-* Determines if the path ends with /index but only when the / is preceded by a word
-*
-* This is needed to create the right paths for Next.js getStaticPaths' paths array
-* `/destinations/index` becomes `/destinations`
-*
-* @param {string} str - the path (e.g /destinations/index)  
-*/
+ * Determines if the path ends with /index but only when the / is preceded by a word
+ *
+ * This is needed to create the right paths for Next.js getStaticPaths' paths array
+ * `/destinations/index` becomes `/destinations`
+ *
+ * @param {string} str - the path (e.g /destinations/index)
+ */
 const pathEndsWithIndex = (str) => {
     const r = /(?<=\w)(\/index)/;
-    return r.test(str)
-} 
+    return r.test(str);
+};
 
-const getPathsArray = (pageList) => {
+const getPathsArray = (pageList, languages = []) => {
+    languages = languages
+        .map((language) => language.languageCode)
+        .filter((language) => language !== 'en');
+
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
         
+        {
+            let [localizedArr] =
+                languages.length > 0 && languages.map((language) => [language, ...urlArr]);
+
+            if (localizedArr.length > 0) {
+                acc = [
+                    ...acc,
+                    {
+                        params: {
+                            slug: pathEndsWithIndex(url)
+                                ? localizedArr.splice(0, urlArr.indexOf('index'))
+                                : localizedArr
+                        }
+                    }
+                ];
+            }
+        }
+
         acc = [
             ...acc,
             {
@@ -124,8 +150,10 @@ const getPathsArray = (pageList) => {
         return acc;
     }, []);
 
+    //console.log(JSON.stringify(paths));
+
     // Due to how optional catch-all works, we need to pass an empty slug to generate index.html
-    return paths.concat( { params: { slug: [""] } } );
+    return paths.concat({ params: { slug: [''] } });
 };
 
 const getCategoryPathsArray = (storeNav) => {
@@ -176,5 +204,6 @@ module.exports = {
     getToken,
     getTagsListForCategory,
     getPathsArray,
-    getCategoryPathsArray
+    getCategoryPathsArray,
+    getLanguages
 };

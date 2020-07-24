@@ -1,42 +1,28 @@
-import PropTypes from 'prop-types';
+import React, { useState, useContext, useEffect } from 'react';
 import PageContext from '../../contexts/PageContext';
-import useDotCMSApi from '../../hooks/useDotCMSApi';
-const dotCMSApi = require('../../config/dotcmsApi');
-
-import React, { useContext } from 'react';
-
-const Options = ({ languages }) => {
-    return languages.map((lang) => (
-        <option key={lang.languageCode} value={lang.id}>
-            {lang.language}
-        </option>
-    ));
-};
-
-Options.propTypes = {
-    languages: PropTypes.arrayOf(
-        PropTypes.shape({
-            languageCode: PropTypes.string.isRequired,
-            id: PropTypes.number.isRequired,
-            language: PropTypes.string.isRequired
-        }).isRequired
-    ).isRequired
-};
 
 const LocaleDropdown = () => {
-    const [loading, languages] = useDotCMSApi(dotCMSApi.language.getLanguages);
-    const { language } = useContext(PageContext);
+    const [language, setLanguage] = useState("");
+    const { languages } = useContext(PageContext);
+
+    useEffect(() => {
+        setLanguage(languages.selectedLanguage);
+    }, []);
 
     return (
         <div className="form-wrap-select">
             <select
                 className="form-input"
-                value={language.current}
+                value={language}
                 onChange={({ target }) => {
-                    language.set(target.value);
+                    setLanguage(target.value);
                 }}
             >
-                <Options languages={languages} />
+                {languages && languages.languagesList.map((lang) => (
+                    <option key={lang} value={lang}>
+                        {lang}
+                    </option>
+                ))}
             </select>
         </div>
     );
