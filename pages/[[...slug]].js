@@ -1,6 +1,12 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
 import Error from '../components/layout/Error';
-import { getPage, getNav, getPathsArray, getLanguages, getLanguagesProps } from '../utilities/dotcms';
+import {
+    getPage,
+    getNav,
+    getPathsArray,
+    getLanguages,
+    getLanguagesProps
+} from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
 const dotCMSApi = require('../config/dotcmsApi');
 
@@ -65,11 +71,11 @@ export const getStaticProps = async (context) => {
             },
             revalidate: 1
         };
-    } catch(error) {
-        return { 
+    } catch (error) {
+        return {
             props: {
                 error
             }
-         }
+        };
     }
 };
