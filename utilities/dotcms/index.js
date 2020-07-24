@@ -16,7 +16,8 @@ async function getPage(url, lang) {
     }
     return dotCMSApi.page
         .get({ url, language: lang })
-        .then(async (pageRender) => {
+        .then(async (pageRender) => {  
+            
             /*
                 If the page doesn't have a layout this transformPage function
                 will throw an error.
@@ -138,8 +139,6 @@ const getPathsArray = (pageList, languages = []) => {
 
         return acc;
     }, []);
-
-    //console.log(JSON.stringify(paths));
 
     // Due to how optional catch-all works, we need to pass an empty slug to generate index.html
     return paths.concat({ params: { slug: [''] } });

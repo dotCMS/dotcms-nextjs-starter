@@ -24,6 +24,7 @@ export default function Nav() {
         typeof localStorage !== 'undefined' &&
         localStorage.getItem('dotcms_language');
     const isDefaultLanguage = current !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE;
+
     useEffect(() => {
              if (
                  current &&
@@ -31,14 +32,12 @@ export default function Nav() {
                  Object.entries(router.query).length > 0 &&
                  !router.query.slug.includes(current)
              ) {
-                 console.log('redirecting...');
 
                  let route =
                      router.query.slug && router.query.slug.length > 0
                          ? [current, ...router.query.slug]
                          : [current];
                  route = new Set(route);
-                 console.log(route);
                  router.push('/[[...slug]]', `/${Array.from(route).join('/')}`);
              }
     }, []);

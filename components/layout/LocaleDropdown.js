@@ -5,10 +5,10 @@ import Router, { useRouter } from 'next/router';
 const LocaleDropdown = () => {
     const router = useRouter();
     const [language, setLanguage] = useState('');
-    const { languages } = useContext(PageContext);
+    const { languageProps } = useContext(PageContext);
 
     useEffect(() => {
-        setLanguage(languages.selectedLanguage);
+        setLanguage(languageProps.selectedLanguage);
     }, []);
 
     const handleChange = (value) => {
@@ -39,10 +39,10 @@ const LocaleDropdown = () => {
                     handleChange(target.value);
                 }}
             >
-                {languages &&
-                    languages.languagesList.map((lang) => (
-                        <option key={lang} value={lang}>
-                            {lang}
+                {languageProps.languages &&
+                    languageProps.languages.map((lang) => (
+                        <option key={lang.id} value={lang.languageCode}>
+                            {lang.language}
                         </option>
                     ))}
             </select>
