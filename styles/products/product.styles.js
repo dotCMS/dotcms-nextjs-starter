@@ -40,11 +40,13 @@ export const SingleProductContainer = styled.div`
         padding: 1rem;
         display: flex;
         justify-content: center;
+        
     }
 
     img {
         object-fit: contain;
         display: block;
+        max-width: 100%;
     }
 `;
 
@@ -140,6 +142,7 @@ export const CarouselContainer = styled.section`
     }
 
     .carousel__navigation-button {
+        cursor: pointer;
         display: inline-block;
         width: 1.5rem;
         height: 1.5rem;

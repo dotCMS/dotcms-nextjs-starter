@@ -3,7 +3,7 @@ import DotCMSImage from '../DotCMSImage';
 
 const Wrapper = styled.div`
     display: block;
-    margin: 1rem 0;
+    margin: 0 0 1rem;
     overflow: hidden;
     position: relative;
     text-decoration: none;
@@ -15,7 +15,6 @@ const Wrapper = styled.div`
 
     &:hover {
         .body {
-            /* transform: translateY(0); */
             opacity: 1;
 
             p,
@@ -74,9 +73,7 @@ export default function Image(props) {
     return (
         <Wrapper>
             <DotCMSImage
-                data={{
-                    path: props.fileAsset
-                }}
+                path={props.fileAsset}
                 alt={props.title}
                 size={{
                     width: 800,

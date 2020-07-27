@@ -40,11 +40,9 @@ export const GlobalStyle = createGlobalStyle`
 	}
 	h3 { 
 		font-size: 1.5em;
-		line-height: 1rem;
 	 }
 	h4 { 
 		font-size: 1.125em;
-		line-height: .8rem;
 	}
 
 	p, ul {

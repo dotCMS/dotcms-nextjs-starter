@@ -27,6 +27,16 @@ const Slider = ({ images, title, id }) => {
         <>
             <ul className="carousel__viewport">
                 {Object.values(images).map((image, index) => {
+                    const data = {
+                        identifier: id,
+                        name: keys[index],
+                        size: {
+                            width: 700,
+                            height: 700
+                        },
+                        alt: title
+                    };
+
                     return (
                         image && (
                             <li
@@ -37,16 +47,7 @@ const Slider = ({ images, title, id }) => {
                                 key={index}
                                 data-slide={index}
                             >
-                                <DotCMSImage
-                                    width={700}
-                                    height={700}
-                                    loading="lazy"
-                                    data={{
-                                        identifier: id,
-                                        name: keys[index]
-                                    }}
-                                    alt={title}
-                                />
+                                <DotCMSImage loading="lazy" {...data} />
                             </li>
                         )
                     );

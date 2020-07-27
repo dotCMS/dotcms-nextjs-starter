@@ -60,9 +60,7 @@ export default function Activity(props) {
     return (
         <WapperLink href={myHref}>
             <DotCMSImage
-                data={{
-                    path: imageUrl
-                }}
+                path={imageUrl}
                 alt={props.title}
                 size={{
                     width: 370,
