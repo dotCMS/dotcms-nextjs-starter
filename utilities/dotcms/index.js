@@ -147,32 +147,6 @@ const getPathsArray = (pageList, languages = []) => {
     return paths.concat({ params: { slug: [''] } });
 };
 
-
-const getCategoryPathsArray = (storeNav, languages) => {
-    let categories = storeNav
-        .filter((item) => item.hash !== 'home')
-        .reduce((acc, curr) => [...acc, curr.href], []);
-
-    // if(languages?.length > 0) {
-    //     const languageCodes = languages.map((lang) => lang.languageCode).filter(lang => lang !== "en");
-    //     const localizedCategoriesPath = categories
-    //         .map((category) => {
-    //             let catArr = category.split('/').filter(Boolean);
-
-    //             let codesArr = languageCodes.map((code) => {
-    //                 return [code, ...catArr];
-    //             });
-
-    //             return [catArr, ...codesArr];
-    //         })
-    //         .flat();
-        
-    //     categories = localizedCategoriesPath.map((categoryPath) => categoryPath.join('/'));
-    // }
-
-    return categories;
-};
-
 const getTagsListForCategory = async (category) => {
     const data = {
         query: {
@@ -249,7 +223,6 @@ module.exports = {
     getToken,
     getTagsListForCategory,
     getPathsArray,
-    getCategoryPathsArray,
     getLanguages,
     getLanguagesProps
 };
