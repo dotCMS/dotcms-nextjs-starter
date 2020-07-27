@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import Product from '../components/Product';
-import { useApollo } from '../config/apollo';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
+
+import ProductItem from '../components/ProductItem';
 import TagsFilter from './TagsFilter';
-import useTagsList from '../hooks/useTagsList';
 import useTagsFiltered from '../hooks/useTagsFiltered';
-import Loading from './Loading';
+import useTagsList from '../hooks/useTagsList';
+import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
+
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -89,14 +89,29 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
                 <StatusIndicator>No products found!</StatusIndicator>
             ) : (
                 <ProductGrid width={width} className="product-grid">
-                    {data?.ProductCollection.map((product) => (
-                        <Product
-                            key={product.identifier}
-                            product={product}
-                            show={show}
-                            size={{ height, width }}
-                        />
-                    ))}
+                    {data?.ProductCollection.map((product) => {
+                        const [category] = product.category.map((item) => {
+                            const [name] = Object.values(item);
+                            return name;
+                        });
+
+                        const data = {
+                            ...product,
+                            category,
+                            ...{
+                                image: {
+                                    path: product.image.idPath,
+                                    size: {
+                                        height,
+                                        width,
+                                        alt: product.title
+                                    }
+                                }
+                            }
+                        };
+
+                        return <ProductItem key={product.identifier} product={data} show={show} />;
+                    })}
                 </ProductGrid>
             )}
         </>

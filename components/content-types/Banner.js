@@ -1,8 +1,10 @@
 import React from 'react';
-import { Button } from '../../styles/shared.styles';
-import dots from '../../public/dots.svg';
-import { BannerWrapper } from '../../styles/banner/banner.styles';
+
 import DotCMSImage from '../DotCMSImage';
+import { BannerWrapper } from '../../styles/banner/banner.styles';
+import { Button } from '../../styles/shared.styles';
+
+import dots from '../../public/dots.svg';
 
 function Banner({ buttonText, image, caption, link, textColor, title }) {
     return (
@@ -21,11 +23,9 @@ function Banner({ buttonText, image, caption, link, textColor, title }) {
             </div>
             <div className="banner-wrapper__figure">
                 <DotCMSImage
-                    width={900}
+                    size={900}
                     alt={title}
-                    data={{
-                        path: image
-                    }}
+                    path={image}
                 />
             </div>
         </BannerWrapper>
