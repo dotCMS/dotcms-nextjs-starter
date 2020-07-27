@@ -12,7 +12,7 @@ const getLanguages = () => {
 
 async function getPage(url, lang) {
     if (process.env.NODE_ENV !== 'production') {
-        loggerLog('DOTCMS PAGE', url, lang || '1');
+        // loggerLog('DOTCMS PAGE', url, lang || '1');
     }
     return dotCMSApi.page
         .get({ url, language: lang })
@@ -126,7 +126,7 @@ const getPathsArray = (pageList, languages = []) => {
         .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
 
     const paths = pageList.reduce((acc, url) => {
-        let urlArr = url.split('/').filter(Boolean);
+        let urlArr = url.split('/').filter(url => Boolean(url));
 
         {
             let [localizedArr] =
@@ -135,6 +135,8 @@ const getPathsArray = (pageList, languages = []) => {
                 acc = [...acc, getParamsObjectForPath(localizedArr, url)];
             }
         }
+
+        // console.log(urlArr);
 
         acc = [...acc, getParamsObjectForPath(urlArr, url)];
 
@@ -145,10 +147,30 @@ const getPathsArray = (pageList, languages = []) => {
     return paths.concat({ params: { slug: [''] } });
 };
 
-const getCategoryPathsArray = (storeNav) => {
-    return storeNav
+
+const getCategoryPathsArray = (storeNav, languages) => {
+    let categories = storeNav
         .filter((item) => item.hash !== 'home')
         .reduce((acc, curr) => [...acc, curr.href], []);
+
+    // if(languages?.length > 0) {
+    //     const languageCodes = languages.map((lang) => lang.languageCode).filter(lang => lang !== "en");
+    //     const localizedCategoriesPath = categories
+    //         .map((category) => {
+    //             let catArr = category.split('/').filter(Boolean);
+
+    //             let codesArr = languageCodes.map((code) => {
+    //                 return [code, ...catArr];
+    //             });
+
+    //             return [catArr, ...codesArr];
+    //         })
+    //         .flat();
+        
+    //     categories = localizedCategoriesPath.map((categoryPath) => categoryPath.join('/'));
+    // }
+
+    return categories;
 };
 
 const getTagsListForCategory = async (category) => {
@@ -182,7 +204,7 @@ const getTagsListForCategory = async (category) => {
     return results.esresponse[0].aggregations['sterms#tag'].buckets;
 };
 
-export const getLanguagesProps = async (selectedLanguage) => {
+export const getLanguagesProps = async (selectedLanguage = "") => {
 
         // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
         // and map to a clean array of ISO compatible lang codes.
@@ -197,7 +219,7 @@ export const getLanguagesProps = async (selectedLanguage) => {
 
         // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
         const languageId = hasLanguages
-            ? languages.find((lang) => lang.languageCode === selectedLanguage)
+            ? languages.find((lang) => lang.languageCode === selectedLanguage)?.id
             : '1';
 
         results = {

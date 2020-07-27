@@ -8,7 +8,6 @@ import {
     getLanguagesProps
 } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
-const dotCMSApi = require('../config/dotcmsApi');
 
 export default function Page({ pageRender, nav, error, languageProps }) {
     if (error) {
@@ -19,11 +18,12 @@ export default function Page({ pageRender, nav, error, languageProps }) {
 
 export const getStaticPaths = async () => {
     // Fetch pages from DotCMS and get all the urls in an array of strings, ex:
-    // ['/destinations/index', '/store/index', '/store/category/snow']
+    // ['/destinations/index', '/store/index', '/store/category/snow'];
+
     const pageList = await getPageList();
 
     // Fetch list of languages supported in the DotCMS instance so we can build our static pages.
-    const languages = await getLanguages();
+    const { languages  } = await getLanguagesProps();
 
     // Using the array of urls return a collection of paths, ex:
     // [
@@ -45,10 +45,11 @@ export const getStaticProps = async (context) => {
         const {
             params: { slug }
         } = context;
+
         // Determine our head and tail
         const [head, ...tail] = slug || [];
         const languageProps = await getLanguagesProps(head);
-
+        let category;
         // Build our URL
         // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
         let url = slug
@@ -57,8 +58,13 @@ export const getStaticProps = async (context) => {
                 : `/${slug.join('/')}`
             : '/index';
 
+        if (slug?.includes('category')) {
+            [category] = slug.slice(-1)[0].split('-');
+            url = `/store/category/${category}`;
+        }
+
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageProps.languageId);
+        const pageRender = await getPage(url, languageProps.languageId);    
 
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
@@ -72,9 +78,10 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
+        console.log(error)
         return {
             props: {
-                error
+                error: JSON.parse(JSON.stringify(error))
             }
         };
     }

@@ -15,7 +15,10 @@ const getPageList = async () => {
                 ... on Destination {
                     url
                 }
-                ...on LandingPage {
+                ... on LandingPage {
+                    url
+                }
+                ... on ProductLineLandingPage {
                     url
                 }
             }
