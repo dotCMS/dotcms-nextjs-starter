@@ -166,7 +166,7 @@ const getTagsListForCategory = async (category) => {
     return results.esresponse[0].aggregations['sterms#tag'].buckets;
 };
 
-export const getLanguagesProps = async (selectedLanguage = "") => {
+const getLanguagesProps = async (selectedLanguage = "") => {
 
         // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
         // and map to a clean array of ISO compatible lang codes.
@@ -181,7 +181,7 @@ export const getLanguagesProps = async (selectedLanguage = "") => {
 
         // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
         const languageId = hasLanguages
-            ? languages.find((lang) => lang.languageCode === selectedLanguage)?.id
+            ? languages.find((lang) => lang.languageCode === selectedLanguage).id
             : '1';
 
         results = {
