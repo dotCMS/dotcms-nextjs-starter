@@ -128,13 +128,11 @@ const getPathsArray = (pageList, languages = []) => {
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
 
-        // let [localizedArr] =
-        //     languages.length > 0 && languages.map((language) => [language, ...urlArr]);
-        // if (localizedArr.length > 0) {
-        //     acc = [...acc, getParamsObjectForPath(localizedArr, url)];
-        // }
-
-        // console.log(urlArr);
+        let [localizedArr] =
+            languages.length > 0 && languages.map((language) => [language, ...urlArr]);
+        if (localizedArr.length > 0) {
+            acc = [...acc, getParamsObjectForPath(localizedArr, url)];
+        }
 
         acc = [...acc, getParamsObjectForPath(urlArr, url)];
 
