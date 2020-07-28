@@ -19,7 +19,7 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
         </a>
     ) : (
         <Link
-            href={href.includes('/store/category') ? '/store/category/[slug]' : '/[...slug]'}
+            href={'/[[...slug]]'}
             as={`${href}`}
         >
             <a aria-label={ariaLabel} className={className}>
