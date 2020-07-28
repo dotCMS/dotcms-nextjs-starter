@@ -1,6 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import PageContext from '../../contexts/PageContext';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+const LanguageSelect = styled.select`
+    margin-left: 1rem;
+`
 
 const LanguageSelector = () => {
     const router = useRouter();
@@ -32,7 +37,7 @@ const LanguageSelector = () => {
 
     return (
         <div className="form-wrap-select">
-            <select
+            <LanguageSelect
                 className="form-input"
                 value={language}
                 onChange={({ target }) => {
@@ -45,7 +50,7 @@ const LanguageSelector = () => {
                             {lang.language}
                         </option>
                     ))}
-            </select>
+            </LanguageSelect>
         </div>
     );
 };

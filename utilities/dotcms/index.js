@@ -170,7 +170,7 @@ const getLanguagesProps = async (selectedLanguage = "") => {
 
         // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
         // and map to a clean array of ISO compatible lang codes.
-        let languages = await getLanguages();
+        const languages = await getLanguages();
         let results;
 
         // Returns either true or false if `selectedLanguage` in a valid language from our languages array

@@ -66,7 +66,6 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        console.log(error)
         return {
             props: {
                 error
