@@ -126,15 +126,13 @@ const getPathsArray = (pageList, languages = []) => {
         .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
 
     const paths = pageList.reduce((acc, url) => {
-        let urlArr = url.split('/').filter(url => Boolean(url));
+        let urlArr = url.split('/').filter(Boolean);
 
-        {
-            let [localizedArr] =
-                languages.length > 0 && languages.map((language) => [language, ...urlArr]);
-            if (localizedArr.length > 0) {
-                acc = [...acc, getParamsObjectForPath(localizedArr, url)];
-            }
-        }
+        // let [localizedArr] =
+        //     languages.length > 0 && languages.map((language) => [language, ...urlArr]);
+        // if (localizedArr.length > 0) {
+        //     acc = [...acc, getParamsObjectForPath(localizedArr, url)];
+        // }
 
         // console.log(urlArr);
 

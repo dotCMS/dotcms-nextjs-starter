@@ -19,6 +19,7 @@ const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {
         languageProps
     };
 
+    // When the page is generating during request (for example `/store/category-tag` pages) we don't want to show anything.
     if (typeof pageRender === 'undefined') return null;
 
     return (
@@ -26,7 +27,7 @@ const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {
             {pageRender?.layout ? (
                 <Layout>{DetailPage ? <DetailPage /> : <LayoutGrid />}</Layout>
             ) : (
-                <h1>No layout in this pageo</h1>
+                <h1>No layout in this page</h1>
             )}
         </PageContext.Provider>
     );

@@ -4,9 +4,9 @@ import {
     getPage,
     getNav,
     getPathsArray,
-    getLanguages,
     getLanguagesProps
 } from '../utilities/dotcms';
+import { getPageUrl } from '../utilities/dotcms/getPageUrl'
 import getPageList from '../utilities/dotcms/getPageList';
 
 export default function Page({ pageRender, nav, error, languageProps }) {
@@ -46,25 +46,13 @@ export const getStaticProps = async (context) => {
             params: { slug }
         } = context;
 
-        // Determine our head and tail
-        const [head, ...tail] = slug || [];
-        const languageProps = await getLanguagesProps(head);
-        let category;
-        // Build our URL
-        // if the hasLanguages predicate returns true then join with the tail otherwise join the slugs array
-        let url = slug
-            ? languageProps.hasLanguages
-                ? `/${tail.join('/')}`
-                : `/${slug.join('/')}`
-            : '/index';
+        const [languageIso] = slug || [];
+        const { languageId, hasLanguages, ...rest } = await getLanguagesProps(languageIso);
 
-        if (slug?.includes('category')) {
-            [category] = slug.slice(-1)[0].split('-');
-            url = `/store/category/${category}`;
-        }
+        const url = await getPageUrl(slug, hasLanguages);
 
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageProps.languageId);    
+        const pageRender = await getPage(url, languageId);    
 
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
@@ -73,7 +61,7 @@ export const getStaticProps = async (context) => {
             props: {
                 pageRender,
                 nav,
-                languageProps
+                languageProps: { languageId, hasLanguages, ...rest }
             },
             revalidate: 1
         };
@@ -81,7 +69,7 @@ export const getStaticProps = async (context) => {
         console.log(error)
         return {
             props: {
-                error: JSON.parse(JSON.stringify(error))
+                error
             }
         };
     }

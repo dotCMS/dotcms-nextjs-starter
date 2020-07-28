@@ -35,7 +35,7 @@ export default function Nav() {
                 router.query.slug && router.query.slug.length > 0
                     ? [current, ...router.query.slug]
                     : [current];
-            route = new Set(route);
+            route = Array.from(new Set(route));
             router.push('/[[...slug]]', `/${Array.from(route).join('/')}`);
         }
     }, []);

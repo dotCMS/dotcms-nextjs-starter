@@ -11,7 +11,7 @@ const LanguageSelector = () => {
         setLanguage(languageProps.selectedLanguage);
     }, []);
 
-    const handleChange = (value) => {
+    const handleLanguageChange = (value) => {
         localStorage.setItem('dotcms_language', value);
         setLanguage(value);
         const {
@@ -36,7 +36,7 @@ const LanguageSelector = () => {
                 className="form-input"
                 value={language}
                 onChange={({ target }) => {
-                    handleChange(target.value);
+                    handleLanguageChange(target.value);
                 }}
             >
                 {languageProps &&
