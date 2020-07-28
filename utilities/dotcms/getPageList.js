@@ -41,6 +41,8 @@ const getPageList = async () => {
         .map(({ urlMap, url }) => urlMap || url);
 
 
+    // If we have languages and language is not default then for each language build the localized URLs
+    // e.g. `/es/blog/some-post`     
     if(languages.length > 0) {
         languages
             .filter((lang) => lang.languageCode !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
