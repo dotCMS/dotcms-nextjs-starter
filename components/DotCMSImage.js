@@ -27,11 +27,11 @@ const getSize = (size) => {
 
 const DotCMSImage = ({ size, alt, path, identifier, name, className }) => {
     let { filterResize, width, height } = getSize(size);
-    let src = `${process.env.NEXT_PUBLIC_DOTCMS_HOST}`;
+    let src = '';
     let filterUrl = `/filter/resize_w/${filterResize}/20q`;
 
     if (path) {
-        src += `/${path}`;
+        src += `${path}`;
     }
 
     if (identifier && name) {
