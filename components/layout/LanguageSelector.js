@@ -16,7 +16,7 @@ const LanguageSelector = () => {
         setLanguage(languageProps.selectedLanguage);
     }, []);
 
-    const getRoute = () => {
+    const getRoute = (value, slug) => {
         return value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
             ? slug
                 ? slug.filter((route) => route !== language)
@@ -33,7 +33,7 @@ const LanguageSelector = () => {
             query: { slug }
         } = router;
 
-        const route = getRoute();     
+        const route = getRoute(value, slug);     
         router.replace('/[[...slug]]', `/${route.join('/')}`);
     };
 
