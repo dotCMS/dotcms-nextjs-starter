@@ -6,7 +6,7 @@ export default function Product(props) {
               const [name] = Object.values(item);
               return name;
           })
-        : '';
+        : [''];
     const { retailPrice, urlTitle, title, salePrice, image } = props;
 
     const data = {
