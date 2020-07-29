@@ -16,6 +16,16 @@ const LanguageSelector = () => {
         setLanguage(languageProps.selectedLanguage);
     }, []);
 
+    const getRoute = () => {
+        return value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
+            ? slug
+                ? slug.filter((route) => route !== language)
+                : []
+            : slug
+            ? [value, ...slug.filter((route) => route !== value)]
+            : [`${value}`];
+    }
+
     const handleLanguageChange = (value) => {
         localStorage.setItem('dotcms_language', value);
         setLanguage(value);
@@ -23,16 +33,8 @@ const LanguageSelector = () => {
             query: { slug }
         } = router;
 
-        const newRoute =
-            value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
-                ? slug
-                    ? slug.filter((route) => route !== language)
-                    : []
-                : slug
-                ? [value, ...slug.filter((route) => route !== value)]
-                : [`${value}`];
-
-        router.replace('/[[...slug]]', `/${newRoute.join('/')}`);
+        const route = getRoute();     
+        router.replace('/[[...slug]]', `/${route.join('/')}`);
     };
 
     return (
