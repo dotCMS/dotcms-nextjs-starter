@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Product from '../components/Product';
 import { useApollo } from '../config/apollo';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
 import TagsFilter from './TagsFilter';
 import useTagsList from '../hooks/useTagsList';
@@ -61,7 +61,14 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
     }`;
 
     let options = { variables: { limit: quantity, query }, client };
-    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
+    const [getData, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY, options);
+
+    useEffect(() => {
+      // To avoid running the GraphQL query in the server we run it only if we're in client-side
+      if (window !== 'undefined') {
+        getData();
+      }
+    }, [])
 
     if (error) return `Error! ${error}`;
 

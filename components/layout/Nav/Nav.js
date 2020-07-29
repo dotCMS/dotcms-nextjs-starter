@@ -1,35 +1,69 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
+import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
+import MenuList from '../../layout/Nav/MenuList';
 import logo from '../../../public/logo.png';
-import searchIcon from '../../../public/search.svg';
-import shoppingCart from '../../../public/shopping-cart.svg';
 import menuIcon from '../../../public/menu.svg';
-import RouterLink from '../../RouterLink';
 import useNav from '../../../hooks/useNav';
 import Link from 'next/link';
+import LanguageSelector from '../LanguageSelector';
+import PageContext from '../../../contexts/PageContext';
+import {
+    setCurrentLanguage,
+    getCurrentLanguage,
+    removeCurrentLanguage
+} from '../../../utilities/dotcms/locale';
 
 export default function Nav() {
     const nav = useNav();
-    const router = useRouter();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    const {
+        languageProps: { languages, defaultLanguage }
+    } = useContext(PageContext);
 
     const handleOpenMenu = (e) => {
         e.preventDefault();
         setIsMenuOpen(!isMenuOpen);
     };
+    
+    const router = useRouter();
 
-    const routerLinkClassName = (item) => {
-        return [
-            router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1] ? 'active' : '',
-            item.children ? 'hasChildren' : ''
-        ];
+    const shouldSetLanguage = (lang) => {
+        const languageFound = () => {
+            return (
+                Object.values(languages.find((val) => val.languageCode === lang) || []).length > 0
+            );
+        };
+
+        return !router.query.slug?.includes(getCurrentLanguage()) && languageFound();
     };
+
+    useEffect(() => {
+        // Destructure alleged language from slug, if nothing found then assign empty string.
+        const [lang] = router.query?.slug || [];
+
+        // If the user manually removes the language and one is found in the available languages then store in localStorage
+        if (shouldSetLanguage(lang)) {
+            setCurrentLanguage(lang);
+        } else if (shouldSetLanguage(defaultLanguage)) {
+            setCurrentLanguage(defaultLanguage);
+        }
+
+        return () => removeCurrentLanguage();
+    }, []);
 
     return (
         <div className="container">
             <MainNav className="main-nav">
-                <Link href="/">
+                <Link
+                    href={
+                        getCurrentLanguage() && !defaultLanguage
+                            ? `/${getCurrentLanguage()}`
+                            : `/`
+                    }
+                >
                     <a className="main-nav__logo" aria-label="Logo">
                         <img src={logo} alt="" width={135} height={41} />
                     </a>
@@ -43,38 +77,9 @@ export default function Nav() {
                     >
                         <img src={menuIcon} alt="Hamburger Icon" />
                     </a>
-                    <nav className="menu menu__list">
-                        {nav.map((item) => (
-                            <RouterLink
-                                key={item.href}
-                                className={routerLinkClassName(item).join(' ')}
-                                href={item.href}
-                            >
-                                {item.title}
-                                {item.children && (
-                                    <ul className="submenu">
-                                        {item.children[0].children.map((child, idx) => {
-                                            return (
-                                                <li key={idx}>
-                                                    <RouterLink href={child.href}>
-                                                        {child.title}
-                                                    </RouterLink>
-                                                </li>
-                                            );
-                                        })}
-                                    </ul>
-                                )}
-                            </RouterLink>
-                        ))}
-                    </nav>
-                    <nav className="menu menu__icons">
-                        <a href="#" aria-label="button">
-                            <img src={searchIcon} alt="Search Icon" />
-                        </a>
-                        <a href="#" aria-label="button">
-                            <img src={shoppingCart} alt="Shopping Cart Icon" />
-                        </a>
-                    </nav>
+                    <MenuList navigation={nav} />
+                    <SocialMediaMenu />
+                    <LanguageSelector />
                 </NavMenu>
             </MainNav>
         </div>

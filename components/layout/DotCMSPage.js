@@ -4,7 +4,7 @@ import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
 
-const DotCMSPage = ({ pageRender, nav, isEditMode }) => {
+const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {
     let DetailPage;
 
     if (pageRender?.urlContentMap) {
@@ -15,8 +15,12 @@ const DotCMSPage = ({ pageRender, nav, isEditMode }) => {
     const contextValue = {
         isEditMode,
         nav,
-        pageRender
+        pageRender,
+        languageProps
     };
+
+    // When the page is generating during request (for example `/store/category-tag` pages) we don't want to show anything.
+    if (typeof pageRender === 'undefined') return null;
 
     return (
         <PageContext.Provider value={contextValue}>
