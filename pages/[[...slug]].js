@@ -1,17 +1,13 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
-import Error from '../components/layout/Error';
-import {
-    getPage,
-    getNav,
-    getPathsArray,
-    getLanguagesProps
-} from '../utilities/dotcms';
-import { getPageUrl } from '../utilities/dotcms/getPageUrl'
+import ErrorPage from '../components/layout/ErrorPage';
+import { isJson } from '../utilities';
+import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
+import { getPageUrl } from '../utilities/dotcms/getPageUrl';
 
 export default function Page({ pageRender, nav, error, languageProps }) {
     if (error) {
-        return <Error statusCode={error.statusCode} message={error.message} />;
+        return <ErrorPage statusCode={error.statusCode} message={error.message} />;
     }
     return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
 }
@@ -21,8 +17,6 @@ export const getStaticPaths = async () => {
     // ['/destinations/index', '/store/index', '/store/category/snow'];
 
     const pageList = await getPageList();
-
-    // Fetch list of languages supported in the DotCMS instance so we can build our static pages.
 
     // Using the array of urls return a collection of paths, ex:
     // [
@@ -51,7 +45,13 @@ export const getStaticProps = async (context) => {
         const url = await getPageUrl(slug, hasLanguages);
 
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageId);    
+        const pageRender = await getPage(url, languageId);   
+        
+        // If the page doesn't have contentlets then we can assume that the page does not exists
+        if (pageRender.numberContents === 0) {
+            const errMessage = { statusCode: 404, message: 'Page Not Found' };
+            throw new Error(JSON.stringify(errMessage));
+        }
 
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
@@ -65,6 +65,7 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
+        error = isJson(error.message) ? JSON.parse(error.message) : error;
         return {
             props: {
                 error

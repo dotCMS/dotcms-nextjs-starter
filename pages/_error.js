@@ -1,4 +1,4 @@
-import Error from '../components/layout/Error';
+import Error from '../components/layout/ErrorPage';
 
 function ErrorPage({ error }) {
     return <Error message={error.message} statusCode={error.statusCode} stack={error.traceError} />;

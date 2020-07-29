@@ -21,11 +21,21 @@ function isNextInternalFile(url) {
     return false;
 }
 
+const isJson = (str) => {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 module.exports = {
     isNextInternalFile,
     loggerLog,
     loggerError,
     getToken,
     currencyFormatter,
-    capitalize
+    capitalize,
+    isJson
 };
