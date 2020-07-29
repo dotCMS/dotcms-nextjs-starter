@@ -47,12 +47,6 @@ export const getStaticProps = async (context) => {
         // Fetch the page object from DotCMS Page API
         const pageRender = await getPage(url, languageId);   
         
-        // If the page doesn't have contentlets then we can assume that the page does not exists
-        if (pageRender.numberContents === 0) {
-            const errMessage = { statusCode: 404, message: 'Page Not Found' };
-            throw new Error(JSON.stringify(errMessage));
-        }
-
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
 
@@ -65,10 +59,9 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        error = isJson(error.message) ? JSON.parse(error.message) : error;
         return {
             props: {
-                error
+                error: isJson(error.message) ? JSON.parse(error.message) : error
             }
         };
     }
