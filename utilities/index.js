@@ -23,7 +23,7 @@ const isNextInternalFile = (url) => {
     return false;
 }
 
-const isJson = (str) => {
+const isJsonValid = (str) => {
     try {
         JSON.parse(str);
     } catch (e) {
