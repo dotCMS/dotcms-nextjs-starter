@@ -10,8 +10,10 @@ const capitalize = (str, lower = false) =>
     (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, (match) =>
         match.toUpperCase()
     );
+
 const internalPrefixes = [/^\/_next\//, /^\/static\//, /^\/favicon.ico/];
-function isNextInternalFile(url) {
+
+const isNextInternalFile = (url) => {
     for (const prefix of internalPrefixes) {
         if (prefix.test(url)) {
             return true;
@@ -28,7 +30,7 @@ const isJson = (str) => {
         return false;
     }
     return true;
-}
+};
 
 module.exports = {
     isNextInternalFile,

@@ -157,43 +157,49 @@ const getTagsListForCategory = async (category) => {
         }
     };
 
-    let results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
-    results = await results.json();
-    return results.esresponse[0].aggregations['sterms#tag'].buckets;
+    try {
+        let results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
+        results = await results.json();
+        return results.esresponse[0].aggregations['sterms#tag'].buckets;    
+    } catch (error) {
+        console.log(error)
+    }
+    
 };
 
-const getLanguagesProps = async (selectedLanguage = "") => {
+const getLanguagesProps = async (selectedLanguage = '') => {
+    // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
+    // and map to a clean array of ISO compatible lang codes.
+    const languages = await getLanguages();
 
-        // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
-        // and map to a clean array of ISO compatible lang codes.
-        const languages = await getLanguages();
-        let results;
+    // Returns either true or false if `selectedLanguage` in a valid language from our languages array
+    let hasLanguages = languages
+        .map((language) => language.languageCode)
+        .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
+        .includes(selectedLanguage);
 
-        // Returns either true or false if `selectedLanguage` in a valid language from our languages array
-        let hasLanguages = languages
-            .map((language) => language.languageCode)
-            .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
-            .includes(selectedLanguage);
+    // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
+    const languageId = hasLanguages
+        ? languages.find((lang) => lang.languageCode === selectedLanguage).id
+        : '1';
 
-        // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
-        const languageId = hasLanguages
-            ? languages.find((lang) => lang.languageCode === selectedLanguage).id
-            : '1';
-
-        results = {
+    return new Promise((resolve) => {
+        let results = {
             hasLanguages,
             languageId,
             languages
         };
 
-        if (hasLanguages) {
-            results = {
-                ...results,
-                selectedLanguage
-            };
-        }
+        resolve(
+            hasLanguages
+                ? {
+                    ...results,
+                    selectedLanguage
+                }
+                : results
+        );
 
-        return results;
+    });
 };
 
 module.exports = {

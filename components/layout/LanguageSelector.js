@@ -17,23 +17,22 @@ const LanguageSelector = () => {
     }, []);
 
     const getRoute = (value, slug) => {
-        return value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
-            ? slug
-                ? slug.filter((route) => route !== language)
-                : []
-            : slug
-            ? [value, ...slug.filter((route) => route !== value)]
-            : [`${value}`];
-    }
+        if (value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE) {
+            return slug ? slug.filter((route) => route !== language) : [];
+        } else {
+            return slug ? [value, ...slug.filter((route) => route !== value)] : [`${value}`];
+        }
+    };
 
     const handleLanguageChange = (value) => {
         localStorage.setItem('dotcms_language', value);
         setLanguage(value);
+        
         const {
             query: { slug }
         } = router;
 
-        const route = getRoute(value, slug);     
+        const route = getRoute(value, slug);
         router.replace('/[[...slug]]', `/${route.join('/')}`);
     };
 
