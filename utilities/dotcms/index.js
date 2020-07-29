@@ -157,14 +157,19 @@ const getTagsListForCategory = async (category) => {
         }
     };
 
-    try {
-        let results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
-        results = await results.json();
-        return results.esresponse[0].aggregations['sterms#tag'].buckets;    
-    } catch (error) {
-        console.log(error)
-    }
-    
+    const results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
+
+    const {
+        esresponse: [
+            {
+                aggregations: {
+                    'sterms#tag': { buckets }
+                }
+            }
+        ]
+    } = await results.json();
+
+    return buckets;    
 };
 
 const getLanguagesProps = async (selectedLanguage = '') => {
