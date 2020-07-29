@@ -1,7 +1,6 @@
 import ProductItem from '../ProductItem';
 
 export default function Product(props) {
-    console.log(props.title, props.category);
     const [cat] = props.category?.length
         ? props.category.map((item) => {
               const [name] = Object.values(item);
