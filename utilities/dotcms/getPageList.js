@@ -32,7 +32,7 @@ const getPageList = async () => {
         query: PAGES_QUERY
     });
 
-    // Fetch list of languages supported in the DotCMS instance so we can build our static pages.
+    // Fetch list of languages available in the DotCMS instance so we can build our static pages for each language
     const { languages } = await getLanguagesProps();
 
     results = data.search
