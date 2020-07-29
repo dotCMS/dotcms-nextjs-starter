@@ -158,7 +158,7 @@ const getTagsListForCategory = async (category) => {
     };
 
     const results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
-
+    
     const {
         esresponse: [
             {
@@ -176,11 +176,14 @@ const getLanguagesProps = async (selectedLanguage = '') => {
     // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
     // and map to a clean array of ISO compatible lang codes.
     const languages = await getLanguages();
+    
+    // This will be coming from the API
+    const __DEFAULT_LANGUAGE__ = "en"
 
     // Returns either true or false if `selectedLanguage` in a valid language from our languages array
     let hasLanguages = languages
         .map((language) => language.languageCode)
-        .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
+        .filter((language) => language !== __DEFAULT_LANGUAGE__)
         .includes(selectedLanguage);
 
     // If the hasLanguages predicate returns true find the language in the languages array and pass it in `getPage` call
@@ -192,7 +195,8 @@ const getLanguagesProps = async (selectedLanguage = '') => {
         let results = {
             hasLanguages,
             languageId,
-            languages
+            languages,
+            defaultLanguage: __DEFAULT_LANGUAGE__
         };
 
         resolve(

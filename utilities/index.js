@@ -13,31 +13,10 @@ const capitalize = (str, lower = false) =>
 
 const internalPrefixes = [/^\/_next\//, /^\/static\//, /^\/favicon.ico/];
 
-const isNextInternalFile = (url) => {
-    for (const prefix of internalPrefixes) {
-        if (prefix.test(url)) {
-            return true;
-        }
-    }
-
-    return false;
-}
-
-const isJson = (str) => {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
-};
-
 module.exports = {
-    isNextInternalFile,
     loggerLog,
     loggerError,
     getToken,
     currencyFormatter,
-    capitalize,
-    isJson
+    capitalize
 };

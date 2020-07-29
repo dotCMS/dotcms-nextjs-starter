@@ -10,24 +10,25 @@ const LanguageSelect = styled.select`
 const LanguageSelector = () => {
     const router = useRouter();
     const [language, setLanguage] = useState('');
-    const { languageProps } = useContext(PageContext);
+    const {
+        languageProps
+    } = useContext(PageContext);
 
     useEffect(() => {
         setLanguage(languageProps.selectedLanguage);
     }, []);
 
     const getRoute = (value, slug) => {
-        if (value === process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE) {
+        if (value === languageProps.defaultLanguage) {
             return slug ? slug.filter((route) => route !== language) : [];
-        } else {
-            return slug ? [value, ...slug.filter((route) => route !== value)] : [`${value}`];
-        }
+        } 
+        return slug ? [value, ...slug.filter((route) => route !== value)] : [`${value}`];
     };
 
     const handleLanguageChange = (value) => {
         localStorage.setItem('dotcms_language', value);
         setLanguage(value);
-        
+
         const {
             query: { slug }
         } = router;
@@ -45,7 +46,7 @@ const LanguageSelector = () => {
                     handleLanguageChange(target.value);
                 }}
             >
-                {languageProps &&
+                {Object.keys(languageProps).length > 0 &&
                     languageProps.languages.map((lang) => (
                         <option key={lang.id} value={lang.languageCode}>
                             {lang.language}

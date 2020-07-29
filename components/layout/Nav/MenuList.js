@@ -7,7 +7,7 @@ import PageContext from '../../../contexts/PageContext';
 function MenuList({navigation}) {
 
   const router = useRouter();
-  const { languageProps: { selectedLanguage } = {} } = useContext(PageContext) || {};
+  const { languageProps: { selectedLanguage, defaultLanguage } = {} } = useContext(PageContext) || {};
 
   const routerLinkClassName = (item) => {
       return [
@@ -17,7 +17,7 @@ function MenuList({navigation}) {
   };
 
   const getHref = (selectedLang, item) => {
-    return selectedLang && selectedLang !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE
+    return selectedLang && selectedLang !== defaultLanguage
         ? `${selectedLang}${item.href}`
         : `${item.href}`;
   }

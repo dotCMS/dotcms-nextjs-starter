@@ -12,8 +12,7 @@ import PageContext from '../../../contexts/PageContext';
 import {
     setCurrentLanguage,
     getCurrentLanguage,
-    removeCurrentLanguage,
-    isDefaultLanguage
+    removeCurrentLanguage
 } from '../../../utilities/dotcms/locale';
 
 export default function Nav() {
@@ -21,7 +20,7 @@ export default function Nav() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const {
-        languageProps: { languages }
+        languageProps: { languages, defaultLanguage }
     } = useContext(PageContext);
 
     const handleOpenMenu = (e) => {
@@ -48,8 +47,8 @@ export default function Nav() {
         // If the user manually removes the language and one is found in the available languages then store in localStorage
         if (shouldSetLanguage(lang)) {
             setCurrentLanguage(lang);
-        } else if (shouldSetLanguage(process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)) {
-            setCurrentLanguage(process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
+        } else if (shouldSetLanguage(defaultLanguage)) {
+            setCurrentLanguage(defaultLanguage);
         }
 
         return () => removeCurrentLanguage();
@@ -60,7 +59,7 @@ export default function Nav() {
             <MainNav className="main-nav">
                 <Link
                     href={
-                        getCurrentLanguage() && !isDefaultLanguage()
+                        getCurrentLanguage() && !defaultLanguage
                             ? `/${getCurrentLanguage()}`
                             : `/`
                     }

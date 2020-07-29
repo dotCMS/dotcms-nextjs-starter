@@ -1,6 +1,5 @@
 import DotCMSPage from '../components/layout/DotCMSPage';
 import ErrorPage from '../components/layout/ErrorPage';
-import { isJson } from '../utilities';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
 import { getPageUrl } from '../utilities/dotcms/getPageUrl';
@@ -61,7 +60,7 @@ export const getStaticProps = async (context) => {
     } catch (error) {
         return {
             props: {
-                error: isJson(error.message) ? JSON.parse(error.message) : error
+                error
             }
         };
     }

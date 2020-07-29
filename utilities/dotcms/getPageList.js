@@ -33,7 +33,7 @@ const getPageList = async () => {
     });
 
     // Fetch list of languages available in the DotCMS instance so we can build our static pages for each language
-    const { languages } = await getLanguagesProps();
+    const { languages, defaultLanguage } = await getLanguagesProps();
 
     results = data.search
         .filter(({ urlMap, url }) => (urlMap || url) && !PAGES_TO_FILTER.includes(url))
@@ -43,7 +43,7 @@ const getPageList = async () => {
     // e.g. `/es/blog/some-post`
     if (languages?.length > 0) {
         languages
-            .filter((lang) => lang.languageCode !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)
+            .filter((lang) => lang.languageCode !== defaultLanguage)
             .forEach((language) => {
                 results.map((url) => {
                     localizedResults.push(`${language.languageCode}${url}`);
