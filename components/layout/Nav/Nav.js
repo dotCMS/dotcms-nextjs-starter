@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Router, { useRouter } from 'next/router';
+import React, { useState, useEffect, useContext } from 'react';
+import { useRouter } from 'next/router';
 import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
 import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
 import MenuList from '../../layout/Nav/MenuList';
@@ -8,42 +8,63 @@ import menuIcon from '../../../public/menu.svg';
 import useNav from '../../../hooks/useNav';
 import Link from 'next/link';
 import LanguageSelector from '../LanguageSelector';
+import PageContext from '../../../contexts/PageContext';
+import {
+    setCurrentLanguage,
+    getCurrentLanguage,
+    removeCurrentLanguage,
+    isDefaultLanguage
+} from '../../../utilities/dotcms/locale';
 
 export default function Nav() {
     const nav = useNav();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const {
+        languageProps: { languages }
+    } = useContext(PageContext);
+
     const handleOpenMenu = (e) => {
         e.preventDefault();
         setIsMenuOpen(!isMenuOpen);
     };
-
-    const router = useRouter();
     
-    const current =
-        typeof localStorage !== 'undefined' &&
-        localStorage.getItem('dotcms_language');
-    const isDefaultLanguage = current !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE;
+    const router = useRouter();
+
+    const shouldSetLanguage = (lang) => {
+        const languageFound = () => {
+            return (
+                Object.values(languages.find((val) => val.languageCode === lang) || []).length > 0
+            );
+        };
+
+        return !router.query.slug?.includes(getCurrentLanguage()) && languageFound();
+    };
+
     useEffect(() => {
-        if (
-            current &&
-            isDefaultLanguage &&
-            Object.entries(router.query).length > 0 &&
-            !router.query.slug.includes(current)
-        ) {
-            let route =
-                router.query.slug && router.query.slug.length > 0
-                    ? [current, ...router.query.slug]
-                    : [current];
-            route = Array.from(new Set(route));
-            router.push('/[[...slug]]', `/${Array.from(route).join('/')}`);
+        // Destructure alleged language from slug, if nothing found then assign empty string.
+        const [lang] = router.query?.slug || [];
+
+        // If the user manually removes the language and one is found in the available languages then store in localStorage
+        if (shouldSetLanguage(lang)) {
+            setCurrentLanguage(lang);
+        } else if (shouldSetLanguage(process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE)) {
+            setCurrentLanguage(process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
         }
+
+        return () => removeCurrentLanguage();
     }, []);
 
     return (
         <div className="container">
             <MainNav className="main-nav">
-                <Link href={current && isDefaultLanguage ? `/${current}` : `/`}>
+                <Link
+                    href={
+                        getCurrentLanguage() && !isDefaultLanguage()
+                            ? `/${getCurrentLanguage()}`
+                            : `/`
+                    }
+                >
                     <a className="main-nav__logo" aria-label="Logo">
                         <img src={logo} alt="" width={135} height={41} />
                     </a>

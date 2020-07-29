@@ -120,11 +120,7 @@ const getParamsObjectForPath = (pathArray, url) => {
     };
 };
 
-const getPathsArray = (pageList, languages = []) => {
-    languages = languages
-        .map((language) => language.languageCode)
-        .filter((language) => language !== process.env.NEXT_PUBLIC_DEFAULT_LANGUAGE);
-
+const getPathsArray = (pageList) => {
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
         acc = [...acc, getParamsObjectForPath(urlArr, url)];

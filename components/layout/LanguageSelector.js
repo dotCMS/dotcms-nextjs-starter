@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const LanguageSelect = styled.select`
     margin-left: 1rem;
-`
+`;
 
 const LanguageSelector = () => {
     const router = useRouter();

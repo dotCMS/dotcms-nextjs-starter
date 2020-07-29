@@ -23,7 +23,6 @@ export const getStaticPaths = async () => {
     const pageList = await getPageList();
 
     // Fetch list of languages supported in the DotCMS instance so we can build our static pages.
-    const { languages  } = await getLanguagesProps();
 
     // Using the array of urls return a collection of paths, ex:
     // [
@@ -31,7 +30,7 @@ export const getStaticPaths = async () => {
     //     { params: { slug: '/store' } }
     //     { params: { slug: '/store/category/snow' } }
     // ]
-    const paths = getPathsArray(pageList, languages);
+    const paths = getPathsArray(pageList);
 
     // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
     return {
