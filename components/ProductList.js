@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
 
-import ProductItem from '../components/ProductItem';
-import TagsFilter from './TagsFilter';
-import useTagsFiltered from '../hooks/useTagsFiltered';
-import useTagsList from '../hooks/useTagsList';
+import { useApollo } from '../config/apollo';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
-
+import useTagsList from '../hooks/useTagsList';
+import useTagsFiltered from '../hooks/useTagsFiltered';
+import TagsFilter from './TagsFilter';
+import ProductItem from '../components/ProductItem';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
