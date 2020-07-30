@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import RouterLink from '../RouterLink';
-import DotCMSImage from '../DotCMSImage';
+import RouterLink from '../../RouterLink';
+import DotCMSImage from '../../DotCMSImage';
 
 const WapperLink = styled(RouterLink)`
     display: block;

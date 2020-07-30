@@ -12,7 +12,7 @@ import {
     calendarEventDetail,
     BlogDetail,
     ActivityDetail,
-} from './rootContentTypes';
+} from '../../components/dotcms/content-types';
 
 export const mapContentTypes = (contentType) => {
 

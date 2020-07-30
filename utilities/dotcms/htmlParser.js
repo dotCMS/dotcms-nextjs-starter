@@ -1,5 +1,5 @@
-import DotCMSImage from '../DotCMSImage';
-import RouterLink from '../RouterLink';
+import DotCMSImage from '../../components/DotCMSImage';
+import RouterLink from '../../components/RouterLink';
 import ReactHtmlParser, { processNodes } from 'react-html-parser';
 
 const transform = (node, _index) => {
@@ -16,6 +16,6 @@ const transform = (node, _index) => {
     }
 };
 
-export default function withRawContent({ content }) {
+export default function htmlParser({ content }) {
     return ReactHtmlParser(content, { transform });
 }

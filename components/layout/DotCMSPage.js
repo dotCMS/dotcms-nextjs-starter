@@ -1,5 +1,5 @@
 import React from 'react';
-import { getComponent } from '../content-types/mapContentTypes';
+import { getComponent } from '../../utilities/dotcms/mapContentTypes';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';

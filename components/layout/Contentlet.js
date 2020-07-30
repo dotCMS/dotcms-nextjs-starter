@@ -1,4 +1,4 @@
-import { mapContentTypes, getComponent } from '../content-types/mapContentTypes';
+import { mapContentTypes, getComponent } from '../../utilities/dotcms/mapContentTypes';
 
 export const Contentlet = ({ data }) => {
     let Component;

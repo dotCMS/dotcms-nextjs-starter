@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
-import { Button } from '../../styles/shared.styles';
-const { currencyFormatter } = require('../../utilities');
-import Carousel from '../Carousel';
+import { Button } from '../../../styles/shared.styles';
+const { currencyFormatter } = require('../../../utilities');
+import Carousel from '../../Carousel';
 import styled from 'styled-components';
-import PageContext from '../../contexts/PageContext';
+import PageContext from '../../../contexts/PageContext';
 
 import {
     ProductContainer,
     ProductDetailContainer,
     Price,
     Quantity
-} from '../../styles/products/product.styles';
+} from '../../../styles/products/product.styles';
 
 const Content = styled.div`
     margin-bottom: 1.6rem;

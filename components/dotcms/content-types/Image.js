@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import DotCMSImage from '../DotCMSImage';
+import DotCMSImage from '../../DotCMSImage';
 
 const Wrapper = styled.div`
     display: block;
