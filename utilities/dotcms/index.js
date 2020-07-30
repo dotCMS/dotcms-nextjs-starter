@@ -1,13 +1,10 @@
 const fetch = require('isomorphic-fetch');
 
-import getPage from './getPage';
-import getLanguages from './getLanguages';
-
 const CustomError = require('../custom-error');
 const dotCMSApi = require('../../config/dotcmsApi');
-const { LANG_COOKIE_NAME } = require('./constants');
+const getLanguages = require('./getLanguages');
+const getPage = require('./getPage');
 const { loggerLog } = require('../logger');
-const { printError } = require('../../cli/print');
 
 async function getNav(depth, location = '/') {
     if (process.env.NODE_ENV !== 'production') {
@@ -35,20 +32,6 @@ function emitRemoteRenderEdit(url) {
         data: { pathname: url }
     });
 }
-
-const getToken = ({ user, password, expirationDays, host }) => {
-    return dotCMSApi.auth
-        .getToken({ user, password, expirationDays, host })
-        .then((res) => res)
-        .catch((err) => {
-            if (err.status === 400 || err.status === 401) {
-                console.log('\n');
-                printError(err.message);
-                return;
-            }
-            throw err;
-        });
-};
 
 /*
  * Determines if the path ends with /index but only when the / is preceded by a word
@@ -111,7 +94,7 @@ const getTagsListForCategory = async (category) => {
     };
 
     const results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
-    
+
     const {
         esresponse: [
             {
@@ -122,16 +105,16 @@ const getTagsListForCategory = async (category) => {
         ]
     } = await results.json();
 
-    return buckets;    
+    return buckets;
 };
 
 const getLanguagesProps = async (selectedLanguage = '') => {
     // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
     // and map to a clean array of ISO compatible lang codes.
     const languages = await getLanguages();
-    
+
     // This will be coming from the API
-    const __DEFAULT_LANGUAGE__ = "en"
+    const __DEFAULT_LANGUAGE__ = 'en';
 
     // Returns either true or false if `selectedLanguage` in a valid language from our languages array
     let hasLanguages = languages
@@ -155,24 +138,19 @@ const getLanguagesProps = async (selectedLanguage = '') => {
         resolve(
             hasLanguages
                 ? {
-                    ...results,
-                    selectedLanguage
-                }
+                      ...results,
+                      selectedLanguage
+                  }
                 : results
         );
-
     });
 };
 
 module.exports = {
     CustomError,
-    getCookie,
-    setCookie,
-    LANG_COOKIE_NAME,
     getPage,
     getNav,
     emitRemoteRenderEdit,
-    getToken,
     getTagsListForCategory,
     getPathsArray,
     getLanguages,

@@ -4,4 +4,4 @@ const getLanguages = () => {
     return dotCMSApi.language.getLanguages();
 };
 
-export default getLanguages
+module.exports = getLanguages

@@ -35,4 +35,4 @@ const getPage = (url, lang) => {
         });
 };
 
-export default getPage;
+module.exports = getPage;

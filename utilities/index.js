@@ -1,5 +1,4 @@
 const { loggerError, loggerLog } = require('./logger');
-const getToken = require('./dotcms');
 
 const currencyFormatter = new Intl.NumberFormat('en-US', {
     style: 'currency',
@@ -14,7 +13,6 @@ const capitalize = (str, lower = false) =>
 module.exports = {
     loggerLog,
     loggerError,
-    getToken,
     currencyFormatter,
     capitalize
 };
