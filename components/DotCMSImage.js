@@ -32,17 +32,25 @@ const DotCMSImage = ({ size, alt, path, identifier, name, className, src }) => {
     const filterUrl = `/filter/resize_w/${filterResize}/20q`;
     let srcUrl = '';
 
-    if(!srcUrl.startsWith("/dA")) {
-        srcUrl = src;
-    } else {
-        if (path) {
-            srcUrl += `${path}`;
-        }
+    // if(!srcUrl.startsWith("/dA")) {
+    //     srcUrl = src;
+    // } else {
+    //     if (path) {
+    //         srcUrl += `${path}`;
+    //     }
 
-        if (identifier && name) {
-            srcUrl += `/dA/${identifier}/${name}`;
-        }
-    }
+    //     if (identifier && name) {
+    //         srcUrl += `/dA/${identifier}/${name}`;
+    //     }
+    // }
+
+     if (path) {
+         srcUrl += `${path}`;
+     }
+
+     if (identifier && name) {
+         srcUrl += `/dA/${identifier}/${name}`;
+     }
 
     return (
         <img
