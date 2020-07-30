@@ -1,47 +1,16 @@
+const fetch = require('isomorphic-fetch');
+
+import getPage from './getPage';
+
+const CustomError = require('../custom-error');
 const dotCMSApi = require('../../config/dotcmsApi');
+const { LANG_COOKIE_NAME } = require('./constants');
 const { loggerLog } = require('../logger');
 const { printError } = require('../../cli/print');
-const fetch = require('isomorphic-fetch');
-const CustomError = require('../custom-error');
-const transformPage = require('./transformPage');
-const { DOTCMS_DOWN, DOTCMS_NO_AUTH, LANG_COOKIE_NAME } = require('./constants');
 
 const getLanguages = () => {
     return dotCMSApi.language.getLanguages();
 };
-
-async function getPage(url, lang) {
-    if (process.env.NODE_ENV !== 'production') {
-        // loggerLog('DOTCMS PAGE', url, lang || '1');
-    }
-    return dotCMSApi.page
-        .get({ url, language: lang })
-        .then(async (pageRender) => {
-            /*
-                If the page doesn't have a layout this transformPage function
-                will throw an error.
-            */
-            return await transformPage(pageRender);
-        })
-        .catch((error) => {
-            /* 
-                Error coming from the DotCMS server when DotCMS instance is down or not accesible
-            */
-            if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-                error.statusCode = DOTCMS_DOWN;
-                error.message = 'DotCMS: instance is not running or inaccessible';
-            }
-            /* 
-                Error coming from the DotCMS server when the authorization failed
-            */
-            if (error.statusCode === 401) {
-                error.statusCode = DOTCMS_NO_AUTH;
-                error.message = 'DotCMS: Invalid Auth Token';
-            }
-
-            throw error;
-        });
-}
 
 async function getNav(depth, location = '/') {
     if (process.env.NODE_ENV !== 'production') {
