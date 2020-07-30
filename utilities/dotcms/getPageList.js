@@ -56,4 +56,4 @@ const getPageList = async () => {
     return results;
 };
 
-module.exports = getPageList;
+export default getPageList;
