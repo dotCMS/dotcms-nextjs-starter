@@ -25,7 +25,10 @@ const getSize = (size) => {
     return result;
 };
 
-const DotCMSImage = ({ size, alt, path, identifier, name, className }) => {
+const DotCMSImage = ({ size, alt, path, identifier, name, className, ...rest }) => {
+
+    console.log({ size, alt, path, identifier, name, className, rest})
+
     let { filterResize, width, height } = getSize(size);
     let src = '';
     let filterUrl = `/filter/resize_w/${filterResize}/20q`;
