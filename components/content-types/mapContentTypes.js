@@ -7,6 +7,7 @@ import {
     CategoryFilter,
     Activity,
     Image,
+    Video,
     Product
 } from './rootContentTypes';
 
@@ -19,6 +20,7 @@ export const mapContentTypes = (contentType) => {
         ProductDetail,
         CategoryFilter,
         Activity,
+        Video,
         Image,
         Product
     };

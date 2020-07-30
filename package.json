@@ -25,6 +25,7 @@
         "fs": "^0.0.1-security",
         "graphql": "^15.0.0",
         "graphql-tag": "^2.10.3",
+        "himalaya": "^1.1.0",
         "isomorphic-fetch": "^2.2.1",
         "next": "^9.5.0",
         "next-with-apollo": "^5.0.1",
