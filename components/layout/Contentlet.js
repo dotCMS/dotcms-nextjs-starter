@@ -1,13 +1,7 @@
-import { mapContentTypes, getComponent } from '../../utilities/dotcms/mapContentTypes';
+import getComponent from '../../utilities/dotcms/getComponent';
 
 export const Contentlet = ({ data }) => {
-    let Component;
-
-    if (data.baseType === 'WIDGET' && !mapContentTypes(data.contentType)) {
-        Component = getComponent('SimpleWidget');
-    } else {
-        Component = getComponent(data.contentType);
-    }
+    let Component = getComponent(data);
 
     return <Component {...data} />;
 };

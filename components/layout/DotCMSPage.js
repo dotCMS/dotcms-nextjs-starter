@@ -1,5 +1,5 @@
 import React from 'react';
-import { getComponent } from '../../utilities/dotcms/mapContentTypes';
+import getPageComponent from '../../utilities/dotcms/getPageComponent';
 import PageContext from '../../contexts/PageContext';
 import Layout from '../layout/Layout';
 import LayoutGrid from './LayoutGrid';
@@ -9,7 +9,7 @@ const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {
 
     if (pageRender?.urlContentMap) {
         const { urlContentMap } = pageRender;
-        DetailPage = getComponent(`${urlContentMap.contentType}Detail`);
+        DetailPage = getPageComponent(urlContentMap.contentType);
     }
 
     const contextValue = {
