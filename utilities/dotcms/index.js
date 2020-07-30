@@ -1,16 +1,13 @@
 const fetch = require('isomorphic-fetch');
 
 import getPage from './getPage';
+import getLanguages from './getLanguages';
 
 const CustomError = require('../custom-error');
 const dotCMSApi = require('../../config/dotcmsApi');
 const { LANG_COOKIE_NAME } = require('./constants');
 const { loggerLog } = require('../logger');
 const { printError } = require('../../cli/print');
-
-const getLanguages = () => {
-    return dotCMSApi.language.getLanguages();
-};
 
 async function getNav(depth, location = '/') {
     if (process.env.NODE_ENV !== 'production') {
