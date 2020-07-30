@@ -1,6 +1,8 @@
 import React from 'react';
 import ProductList from '../../ProductList';
 
-export default function StoreProductList(props) {
+function StoreProductList(props) {
     return <ProductList {...props} />;
 }
+
+export default StoreProductList;

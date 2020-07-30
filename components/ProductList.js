@@ -8,6 +8,7 @@ import useTagsList from '../hooks/useTagsList';
 import useTagsFiltered from '../hooks/useTagsFiltered';
 import TagsFilter from './TagsFilter';
 import ProductItem from '../components/ProductItem';
+import Loading from '../components/Loading';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -64,11 +65,11 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
     const [getData, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY, options);
 
     useEffect(() => {
-      // To avoid running the GraphQL query in the server we run it only if we're in client-side
-      if (window !== 'undefined') {
-        getData();
-      }
-    }, [])
+        // To avoid running the GraphQL query in the server we run it only if we're in client-side
+        if (window !== 'undefined') {
+            getData();
+        }
+    }, []);
 
     if (error) return `Error! ${error}`;
 

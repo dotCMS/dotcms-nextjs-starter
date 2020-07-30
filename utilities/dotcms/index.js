@@ -1,4 +1,3 @@
-const fetch = require('isomorphic-fetch');
 
 const CustomError = require('../custom-error');
 const dotCMSApi = require('../../config/dotcmsApi');
