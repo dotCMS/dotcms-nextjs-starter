@@ -8,16 +8,23 @@ import {
     Activity,
     Image,
     Video,
-    Product
+    Product,
+    calendarEventDetail,
+    BlogDetail,
+    ActivityDetail,
 } from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
+
     const components = {
         Banner,
         SimpleWidget,
         webPageContent,
         StoreProductList,
         ProductDetail,
+        calendarEventDetail,
+        BlogDetail,
+        ActivityDetail,
         CategoryFilter,
         Activity,
         Video,
@@ -33,4 +40,4 @@ export const mapContentTypes = (contentType) => {
 };
 
 export const getComponent = (contentType) =>
-    mapContentTypes(contentType) || mapContentTypes('webPageContent');
+           mapContentTypes(contentType) || mapContentTypes('webPageContent');

@@ -7,7 +7,6 @@ import PageContext from '../../contexts/PageContext';
 
 import {
     ProductContainer,
-    ProductSingle,
     ProductDetailContainer,
     Price,
     Quantity
