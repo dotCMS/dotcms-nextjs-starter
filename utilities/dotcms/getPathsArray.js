@@ -1,3 +1,13 @@
+/*
+ * Determines if the path ends with /index but only when the / is preceded by a word
+ *
+ * This is needed to create the right paths for Next.js getStaticPaths' paths array
+ * `/destinations/index` becomes `/destinations`
+ *
+ * @param {string} str - the path (e.g /destinations/index)
+ */
+
+
 const pathEndsWithIndex = (str) => {
     const r = /(?<=\w)(\/index)/;
     return r.test(str);
