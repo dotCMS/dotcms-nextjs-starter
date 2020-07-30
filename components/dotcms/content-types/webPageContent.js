@@ -1,4 +1,4 @@
-import htmlParser from '../../../utilities/dotcms/htmlParser';
+import htmlParser from '../../../utilities/htmlParser';
 
 export default function webPageContent({ body }) {
     return htmlParser({ content: body });

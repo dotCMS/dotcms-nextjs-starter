@@ -14,5 +14,5 @@ module.exports = {
     loggerLog,
     loggerError,
     currencyFormatter,
-    capitalize
+    capitalize,
 };

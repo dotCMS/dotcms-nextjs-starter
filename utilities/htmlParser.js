@@ -1,5 +1,5 @@
-import DotCMSImage from '../../components/DotCMSImage';
-import RouterLink from '../../components/RouterLink';
+import DotCMSImage from '../components/DotCMSImage';
+import RouterLink from '../components/RouterLink';
 import ReactHtmlParser, { processNodes } from 'react-html-parser';
 
 const transform = (node, index) => {
