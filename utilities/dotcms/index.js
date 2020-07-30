@@ -17,46 +17,6 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-const getTagsListForCategory = async (category) => {
-    const data = {
-        query: {
-            query_string: {
-                query: `+contentType:product +categories:${category}`
-            }
-        },
-        aggs: {
-            tag: {
-                terms: {
-                    field: 'tags',
-                    size: 100
-                }
-            }
-        },
-        size: 0
-    };
-
-    const options = {
-        method: 'post',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    };
-
-    const results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
-
-    const {
-        esresponse: [
-            {
-                aggregations: {
-                    'sterms#tag': { buckets }
-                }
-            }
-        ]
-    } = await results.json();
-
-    return buckets;
-};
 
 const getLanguagesProps = async (selectedLanguage = '') => {
     // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
@@ -101,7 +61,6 @@ module.exports = {
     getPage,
     getNav,
     emitRemoteRenderEdit,
-    getTagsListForCategory,
     getPathsArray,
     getLanguages,
     getLanguagesProps
