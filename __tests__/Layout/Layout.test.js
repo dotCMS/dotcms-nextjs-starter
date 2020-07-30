@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 
-import { Layout } from '../../components/layout/Layout';
+import { Layout } from '../../components/dotcms/layout/Layout';
 
 describe('<Layout />', () => {
     it('should render correctly', () => {

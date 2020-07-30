@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import RowContainer from '../../components/layout/RowContainer';
+import RowContainer from '../../components/dotcms/layout/RowContainer';
 
 import { getMockRow } from '../../utils/test/data';
 

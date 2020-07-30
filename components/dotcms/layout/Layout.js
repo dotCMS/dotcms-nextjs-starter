@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import Header from '../Header';
-import Footer from '../Footer';
-import PageContext from '../../contexts/PageContext';
+import Header from './Header';
+import Footer from './Footer';
+import PageContext from '../../../contexts/PageContext';
+
 export default function Layout({ children }) {
     const {
         pageRender: {

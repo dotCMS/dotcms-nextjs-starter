@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import RowContainer from './RowContainer';
-import PageContext from '../../contexts/PageContext';
+import PageContext from '../../../contexts/PageContext';
 
 const LayoutGrid = () => {
     const {

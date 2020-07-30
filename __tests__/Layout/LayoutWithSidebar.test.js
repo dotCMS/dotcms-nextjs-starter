@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
 
-import LayoutWithSidebar from '../../components/layout/LayoutWithSidebar';
+import LayoutWithSidebar from '../../components/dotcms/layout/LayoutWithSidebar';
 
 describe('<LayoutWithSidebar />', () => {
     it('should render correctly', () => {

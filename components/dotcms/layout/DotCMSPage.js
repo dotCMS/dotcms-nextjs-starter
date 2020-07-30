@@ -1,7 +1,7 @@
 import React from 'react';
-import getPageComponent from '../../utilities/dotcms/getPageComponent';
-import PageContext from '../../contexts/PageContext';
-import Layout from '../layout/Layout';
+import getPageComponent from '../../../utilities/dotcms/getPageComponent';
+import PageContext from '../../../contexts/PageContext';
+import Layout from './Layout';
 import LayoutGrid from './LayoutGrid';
 
 const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {

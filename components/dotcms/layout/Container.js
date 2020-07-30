@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import PageContext from '../../contexts/PageContext';
+import PageContext from '../../../contexts/PageContext';
 
 import { Contentlet } from './Contentlet';
 import reactifyWc from 'reactify-wc';

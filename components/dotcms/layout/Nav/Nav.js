@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { MainNav, NavMenu } from '../../../styles/nav/nav.styles';
-import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
-import MenuList from '../../layout/Nav/MenuList';
-import logo from '../../../public/logo.png';
-import menuIcon from '../../../public/menu.svg';
-import useNav from '../../../hooks/useNav';
-import Link from 'next/link';
+
 import LanguageSelector from '../LanguageSelector';
-import PageContext from '../../../contexts/PageContext';
+import Link from 'next/link';
+import MenuList from '../../layout/Nav/MenuList';
+import PageContext from '../../../../contexts/PageContext';
+import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
+import logo from '../../../../public/logo.png';
+import menuIcon from '../../../../public/menu.svg';
+import useNav from '../../../../hooks/useNav';
+import { MainNav, NavMenu } from '../../../../styles/nav/nav.styles';
 import {
     setCurrentLanguage,
     getCurrentLanguage,
     removeCurrentLanguage
-} from '../../../utilities/dotcms/locale';
+} from '../../../../utilities/dotcms/locale';
 
 export default function Nav() {
     const nav = useNav();
@@ -27,7 +28,7 @@ export default function Nav() {
         e.preventDefault();
         setIsMenuOpen(!isMenuOpen);
     };
-    
+
     const router = useRouter();
 
     const shouldSetLanguage = (lang) => {
@@ -59,9 +60,7 @@ export default function Nav() {
             <MainNav className="main-nav">
                 <Link
                     href={
-                        getCurrentLanguage() && !defaultLanguage
-                            ? `/${getCurrentLanguage()}`
-                            : `/`
+                        getCurrentLanguage() && !defaultLanguage ? `/${getCurrentLanguage()}` : `/`
                     }
                 >
                     <a className="main-nav__logo" aria-label="Logo">

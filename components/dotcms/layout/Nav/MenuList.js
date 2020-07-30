@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import RouterLink from '../../RouterLink';
+import RouterLink from '../../../RouterLink';
 import { useRouter } from 'next/router'
-import PageContext from '../../../contexts/PageContext';
+import PageContext from '../../../../contexts/PageContext';
 
 
 function MenuList({navigation}) {

@@ -1,6 +1,6 @@
 import React from 'react'
-import searchIcon from '../../../public/search.svg';
-import shoppingCart from '../../../public/shopping-cart.svg';
+import searchIcon from '../../../../public/search.svg';
+import shoppingCart from '../../../../public/shopping-cart.svg';
 
 function SocialMediaMenu() {
   return (

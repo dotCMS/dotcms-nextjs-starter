@@ -1,5 +1,5 @@
 import Head from 'next/head';
-const { loggerError } = require('../../utilities/logger');
+const { loggerError } = require('../../../utilities/logger');
 
 const defaultMessages = {
     400: 'Bad Request',

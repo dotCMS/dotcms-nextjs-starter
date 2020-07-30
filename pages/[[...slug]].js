@@ -1,5 +1,5 @@
-import DotCMSPage from '../components/layout/DotCMSPage';
-import ErrorPage from '../components/layout/ErrorPage';
+import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
+import ErrorPage from '../components/dotcms/layout/ErrorPage';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';

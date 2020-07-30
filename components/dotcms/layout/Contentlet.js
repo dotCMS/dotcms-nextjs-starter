@@ -1,4 +1,4 @@
-import getComponent from '../../utilities/dotcms/getComponent';
+import getComponent from '../../../utilities/dotcms/getComponent';
 
 export const Contentlet = ({ data }) => {
     let Component = getComponent(data);

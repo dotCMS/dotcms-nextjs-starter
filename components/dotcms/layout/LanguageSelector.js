@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import PageContext from '../../contexts/PageContext';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+
+import PageContext from '../../../contexts/PageContext';
 
 const LanguageSelect = styled.select`
     margin-left: 1rem;

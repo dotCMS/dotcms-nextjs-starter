@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from '../public/logo.png';
-import fb from '../public/fb.svg';
-import instagram from '../public/instagram.svg';
-import linkedin from '../public/linkedin.svg';
-import twitter from '../public/twitter.svg';
-import pinterest from '../public/pinterest.svg';
-import { FooterContainer, FooterSection } from '../styles/footer/footer.styles';
+import logo from '../../../public/logo.png';
+import fb from '../../../public/fb.svg';
+import instagram from '../../../public/instagram.svg';
+import linkedin from '../../../public/linkedin.svg';
+import twitter from '../../../public/twitter.svg';
+import pinterest from '../../../public/pinterest.svg';
+import { FooterContainer, FooterSection } from '../../../styles/footer/footer.styles';
+
 function Footer() {
     return (
         <FooterContainer>
