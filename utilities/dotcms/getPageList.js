@@ -1,9 +1,14 @@
-const gql = require('graphql-tag');
-const { initializeApollo } = require('../../config/apollo');
-const apolloClient = initializeApollo();
+import gql from 'graphql-tag';
+
 import { getLanguagesProps } from '../../utilities/dotcms/index';
+import { initializeApollo } from '../../config/apollo';
+
+const apolloClient = initializeApollo();
 const PAGES_TO_FILTER = ['/store/product-line', '/store/product-detail', '/store/cart'];
 
+/**
+ * Get all the pages from DotCMS GraphQL API and return an array of urls
+ */
 const getPageList = async () => {
     let results = [];
     let localizedResults = [];

@@ -4,6 +4,10 @@ const getLanguages = () => {
     return dotCMSApi.language.getLanguages();
 };
 
+/**
+ * Get the list of language from DotCMS instance and handle the current and default language
+ * 
+ */
 const getLanguagesProps = async (selectedLanguage = '') => {
     // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
     // and map to a clean array of ISO compatible lang codes.

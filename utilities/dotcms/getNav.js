@@ -1,6 +1,10 @@
 const dotCMSApi = require('../../config/dotcmsApi');
 const { loggerLog } = require('../logger');
 
+/**
+ * Get the navigation menu object from dotcms api
+ *
+ */
 async function getNav(depth, location = '/') {
     if (process.env.NODE_ENV !== 'production') {
         loggerLog('DOTCMS NAV');

@@ -1,7 +1,11 @@
 const dotCMSApi = require('../../config/dotcmsApi');
 const transformPage = require('./transformPage');
-const { DOTCMS_DOWN, DOTCMS_NO_AUTH, LANG_COOKIE_NAME } = require('./constants');
+const { DOTCMS_DOWN, DOTCMS_NO_AUTH } = require('./constants');
 
+/**
+ * Get the page from the DotCMS PageAPI and make extra transformation for easy render
+ * 
+ */
 const getPage = (url, lang) => {
     if (process.env.NODE_ENV !== 'production') {
         // loggerLog('DOTCMS PAGE', url, lang || '1');

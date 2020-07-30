@@ -2,7 +2,7 @@ import DotCMSPage from '../components/layout/DotCMSPage';
 import ErrorPage from '../components/layout/ErrorPage';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
-import { getPageUrl } from '../utilities/dotcms/getPageUrl';
+import getPageUrl from '../utilities/dotcms/getPageUrl';
 
 export default function Page({ pageRender, nav, error, languageProps }) {
     if (error) {
@@ -44,8 +44,8 @@ export const getStaticProps = async (context) => {
         const url = await getPageUrl(slug, hasLanguages);
 
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageId);   
-        
+        const pageRender = await getPage(url, languageId);
+
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
 

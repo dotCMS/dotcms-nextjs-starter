@@ -18,6 +18,11 @@ const transform = (node, index) => {
     }
 };
 
+/**
+ * Some data from DotCMS comes as a string HTML, for example from WYSIYG fields. So we parse this
+ * html, turn them into react component and replace <a> for <RouterLink> to use NextJS routing.
+ * 
+ */
 export default function htmlParser({ content }) {
     return ReactHtmlParser(content, { transform });
 }

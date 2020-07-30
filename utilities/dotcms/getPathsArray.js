@@ -6,8 +6,6 @@
  *
  * @param {string} str - the path (e.g /destinations/index)
  */
-
-
 const pathEndsWithIndex = (str) => {
     const r = /(?<=\w)(\/index)/;
     return r.test(str);
@@ -23,6 +21,11 @@ const getParamsObjectForPath = (pathArray, url) => {
     };
 };
 
+/**
+ * Return the collections of paths to render the static pages in NextJS
+ * More info: https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
+ * 
+ */
 const getPathsArray = (pageList) => {
     const paths = pageList.reduce((acc, url) => {
         let urlArr = url.split('/').filter(Boolean);
