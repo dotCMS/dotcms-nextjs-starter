@@ -36,19 +36,6 @@ function emitRemoteRenderEdit(url) {
     });
 }
 
-function getCookie(cookies, name) {
-    if (cookies) {
-        const match = cookies.match(new RegExp('(^| )' + name + '=([^;]+)'));
-        return match ? match[2] : '';
-    }
-
-    return '';
-}
-
-function setCookie(name, value) {
-    document.cookie = `${name}=${value}`;
-}
-
 const getToken = ({ user, password, expirationDays, host }) => {
     return dotCMSApi.auth
         .getToken({ user, password, expirationDays, host })
