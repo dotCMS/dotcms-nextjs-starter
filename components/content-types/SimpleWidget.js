@@ -1,3 +1,7 @@
-export default function SimpleWidget(props) {
-    return <div dangerouslySetInnerHTML={{ __html: props.rendered }} />;
+import parseContent from './parseContent';
+
+function SimpleWidget(props) {
+    return parseContent({ content: props.rendered });
 }
+
+export default SimpleWidget;
