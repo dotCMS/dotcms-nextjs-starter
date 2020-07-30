@@ -5,26 +5,9 @@ const dotCMSApi = require('../../config/dotcmsApi');
 const getLanguages = require('./getLanguages');
 const getPage = require('./getPage');
 const getPathsArray = require('./getPathsArray');
-const { loggerLog } = require('../logger');
+const getNav = require('./getNav');
 
-async function getNav(depth, location = '/') {
-    if (process.env.NODE_ENV !== 'production') {
-        loggerLog('DOTCMS NAV');
-    }
 
-    const nav = await dotCMSApi.nav.get(depth, location).then(({ children }) => children);
-    const finalNav = [
-        {
-            href: '/index',
-            title: 'Home',
-            children: [],
-            folder: false,
-            hash: 'home'
-        },
-        ...nav
-    ];
-    return finalNav;
-}
 
 function emitRemoteRenderEdit(url) {
     console.log('emitting event');

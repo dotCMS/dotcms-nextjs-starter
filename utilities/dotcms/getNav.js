@@ -1,0 +1,23 @@
+const dotCMSApi = require('../../config/dotcmsApi');
+const { loggerLog } = require('../logger');
+
+async function getNav(depth, location = '/') {
+    if (process.env.NODE_ENV !== 'production') {
+        loggerLog('DOTCMS NAV');
+    }
+
+    const nav = await dotCMSApi.nav.get(depth, location).then(({ children }) => children);
+    const finalNav = [
+        {
+            href: '/index',
+            title: 'Home',
+            children: [],
+            folder: false,
+            hash: 'home'
+        },
+        ...nav
+    ];
+    return finalNav;
+}
+
+module.exports = getNav;
