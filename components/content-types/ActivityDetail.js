@@ -1,21 +1,8 @@
-import React, { useContext } from 'react';
-import PageContext from '../../contexts/PageContext';
+import React from 'react';
+import SinglePageDetail from '../SinglePageDetail';
 
-function ActivityDetail() {
-    const {
-        pageRender: {
-            urlContentMap: { title, body, publishDate, image }
-        }
-    } = useContext(PageContext);
-
-    return (
-        <div>
-            <h2>{title}</h2>
-            <span>{publishDate}</span>
-            <div dangerouslySetInnerHTML={{ __html: body }} />
-            <img src={`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${image}`} />
-        </div>
-    );
+function ActivityDetail(props) {
+    return <SinglePageDetail {...props} />;
 }
 
 export default ActivityDetail;

@@ -16,11 +16,8 @@ const Content = styled.div`
     margin-bottom: 1.6rem;
 `;
 
-function ProductDetail() {
-    const {
-        pageRender: { urlContentMap }
-    } = useContext(PageContext);
-
+function ProductDetail({ pageRender: { urlContentMap } }) {
+    
     const {
         title,
         description,

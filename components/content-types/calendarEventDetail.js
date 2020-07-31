@@ -1,21 +1,8 @@
-import React, { useContext } from 'react'
-import PageContext from '../../contexts/PageContext'
+import React from 'react';
+import SinglePageDetail from '../SinglePageDetail';
+
 function calendarEventDetail(props) {
-
-  const {
-      pageRender: {
-          urlContentMap: { title, publishDate, description, image }
-      }
-  } = useContext(PageContext);
-
-  return (
-      <div>
-          <h2>{title}</h2>
-          <span>{publishDate}</span>
-          <div dangerouslySetInnerHTML={{ __html: description }} />
-          <img src={`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${image}`} />
-      </div>
-  );
+    return <SinglePageDetail {...props} />;
 }
 
-export default calendarEventDetail
+export default calendarEventDetail;
