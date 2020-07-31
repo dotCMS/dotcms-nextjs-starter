@@ -3,7 +3,7 @@ const { printError } = require('./print');
 
 const getAuthToken = async ({ user, password, expirationDays, host }) => {
     return dotCMSApi.auth
-        .getAuthToken({ user, password, expirationDays, host })
+        .getToken({ user, password, expirationDays, host })
         .then((res) => res)
         .catch((err) => {
             if (err.status === 400 || err.status === 401) {
