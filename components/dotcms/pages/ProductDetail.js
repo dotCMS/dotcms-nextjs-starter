@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from '../../../styles/shared.styles';
 const { currencyFormatter } = require('../../../utilities');
 import Carousel from '../../Carousel';
 import styled from 'styled-components';
-import PageContext from '../../../contexts/PageContext';
 
 import {
     ProductContainer,

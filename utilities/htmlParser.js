@@ -4,9 +4,11 @@ import ReactHtmlParser, { processNodes } from 'react-html-parser';
 
 const transform = (node, index) => {
     if (node.type === 'tag') {
-        if (node.name === 'img') {
-            return <DotCMSImage key={index} {...node.attribs} />;
-        }
+
+        // TODO: WIP
+        // if (node.name === 'img') {
+        //     return <DotCMSImage key={index} {...node.attribs} />;
+        // }
 
         if (node.name === 'a') {
             return (

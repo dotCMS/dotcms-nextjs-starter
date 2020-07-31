@@ -1,9 +1,7 @@
 import React from 'react'
-
 import DotCMSImage from '../../DotCMSImage';
 import { BannerWrapper } from '../../../styles/banner/banner.styles';
 import { Button } from '../../../styles/shared.styles';
-
 import dots from '../../../public/dots.svg';
 
 function Banner({ buttonText, image, caption, link, textColor, title }) {

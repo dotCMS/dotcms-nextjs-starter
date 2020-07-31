@@ -44,7 +44,7 @@ export const getStaticProps = async (context) => {
         const url = await getPageUrl(slug, hasLanguages);
 
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageId);
+        let pageRender = await getPage(url, languageId);
 
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
