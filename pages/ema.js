@@ -1,4 +1,4 @@
-import DotCMSPage from '../components/layout/DotCMSPage';
+import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import { useEffect } from 'react';
 
 function DotCMSStaticPage({ pageRender, nav }) {
@@ -10,7 +10,7 @@ function DotCMSStaticPage({ pageRender, nav }) {
                 we create a library with two Web Components to pass that data.
 
                 Web Component library: https://www.npmjs.com/package/dotcms-ema-elements
-                More information in the component: components/layout/Container.js
+                More information in the component: components/dotcms/layout/Container.js
             */
             import('dotcms-ema-elements/loader').then((module) => {
                 module.applyPolyfills().then(() => {

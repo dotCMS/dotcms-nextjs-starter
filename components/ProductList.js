@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import gql from 'graphql-tag';
-import { useApollo } from '../config/apollo';
-import { useQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
-import Loading from './Loading';
-import ProductItem from './ProductItem';
-import TagsFilter from './TagsFilter';
-import useTagsFiltered from '../hooks/useTagsFiltered';
-import useTagsList from '../hooks/useTagsList';
+import { useApollo } from '../config/apollo';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
+import useTagsList from '../hooks/useTagsList';
+import useTagsFiltered from '../hooks/useTagsFiltered';
+import TagsFilter from './TagsFilter';
+import ProductItem from '../components/ProductItem';
+import Loading from '../components/Loading';
 
 const PRODUCTS_QUERY = gql`
     query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -62,7 +62,14 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
     }`;
 
     let options = { variables: { limit: quantity, query }, client };
-    const { loading, error, data } = useQuery(PRODUCTS_QUERY, options);
+    const [getData, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY, options);
+
+    useEffect(() => {
+        // To avoid running the GraphQL query in the server we run it only if we're in client-side
+        if (window !== 'undefined') {
+            getData();
+        }
+    }, []);
 
     if (error) return `Error! ${error}`;
 

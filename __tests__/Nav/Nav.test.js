@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import wait from 'waait';
-import Nav from '../../components/layout/Nav/Nav';
+import Nav from '../../components/dotcms/layout/Nav/Nav';
 import toJSON from 'enzyme-to-json';
 
 describe('<Nav />', () => {

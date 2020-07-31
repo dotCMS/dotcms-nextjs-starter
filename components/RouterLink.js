@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import Link from 'next/link';
 import PageContext from '../contexts/PageContext';
-import { emitRemoteRenderEdit } from '../utilities/dotcms';
+import { emitEMANavEvent } from '../utilities/dotcms';
 
 const RouterLink = ({ href, children, className, ariaLabel }) => {
     const { isEditMode } = useContext(PageContext);
@@ -11,7 +11,7 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
             style={{ cursor: 'pointer' }}
             aria-label={ariaLabel}
             onClick={() => {
-                emitRemoteRenderEdit(href);
+                emitEMANavEvent(href);
             }}
             className={className}
         >
@@ -19,7 +19,7 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
         </a>
     ) : (
         <Link
-            href={href.includes('/store/category') ? '/store/category/[slug]' : '/[...slug]'}
+            href={'/[[...slug]]'}
             as={`${href}`}
         >
             <a aria-label={ariaLabel} className={className}>
