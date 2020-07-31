@@ -1,6 +1,4 @@
 const dotCMSApi = require('../../config/dotcmsApi');
-const { CustomError } = require('../custom-error');
-const { DOTCMS_NO_LAYOUT } = require('./constants');
 
 function getAcceptTypes(containers, identifier) {
     // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
@@ -75,7 +73,7 @@ async function getRows(page) {
 /**
  * Merge the page containers and components into the layout property
  * for easy render of react components
- * 
+ *
  */
 async function transformPage(page) {
     try {
@@ -110,10 +108,10 @@ async function transformPage(page) {
 
             return transformedPage;
         } else {
-            throw new CustomError(`This page doesn't have a layout to render`, DOTCMS_NO_LAYOUT);
+            throw new Error(`This page doesn't have a layout to render`);
         }
     } catch (error) {
-        throw error instanceof CustomError ? error : new CustomError(error.message);
+        throw new Error(error.message);
     }
 }
 

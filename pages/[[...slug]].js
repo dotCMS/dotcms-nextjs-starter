@@ -1,13 +1,14 @@
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import ErrorPage from '../components/dotcms/layout/ErrorPage';
-import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';
+import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 
 export default function Page({ pageRender, nav, error, languageProps }) {
     if (error) {
         return <ErrorPage statusCode={error.statusCode} message={error.message} />;
     }
+
     return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
 }
 
@@ -58,10 +59,6 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        return {
-            props: {
-                error
-            }
-        };
+        throw new Error(error);
     }
 };

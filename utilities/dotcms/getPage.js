@@ -1,15 +1,18 @@
 const dotCMSApi = require('../../config/dotcmsApi');
 const transformPage = require('./transformPage');
-const { DOTCMS_DOWN, DOTCMS_NO_AUTH } = require('./constants');
+const getLicense = require('./getLicense');
 
 /**
  * Get the page from the DotCMS PageAPI and make extra transformation for easy render
- * 
+ *
  */
-const getPage = (url, lang) => {
-    if (process.env.NODE_ENV !== 'production') {
-        // loggerLog('DOTCMS PAGE', url, lang || '1');
+const getPage = async (url, lang) => {
+    const { isCommunity } = await getLicense();
+
+    if (isCommunity) {
+        throw new Error('You need a DotCMS license');
     }
+
     return dotCMSApi.page
         .get({ url, language: lang })
         .then(async (pageRender) => {
@@ -24,18 +27,14 @@ const getPage = (url, lang) => {
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
             if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND') {
-                error.statusCode = DOTCMS_DOWN;
-                error.message = 'DotCMS: instance is not running or inaccessible';
+                throw new Error('DotCMS: instance is not running or inaccessible');
             }
             /* 
                 Error coming from the DotCMS server when the authorization failed
             */
             if (error.statusCode === 401) {
-                error.statusCode = DOTCMS_NO_AUTH;
-                error.message = 'DotCMS: Invalid Auth Token';
+                throw new Error('DotCMS: Invalid Auth Token');
             }
-
-            throw error;
         });
 };
 
