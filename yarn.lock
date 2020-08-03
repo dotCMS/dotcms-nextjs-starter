@@ -1223,17 +1223,10 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-<<<<<<< HEAD
-"@next/react-dev-overlay@9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-9.5.0.tgz#0cf9b5b843d7520919c0c6f887799b3eb848d900"
-  integrity sha512-Ds+sQnyeYWq07QIJ7bbYE6WI6ZdPSa+3S+cysvdy0zLLaHemp/Ew8OteXvgNtZYo9OGYBbngxHVUORDcQHaCng==
-=======
 "@next/react-dev-overlay@9.5.1":
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/@next/react-dev-overlay/-/react-dev-overlay-9.5.1.tgz#534e84fbd67f8b2ad0f7b8363ae069943a6b5e12"
   integrity sha512-0zQlUocdPWBCFHbfuXL+dg7Rn9YWKrnlJjodNGQsI6CLzXRVa1W72H8Fh6bh8F9pO7ERMiQpnpstMSXPbvFR1Q==
->>>>>>> 250362c8cdeae123daf5342d7aec35acf5e4f98d
   dependencies:
     "@babel/code-frame" "7.8.3"
     ally.js "1.4.1"
@@ -1246,17 +1239,10 @@
     stacktrace-parser "0.1.10"
     strip-ansi "6.0.0"
 
-<<<<<<< HEAD
-"@next/react-refresh-utils@9.5.0":
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.5.0.tgz#5d3923bc5520f355c3a70b72673c92d23719cf4b"
-  integrity sha512-YaLBsyAQuEDTyzEuTzg/VwwSqpfNkJ5fiQNIBSGY+UmSpg1+1OHIyMRURzLKO1K7ad3w6kZ+ykgGcMLToR33EQ==
-=======
 "@next/react-refresh-utils@9.5.1":
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/@next/react-refresh-utils/-/react-refresh-utils-9.5.1.tgz#fe257fafe1a7f1c0c6e818017fa65b5ee45c5eca"
   integrity sha512-A19z/E6f08RXfBRc2STQ+5qo7iSPif7mNcww9dZAVli3Idu4umGP5dbpL71Hz1vyRs1eMUEylXTpXsY2WzY07g==
->>>>>>> 250362c8cdeae123daf5342d7aec35acf5e4f98d
 
 "@rollup/plugin-commonjs@^11.0.0":
   version "11.1.0"
@@ -3491,10 +3477,10 @@ dotcms-models@^0.0.8:
   dependencies:
     tslib "^1.9.0"
 
-dotcms@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.10.tgz#a6b27cac5f73ff308546fbf8201057ba1a859a4f"
-  integrity sha512-Qy42HvDFTvlYpmg9RtxNLLiimEnvXcr/ztSoSD6WJsYC3bEXRGpf9KAc6ea0vB6SL8pHa5+bNPQMObSSgVOv6A==
+dotcms@^0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.16.tgz#3bd3652037261fd3a7d310479c767633f51fcb14"
+  integrity sha512-mmaiWZVichQhG2Ho94/kPv3pfYHWU8oq98D9Y4Ay1LZkDIkxiRWoRt2Y4HhkLo9CWK7+zHxqG4GQ+WcLDZLAqg==
   dependencies:
     tslib "^1.9.0"
 
@@ -6126,15 +6112,9 @@ next-with-apollo@^5.0.1:
     isomorphic-unfetch "^3.0.0"
 
 next@^9.5.0:
-<<<<<<< HEAD
-  version "9.5.0"
-  resolved "https://registry.yarnpkg.com/next/-/next-9.5.0.tgz#964c35db00f9938443a53858e16bba31d234fb4b"
-  integrity sha512-kb6QnrbMyS/h4bvryZSQKgRqLtFVL2NZQed4jxrFZ15yxtwdsSCf5+LNfS7bcpVxh7HeD5Ddwh55l9+nOGkEBQ==
-=======
   version "9.5.1"
   resolved "https://registry.yarnpkg.com/next/-/next-9.5.1.tgz#85bd64ca05e7d97310cc15fa9d3b89e38226078a"
   integrity sha512-rPjeK8wd5sH/NHdL6Rhi3Mft4onB2+BvnXzS0vhGqdo1IXp26/6Hlpqb1pP+qqwI/HMJ4ms2pSEJQWp+BnyeWw==
->>>>>>> 250362c8cdeae123daf5342d7aec35acf5e4f98d
   dependencies:
     "@ampproject/toolbox-optimizer" "2.5.14"
     "@babel/code-frame" "7.8.3"
@@ -6154,14 +6134,9 @@ next@^9.5.0:
     "@babel/preset-typescript" "7.9.0"
     "@babel/runtime" "7.9.6"
     "@babel/types" "7.9.6"
-<<<<<<< HEAD
-    "@next/react-dev-overlay" "9.5.0"
-    "@next/react-refresh-utils" "9.5.0"
-=======
     "@next/react-dev-overlay" "9.5.1"
     "@next/react-refresh-utils" "9.5.1"
     ast-types "0.13.2"
->>>>>>> 250362c8cdeae123daf5342d7aec35acf5e4f98d
     babel-plugin-syntax-jsx "6.18.0"
     babel-plugin-transform-define "2.0.0"
     babel-plugin-transform-react-remove-prop-types "0.4.24"

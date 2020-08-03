@@ -20,20 +20,12 @@ function hasLayout(page) {
 }
 
 async function getUpdatedContainer(page, container) {
-    const types = ['WIDGET'];
-    const contentlets = page.containers[container.identifier].contentlets[`uuid-${container.uuid}`];
+    const uuid = `uuid-${container.uuid}`;
+    const contentlets = page.containers[container.identifier].contentlets[uuid];
 
     for (let i = 0; i < contentlets.length; i++) {
         const contentlet = contentlets[i];
-
-        if (types.includes(contentlet.baseType)) {
-            contentlet.rendered = await dotCMSApi.widget
-                .getHtml(contentlet.identifier)
-                .then((html) => html)
-                .catch(() => {
-                    return 'Widget was not found';
-                });
-        }
+        contentlet.rendered = page.containers[container.identifier].rendered[uuid];
     }
 
     return {

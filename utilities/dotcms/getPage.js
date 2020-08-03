@@ -10,11 +10,11 @@ const getPage = async (url, lang) => {
     const { isCommunity } = await getLicense();
 
     if (isCommunity) {
-        throw new Error('You need a DotCMS license');
+        throw new Error('You need a DotCMS license to use the Layout API');
     }
 
     return dotCMSApi.page
-        .get({ url, language: lang })
+        .get({ url, language: lang }, 'render')
         .then(async (pageRender) => {
             /*
                 If the page doesn't have a layout this transformPage function
