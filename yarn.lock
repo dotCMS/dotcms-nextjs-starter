@@ -3477,10 +3477,10 @@ dotcms-models@^0.0.8:
   dependencies:
     tslib "^1.9.0"
 
-dotcms@^0.0.16:
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.16.tgz#3bd3652037261fd3a7d310479c767633f51fcb14"
-  integrity sha512-mmaiWZVichQhG2Ho94/kPv3pfYHWU8oq98D9Y4Ay1LZkDIkxiRWoRt2Y4HhkLo9CWK7+zHxqG4GQ+WcLDZLAqg==
+dotcms@^0.0.17:
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.17.tgz#d847f0ea0a1569148fda92d6fd96eee7388f46ea"
+  integrity sha512-Aa4R0xoDhUxWpRLrr16cV38bOhlNbN2pgOOI4blXBqT2cslo3zHhVpvm0caaMr9BxwMgXrWewVTz+UBNwya2TQ==
   dependencies:
     tslib "^1.9.0"
 
