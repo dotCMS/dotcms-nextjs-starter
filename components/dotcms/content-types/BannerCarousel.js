@@ -8,7 +8,7 @@ function BannerCarousel({ rendered }) {
     const transform = (node) => {
         if (node.type === 'tag') {
             if (node.attribs.class === 'carousel-inner') {
-                return <Carousel>{processNodes(node.children)}</Carousel>;
+                return <Carousel showThumbs={false}>{processNodes(node.children)}</Carousel>;
             }
 
             if (node.attribs.class === 'carousel-control-prev') {
