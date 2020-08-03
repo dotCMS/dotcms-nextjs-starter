@@ -200,7 +200,8 @@ export const GlobalStyle = createGlobalStyle`
 	text-decoration: none;
 }
 .post-classic .post-title {
-	margin-bottom: 1rem;
+	margin: 1rem 0;
+	font-size: 1.2rem;
 }
 	${reflex}
 `;
