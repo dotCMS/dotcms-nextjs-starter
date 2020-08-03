@@ -160,5 +160,47 @@ export const GlobalStyle = createGlobalStyle`
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap; /* added line */
 }
+.box-product-name {
+	margin-bottom: 0;
+}
+.box-product-name a {
+	font-size: 1.2rem;
+	line-height: 1.6rem;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.box-product-prices .current-price {
+	color: grey;
+	margin-bottom: .5rem;
+	display: inline-block;
+}
+
+.box-product-prices {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+}
+
+.original-price {
+	text-decoration: line-through;
+	margin-right: .5rem;
+}
+
+.box-product-img {
+	width: 100%;
+}
+
+.post-classic img {
+	width: 100%;
+	height: 300px;
+}
+
+.post-classic .post-title a {
+	text-decoration: none;
+}
+.post-classic .post-title {
+	margin-bottom: 1rem;
+}
 	${reflex}
 `;
