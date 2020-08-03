@@ -6,6 +6,7 @@ export const Banner = dynamic(() => import('./Banner'));
 export const CategoryFilter = dynamic(() => import('./CategoryFilter'));
 export const Image = dynamic(() => import('./Image'));
 export const SimpleWidget = dynamic(() => import('./SimpleWidget'));
+export const BannerCarousel = dynamic(() => import('./BannerCarousel'));
 export const StoreProductList = dynamic(() => import('./StoreProductList'));
 export const webPageContent = dynamic(() => import('./webPageContent'));
 export const Product = dynamic(() => import('./Product'));

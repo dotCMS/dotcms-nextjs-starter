@@ -9,6 +9,7 @@ export const calendarEventDetail = dynamic(() => import('./calendarEventDetail')
 export const BlogDetail = dynamic(() => import('./BlogDetail'));
 export const ActivityDetail = dynamic(() => import('./ActivityDetail'));
 export const SimpleWidget = dynamic(() => import('../content-types/SimpleWidget'));
+export const BannerCarousel = dynamic(() => import('../content-types/BannerCarousel'));
 export const StoreProductList = dynamic(() => import('../content-types/StoreProductList'));
 export const webPageContent = dynamic(() => import('../content-types/webPageContent'));
 export const Product = dynamic(() => import('../content-types/Product'));

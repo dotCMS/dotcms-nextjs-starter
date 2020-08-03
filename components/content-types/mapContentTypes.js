@@ -12,6 +12,7 @@ import {
     calendarEventDetail,
     BlogDetail,
     ActivityDetail,
+    BannerCarousel
 } from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
@@ -29,7 +30,8 @@ export const mapContentTypes = (contentType) => {
         Activity,
         Video,
         Image,
-        Product
+        Product,
+        BannerCarousel
     };
 
     if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {

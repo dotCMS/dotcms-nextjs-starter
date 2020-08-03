@@ -34,6 +34,7 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-html-parser": "^2.0.2",
+        "react-responsive-carousel": "^3.2.9",
         "reactify-wc": "^1.0.5",
         "styled-components": "^5.1.0",
         "url-loader": "^2.2.0"

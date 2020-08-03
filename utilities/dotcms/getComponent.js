@@ -11,7 +11,8 @@ import {
     Product,
     calendarEventDetail,
     BlogDetail,
-    ActivityDetail
+    ActivityDetail,
+    BannerCarousel
 } from '../../components/dotcms/content-types';
 
 const components = {
@@ -27,7 +28,8 @@ const components = {
     Activity,
     Video,
     Image,
-    Product
+    Product,
+    BannerCarousel
 };
 
 /**

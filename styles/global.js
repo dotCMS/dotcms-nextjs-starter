@@ -170,38 +170,115 @@ export const GlobalStyle = createGlobalStyle`
 	text-decoration: none;
 }
 
-.box-product-prices .current-price {
-	color: grey;
-	margin-bottom: .5rem;
-	display: inline-block;
-}
+	.box-product-prices .current-price {
+		color: grey;
+		margin-bottom: .5rem;
+		display: inline-block;
+	}
 
-.box-product-prices {
-	display: flex;
-	flex-direction: row-reverse;
-	justify-content: flex-end;
-}
+	.box-product-prices {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+	}
 
-.original-price {
-	text-decoration: line-through;
-	margin-right: .5rem;
-}
+	.original-price {
+		text-decoration: line-through;
+		margin-right: .5rem;
+	}
 
-.box-product-img {
-	width: 100%;
-}
+	.box-product-img {
+		width: 100%;
+	}
 
-.post-classic img {
-	width: 100%;
-	height: 300px;
-}
+	.post-classic img {
+		width: 100%;
+		height: 300px;
+	}
 
-.post-classic .post-title a {
-	text-decoration: none;
-}
-.post-classic .post-title {
-	margin: 1rem 0;
-	font-size: 1.2rem;
-}
+	.post-title {
+		margin: 1rem 0 .5rem 0;
+	}
+
+	.post-modern > a {
+		display: block;
+	}
+	.post-body {
+		position: relative;
+	}
+	.badge.badge-primary {
+		position: absolute;
+    top: -48px;
+		background: var(--dotcms-purple-80);
+		color:  var(--dotcms-purple-20);
+		padding: 0 .5rem;
+		font-size: 1rem;
+		font-style: italic;
+	}
+	.post-modern .post-img {
+		width: 100%;
+		object-fit: cover;
+	}
+
+	.post-title a {
+		text-decoration: none;
+		margin: 1rem 0;
+		font-size: 1.2rem;
+	}
+
+	.carousel-inner {
+		position: relative;
+		height: 300px;
+		width: 100%;
+	}
+
+	.banner.bg-image-full {
+		background-repeat: no-repeat;
+		width: 100%;
+		background-size: cover;
+		height: 350px;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+
+	.row.justify-content-lg-center {
+		display: flex;
+    justify-content: center;
+	}
+	
+	.banner-title {
+		font-size: 2.25rem;
+		line-height: 4rem;
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+
+	.banner-title, .text-decoration-lines-2 {
+		color: white;
+	}
+
+	.text-decoration-lines-2 {
+		font-size: 1.2rem;
+		line-height: 1.6rem;
+	}
+
+	.col-lg-9.text-center {
+		width: 60%;
+		z-index: 1;
+	}
+
+	.banner.bg-image-full.bg-overlay-30.context-dark::before {
+		z-index: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+		background: rgba(0,0,0,.3);
+		width: 100%;
+		height: 100%;
+		content: '';
+	}
+	
 	${reflex}
 `;
