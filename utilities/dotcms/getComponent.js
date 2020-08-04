@@ -12,24 +12,26 @@ import {
     calendarEventDetail,
     BlogDetail,
     ActivityDetail,
-    BannerCarousel
+    BannerCarousel,
+    forms
 } from '../../components/dotcms/content-types';
 
 const components = {
-    Banner,
-    SimpleWidget,
-    webPageContent,
-    StoreProductList,
-    ProductDetail,
-    calendarEventDetail,
-    BlogDetail,
-    ActivityDetail,
-    CategoryFilter,
     Activity,
-    Video,
+    ActivityDetail,
+    Banner,
+    BannerCarousel,
+    BlogDetail,
+    CategoryFilter,
     Image,
     Product,
-    BannerCarousel
+    ProductDetail,
+    SimpleWidget,
+    StoreProductList,
+    Video,
+    calendarEventDetail,
+    forms,
+    webPageContent
 };
 
 /**

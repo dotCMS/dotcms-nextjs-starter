@@ -6,7 +6,15 @@ module.exports = withCss({
             // check if Next.js project routes match before we attempt proxying
             {
                 source: '/dA/:slug*',
-                destination: `https://starter.dotcms.com:8443/dA/:slug*`
+                destination: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/dA/:slug*`
+            },
+            {
+                source: '/dotcms-webcomponents/:slug*',
+                destination: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/dotcms-webcomponents/:slug*`
+            },
+            {
+                source: '/api/:slug*',
+                destination: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/:slug*`
             }
         ];
     },

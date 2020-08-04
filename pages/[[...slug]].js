@@ -3,14 +3,6 @@ import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 
-if (process.browser && !window.dotcmsFields) {
-    import('dotcms-webcomponents/loader/index.cjs').then((module) => {
-        module.applyPolyfills().then(() => {
-            module.defineCustomElements();
-        });
-    });
-}
-
 export default function Page({ pageRender, nav, error, languageProps }) {
     return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
 }

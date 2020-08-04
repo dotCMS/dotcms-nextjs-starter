@@ -20,7 +20,6 @@
         "body-parser": "^1.19.0",
         "dotcms": "^0.0.17",
         "dotcms-ema-elements": "0.0.2",
-        "dotcms-webcomponents": "^0.0.13",
         "express": "^4.17.1",
         "fs": "^0.0.1-security",
         "graphql": "^15.0.0",
