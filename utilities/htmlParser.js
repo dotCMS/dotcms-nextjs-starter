@@ -4,10 +4,15 @@ import ReactHtmlParser, { processNodes } from 'react-html-parser';
 
 const defaultTransform = (node, index) => {
     if (node.type === 'tag') {
+
         // TODO: WIP
         // if (node.name === 'img') {
         //     return <DotCMSImage key={index} {...node.attribs} />;
         // }
+
+        if(node.attribs.class === "form-booking") {
+            return null;
+        }
 
         if (node.name === 'a') {
             return (
