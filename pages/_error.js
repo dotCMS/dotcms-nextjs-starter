@@ -1,29 +1,17 @@
-import Error from '../components/dotcms/layout/ErrorPage';
+import CustomError from '../components/dotcms/layout/CustomError';
 
-function ErrorPage({ error }) {
-    return <Error message={error.message} statusCode={error.statusCode} stack={error.traceError} />;
+function Error({ statusCode, err }) {
+    return (
+        <CustomError
+            message={err.message}
+            statusCode={statusCode}
+            stack={err.traceError}
+        />
+    );
 }
 
-ErrorPage.getInitialProps = async ({ query: { customError }, res: { statusCode } }) => {
-    // Custom DotCMS error
-    if (customError) {
-        return { error: customError };
-    }
-
-    // Error from NextJS static file page render
-    if (statusCode !== 200) {
-        return {
-            error: {
-                statusCode
-            }
-        };
-    }
-
-    return {
-        error: {
-            statusCode: 404
-        }
-    };
+Error.getInitialProps = ({ res, err }) => {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+    return { statusCode, err };
 };
-
-export default ErrorPage;
+export default Error;

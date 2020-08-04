@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { useLazyQuery } from '@apollo/react-hooks';
-
 import { useApollo } from '../config/apollo';
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles';
 import useTagsList from '../hooks/useTagsList';
@@ -40,6 +39,21 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
+function ErrorFallback({ error, componentStack, resetErrorBoundary }) {
+    return (
+        <div role="alert">
+            <p>Something went wrong:</p>
+            <pre>{error.message}</pre>
+            <pre>{componentStack}</pre>
+            <button onClick={resetErrorBoundary}>Try again</button>
+        </div>
+    );
+}
+
+const Boom = () => {
+    throw new Error('Something happened');
+};
+
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
     const client = useApollo();
     let category;
@@ -59,8 +73,6 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
 
     const query = `+contentType:product ${category && `+categories:${category}`}`;
 
-    console.log(tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : '');
-
     let options = { variables: { limit: quantity, query }, client, errorPolicy: 'none' };
     const [getData, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY, options);
 
@@ -70,8 +82,6 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             getData();
         }
     }, []);
-
-    if (error) return `Error! ${error}`;
 
     return (
         <>
@@ -91,7 +101,9 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             ) : (
                 <ProductGrid width={width} className="product-grid">
                     {data?.ProductCollection.map((product) => {
-                        const [category] = product.category.map((item) => {
+                        product['category'] = undefined;
+
+                        const [category] = product?.category.map((item) => {
                             const [name] = Object.values(item);
                             return name;
                         });

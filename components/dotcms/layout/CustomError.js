@@ -8,7 +8,7 @@ const defaultMessages = {
     500: 'Internal Server Error'
 };
 
-function ErrorPage({ statusCode, message, stack }) {
+function CustomError({ statusCode, message, stack }) {
     const displayMessage = message || defaultMessages[statusCode];
     if (stack) {
         loggerError(stack);
@@ -38,4 +38,4 @@ function ErrorPage({ statusCode, message, stack }) {
     );
 }
 
-export default ErrorPage;
+export default CustomError;

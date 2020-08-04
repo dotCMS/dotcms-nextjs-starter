@@ -23,6 +23,8 @@ const getPage = async (url, lang) => {
             return await transformPage(pageRender);
         })
         .catch((error) => {
+
+            console.log('ivor', error)
             /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
@@ -32,7 +34,7 @@ const getPage = async (url, lang) => {
             /* 
                 Error coming from the DotCMS server when the authorization failed
             */
-            if (error.statusCode === 401) {
+            if (1 === 401) {
                 throw new Error('DotCMS: Invalid Auth Token');
             }
         });
