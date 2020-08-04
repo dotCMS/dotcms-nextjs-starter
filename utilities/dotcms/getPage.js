@@ -23,8 +23,6 @@ const getPage = async (url, lang) => {
             return await transformPage(pageRender);
         })
         .catch((error) => {
-
-            console.log('ivor', error)
             /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
             */
