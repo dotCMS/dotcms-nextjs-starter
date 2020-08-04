@@ -39,21 +39,6 @@ const PRODUCTS_QUERY = gql`
     }
 `;
 
-function ErrorFallback({ error, componentStack, resetErrorBoundary }) {
-    return (
-        <div role="alert">
-            <p>Something went wrong:</p>
-            <pre>{error.message}</pre>
-            <pre>{componentStack}</pre>
-            <button onClick={resetErrorBoundary}>Try again</button>
-        </div>
-    );
-}
-
-const Boom = () => {
-    throw new Error('Something happened');
-};
-
 function ProductList({ quantity, show, showTagsFilter, productLine, width, height }) {
     const client = useApollo();
     let category;
