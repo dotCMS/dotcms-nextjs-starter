@@ -13,10 +13,6 @@ if (process.browser && !window.dotcmsFields) {
 }
 
 export default function Page({ pageRender, nav, error, languageProps }) {
-    if (error) {
-        return <CustomError statusCode={error.statusCode} message={error.message} />;
-    }
-
     return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
 }
 
@@ -67,7 +63,6 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        console.log(error);
         throw new Error(error?.message ? error.message : error);
     }
 };

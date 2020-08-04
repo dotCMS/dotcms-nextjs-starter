@@ -101,13 +101,10 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             ) : (
                 <ProductGrid width={width} className="product-grid">
                     {data?.ProductCollection.map((product) => {
-                        product['category'] = undefined;
-
                         const [category] = product?.category.map((item) => {
                             const [name] = Object.values(item);
                             return name;
                         });
-
                         const data = {
                             ...product,
                             category,
