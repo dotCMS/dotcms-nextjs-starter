@@ -1,5 +1,5 @@
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
-import ErrorPage from '../components/dotcms/layout/CustomError';
+import CustomError from '../components/dotcms/layout/CustomError';
 import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
@@ -14,7 +14,7 @@ if (process.browser && !window.dotcmsFields) {
 
 export default function Page({ pageRender, nav, error, languageProps }) {
     if (error) {
-        return <ErrorPage statusCode={"error.statusCode"} message={"error.message"} />;
+        return <CustomError statusCode={error.statusCode} message={error.message} />;
     }
 
     return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
