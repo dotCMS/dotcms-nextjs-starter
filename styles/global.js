@@ -235,5 +235,23 @@ export const GlobalStyle = createGlobalStyle`
 		width: 60%;
 		z-index: 1;
 	}
+	.post-modern-time > b {
+		margin-right: .5rem;
+	}
+
+	.card-title > a {
+		font-size: 1.2rem;
+		font-weight: bold;
+		display: inline-block;
+		margin-bottom: 1rem;
+		text-decoration: none;
+	}
+	/* too specific to avoid changing the stater */
+	#section-3 > div > div > div > h1.text-center {
+		font-size: 2.4rem;
+	}
+	#section-4 > div > div > div > h2 {
+		font-size: 1.8rem;
+	}
 	${reflex}
 `;
