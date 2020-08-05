@@ -19,19 +19,33 @@ function hasLayout(page) {
     return page.layout && page.layout.body;
 }
 
-function getUpdatedContainer(page, container) {
-    const uuid = `uuid-${container.uuid}`;
-    const contentlets = page.containers[container.identifier].contentlets[uuid];
+function getUpdatedContainer(page, containerInLayout) {
+    const uuid = `uuid-${containerInLayout.uuid}`;
+    const container = page.containers[containerInLayout.identifier];
+    const contentlets = container.contentlets[uuid];
+    const containerRenderedHTML = container.rendered[uuid];
 
-    for (let i = 0; i < contentlets.length; i++) {
-        const contentlet = contentlets[i];
-        contentlet.rendered = page.containers[container.identifier].rendered[uuid];
+    /*
+        We can only use the rendered HTML frome the container when there is only one contentlet
+        in the container otherwise it will end up with duplicated contentlets because the
+        rendered property in the container have the HTML for all the contentlets
+    */
+    if (contentlets.length === 1) {
+        const [contentlet] = contentlets;
+        contentlet.rendered = containerRenderedHTML;
+    }
+
+    /*
+        For containers that don't hold contentlets but just have HTML or VTL code we pass the
+        rendered property so we can just render the HTML inside a React Component
+    */
+    if (container.container.maxContentlets === 0) {
+        container.container.rendered = containerRenderedHTML;
     }
 
     return {
-        ...container,
-        ...page.containers[container.identifier].container,
-        acceptTypes: getAcceptTypes(page.containers, container.identifier),
+        ...container.container,
+        acceptTypes: getAcceptTypes(page.containers, containerInLayout.identifier),
         contentlets: contentlets
     };
 }

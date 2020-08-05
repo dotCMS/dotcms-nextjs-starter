@@ -1,5 +1,5 @@
 import htmlParser from '../../../utilities/htmlParser';
 
-export default function SimpleWidget({ rendered, identifier, ...rest }) {
+export default function SimpleWidget({ rendered }) {
     return htmlParser({ content: rendered });
 }

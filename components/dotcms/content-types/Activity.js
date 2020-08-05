@@ -32,7 +32,7 @@ const WapperLink = styled(RouterLink)`
         height: 200px;
         padding: 1rem;
         position: absolute;
-        transform: translateY(155px);
+        transform: translateY(135px);
         transition: transform 200ms, background-color 200ms;
         width: 100%;
 

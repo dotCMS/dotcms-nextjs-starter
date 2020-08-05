@@ -15,6 +15,10 @@ module.exports = withCss({
             {
                 source: '/api/:slug*',
                 destination: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/:slug*`
+            },
+            {
+                source: '/images/:slug*',
+                destination: `${process.env.NEXT_PUBLIC_DOTCMS_HOST}/images/:slug*`
             }
         ];
     },
