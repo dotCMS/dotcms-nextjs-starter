@@ -19,7 +19,7 @@ function hasLayout(page) {
     return page.layout && page.layout.body;
 }
 
-async function getUpdatedContainer(page, container) {
+function getUpdatedContainer(page, container) {
     const uuid = `uuid-${container.uuid}`;
     const contentlets = page.containers[container.identifier].contentlets[uuid];
 
@@ -40,26 +40,22 @@ function getContainers(containers, page) {
     return containers.map((container) => getUpdatedContainer(page, container));
 }
 
-async function getColumns(row, page) {
-    return Promise.all(
-        row.columns.map(async (column) => {
-            return {
-                ...column,
-                containers: await Promise.all(getContainers(column.containers, page))
-            };
-        })
-    );
+function getColumns(row, page) {
+    return row.columns.map((column) => {
+        return {
+            ...column,
+            containers: getContainers(column.containers, page)
+        };
+    });
 }
 
-async function getRows(page) {
-    return await Promise.all(
-        page.layout.body.rows.map(async (row) => {
-            return {
-                ...row,
-                columns: await getColumns(row, page)
-            };
-        })
-    );
+function getRows(page) {
+    return page.layout.body.rows.map((row) => {
+        return {
+            ...row,
+            columns: getColumns(row, page)
+        };
+    });
 }
 
 /**
@@ -67,7 +63,7 @@ async function getRows(page) {
  * for easy render of react components
  *
  */
-async function transformPage(page) {
+function transformPage(page) {
     try {
         if (hasLayout(page)) {
             let transformedPage = {
@@ -76,15 +72,13 @@ async function transformPage(page) {
                     ...page.layout,
                     body: {
                         ...page.layout.body,
-                        rows: await getRows(page)
+                        rows: getRows(page)
                     }
                 }
             };
 
             if (hasSidebar(page)) {
-                const containers = await Promise.all(
-                    getContainers(page.layout.sidebar.containers, page)
-                );
+                const containers = getContainers(page.layout.sidebar.containers, page);
 
                 transformedPage = {
                     ...transformedPage,
