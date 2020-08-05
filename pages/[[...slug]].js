@@ -4,9 +4,9 @@ import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 
+export default function Page({ pageRender, nav, languageProps }) {
+    const { page } = pageRender || {};
 
-export default function Page({ pageRender, nav, error, languageProps }) {
-    const { page } = pageRender
     return (
         <>
             <Head>
@@ -14,7 +14,10 @@ export default function Page({ pageRender, nav, error, languageProps }) {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <meta
                     name="description"
-                    content="This is an example of a meta description. This will often show up in search results."
+                    content={
+                        page?.seodescription ||
+                        'This is an example of a meta description. This will often show up in search results.'
+                    }
                 />
             </Head>
             <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />
