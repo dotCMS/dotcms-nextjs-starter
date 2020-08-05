@@ -13,7 +13,7 @@ const locale = {
 };
 
 module.exports = {
-  setCurrentLanguage: locale.setCurrentLanguage,
-  getCurrentLanguage: locale.getCurrentLanguage,
-  removeCurrentLanguage: locale.removeCurrentLanguage
-}
+    setCurrentLanguage: locale.setCurrentLanguage,
+    getCurrentLanguage: locale.getCurrentLanguage,
+    removeCurrentLanguage: locale.removeCurrentLanguage
+};

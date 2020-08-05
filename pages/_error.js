@@ -1,13 +1,7 @@
 import CustomError from '../components/dotcms/layout/CustomError';
 
 function Error({ statusCode, err }) {
-    return (
-        <CustomError
-            message={err.message}
-            statusCode={statusCode}
-            stack={err.traceError}
-        />
-    );
+    return <CustomError message={err.message} statusCode={statusCode} stack={err.traceError} />;
 }
 
 Error.getInitialProps = ({ res, err }) => {

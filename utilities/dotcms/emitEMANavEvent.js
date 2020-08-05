@@ -11,4 +11,4 @@ function emitEMANavEvent(url) {
     });
 }
 
-module.exports = emitEMANavEvent
+module.exports = emitEMANavEvent;

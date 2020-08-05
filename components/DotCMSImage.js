@@ -26,9 +26,8 @@ const getSize = (size) => {
 };
 
 const DotCMSImage = ({ size, alt, path, identifier, name, className, src }) => {
-
     const { filterResize, width, height } = getSize(size);
-    
+
     const filterUrl = `/filter/resize_w/${filterResize}/20q`;
     let srcUrl = '';
 
@@ -44,13 +43,13 @@ const DotCMSImage = ({ size, alt, path, identifier, name, className, src }) => {
     //     }
     // }
 
-     if (path) {
-         srcUrl += `${path}`;
-     }
+    if (path) {
+        srcUrl += `${path}`;
+    }
 
-     if (identifier && name) {
-         srcUrl += `/dA/${identifier}/${name}`;
-     }
+    if (identifier && name) {
+        srcUrl += `/dA/${identifier}/${name}`;
+    }
 
     return (
         <img

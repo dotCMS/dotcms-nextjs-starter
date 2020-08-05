@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import DotCMSImage from '../../DotCMSImage';
 import { BannerWrapper } from '../../../styles/banner/banner.styles';
 import { Button } from '../../../styles/shared.styles';
@@ -20,11 +20,7 @@ function Banner({ buttonText, image, caption, link, textColor, title }) {
                 )}
             </div>
             <div className="banner-wrapper__figure">
-                <DotCMSImage
-                    size={900}
-                    alt={title}
-                    path={image}
-                />
+                <DotCMSImage size={900} alt={title} path={image} />
             </div>
         </BannerWrapper>
     );

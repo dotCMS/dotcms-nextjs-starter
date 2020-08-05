@@ -11,7 +11,7 @@ export default function Video(props) {
                     background: `url("${props.thumbnailLarge}") 0 0 no-repeat`,
                     height: '360px'
                 }}
-            ></div>
+            />
         </a>
     );
 }

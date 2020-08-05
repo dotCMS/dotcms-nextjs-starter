@@ -4,7 +4,7 @@ const { printError, printHeading, DOTCMS } = require('./print');
 const { getParsedEnvFile, createEnvFile } = require('./envFile');
 const hasYarn = require('./hasYarn');
 const getAuthToken = require('./getAuthToken');
- 
+
 const createEnvVars = (vars, separator) => {
     return vars
         ? Object.keys(vars)

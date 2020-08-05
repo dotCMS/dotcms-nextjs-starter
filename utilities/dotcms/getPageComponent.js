@@ -14,7 +14,7 @@ const components = {
 
 /**
  * Get the component to render a especific detail page
- * 
+ *
  */
 const getPageComponent = (contentType) => components[`${contentType}Detail`] || null;
 

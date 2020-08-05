@@ -25,7 +25,9 @@ const DotCMSPage = ({ pageRender, nav, isEditMode, languageProps }) => {
     return (
         <PageContext.Provider value={contextValue}>
             {pageRender?.layout ? (
-                <Layout>{DetailPage ? <DetailPage pageRender={pageRender} /> : <LayoutGrid />}</Layout>
+                <Layout>
+                    {DetailPage ? <DetailPage pageRender={pageRender} /> : <LayoutGrid />}
+                </Layout>
             ) : (
                 <h1>No layout in this page</h1>
             )}

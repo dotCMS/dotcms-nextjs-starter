@@ -6,7 +6,7 @@ const getLanguages = () => {
 
 /**
  * Get the list of language from DotCMS instance and handle the current and default language
- * 
+ *
  */
 const getLanguagesProps = async (selectedLanguage = '') => {
     // Fetch list of languages supported in the DotCMS instance so we can inject the data into the static pages
@@ -46,4 +46,4 @@ const getLanguagesProps = async (selectedLanguage = '') => {
     });
 };
 
-module.exports = getLanguagesProps
+module.exports = getLanguagesProps;

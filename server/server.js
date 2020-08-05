@@ -10,7 +10,6 @@ const transformPage = require('../utilities/dotcms/transformPage');
 const { getNav } = require('../utilities/dotcms');
 const { loggerLog } = require('../utilities/logger');
 
-
 const formUrlEncodedParser = bodyParser.raw({
     type: 'application/x-www-form-urlencoded',
     limit: '10mb',

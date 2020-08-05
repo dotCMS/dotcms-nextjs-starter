@@ -16,7 +16,6 @@ const Content = styled.div`
 `;
 
 function ProductDetail({ pageRender: { urlContentMap } }) {
-    
     const {
         title,
         description,

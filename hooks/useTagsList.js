@@ -41,7 +41,6 @@ const getTagsListForCategory = async (category) => {
     return buckets;
 };
 
-
 function useTagsList(category) {
     const [tagsList, setTagsList] = useState([]);
     useEffect(() => {

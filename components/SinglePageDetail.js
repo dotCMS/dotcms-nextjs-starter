@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components';
 
 const DetailContainer = styled.div`
@@ -23,7 +23,7 @@ const DetailContainer = styled.div`
 function SinglePageDetail({
     pageRender: {
         urlContentMap: { title, body, description, publishDate, image }
-    },
+    }
 }) {
     return (
         <DetailContainer className="container">
@@ -35,4 +35,4 @@ function SinglePageDetail({
     );
 }
 
-export default SinglePageDetail
+export default SinglePageDetail;

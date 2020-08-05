@@ -16,7 +16,6 @@ import {
 } from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
-
     const components = {
         Banner,
         SimpleWidget,
@@ -42,4 +41,4 @@ export const mapContentTypes = (contentType) => {
 };
 
 export const getComponent = (contentType) =>
-           mapContentTypes(contentType) || mapContentTypes('webPageContent');
+    mapContentTypes(contentType) || mapContentTypes('webPageContent');

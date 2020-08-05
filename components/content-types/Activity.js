@@ -36,7 +36,6 @@ const WapperLink = styled(RouterLink)`
         transition: transform 200ms, background-color 200ms;
         width: 100%;
 
-
         h4 {
             text-transform: uppercase;
             transition: color 200ms;
@@ -45,7 +44,6 @@ const WapperLink = styled(RouterLink)`
         p {
             opacity: 0;
             transition: opacity 200ms;
-
         }
     }
 `;

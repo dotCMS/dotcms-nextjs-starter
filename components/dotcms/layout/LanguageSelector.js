@@ -11,9 +11,7 @@ const LanguageSelect = styled.select`
 const LanguageSelector = () => {
     const router = useRouter();
     const [language, setLanguage] = useState('');
-    const {
-        languageProps
-    } = useContext(PageContext);
+    const { languageProps } = useContext(PageContext);
 
     useEffect(() => {
         setLanguage(languageProps.selectedLanguage);
@@ -22,7 +20,7 @@ const LanguageSelector = () => {
     const getRoute = (value, slug) => {
         if (value === languageProps.defaultLanguage) {
             return slug ? slug.filter((route) => route !== language) : [];
-        } 
+        }
         return slug ? [value, ...slug.filter((route) => route !== value)] : [`${value}`];
     };
 

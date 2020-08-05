@@ -1,4 +1,4 @@
-import {transformPage} from '../../utilities/dotcms';
+import { transformPage } from '../../utilities/dotcms';
 
 const PAGE_MOCK = {
     template: {

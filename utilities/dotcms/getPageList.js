@@ -65,7 +65,9 @@ const getPageList = async () => {
         if (networkError) {
             if (networkError.response) {
                 throw new Error(
-                    `[GraphQL Network error]: ${networkError.response.status} ${networkError.response.statusText}`
+                    `[GraphQL Network error]: ${networkError.response.status} ${
+                        networkError.response.statusText
+                    }`
                 );
             }
 
