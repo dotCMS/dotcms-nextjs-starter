@@ -14,7 +14,6 @@ const locale = {
 
 export const setLocaleHref = ({ as, url = '', defaultLang }) => {
     // If we have a selected language and the language is not the default lang
-
     const currentLang = locale.getCurrentLanguage();
 
     if (currentLang && currentLang !== defaultLang) {
@@ -28,9 +27,11 @@ export const setLocaleHref = ({ as, url = '', defaultLang }) => {
         if (url.length > 0) {
             return { as: currentLang + as, url: currentLang + url };
         }
+
         // Otherwise just return the selected language concatenated with the path
         return currentLang + as;
     } else {
+        
         // Default return value is the path passed to the function `as`
         return as;
     }
