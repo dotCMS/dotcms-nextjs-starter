@@ -81,31 +81,36 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             )}
             {loading ? (
                 <Loading />
-            ) : data?.ProductCollection.length === 0 ? (
+            ) : data.ProductCollection.length === 0 ? (
                 <StatusIndicator>No products found!</StatusIndicator>
             ) : (
                 <ProductGrid width={width} className="product-grid">
-                    {data?.ProductCollection.map((product) => {
-                        const [category] = product?.category.map((item) => {
-                            const [name] = Object.values(item);
-                            return name;
-                        });
-                        const data = {
-                            ...product,
-                            category,
-                            ...{
-                                image: {
-                                    path: product.image.idPath,
-                                    size: {
-                                        height,
-                                        width,
-                                        alt: product.title
+                    {data.ProductCollection?.map((product) => {
+                        const [category] =
+                            product.category?.map((item) => {
+                                const [name] = Object.values(item);
+                                return name;
+                            }) || [];
+                        if (category) {
+                            const data = {
+                                ...product,
+                                category,
+                                ...{
+                                    image: {
+                                        path: product.image.idPath,
+                                        size: {
+                                            height,
+                                            width,
+                                            alt: product.title
+                                        }
                                     }
                                 }
-                            }
-                        };
+                            };
 
-                        return <ProductItem key={product.identifier} product={data} show={show} />;
+                            return (
+                                <ProductItem key={product.identifier} product={data} show={show} />
+                            );
+                        }
                     })}
                 </ProductGrid>
             )}

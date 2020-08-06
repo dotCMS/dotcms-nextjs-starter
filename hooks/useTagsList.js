@@ -26,7 +26,7 @@ const getTagsListForCategory = async (category) => {
         }
     };
 
-    const results = await fetch(`${process.env.NEXT_PUBLIC_DOTCMS_HOST}/api/es/search`, options);
+    const results = await fetch(`/api/es/search`, options);
 
     const {
         esresponse: [

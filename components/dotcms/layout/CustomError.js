@@ -1,5 +1,4 @@
 import Head from 'next/head';
-const { loggerError } = require('../../../utilities/logger');
 
 const defaultMessages = {
     400: 'Bad Request',
@@ -10,9 +9,6 @@ const defaultMessages = {
 
 function CustomError({ statusCode, message, stack }) {
     const displayMessage = message || defaultMessages[statusCode];
-    if (stack) {
-        loggerError(stack);
-    }
 
     return (
         <>

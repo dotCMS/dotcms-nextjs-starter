@@ -76,8 +76,7 @@ export default function Image(props) {
                 path={props.fileAsset}
                 alt={props.title}
                 size={{
-                    width: 800,
-                    height: 'auto'
+                    width: 800
                 }}
             />
             <div className="body">

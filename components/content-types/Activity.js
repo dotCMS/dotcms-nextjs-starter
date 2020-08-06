@@ -61,8 +61,7 @@ export default function Activity(props) {
                 path={imageUrl}
                 alt={props.title}
                 size={{
-                    width: 370,
-                    height: 'auto'
+                    width: 370
                 }}
             />
             <div className="body">

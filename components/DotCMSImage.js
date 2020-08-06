@@ -25,23 +25,11 @@ const getSize = (size) => {
     return result;
 };
 
-const DotCMSImage = ({ size, alt, path, identifier, name, className, src }) => {
+const DotCMSImage = ({ size, alt, path, identifier, name, className }) => {
     const { filterResize, width, height } = getSize(size);
 
     const filterUrl = `/filter/resize_w/${filterResize}/20q`;
     let srcUrl = '';
-
-    // if(!srcUrl.startsWith("/dA")) {
-    //     srcUrl = src;
-    // } else {
-    //     if (path) {
-    //         srcUrl += `${path}`;
-    //     }
-
-    //     if (identifier && name) {
-    //         srcUrl += `/dA/${identifier}/${name}`;
-    //     }
-    // }
 
     if (path) {
         srcUrl += `${path}`;

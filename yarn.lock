@@ -3455,10 +3455,27 @@ dotcms-ema-elements@0.0.2:
   resolved "https://registry.yarnpkg.com/dotcms-ema-elements/-/dotcms-ema-elements-0.0.2.tgz#172a7d2a4acb379eb1924660ed63790a5556a901"
   integrity sha512-ruiUwaYUk0B0t1l2UmfggEpOyRm3C4kORhnkmdE57zVkQg1ZYQqLPE9rDSVaz6duef83B873pCFmpylpvuYtsg==
 
-dotcms@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.17.tgz#d847f0ea0a1569148fda92d6fd96eee7388f46ea"
-  integrity sha512-Aa4R0xoDhUxWpRLrr16cV38bOhlNbN2pgOOI4blXBqT2cslo3zHhVpvm0caaMr9BxwMgXrWewVTz+UBNwya2TQ==
+dotcms-field-elements@0.0.20:
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/dotcms-field-elements/-/dotcms-field-elements-0.0.20.tgz#5a26ee04a34a8af3c3d2a069eeeeb2d75ad82da5"
+  integrity sha512-fktr/bobm9c+Yh28umEo0cQFUIkRUeoZEjUVi6gG33BwjeFchL7QAccAaDBlGpXg40pRsejAP5ILX4oECAWvog==
+  dependencies:
+    "@tarekraafat/autocomplete.js" "^4.0.0"
+    dotcms-models "^0.0.8"
+    flatpickr "^4.5.7"
+    stencil-fragment "^1.0.1"
+
+dotcms-models@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/dotcms-models/-/dotcms-models-0.0.8.tgz#dfca36ef2924766e4261f0a580a8eebe62122ec3"
+  integrity sha512-uGBJi6+1tmMcJJEjFxtAiWSHqnzgAtyl2fIjiY86aO0GXR6Pr1Rp2kMtHbdL/oNlUNrlvZ1DicOWBAUMQ3Gmng==
+  dependencies:
+    tslib "^1.9.0"
+
+dotcms@0.0.16:
+  version "0.0.16"
+  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.16.tgz#3bd3652037261fd3a7d310479c767633f51fcb14"
+  integrity sha512-mmaiWZVichQhG2Ho94/kPv3pfYHWU8oq98D9Y4Ay1LZkDIkxiRWoRt2Y4HhkLo9CWK7+zHxqG4GQ+WcLDZLAqg==
   dependencies:
     tslib "^1.9.0"
 

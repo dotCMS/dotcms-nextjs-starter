@@ -12,18 +12,18 @@ const locale = {
     }
 };
 
-export const setLocaleHref = ({ as, url = '', defaultLang }) => {
+/**
+* if `url` is passed then return { as, url } to build the tags route
+*
+* @param {string} as e.g. '/store/category/[slug]'
+* @param {string} url The path that we need to pass `/products/hello-world`
+* @param {string} selectedLang The current selected language
+*/
+export const getLocaleHref = ({ as, url = '', defaultLang }) => {
     // If we have a selected language and the language is not the default lang
     const currentLang = locale.getCurrentLanguage();
 
     if (currentLang && currentLang !== defaultLang) {
-        /**
-         * if `url` is passed then return { as, url } to build the tags route
-         *
-         * @param {string} as e.g. '/store/category/[slug]'
-         * @param {string} url The path that we need to pass `/products/hello-world`
-         * @param {string} selectedLang The current selected language
-         */
         if (url.length > 0) {
             return { as: currentLang + as, url: currentLang + url };
         }
@@ -41,5 +41,5 @@ module.exports = {
     setCurrentLanguage: locale.setCurrentLanguage,
     getCurrentLanguage: locale.getCurrentLanguage,
     removeCurrentLanguage: locale.removeCurrentLanguage,
-    setLocaleHref
+    getLocaleHref
 };

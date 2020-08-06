@@ -1,6 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useRouter } from 'next/router';
-
+import React, { useState, useContext } from 'react';
 import LanguageSelector from '../LanguageSelector';
 import MenuList from '../../layout/Nav/MenuList';
 import PageContext from '../../../../contexts/PageContext';
@@ -35,15 +33,15 @@ export default function Nav() {
                 >
                     <img src={logo} alt="" width={135} height={41} />
                 </RouterLink>
-                <NavMenu className="main-nav__menu" isOpen={isMenuOpen}>
-                    <a
+                <NavMenu isOpen={isMenuOpen}>
+                    <button
                         className="hamburger"
                         href="#"
                         aria-label="button"
                         onClick={(e) => handleOpenMenu(e)}
                     >
                         <img src={menuIcon} alt="Hamburger Icon" />
-                    </a>
+                    </button>
                     <MenuList navigation={nav} />
                     <SocialMediaMenu />
                     <LanguageSelector />

@@ -24,12 +24,8 @@ export const NavMenu = styled.div`
                display: none;
            }
            @media screen and (max-width: 767px) {
-               position: absolute;
-               right: 0;
-               z-index: 5;
                .hamburger {
-                   display: inline-block;
-                   text-align: right;
+                   display: block;
                }
                flex-direction: column;
                .menu {

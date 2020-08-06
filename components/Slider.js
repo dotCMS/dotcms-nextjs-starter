@@ -25,34 +25,36 @@ const Slider = ({ images, title, id }) => {
 
     return (
         <>
-            <ul className="carousel__viewport">
-                {Object.values(images).map((image, index) => {
-                    const data = {
-                        identifier: id,
-                        name: keys[index],
-                        size: {
-                            width: 700,
-                            height: 700
-                        },
-                        alt: title
-                    };
+            {images && (
+                <ul className="carousel__viewport">
+                    {Object.values(images).map((image, index) => {
+                        const data = {
+                            identifier: id,
+                            name: keys[index],
+                            size: {
+                                width: 700,
+                                height: 700
+                            },
+                            alt: title
+                        };
 
-                    return (
-                        image && (
-                            <li
-                                id={`carousel__slide${index}`}
-                                tabIndex="0"
-                                className="carousel__slide"
-                                ref={slideRefs[index]}
-                                key={index}
-                                data-slide={index}
-                            >
-                                <DotCMSImage loading="lazy" {...data} />
-                            </li>
-                        )
-                    );
-                })}
-            </ul>
+                        return (
+                            image && (
+                                <li
+                                    id={`carousel__slide${index}`}
+                                    tabIndex="0"
+                                    className="carousel__slide"
+                                    ref={slideRefs[index]}
+                                    key={index}
+                                    data-slide={index}
+                                >
+                                    <DotCMSImage loading="lazy" {...data} />
+                                </li>
+                            )
+                        );
+                    })}
+                </ul>
+            )}
             <aside className="carousel__navigation">
                 <ul className="carousel__navigation-list">
                     {values.length > 1 &&

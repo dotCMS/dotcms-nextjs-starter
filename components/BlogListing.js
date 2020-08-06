@@ -28,7 +28,7 @@ const BlogListing = () => {
         <div className="unit unit-spacing-lg" key={identifier}>
             <div className="unit-left">
                 <RouterLink href={`/blog/post/${urlTitle}`}>
-                    <DotCMSImage alt={title} width="70" data={{ identifier }} />
+                    <DotCMSImage alt={title} width="70" identifier={identifier} />
                 </RouterLink>
             </div>
             <div className="unit-body">

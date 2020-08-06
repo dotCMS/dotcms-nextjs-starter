@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import DotCMSImage from '../components/DotCMSImage'
 
 const DetailContainer = styled.div`
     width: 50%;
@@ -30,7 +31,11 @@ function SinglePageDetail({
             <h2 className="title">{title}</h2>
             <span className="date">{new Date(publishDate).toDateString()}</span>
             <div className="content" dangerouslySetInnerHTML={{ __html: body || description }} />
-            <img className="figure" src={`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${image}`} />
+            <DotCMSImage
+                className="figure"
+                alt={title}
+                path={`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${image}`}
+            />
         </DetailContainer>
     );
 }

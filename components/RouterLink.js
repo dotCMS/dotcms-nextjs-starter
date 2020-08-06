@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import PageContext from '../contexts/PageContext';
 import { emitEMANavEvent } from '../utilities/dotcms';
-import { setLocaleHref } from './../utilities/dotcms/locale';
+import { getLocaleHref } from './../utilities/dotcms/locale';
 
 const RouterLink = ({ href, children, className, ariaLabel }) => {
     const { isEditMode, languageProps: { defaultLanguage } = {} } = useContext(PageContext);
@@ -20,7 +20,7 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
     ) : (
         <Link
             href={'/[[...slug]]'}
-            as={setLocaleHref({
+            as={getLocaleHref({
                 as: href,
                 defaultLang: defaultLanguage
             })}

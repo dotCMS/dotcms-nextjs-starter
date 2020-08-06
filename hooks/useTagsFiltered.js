@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { setLocaleHref } from './../utilities/dotcms/locale';
+import { getLocaleHref } from './../utilities/dotcms/locale';
 import PageContext from '../contexts/PageContext';
 
 function useTagsFiltered() {
@@ -13,7 +13,7 @@ function useTagsFiltered() {
     const [routePath, setRoutePath] = useState('');
 
     useEffect(() => {
-        const { as, url } = setLocaleHref({ url: '/store/category/[slug]', as: routePath });
+        const { as, url } = getLocaleHref({ url: '/store/category/[slug]', as: routePath });
         routePath && router.push(url, as);
     }, [routePath]);
 
