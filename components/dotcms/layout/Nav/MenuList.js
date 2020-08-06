@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import RouterLink from '../../../RouterLink';
 import { useRouter } from 'next/router';
-
+ 
 function MenuList({ navigation }) {
     const router = useRouter();
 
@@ -13,14 +13,12 @@ function MenuList({ navigation }) {
     };
 
     return (
-        <nav className="menu menu__list">
-            {navigation.map((item) => (
-                <RouterLink
-                    key={item.href}
-                    className={routerLinkClassName(item).join(' ')}
-                    href={item.href}
-                >
-                    {item.title}
+        <ul className="menu menu__list">
+            {navigation.map((item, index) => (
+                <li key={index} className={routerLinkClassName(item).join(' ')}>
+                    <RouterLink key={item.href} href={item.href}>
+                        {item.title}
+                    </RouterLink>
                     {item.children && (
                         <ul className="submenu">
                             {item.children[0].children.map((child, idx) => {
@@ -32,10 +30,12 @@ function MenuList({ navigation }) {
                             })}
                         </ul>
                     )}
-                </RouterLink>
+                </li>
             ))}
-        </nav>
+        </ul>
     );
 }
+
+
 
 export default MenuList;

@@ -64,8 +64,10 @@ export const GlobalStyle = createGlobalStyle`
 			color: var(--dotcms-purple);
 		}
 	}
-	nav.menu__list {
-		& > a {
+	ul.menu__list {
+		list-style: none;
+		display: flex;
+		 a {
 			font-weight: 500;
 			text-decoration: none;
 		}
@@ -74,7 +76,7 @@ export const GlobalStyle = createGlobalStyle`
 		}
 		a:active,
 		a:hover,
-		.active {
+		li.active > a {
 			color: var(--dotcms-purple);
 		}
 	}
