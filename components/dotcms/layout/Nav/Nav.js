@@ -9,10 +9,8 @@ import logo from '../../../../public/logo.png';
 import menuIcon from '../../../../public/menu.svg';
 import useNav from '../../../../hooks/useNav';
 import { MainNav, NavMenu } from '../../../../styles/nav/nav.styles';
-import RouterLink from '../../../RouterLink'
-import {
-    getCurrentLanguage,
-} from '../../../../utilities/dotcms/locale';
+import RouterLink from '../../../RouterLink';
+import { getCurrentLanguage } from '../../../../utilities/dotcms/locale';
 
 export default function Nav() {
     const nav = useNav();
@@ -35,7 +33,7 @@ export default function Nav() {
                         getCurrentLanguage() && !defaultLanguage ? `/${getCurrentLanguage()}` : `/`
                     }
                 >
-                  <img src={logo} alt="" width={135} height={41} />
+                    <img src={logo} alt="" width={135} height={41} />
                 </RouterLink>
                 <NavMenu className="main-nav__menu" isOpen={isMenuOpen}>
                     <a

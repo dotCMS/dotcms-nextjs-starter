@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
-import { getCurrentLanguage, setLocaleHref } from './../utilities/dotcms/locale';
+import { setLocaleHref } from './../utilities/dotcms/locale';
 import PageContext from '../contexts/PageContext';
 
 function useTagsFiltered() {

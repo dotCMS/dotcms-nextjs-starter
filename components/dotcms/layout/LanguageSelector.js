@@ -17,13 +17,13 @@ const LanguageSelector = () => {
     const [language, setLanguage] = useState('');
     const { languageProps } = useContext(PageContext);
 
-
     // Predicate to determine whether we should set the new language or not
     const shouldSetLanguage = (lang) => {
         const languageFound = () => {
             return (
-                Object.values(languageProps.languages.find((val) => val.languageCode === lang) || [])
-                    .length > 0
+                Object.values(
+                    languageProps.languages.find((val) => val.languageCode === lang) || []
+                ).length > 0
             );
         };
 
@@ -53,7 +53,7 @@ const LanguageSelector = () => {
     };
 
     const handleLanguageChange = (value) => {
-        setCurrentLanguage(value)
+        setCurrentLanguage(value);
         setLanguage(value);
 
         const {

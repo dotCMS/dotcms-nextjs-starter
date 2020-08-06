@@ -26,9 +26,7 @@ function MenuList({ navigation }) {
                             {item.children[0].children.map((child, idx) => {
                                 return (
                                     <li key={idx}>
-                                        <RouterLink href={child.href}>
-                                            {child.title}
-                                        </RouterLink>
+                                        <RouterLink href={child.href}>{child.title}</RouterLink>
                                     </li>
                                 );
                             })}

@@ -1,6 +1,5 @@
 import React from 'react';
 import App from 'next/app';
-import Head from 'next/head';
 import { GlobalStyle } from '../styles/global';
 import Router from 'next/router';
 import NProgress from 'nprogress';
