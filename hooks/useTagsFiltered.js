@@ -27,7 +27,7 @@ function useTagsFiltered() {
 
     const tagsMap = tagsFiltered && tagsFiltered.map((tag) => `Product.tags:${tag}`);
 
-    return [tagsFiltered, setRoutePath, tagsMap];
+    return [tagsFiltered, setRoutePath, tagsMap, routePath];
 }
 
 export default useTagsFiltered;

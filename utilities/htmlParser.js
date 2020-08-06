@@ -14,7 +14,7 @@ const defaultTransform = (node, index) => {
             return null;
         }
 
-        if (node.name === 'a' && !isAbsolutePath()) {
+        if (node.name === 'a' && !isAbsolutePath(node.attribs.href)) {
             return (
                 <RouterLink key={index} {...node.attribs}>
                     {processNodes(node.children, defaultTransform)}
