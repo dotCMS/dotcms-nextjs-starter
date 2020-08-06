@@ -76,7 +76,6 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
                     selected={tagsFiltered}
                     onFilterChange={(tags) => {
                         setRoutePath(getUrl(category, tags));
-                        // setRoutePath({ href: '/store/category/[slug]', as: 'url' });
                     }}
                 />
             )}
