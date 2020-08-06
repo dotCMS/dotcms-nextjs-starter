@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useRouter } from 'next/router';
+import { getCurrentLanguage, setLocaleHref } from './../utilities/dotcms/locale';
+import PageContext from '../contexts/PageContext';
 
 function useTagsFiltered() {
     // Find the category and tags from the URL
     const router = useRouter();
     let { asPath: path } = router;
     path = path.split('/').pop();
+    const { languageProps: { defaultLanguage } = {} } = useContext(PageContext);
 
     const [routePath, setRoutePath] = useState('');
 
-    useEffect(
-        () => {
-            routePath && router.push('/store/category/[slug]', routePath);
-        },
-        [routePath]
-    );
+    useEffect(() => {
+        const { as, url } = setLocaleHref({ url: '/store/category/[slug]', as: routePath });
+        routePath && router.push(url, as);
+    }, [routePath]);
 
     // Separate category from tags
     let [_, ...tagsFiltered] = path.split('-');

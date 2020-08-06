@@ -1,12 +1,9 @@
 import React, { useContext } from 'react';
 import RouterLink from '../../../RouterLink';
 import { useRouter } from 'next/router';
-import PageContext from '../../../../contexts/PageContext';
 
 function MenuList({ navigation }) {
     const router = useRouter();
-    const { languageProps: { selectedLanguage, defaultLanguage } = {} } =
-        useContext(PageContext) || {};
 
     const routerLinkClassName = (item) => {
         return [
@@ -15,19 +12,13 @@ function MenuList({ navigation }) {
         ];
     };
 
-    const getHref = (selectedLang, item) => {
-        return selectedLang && selectedLang !== defaultLanguage
-            ? `${selectedLang}${item.href}`
-            : `${item.href}`;
-    };
-
     return (
         <nav className="menu menu__list">
             {navigation.map((item) => (
                 <RouterLink
                     key={item.href}
                     className={routerLinkClassName(item).join(' ')}
-                    href={getHref(selectedLanguage, item)}
+                    href={item.href}
                 >
                     {item.title}
                     {item.children && (
@@ -35,7 +26,7 @@ function MenuList({ navigation }) {
                             {item.children[0].children.map((child, idx) => {
                                 return (
                                     <li key={idx}>
-                                        <RouterLink href={getHref(selectedLanguage, child)}>
+                                        <RouterLink href={child.href}>
                                             {child.title}
                                         </RouterLink>
                                     </li>
