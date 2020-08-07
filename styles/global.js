@@ -255,5 +255,45 @@ export const GlobalStyle = createGlobalStyle`
 	#section-4 > div > div > div > h2 {
 		font-size: 1.8rem;
 	}
+	.dot-tags__container {
+		border: none !important;
+		padding: 0 !important;
+	}
+	dot-form form input[type="text"]:focus {
+		border-radius: 3px;
+	}
+	dot-autocomplete {
+		margin: 0 !important;
+	}
+	dot-form form input[type="text"], 
+	dot-autocomplete input {
+		border: 1px solid #ccc;
+		border-radius: 3px;
+		padding: .4rem;
+	}
+
+	dot-textarea textarea {
+		border: 1px solid #ccc;
+		min-height: 250px;
+		border-radius: 3px;
+	}
+
+	dot-binary-upload-button button {
+		padding: .4rem 1rem !important;
+		margin-left: 15px !important;
+		border-radius: 3px !important;
+	}
+
+	#label-accept {
+		display: flex;
+		flex-direction: row;
+		margin-right: 10px;
+	}
+
+	.hint-i-agree-to-all-terms-and-conditions-of-travellux-resort-destinations input {
+		margin-top: 5px;
+    margin-left: 15px;
+	}
+
 	${reflex}
 `;
