@@ -62,7 +62,7 @@ export default function Activity(props) {
                 alt={props.title}
                 size={{
                     width: 370,
-                    height: 'auto'
+                    height: 370
                 }}
             />
             <div className="body">

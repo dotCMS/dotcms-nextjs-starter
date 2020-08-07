@@ -111,7 +111,7 @@ function transformPage(page) {
             throw new Error(`This page doesn't have a layout to render`);
         }
     } catch (error) {
-        throw new Error(error.message);
+        throw error;
     }
 }
 

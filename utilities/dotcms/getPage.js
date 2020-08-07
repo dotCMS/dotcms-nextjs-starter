@@ -32,9 +32,11 @@ const getPage = async (url, lang) => {
             /* 
                 Error coming from the DotCMS server when the authorization failed
             */
-            if (1 === 401) {
+            if (error.code === 401) {
                 throw new Error('DotCMS: Invalid Auth Token');
             }
+
+            throw error
         });
 };
 
