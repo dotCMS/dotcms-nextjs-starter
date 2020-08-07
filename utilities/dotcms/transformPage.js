@@ -1,6 +1,5 @@
 const dotCMSApi = require('../../config/dotcmsApi');
-const { CustomError } = require('../custom-error');
-const { DOTCMS_NO_LAYOUT } = require('./constants');
+
 function getAcceptTypes(containers, identifier) {
     // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
     return containers[identifier].containerStructures
@@ -20,27 +19,33 @@ function hasLayout(page) {
     return page.layout && page.layout.body;
 }
 
-async function getUpdatedContainer(page, container) {
-    const types = ['WIDGET'];
-    const contentlets = page.containers[container.identifier].contentlets[`uuid-${container.uuid}`];
+function getUpdatedContainer(page, containerInLayout) {
+    const uuid = `uuid-${containerInLayout.uuid}`;
+    const container = page.containers[containerInLayout.identifier];
+    const contentlets = container.contentlets[uuid];
+    const containerRenderedHTML = container.rendered[uuid];
 
-    for (let i = 0; i < contentlets.length; i++) {
-        const contentlet = contentlets[i];
+    /*
+        We can only use the rendered HTML frome the container when there is only one contentlet
+        in the container otherwise it will end up with duplicated contentlets because the
+        rendered property in the container have the HTML for all the contentlets
+    */
+    if (contentlets.length === 1) {
+        const [contentlet] = contentlets;
+        contentlet.rendered = containerRenderedHTML;
+    }
 
-        if (types.includes(contentlet.baseType)) {
-            contentlet.rendered = await dotCMSApi.widget
-                .getHtml(contentlet.identifier)
-                .then((html) => html)
-                .catch(() => {
-                    return 'Widget was not found';
-                });
-        }
+    /*
+        For containers that don't hold contentlets but just have HTML or VTL code we pass the
+        rendered property so we can just render the HTML inside a React Component
+    */
+    if (container.container.maxContentlets === 0) {
+        container.container.rendered = containerRenderedHTML;
     }
 
     return {
-        ...container,
-        ...page.containers[container.identifier].container,
-        acceptTypes: getAcceptTypes(page.containers, container.identifier),
+        ...container.container,
+        acceptTypes: getAcceptTypes(page.containers, containerInLayout.identifier),
         contentlets: contentlets
     };
 }
@@ -49,29 +54,30 @@ function getContainers(containers, page) {
     return containers.map((container) => getUpdatedContainer(page, container));
 }
 
-async function getColumns(row, page) {
-    return Promise.all(
-        row.columns.map(async (column) => {
-            return {
-                ...column,
-                containers: await Promise.all(getContainers(column.containers, page))
-            };
-        })
-    );
+function getColumns(row, page) {
+    return row.columns.map((column) => {
+        return {
+            ...column,
+            containers: getContainers(column.containers, page)
+        };
+    });
 }
 
-async function getRows(page) {
-    return await Promise.all(
-        page.layout.body.rows.map(async (row) => {
-            return {
-                ...row,
-                columns: await getColumns(row, page)
-            };
-        })
-    );
+function getRows(page) {
+    return page.layout.body.rows.map((row) => {
+        return {
+            ...row,
+            columns: getColumns(row, page)
+        };
+    });
 }
 
-async function transformPage(page) {
+/**
+ * Merge the page containers and components into the layout property
+ * for easy render of react components
+ *
+ */
+function transformPage(page) {
     try {
         if (hasLayout(page)) {
             let transformedPage = {
@@ -80,15 +86,13 @@ async function transformPage(page) {
                     ...page.layout,
                     body: {
                         ...page.layout.body,
-                        rows: await getRows(page)
+                        rows: getRows(page)
                     }
                 }
             };
 
             if (hasSidebar(page)) {
-                const containers = await Promise.all(
-                    getContainers(page.layout.sidebar.containers, page)
-                );
+                const containers = getContainers(page.layout.sidebar.containers, page);
 
                 transformedPage = {
                     ...transformedPage,
@@ -104,10 +108,10 @@ async function transformPage(page) {
 
             return transformedPage;
         } else {
-            throw new CustomError(`This page doesn't have a layout to render`, DOTCMS_NO_LAYOUT);
+            throw new Error(`This page doesn't have a layout to render`);
         }
     } catch (error) {
-        throw error instanceof CustomError ? error : new CustomError(error.message);
+        throw new Error(error.message);
     }
 }
 

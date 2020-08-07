@@ -1,14 +1,28 @@
-import DotCMSPage from '../components/layout/DotCMSPage';
-import ErrorPage from '../components/layout/ErrorPage';
-import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
+import Head from 'next/head';
+import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import getPageList from '../utilities/dotcms/getPageList';
-import { getPageUrl } from '../utilities/dotcms/getPageUrl';
+import getPageUrl from '../utilities/dotcms/getPageUrl';
+import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 
-export default function Page({ pageRender, nav, error, languageProps }) {
-    if (error) {
-        return <ErrorPage statusCode={error.statusCode} message={error.message} />;
-    }
-    return <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />;
+export default function Page({ pageRender, nav, languageProps }) {
+    const { page } = pageRender || {};
+
+    return (
+        <>
+            <Head>
+                <title>dotCMS | {page?.seoTitle || page?.title}</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <meta
+                    name="description"
+                    content={
+                        page?.seodescription ||
+                        'This is an example of a meta description. This will often show up in search results.'
+                    }
+                />
+            </Head>
+            <DotCMSPage pageRender={pageRender} nav={nav} languageProps={languageProps} />
+        </>
+    );
 }
 
 export const getStaticPaths = async () => {
@@ -44,8 +58,8 @@ export const getStaticProps = async (context) => {
         const url = await getPageUrl(slug, hasLanguages);
 
         // Fetch the page object from DotCMS Page API
-        const pageRender = await getPage(url, languageId);   
-        
+        let pageRender = await getPage(url, languageId);
+
         // Fetch the navigation from DotCMS Navigation API
         const nav = await getNav('4');
 
@@ -58,10 +72,6 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        return {
-            props: {
-                error
-            }
-        };
+        throw new Error(error?.message ? error.message : error);
     }
 };

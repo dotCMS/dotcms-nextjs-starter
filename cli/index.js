@@ -1,10 +1,10 @@
 const { spawn } = require('child_process');
 const { getAnswersBasic, getAnswersAuth } = require('./questions');
 const { printError, printHeading, DOTCMS } = require('./print');
-const { getToken } = require('../utilities/dotcms');
 const { getParsedEnvFile, createEnvFile } = require('./envFile');
-const hasYarn  = require('./hasYarn');
- 
+const hasYarn = require('./hasYarn');
+const getAuthToken = require('./getAuthToken');
+
 const createEnvVars = (vars, separator) => {
     return vars
         ? Object.keys(vars)
@@ -56,7 +56,7 @@ const main = async () => {
                 ...auth
             };
 
-            token = await getToken({
+            token = await getAuthToken({
                 host: cliValues.NEXT_PUBLIC_DOTCMS_HOST,
                 user: cliValues.user,
                 password: cliValues.password,

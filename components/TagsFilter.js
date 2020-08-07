@@ -68,7 +68,7 @@ function TagsFilter({ onFilterChange, list, selected }) {
                     );
                 })
             ) : (
-                <p>No tags</p>
+                <p>Loading...</p>
             )}
         </TagsListContainer>
     );

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import toJSON from 'enzyme-to-json';
-import NavOption from '../../components/layout/Nav/NavOption';
+import NavOption from '../../components/dotcms/layout/Nav/NavOption';
 import { NavResponse } from '../../utils/test/navResponse';
 
 describe('<NavOption />', () => {

@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-// TODO: Improve 404 page 
+// TODO: Improve 404 page
 function Error() {
-  return (
-    <div>
-      <h2>Page Not Found</h2>
-    </div>
-  )
+    return (
+        <div>
+            <h2>Page Not Found</h2>
+        </div>
+    );
 }
 
-export default Error
+export default Error;

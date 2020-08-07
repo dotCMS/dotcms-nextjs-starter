@@ -4,7 +4,15 @@ import {
     StoreProductList,
     webPageContent,
     ProductDetail,
-    CategoryFilter
+    CategoryFilter,
+    Activity,
+    Image,
+    Video,
+    Product,
+    calendarEventDetail,
+    BlogDetail,
+    ActivityDetail,
+    BannerCarousel
 } from './rootContentTypes';
 
 export const mapContentTypes = (contentType) => {
@@ -14,7 +22,15 @@ export const mapContentTypes = (contentType) => {
         webPageContent,
         StoreProductList,
         ProductDetail,
-        CategoryFilter
+        calendarEventDetail,
+        BlogDetail,
+        ActivityDetail,
+        CategoryFilter,
+        Activity,
+        Video,
+        Image,
+        Product,
+        BannerCarousel
     };
 
     if (process.env.NODE_ENV === 'dev' && typeof (components[contentType] === 'undefined')) {

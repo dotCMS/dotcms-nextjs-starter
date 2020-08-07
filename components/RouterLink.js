@@ -1,17 +1,17 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import Link from 'next/link';
 import PageContext from '../contexts/PageContext';
-import { emitRemoteRenderEdit } from '../utilities/dotcms';
+import { emitEMANavEvent } from '../utilities/dotcms';
+import { getLocaleHref } from './../utilities/dotcms/locale';
 
 const RouterLink = ({ href, children, className, ariaLabel }) => {
-    const { isEditMode } = useContext(PageContext);
-
+    const { isEditMode, languageProps: { defaultLanguage } = {} } = useContext(PageContext);
     return isEditMode ? (
         <a
             style={{ cursor: 'pointer' }}
             aria-label={ariaLabel}
             onClick={() => {
-                emitRemoteRenderEdit(href);
+                emitEMANavEvent(href);
             }}
             className={className}
         >
@@ -20,7 +20,10 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
     ) : (
         <Link
             href={'/[[...slug]]'}
-            as={`${href}`}
+            as={getLocaleHref({
+                as: href,
+                defaultLang: defaultLanguage
+            })}
         >
             <a aria-label={ariaLabel} className={className}>
                 {children}
