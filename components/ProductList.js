@@ -81,11 +81,11 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
             )}
             {loading ? (
                 <Loading />
-            ) : data.ProductCollection.length === 0 ? (
+            ) : data?.ProductCollection?.length === 0 ? (
                 <StatusIndicator>No products found!</StatusIndicator>
             ) : (
                 <ProductGrid width={width} className="product-grid">
-                    {data.ProductCollection?.map((product) => {
+                    {data?.ProductCollection?.map((product) => {
                         const [category] =
                             product.category?.map((item) => {
                                 const [name] = Object.values(item);
