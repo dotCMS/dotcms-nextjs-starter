@@ -4,10 +4,6 @@ import PageContext from '../contexts/PageContext';
 import { emitEMANavEvent } from '../utilities/dotcms';
 import { getLocaleHref } from './../utilities/dotcms/locale';
 
-const isAbsolutePath = (href) => {
-    const regex = /^https?:\/\/|^\/\//i;
-    return regex.test(href);
-};
 
 const RouterLink = ({ href, children, className, ariaLabel }) => {
     const { isEditMode, languageProps: { defaultLanguage } = {} } = useContext(PageContext);
@@ -21,20 +17,6 @@ const RouterLink = ({ href, children, className, ariaLabel }) => {
                     emitEMANavEvent(href);
                 }}
                 className={className}
-            >
-                {children}
-            </a>
-        );
-    }
-
-    if (isAbsolutePath(href)) {
-        return (
-            <a
-                aria-label={ariaLabel}
-                className={className}
-                rel="noopener noreferrer"
-                style={{ cursor: 'pointer' }}
-                target="_blank"
             >
                 {children}
             </a>

@@ -3,13 +3,18 @@ import ReactHtmlParser, { processNodes } from 'react-html-parser';
 
 const EXCLUDED_CONTENT = ['form-booking', 'breadcrumbs-custom'];
 
+const isAbsolutePath = (href) => {
+    const regex = /^https?:\/\/|^\/\//i
+    return regex.test(href)
+}
+
 const defaultTransform = (node, index) => {
     if (node.type === 'tag') {
         if (EXCLUDED_CONTENT.includes(node.attribs.class)) {
             return null;
         }
 
-        if (node.name === 'a') {
+        if (node.name === 'a' && !isAbsolutePath(node.attribs.href)) {
             return (
                 <RouterLink key={index} {...node.attribs}>
                     {processNodes(node.children, defaultTransform)}
