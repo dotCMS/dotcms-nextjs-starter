@@ -1,10 +1,15 @@
 import Head from 'next/head';
+import CustomError from '../components/CustomError';
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import getPageList from '../utilities/dotcms/getPageList';
 import getPageUrl from '../utilities/dotcms/getPageUrl';
 import { getPage, getNav, getPathsArray, getLanguagesProps } from '../utilities/dotcms';
 
-export default function Page({ pageRender, nav, languageProps }) {
+export default function Page({ pageRender, nav, languageProps, error }) {
+    if (error) {
+        return <CustomError {...error} />;
+    }
+
     const { page } = pageRender || {};
 
     return (
@@ -72,6 +77,14 @@ export const getStaticProps = async (context) => {
             revalidate: 1
         };
     } catch (error) {
-        throw error
+        if (error.statusCode) {
+            return {
+                props: {
+                    error
+                }
+            };
+        }
+
+        throw error;
     }
 };
