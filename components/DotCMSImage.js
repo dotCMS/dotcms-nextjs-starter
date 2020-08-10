@@ -2,7 +2,7 @@ const getSize = (size) => {
     let result = {
         width: 250,
         height: 250,
-        filter: 250
+        filterResize: 250
     };
 
     if (size) {

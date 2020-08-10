@@ -34,7 +34,7 @@ function SinglePageDetail({
             <DotCMSImage
                 className="figure"
                 alt={title}
-                path={`${process.env.NEXT_PUBLIC_DOTCMS_HOST}${image}`}
+                path={image}
             />
         </DetailContainer>
     );
