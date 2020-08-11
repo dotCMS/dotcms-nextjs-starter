@@ -4,20 +4,26 @@ import PageContext from '../contexts/PageContext';
 import { emitEMANavEvent } from '../utilities/dotcms';
 import { getLocaleHref } from './../utilities/dotcms/locale';
 
+
 const RouterLink = ({ href, children, className, ariaLabel }) => {
     const { isEditMode, languageProps: { defaultLanguage } = {} } = useContext(PageContext);
-    return isEditMode ? (
-        <a
-            style={{ cursor: 'pointer' }}
-            aria-label={ariaLabel}
-            onClick={() => {
-                emitEMANavEvent(href);
-            }}
-            className={className}
-        >
-            {children}
-        </a>
-    ) : (
+
+    if (isEditMode) {
+        return (
+            <a
+                style={{ cursor: 'pointer' }}
+                aria-label={ariaLabel}
+                onClick={() => {
+                    emitEMANavEvent(href);
+                }}
+                className={className}
+            >
+                {children}
+            </a>
+        );
+    }
+
+    return (
         <Link
             href={'/[[...slug]]'}
             as={getLocaleHref({

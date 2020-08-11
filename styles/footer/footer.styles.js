@@ -18,6 +18,7 @@ export const FooterContainer = styled.div`
 export const FooterSection = styled.section`
     display: flex;
     flex-wrap: wrap;
+
     &:first-child {
         justify-content: space-between;
         nav {
@@ -28,6 +29,7 @@ export const FooterSection = styled.section`
             color: grey;
         }
     }
+
     &:last-child {
         flex-direction: column;
         text-align: center;
@@ -43,9 +45,15 @@ export const FooterSection = styled.section`
             color: grey;
         }
     }
+
     &:not(:first-child) {
         justify-content: center;
     }
+
+    nav > a {
+        margin: 0 0.5rem;
+    }
+
     nav > a:hover > img {
         filter: contrast(50%);
     }
