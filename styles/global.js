@@ -64,6 +64,13 @@ export const GlobalStyle = createGlobalStyle`
 			color: var(--dotcms-purple);
 		}
 	}
+	nav.menu__list {
+		a {
+			margin: 0 .5rem;
+			text-decoration: none;
+			font-weight: bold;
+		}
+	}
 	ul.menu__list {
 		list-style: none;
 		display: flex;

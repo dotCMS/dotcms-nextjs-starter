@@ -56,7 +56,9 @@ function ProductList({ quantity, show, showTagsFilter, productLine, width, heigh
         return `/store/category/${category}${tagsUrl}`;
     };
 
-    const query = `+contentType:product ${category && `+categories:${category}`}`;
+    const query = `+contentType:product ${category && `+categories:${category}`} ${
+        tagsMap && tagsMap.length > 0 ? `+(${tagsMap.join(' ')})` : ''
+    }`;
 
     let options = { variables: { limit: quantity, query }, client, errorPolicy: 'none' };
     const [getData, { loading, data, error }] = useLazyQuery(PRODUCTS_QUERY, options);
