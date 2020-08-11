@@ -61,7 +61,6 @@ export const getStaticProps = async (context) => {
         const { languageId, hasLanguages, ...rest } = await getLanguagesProps(languageIso);
 
         const url = await getPageUrl(slug, hasLanguages);
-        console.log(url);
         // Fetch the page object from DotCMS Page API
         let pageRender = await getPage(url, languageId);
 
