@@ -52,6 +52,7 @@ const getPageList = async () => {
         }
 
         return results;
+
     } catch ({ graphQLErrors, networkError }) {
         if (networkError) {
             if (networkError.response) {

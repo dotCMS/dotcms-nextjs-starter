@@ -8,6 +8,7 @@
  */
 const pathEndsWithIndex = (str) => {
     const r = /(?<=\w)(\/index)/;
+
     return r.test(str);
 };
 
