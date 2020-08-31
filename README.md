@@ -22,10 +22,6 @@ With the release of NextJS 9.4 you can use its [Static Site Generator](https://n
 
 ----------------------------
 
-## NextJS + Express
-
-We are using [NextJS](https://nextjs.org/) but with a [custom](https://nextjs.org/docs#custom-server-and-routing) [NodeJS](https://nodejs.org/en/) with [Express framework](https://expressjs.com/). This server handle the POST request for our [Single-page Application (SPA) Editor](https://www.youtube.com/watch?v=8JhoHHtcj6g&feature=emb_title)
-
 ## Getting Started
 
 ### Install dependencies
@@ -50,6 +46,9 @@ Run `yarn start` starts the application in production mode. The application shou
 ----------------------------
 
 ### NodeJS Server (Edit Mode Anywhere)
+
+We are using [NextJS](https://nextjs.org/) but with a [custom](https://nextjs.org/docs#custom-server-and-routing) [NodeJS](https://nodejs.org/en/) with [Express framework](https://expressjs.com/).
+
 To run locally and test your EMA server, run `yarn ema`
 
 ## Deploy
