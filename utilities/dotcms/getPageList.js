@@ -19,16 +19,7 @@ const getPageList = async () => {
             {
                 search(query: "+(urlmap:/* OR (basetype:5 AND path:/*))") {
                     urlMap
-                    ... on htmlpageasset {
-                        url
-                    }
-                    ... on Destination {
-                        url
-                    }
-                    ... on LandingPage {
-                        url
-                    }
-                    ... on ProductLineLandingPage {
+                    ... on PageBaseType {
                         url
                     }
                 }
@@ -65,9 +56,7 @@ const getPageList = async () => {
         if (networkError) {
             if (networkError.response) {
                 throw new Error(
-                    `[GraphQL Network error]: ${networkError.response.status} ${
-                        networkError.response.statusText
-                    }`
+                    `[GraphQL Network error]: ${networkError.response.status} ${networkError.response.statusText}`
                 );
             }
 
