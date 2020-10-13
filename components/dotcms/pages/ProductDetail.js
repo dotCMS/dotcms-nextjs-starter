@@ -34,16 +34,20 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
 
     const renderSpecs = () => {
         // Removes tab character that may come from the API and parses the object
-        const specifications = JSON.parse(specifications1.replace(/\t+/g, ''));
-        const specsArr = [];
-        for (var key in specifications) {
-            specsArr.push(
-                <li key={key}>
-                    <b>{key}</b>: {specifications[key]}
-                </li>
-            );
+        try {
+            const specifications = JSON.parse(specifications1.replace(/\t+/g, ''));
+            const specsArr = [];
+            for (var key in specifications) {
+                specsArr.push(
+                    <li key={key}>
+                        <b>{key}</b>: {specifications[key]}
+                    </li>
+                );
+            }
+            return specsArr;
+        } catch {
+            return [];
         }
-        return specsArr;
     };
 
     return (
