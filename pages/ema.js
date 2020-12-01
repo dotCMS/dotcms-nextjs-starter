@@ -1,7 +1,7 @@
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import { useEffect } from 'react';
 
-function DotCMSStaticPage({ pageRender, nav }) {
+function DotCMSStaticPage({ pageRender, nav, languageProps }) {
     useEffect(() => {
         if (process.browser) {
             /*
@@ -20,15 +20,23 @@ function DotCMSStaticPage({ pageRender, nav }) {
         }
     });
 
-    return <DotCMSPage pageRender={pageRender} nav={nav} isEditMode={true} />;
+    return (
+        <DotCMSPage
+            pageRender={pageRender}
+            nav={nav}
+            languageProps={languageProps}
+            isEditMode={true}
+        />
+    );
 }
 
 export async function getServerSideProps(context) {
-    const { nav, pageRender } = context.query;
+    const { nav, pageRender, languageProps } = context.query;
     return {
         props: {
             pageRender,
-            nav
+            nav,
+            languageProps
         }
     };
 }

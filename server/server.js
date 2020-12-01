@@ -7,7 +7,7 @@ const app = next({ dev: true });
 const handle = app.getRequestHandler();
 
 const transformPage = require('../utilities/dotcms/transformPage');
-const { getNav } = require('../utilities/dotcms');
+const { getNav, getLanguagesProps } = require('../utilities/dotcms');
 const { loggerLog } = require('../utilities/logger');
 
 const formUrlEncodedParser = bodyParser.raw({
@@ -33,7 +33,14 @@ app.prepare()
                 const pageRender = await transformPage(page);
                 const nav = await getNav(4);
                 app.setAssetPrefix(`${process.env.DEPLOY_URL}`);
-                app.render(req, res, '/ema', { pageRender, nav });
+
+                const { languageId, hasLanguages, ...rest } = await getLanguagesProps();
+
+                app.render(req, res, '/ema', {
+                    pageRender,
+                    nav,
+                    languageProps: { languageId, hasLanguages, ...rest }
+                });
             } catch (error) {
                 res.send(error);
             }
