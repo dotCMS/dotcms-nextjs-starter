@@ -46,7 +46,8 @@ function getUpdatedContainer(page, containerInLayout) {
     return {
         ...container.container,
         acceptTypes: getAcceptTypes(page.containers, containerInLayout.identifier),
-        contentlets: contentlets
+        contentlets: contentlets,
+        uuid: uuid.replace('uuid-', '')
     };
 }
 

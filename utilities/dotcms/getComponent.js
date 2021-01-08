@@ -1,6 +1,5 @@
 import {
     Banner,
-    SimpleWidget,
     StoreProductList,
     webPageContent,
     ProductDetail,
@@ -26,7 +25,6 @@ const components = {
     Image,
     Product,
     ProductDetail,
-    SimpleWidget,
     StoreProductList,
     Video,
     calendarEventDetail,
@@ -34,14 +32,17 @@ const components = {
     webPageContent
 };
 
+const FallbackComponent = ({ contentType }) => {
+    return <h3>You don't have this component for the content type: {contentType}</h3>;
+};
+
 /**
  * Get the component to render base on the contentlet content type
  *
  */
-const getComponent = ({ baseType, contentType }) => {
-    const FALLBACK_COMPONENT = baseType === 'WIDGET' ? 'SimpleWidget' : 'webPageContent';
+const getComponent = ({ contentType }) => {
 
-    return components[contentType] || components[FALLBACK_COMPONENT];
+    return components[contentType] || FallbackComponent;
 };
 
 export default getComponent;
