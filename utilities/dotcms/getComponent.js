@@ -33,7 +33,7 @@ const components = {
 };
 
 const FallbackComponent = ({ contentType }) => {
-    return <h3>You don't have this component for the content type: {contentType}</h3>;
+    return <h3>You don't have a component for the content type: {contentType}</h3>;
 };
 
 /**
