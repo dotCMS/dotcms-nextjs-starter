@@ -50,6 +50,10 @@ const Contentlets = ({ contentlets }) => {
     return contentlets.length ? (
         <>
             {contentlets.map((contentlet) => {
+                if (contentlet.contentType === 'SimpleWidget') {
+                    return null;
+                }
+
                 return (
                     <ContentletWrapper
                         key={contentlet.identifier}

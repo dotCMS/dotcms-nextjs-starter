@@ -11,6 +11,7 @@ const WapperLink = styled(RouterLink)`
 
     img {
         width: 100%;
+        object-fit: cover;
     }
 
     &:hover {
