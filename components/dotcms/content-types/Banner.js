@@ -3,7 +3,7 @@ import DotCMSImage from '../../DotCMSImage';
 import { BannerWrapper } from '../../../styles/banner/banner.styles';
 import { Button } from '../../../styles/shared.styles';
 import dots from '../../../public/dots.svg';
-import {withEditable} from '../../../utilities/dotcms/widthEditable';
+import { withEditable } from '../../../utilities/dotcms/widthEditable';
 
 function Banner({ buttonText, image, caption, link, textColor, title, inode }) {
     const TitleEditable = withEditable((props) => {
