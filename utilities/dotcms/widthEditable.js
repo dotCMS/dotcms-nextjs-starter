@@ -1,10 +1,17 @@
+import { useContext } from 'react';
+import PageContext from '../../contexts/PageContext';
+
 export function withEditable(Component) {
+    const { isEditMode } = useContext(PageContext);
+
     return function ({ name, lang, mode, inode }) {
         return (
             <Component
                 onClick={(e) => {
-                    e.stopPropagation();
-                    e.preventDefault();
+                    if (isEditMode) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                    }
                 }}
                 data-mode={mode || 'minimal'}
                 data-field-name={name}
