@@ -56,12 +56,8 @@ export default function Activity({ description, identifier, urlTitle, title, ino
     const imageUrl = `/dA/${identifier}/image/270w/50q`;
     const myHref = '/activities/' + urlTitle;
 
-    const TitleEditable = withEditable((props) => {
-        return <h4 {...props}>{title}</h4>;
-    });
-    const DescriptionEditable = withEditable((props) => {
-        return <p {...props}>{desc}</p>;
-    });
+    const TitleEditable = withEditable((props) => <h4 {...props}>{title}</h4>);
+    const DescriptionEditable = withEditable((props) => <p {...props}>{desc}</p>);
 
     return (
         <WapperLink href={myHref}>

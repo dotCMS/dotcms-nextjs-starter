@@ -4,6 +4,7 @@ import RouterLink from './RouterLink';
 import DotCMSImage from './DotCMSImage';
 import { SingleProductContainer } from '../styles/products/product.styles';
 import { Price } from '../styles/products/product.styles';
+import { withEditable } from '../utilities/dotcms/widthEditable';
 
 const { currencyFormatter } = require('../utilities');
 
@@ -17,7 +18,8 @@ const shouldIShow = (show, item) => {
 };
 
 export default function ProductItem({ product, show }) {
-    const { retailPrice, urlTitle, image, title, salePrice, category } = product;
+    const { retailPrice, urlTitle, image, title, salePrice, category, inode } = product;
+    const TitleEditable = withEditable((props) => <span {...props}>{title}</span>);
 
     return (
         <SingleProductContainer>
@@ -33,7 +35,9 @@ export default function ProductItem({ product, show }) {
                 </h4>
                 {shouldIShow(show, 'title') && (
                     <h3 className="meta__title">
-                        <RouterLink href={`/store/products/${urlTitle}`}>{title}</RouterLink>
+                        <RouterLink href={`/store/products/${urlTitle}`}>
+                            <TitleEditable name="title" lang="1" mode="minimal" inode={inode} />
+                        </RouterLink>
                     </h3>
                 )}
 

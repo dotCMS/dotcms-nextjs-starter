@@ -3,6 +3,7 @@ import { Button } from '../../../styles/shared.styles';
 const { currencyFormatter } = require('../../../utilities');
 import Carousel from '../../Carousel';
 import styled from 'styled-components';
+import { withEditable } from '../../../utilities/dotcms/widthEditable';
 
 import {
     ProductContainer,
@@ -17,6 +18,7 @@ const Content = styled.div`
 
 function ProductDetail({ pageRender: { urlContentMap } }) {
     const {
+        inode,
         title,
         description,
         retailPrice,
@@ -31,6 +33,8 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };
+
+    const TitleEditable = withEditable((props) => <h3 {...props}>{title}</h3>);
 
     const renderSpecs = () => {
         // Removes tab character that may come from the API and parses the object
@@ -62,7 +66,13 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
 
             <ProductDetailContainer>
                 <div className="meta">
-                    <h3 className="meta__title">{title}</h3>
+                    <TitleEditable
+                        name="title"
+                        lang="1"
+                        mode="minimal"
+                        inode={inode}
+                        className="meta__title"
+                    />
                     <Price salePrice={!!salePrice}>
                         {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
                     </Price>
