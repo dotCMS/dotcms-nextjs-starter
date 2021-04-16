@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.p`
+export const Button = styled.a`
     color: var(--dotcms-purple-20);
     background: var(--dotcms-purple-80);
     text-decoration: none;
@@ -13,15 +13,12 @@ export const Button = styled.p`
     transition: margin cubic-bezier(.215, .61, .355, 1) 250ms, padding cubic-bezier(.215, .61, .355, 1) 250ms;;
     margin: 0 3px;
     padding: 0.75rem 1.5rem;
+
     &:hover {
         color: var(--dotcms-purple-20);
         transform: translate(0px, 0px);
         margin: 0 0px;
         padding: 0.75rem 2rem;
     }
-`;
-
-export const Title = styled.h1`
-    font-size: 4rem;
 `;
 
