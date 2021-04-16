@@ -3,7 +3,7 @@ import { Button } from '../../../styles/shared.styles';
 const { currencyFormatter } = require('../../../utilities');
 import Carousel from '../../Carousel';
 import styled from 'styled-components';
-import { withEditable } from '../../../utilities/dotcms/widthEditable';
+import { Editable } from '../../Editable';
 
 import {
     ProductContainer,
@@ -33,8 +33,6 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
     const imagesFound = () => {
         return !!image || !!image2 || !!image3;
     };
-
-    const TitleEditable = withEditable((props) => <h3 {...props}>{title}</h3>);
 
     const renderSpecs = () => {
         // Removes tab character that may come from the API and parses the object
@@ -66,20 +64,29 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
 
             <ProductDetailContainer>
                 <div className="meta">
-                    <TitleEditable
-                        name="title"
+                    <Editable
+                        element={<h3>{title}</h3>}
+                        field="title"
                         lang="1"
                         mode="minimal"
                         inode={inode}
                         className="meta__title"
                     />
+
                     <Price salePrice={!!salePrice}>
                         {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
                     </Price>
                     {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
                 </div>
 
-                <Content dangerouslySetInnerHTML={{ __html: description }} />
+                <Editable
+                    element={<Content dangerouslySetInnerHTML={{ __html: description }} />}
+                    field="description"
+                    lang="1"
+                    mode="full"
+                    inode={inode}
+                    className="meta__title"
+                />
 
                 {renderSpecs().length > 1 && (
                     <>

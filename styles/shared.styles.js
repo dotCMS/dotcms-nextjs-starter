@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.a`
+export const Button = styled.p`
     color: var(--dotcms-purple-20);
     background: var(--dotcms-purple-80);
     text-decoration: none;
@@ -20,3 +20,8 @@ export const Button = styled.a`
         padding: 0.75rem 2rem;
     }
 `;
+
+export const Title = styled.h1`
+    font-size: 4rem;
+`;
+
