@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Link from 'next/link';
 import PageContext from '../contexts/PageContext';
 import { emitEMANavEvent } from '../utilities/dotcms';

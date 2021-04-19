@@ -7,9 +7,10 @@ export default function Product(props) {
               return name;
           })
         : [''];
-    const { retailPrice, urlTitle, title, salePrice, image } = props;
+    const { retailPrice, urlTitle, title, salePrice, image, inode } = props;
 
     const data = {
+        inode,
         category: cat,
         retailPrice,
         urlTitle,

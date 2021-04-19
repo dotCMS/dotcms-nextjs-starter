@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import RouterLink from '../../RouterLink';
 import DotCMSImage from '../../DotCMSImage';
+import { Editable } from '../../Editable';
 
 const WapperLink = styled(RouterLink)`
     display: block;
@@ -49,26 +50,37 @@ const WapperLink = styled(RouterLink)`
     }
 `;
 
-export default function Activity(props) {
-    const description =
-        props.description.length > 120 ? props.description.substring(0, 120) : props.description;
+export default function Activity({ description, identifier, urlTitle, title, inode }) {
+    const desc = description.length > 120 ? description.substring(0, 120) : description;
 
-    const imageUrl = `/dA/${props.identifier}/image/270w/50q`;
-    const myHref = '/activities/' + props.urlTitle;
+    const imageUrl = `/dA/${identifier}/image/270w/50q`;
+    const myHref = '/activities/' + urlTitle;
 
     return (
         <WapperLink href={myHref}>
             <DotCMSImage
                 path={imageUrl}
-                alt={props.title}
+                alt={title}
                 size={{
                     width: 370,
                     height: 370
                 }}
             />
             <div className="body">
-                <h4>{props.title}</h4>
-                <p>{description}</p>
+                <Editable
+                    element={<h4>{title}</h4>}
+                    field="title"
+                    lang="1"
+                    mode="minimal"
+                    inode={inode}
+                />
+                <Editable
+                    element={<p>{desc}</p>}
+                    field="description"
+                    lang="1"
+                    mode="minimal"
+                    inode={inode}
+                />
             </div>
         </WapperLink>
     );

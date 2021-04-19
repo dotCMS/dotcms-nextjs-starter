@@ -13,6 +13,7 @@ export const Button = styled.a`
     transition: margin cubic-bezier(.215, .61, .355, 1) 250ms, padding cubic-bezier(.215, .61, .355, 1) 250ms;;
     margin: 0 3px;
     padding: 0.75rem 1.5rem;
+
     &:hover {
         color: var(--dotcms-purple-20);
         transform: translate(0px, 0px);
@@ -20,3 +21,4 @@ export const Button = styled.a`
         padding: 0.75rem 2rem;
     }
 `;
+

@@ -3,6 +3,7 @@ import { Button } from '../../../styles/shared.styles';
 const { currencyFormatter } = require('../../../utilities');
 import Carousel from '../../Carousel';
 import styled from 'styled-components';
+import { Editable } from '../../Editable';
 
 import {
     ProductContainer,
@@ -17,6 +18,7 @@ const Content = styled.div`
 
 function ProductDetail({ pageRender: { urlContentMap } }) {
     const {
+        inode,
         title,
         description,
         retailPrice,
@@ -62,14 +64,29 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
 
             <ProductDetailContainer>
                 <div className="meta">
-                    <h3 className="meta__title">{title}</h3>
+                    <Editable
+                        element={<h3>{title}</h3>}
+                        field="title"
+                        lang="1"
+                        mode="minimal"
+                        inode={inode}
+                        className="meta__title"
+                    />
+
                     <Price salePrice={!!salePrice}>
                         {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
                     </Price>
                     {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
                 </div>
 
-                <Content dangerouslySetInnerHTML={{ __html: description }} />
+                <Editable
+                    element={<Content dangerouslySetInnerHTML={{ __html: description }} />}
+                    field="description"
+                    lang="1"
+                    mode="full"
+                    inode={inode}
+                    className="meta__title"
+                />
 
                 {renderSpecs().length > 1 && (
                     <>
