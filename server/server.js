@@ -23,6 +23,7 @@ app.prepare()
         const server = express();
 
         server.get('*', (req, res) => {
+            res.set('Access-Control-Allow-Origin', '*')
             handle(req, res);
         });
 

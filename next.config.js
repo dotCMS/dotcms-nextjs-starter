@@ -1,6 +1,19 @@
 const withCss = require('@zeit/next-css');
 
 module.exports = withCss({
+    async headers() {
+        return [
+            {
+                source: '/',
+                headers: [
+                    {
+                        key: 'Referrer-Policy',
+                        value: 'no-referrer-when-downgrade', // Matched parameters can be used in the value
+                    }
+                ],
+            },
+        ]
+    },
     async rewrites() {
         return [
             // check if Next.js project routes match before we attempt proxying
