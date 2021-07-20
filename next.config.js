@@ -1,7 +1,5 @@
 const withCss = require('@zeit/next-css');
 
-const isProd = process.env.NODE_ENV === 'production'
-
 module.exports = withCss({
     async headers() {
         return [
@@ -51,5 +49,5 @@ module.exports = withCss({
         });
         return config;
     },
-    assetPrefix: isProd ? process.env.NEXT_PUBLIC_DOTCMS_HOST : ''
+    assetPrefix: process.env.DEPLOY_URL
 });
