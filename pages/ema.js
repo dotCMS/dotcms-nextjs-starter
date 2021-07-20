@@ -43,14 +43,12 @@ function DotCMSStaticPage({ pageRender, nav, languageProps }) {
     );
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req }) {
     const body = await parseBody(req, '1mb');
     const page = JSON.parse(body.dotPageData).entity;
     const pageRender = await transformPage(page);
     const nav = await getNav(4);
     const { languageId, hasLanguages, ...rest } = await getLanguagesProps();
-    res.set('Access-Control-Allow-Origin', '*')
-
 
     return {
         props: {

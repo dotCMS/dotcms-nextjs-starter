@@ -63,6 +63,5 @@ You can deploy to [Vercel](https://vercel.com/docs/platform/deployments) which i
 #### Netlify
 [How to Deploy Next.js Sites to Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
 
-
 #### Amazon Web Services
 [Deploy a Next.js app using Amplify Hosting](https://docs.amplify.aws/guides/hosting/nextjs/q/platform/js)
