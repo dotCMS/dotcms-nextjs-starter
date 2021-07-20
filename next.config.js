@@ -7,6 +7,7 @@ module.exports = withCss({
                 source: '/:path*',
                 headers: [
                     {
+                        // Prevent CORS issues in the DotCMS Page Editor
                         key: 'Access-Control-Allow-Origin',
                         value: '*',
                     }
@@ -49,5 +50,7 @@ module.exports = withCss({
         });
         return config;
     },
+    // When we load the page in the DotCMS editor we need to have
+    // absolutes url for he nextjs page
     assetPrefix: process.env.DEPLOY_URL
 });
