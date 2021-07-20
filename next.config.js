@@ -1,6 +1,22 @@
 const withCss = require('@zeit/next-css');
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = withCss({
+    async headers() {
+        return [
+            {
+                source: '/:path*',
+                headers: [
+                    {
+                        key: 'Access-Control-Allow-Origin',
+                        value: '*',
+                    }
+                ]
+            },
+        ]
+    },
+
     async rewrites() {
         return [
             // check if Next.js project routes match before we attempt proxying
@@ -34,5 +50,6 @@ module.exports = withCss({
             }
         });
         return config;
-    }
+    },
+    assetPrefix: isProd ? process.env.NEXT_PUBLIC_DOTCMS_HOST : ''
 });

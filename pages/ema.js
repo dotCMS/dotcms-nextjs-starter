@@ -1,6 +1,11 @@
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import { useEffect } from 'react';
 
+import { parseBody } from 'next/dist/next-server/server/api-utils';
+
+import { getNav, getLanguagesProps } from '../utilities/dotcms';
+import transformPage from '../utilities/dotcms/transformPage';
+
 function DotCMSStaticPage({ pageRender, nav, languageProps }) {
     useEffect(() => {
         if (process.browser) {
@@ -20,7 +25,9 @@ function DotCMSStaticPage({ pageRender, nav, languageProps }) {
         }
     });
 
+
     return (
+
         <DotCMSPage
             pageRender={pageRender}
             nav={nav}
@@ -30,13 +37,20 @@ function DotCMSStaticPage({ pageRender, nav, languageProps }) {
     );
 }
 
-export async function getServerSideProps(context) {
-    const { nav, pageRender, languageProps } = context.query;
+export async function getServerSideProps({ req, res }) {
+    const body = await parseBody(req, '1mb');
+    const page = JSON.parse(body.dotPageData).entity;
+    const pageRender = await transformPage(page);
+    const nav = await getNav(4);
+    const { languageId, hasLanguages, ...rest } = await getLanguagesProps();
+    res.set('Access-Control-Allow-Origin', '*')
+
+
     return {
         props: {
             pageRender,
             nav,
-            languageProps
+            languageProps: { languageId, hasLanguages, ...rest }
         }
     };
 }
