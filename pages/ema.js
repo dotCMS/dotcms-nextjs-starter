@@ -1,3 +1,5 @@
+import { Head } from 'next/head'
+
 import DotCMSPage from '../components/dotcms/layout/DotCMSPage';
 import { useEffect } from 'react';
 
@@ -27,13 +29,17 @@ function DotCMSStaticPage({ pageRender, nav, languageProps }) {
 
 
     return (
-
-        <DotCMSPage
-            pageRender={pageRender}
-            nav={nav}
-            languageProps={languageProps}
-            isEditMode={true}
-        />
+        <>
+            <Head>
+                <meta name="robots" content="noindex" />
+            </Head>
+            <DotCMSPage
+                pageRender={pageRender}
+                nav={nav}
+                languageProps={languageProps}
+                isEditMode={true}
+            />
+        </>
     );
 }
 
