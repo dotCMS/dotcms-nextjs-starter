@@ -57,6 +57,20 @@ We create a `/pages/ema.js` that will receive the object from DotCMS to create t
 
 ### Deploy
 
+#### Enviromental variables
+For all deploys you need to set 3 env variables
+
+```
+# The DotCMS instance URL
+NEXT_PUBLIC_DOTCMS_HOST=https://demo.dotcms.com
+
+# The url of your nextjs app
+DEPLOY_URL=https://yourdomain.com
+
+# Auth token from DotCMS
+BEARER_TOKEN=TOKEN
+```
+
 #### Vercel
 You can deploy to [Vercel](https://vercel.com/docs/platform/deployments) which is the company behind Nextjs so the support is the best.
 
