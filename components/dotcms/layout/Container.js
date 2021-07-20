@@ -20,7 +20,6 @@ const DotCMSEditContainerWrapper = reactifyWc('dotcms-ema-container');
 const DotCMSEditContentletWrapper = reactifyWc('dotcms-ema-contentlet');
 
 const ContentletWrapper = ({ children, contentlet, isEditMode }) => {
-    console.log('ContentletWrapper', {isEditMode});
     if (isEditMode) {
         contentlet.dotCanEdit = true;
         return (
@@ -34,7 +33,6 @@ const ContentletWrapper = ({ children, contentlet, isEditMode }) => {
 };
 
 const ContainerWrapper = ({ children, container, isEditMode }) => {
-    console.log('ContainerWrapper', {isEditMode});
     if (isEditMode) {
         return (
             <DotCMSEditContainerWrapper container={container}>

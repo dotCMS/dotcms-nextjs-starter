@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-import { getLanguagesProps } from '../../utilities/dotcms/index';
+import { getLanguagesProps } from '../../utilities/dotcms';
 import { initializeApollo } from '../../config/apollo';
 
 const apolloClient = initializeApollo();
