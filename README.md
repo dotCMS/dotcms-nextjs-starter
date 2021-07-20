@@ -10,7 +10,7 @@ If you want information on how we build all this, you can see these two videos:
 [DotCMS](https://dotcms.com) as a [hybrid CMS](https://dotcms.com/product/hybrid-cms) allows you not only edit regular pages, Single Page Apps or any kind of JamStack websites.
 
 ## NextJS
-We are using the latest [NextJS](https://nextjs.org/) features to statically render all the DotCMS pages and publish it to [Vercel](https://vercel.com) and [Heroku](https://heroku.com)
+We are using the latest [NextJS](https://nextjs.org/) features to statically render all the DotCMS pages.
 
 With the release of NextJS 9.4 you can use its [Static Site Generator](https://nextjs.org/blog/next-9-3#next-gen-static-site-generation-ssg-support) feature to create static DotCMS pages in build time, this is the approach we took here, in a overview we:
 
@@ -54,3 +54,15 @@ We create a `/pages/ema.js` that will receive the object from DotCMS to create t
 2. Build your container: `docker build -t CONTAINER_NAME .`
 3. Run your container: `docker run -p 3000:3000 CONTAINER_NAME`
 
+
+### Deploy
+
+#### Vercel
+You can deploy to [Vercel](https://vercel.com/docs/platform/deployments) which is the company behind Nextjs so the support is the best.
+
+#### Netlify
+[How to Deploy Next.js Sites to Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
+
+
+#### Amazon Web Services
+[Deploy a Next.js app using Amplify Hosting](https://docs.amplify.aws/guides/hosting/nextjs/q/platform/js)
