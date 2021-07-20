@@ -81,7 +81,8 @@ We have two deploys here, one to [Vercel](https://vercel.com/) (our JamStack Web
 
 7. Deploy with `git push heroku master`
 
-### Docker for Edit Mode Anywhere
-1. Install [Docker](https://www.docker.com/get-started)
-2. Build the image: `docker build -t dotcms/dotcms-spa:YOUR_VERSION .`
-3. Run locally: `docker run -p 5000:5000 dotcms/dotcms-spa:YOUR_VERSION`
+### Using Docker
+1. Install [Docker](https://docs.docker.com/get-docker/) on your machine.
+2. Build your container: `docker build -t CONTAINER_NAME .`
+3. Run your container: `docker run -p 3000:3000 CONTAINER_NAME`
+

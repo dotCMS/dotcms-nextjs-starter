@@ -7,4 +7,3 @@ Procfile
 jest.config.js
 README.md
 setupTest.js
-yarn.lock
