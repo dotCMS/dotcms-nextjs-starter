@@ -9,27 +9,21 @@
         "build": "next build",
         "start": "next start",
         "export": "next export",
-        "setup": "node ./cli/index.js build",
-        "ema": "node server/server.js"
+        "setup": "node ./cli/index.js build"
     },
     "dependencies": {
         "@apollo/react-hooks": "^3.1.5",
         "@zeit/next-css": "^1.0.1",
         "apollo-boost": "^0.4.9",
         "babel-plugin-styled-components": "^1.10.7",
-        "body-parser": "^1.19.0",
         "dotcms": "0.0.17",
         "dotcms-ema-elements": "0.0.2",
-        "express": "^4.17.1",
         "fs": "^0.0.1-security",
         "graphql": "^15.0.0",
         "graphql-tag": "^2.10.3",
-        "isomorphic-fetch": "^2.2.1",
         "next": "^9.5.0",
-        "next-with-apollo": "^5.0.1",
         "nprogress": "^0.2.0",
         "prop-types": "^15.7.2",
-        "query-string": "^6.13.1",
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "react-html-parser": "^2.0.2",
@@ -47,9 +41,6 @@
         "inquirer": "^7.1.0",
         "jest": "^24.9.0",
         "nodemon": "^1.19.4",
-        "pnpapi": "^0.0.0",
-        "react-testing-library": "^8.0.1",
-        "url": "^0.11.0",
         "waait": "^1.0.5"
     }
 }
