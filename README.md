@@ -1,8 +1,6 @@
 # DotCMS JamStack Starter
 For this project we used [NextJS](https://nextjs.org/) to build a [JamStack Website](https://jamstack.org/) which data (pages and content) came fully from [DotCMS](https://dotcms.com).
 
-Additionally we have a server [NodeJS](https://nodejs.org/) that allows you to edit your JamStack pages from [DotCMS](https://dotcms.com).
-
 If you want information on how we build all this, you can see these two videos:
 
 1. [Build and deploy your Jamstack with NextJS and GraphQL](https://www.youtube.com/watch?v=zy7xr7TcqUo)
