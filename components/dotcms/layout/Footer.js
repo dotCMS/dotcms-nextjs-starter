@@ -1,11 +1,7 @@
 import React from 'react';
-import logo from '../../../public/logo.png';
-import fb from '../../../public/fb.svg';
-import instagram from '../../../public/instagram.svg';
-import linkedin from '../../../public/linkedin.svg';
-import twitter from '../../../public/twitter.svg';
-import pinterest from '../../../public/pinterest.svg';
 import { FooterContainer, FooterSection } from '../../../styles/footer/footer.styles';
+
+import Image from 'next/image';
 
 function Footer() {
     return (
@@ -13,7 +9,12 @@ function Footer() {
             <div className="container">
                 <FooterSection className="footer__section">
                     <a className="main-nav__logo" href="#" aria-label="Footer Logo">
-                        <img src={logo} alt="" width={135} height={41} />
+                        <Image
+                            src="/logo.png"
+                            alt="DotCMS - NextJS example"
+                            width="135"
+                            height="41"
+                        />
                     </a>
                     <nav className="menu__list">
                         <a className="active" href="#">
@@ -29,19 +30,19 @@ function Footer() {
                 <FooterSection className="icons">
                     <nav className="menu__list">
                         <a href="#">
-                            <img src={fb} alt="fb" />
+                            <Image src="/fb.svg" alt="Faceboook" width="32" height="32" />
                         </a>
                         <a href="#">
-                            <img src={instagram} alt="instagram" />
+                            <Image src="/instagram.svg" alt="Instagram" width="32" height="32" />
                         </a>
                         <a href="#">
-                            <img src={linkedin} alt="linkedin" />
+                            <Image src="/linkedin.svg" alt="Linkedin" width="32" height="32" />
                         </a>
                         <a href="#">
-                            <img src={twitter} alt="twitter" />
+                            <Image src="/twitter.svg" alt="Twitter" width="32" height="32" />
                         </a>
                         <a href="#">
-                            <img src={pinterest} alt="pinterest" />
+                            <Image src="/pinterest.svg" alt="Pinterest" width="32" height="32" />
                         </a>
                     </nav>
                 </FooterSection>

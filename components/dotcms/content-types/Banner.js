@@ -1,18 +1,30 @@
 import React from 'react';
+
+import Image from 'next/image';
+
 import DotCMSImage from '../../DotCMSImage';
 import { BannerWrapper } from '../../../styles/banner/banner.styles';
 import { Button } from '../../../styles/shared.styles';
-import dots from '../../../public/dots.svg';
 import { Editable } from '../../Editable';
 
 function Banner({ buttonText, image, caption, link, textColor, title, inode }) {
-
-
     return (
         <BannerWrapper className="banner-wrapper">
             <div className="banner-wrapper__content">
-                <img className="banner-wrapper__content--dots" src={dots} alt="Dots SVG" />
-                <img className="banner-wrapper__content--dots --bottom" src={dots} alt="Dots SVG" />
+                <Image
+                    className="banner-wrapper__content--dots"
+                    src="/dots.svg"
+                    width="175"
+                    height="175"
+                    alt="Dots SVG"
+                />
+                <Image
+                    className="banner-wrapper__content--dots--bottom"
+                    src="/dots.svg"
+                    width="175"
+                    height="175"
+                    alt="Dots SVG"
+                />
 
                 {title && (
                     <Editable
@@ -38,7 +50,7 @@ function Banner({ buttonText, image, caption, link, textColor, title, inode }) {
                 )}
             </div>
             <div className="banner-wrapper__figure">
-                <DotCMSImage size={900} alt={title} path={image} />
+                <DotCMSImage alt={title} path={image} />
             </div>
         </BannerWrapper>
     );

@@ -1,15 +1,14 @@
 import React from 'react';
-import searchIcon from '../../../../public/search.svg';
-import shoppingCart from '../../../../public/shopping-cart.svg';
+import Image from 'next/image';
 
 function SocialMediaMenu() {
     return (
         <nav className="menu menu__icons">
             <a href="#" aria-label="button">
-                <img src={searchIcon} alt="Search Icon" />
+                <Image src="/search.svg" alt="Search" width="24" height="24" />
             </a>
             <a href="#" aria-label="button">
-                <img src={shoppingCart} alt="Shopping Cart Icon" />
+                <Image src="/shopping-cart.svg" alt="Shopping Cart" width="24" height="24" />
             </a>
         </nav>
     );
