@@ -1,6 +1,4 @@
-const withCss = require('@zeit/next-css');
-
-module.exports = withCss({
+module.exports = {
     async headers() {
         return [
             {
@@ -53,4 +51,4 @@ module.exports = withCss({
     // When we load the page in the DotCMS editor we need to have
     // absolutes url for he nextjs page
     assetPrefix: process.env.DEPLOY_URL
-});
+};
