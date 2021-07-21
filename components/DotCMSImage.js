@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const getSize = (size) => {
     let result = {
         width: 250,
@@ -25,10 +27,9 @@ const getSize = (size) => {
     return result;
 };
 
-const DotCMSImage = ({ size, alt, path, identifier, name, className }) => {
-    const { filterResize, width, height } = getSize(size);
+const DotCMSImage = ({ width, height, alt, path, identifier, name, className }) => {
 
-    const filterUrl = `/filter/resize_w/${filterResize}/20q`;
+    const filterUrl = `/filter/resize_w/${width || height || 1000}/20q`;
     let srcUrl = '';
 
     if (path) {
@@ -39,14 +40,25 @@ const DotCMSImage = ({ size, alt, path, identifier, name, className }) => {
         srcUrl += `/dA/${identifier}/${name}`;
     }
 
+    const src = `${srcUrl}${filterUrl}`;
+
+    let props = {
+        src, alt
+    }
+
+    if (width && height) {
+        props.width = width;
+        props.height = height;
+    } else {
+        props.layout = 'fill';
+    }
+
+
     return (
-        <img
+        <Image
             className={className}
-            src={`${srcUrl}${filterUrl}`}
             alt={alt}
-            width={width || 250}
-            height={height || 250}
-            loading="lazy"
+            {...props}
         />
     );
 };

@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
+import Image from 'next/image'
+
 import LanguageSelector from '../LanguageSelector';
 import MenuList from '../../layout/Nav/MenuList';
 import PageContext from '../../../../contexts/PageContext';
+import RouterLink from '../../../RouterLink';
 import SocialMediaMenu from '../../layout/Nav/SocialMediaMenu';
-import logo from '../../../../public/logo.png';
-import menuIcon from '../../../../public/menu.svg';
 import useNav from '../../../../hooks/useNav';
 import { MainNav, NavMenu } from '../../../../styles/nav/nav.styles';
-import RouterLink from '../../../RouterLink';
 import { getCurrentLanguage } from '../../../../utilities/dotcms/locale';
 
 export default function Nav() {
@@ -31,7 +31,7 @@ export default function Nav() {
                         getCurrentLanguage() && !defaultLanguage ? `/${getCurrentLanguage()}` : `/`
                     }
                 >
-                    <img src={logo} alt="" width={135} height={41} />
+                    <Image src="/logo.png" alt="DotCMS - NextJS example" width="135" height="41" />
                 </RouterLink>
                 <NavMenu isOpen={isMenuOpen}>
                     <button
@@ -40,7 +40,8 @@ export default function Nav() {
                         aria-label="button"
                         onClick={(e) => handleOpenMenu(e)}
                     >
-                        <img src={menuIcon} alt="Hamburger Icon" />
+
+                        <Image src="/menu.svg" alt="Open Menu" width="24" height="24" />
                     </button>
                     <MenuList navigation={nav} />
                     <SocialMediaMenu />

@@ -61,10 +61,8 @@ export default function Activity({ description, identifier, urlTitle, title, ino
             <DotCMSImage
                 path={imageUrl}
                 alt={title}
-                size={{
-                    width: 370,
-                    height: 370
-                }}
+                width={370}
+                height={370}
             />
             <div className="body">
                 <Editable

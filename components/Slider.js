@@ -31,10 +31,8 @@ const Slider = ({ images, title, id }) => {
                         const data = {
                             identifier: id,
                             name: keys[index],
-                            size: {
-                                width: 700,
-                                height: 700
-                            },
+                            width: 700,
+                            height: 700,
                             alt: title
                         };
 

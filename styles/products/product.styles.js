@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const SingleProductContainer = styled.div`
+    margin-bottom: var(--primary-spacing);
+
     .meta {
-        margin-top: var(--primary-spacing);
+        margin-top: 1rem;
 
         &__category,
         &__title {
@@ -38,28 +40,25 @@ export const SingleProductContainer = styled.div`
         display: block;
         background: #fff;
         padding: 1rem;
-        display: flex;
-        justify-content: center;
-        
-    }
+        position: relative;
+        min-height: 300px;
 
-    img {
-        object-fit: contain;
-        display: block;
-        max-width: 100%;
+        img {
+            object-fit: contain;
+        }
     }
 `;
 
 export const ProductGrid = styled.div`
-           display: grid;
-           grid-template-columns: ${(props) =>
-               props.width
-                   ? `repeat(auto-fill, minmax(${props.width}px, 1fr))`
-                   : `repeat(auto-fill, minmax(250px, 1fr))`};
-           flex: 1 0 80%;
-           margin-top: var(--primary-spacing);
-           gap: var(--primary-spacing);
-       `;
+    display: grid;
+    grid-template-columns: ${(props) =>
+        props.width
+            ? `repeat(auto-fill, minmax(${props.width}px, 1fr))`
+            : `repeat(auto-fill, minmax(250px, 1fr))`};
+    flex: 1 0 80%;
+    margin-top: var(--primary-spacing);
+    gap: var(--primary-spacing);
+`;
 
 export const StatusIndicator = styled.h3`
     margin: 1rem 0;
@@ -90,7 +89,7 @@ export const CarouselContainer = styled.section`
         img {
             width: 100%;
             height: 100%;
-         	background-color: white;
+            background-color: white;
             object-fit: contain;
         }
     }

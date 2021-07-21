@@ -24,6 +24,13 @@ display: flex;
     display: none;
 }
 .menu {
+
+    &__icons {
+        a {
+            margin-left: 1rem;
+        }
+    }
+
     &__list {
         > li {
             position: relative;
@@ -86,14 +93,9 @@ display: flex;
             }
         }
     }
+
     &__list:not(:only-child) {
         margin-right: 2rem;
-    }
-
-    &__icons {
-        img {
-            margin-left: 1rem;
-        }
     }
 }
 
@@ -101,10 +103,12 @@ display: flex;
     .hamburger {
         display: block;
     }
+
     flex-direction: column;
     .menu {
         background: white;
         display: ${(props) => (props.isOpen ? 'block' : 'none !important')};
+
         &__list {
             display: flex;
             padding: 1.6rem 2rem;
@@ -123,16 +127,20 @@ display: flex;
             z-index: 5;
             display: flex;
             width: 100%;
+
             img {
                 margin: 0 !important;
                 vertical-align: middle;
             }
+
             a:first-child {
                 border-right: 1px solid #e9e9e9;
             }
+
             a:hover {
                 background-color: #e9e9e9;
             }
+
             a {
                 width: 100%;
                 padding: 1rem;
