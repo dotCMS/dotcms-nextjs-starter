@@ -46,10 +46,6 @@ const DotCMSImage = ({ width, height, alt, path, identifier, name, className }) 
         src, alt
     }
 
-    if (!width || !height) {
-        props.layout = 'fill';
-    }
-
     if (width && height) {
         props.width = width;
         props.height = height;
