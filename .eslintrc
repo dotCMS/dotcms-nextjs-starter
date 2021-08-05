@@ -1,0 +1,18 @@
+{
+  "plugins": ["tailwindcss"],
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "prettier",
+    "plugin:tailwindcss/recommended"
+  ],
+  "rules": {
+    "react/jsx-sort-props": 2,
+    "no-console": [
+      2,
+      {
+        "allow": ["warn", "error", "table", "info"]
+      }
+    ]
+  }
+}
