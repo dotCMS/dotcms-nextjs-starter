@@ -31,17 +31,17 @@ export default function Nav() {
                         getCurrentLanguage() && !defaultLanguage ? `/${getCurrentLanguage()}` : `/`
                     }
                 >
-                    <Image src="/logo.png" alt="DotCMS - NextJS example" width="135" height="41" />
+                    <Image alt="DotCMS - NextJS example" height="41" src="/logo.png" width="135" />
                 </RouterLink>
                 <NavMenu isOpen={isMenuOpen}>
                     <button
+                        aria-label="button"
                         className="hamburger"
                         href="#"
-                        aria-label="button"
                         onClick={(e) => handleOpenMenu(e)}
                     >
 
-                        <Image src="/menu.svg" alt="Open Menu" width="24" height="24" />
+                        <Image alt="Open Menu" height="24" src="/menu.svg" width="24" />
                     </button>
                     <MenuList navigation={nav} />
                     <SocialMediaMenu />

@@ -56,8 +56,8 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
         <ProductContainer className="container">
             {imagesFound() && (
                 <Carousel
-                    images={{ image, image2, image3 }}
                     identifier={identifier}
+                    images={{ image, image2, image3 }}
                     title={title}
                 />
             )}
@@ -65,12 +65,12 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
             <ProductDetailContainer>
                 <div className="meta">
                     <Editable
+                        className="meta__title"
                         element={<h3>{title}</h3>}
                         field="title"
+                        inode={inode}
                         lang="1"
                         mode="minimal"
-                        inode={inode}
-                        className="meta__title"
                     />
 
                     <Price salePrice={!!salePrice}>
@@ -80,12 +80,12 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
                 </div>
 
                 <Editable
+                    className="meta__title"
                     element={<Content dangerouslySetInnerHTML={{ __html: description }} />}
                     field="description"
+                    inode={inode}
                     lang="1"
                     mode="full"
-                    inode={inode}
-                    className="meta__title"
                 />
 
                 {renderSpecs().length > 1 && (
@@ -95,14 +95,14 @@ function ProductDetail({ pageRender: { urlContentMap } }) {
                     </>
                 )}
 
-                <label htmlFor="product_quantity" className="visually-hidden">
+                <label className="visually-hidden" htmlFor="product_quantity">
                     Quantity
                 </label>
                 <Quantity
-                    type="number"
-                    name="product_quantity"
                     id="product_quantity"
+                    name="product_quantity"
                     placeholder="1"
+                    type="number"
                 />
                 <Button href="#">Add to cart</Button>
             </ProductDetailContainer>

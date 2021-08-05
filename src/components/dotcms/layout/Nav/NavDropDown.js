@@ -11,14 +11,14 @@ const NavDropDown = ({ options }) => {
             className={`rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu ${
                 focus ? 'focus' : ''
             }`}
-            onMouseOver={() => {
-                setFocus(true);
-            }}
             onMouseOut={() => {
                 setFocus(false);
             }}
+            onMouseOver={() => {
+                setFocus(true);
+            }}
         >
-            <RouterLink href={options.href} className="rd-nav-link">
+            <RouterLink className="rd-nav-link" href={options.href}>
                 {options.title}
             </RouterLink>
             <span className="rd-navbar-submenu-toggle" />

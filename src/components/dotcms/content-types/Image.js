@@ -73,8 +73,8 @@ export default function Image(props) {
     return (
         <Wrapper>
             <DotCMSImage
-                path={props.fileAsset}
                 alt={props.title}
+                path={props.fileAsset}
                 width={800}
             />
             <div className="body">

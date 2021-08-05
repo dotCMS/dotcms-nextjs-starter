@@ -59,25 +59,25 @@ export default function Activity({ description, identifier, urlTitle, title, ino
     return (
         <WapperLink href={myHref}>
             <DotCMSImage
-                path={imageUrl}
                 alt={title}
-                width={370}
                 height={370}
+                path={imageUrl}
+                width={370}
             />
             <div className="body">
                 <Editable
                     element={<h4>{title}</h4>}
                     field="title"
+                    inode={inode}
                     lang="1"
                     mode="minimal"
-                    inode={inode}
                 />
                 <Editable
                     element={<p>{desc}</p>}
                     field="description"
+                    inode={inode}
                     lang="1"
                     mode="minimal"
-                    inode={inode}
                 />
             </div>
         </WapperLink>

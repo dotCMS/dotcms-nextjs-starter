@@ -21,8 +21,8 @@ function MenuList({ navigation }) {
     return (
         <ul className="menu menu__list">
             {navigation.map((item, index) => (
-                <li key={index} className={routerLinkClassName(item).join(' ')}>
-                    <RouterLink key={item.href} href={getHref(item.href)}>
+                <li className={routerLinkClassName(item).join(' ')} key={index}>
+                    <RouterLink href={getHref(item.href)} key={item.href}>
                         {item.title}
                     </RouterLink>
                     {item.children && (

@@ -4,11 +4,11 @@ import Image from 'next/image';
 function SocialMediaMenu() {
     return (
         <nav className="menu menu__icons">
-            <a href="#" aria-label="button">
-                <Image src="/search.svg" alt="Search" width="24" height="24" />
+            <a aria-label="button" href="#">
+                <Image alt="Search" height="24" src="/search.svg" width="24" />
             </a>
-            <a href="#" aria-label="button">
-                <Image src="/shopping-cart.svg" alt="Shopping Cart" width="24" height="24" />
+            <a aria-label="button" href="#">
+                <Image alt="Shopping Cart" height="24" src="/shopping-cart.svg" width="24" />
             </a>
         </nav>
     );

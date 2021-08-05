@@ -4,7 +4,7 @@ import RouterLink from '../../RouterLink';
 
 const NavOption = ({ item }) => {
     return (
-        <RouterLink key={item.folder} className="rd-nav-link" href={item.href}>
+        <RouterLink className="rd-nav-link" href={item.href} key={item.folder}>
             {item.title}
         </RouterLink>
     );

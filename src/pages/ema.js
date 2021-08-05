@@ -27,6 +27,8 @@ function DotCMSStaticPage(props) {
     )
   }
 
+  // TODO: Fix this conditional call to useEffect
+  // eslint-disable-next-line
   useEffect(() => {
     if (process.browser) {
       /*

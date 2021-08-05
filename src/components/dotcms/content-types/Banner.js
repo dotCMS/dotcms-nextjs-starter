@@ -12,27 +12,27 @@ function Banner({ buttonText, image, caption, link, textColor, title, inode }) {
         <BannerWrapper className="banner-wrapper">
             <div className="banner-wrapper__content">
                 <Image
+                    alt="Dots SVG"
                     className="banner-wrapper__content--dots"
+                    height="175"
                     src="/dots.svg"
                     width="175"
-                    height="175"
-                    alt="Dots SVG"
                 />
                 <Image
+                    alt="Dots SVG"
                     className="banner-wrapper__content--dots--bottom"
+                    height="175"
                     src="/dots.svg"
                     width="175"
-                    height="175"
-                    alt="Dots SVG"
                 />
 
                 {title && (
                     <Editable
                         element={<h1>{title}</h1>}
                         field="title"
+                        inode={inode}
                         lang="1"
                         mode="minimal"
-                        inode={inode}
                     />
                 )}
                 {caption && <p>{caption}</p>}
@@ -40,11 +40,11 @@ function Banner({ buttonText, image, caption, link, textColor, title, inode }) {
                 {buttonText && (
                     <Editable
                         element={<Button>{buttonText}</Button>}
+                        field="buttonText"
                         href={link}
                         inode={inode}
                         lang="1"
                         mode="minimal"
-                        field="buttonText"
                         textColor={textColor}
                     />
                 )}

@@ -68,10 +68,10 @@ const LanguageSelector = () => {
         <div className="form-wrap-select">
             <LanguageSelect
                 className="form-input"
-                value={language}
                 onChange={({ target }) => {
                     handleLanguageChange(target.value);
                 }}
+                value={language}
             >
                 {Object.keys(languageProps).length > 0 &&
                     languageProps.languages.map((lang) => (

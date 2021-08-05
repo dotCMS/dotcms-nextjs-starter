@@ -7,18 +7,18 @@ export default function NavBarSearch() {
     return (
         <div className={`rd-navbar-search${active ? ' active' : ''}`}>
             <button
+                aria-label="Search Box Toggle"
                 className={`rd-navbar-search-toggle rd-navbar-fixed-element-2${
                     active ? ' active' : ''
                 }`}
                 data-rd-navbar-toggle=".rd-navbar-search"
-                aria-label="Search Box Toggle"
                 onClick={() => {
                     setActive(!active);
                 }}
             >
                 <span />
             </button>
-            <form className="rd-search" action="/search/" method="GET">
+            <form action="/search/" className="rd-search" method="GET">
                 <div className="form-wrap">
                     <label
                         className={`form-label search-label${inputActive ? ' label-active' : ''}`}
@@ -27,22 +27,22 @@ export default function NavBarSearch() {
                         Search...
                     </label>
                     <input
+                        autoComplete="off"
                         className="rd-navbar-search-form-input form-input site-search"
-                        type="text"
                         name="q"
-                        onFocus={() => {
-                            setInputActive(!inputActive);
-                        }}
                         onBlur={() => {
                             setInputActive(!inputActive);
                         }}
-                        autoComplete="off"
+                        onFocus={() => {
+                            setInputActive(!inputActive);
+                        }}
+                        type="text"
                     />
                 </div>
                 <button
+                    aria-label="Submit"
                     className="rd-search-form-submit fa-search"
                     type="submit"
-                    aria-label="Submit"
                 />
             </form>
         </div>

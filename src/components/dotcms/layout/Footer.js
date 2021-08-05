@@ -8,12 +8,12 @@ function Footer() {
         <FooterContainer>
             <div className="container">
                 <FooterSection className="footer__section">
-                    <a className="main-nav__logo" href="#" aria-label="Footer Logo">
+                    <a aria-label="Footer Logo" className="main-nav__logo" href="#">
                         <Image
-                            src="/logo.png"
                             alt="DotCMS - NextJS example"
-                            width="135"
                             height="41"
+                            src="/logo.png"
+                            width="135"
                         />
                     </a>
                     <nav className="menu__list">
@@ -30,19 +30,19 @@ function Footer() {
                 <FooterSection className="icons">
                     <nav className="menu__list">
                         <a href="#">
-                            <Image src="/fb.svg" alt="Faceboook" width="32" height="32" />
+                            <Image alt="Faceboook" height="32" src="/fb.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image src="/instagram.svg" alt="Instagram" width="32" height="32" />
+                            <Image alt="Instagram" height="32" src="/instagram.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image src="/linkedin.svg" alt="Linkedin" width="32" height="32" />
+                            <Image alt="Linkedin" height="32" src="/linkedin.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image src="/twitter.svg" alt="Twitter" width="32" height="32" />
+                            <Image alt="Twitter" height="32" src="/twitter.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image src="/pinterest.svg" alt="Pinterest" width="32" height="32" />
+                            <Image alt="Pinterest" height="32" src="/pinterest.svg" width="32" />
                         </a>
                     </nav>
                 </FooterSection>

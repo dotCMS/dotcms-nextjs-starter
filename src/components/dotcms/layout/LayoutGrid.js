@@ -11,7 +11,7 @@ const LayoutGrid = () => {
 
     return body && body.rows ? (
         body.rows.map((row, i) => (
-            <section key={i} id={`section-${i + 1}`} className={`section ${row.styleClass || ''}`}>
+            <section className={`section ${row.styleClass || ''}`} id={`section-${i + 1}`} key={i}>
                 <RowContainer row={row} />
             </section>
         ))

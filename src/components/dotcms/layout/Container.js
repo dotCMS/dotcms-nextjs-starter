@@ -56,9 +56,9 @@ const Contentlets = ({ contentlets }) => {
 
                 return (
                     <ContentletWrapper
-                        key={contentlet.identifier}
-                        isEditMode={isEditMode}
                         contentlet={contentlet}
+                        isEditMode={isEditMode}
+                        key={contentlet.identifier}
                     >
                         <Contentlet data={contentlet} />
                     </ContentletWrapper>
@@ -72,7 +72,7 @@ export default function ContentletContainer({ container }) {
     const { isEditMode } = useContext(PageContext);
 
     return (
-        <ContainerWrapper isEditMode={isEditMode} container={container}>
+        <ContainerWrapper container={container} isEditMode={isEditMode}>
             <Contentlets {...container} />
         </ContainerWrapper>
     );
