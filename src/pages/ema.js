@@ -1,12 +1,12 @@
 import { Head } from 'next/head'
 
-import DotCMSPage from '../../components/dotcms/layout/DotCMSPage'
+import DotCMSPage from '../components/dotcms/layout/DotCMSPage'
 import { useEffect } from 'react'
 
 import { parseBody } from 'next/dist/next-server/server/api-utils'
 
-import { getNav, getLanguagesProps } from '../../utilities/dotcms'
-import transformPage from '../../utilities/dotcms/transformPage'
+import { getNav, getLanguagesProps } from '../utilities/dotcms'
+import transformPage from '../utilities/dotcms/transformPage'
 
 function DotCMSStaticPage(props) {
   const { pageRender, nav, languageProps } = props

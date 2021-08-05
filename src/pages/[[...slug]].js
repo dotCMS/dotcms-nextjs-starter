@@ -1,14 +1,14 @@
 import Head from 'next/head'
-import CustomError from '../../components/CustomError'
-import DotCMSPage from '../../components/dotcms/layout/DotCMSPage'
-import getPageList from '../../utilities/dotcms/getPageList'
-import getPageUrl from '../../utilities/dotcms/getPageUrl'
+import CustomError from '../components/CustomError'
+import DotCMSPage from '../components/dotcms/layout/DotCMSPage'
+import getPageList from '../utilities/dotcms/getPageList'
+import getPageUrl from '../utilities/dotcms/getPageUrl'
 import {
   getPage,
   getNav,
   getPathsArray,
   getLanguagesProps,
-} from '../../utilities/dotcms'
+} from '../utilities/dotcms'
 
 export default function Page({ pageRender, nav, languageProps, error }) {
   if (error) {
