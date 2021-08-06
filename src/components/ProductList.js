@@ -5,9 +5,11 @@ import { useApollo } from '../config/apollo'
 import { ProductGrid, StatusIndicator } from '../styles/products/product.styles'
 import useTagsList from '../hooks/useTagsList'
 import useTagsFiltered from '../hooks/useTagsFiltered'
-import TagsFilter from './TagsFilter'
 import ProductItem from '../components/ProductItem'
 import Loading from '../components/Loading'
+
+// Internals
+import { TagsFilter } from '@/components'
 
 const PRODUCTS_QUERY = gql`
   query PRODUCTS_QUERY($limit: Int, $query: String) {
@@ -89,7 +91,7 @@ function ProductList({
       {showTagsFilter && (
         <TagsFilter
           list={tagsList}
-          onFilterChange={(tags) => {
+          onChange={(tags) => {
             setRoutePath(getUrl(category, tags))
           }}
           selected={tagsFiltered}

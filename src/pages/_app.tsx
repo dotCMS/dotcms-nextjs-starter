@@ -16,6 +16,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <GlobalStyle />
+
       <Component {...pageProps} />
     </>
   )

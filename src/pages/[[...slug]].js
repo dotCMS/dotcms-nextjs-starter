@@ -30,6 +30,7 @@ export default function Page({ pageRender, nav, languageProps, error }) {
           name="description"
         />
       </Head>
+
       <DotCMSPage
         languageProps={languageProps}
         nav={nav}
