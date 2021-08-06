@@ -6,10 +6,9 @@ import { ProductGrid, StatusIndicator } from '../styles/products/product.styles'
 import useTagsList from '../hooks/useTagsList'
 import useTagsFiltered from '../hooks/useTagsFiltered'
 import ProductItem from '../components/ProductItem'
-import Loading from '../components/Loading'
 
 // Internals
-import { TagsFilter } from '@/components'
+import { Loading, TagsFilter } from '@/components'
 
 const PRODUCTS_QUERY = gql`
   query PRODUCTS_QUERY($limit: Int, $query: String) {

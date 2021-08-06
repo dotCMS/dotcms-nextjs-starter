@@ -1,10 +1,12 @@
 const dotCMSApi = require('../config/dotcmsApi')
 
-import Loader from './Loading'
 import useDotCMSApi from '../hooks/useDotCMSApi'
 import RouterLink from './RouterLink'
 import DotCMSImage from './DotCMSImage'
 import CustomDate from './CustomDate'
+
+// Internals
+import { Loading } from '@/components'
 
 const BlogListing = () => {
   const [loading, posts] = useDotCMSApi(() => {
@@ -21,7 +23,7 @@ const BlogListing = () => {
   })
 
   if (loading) {
-    return <Loader />
+    return <Loading />
   }
 
   return posts.map(({ title, postingDate, identifier, urlTitle }) => (
