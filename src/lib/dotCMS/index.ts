@@ -1,1 +1,1 @@
-export * from './emitEmaNavEvent'
+export * from './emitEMANavEvent'
