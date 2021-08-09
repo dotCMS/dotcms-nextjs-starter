@@ -23,6 +23,7 @@
     "fs": "^0.0.1-security",
     "graphql": "^15.5.1",
     "graphql-tag": "^2.12.5",
+    "html-react-parser": "^1.2.7",
     "next": "^11.0.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
