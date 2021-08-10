@@ -3,7 +3,7 @@ import {
   calendarEventDetail,
   BlogDetail,
   ActivityDetail,
-} from '../../components/dotcms/content-types'
+} from '../../components/dotCMS/content-types'
 
 const components = {
   ProductDetail,

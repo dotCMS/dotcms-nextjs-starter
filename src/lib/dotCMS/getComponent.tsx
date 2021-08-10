@@ -14,7 +14,7 @@ import {
   ActivityDetail,
   BannerCarousel,
   forms,
-} from '@/components/dotcms/content-types'
+} from '@/components/dotCMS/content-types'
 
 const components = {
   Activity,

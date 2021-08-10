@@ -49,13 +49,15 @@ const options: HTMLReactParserOptions = {
 
 type HTMLParserOptions = {
   content: string
-  options: HTMLReactParserOptions
+  options?: HTMLReactParserOptions
 }
 
 /**
  * Some data from DotCMS comes as a string HTML, for example from WYSIYG fields. So we parse this
  * html, turn them into react component and replace <a> for <RouterLink> to use NextJS routing.
  */
-export default function htmlParser({ content, options }: HTMLParserOptions) {
+export const htmlParser = ({ content, options }: HTMLParserOptions) => {
   return parse(content, options)
 }
+
+export default htmlParser

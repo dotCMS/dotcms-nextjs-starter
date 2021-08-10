@@ -1,17 +1,17 @@
-const getDateLocale = (date, locale = 'en-us') =>
-  date.toLocaleDateString(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  })
+// Internals
+import { getDateLocale, getTimeLocale } from '@/utils'
 
-const getTimeLocale = (date, locale = 'en-us') =>
-  date.toLocaleTimeString(locale, {
-    hour: 'numeric',
-    minute: 'numeric',
-  })
+export type CustomDateProps = {
+  value: string
+  format?: 'DateTime' | 'Date' | 'Time'
+  locale?: string
+}
 
-const CustomDate = ({ value, format = 'Date', locale = 'en-us' }) => {
+export const CustomDate = ({
+  value,
+  format = 'Date',
+  locale = 'en-us',
+}: CustomDateProps) => {
   const d = new Date(value)
   let formatString = ''
 

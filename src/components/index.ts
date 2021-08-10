@@ -1,3 +1,7 @@
+export * from './dotCMS'
+export * from './CustomDate'
+export * from './CustomError'
 export * from './Link'
 export * from './Loading'
+export * from './SinglePageDetail'
 export * from './TagsFilter'

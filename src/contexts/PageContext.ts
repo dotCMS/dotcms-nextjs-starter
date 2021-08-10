@@ -1,4 +1,5 @@
-import React from 'react'
+// Dependencies
+import * as React from 'react'
 
 const PageContext = React.createContext({
   isEditMode: false,

@@ -4,7 +4,7 @@ import { parseBody } from 'next/dist/next-server/server/api-utils'
 import type { GetServerSideProps, NextPage } from 'next'
 
 // Internals
-import DotCMSPage from '@/components/dotcms/layout/DotCMSPage'
+import DotCMSPage from '@/components/dotCMS/layout/DotCMSPage'
 import transformPage from '@/utilities/dotcms/transformPage'
 import { getNav, getLanguagesProps } from '@/utilities/dotcms'
 

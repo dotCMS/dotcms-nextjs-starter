@@ -1,0 +1,43 @@
+// Dependencies
+import Image, { ImageProps } from 'next/image'
+
+export type DotCMSImageProps = Omit<ImageProps, 'src'> & {
+  path: string
+  identifier?: string
+  name?: string
+}
+
+export const DotCMSImage = ({
+  alt,
+  path,
+  identifier,
+  name,
+  className,
+  ...props
+}: DotCMSImageProps) => {
+  const filterUrl = `/filter/resize_w/${
+    props.width || props.height || 1000
+  }/20q`
+  let srcUrl = ''
+
+  if (path) {
+    srcUrl += `${path}`
+  }
+
+  if (identifier && name) {
+    srcUrl += `/dA/${identifier}/${name}`
+  }
+
+  const src = `${srcUrl}${filterUrl}`
+
+  if (!props.width && !props.height) {
+    props.layout = 'fill'
+  } else {
+  }
+
+  // @ts-ignore - TODO: fix this type searching more accurately
+  // type src is incompatible with `StaticImport`
+  return <Image alt={alt} className={className} src={src as any} {...props} />
+}
+
+export default DotCMSImage

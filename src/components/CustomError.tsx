@@ -1,3 +1,4 @@
+// Dependencies
 import Head from 'next/head'
 
 const defaultMessages = {
@@ -7,7 +8,14 @@ const defaultMessages = {
   500: 'Internal Server Error',
 }
 
-function CustomError({ statusCode, message, stack }) {
+export type CustomErrorProps = Omit<Error, 'name'> & {
+  statusCode: number
+}
+
+export const CustomError = ({
+  statusCode,
+  message,
+}: CustomErrorProps): JSX.Element => {
   const displayMessage = message || defaultMessages[statusCode]
 
   return (
