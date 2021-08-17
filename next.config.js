@@ -1,4 +1,12 @@
+const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname;
+const deployUrl = new URL(process.env.DEPLOY_URL).hostname;
+const domains = Array.from(new Set([publicHost, deployUrl]))
+
 module.exports = {
+  images: {
+    domains
+  },
+
   async headers() {
     return [
       {

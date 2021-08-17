@@ -1,7 +1,7 @@
 import React from 'react';
 import { FooterContainer, FooterSection } from '../../../styles/footer/footer.styles';
 
-import Image from 'next/image';
+import {LocalImage} from '../../LocalImage';
 
 function Footer() {
     return (
@@ -9,10 +9,10 @@ function Footer() {
             <div className="container">
                 <FooterSection className="footer__section">
                     <a aria-label="Footer Logo" className="main-nav__logo" href="#">
-                        <Image
+                        <LocalImage
                             alt="DotCMS - NextJS example"
                             height="41"
-                            src="/logo.png"
+                            src="http://localhost:3000/logo.png"
                             width="135"
                         />
                     </a>
@@ -30,19 +30,19 @@ function Footer() {
                 <FooterSection className="icons">
                     <nav className="menu__list">
                         <a href="#">
-                            <Image alt="Faceboook" height="32" src="/fb.svg" width="32" />
+                            <LocalImage alt="Faceboook" height="32" src="/fb.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image alt="Instagram" height="32" src="/instagram.svg" width="32" />
+                            <LocalImage alt="Instagram" height="32" src="/instagram.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image alt="Linkedin" height="32" src="/linkedin.svg" width="32" />
+                            <LocalImage alt="Linkedin" height="32" src="/linkedin.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image alt="Twitter" height="32" src="/twitter.svg" width="32" />
+                            <LocalImage alt="Twitter" height="32" src="/twitter.svg" width="32" />
                         </a>
                         <a href="#">
-                            <Image alt="Pinterest" height="32" src="/pinterest.svg" width="32" />
+                            <LocalImage alt="Pinterest" height="32" src="/pinterest.svg" width="32" />
                         </a>
                     </nav>
                 </FooterSection>
