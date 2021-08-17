@@ -1,5 +1,5 @@
 const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname;
-const deployUrl = new URL(process.env.DEPLOY_URL).hostname;
+const deployUrl = new URL(process.env.NEXT_PUBLIC_DEPLOY_URL).hostname;
 const domains = Array.from(new Set([publicHost, deployUrl]))
 
 module.exports = {
@@ -61,5 +61,5 @@ module.exports = {
   },
   // When we load the page in the DotCMS editor we need to have
   // absolutes url for he nextjs page
-  assetPrefix: process.env.DEPLOY_URL,
+  assetPrefix: process.env.NEXT_PUBLIC_DEPLOY_URL,
 }

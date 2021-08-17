@@ -65,7 +65,7 @@ For all deploys you need to set 3 env variables
 NEXT_PUBLIC_DOTCMS_HOST=https://demo.dotcms.com
 
 # The url of your nextjs app
-DEPLOY_URL=https://yourdomain.com
+NEXT_PUBLIC_DEPLOY_URL=https://yourdomain.com
 
 # Auth token from DotCMS
 BEARER_TOKEN=TOKEN

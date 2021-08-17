@@ -35,7 +35,7 @@ const DotCMSImage = ({
   }
 
   const myLoader = ({ src }) => {
-    return `http://localhost:8080${src}`
+    return `${process.env.NEXT_PUBLIC_DOTCMS_HOST}${src}`
   }
 
   return <Image alt={alt} className={className} {...props} loader={myLoader} />

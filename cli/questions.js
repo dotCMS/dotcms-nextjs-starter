@@ -19,8 +19,8 @@ const questionsBasic = (param) => [
   },
   {
     message: `Public URL`,
-    name: 'DEPLOY_URL',
-    default: (param && param.DEPLOY_URL) || defaultNodeUrl,
+    name: 'NEXT_PUBLIC_DEPLOY_URL',
+    default: (param && param.NEXT_PUBLIC_DEPLOY_URL) || defaultNodeUrl,
   },
 ]
 

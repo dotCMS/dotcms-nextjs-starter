@@ -1,7 +1,5 @@
 import React from 'react';
 
-import Image from 'next/image';
-
 import DotCMSImage from '../../DotCMSImage';
 import { LocalImage } from '../../LocalImage';
 import { BannerWrapper } from '../../../styles/banner/banner.styles';
