@@ -1,32 +1,5 @@
 import Image from 'next/image'
 
-const getSize = (size) => {
-  let result = {
-    width: 250,
-    height: 250,
-    filterResize: 250,
-  }
-
-  if (size) {
-    if (typeof size === 'number') {
-      result = {
-        width: size,
-        filter: size,
-      }
-    }
-
-    if (typeof size === 'object') {
-      result = {
-        width: size.width,
-        height: size.height,
-        filterResize: size.width,
-      }
-    }
-  }
-
-  return result
-}
-
 const DotCMSImage = ({
   width,
   height,
@@ -61,7 +34,11 @@ const DotCMSImage = ({
     props.layout = 'fill'
   }
 
-  return <Image alt={alt} className={className} {...props} />
+  const myLoader = ({ src }) => {
+    return `${process.env.NEXT_PUBLIC_DOTCMS_HOST}${src}`
+  }
+
+  return <Image alt={alt} className={className} {...props} loader={myLoader} />
 }
 
 export default DotCMSImage
