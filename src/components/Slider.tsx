@@ -1,21 +1,44 @@
-import React, { createRef, useRef, useState, useEffect } from 'react'
-import DotCMSImage from './DotCMSImage'
+// Dependencies
+import * as React from 'react'
 
-const Slider = ({ images, title, id }) => {
+// Internals
+import { DotCMSImage } from '@/components'
+
+export type SlideProps = {
+  images: Record<string, string>
+  title: string
+  id: string
+}
+
+/**
+ * TODO: when we install @graphql-codegen/typescript, we can remove this
+ * custom types to use the provided by the generated typescript code
+ */
+export const Slider = ({ images, title, id }: SlideProps) => {
   const keys = Object.keys(images)
   const values = Object.values(images).filter(Boolean)
 
-  const handleNavigatorClick = (elem) => {
+  /**
+   * Handle the click event on the dots
+   *
+   * @param elem The element clicked
+   */
+  const handleNavigatorClick = (elem: HTMLAnchorElement) => {
     elem.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     })
   }
 
-  const createRefs = (imgs) => {
+  /**
+   * Create the references given an image object
+   *
+   * @param imgs The image object
+   */
+  const createRefs = (imgs: Record<string, string>) => {
     const values = Object.values(imgs)
     return values.reduce((acc, value, idx) => {
-      acc[idx] = createRef()
+      acc[idx] = React.createRef()
       return acc
     }, [])
   }
@@ -44,7 +67,7 @@ const Slider = ({ images, title, id }) => {
                   id={`carousel__slide${index}`}
                   key={index}
                   ref={slideRefs[index]}
-                  tabIndex="0"
+                  tabIndex={0}
                 >
                   <DotCMSImage loading="lazy" {...data} />
                 </li>

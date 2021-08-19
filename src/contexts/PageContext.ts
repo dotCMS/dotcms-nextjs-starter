@@ -1,7 +1,7 @@
 // Dependencies
 import * as React from 'react'
 
-const PageContext = React.createContext({
+export const PageContext = React.createContext({
   isEditMode: false,
   nav: [],
   language: {},

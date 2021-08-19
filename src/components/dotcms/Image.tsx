@@ -1,8 +1,9 @@
 // Dependencies
-import Image, { ImageProps } from 'next/image'
+import Image from 'next/image'
+import type { ImageProps } from 'next/image'
 
 export type DotCMSImageProps = Omit<ImageProps, 'src'> & {
-  path: string
+  path?: string
   identifier?: string
   name?: string
 }
@@ -32,12 +33,11 @@ export const DotCMSImage = ({
 
   if (!props.width && !props.height) {
     props.layout = 'fill'
-  } else {
   }
 
   // @ts-ignore - TODO: fix this type searching more accurately
   // type src is incompatible with `StaticImport`
-  return <Image alt={alt} className={className} src={src as any} {...props} />
+  return <Image {...props} alt={alt} className={className} src={src as any} />
 }
 
 export default DotCMSImage

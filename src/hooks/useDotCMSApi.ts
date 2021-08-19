@@ -7,7 +7,7 @@ import * as React from 'react'
  * Note: we use `P` to be a generic type for the props, so the hook
  * can be typed of what type of response we get from the API.
  */
-export function useDotCMSApi<P>(fetchDotCMS: () => Promise<P>) {
+export function useDotCMSApi<P>(fetchDotCMS: () => Promise<P>): [boolean, P] {
   const [data, setData] = React.useState<P>()
   const [loading, setLoading] = React.useState(true)
 

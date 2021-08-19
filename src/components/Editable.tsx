@@ -1,6 +1,18 @@
-import React from 'react'
+// Dependencies
+import * as React from 'react'
 
-export const Editable = ({ element, ...rest }) => {
+export type EditableProps = {
+  element: React.ReactElement
+  mode: string
+  field: string
+  lang: string
+  inode: string
+  onClick?: () => void
+  href?: string
+  textColor?: string
+}
+
+export const Editable = ({ element, ...rest }: EditableProps) => {
   const { mode, field, lang, inode, onClick } = rest
   const {
     props: { children },
@@ -24,3 +36,5 @@ export const Editable = ({ element, ...rest }) => {
     children
   )
 }
+
+export default Editable

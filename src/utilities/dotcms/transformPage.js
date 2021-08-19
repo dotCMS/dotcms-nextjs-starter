@@ -30,7 +30,7 @@ function getUpdatedContainer(page, containerInLayout) {
         in the container otherwise it will end up with duplicated contentlets because the
         rendered property in the container have the HTML for all the contentlets
     */
-  if (contentlets.length === 1) {
+  if (contentlets && contentlets.length === 1) {
     const [contentlet] = contentlets
     contentlet.rendered = containerRenderedHTML
   }
@@ -46,7 +46,7 @@ function getUpdatedContainer(page, containerInLayout) {
   return {
     ...container.container,
     acceptTypes: getAcceptTypes(page.containers, containerInLayout.identifier),
-    contentlets: contentlets,
+    contentlets: contentlets || [],
     uuid: uuid.replace('uuid-', ''),
   }
 }
