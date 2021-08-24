@@ -3,6 +3,10 @@ const deployUrl = new URL(process.env.NEXT_PUBLIC_DEPLOY_URL).hostname;
 const domains = Array.from(new Set([publicHost, deployUrl]))
 
 module.exports = {
+  env: 
+    {
+	    BEARER_TOKEN: process.env.BEARER_TOKEN
+   },
   images: {
     domains
   },

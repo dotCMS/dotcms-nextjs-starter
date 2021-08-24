@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
+    "serverless": "serverless",
     "lint": "next lint",
     "type-check": "tsc --pretty --noEmit",
     "setup": "node ./cli/index.js build"
