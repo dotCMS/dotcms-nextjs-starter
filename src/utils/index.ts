@@ -1,5 +1,6 @@
 export * from './capitalize'
 export * from './clsx'
+export * from './currencyFormatter'
 export * from './date'
 export * from './htmlParser'
 export * from './logger'

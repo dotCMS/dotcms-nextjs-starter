@@ -1,5 +1,6 @@
 export * from './dotCMS'
 export * from './emitEMANavEvent'
+export * from './getComponent'
 export * from './getLanguageProps'
 export * from './getLicense'
 export * from './getNav'

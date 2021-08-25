@@ -3,6 +3,7 @@ import * as React from 'react'
 
 export type EditableProps = {
   element: React.ReactElement
+  className?: string
   mode: string
   field: string
   lang: string

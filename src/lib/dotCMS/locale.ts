@@ -31,7 +31,7 @@ export function removeCurrentLanguage(key = 'dotcms_language') {
 type GetLocaleHrefProps = {
   as: string
   url: string
-  defaultLang: string
+  defaultLang?: string
 }
 
 /**

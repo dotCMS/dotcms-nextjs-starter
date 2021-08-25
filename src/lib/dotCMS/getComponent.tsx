@@ -1,20 +1,22 @@
 // Internals
 import {
-  Banner,
-  StoreProductList,
-  webPageContent,
-  ProductDetail,
-  CategoryFilter,
   Activity,
-  Image,
-  Video,
-  Product,
-  calendarEventDetail,
-  BlogDetail,
-  ActivityDetail,
+  Banner,
   BannerCarousel,
-  forms,
+  CategoryFilter,
+  Form,
+  Image,
+  Product,
+  StoreProductList,
+  Video,
+  WebPageContent,
 } from '@/components/dotCMS/content-types'
+import {
+  ActivityDetail,
+  BlogDetail,
+  CalendarEventDetail,
+  ProductDetail,
+} from '@/components/dotCMS/pages'
 
 const components = {
   Activity,
@@ -28,9 +30,9 @@ const components = {
   ProductDetail,
   StoreProductList,
   Video,
-  calendarEventDetail,
-  forms,
-  webPageContent,
+  calendarEventDetail: CalendarEventDetail,
+  forms: Form,
+  webPageContent: WebPageContent,
 }
 
 const FallbackComponent = ({ contentType }) => {
@@ -42,7 +44,7 @@ const FallbackComponent = ({ contentType }) => {
 /**
  * Get the component to render base on the contentlet content type
  */
-const getComponent = ({ contentType }) => {
+export const getComponent = ({ contentType }) => {
   return components[contentType] || FallbackComponent
 }
 

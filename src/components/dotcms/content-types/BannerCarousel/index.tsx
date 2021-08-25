@@ -9,7 +9,7 @@ import type { Element } from 'html-react-parser'
 import { htmlParser } from '@/utils'
 import { CarouselContainer } from './styles'
 
-const BannerCarousel = ({ rendered }) => {
+export const BannerCarousel = ({ rendered }) => {
   const replace = (node: Element) => {
     const { class: className } = node.attribs
 

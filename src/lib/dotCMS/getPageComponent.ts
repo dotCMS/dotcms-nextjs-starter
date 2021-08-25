@@ -1,14 +1,14 @@
 // Internals
 import {
   ProductDetail,
-  calendarEventDetail,
+  CalendarEventDetail,
   BlogDetail,
   ActivityDetail,
-} from '@/components/dotCMS/content-types'
+} from '@/components/dotCMS/pages'
 
 const components = {
   ProductDetail,
-  calendarEventDetail,
+  calendarEventDetail: CalendarEventDetail,
   BlogDetail,
   ActivityDetail,
 }
