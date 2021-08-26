@@ -1,5 +1,6 @@
 // Internals
-import { CustomDate, DotCMSImage, Link, Loading } from '@/components'
+import { CustomDate, Link, Loading } from '@/components'
+import { DotCMSImage } from '@/components/dotCMS'
 import { useDotCMSApi } from '@/hooks'
 import { dotCMS } from '@/lib/dotCMS'
 
