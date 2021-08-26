@@ -7,6 +7,11 @@ export const LocalImage = (props: ImageProps) => {
     return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${src}`
   }
 
+  console.log({
+    NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
+    NEXT_PUBLIC_DEPLOY_URL: process.env.NEXT_PUBLIC_DEPLOY_URL,
+  })
+
   return <Image {...props} alt={props.alt} loader={myLoader} />
 }
 
