@@ -1,20 +1,22 @@
 // Internals
 import {
   Activity,
-  ActivityDetail,
   Banner,
   BannerCarousel,
-  BlogDetail,
-  CalendarEventDetail,
   CategoryFilter,
   Form,
   Image,
   Product,
-  ProductDetail,
   StoreProductList,
   Video,
   WebPageContent,
-} from '@/components'
+} from '@/components/dotCMS/content-types'
+import {
+  ActivityDetail,
+  BlogDetail,
+  CalendarEventDetail,
+  ProductDetail,
+} from '@/components/dotCMS/pages'
 
 const components = {
   Activity,
