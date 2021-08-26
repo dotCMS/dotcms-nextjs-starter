@@ -5,8 +5,8 @@ export type HTMLParserProps = {
   body: string
 }
 
-export const WebPageContent = ({ body }: HTMLParserProps) => {
-  return htmlParser({ content: body })
+export const WebPageContent = ({ body }: HTMLParserProps): JSX.Element => {
+  return htmlParser({ content: body }) as JSX.Element
 }
 
 export default WebPageContent
