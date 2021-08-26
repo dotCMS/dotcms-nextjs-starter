@@ -35,6 +35,10 @@ export const DotCMSImage = ({
     props.layout = 'fill'
   }
 
+  const dotCmsLoader = ({ src }) => {
+    return `${process.env.NEXT_PUBLIC_DOTCMS_HOST}${src}`
+  }
+
   // @ts-ignore - TODO: fix this type searching more accurately
   // type src is incompatible with `StaticImport`
   return (
@@ -44,6 +48,7 @@ export const DotCMSImage = ({
       className={className}
       height={props.height || 1000}
       layout={props.layout || 'responsive'}
+      loader={dotCmsLoader}
       src={src as any}
       width={props.width || 1000}
     />
