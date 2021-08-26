@@ -16,11 +16,11 @@ export const CategoryFilter = (props: CategoryFilterProps) => {
     (nav) => nav.href === '/Store' || nav.href === '/store'
   )
 
-  const data: any[] = storeNav.children.reduce(function (acc, curr) {
+  const data: any[] = storeNav.children.reduce(function (acc: any, curr: any) {
     if (curr.children.length > 0) {
       acc = [
         ...acc,
-        ...curr.children.map((children) => ({
+        ...curr.children.map((children: { title: string; href: string }) => ({
           title: children.title,
           href: children.href,
         })),

@@ -36,6 +36,7 @@ export const ProductList = ({
     category = (Object.values(category)[0] as string).toLowerCase?.()
   }
 
+  // @ts-ignore we can use category at this point
   const tagsList = useTagsList(category)
   const [tagsFiltered, setRoutePath, tagsMap] = useTagsFiltered()
 
@@ -45,6 +46,7 @@ export const ProductList = ({
   }
 
   const query = `+contentType:product ${
+    // @ts-ignore we can use category at this point
     category ? `+categories:${category}` : ''
   } ${
     tagsMap && tagsMap.length > 0 ? `+(${(tagsMap as string[]).join(' ')})` : ''
@@ -82,9 +84,9 @@ export const ProductList = ({
         <StatusIndicator>No products found!</StatusIndicator>
       ) : (
         <ProductGrid className="product-grid" width={width}>
-          {data?.ProductCollection?.map((product) => {
+          {data?.ProductCollection?.map((product: Record<string, any>) => {
             const [category] =
-              product.category?.map((item) => {
+              product.category?.map((item: Record<string, any>) => {
                 const [name] = Object.values(item)
                 return name
               }) || []
@@ -108,7 +110,7 @@ export const ProductList = ({
                 <ProductItem
                   key={product.identifier}
                   product={data}
-                  show={show}
+                  show={String(show)}
                 />
               )
             }

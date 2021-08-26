@@ -28,7 +28,7 @@ export const getParamsObjectForPath = (pathArray: string[], path: string) => {
  * More info: https://nextjs.org/docs/basic-features/data-fetching#getstaticpaths-static-generation
  */
 export const getPathsArray = (pageList: string[]) => {
-  const paths = pageList.reduce((acc, url) => {
+  const paths = pageList.reduce((acc: any[], url: string) => {
     let urlArr = url.split('/').filter(Boolean)
     acc = [...acc, getParamsObjectForPath(urlArr, url)]
     return acc

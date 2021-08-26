@@ -35,7 +35,7 @@ export const NavDropDown = ({ options }: NavDropDownProps) => {
       </Link>
       <span className="rd-navbar-submenu-toggle" />
       <ul className="rd-menu rd-navbar-megamenu rd-navbar-open-left rd-navbar-open-right">
-        {options.children.map((subItem, index) => {
+        {options.children?.map((subItem, index) => {
           return (
             <li className="rd-megamenu-item" key={index}>
               <div className="rd-megamenu-title">

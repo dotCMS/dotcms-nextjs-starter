@@ -13,7 +13,13 @@ import { Button } from '@/styles/shared.styles'
 import { currencyFormatter } from '@/utils'
 import { Content } from './styles'
 
-export function ProductDetail({ pageRender: { urlContentMap } }) {
+export type ProductDetailProps = {
+  pageRender: Record<string, any>
+}
+
+export function ProductDetail({
+  pageRender: { urlContentMap },
+}: ProductDetailProps) {
   const {
     inode,
     title,

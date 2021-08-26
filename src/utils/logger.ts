@@ -38,9 +38,16 @@ export function loggerPageRender({
 
   urlContentMap && console.table(urlContentMap)
 
-  rows.forEach(({ columns }) => {
+  rows.forEach(({ columns }: { columns: Record<string, any> }) => {
     columns.forEach(
-      ({ containers, leftOffset, width, widthPercent, styleClass, left }) => {
+      ({
+        containers,
+        leftOffset,
+        width,
+        widthPercent,
+        styleClass,
+        left,
+      }: Record<string, any>) => {
         console.table({
           containers,
           leftOffset,

@@ -15,7 +15,7 @@ export const TagsFilter = ({
   list,
   onChange,
   selected,
-}: TagsFilterProps): JSX.Element => {
+}: TagsFilterProps): JSX.Element | null => {
   // We use an arrow function to avoid performance issues
   const [currentTags, setCurrentTags] = React.useState(() => selected || [])
 

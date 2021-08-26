@@ -14,7 +14,7 @@ export function useTagsFiltered(): [
   // Find the category and tags from the URL
   const router = useRouter()
   let { asPath: path } = router
-  path = path.split('/').pop()
+  path = path.split('/').pop() || ''
 
   const [routePath, setRoutePath] = React.useState('')
 

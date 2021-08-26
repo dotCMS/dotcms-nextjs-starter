@@ -19,7 +19,11 @@ const options: HTMLReactParserOptions = {
   },
 }
 
-export const withRawContent = ({ content }) => {
+export type withRawContentProps = {
+  content: string
+}
+
+export const withRawContent = ({ content }: withRawContentProps) => {
   return ReactHtmlParser(content, options)
 }
 

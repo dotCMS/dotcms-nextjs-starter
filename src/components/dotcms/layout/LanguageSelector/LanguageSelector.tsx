@@ -22,12 +22,17 @@ export const LanguageSelector = () => {
     const languageFound = () => {
       return (
         Object.values(
-          languageProps.languages.find((val) => val.languageCode === lang) || []
+          languageProps.languages.find(
+            (val: Record<string, string>) => val.languageCode === lang
+          ) || []
         ).length > 0
       )
     }
 
-    return !router.query.slug?.includes(getCurrentLanguage()) && languageFound()
+    return (
+      !router.query.slug?.includes(String(getCurrentLanguage())) &&
+      languageFound()
+    )
   }
 
   React.useEffect(() => {
@@ -42,10 +47,10 @@ export const LanguageSelector = () => {
       setCurrentLanguage(languageProps.defaultLanguage)
     }
 
-    return () => removeCurrentLanguage()
+    return () => removeCurrentLanguage() as void
   }, [])
 
-  const getRoute = (value, slug) => {
+  const getRoute = (value: string, slug: string[]) => {
     if (value === languageProps.defaultLanguage) {
       return slug ? slug.filter((route) => route !== language) : []
     }
@@ -54,7 +59,7 @@ export const LanguageSelector = () => {
       : [`${value}`]
   }
 
-  const handleLanguageChange = (value) => {
+  const handleLanguageChange = (value: string) => {
     setCurrentLanguage(value)
     setLanguage(value)
 
@@ -62,7 +67,7 @@ export const LanguageSelector = () => {
       query: { slug },
     } = router
 
-    const route = getRoute(value, slug)
+    const route = getRoute(value, slug as string[])
     router.replace('/[[...slug]]', `/${route.join('/')}`)
   }
 
@@ -76,7 +81,7 @@ export const LanguageSelector = () => {
         value={language}
       >
         {Object.keys(languageProps).length > 0 &&
-          languageProps.languages.map((lang) => (
+          languageProps.languages.map((lang: Record<string, string>) => (
             <option key={lang.id} value={lang.languageCode}>
               {lang.language}
             </option>

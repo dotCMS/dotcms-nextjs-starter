@@ -1,5 +1,6 @@
 // Dependencies
 import Head from 'next/head'
+import type { GetStaticProps } from 'next'
 
 // Internals
 import { CustomError, DotCMSPage } from '@/components'
@@ -11,8 +12,21 @@ import {
   getPathsArray,
   getLanguageProps,
 } from '@/lib/dotCMS'
+import type { CustomErrorProps } from '@/components'
 
-export default function Page({ pageRender, nav, languageProps, error }) {
+export type PageProps = {
+  pageRender: Record<string, any>
+  nav: Record<string, any>
+  languageProps: Record<string, any>
+  error?: CustomErrorProps
+}
+
+export default function Page({
+  pageRender,
+  nav,
+  languageProps,
+  error,
+}: PageProps) {
   if (error) {
     return <CustomError {...error} />
   }
@@ -63,18 +77,16 @@ export const getStaticPaths = async () => {
   }
 }
 
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   try {
-    const {
-      params: { slug },
-    } = context
+    const { params } = context
 
-    const [languageIso] = slug || []
+    const [languageIso] = (params?.slug as string[]) || []
     const { languageId, hasLanguages, ...rest } = await getLanguageProps(
       languageIso
     )
 
-    const url = await getPageUrl(slug, hasLanguages)
+    const url = await getPageUrl(params?.slug as string[], hasLanguages)
     // Fetch the page object from DotCMS Page API
     let pageRender = await getPage(url, String(languageId))
 

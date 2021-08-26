@@ -1,5 +1,6 @@
 // Internals
 import ColumnContainer from './ColumnContainer'
+import type { ColumnContainerProps } from './ColumnContainer'
 
 /**
  * Calculate the offset for the column container
@@ -21,7 +22,7 @@ export const calcColumnOffset = (prev: any, col: any) => {
  * @param row The row container
  */
 export const getColumnsWithOffset = (row: any) => {
-  return row.columns.reduce((acc, col) => {
+  return row.columns.reduce((acc: any, col: any) => {
     const prev = acc[acc.length - 1] || null
 
     return acc.concat([
@@ -44,7 +45,7 @@ export const RowContainer = ({ row }: RowContainerProps) => {
   return (
     <div className="container">
       <div className="row">
-        {cols.map((col, k) => (
+        {cols.map((col: ColumnContainerProps, k: any) => (
           <ColumnContainer {...col} key={k} />
         ))}
       </div>

@@ -16,10 +16,10 @@ const PAGES_TO_FILTER = [
  * Get all the pages from DotCMS GraphQL API and return an array of urls
  */
 export const getPageList = async () => {
-  let results = []
+  let results: string[] = []
 
   try {
-    let localizedResults = []
+    let localizedResults: string[] = []
 
     const PAGES_QUERY = gql`
       {
@@ -41,9 +41,10 @@ export const getPageList = async () => {
 
     results = data.search
       .filter(
-        ({ urlMap, url }) => (urlMap || url) && !PAGES_TO_FILTER.includes(url)
+        ({ urlMap, url }: { urlMap: string; url: string }) =>
+          (urlMap || url) && !PAGES_TO_FILTER.includes(url)
       )
-      .map(({ urlMap, url }) => urlMap || url)
+      .map(({ urlMap, url }: { urlMap: string; url: string }) => urlMap || url)
 
     // If we have more than one language we return the pages with extra languages
     // e.g. `/es/blog/some-post`
@@ -74,7 +75,15 @@ export const getPageList = async () => {
     if (graphQLErrors) {
       const errors = graphQLErrors
         .map(
-          ({ message, locations, path }) =>
+          ({
+            message,
+            locations,
+            path,
+          }: {
+            message: string
+            locations: string
+            path: string
+          }) =>
             `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
         )
         .join('\n')

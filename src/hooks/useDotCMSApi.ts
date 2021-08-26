@@ -28,5 +28,5 @@ export function useDotCMSApi<P>(fetchDotCMS: () => Promise<P>): [boolean, P] {
     fetchData()
   }, [fetchDotCMS])
 
-  return [loading, data]
+  return [loading, data as P]
 }

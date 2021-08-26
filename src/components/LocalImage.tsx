@@ -3,7 +3,7 @@ import Image from 'next/image'
 import type { ImageProps } from 'next/image'
 
 export const LocalImage = (props: ImageProps) => {
-  const myLoader = ({ src }) => {
+  const myLoader = ({ src }: { src: string }) => {
     return `${process.env.NEXT_PUBLIC_DEPLOY_URL}${src}`
   }
 

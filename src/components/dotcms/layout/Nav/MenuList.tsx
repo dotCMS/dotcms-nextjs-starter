@@ -22,7 +22,7 @@ export type MenuListProps = {
 export const MenuList = ({ navigation }: MenuListProps) => {
   const router = useRouter()
 
-  const routerLinkClassName = (item) => {
+  const routerLinkClassName = (item: Record<string, string>) => {
     return [
       router.asPath.split('/').filter(Boolean)[0] === item.href.split('/')[1]
         ? 'active'
@@ -40,13 +40,15 @@ export const MenuList = ({ navigation }: MenuListProps) => {
           </Link>
           {item.children && (
             <ul className="submenu">
-              {item.children[0].children.map((child, idx) => {
-                return (
-                  <li key={idx}>
-                    <Link href={getHref(child.href)}>{child.title}</Link>
-                  </li>
-                )
-              })}
+              {item.children[0].children.map(
+                (child: Record<string, string>, idx: number) => {
+                  return (
+                    <li key={idx}>
+                      <Link href={getHref(child.href)}>{child.title}</Link>
+                    </li>
+                  )
+                }
+              )}
             </ul>
           )}
         </li>

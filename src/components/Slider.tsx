@@ -38,6 +38,7 @@ export const Slider = ({ images, title, id }: SlideProps) => {
   const createRefs = (imgs: Record<string, string>) => {
     const values = Object.values(imgs)
     return values.reduce((acc, value, idx) => {
+      // @ts-ignore common problem with accessing the key
       acc[idx] = React.createRef()
       return acc
     }, [])
@@ -86,7 +87,8 @@ export const Slider = ({ images, title, id }: SlideProps) => {
                     className="carousel__navigation-button"
                     onClick={(e) => {
                       e.preventDefault()
-                      handleNavigatorClick(slideRefs[index].current)
+                      // React.RefObject<HTMLAnchorElement> was giving an error that didnt exist
+                      handleNavigatorClick((slideRefs[index] as any)?.current)
                     }}
                     ref={navigatorRefs[index]}
                   />

@@ -24,7 +24,7 @@ export const Editable = ({ element, ...rest }: EditableProps) => {
       ...rest,
       onClick:
         onClick &&
-        ((e) => {
+        ((e: React.MouseEvent<HTMLElement, MouseEvent>) => {
           e.preventDefault()
           e.stopPropagation()
           onClick()

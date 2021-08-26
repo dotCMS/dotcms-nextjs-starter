@@ -6,7 +6,8 @@ const SIDEBAR_SIZE_MAP = {
   large: 4,
 }
 
-const getSidebarLayoutColumns = (sidebar) => {
+const getSidebarLayoutColumns = (sidebar: Record<string, any>) => {
+  // @ts-ignore we can index with any but we need better types
   const sidebarSize = SIDEBAR_SIZE_MAP[sidebar.width]
 
   if (sidebar.location === 'right') {
@@ -22,7 +23,15 @@ const getSidebarLayoutColumns = (sidebar) => {
   }
 }
 
-export const LayoutWithSidebar = ({ sidebar, children }) => {
+export type LayoutWithSidebarProps = {
+  sidebar: Record<string, any>
+  children: React.ReactNode
+}
+
+export const LayoutWithSidebar = ({
+  sidebar,
+  children,
+}: LayoutWithSidebarProps) => {
   const columns = getSidebarLayoutColumns(sidebar)
 
   return (

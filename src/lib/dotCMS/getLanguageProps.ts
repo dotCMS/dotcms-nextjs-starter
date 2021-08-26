@@ -51,13 +51,13 @@ export const getLanguageProps = async (
    * in the languages array and pass it in `getPage` call
    */
   const languageId = hasLanguages
-    ? languages.find((lang) => lang.languageCode === language).id
+    ? languages?.find((lang) => lang.languageCode === language)?.id
     : '1'
 
   return new Promise((resolve) => {
     let results = {
       hasLanguages,
-      languageId,
+      languageId: String(languageId),
       languages,
       defaultLanguage: __DEFAULT_LANGUAGE__,
     }

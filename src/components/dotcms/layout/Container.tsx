@@ -71,12 +71,16 @@ export const ContainerWrapper = ({
   return <>{children}</>
 }
 
-const Contentlets = ({ contentlets }) => {
+type ContentletsProps = {
+  contentlets?: any[]
+}
+
+const Contentlets = ({ contentlets }: ContentletsProps) => {
   const { isEditMode } = React.useContext(PageContext)
 
-  return contentlets.length ? (
+  return contentlets?.length ? (
     <>
-      {contentlets.map((contentlet) => {
+      {contentlets?.map((contentlet) => {
         if (contentlet.contentType === 'SimpleWidget') {
           return null
         }
@@ -100,7 +104,9 @@ export type ContentletContainerProps = {
   container: any
 }
 
-export const ContentletContainer = ({ container }) => {
+export const ContentletContainer = ({
+  container,
+}: ContentletContainerProps) => {
   const { isEditMode } = React.useContext(PageContext)
 
   return (

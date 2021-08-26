@@ -3,7 +3,7 @@
 function getAcceptTypes(containers: any, identifier: any) {
   // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
   return containers[identifier].containerStructures
-    .map((structure) => structure.contentTypeVar)
+    .map((structure: Record<string, string>) => structure.contentTypeVar)
     .join(',')
 }
 
@@ -56,7 +56,7 @@ function getContainers(containers: any[], page: any) {
 }
 
 function getColumns(row: any, page: any) {
-  return row.columns.map((column) => {
+  return row.columns.map((column: Record<string, any>) => {
     return {
       ...column,
       containers: getContainers(column.containers, page),
@@ -65,7 +65,7 @@ function getColumns(row: any, page: any) {
 }
 
 function getRows(page: any) {
-  return page.layout.body.rows.map((row) => {
+  return page.layout.body.rows.map((row: Record<string, any>) => {
     return {
       ...row,
       columns: getColumns(row, page),

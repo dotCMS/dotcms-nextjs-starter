@@ -14,7 +14,12 @@ const shouldIShow = (show: string, item: any) => {
   return shouldShow?.includes(item)
 }
 
-export const ProductItem = ({ product, show }) => {
+export type ProductItemProps = {
+  product: Record<string, any>
+  show: string
+}
+
+export const ProductItem = ({ product, show }: ProductItemProps) => {
   const { retailPrice, urlTitle, image, title, salePrice, category, inode } =
     product
 

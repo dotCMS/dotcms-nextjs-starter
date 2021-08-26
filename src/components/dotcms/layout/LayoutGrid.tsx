@@ -14,7 +14,7 @@ export const LayoutGrid = () => {
   } = React.useContext(PageContext)
 
   return body && body.rows ? (
-    body.rows.map((row, i) => (
+    body.rows.map((row: Record<string, string>, i: number) => (
       <section
         className={`section ${row.styleClass || ''}`}
         id={`section-${i + 1}`}

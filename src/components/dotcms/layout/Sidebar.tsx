@@ -6,7 +6,7 @@ export type SidebarProps = any
 
 export const Sidebar = (sidebar: SidebarProps) => {
   return sidebar.containers
-    ? sidebar.containers.map((container) => (
+    ? sidebar.containers.map((container: any) => (
         <Container container={container} key={container.identifier} />
       ))
     : ''

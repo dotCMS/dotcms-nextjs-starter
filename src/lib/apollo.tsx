@@ -32,7 +32,9 @@ export function initializeApollo(initialState = null) {
   const _apolloClient = apolloClient ?? createApolloClient()
 
   if (initialState) {
-    _apolloClient.cache.restore(initialState)
+    _apolloClient.cache.restore(
+      initialState as unknown as NormalizedCacheObject
+    )
   }
 
   // For SSG and SSR always create a new Apollo Client

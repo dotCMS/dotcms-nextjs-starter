@@ -33,7 +33,7 @@ const components = {
   webPageContent: WebPageContent,
 }
 
-const FallbackComponent = ({ contentType }) => {
+const FallbackComponent = ({ contentType }: { contentType: string }) => {
   return (
     <h3>You don&apos;t have a component for the content type: {contentType}</h3>
   )
@@ -42,7 +42,8 @@ const FallbackComponent = ({ contentType }) => {
 /**
  * Get the component to render base on the contentlet content type
  */
-export const getComponent = ({ contentType }) => {
+export const getComponent = ({ contentType }: { contentType: string }) => {
+  // @ts-ignore we can index by contentType name
   return components[contentType] || FallbackComponent
 }
 

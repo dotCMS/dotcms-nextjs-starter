@@ -9,7 +9,7 @@ const defaultMessages = {
 }
 
 export type CustomErrorProps = Omit<Error, 'name'> & {
-  statusCode: number
+  statusCode: 400 | 404 | 405 | 500
 }
 
 export const CustomError = ({
