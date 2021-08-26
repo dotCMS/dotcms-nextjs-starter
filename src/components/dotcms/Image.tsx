@@ -37,7 +37,17 @@ export const DotCMSImage = ({
 
   // @ts-ignore - TODO: fix this type searching more accurately
   // type src is incompatible with `StaticImport`
-  return <Image {...props} alt={alt} className={className} src={src as any} />
+  return (
+    <Image
+      {...props}
+      alt={alt}
+      className={className}
+      height={props.height || 1000}
+      layout={props.layout || 'responsive'}
+      src={src as any}
+      width={props.width || 1000}
+    />
+  )
 }
 
 export default DotCMSImage

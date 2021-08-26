@@ -20,7 +20,7 @@ export type GetNavResult = {
  * @param location - The root path to begin traversing the folder tree
  */
 export async function getNav(
-  deep: string,
+  deep: string | number,
   location = '/'
 ): Promise<(DotCMSNavigationItem | GetNavResult)[]> {
   if (process.env.NODE_ENV !== 'production') {
@@ -28,7 +28,7 @@ export async function getNav(
   }
 
   const nav = await dotCMS.nav
-    .get(deep, location)
+    .get(String(deep), location)
     .then((res) => res.children || [])
   const finalNav = [
     {

@@ -2,7 +2,7 @@
 import styled from 'styled-components'
 
 // Internals
-import { Link } from '@/components'
+import Link from '../../../Link'
 
 export const WapperLink = styled(Link)`
   display: block;

@@ -1,14 +1,16 @@
+// Dependencies
 import Head from 'next/head'
-import CustomError from '../components/CustomError'
-import DotCMSPage from '../components/dotcms/layout/DotCMSPage'
-import getPageList from '../utilities/dotcms/getPageList'
-import getPageUrl from '../utilities/dotcms/getPageUrl'
+
+// Internals
+import { CustomError, DotCMSPage } from '@/components'
 import {
+  getPageList,
+  getPageUrl,
   getPage,
   getNav,
   getPathsArray,
-  getLanguagesProps,
-} from '../utilities/dotcms'
+  getLanguageProps,
+} from '@/lib/dotCMS'
 
 export default function Page({ pageRender, nav, languageProps, error }) {
   if (error) {
@@ -68,13 +70,13 @@ export const getStaticProps = async (context) => {
     } = context
 
     const [languageIso] = slug || []
-    const { languageId, hasLanguages, ...rest } = await getLanguagesProps(
+    const { languageId, hasLanguages, ...rest } = await getLanguageProps(
       languageIso
     )
 
     const url = await getPageUrl(slug, hasLanguages)
     // Fetch the page object from DotCMS Page API
-    let pageRender = await getPage(url, languageId)
+    let pageRender = await getPage(url, String(languageId))
 
     // Fetch the navigation from DotCMS Navigation API
     const nav = await getNav('4')

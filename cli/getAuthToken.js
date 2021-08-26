@@ -1,4 +1,4 @@
-const dotCMS = require('../src/lib/dotCMS/dotCMS')
+const dotCMS = require('../src/lib/dotCMS/dotCMS').default
 const { printError } = require('./print')
 
 const getAuthToken = async ({ user, password, expirationDays, host }) => {
