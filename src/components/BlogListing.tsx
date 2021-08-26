@@ -1,8 +1,8 @@
 // Internals
 import { CustomDate, Link, Loading } from '@/components'
-import { DotCMSImage } from '@/components/dotCMS'
 import { useDotCMSApi } from '@/hooks'
 import { dotCMS } from '@/lib/dotCMS'
+import DotCMSImage from './dotCMS/Image'
 
 const BlogListing = () => {
   const [loading, posts] = useDotCMSApi(async () => {
