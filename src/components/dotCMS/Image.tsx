@@ -31,7 +31,10 @@ export const DotCMSImage = ({
 
   const src = `${srcUrl}${filterUrl}`
 
-  if (!props.width && !props.height) {
+  if (props.width && props.height) {
+    props.width = props.width
+    props.height = props.height
+  } else {
     props.layout = 'fill'
   }
 
@@ -46,11 +49,8 @@ export const DotCMSImage = ({
       {...props}
       alt={alt}
       className={className}
-      height={props.height || 1000}
-      layout={props.layout || 'responsive'}
       loader={dotCmsLoader}
       src={src as any}
-      width={props.width || 1000}
     />
   )
 }

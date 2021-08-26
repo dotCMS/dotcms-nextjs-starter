@@ -7,7 +7,7 @@ export const LocalImage = (props: ImageProps) => {
     return `${process.env.NEXT_PUBLIC_DEPLOY_URL}${src}`
   }
 
-  return <Image alt={props.alt} {...props} loader={myLoader} />
+  return <Image {...props} alt={props.alt} loader={myLoader} />
 }
 
 export default LocalImage
