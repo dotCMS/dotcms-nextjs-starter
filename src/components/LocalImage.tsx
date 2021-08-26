@@ -7,7 +7,7 @@ export const LocalImage = (props: ImageProps) => {
     return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${src}`
   }
 
-  console.log({
+  console.warn({
     NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
     NEXT_PUBLIC_DEPLOY_URL: process.env.NEXT_PUBLIC_DEPLOY_URL,
   })
