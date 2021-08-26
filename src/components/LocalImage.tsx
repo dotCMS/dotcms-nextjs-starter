@@ -11,11 +11,6 @@ export const LocalImage = (props: ImageProps) => {
     return `${currentDeployURL}${src}`
   }
 
-  console.warn({
-    NEXT_PUBLIC_VERCEL_URL: process.env.NEXT_PUBLIC_VERCEL_URL,
-    NEXT_PUBLIC_DEPLOY_URL: process.env.NEXT_PUBLIC_DEPLOY_URL,
-  })
-
   return <Image {...props} alt={props.alt} loader={myLoader} />
 }
 
