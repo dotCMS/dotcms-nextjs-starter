@@ -4,7 +4,11 @@ import type { ImageProps } from 'next/image'
 
 export const LocalImage = (props: ImageProps) => {
   const myLoader = ({ src }: { src: string }) => {
-    return `https://${process.env.NEXT_PUBLIC_VERCEL_URL}${src}`
+    const currentDeployURL = process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : process.env.NEXT_PUBLIC_DEPLOY_URL
+
+    return `${currentDeployURL}${src}`
   }
 
   console.warn({
