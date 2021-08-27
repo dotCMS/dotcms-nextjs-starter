@@ -1,8 +1,8 @@
-const dotCMSApi = require('../src/config/dotcmsApi')
+const dotCMS = require('../src/lib/dotCMS/dotCMS').default
 const { printError } = require('./print')
 
 const getAuthToken = async ({ user, password, expirationDays, host }) => {
-  return dotCMSApi.auth
+  return dotCMS.auth
     .getToken({ user, password, expirationDays, host })
     .then((res) => res)
     .catch((err) => {

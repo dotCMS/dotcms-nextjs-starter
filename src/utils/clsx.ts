@@ -1,4 +1,6 @@
 /**
+ * @author Daniel Esteves <danestves@gmail.com>
+ *
  * Utility function to join classes
  *
  * @param classes Array of classes to append

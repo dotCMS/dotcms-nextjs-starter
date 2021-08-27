@@ -1,14 +1,16 @@
-// Internals
-import dotCMSApi from '@/config/dotcmsApi'
+// Dependencies
 import type { DotCMSConfigurationItem } from 'dotcms/lib/models'
+
+// Internals
+import { dotCMS } from './'
 
 /**
  * Get DotCMS license information
  */
 export const getLicense = async (): Promise<
-  DotCMSConfigurationItem['license'] | Error
+  DotCMSConfigurationItem['license']
 > => {
-  return dotCMSApi.config
+  return dotCMS.config
     .get()
     .then(({ license }) => license)
     .catch((error) => {

@@ -1,14 +1,14 @@
 // Internals
 import {
   ProductDetail,
-  calendarEventDetail,
+  CalendarEventDetail,
   BlogDetail,
   ActivityDetail,
-} from '@/components/dotcms/content-types'
+} from '@/components/dotCMS/pages'
 
 const components = {
   ProductDetail,
-  calendarEventDetail,
+  calendarEventDetail: CalendarEventDetail,
   BlogDetail,
   ActivityDetail,
 }
@@ -17,5 +17,6 @@ const components = {
  * Get the component to render a especific detail page
  */
 export const getPageComponent = (contentType: string): JSX.Element | null => {
+  // @ts-ignore we can index by contentType name
   return components[`${contentType}Detail`] || null
 }

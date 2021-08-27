@@ -1,12 +1,11 @@
 // Dependencies
 import * as React from 'react'
-import { parseBody } from 'next/dist/next-server/server/api-utils'
+import { parseBody } from 'next/dist/server/api-utils'
 import type { GetServerSideProps, NextPage } from 'next'
 
 // Internals
-import DotCMSPage from '@/components/dotcms/layout/DotCMSPage'
-import transformPage from '@/utilities/dotcms/transformPage'
-import { getNav, getLanguagesProps } from '@/utilities/dotcms'
+import { DotCMSPage } from '@/components'
+import { getLanguageProps, getNav, transformPage } from '@/lib/dotCMS'
 
 // TODO: This is a temporary solution to get the props we must pass to the correct types
 export type DotCMSStaticPageProps = {
@@ -81,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
 
     // Optional but better performance: we get the navigation and language server side.
     const nav = await getNav(4)
-    const { languageId, hasLanguages, ...rest } = await getLanguagesProps()
+    const { languageId, hasLanguages, ...rest } = await getLanguageProps()
 
     // Return the props to be shown in the component
     return {
