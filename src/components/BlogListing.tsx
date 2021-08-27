@@ -4,6 +4,7 @@ import { useDotCMSApi } from '@/hooks'
 import { dotCMS } from '@/lib/dotCMS'
 import DotCMSImage from './dotCMS/Image'
 
+
 const BlogListing = () => {
   const [loading, posts] = useDotCMSApi(async () => {
     return dotCMS.esSearch
