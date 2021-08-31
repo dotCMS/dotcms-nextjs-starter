@@ -1,6 +1,6 @@
 const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
 // We must provide the https:// since the env variable is not providing and will fail on build
-const currentDeployURL = process.env.NEXT_PUBLIC_DEPLOY_URL
+const currentDeployURL = `https://${process.env.NEXT_PUBLIC_DEPLOY_URL}`
 const deployUrl = new URL(currentDeployURL).hostname
 const domains = Array.from(new Set([publicHost, deployUrl]))
 
