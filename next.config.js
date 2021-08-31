@@ -25,8 +25,7 @@ module.exports = {
   },
 
   async rewrites() {
-    const baseUrl =
-      process.env.NEXT_PUBLIC_DEPLOY_URL || process.env.NEXT_PUBLIC_DOTCMS_HOST
+    const baseUrl = process.env.NEXT_PUBLIC_DOTCMS_HOST
 
     return [
       // check if Next.js project routes match before we attempt proxying
