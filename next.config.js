@@ -1,6 +1,6 @@
 const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
 // We must provide the https:// since the env variable is not providing and will fail on build
-const currentDeployURL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+const currentDeployURL = process.env.NEXT_PUBLIC_DEPLOY_URL
 const deployUrl = new URL(currentDeployURL).hostname
 const domains = Array.from(new Set([publicHost, deployUrl]))
 
@@ -26,7 +26,7 @@ module.exports = {
 
   async rewrites() {
     const baseUrl =
-      process.env.NEXT_BASE_ASSET_URL || process.env.NEXT_PUBLIC_DOTCMS_HOST
+      process.env.NEXT_PUBLIC_DEPLOY_URL || process.env.NEXT_PUBLIC_DOTCMS_HOST
 
     return [
       // check if Next.js project routes match before we attempt proxying
