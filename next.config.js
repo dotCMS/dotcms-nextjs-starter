@@ -1,8 +1,10 @@
+const isProd = process.env.NODE_ENV === 'production'
+
 const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
 // We must provide the https:// since the env variable is not providing and will fail on build
-const currentDeployURL = `http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`
-const deployUrl = new URL(currentDeployURL).hostname
-const domains = Array.from(new Set([publicHost, deployUrl]))
+const deployUrl = new URL(`http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`)
+const assetPrefix = `${isProd ? 'https://' : 'http://'}${deployUrl.hostname}${deployUrl.port && `:${deployUrl.port}`}`
+const domains = Array.from(new Set([publicHost, deployUrl.host]))
 
 module.exports = {
   images: {
@@ -62,5 +64,5 @@ module.exports = {
   },
   // When we load the page in the DotCMS editor we need to have
   // absolutes url for he nextjs page
-  assetPrefix: currentDeployURL,
+  assetPrefix: assetPrefix
 }
