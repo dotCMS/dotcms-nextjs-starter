@@ -1,10 +1,17 @@
-const isProd = process.env.NODE_ENV === 'production'
+function getAssetPrefix({ hostname, port }) {
+  const isProd = process.env.NODE_ENV === 'production'
+  const protocol = isProd ? 'https' : 'http'
+  const urlPort = !!port ? `:${port}` : '';
 
-const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
-// We must provide the https:// since the env variable is not providing and will fail on build
-const deployUrl = new URL(`http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`)
-const assetPrefix = `${isProd ? 'https://' : 'http://'}${deployUrl.hostname}${deployUrl.port && `:${deployUrl.port}`}`
-const domains = Array.from(new Set([publicHost, deployUrl.host]))
+  return `${protocol}://${hostname}${urlPort}`;
+}
+
+const dotcmsUrl = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
+const nextjsUrl = new URL(`http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`)
+const assetPrefix = getAssetPrefix(nextjsUrl)
+
+// Provide domains for local images or in DotCMS CDN
+const domains = Array.from(new Set([dotcmsUrl, nextjsUrl.host]))
 
 module.exports = {
   images: {
