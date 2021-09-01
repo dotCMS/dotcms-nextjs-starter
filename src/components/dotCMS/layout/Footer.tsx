@@ -1,6 +1,8 @@
 // Dependencies
 import * as React from 'react'
 
+import Image from 'next/image'
+
 // Internals
 import { LocalImage } from '@/components'
 import { FooterContainer, FooterSection } from '@/styles/footer/footer.styles'
@@ -11,10 +13,10 @@ export const Footer = () => {
       <div className="container">
         <FooterSection className="footer__section">
           <a aria-label="Footer Logo" className="main-nav__logo" href="#">
-            <LocalImage
+            <Image
               alt="DotCMS - NextJS example"
               height="41"
-              src="http://localhost:3000/logo.png"
+              src="/logo.png"
               width="135"
             />
           </a>

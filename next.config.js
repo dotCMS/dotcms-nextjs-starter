@@ -1,8 +1,17 @@
-const publicHost = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
-// We must provide the https:// since the env variable is not providing and will fail on build
-const currentDeployURL = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-const deployUrl = new URL(currentDeployURL).hostname
-const domains = Array.from(new Set([publicHost, deployUrl]))
+function getAssetPrefix({ hostname, port }) {
+  const isProd = process.env.NODE_ENV === 'production'
+  const protocol = isProd ? 'https' : 'http'
+  const urlPort = !!port ? `:${port}` : '';
+
+  return `${protocol}://${hostname}${urlPort}`;
+}
+
+const dotcmsUrl = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
+const nextjsUrl = new URL(`http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`)
+const assetPrefix = getAssetPrefix(nextjsUrl)
+
+// Provide domains for local images or in DotCMS CDN
+const domains = Array.from(new Set([dotcmsUrl, nextjsUrl.host]))
 
 module.exports = {
   images: {
@@ -25,8 +34,7 @@ module.exports = {
   },
 
   async rewrites() {
-    const baseUrl =
-      process.env.NEXT_BASE_ASSET_URL || process.env.NEXT_PUBLIC_DOTCMS_HOST
+    const baseUrl = process.env.NEXT_PUBLIC_DOTCMS_HOST
 
     return [
       // check if Next.js project routes match before we attempt proxying
@@ -63,5 +71,5 @@ module.exports = {
   },
   // When we load the page in the DotCMS editor we need to have
   // absolutes url for he nextjs page
-  assetPrefix: currentDeployURL,
+  assetPrefix: assetPrefix
 }

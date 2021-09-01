@@ -38,8 +38,8 @@ export const DotCMSImage = ({
     props.layout = 'fill'
   }
 
-  const dotCmsLoader = ({ src }) => {
-    return `${process.env.NEXT_PUBLIC_DOTCMS_HOST}${src}`
+  const dotCmsLoader = ({ src, width }) => {
+    return `${process.env.NEXT_PUBLIC_DOTCMS_HOST}${src}?w=${width}`
   }
 
   // @ts-ignore - TODO: fix this type searching more accurately
