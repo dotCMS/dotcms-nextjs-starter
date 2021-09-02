@@ -1,17 +1,8 @@
-function getAssetPrefix({ hostname, port }) {
-  const isProd = process.env.NODE_ENV === 'production'
-  const protocol = isProd ? 'https' : 'http'
-  const urlPort = !!port ? `:${port}` : '';
-
-  return `${protocol}://${hostname}${urlPort}`;
-}
-
 const dotcmsUrl = new URL(process.env.NEXT_PUBLIC_DOTCMS_HOST).hostname
-const nextjsUrl = new URL(`http://${process.env.NEXT_PUBLIC_DEPLOY_URL}`)
-const assetPrefix = getAssetPrefix(nextjsUrl)
+const nextjsUrl = new URL(process.env.NEXT_PUBLIC_DEPLOY_URL).hostname
 
 // Provide domains for local images or in DotCMS CDN
-const domains = Array.from(new Set([dotcmsUrl, nextjsUrl.host]))
+const domains = Array.from(new Set([dotcmsUrl, nextjsUrl]))
 
 module.exports = {
   images: {
@@ -71,5 +62,5 @@ module.exports = {
   },
   // When we load the page in the DotCMS editor we need to have
   // absolutes url for he nextjs page
-  assetPrefix: assetPrefix
+  assetPrefix: process.env.NEXT_PUBLIC_DEPLOY_URL
 }

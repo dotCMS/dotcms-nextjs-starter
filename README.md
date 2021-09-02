@@ -37,6 +37,11 @@ Run `yarn dev` this will start you NextJS application in development mode with h
 
 #### Build and run in production
 
+**To run production locally**
+
+1. Create a file `.env.production.local`
+2. Add `NEXT_PUBLIC_DEPLOY_URL=http://localhost:3000`
+
 Run `yarn build` creates an optimized production build of your application. The output displays information about each route, [more information](https://nextjs.org/docs/api-reference/cli#build).
 
 Run `yarn start` starts the application in production mode. The application should be compiled with `next build` first, [more information](https://nextjs.org/docs/api-reference/cli#production)
