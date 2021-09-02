@@ -37,6 +37,10 @@ Run `yarn dev` this will start you NextJS application in development mode with h
 
 #### Build and run in production
 
+**To run production locally**
+
+NOTE: Rename `~env.production.local` to `.env.production.local`
+
 Run `yarn build` creates an optimized production build of your application. The output displays information about each route, [more information](https://nextjs.org/docs/api-reference/cli#build).
 
 Run `yarn start` starts the application in production mode. The application should be compiled with `next build` first, [more information](https://nextjs.org/docs/api-reference/cli#production)
@@ -73,13 +77,6 @@ BEARER_TOKEN=TOKEN
 
 #### Vercel
 You can deploy to [Vercel](https://vercel.com/docs/platform/deployments) which is the company behind Nextjs so the support is the best.
-
-**Deploy with vercel-cli**
-In order to use "preview" mode in Vercel we need to use [vercel-cli](https://vercel.com/docs/cli):
-
-1. Install vercel cli
-2. Rename `.env.production__example` to `.env.production`
-3. Run `vercel` to deploy
 
 #### Netlify
 [How to Deploy Next.js Sites to Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
