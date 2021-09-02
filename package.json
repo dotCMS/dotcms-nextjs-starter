@@ -25,7 +25,7 @@
     "graphql-tag": "^2.12.5",
     "html-react-parser": "^1.2.8",
     "nanoid": "^3.1.25",
-    "next": "^11.1.0",
+    "next": "^11.1.1",
     "nprogress": "^0.2.0",
     "prop-types": "^15.7.2",
     "raw-body": "^2.4.1",
