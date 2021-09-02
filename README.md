@@ -39,7 +39,7 @@ Run `yarn dev` this will start you NextJS application in development mode with h
 
 **To run production locally**
 
-NOTE: Rename `~env.production.local` to `.env.production.local`
+NOTE: Duplicate and rename `~env.production.local` to `.env.production.local`
 
 Run `yarn build` creates an optimized production build of your application. The output displays information about each route, [more information](https://nextjs.org/docs/api-reference/cli#build).
 
