@@ -11,7 +11,7 @@
     "export": "next export",
     "lint": "next lint",
     "type-check": "tsc --pretty --noEmit",
-    "setup": "ts-node -O '{\"module\":\"commonjs\"}' ./cli/index.js build"
+    "setup": "ts-node -O '{\"module\":\"commonjs\"}' ./cli/index.js"
   },
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",

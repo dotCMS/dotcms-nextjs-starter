@@ -23,10 +23,12 @@ const printAuthError = (err) => {
 const setEnvVarsAndStartApp = (vars) => {
   const packageManager = hasYarn() ? 'yarn' : 'npm'
 
-  spawn(`${packageManager} run ${process.argv[2]}`, {
-    stdio: 'inherit',
-    shell: true,
-  })
+  if (process.argv[2]) {
+    spawn(`${packageManager} run ${process.argv[2]}`, {
+      stdio: 'inherit',
+      shell: true,
+    })
+  }
 }
 
 const printWelcome = () => {
