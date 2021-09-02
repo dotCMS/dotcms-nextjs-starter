@@ -74,6 +74,13 @@ BEARER_TOKEN=TOKEN
 #### Vercel
 You can deploy to [Vercel](https://vercel.com/docs/platform/deployments) which is the company behind Nextjs so the support is the best.
 
+**Deploy with vercel-cli**
+In order to use "preview" mode in Vercel we need to use [vercel-cli](https://vercel.com/docs/cli):
+
+1. Install vercel cli
+2. Rename `.env.production__example` to `.env.production`
+3. Run `vercel` to deploy
+
 #### Netlify
 [How to Deploy Next.js Sites to Netlify](https://www.netlify.com/blog/2020/11/30/how-to-deploy-next.js-sites-to-netlify/)
 
