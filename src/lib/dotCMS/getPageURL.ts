@@ -1,7 +1,10 @@
 /**
  * Get the page URL to prefix with the language when needs
  */
-export const getPageUrl = (slug: string[], hasLanguages: boolean): string => {
+export const getPageUrl = async (
+  slug: string[],
+  hasLanguages: boolean
+): Promise<string> => {
   let category: string[]
   const [_, ...tail] = slug || []
 
