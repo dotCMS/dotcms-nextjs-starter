@@ -18,9 +18,9 @@ export const BannerCarousel = ({ rendered }: BannerCarouselProps) => {
   const options: HTMLReactParserOptions = {
     replace: (domNode) => {
       const typedDomNode = domNode as Element
-      const { class: className } = typedDomNode.attribs
+      const attribs = typedDomNode.attribs
 
-      if (className === 'carousel-inner') {
+      if (attribs?.className === 'carousel-inner') {
         return (
           <Carousel key={nanoid()} showThumbs={false}>
             {domToReact(typedDomNode.children) as JSX.Element[]}
@@ -29,8 +29,8 @@ export const BannerCarousel = ({ rendered }: BannerCarouselProps) => {
       }
 
       if (
-        className === 'carousel-control-prev' ||
-        className === 'carousel-control-next'
+        attribs?.className === 'carousel-control-prev' ||
+        attribs?.className === 'carousel-control-next'
       ) {
         return null
       }

@@ -19,6 +19,7 @@ export const LanguageSelector = () => {
       locale: value,
     })
   }
+  console.info(router)
 
   return (
     <div className="form-wrap-select">
