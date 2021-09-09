@@ -72,7 +72,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   let pagesPaths = getPathsArray(pageList)
 
   for (const locale of locales as string[]) {
-    pagesPaths.map((page) => {
+    pagesPaths.forEach((page) => {
       paths.push({ ...page, locale })
     })
   }
