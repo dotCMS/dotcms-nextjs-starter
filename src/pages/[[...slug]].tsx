@@ -1,6 +1,6 @@
 // Dependencies
 import Head from 'next/head'
-import type { GetStaticProps } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 
 // Internals
 import { CustomError, DotCMSPage } from '@/components'
@@ -56,7 +56,7 @@ export default function Page({
   )
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   // Fetch pages from DotCMS and get all the urls in an array of strings, ex:
   // ['/destinations/index', '/store/index', '/store/category/snow'];
 
@@ -68,7 +68,14 @@ export const getStaticPaths = async () => {
   //     { params: { slug: '/store' } }
   //     { params: { slug: '/store/category/snow' } }
   // ]
-  const paths = getPathsArray(pageList)
+  let paths = []
+  let pagesPaths = getPathsArray(pageList)
+
+  for (const locale of locales as string[]) {
+    pagesPaths.forEach((page) => {
+      paths.push({ ...page, locale })
+    })
+  }
 
   // Then Next.js will statically generate /destinations, /store and /store/category/snow at build time using the page component in pages/[...slug].js.
   return {
@@ -79,14 +86,11 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   try {
-    const { params } = context
+    const { locale, params } = context
 
-    const [languageIso] = (params?.slug as string[]) || []
-    const { languageId, hasLanguages, ...rest } = await getLanguageProps(
-      languageIso
-    )
+    const { languageId, hasLanguages, ...rest } = await getLanguageProps(locale)
 
-    const url = await getPageUrl(params?.slug as string[], hasLanguages)
+    const url = await getPageUrl(params?.slug as string[])
     // Fetch the page object from DotCMS Page API
     let pageRender = await getPage(url, String(languageId))
 

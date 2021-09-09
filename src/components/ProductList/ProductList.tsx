@@ -60,7 +60,7 @@ export const ProductList = ({
 
   React.useEffect(() => {
     // To avoid running the GraphQL query in the server we run it only if we're in client-side
-    if (window !== 'undefined') {
+    if (typeof window !== 'undefined') {
       getData()
     }
 

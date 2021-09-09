@@ -4,71 +4,20 @@ import { useRouter } from 'next/router'
 
 // Internals
 import { PageContext } from '@/contexts'
-import {
-  setCurrentLanguage,
-  getCurrentLanguage,
-  removeCurrentLanguage,
-} from '@/lib/dotCMS'
 import { LanguageSelect } from './styles'
 
 export const LanguageSelector = () => {
   const router = useRouter()
-  const [language, setLanguage] = React.useState('')
+  const [language, setLanguage] = React.useState(() => router.locale)
   // @ts-ignore TODO: add the correct types
   const { languageProps } = React.useContext(PageContext)
 
-  // Predicate to determine whether we should set the new language or not
-  const shouldSetLanguage = (lang: string) => {
-    const languageFound = () => {
-      return (
-        Object.values(
-          languageProps.languages.find(
-            (val: Record<string, string>) => val.languageCode === lang
-          ) || []
-        ).length > 0
-      )
-    }
-
-    return (
-      !router.query.slug?.includes(String(getCurrentLanguage())) &&
-      languageFound()
-    )
-  }
-
-  React.useEffect(() => {
-    // Set out selectedLanguage state on initial render
-    setLanguage(languageProps.selectedLanguage)
-
-    const { slug = [] } = router.query
-    // If the user manually removes the language and one is found in the available languages then store in localStorage
-    if (shouldSetLanguage(slug[0])) {
-      setCurrentLanguage(slug[0])
-    } else if (shouldSetLanguage(languageProps.defaultLanguage)) {
-      setCurrentLanguage(languageProps.defaultLanguage)
-    }
-
-    return () => removeCurrentLanguage() as void
-  }, [])
-
-  const getRoute = (value: string, slug: string[]) => {
-    if (value === languageProps.defaultLanguage) {
-      return slug ? slug.filter((route) => route !== language) : []
-    }
-    return slug
-      ? [value, ...slug.filter((route) => route !== value)]
-      : [`${value}`]
-  }
-
   const handleLanguageChange = (value: string) => {
-    setCurrentLanguage(value)
     setLanguage(value)
 
-    const {
-      query: { slug },
-    } = router
-
-    const route = getRoute(value, slug as string[])
-    router.replace('/[[...slug]]', `/${route.join('/')}`)
+    return router.push(router.asPath, undefined, {
+      locale: value,
+    })
   }
 
   return (
