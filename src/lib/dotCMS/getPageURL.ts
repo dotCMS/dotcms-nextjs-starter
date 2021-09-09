@@ -1,20 +1,10 @@
 /**
  * Get the page URL to prefix with the language when needs
  */
-export const getPageUrl = async (
-  slug: string[],
-  hasLanguages: boolean
-): Promise<string> => {
+export const getPageUrl = async (slug: string[]): Promise<string> => {
   let category: string[]
-  const [_, ...tail] = slug || []
-
-  // If the URL has a language then join the rest of the slug array: `tail`
-  // Otherwise join the slug array
-  let url = slug
-    ? hasLanguages
-      ? `/${tail.join('/')}`
-      : `/${slug?.join('/')}`
-    : '/index'
+  // We need to add "/" before the slug so the page can respond with the HTML
+  let url = `/${String(slug)}`
 
   // If slug includes the term `category` then we're in a category and we need to build our URL
   if (slug?.includes('category')) {
