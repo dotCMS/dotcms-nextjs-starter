@@ -1,6 +1,7 @@
 // Dependencies
 import parse, { domToReact } from 'html-react-parser'
 import type { Element, HTMLReactParserOptions } from 'html-react-parser'
+import Script from 'next/script'
 
 // Internals
 import { Link } from '@/components'
@@ -27,6 +28,19 @@ const isAbsolutePath = (path: string) => {
 const options: HTMLReactParserOptions = {
   replace: (domNode) => {
     const typedDomNode = domNode as Element
+
+    if (typedDomNode.type === 'script') {
+      if (typedDomNode.childNodes.length) {
+        const [node] = typedDomNode.childNodes;
+        return <Script
+          id="show-banner"
+          dangerouslySetInnerHTML={{
+            __html: node.data
+          }}
+        />
+      }
+      return <Script {...(typedDomNode.attribs as any)} />
+    }
 
     if (typedDomNode.type === 'tag') {
       if (EXCLUDED_CONTENT.includes(typedDomNode.attribs.class)) {
@@ -56,8 +70,6 @@ type HTMLParserOptions = {
  * Some data from DotCMS comes as a string HTML, for example from WYSIYG fields. So we parse this
  * html, turn them into react component and replace <a> for <RouterLink> to use NextJS routing.
  */
-export const htmlParser = ({ content, options }: HTMLParserOptions) => {
-  return parse(content, options)
-}
+export const htmlParser = ({ content }: HTMLParserOptions) => parse(content, options)
 
 export default htmlParser
