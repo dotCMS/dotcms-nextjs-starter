@@ -33,7 +33,6 @@ const options: HTMLReactParserOptions = {
       if (typedDomNode.childNodes.length) {
         const [node] = typedDomNode.childNodes;
         return <Script
-          id="show-banner"
           dangerouslySetInnerHTML={{
             __html: node.data
           }}

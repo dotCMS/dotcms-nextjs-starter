@@ -45,7 +45,6 @@ const FallbackComponent = ({ contentType }: { contentType: string }) => {
  * Get the component to render base on the contentlet content type
  */
 export const getComponent = ({ contentType }: { contentType: string }) => {
-  console.log({ contentType })
   // @ts-ignore we can index by contentType name
   return components[contentType] || FallbackComponent
 }
