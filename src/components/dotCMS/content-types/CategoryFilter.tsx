@@ -16,28 +16,13 @@ export const CategoryFilter = (props: CategoryFilterProps) => {
     (nav) => nav.href === '/Store' || nav.href === '/store'
   )
 
-  const data: any[] = storeNav.children.reduce(function (acc: any, curr: any) {
-    if (curr.children.length > 0) {
-      acc = [
-        ...acc,
-        ...curr.children.map((children: { title: string; href: string }) => ({
-          title: children.title,
-          href: children.href,
-        })),
-      ]
-    }
-    return acc
-  }, [])
-
   return (
     <SidebarContainer>
       <h4 className="sidebar-title">{props.title}</h4>
       <ul>
-        {data.map((item) => (
+        {storeNav.children.map((item) => (
           <li key={item.href}>
-            <Link href={item.href} prefetch>
-              {item.title}
-            </Link>
+            <Link href={item.href}>{item.title}</Link>
           </li>
         ))}
       </ul>
