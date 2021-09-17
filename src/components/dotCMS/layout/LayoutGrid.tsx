@@ -24,7 +24,7 @@ export const LayoutGrid = () => {
 
   return body.rows.map(({ columns }, i) => (
     /**
-     * We loop through the rows and render the columns
+     * We loop through the rows, containers and contentlets
      */
     <Row key={`row-${i}`}>
       {columns.map(({ leftOffset, width, containers }, k) => (

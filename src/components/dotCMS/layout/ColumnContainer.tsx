@@ -16,7 +16,7 @@ export const ColumnContainer = ({
   containers,
 }: ColumnContainerProps) => {
   return (
-    <Column className={styleClass} md={{ size: width, offset: offset }}>
+    <Column className={styleClass} leftOffset={offset} width={width}>
       {containers?.map((container) => (
         <ContentletContainer container={container} key={container.identifier} />
       ))}

@@ -44,7 +44,7 @@ export const RowContainer = ({ row }: RowContainerProps) => {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="grid grid-cols-12 gap-2 my-2">
         {cols.map((col: ColumnContainerProps, k: any) => (
           <ColumnContainer {...col} key={k} />
         ))}
