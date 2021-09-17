@@ -1,5 +1,3 @@
-import { transformPage } from '../../utilities/dotcms'
-
 const PAGE_MOCK = {
   template: {
     template: false,
@@ -625,7 +623,7 @@ const PAGE_MOCK = {
   },
 }
 
-const PAGE_MOCK_FORMMATED = transformPage(PAGE_MOCK)
+const PAGE_MOCK_FORMMATED = PAGE_MOCK
 
 export default PAGE_MOCK_FORMMATED
 

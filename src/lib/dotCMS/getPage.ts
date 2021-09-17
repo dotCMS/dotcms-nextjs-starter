@@ -1,5 +1,5 @@
 // Internals
-import { dotCMS, getLicense, transformPage } from './'
+import { dotCMS, getLicense } from './'
 
 /**
  * Get the page from the DotCMS PageAPI and make extra transformation for easy render
@@ -14,13 +14,7 @@ export const getPage = async (url: string, lang: string) => {
 
   return dotCMS.page
     .get({ url, language: lang }, 'render' as any)
-    .then(async (pageRender) => {
-      /*
-        If the page doesn't have a layout this transformPage function
-        will throw an error.
-      */
-      return pageRender
-    })
+    .then(async (pageRender) => pageRender)
     .catch((error) => {
       /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
