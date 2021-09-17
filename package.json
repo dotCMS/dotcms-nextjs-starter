@@ -16,6 +16,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "apollo-boost": "^0.4.9",
+    "autoprefixer": "^10.3.4",
     "babel-plugin-styled-components": "^1.13.2",
     "cross-fetch": "^3.1.4",
     "dotcms": "0.0.17",
@@ -27,6 +28,7 @@
     "nanoid": "^3.1.25",
     "next": "^11.1.2",
     "nprogress": "^0.2.0",
+    "postcss": "^8.3.6",
     "prop-types": "^15.7.2",
     "raw-body": "^2.4.1",
     "react": "^17.0.2",
@@ -36,6 +38,7 @@
     "reactify-wc": "^4.0.0",
     "sharp": "^0.29.1",
     "styled-components": "^5.3.1",
+    "tailwindcss": "^2.2.15",
     "url-loader": "^4.1.1"
   },
   "devDependencies": {

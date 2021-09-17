@@ -16,10 +16,10 @@ export const getPage = async (url: string, lang: string) => {
     .get({ url, language: lang }, 'render' as any)
     .then(async (pageRender) => {
       /*
-                If the page doesn't have a layout this transformPage function
-                will throw an error.
-            */
-      return await transformPage(pageRender)
+        If the page doesn't have a layout this transformPage function
+        will throw an error.
+      */
+      return pageRender
     })
     .catch((error) => {
       /* 

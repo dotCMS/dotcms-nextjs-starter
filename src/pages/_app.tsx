@@ -6,6 +6,7 @@ import type { AppProps } from 'next/app'
 
 // Internals
 import { GlobalStyle } from '@/styles/global'
+import '@/styles/tailwind.css'
 
 // Binding events
 Router.events.on('routeChangeStart', (url) => NProgress.start())
