@@ -34,7 +34,7 @@ export const LayoutGrid = () => {
          * - We use the width to calculate the width of the column
          */
         <Column key={`col-${k}`} leftOffset={leftOffset} width={width}>
-          {containers.map(({ identifier, uuid }, l) => {
+          {containers.map(({ identifier, uuid }) => {
             /**
              * - We use the uuid to find the contentlets in the containers
              */
@@ -42,13 +42,13 @@ export const LayoutGrid = () => {
               containersData[identifier].contentlets[`uuid-${uuid}`]
 
             return (
-              <div key={`container-${l}`}>
+              <div key={identifier}>
                 {contentlets.map((contentlet, m) => {
                   /**
                    * - We loop through the contentlets and render the contentlet
                    */
                   return (
-                    <Contentlet data={contentlet} key={`contentlet-${m}`} />
+                    <Contentlet data={contentlet} key={contentlet.identifier} />
                   )
                 })}
               </div>

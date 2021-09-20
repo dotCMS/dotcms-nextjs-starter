@@ -73,10 +73,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     // We get the body. Note: We put any because of a problem with the type definition
     const body = await parseBody(req as any, '1mb')
 
-    const page = JSON.parse(body.dotPageData).entity
-
-    // Transform the page object to add the contentlets inside the layout property (easier to render components)
-    const pageRender = page
+    const pageRender = JSON.parse(body.dotPageData).entity
 
     // Optional but better performance: we get the navigation and language server side.
     const nav = await getNav(4)

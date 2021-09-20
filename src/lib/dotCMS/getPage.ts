@@ -14,7 +14,6 @@ export const getPage = async (url: string, lang: string) => {
 
   return dotCMS.page
     .get({ url, language: lang }, 'render' as any)
-    .then(async (pageRender) => pageRender)
     .catch((error) => {
       /* 
                 Error coming from the DotCMS server when DotCMS instance is down or not accesible
