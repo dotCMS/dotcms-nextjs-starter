@@ -1,11 +1,6 @@
 {
   "plugins": ["tailwindcss"],
-  "extends": [
-    "next",
-    "next/core-web-vitals",
-    "prettier",
-    "plugin:tailwindcss/recommended"
-  ],
+  "extends": ["next", "next/core-web-vitals", "prettier"],
   "rules": {
     "react/jsx-sort-props": 2,
     "no-console": [

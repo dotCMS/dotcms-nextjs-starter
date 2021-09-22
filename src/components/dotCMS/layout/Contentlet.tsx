@@ -11,3 +11,5 @@ export const Contentlet = ({ data }: ContentletProps) => {
 
   return <Component {...data} />
 }
+
+export default Contentlet

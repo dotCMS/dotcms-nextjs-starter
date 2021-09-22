@@ -5,7 +5,7 @@ import type { GetServerSideProps, NextPage } from 'next'
 
 // Internals
 import { DotCMSPage } from '@/components'
-import { getLanguageProps, getNav, transformPage } from '@/lib/dotCMS'
+import { getLanguageProps, getNav } from '@/lib/dotCMS'
 
 // TODO: This is a temporary solution to get the props we must pass to the correct types
 export type DotCMSStaticPageProps = {
@@ -73,10 +73,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
     // We get the body. Note: We put any because of a problem with the type definition
     const body = await parseBody(req as any, '1mb')
 
-    const page = JSON.parse(body.dotPageData).entity
-
-    // Transform the page object to add the contentlets inside the layout property (easier to render components)
-    const pageRender = await transformPage(page)
+    const pageRender = JSON.parse(body.dotPageData).entity
 
     // Optional but better performance: we get the navigation and language server side.
     const nav = await getNav(4)
