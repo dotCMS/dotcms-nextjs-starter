@@ -6,7 +6,7 @@ import { PageContext } from '@/contexts'
 import Column from './Column'
 import Contentlet from './Contentlet'
 import Row from './Row'
-import { ContentletWrapper } from './Container';
+import { ContentletWrapper } from './Container'
 
 export const LayoutGrid = () => {
   const {
