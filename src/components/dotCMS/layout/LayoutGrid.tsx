@@ -1,11 +1,13 @@
 // Dependencies
 import * as React from 'react'
 
+// import * as React from 'react'
 // Internals
 import { PageContext } from '@/contexts'
 import Column from './Column'
 import Contentlet from './Contentlet'
 import Row from './Row'
+import { ContentletWrapper } from './Container';
 
 export const LayoutGrid = () => {
   const {
@@ -14,6 +16,7 @@ export const LayoutGrid = () => {
       layout: { body },
       containers,
     },
+    isEditMode
   } = React.useContext(PageContext)
 
   if (!body.rows.length) {
@@ -48,7 +51,13 @@ export const LayoutGrid = () => {
                    * - We loop through the contentlets and render the contentlet
                    */
                   return (
-                    <Contentlet data={contentlet} key={contentlet.identifier} />
+                    <ContentletWrapper
+                      contentlet={contentlet}
+                      isEditMode={isEditMode}
+                      key={contentlet.identifier}
+                    >
+                      <Contentlet data={contentlet}/>
+                    </ContentletWrapper>
                   )
                 })}
               </div>
