@@ -1,7 +1,6 @@
 // Dependencies
 import * as React from 'react'
 
-// import * as React from 'react'
 // Internals
 import { PageContext } from '@/contexts'
 import Column from './Column'
