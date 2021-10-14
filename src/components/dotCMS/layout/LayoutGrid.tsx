@@ -6,6 +6,7 @@ import { PageContext } from '@/contexts'
 import Column from './Column'
 import Contentlet from './Contentlet'
 import Row from './Row'
+import { ContentletWrapper, ContainerWrapper } from './Container'
 
 export const LayoutGrid = () => {
   const {
@@ -14,6 +15,7 @@ export const LayoutGrid = () => {
       layout: { body },
       containers,
     },
+    isEditMode
   } = React.useContext(PageContext)
 
   if (!body.rows.length) {
@@ -34,7 +36,8 @@ export const LayoutGrid = () => {
          * - We use the width to calculate the width of the column
          */
         <Column key={`col-${k}`} leftOffset={leftOffset} width={width}>
-          {containers.map(({ identifier, uuid }) => {
+          {containers.map((container) => {
+            const { identifier, uuid } = container;
             /**
              * - We use the uuid to find the contentlets in the containers
              */
@@ -42,16 +45,22 @@ export const LayoutGrid = () => {
               containersData[identifier].contentlets[`uuid-${uuid}`]
 
             return (
-              <div key={identifier}>
+              <ContainerWrapper container={container} isEditMode={isEditMode} key={identifier}>
                 {contentlets.map((contentlet, m) => {
                   /**
                    * - We loop through the contentlets and render the contentlet
                    */
                   return (
-                    <Contentlet data={contentlet} key={contentlet.identifier} />
+                    <ContentletWrapper
+                      contentlet={contentlet}
+                      isEditMode={isEditMode}
+                      key={contentlet.identifier}
+                    >
+                      <Contentlet data={contentlet}/>
+                    </ContentletWrapper>
                   )
                 })}
-              </div>
+              </ContainerWrapper>
             )
           })}
         </Column>
