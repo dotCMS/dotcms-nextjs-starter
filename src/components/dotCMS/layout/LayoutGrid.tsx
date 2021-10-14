@@ -8,6 +8,19 @@ import Contentlet from './Contentlet'
 import Row from './Row'
 import { ContentletWrapper, ContainerWrapper } from './Container'
 
+function getFullContainer({ container, containerStructures }: { [key: string]: any }, uuid: string) {
+  // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
+  const acceptTypes = containerStructures
+    .map((structure: Record<string, string>) => structure.contentTypeVar)
+    .join(',');
+
+  return {
+    ...container,
+    acceptTypes,
+    uuid
+  }
+}
+
 export const LayoutGrid = () => {
   const {
     // @ts-ignore TODO: we need to type the contexts
@@ -44,9 +57,11 @@ export const LayoutGrid = () => {
             const contentlets =
               containersData[identifier].contentlets[`uuid-${uuid}`]
 
+            const fullContainer = getFullContainer(containersData[identifier], uuid);
+
             return (
-              <ContainerWrapper container={container} isEditMode={isEditMode} key={identifier}>
-                {contentlets.map((contentlet, m) => {
+              <ContainerWrapper container={fullContainer} isEditMode={isEditMode} key={identifier}>
+                {contentlets.map((contentlet) => {
                   /**
                    * - We loop through the contentlets and render the contentlet
                    */
@@ -56,7 +71,7 @@ export const LayoutGrid = () => {
                       isEditMode={isEditMode}
                       key={contentlet.identifier}
                     >
-                      <Contentlet data={contentlet}/>
+                      <Contentlet data={contentlet} />
                     </ContentletWrapper>
                   )
                 })}
