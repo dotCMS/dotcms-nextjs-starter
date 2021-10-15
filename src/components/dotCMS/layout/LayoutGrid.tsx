@@ -9,7 +9,7 @@ import Row from './Row'
 import { ContentletWrapper, ContainerWrapper } from './Container'
 
 function getFullContainer({ container, containerStructures }: { [key: string]: any }, uuid: string) {
-  // TODO: we can't calculate accept types like this because when the container is empty there is nothing in the containerStructures.
+
   const acceptTypes = containerStructures
     .map((structure: Record<string, string>) => structure.contentTypeVar)
     .join(',');
