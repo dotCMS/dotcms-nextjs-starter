@@ -54,6 +54,21 @@ EMA is a pattern we defined to allow creator to edit JamStack pages. [Read more]
 
 We create a `/pages/ema.js` that will receive the object from DotCMS to create the page and send it back to our editor.
 
+#### Activate the APP
+
+In DotCMS you need to enable the EMA App, go to:
+
+1. System > Apps
+2. Click on EMA APP
+3. Click on your host
+4. Enter: http://localhost:3000/ema (or your domain)
+
+No you can yo to Site Browser and edit a page.
+
+#### Troubleshooting
+
+If you DotCMS instance is in the cloud or some external server it will not have access to you `localhost` in that case you can use a tunnel service like [ngrok.com](https://ngrok.com/)
+
 ### Docker
 1. Install [Docker](https://docs.docker.com/get-docker/) on your machine.
 2. Build your container: `docker build -t CONTAINER_NAME .`
