@@ -7,6 +7,11 @@ export interface StoryNode<T = Record<string, string>> {
   type: string
   content?: StoryNode[]
   attrs?: T
-  marks?: string[]
+  marks?: Mark[]
   text?: string
+}
+
+interface Mark {
+  type: string
+  attrs: Record<string, string>
 }

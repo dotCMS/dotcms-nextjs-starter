@@ -4,14 +4,14 @@ import Link from '../../../Link'
 import { StoryNode } from '../type'
 
 // Styles
-import { DetailContainer, DotState } from './styles'
+import { DotContentContainer, DotState } from './styles'
 
 export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
   const { language, contentType, title, urlMap } = data
   const state = getState(data)
 
   return (
-    <DetailContainer>
+    <DotContentContainer>
       <div className="card">
         <div className="card-header">
           <div className="card-img">
@@ -39,11 +39,11 @@ export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
           </div>
         </div>
       </div>
-    </DetailContainer>
+    </DotContentContainer>
   )
 }
 
-const getState = ({ live, archived, working, hasLiveVersion }: any) => {
+const getState = ({ live, archived, working, hasLiveVersion }): string => {
   if (archived) {
     return 'archived'
   }

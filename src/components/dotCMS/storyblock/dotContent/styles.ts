@@ -1,7 +1,7 @@
 // Dependencies
 import styled from 'styled-components'
 
-export const DetailContainer = styled.div`
+export const DotContentContainer = styled.div`
   display: block;
   height: 100%;
   width: 100%;

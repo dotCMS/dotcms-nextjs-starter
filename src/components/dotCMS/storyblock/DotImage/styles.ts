@@ -8,7 +8,6 @@ export const ImageContainer = styled.div`
   margin-bottom: 1rem;
 
   img {
-    width: 50% !important;
     object-fit: cover;
   }
 `

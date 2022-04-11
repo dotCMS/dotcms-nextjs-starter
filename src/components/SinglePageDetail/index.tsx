@@ -2,7 +2,7 @@
 import React from 'react'
 import { DotCMSImage } from '@/components'
 import { DetailContainer } from './styles'
-import Storyblock from '../dotCMS/storyblock/Storyblock'
+import { DotSBRender } from '../dotCMS/storyblock'
 
 // TODO: improve the type definition
 export type SinglePageDetailProps = {
@@ -24,10 +24,9 @@ export const SinglePageDetail = ({
       <span className="date">{new Date(publishDate).toDateString()}</span>
       {/* This conditional is temporal */}
       {blockData ? (
-        <>
-          <h1>StoryBlock</h1>
-          <Storyblock {...blockData} />
-        </>
+        <div>
+          <DotSBRender {...blockData} />
+        </div>
       ) : (
         <div
           className="content"

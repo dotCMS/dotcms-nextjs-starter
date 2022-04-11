@@ -1,16 +1,16 @@
-import Image from 'next/image'
 import React, { useState } from 'react'
+import DotCMSImage from '../../Image'
 
 export const DotThumbnail = (contentlet) => {
   const [loadImage, setLoadImage] = useState(isImage(contentlet))
   return (
     <>
       {loadImage ? (
-        <Image
+        <DotCMSImage
           alt={contentlet.titleImage}
           height={94}
           onError={() => setLoadImage(false)}
-          src={getImageURL(contentlet)}
+          path={getImageURL(contentlet)}
           width={94}
         />
       ) : (
@@ -22,15 +22,7 @@ export const DotThumbnail = (contentlet) => {
 }
 
 const isImage = ({ hasTitleImage, mimeType }): boolean => {
-  let result = false
-  // Some endpoints return this property as a boolean
-  if (typeof hasTitleImage === 'boolean' && hasTitleImage) {
-    result = hasTitleImage
-  } else {
-    result = hasTitleImage === 'true' || mimeType === 'application/pdf'
-  }
-
-  return result
+  return hasTitleImage || mimeType === 'application/pdf'
 }
 
 const getImageURL = (contentlet): string => {
