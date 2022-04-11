@@ -1,17 +1,5 @@
 // Dependencies
-import styled from "styled-components";
-
-// Spacing
-// $spacing-0: 0;
-// $spacing-1: 0.5rem;
-// $spacing-2: 0.75rem;
-// $spacing-3: 1rem;
-// $spacing-4: 1.5rem;
-// $spacing-5: 2rem;
-// $spacing-6: 2.5rem;
-// $spacing-7: 3rem;
-// $spacing-8: 4rem;
-// $spacing-9: 4.5rem;
+import styled from 'styled-components'
 
 export const DetailContainer = styled.div`
   display: block;
@@ -25,6 +13,12 @@ export const DetailContainer = styled.div`
     border: 1px solid #b3b1b8;
     color: #0a0725;
     display: flex;
+  }
+
+  .card-img {
+    width: 94px,
+    height: 94px,
+    position: relative
   }
 
   .card-header {
@@ -70,15 +64,7 @@ export const DetailContainer = styled.div`
     margin-bottom: 0.8rem;
   }
 
-  dot-contentlet-thumbnail {
-    align-items: center;
-    display: block;
-    position: relative;
-    width: 94px;
-    height: 94px;
-  }
-
-  .state {
+  .card-footer {
     align-items: center;
     display: flex;
 
@@ -100,4 +86,20 @@ export const DetailContainer = styled.div`
       }
     }
   }
-`;
+`
+
+export const DotState = styled.div<{ state: string }>`
+  border-radius: 50%;
+  border: solid 2px;
+  box-sizing: border-box;
+  height: 16px;
+  width: 16px;
+  background: ${(props) => colors[props.state]};
+`
+
+const colors = {
+  archived: '#e63946',
+  published: '#27b970',
+  revision: '#ffb703',
+  draft: 'transparent',
+}

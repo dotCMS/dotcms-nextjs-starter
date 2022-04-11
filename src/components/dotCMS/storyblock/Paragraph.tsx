@@ -1,12 +1,10 @@
 import TextNode from './TextNode'
-// Internals
+import { StoryNode } from './type'
 
-// SsotyBlock Node <T = unkown>
-// Content = T
-export const Paragraph = ({ content }) => {
+export const Paragraph = ({ content }: StoryNode) => {
   return (
     <p>
-      <TextNode {...content[0]} />
+      <TextNode {...content} />
     </p>
   )
 }

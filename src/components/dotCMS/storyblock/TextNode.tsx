@@ -1,8 +1,15 @@
 import React from 'react'
 import { StoryNode } from './type'
 
-export const TextNode = ({ marks, text }: StoryNode) => {
-  return <>{addMarks(marks, text)}</>
+export const TextNode = (data: StoryNode[]) => {
+  const nodes = Object.values(data)
+  return (
+    <>
+      {nodes.map(({ type, marks, text }) => {
+        return type === 'text' ? addMarks(marks, text) : <br />
+      })}
+    </>
+  )
 }
 
 // TODO: Talk to Freddy about `marks` because they can also be added to styles.
@@ -19,16 +26,12 @@ const addMarks = (tags = [], text) => {
           {addMarks(tags.slice(1), text)}
         </a>
       )
-      break
     case 'bold':
       return <strong>{addMarks(tags.slice(1), text)}</strong>
-      break
     case 'italic':
       return <em>{addMarks(tags.slice(1), text)}</em>
-      break
     case 'underline':
       return <u>{addMarks(tags.slice(1), text)}</u>
-      break
     case 'strike':
       return <s>{addMarks(tags.slice(1), text)}</s>
     default:

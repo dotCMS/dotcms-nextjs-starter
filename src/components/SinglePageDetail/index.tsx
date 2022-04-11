@@ -14,6 +14,8 @@ export const SinglePageDetail = ({
     urlContentMap: { title, body, body1, description, publishDate, image },
   },
 }: SinglePageDetailProps): JSX.Element => {
+  const blockData = body1 ? JSON.parse(body1) : null
+  console.info(blockData)
   return (
     <DetailContainer className="container">
       <div className="image">
@@ -22,10 +24,10 @@ export const SinglePageDetail = ({
       <h2 className="title">{title}</h2>
       <span className="date">{new Date(publishDate).toDateString()}</span>
       {/* This conditional is temporal */}
-      {body1 ? (
+      {blockData ? (
         <>
           <h1>StoryBlock</h1>
-          <Storyblock {...JSON.parse(body1)} />
+          <Storyblock {...blockData} />
         </>
       ) : (
         <div

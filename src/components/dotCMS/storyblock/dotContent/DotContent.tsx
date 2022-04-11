@@ -1,24 +1,20 @@
 import React from 'react'
-import DotThumbnail from '../dotContent/DotThumbnail'
-import { DetailContainer } from './styles'
+import DotThumbnail from './DotThumbnail'
 import Link from '../../../Link'
 import { StoryNode } from '../type'
-// Internals
 
-const imageStyle = {
-  width: '94px',
-  height: '94px',
-  position: 'relative' as any,
-}
+// Styles
+import { DetailContainer, DotState } from './styles'
 
 export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
   const { language, contentType, title, urlMap } = data
+  const state = getState(data)
+
   return (
     <DetailContainer>
       <div className="card">
         <div className="card-header">
-          {/* TODO: Remove this style */}
-          <div style={imageStyle}>
+          <div className="card-img">
             <DotThumbnail {...data} />
           </div>
         </div>
@@ -35,20 +31,32 @@ export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
             </div>
           </div>
 
-          {/* TODO: Make this a Component */}
-          <div>
-            <div className="state">
-              {/* <dot-state-icon [state]="data | contentletState" size="16px"> */}
-              {/* </dot-state-icon> */}
-              <div className="badge">
-                <span>{language}</span>
-              </div>
+          <div className="card-footer">
+            <DotState state={state} />
+            <div className="badge">
+              <span>{language}</span>
             </div>
           </div>
         </div>
       </div>
     </DetailContainer>
   )
+}
+
+const getState = ({ live, archived, working, hasLiveVersion }: any) => {
+  if (archived) {
+    return 'archived'
+  }
+
+  if (live && hasLiveVersion && working) {
+    return 'published'
+  }
+
+  if (hasLiveVersion) {
+    return 'revision'
+  }
+
+  return 'draft'
 }
 
 export default DotContent

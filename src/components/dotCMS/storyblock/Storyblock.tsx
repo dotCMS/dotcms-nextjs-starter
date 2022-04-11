@@ -4,7 +4,11 @@ import {
   Heading,
   BulletList,
   OrderedList,
+  CodeBlock,
+  BlockQuote,
+  HorizontalRule,
   DotContent,
+  DotImage,
 } from './index'
 import { StoryblockType } from './type'
 
@@ -13,13 +17,17 @@ const components = {
   heading: Heading,
   bulletList: BulletList,
   orderedList: OrderedList,
+  codeBlock: CodeBlock,
   dotContent: DotContent,
+  dotImage: DotImage,
+  horizontalRule: HorizontalRule,
+  blockquote: BlockQuote,
 }
 
 const FallbackComponent = ({ type }: { type: string }) => {
   return (
     <h3>
-      You don&apos;t have a storybook component for the content type: {type}
+      You don&apos;t have a storyblock component for the content type: {type}
     </h3>
   )
 }

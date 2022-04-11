@@ -3,7 +3,7 @@ import ListItem from './ListItem'
 import { StoryNode } from './type'
 
 // Internals
-export const BulletList: any = ({ attrs, content }: StoryNode) => {
+export const BulletList: any = ({ content }: StoryNode) => {
   return (
     <ul>
       {content.map((data, index) => {
