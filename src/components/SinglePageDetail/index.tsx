@@ -15,7 +15,6 @@ export const SinglePageDetail = ({
   },
 }: SinglePageDetailProps): JSX.Element => {
   const blockData = body1 ? JSON.parse(body1) : null
-  console.info(blockData)
   return (
     <DetailContainer className="container">
       <div className="image">

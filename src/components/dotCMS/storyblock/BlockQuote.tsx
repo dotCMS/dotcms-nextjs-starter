@@ -2,7 +2,7 @@ import React from 'react'
 import Paragraph from './Paragraph'
 import { StoryNode } from './type'
 
-const BlockQuote = ({ content }): StoryNode => {
+export const BlockQuote = ({ content }: StoryNode) => {
   return (
     <blockquote
       style={{
