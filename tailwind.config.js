@@ -12,7 +12,11 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        xs: ['0.625rem', '1rem'],
+      }
+    },
   },
   variants: {
     extend: {},

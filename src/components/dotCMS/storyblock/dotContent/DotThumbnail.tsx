@@ -30,5 +30,3 @@ const getImageURL = (contentlet): string => {
     ? `/contentAsset/image/${contentlet.inode}/${contentlet.titleImage}/pdf_page/1/resize_w/250/quality_q/45`
     : `/dA/${contentlet.inode}/500w/20q`
 }
-
-export default DotThumbnail

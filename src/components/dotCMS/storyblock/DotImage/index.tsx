@@ -1,16 +1,15 @@
 import React from 'react'
 import DotCMSImage from '../../Image'
 import { StoryNode } from '../type'
-import { ImageContainer } from './styles'
 
 export const DotImage = ({ attrs: { textAlign, data } }: StoryNode<any>) => {
   const { asset, title } = data
   const [imgTitle] = title.split('.')
 
   return (
-    <ImageContainer style={{ textAlign: textAlign }}>
-      <DotCMSImage path={asset} title={imgTitle} />
-    </ImageContainer>
+    <div className="w-full h-64 mb-4 relative" style={{ textAlign: textAlign }}>
+      <DotCMSImage objectFit={'cover'} path={asset} title={imgTitle} />
+    </div>
   )
 }
 
