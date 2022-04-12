@@ -13,7 +13,7 @@ const nodeMarks = {
 
 export const TextNode = (props: StoryNode) => {
   const { marks = [], text } = props
-  const mark = marks[0] || { type: '' }
+  const mark = marks[0] || { type: '', attrs: {} }
   const newProps = { ...props, marks: marks.slice(1) }
   const Component = nodeMarks[mark?.type]
 
@@ -21,7 +21,7 @@ export const TextNode = (props: StoryNode) => {
     <>
       {Component ? (
         <>
-          <Component>
+          <Component attrs={mark.attrs}>
             <TextNode {...newProps} />
           </Component>
         </>

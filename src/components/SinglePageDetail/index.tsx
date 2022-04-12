@@ -11,10 +11,10 @@ export type SinglePageDetailProps = {
 
 export const SinglePageDetail = ({
   pageRender: {
-    urlContentMap: { title, body, body1, description, publishDate, image },
+    urlContentMap: { title, body1: body, publishDate, image },
   },
 }: SinglePageDetailProps): JSX.Element => {
-  const blockData = body1 ? JSON.parse(body1) : null
+  const blockData = body ? JSON.parse(body) : null
   return (
     <DetailContainer className="container">
       <div className="image">
@@ -22,16 +22,10 @@ export const SinglePageDetail = ({
       </div>
       <h2 className="title">{title}</h2>
       <span className="date">{new Date(publishDate).toDateString()}</span>
-      {/* This conditional is temporal */}
-      {blockData ? (
+      {blockData && (
         <div>
           <DotSBRender {...blockData} />
         </div>
-      ) : (
-        <div
-          className="content"
-          dangerouslySetInnerHTML={{ __html: body || description }}
-        />
       )}
     </DetailContainer>
   )

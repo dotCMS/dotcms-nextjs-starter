@@ -5,7 +5,7 @@ import { ImageContainer } from './styles'
 
 export const DotImage = ({ attrs: { textAlign, data } }: StoryNode<any>) => {
   const { asset, title } = data
-  const imgTitle = title.split('.')[0]
+  const [imgTitle] = title.split('.')
 
   return (
     <ImageContainer style={{ textAlign: textAlign }}>

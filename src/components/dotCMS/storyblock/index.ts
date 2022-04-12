@@ -7,5 +7,5 @@ export * from './BasicNodes'
 // Nodes
 export const DotSBRender = dynamic(() => import('./DotSBRender'))
 export const TextNode = dynamic(() => import('./TextNode'))
-export const DotContent = dynamic(() => import('./DotContent/DotContent'))
-export const DotImage = dynamic(() => import('./DotImage/DotImage'))
+export const DotContent = dynamic(() => import('./dotContent/DotContent'))
+export const DotImage = dynamic(() => import('./dotImage/DotImage'))

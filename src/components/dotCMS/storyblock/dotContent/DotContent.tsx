@@ -1,10 +1,10 @@
 import React from 'react'
-import DotThumbnail from './DotThumbnail'
+import DotThumbnail from '../dotContent/DotThumbnail'
 import Link from '../../../Link'
 import { StoryNode } from '../type'
 
 // Styles
-import { DotContentContainer, DotState } from './styles'
+import { DotContentContainer, DotState } from '../dotContent/styles'
 
 export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
   const { language, contentType, title, urlMap } = data

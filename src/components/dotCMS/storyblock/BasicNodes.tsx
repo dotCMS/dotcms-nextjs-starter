@@ -4,12 +4,12 @@ import React from 'react'
 import { blockQuoteStyle, codeBlockStyle } from './utils/Styles'
 
 // Nodes
-const BulletList = ({ children }) => <ul>{children}</ul>
 const HardBreak = () => <br />
 const HorizontalRule = () => <hr />
 const ListItem = ({ children }) => <li>{children}</li>
 const OrderedList = ({ children }) => <ol>{children}</ol>
 const Paragraph = ({ children }) => <p>{children}</p>
+const UnorderedList = ({ children }) => <ul>{children}</ul>
 
 const Heading: any = ({ attrs, children }) => {
   const Tag = `h${attrs.level}` as keyof JSX.IntrinsicElements
@@ -29,7 +29,7 @@ export const BasicNodes = {
   paragraph: Paragraph,
   heading: Heading,
   listItem: ListItem,
-  bulletList: BulletList,
+  bulletList: UnorderedList,
   orderedList: OrderedList,
   codeBlock: CodeBlock,
   blockquote: BlockQuote,

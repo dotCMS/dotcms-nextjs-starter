@@ -12,11 +12,18 @@ const components = {
   dotImage: DotImage,
 }
 
-const FallbackComponent = ({ type }: { type: string }) => {
+const FallbackComponent = ({ type }) => {
   return (
-    <span>
-      You don&apos;t have a storyblock component for the content type: {type}
-    </span>
+    <>
+      {process.env.NODE_ENV === 'development' ? (
+        <span>
+          You don&apos;t have a storyblock component for the content type:{' '}
+          {type}
+        </span>
+      ) : (
+        <></>
+      )}
+    </>
   )
 }
 
@@ -28,13 +35,12 @@ export const DotSBRender = ({ content }: StoryNode) => {
     <>
       {content?.map((data, index) => {
         const Component = components[data.type] || FallbackComponent
-        // console.info(data)
         if (!data?.content?.length) {
           return <Component key={index} {...data} />
         }
 
         return (
-          <Component attrs={data.attrs} key={index}>
+          <Component attrs={data.attrs} key={index} type={data?.type}>
             <DotSBRender key={index} {...data} />
           </Component>
         )
