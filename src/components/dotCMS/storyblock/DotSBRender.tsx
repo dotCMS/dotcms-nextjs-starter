@@ -1,5 +1,6 @@
-// Internals
-import { TextNode, BasicNodes, DotContent, DotImage } from './index'
+import React from 'react'
+
+import { BasicNodes, DotContent, TextNode, DotImage } from './components'
 import { StoryNode } from './type'
 
 const components = {

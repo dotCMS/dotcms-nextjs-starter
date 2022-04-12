@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import DotCMSImage from '../../Image'
+import DotCMSImage from '../../../Image'
 
 export const DotThumbnail = (contentlet) => {
   const [loadImage, setLoadImage] = useState(isImage(contentlet))

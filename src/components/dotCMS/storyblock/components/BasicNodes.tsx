@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Styles
-import { blockQuoteStyle, codeBlockStyle } from './utils/Styles'
+import { blockQuoteStyle, codeBlockStyle } from '../utils/Styles'
 
 // Nodes
 const HardBreak = () => <br />

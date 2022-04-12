@@ -1,6 +1,6 @@
 import React from 'react'
-import { StoryNode } from './type'
-import { Link, Bold, Italic, Strike, Underline } from './utils/Marks'
+import { StoryNode } from '../type'
+import { Link, Bold, Italic, Strike, Underline } from '../utils/Marks'
 
 // TODO: Talk to Freddy about `marks` because they can also be added to styles.
 const nodeMarks = {

@@ -1,11 +1,11 @@
 import React from 'react'
 
-import Link from '../../../Link'
+import Link from '@/components/Link'
 import { DotThumbnail } from './DotThumbnail'
 import { DotState } from '../DotContent/DotState'
+import { StoryNode } from '../../type'
 
 // Types
-import { StoryNode } from '../type'
 
 export const DotContent: any = ({ attrs: { data } }: StoryNode<any>) => {
   const { contentType, title, urlMap } = data
