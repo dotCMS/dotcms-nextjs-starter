@@ -11,10 +11,10 @@ export type SinglePageDetailProps = {
 
 export const SinglePageDetail = ({
   pageRender: {
-    urlContentMap: { title, body1: body, publishDate, image },
+    urlContentMap: { title, blogContent, publishDate, image },
   },
 }: SinglePageDetailProps): JSX.Element => {
-  const blockData = body ? JSON.parse(body) : null
+  const blogContentJSON = blogContent ? JSON.parse(blogContent) : null
   return (
     <DetailContainer className="container">
       <div className="image">
@@ -22,9 +22,9 @@ export const SinglePageDetail = ({
       </div>
       <h2 className="title">{title}</h2>
       <span className="date">{new Date(publishDate).toDateString()}</span>
-      {blockData && (
+      {blogContentJSON && (
         <div>
-          <DotSBRender {...blockData} />
+          <DotSBRender {...blogContentJSON} />
         </div>
       )}
     </DetailContainer>
