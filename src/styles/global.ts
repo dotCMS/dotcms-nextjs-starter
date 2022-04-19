@@ -305,5 +305,18 @@ export const GlobalStyle = createGlobalStyle`
     margin-left: 15px;
 	}
 
+	li > p {
+		margin: 0;
+	}
+
+	.line-clamp {
+		overflow: hidden;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 4;
+		-moz-box-orient: vertical;
+		-moz-line-clamp: 4;
+	}
+
 	${reflex}
 `

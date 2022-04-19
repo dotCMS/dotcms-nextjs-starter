@@ -10,10 +10,9 @@ export const DotThumbnail = (contentlet) => {
       {loadImage ? (
         <DotCMSImage
           alt={contentlet.titleImage}
-          height={94}
           onError={() => setLoadImage(false)}
           path={getImageURL(contentlet)}
-          width={94}
+          width={150}
         />
       ) : (
         <span className="material-icons-outlined text-7xl">

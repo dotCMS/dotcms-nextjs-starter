@@ -2,37 +2,55 @@ import React from 'react'
 
 import Link from '@/components/Link'
 import { DotThumbnail } from './DotThumbnail'
-import { DotState } from '../DotContent/DotState'
 
 // Types
 import { StoryNode, DotContentProps } from '../../type'
+import { ProductPrice } from './ProductPrice'
 
 export const DotContent: any = ({
   attrs: { data },
 }: StoryNode<{ data: DotContentProps }>) => {
-  const { contentType, title, urlMap } = data
+  const {
+    contentType,
+    title,
+    urlMap,
+    description,
+    shortDescription,
+    urlTitle,
+  } = data
+  const isProduct = contentType == 'Product'
+  const desc = description || shortDescription
+  const link = urlMap || `${contentType}/${urlTitle}`
+
   return (
     <div className="w-full h-full mb-4 box-border">
-      <div className="bg-white border border-solid border-gray-300 flex">
-        <div className="box-border p-2 w-28">
-          <div className="flex h-full w-full justify-center items-center relative">
-            <DotThumbnail {...data} />
-          </div>
+      <div className="bg-white border border-solid border-gray-300 flex p-4 flex flex-1 justify-start items-center flex-wrap flex-col lg:flex-row">
+        <div className="w-40 h-40 p-3 border border-solid border-gray-300 justify-center items-center relative mb-4 lg:m-0">
+          <DotThumbnail {...data} />
         </div>
-        <div className="box-border flex flex-col flex-1 p-2 pr-4">
-          <div className="flex-1">
-            <div className="w-full overflow-hidden">
-              <h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-bold text-2xl mb-1 ">
-                <Link href={urlMap}>{title}</Link>
+
+        <div className="flex-1 lg:mx-2 lg:p-2">
+          <div className="mb-4 min-w-md lg:mb-0">
+            <div className="mb-4 w-full min-w-full lg:w-24">
+              <h3 className="truncate font-bold text-lg mb-2 text-center lg:text-start">
+                {title}
               </h3>
             </div>
-            <div className="text-sm text-gray-400 mb-4">
-              <span>{contentType}</span>
-            </div>
+            <div
+              className="text-sm text-gray-500 line-clamp overflow-hidden text-ellipsis leading-6 w-full first:m-0"
+              dangerouslySetInnerHTML={{ __html: desc }}
+            />
           </div>
-          <div className="flex items-center">
-            <DotState {...data} />
-          </div>
+        </div>
+
+        <div className="flex justify-center items-center flex-col w-full lg:w-auto">
+          {isProduct && <ProductPrice {...data} />}
+          <Link
+            className="text-white font-bold uppercase bg-dot-purple py-2 px-4 w-full h-14 mt-2 flex justify-center items-center hover:text-white hover:bg-dot-purple-80 lg:w-36 lg:mt-0"
+            href={link}
+          >
+            {isProduct ? 'Buy' : 'View Details'}
+          </Link>
         </div>
       </div>
     </div>
