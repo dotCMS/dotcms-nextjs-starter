@@ -29,10 +29,10 @@ export const DotContent: any = ({
           <DotThumbnail {...data} />
         </div>
 
-        <div className="flex-1 lg:mx-2 lg:p-2">
-          <div className="mb-4 min-w-md lg:mb-0">
+        <div className="flex-1 max-w-full lg:mx-2 lg:p-2">
+          <div className="mb-4 lg:mb-0">
             <div className="mb-4 w-full min-w-full lg:w-24">
-              <h3 className="truncate font-bold text-lg mb-2 text-center lg:text-start">
+              <h3 className="truncate font-bold text-lg mb-2 text-center lg:text-left">
                 {title}
               </h3>
             </div>
