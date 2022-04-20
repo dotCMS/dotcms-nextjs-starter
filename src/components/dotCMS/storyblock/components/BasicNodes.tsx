@@ -1,8 +1,5 @@
 import React from 'react'
 
-// Styles
-import { blockQuoteStyle, codeBlockStyle } from '../utils/Styles'
-
 // Nodes
 const HardBreak = () => <br />
 const HorizontalRule = () => <hr />
@@ -17,10 +14,15 @@ const Heading: any = ({ attrs, children }) => {
 }
 
 const BlockQuote = ({ children }) => (
-  <blockquote style={blockQuoteStyle}>{children}</blockquote>
+  <blockquote className="m-4 pl-4 border-solid border-l-4 border-gray-300">
+    {children}
+  </blockquote>
 )
 const CodeBlock = ({ attrs: { language }, children }) => (
-  <pre data-language={language} style={codeBlockStyle}>
+  <pre
+    className="bg-black text-white p-2.5 rounded-md"
+    data-language={language}
+  >
     <code>{children}</code>
   </pre>
 )
