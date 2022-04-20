@@ -1,11 +1,12 @@
 import React from 'react'
 
 import Link from '@/components/Link'
-import { DotThumbnail } from './DotThumbnail'
 
 // Types
 import { StoryNode, DotContentProps } from '../../type'
 import { ProductPrice } from './ProductPrice'
+import DotCMSImage from '../../../Image'
+import { getImageURL } from '../../utils/DotContent.utils'
 
 export const DotContent: any = ({
   attrs: { data },
@@ -17,6 +18,7 @@ export const DotContent: any = ({
     description,
     shortDescription,
     urlTitle,
+    titleImage,
   } = data
   const isProduct = contentType == 'Product'
   const desc = description || shortDescription
@@ -26,7 +28,7 @@ export const DotContent: any = ({
     <div className="w-full h-full mb-4 box-border">
       <div className="bg-white border border-solid border-gray-300 flex p-4 flex flex-1 justify-start items-center flex-wrap flex-col lg:flex-row">
         <div className="w-40 h-40 p-3 border border-solid border-gray-300 justify-center items-center relative mb-4 lg:m-0">
-          <DotThumbnail {...data} />
+          <DotCMSImage alt={titleImage} path={getImageURL({ ...data })} />
         </div>
 
         <div className="flex-1 max-w-full lg:mx-2 lg:p-2">

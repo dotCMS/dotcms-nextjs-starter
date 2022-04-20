@@ -1,6 +1,6 @@
 import React from 'react'
-import DotCMSImage from '../../../Image'
-import { StoryNode } from '../../type'
+import DotCMSImage from '../../Image'
+import { StoryNode } from '../type'
 
 export const DotImage = ({ attrs: { textAlign, data } }: StoryNode<any>) => {
   const { asset, title } = data

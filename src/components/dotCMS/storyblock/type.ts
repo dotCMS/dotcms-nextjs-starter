@@ -39,8 +39,9 @@ export interface DotContentProps {
   __icon__: string
   contentTypeIcon: string
   language: string
-  description: string,
-  shortDescription: string,
-  salePrice: string,
+  description: string
+  shortDescription: string
+  salePrice: string
   retailPrice: string
+  mimeType: string
 }
