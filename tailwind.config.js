@@ -12,7 +12,15 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        xs: ['0.625rem', '1rem'],
+      },
+      colors: {
+        'dot-purple': '#c336e5',
+        'dot-purple-80': '#CE5DEA'
+      }
+    },
   },
   variants: {
     extend: {},

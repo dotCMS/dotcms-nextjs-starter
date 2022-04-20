@@ -16,7 +16,7 @@ const components = {
 /**
  * Get the component to render a especific detail page
  */
-export const getPageComponent = (contentType: string): JSX.Element | null => {
+export const getPageComponent = (contentType: string): React.FC | null => {
   // @ts-ignore we can index by contentType name
   return components[`${contentType}Detail`] || null
 }

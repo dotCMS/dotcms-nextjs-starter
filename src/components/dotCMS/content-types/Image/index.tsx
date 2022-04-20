@@ -16,7 +16,7 @@ export const Image = (props: ImageProps) => {
 
   return (
     <Wrapper>
-      <DotCMSImage alt={props.title} path={props.fileAsset} width={800} />
+      <DotCMSImage alt={props.title} path={props.fileAsset} />
       <div className="body">
         <h4>{props.title}</h4>
         <p>{description}</p>

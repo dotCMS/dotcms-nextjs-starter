@@ -10,7 +10,7 @@ import {
   StoreProductList,
   Video,
   WebPageContent,
-  VtlInclude
+  VtlInclude,
 } from '@/components/dotCMS/content-types'
 import {
   ActivityDetail,
@@ -34,7 +34,7 @@ const components = {
   calendarEventDetail: CalendarEventDetail,
   forms: Form,
   webPageContent: WebPageContent,
-  VtlInclude
+  VtlInclude,
 }
 
 const FallbackComponent = ({ contentType }: { contentType: string }) => {
