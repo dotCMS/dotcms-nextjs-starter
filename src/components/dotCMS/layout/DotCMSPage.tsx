@@ -6,6 +6,7 @@ import { getPageComponent } from '@/lib/dotCMS'
 import { PageContext } from '@/contexts'
 import Layout from './Layout'
 import LayoutGrid from './LayoutGrid'
+import { PageRender } from '../pages/type'
 
 // TODO: add correct types with GraphQL-Codegen
 export type DotCMSPageProps = any
@@ -16,8 +17,7 @@ export const DotCMSPage = ({
   isEditMode,
   languageProps,
 }: DotCMSPageProps) => {
-  // TODO: find a better type for dynamic page
-  let DetailPage: any
+  let DetailPage: React.FC<{ pageRender: PageRender }> | null
 
   if (pageRender?.urlContentMap) {
     const { urlContentMap } = pageRender

@@ -12,6 +12,7 @@ import {
 import { Button } from '@/styles/shared.styles'
 import { currencyFormatter } from '@/utils'
 import { Content } from './styles'
+import { DotCMSDetailPageProps } from '../type'
 
 export type ProductDetailProps = {
   pageRender: Record<string, any>
@@ -19,7 +20,7 @@ export type ProductDetailProps = {
 
 export function ProductDetail({
   pageRender: { urlContentMap },
-}: ProductDetailProps) {
+}: DotCMSDetailPageProps) {
   const {
     inode,
     title,
@@ -77,9 +78,9 @@ export function ProductDetail({
           />
 
           <Price salePrice={!!salePrice}>
-            {currencyFormatter.format(retailPrice.replace(/\,/g, ''))}
+            {currencyFormatter.format(+retailPrice.replace(/\,/g, ''))}
           </Price>
-          {salePrice && <Price>{currencyFormatter.format(salePrice)}</Price>}
+          {salePrice && <Price>{currencyFormatter.format(+salePrice)}</Price>}
         </div>
 
         <Editable

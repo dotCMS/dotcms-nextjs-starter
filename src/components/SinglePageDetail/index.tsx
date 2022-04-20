@@ -2,19 +2,20 @@
 import React from 'react'
 import { DotCMSImage } from '@/components'
 import { DetailContainer } from './styles'
-import { DotSBRender } from '../dotCMS/storyblock'
 
-// TODO: improve the type definition
 export type SinglePageDetailProps = {
-  pageRender: any
+  title: string
+  publishDate: number
+  image: string
+  children: JSX.Element
 }
 
 export const SinglePageDetail = ({
-  pageRender: {
-    urlContentMap: { title, blogContent, publishDate, image },
-  },
-}: SinglePageDetailProps): JSX.Element => {
-  const blogContentJSON = blogContent ? JSON.parse(blogContent) : null
+  title,
+  publishDate,
+  image,
+  children,
+}: any): JSX.Element => {
   return (
     <DetailContainer className="container">
       <div className="image">
@@ -22,11 +23,7 @@ export const SinglePageDetail = ({
       </div>
       <h2 className="title">{title}</h2>
       <span className="date">{new Date(publishDate).toDateString()}</span>
-      {blogContentJSON && (
-        <div>
-          <DotSBRender {...blogContentJSON} />
-        </div>
-      )}
+      {children}
     </DetailContainer>
   )
 }

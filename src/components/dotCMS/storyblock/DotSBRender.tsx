@@ -32,6 +32,10 @@ const FallbackComponent = ({ type }) => {
  * Dot Story Block Render
  */
 export const DotSBRender = ({ content }: StoryNode) => {
+  if (!content && process.env.NODE_ENV === 'development') {
+    return <h3>You don&apos;t any content</h3>
+  }
+
   return (
     <>
       {content?.map((data, index) => {

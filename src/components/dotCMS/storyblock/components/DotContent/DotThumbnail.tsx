@@ -12,7 +12,6 @@ export const DotThumbnail = (contentlet) => {
           alt={contentlet.titleImage}
           onError={() => setLoadImage(false)}
           path={getImageURL(contentlet)}
-          width={150}
         />
       ) : (
         <span className="material-icons-outlined text-7xl">
