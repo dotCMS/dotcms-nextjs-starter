@@ -1,8 +1,8 @@
 export interface BlogListingProps {
-  posts: post[]
+  posts: Post[]
 }
 
-interface post {
+export interface Post {
   identifier: string
   inode: string
   title: string

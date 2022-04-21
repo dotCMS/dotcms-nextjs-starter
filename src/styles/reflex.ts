@@ -1517,7 +1517,7 @@ mt-5 {
 }
 
 .mb-5 {
-  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 @media (max-width: 575px) {
