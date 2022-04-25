@@ -69,7 +69,7 @@ export const ContentBlocks = ({ content }: { content: ContentNode[] }) => {
 
           case 'codeBlock':
             return (
-              <CodeBlock attrs={data.attrs as { language: string }} key={index}>
+              <CodeBlock key={index} language={data.attrs.language}>
                 <ContentBlocks content={data.content} />
               </CodeBlock>
             )

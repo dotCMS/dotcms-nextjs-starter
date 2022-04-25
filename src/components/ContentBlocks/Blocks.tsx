@@ -84,7 +84,7 @@ export const BlockQuote = ({ children }) => {
   return <blockquote>{children}</blockquote>
 }
 
-export const CodeBlock = ({ attrs: { language }, children }) => {
+export const CodeBlock = ({ language, children }) => {
   return (
     <pre data-language={language}>
       <code>{children}</code>
