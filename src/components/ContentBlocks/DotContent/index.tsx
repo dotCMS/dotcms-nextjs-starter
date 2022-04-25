@@ -1,15 +1,15 @@
 import React from 'react'
 
 import Link from '@/components/Link'
-
-// Types
-import { StoryNode, DotContentProps } from '../type'
 import { ProductPrice } from './ProductPrice'
 import DotCMSImage from '../../dotCMS/Image'
 
+// Types
+import { ContentNode, DotContentProps } from '../type'
+
 export const DotContent: any = ({
   attrs: { data },
-}: StoryNode<{ data: DotContentProps }>) => {
+}: ContentNode<{ data: DotContentProps }>) => {
   const {
     contentType,
     title,
