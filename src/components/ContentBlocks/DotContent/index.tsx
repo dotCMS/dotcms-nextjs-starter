@@ -1,16 +1,15 @@
 import React from 'react'
 
 import Link from '@/components/Link'
+import { ProductPrice } from './ProductPrice'
+import DotCMSImage from '../../dotCMS/Image'
 
 // Types
-import { StoryNode, DotContentProps } from '../../type'
-import { ProductPrice } from './ProductPrice'
-import DotCMSImage from '../../../Image'
-import { getImageURL } from '../../utils/DotContent.utils'
+import { ContentNode, DotContentProps } from '../type'
 
 export const DotContent: any = ({
   attrs: { data },
-}: StoryNode<{ data: DotContentProps }>) => {
+}: ContentNode<{ data: DotContentProps }>) => {
   const {
     contentType,
     title,
@@ -57,6 +56,12 @@ export const DotContent: any = ({
       </div>
     </div>
   )
+}
+
+export const getImageURL = ({ mimeType, titleImage, inode }): string => {
+  return mimeType === 'application/pdf'
+    ? `/contentAsset/image/${inode}/${titleImage}/pdf_page/1/resize_w/250/quality_q/45`
+    : `/dA/${inode}/500w/20q`
 }
 
 export default DotContent

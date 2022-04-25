@@ -1,6 +1,7 @@
 export * from './dotCMS'
 export * from './BlogListing'
 export * from './Carousel'
+export * from './ContentBlocks'
 export * from './CustomDate'
 export * from './CustomError'
 export * from './Editable'

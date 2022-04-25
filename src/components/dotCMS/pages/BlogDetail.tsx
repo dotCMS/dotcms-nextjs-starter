@@ -1,6 +1,5 @@
 // Internals
-import { SinglePageDetail } from '@/components'
-import { DotSBRender } from '../storyblock/index'
+import { SinglePageDetail, ContentBlocks } from '@/components'
 import { DotCMSDetailPageProps } from './type'
 
 export function BlogDetail({
@@ -10,7 +9,7 @@ export function BlogDetail({
   const blogContentJSON = blogContent ? JSON.parse(blogContent) : null
   return (
     <SinglePageDetail {...data}>
-      <DotSBRender {...blogContentJSON} />
+      <ContentBlocks {...blogContentJSON} />
     </SinglePageDetail>
   )
 }
