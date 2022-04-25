@@ -1,11 +1,6 @@
-export interface StoryblockType {
+export interface ContentNode<T = Record<string, string>> {
   type: string
-  content: StoryNode[]
-}
-
-export interface StoryNode<T = Record<string, string>> {
-  type: string
-  content?: StoryNode[]
+  content: ContentNode[]
   attrs?: T
   marks?: Mark[]
   text?: string
