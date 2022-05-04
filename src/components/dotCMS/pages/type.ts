@@ -1,3 +1,5 @@
+import { ContentNode } from "@/components/ContentBlocks/type"
+
 export interface DotCMSDetailPageProps {
   pageRender: PageRender
 }
@@ -351,7 +353,10 @@ interface URLContentMap {
   hostName: string
   modDate: number
   publishDate: number
-  blogContent?: string
+  blogContent?: {
+    type: 'doc',
+    content: ContentNode[]
+  }
   postingDate?: number
   title: string
   baseType: string

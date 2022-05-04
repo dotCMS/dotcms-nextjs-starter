@@ -6,10 +6,10 @@ export function BlogDetail({
   pageRender: { urlContentMap: data },
 }: DotCMSDetailPageProps) {
   const { blogContent } = data
-  const blogContentJSON = blogContent ? JSON.parse(blogContent) : null
+
   return (
     <SinglePageDetail {...data}>
-      <ContentBlocks {...blogContentJSON} />
+      <ContentBlocks content={blogContent.content} />
     </SinglePageDetail>
   )
 }

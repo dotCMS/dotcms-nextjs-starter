@@ -12,6 +12,7 @@ export const getPage = async (url: string, lang: string) => {
     throw new Error('You need a DotCMS license to use the Layout API')
   }
 
+
   return dotCMS.page
     .get({ url, language: lang }, 'render' as any)
     .catch((error) => {
