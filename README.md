@@ -1,4 +1,4 @@
-# DotCMS JamStack Starter
+# DotCMS Next.js / JamStack Starter
 For this project we used [NextJS](https://nextjs.org/) to build a [JamStack Website](https://jamstack.org/) which data (pages and content) came fully from [DotCMS](https://dotcms.com).
 
 If you want information on how we build all this, you can see these two videos:
