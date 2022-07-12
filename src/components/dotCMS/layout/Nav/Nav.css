@@ -74,10 +74,6 @@
     color: var(--white);
 }
 
-.nav-sort__button {
-    margin-right: 0.5rem;
-}
-
 @media (max-width: 992px) and (min-width: 768px) {
     .navbar-expand-md .nav-menu__links.navbar-collapse {
         display: none !important;

@@ -6,12 +6,15 @@ import { PageContext } from '@/contexts'
 import { dotCMS } from '@/lib/dotCMS'
 
 export const NavSort = () => {
-  const context = React.useContext<any>(PageContext)
+  const { pageRender, isEditMode } = React.useContext<any>(PageContext)
+
+  const { site, page } = pageRender
 
   const emitEvent = () => {
-    const siteId = context.site ? context.site.identifier : ''
-    const pageUrl = context.page ? context.page.pageURI : ''
+    const siteId = site ? site.identifier : ''
+    const pageUrl = page ? page.pageURI : ''
     const PORLET_ID = 'b7ab5d3c-5ee0-4195-a17e-8f5579d718dd'
+
     const url = [
       `/c/portal/layout?p_l_id=${PORLET_ID}&p_p_id=site-browser`,
       `&p_p_action=1&p_p_state=maximized&_site_browser_struts_action=%2Fext%2Ffolders%2Forder_menu`,
@@ -24,15 +27,19 @@ export const NavSort = () => {
     })
   }
 
-  return (
+  return isEditMode ? (
     <button
       className="nav-sort__button btn btn-light"
       onClick={() => emitEvent()}
     >
-      <i className="icon-arrow-up3" />
-      <i className="icon-arrow-down3" />
+      <img
+        width="24"
+        height="24"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABdUlEQVRoge2ZK0sEURiGH2+IiCIIgmAwGCwGgwaTxWQymWw2m80/sE2TJpvJZDJZTAYNBovBYBAEQRAWEfFe5nVh3XV2Lucc9/M88MK0eZ8wM2e+DyKRtmUjSVuzBnwmWQ/cJTcrwDs1kQ9gNWijHCwBr9QklDdgOWCvTCwAz/yUUF6AxWDtWmQOeKS5hPIEzAfqmMosUCVdQqkCM0Ga/sIUcE/rEsoDMB2gb0MmgFuySyh3wKT31nWMAdfkl1BugHHP3b8ZAS5TCmbJFTDq1QAYAs4LFm+UC2DYl8QAcOZAQjlN7uGUPuDYoYRyAvS7kugBDj1IKEdAb9kSXcC+RwnlAOguS6ID2A0goewBnWWIbAaUULaLSlT+gIRSKSoTiUSaY+phN/H6BUMfRDByRBEmDo3CxDFemPixEiZ+dYWJ4YMwMQ4SJgZ0wsTIVJgYYgsTawVhYtEjTKzehIllqPC2ni79iFzHDjCYXG85vlckEvkPfAEI5am24OmsCgAAAABJRU5ErkJggg=="
+        alt="Sort Menu"
+      />
     </button>
-  )
+  ) : null
 }
 
 export default NavSort

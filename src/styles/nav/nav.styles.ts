@@ -17,6 +17,11 @@ export const MainNav = styled.header`
       }
     }
   }
+
+  .nav-sort__button {
+    margin-right: 0.5rem;
+    height: 24px;
+}
 `
 
 export const NavMenu = styled.div<{ isOpen?: boolean }>`

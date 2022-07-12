@@ -11,6 +11,7 @@ import { MainNav, NavMenu } from '@/styles/nav/nav.styles'
 import { LanguageSelector } from '../LanguageSelector'
 import MenuList from './MenuList'
 import SocialMediaMenu from './SocialMediaMenu'
+import NavSort from './NavSort'
 
 export const Nav = () => {
   const nav = useNav()
@@ -46,6 +47,7 @@ export const Nav = () => {
           />
         </Link>
         <NavMenu isOpen={isMenuOpen}>
+          <NavSort />
           <button
             aria-label="button"
             className="hamburger"
