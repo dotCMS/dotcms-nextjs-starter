@@ -1,15 +1,15 @@
 module.exports = {
-  purge: {
+  // purge: {
     content: [
-      './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
+      './src/pages/**/*.{js,ts,jsx,tsx}',
+      './src/components/**/*.{js,ts,jsx,tsx}',
     ],
     safelist: [
-      ...Array(12)
+      ...Array(13)
         .fill(0)
         .flatMap((el, i) => [`col-start-${i + 1}`, `col-end-${i + 1}`]),
     ],
-  },
+  // },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {

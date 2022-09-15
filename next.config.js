@@ -4,7 +4,16 @@ const nextjsUrl = new URL(process.env.NEXT_PUBLIC_DEPLOY_URL).hostname
 // Provide domains for local images or in DotCMS CDN
 const domains = Array.from(new Set([dotcmsUrl, nextjsUrl]))
 
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+
+  compiler: {
+    // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
+    styledComponents: true
+  },
+
   i18n: {
     locales: ['en', 'es'],
     defaultLocale: 'en',
@@ -68,3 +77,5 @@ module.exports = {
   // absolutes url for he nextjs page
   assetPrefix: process.env.NEXT_PUBLIC_DEPLOY_URL,
 }
+
+module.exports = nextConfig
