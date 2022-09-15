@@ -33,10 +33,10 @@ export const NavSort = () => {
       onClick={() => emitEvent()}
     >
       <img
-        width="24"
+        alt="Sort Menu"
         height="24"
         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAABdUlEQVRoge2ZK0sEURiGH2+IiCIIgmAwGCwGgwaTxWQymWw2m80/sE2TJpvJZDJZTAYNBovBYBAEQRAWEfFe5nVh3XV2Lucc9/M88MK0eZ8wM2e+DyKRtmUjSVuzBnwmWQ/cJTcrwDs1kQ9gNWijHCwBr9QklDdgOWCvTCwAz/yUUF6AxWDtWmQOeKS5hPIEzAfqmMosUCVdQqkCM0Ga/sIUcE/rEsoDMB2gb0MmgFuySyh3wKT31nWMAdfkl1BugHHP3b8ZAS5TCmbJFTDq1QAYAs4LFm+UC2DYl8QAcOZAQjlN7uGUPuDYoYRyAvS7kugBDj1IKEdAb9kSXcC+RwnlAOguS6ID2A0goewBnWWIbAaUULaLSlT+gIRSKSoTiUSaY+phN/H6BUMfRDByRBEmDo3CxDFemPixEiZ+dYWJ4YMwMQ4SJgZ0wsTIVJgYYgsTawVhYtEjTKzehIllqPC2ni79iFzHDjCYXG85vlckEvkPfAEI5am24OmsCgAAAABJRU5ErkJggg=="
-        alt="Sort Menu"
+        width="24"
       />
     </button>
   ) : null

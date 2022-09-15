@@ -1,6 +1,6 @@
 // Dependencies
 import * as React from 'react'
-import { parseBody } from 'next/dist/server/api-utils'
+import { parseBody } from "next/dist/server/api-utils/node";
 import type { GetServerSideProps, NextPage } from 'next'
 
 // Internals
