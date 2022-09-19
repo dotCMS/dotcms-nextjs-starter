@@ -1,7 +1,7 @@
 // Dependencies
 import * as React from 'react'
-import { useLazyQuery } from '@apollo/react-hooks'
-import type { ApolloClient } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
+import type { ApolloClient } from '@apollo/client'
 
 // Internals
 import { Loading, TagsFilter } from '@/components'

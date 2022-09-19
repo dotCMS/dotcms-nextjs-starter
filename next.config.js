@@ -6,7 +6,9 @@ const domains = Array.from(new Set([dotcmsUrl, nextjsUrl]))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // Needs to be false due a problem with `styled-components`
+  // See more information here: https://github.com/styled-components/styled-components/issues/3146#issuecomment-895245050
+  reactStrictMode: false,
   swcMinify: true,
 
   compiler: {
