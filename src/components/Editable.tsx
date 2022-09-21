@@ -4,17 +4,19 @@ import * as React from 'react'
 export type EditableProps = {
   element: React.ReactElement
   className?: string
-  mode: string
+  mode?: string
   field: string
   lang: string
   inode: string
-  onClick?: () => void
+  onClick?: (event?: any) => void
   href?: string
-  textColor?: string
+  textColor?: string,
+  contentType?: any,
+  editorContent?: any
 }
 
 export const Editable = ({ element, ...rest }: EditableProps) => {
-  const { mode, field, lang, inode, onClick } = rest
+  const { mode, field, lang, inode, onClick, contentType, editorContent } = rest;
   const {
     props: { children },
   } = element
@@ -27,12 +29,14 @@ export const Editable = ({ element, ...rest }: EditableProps) => {
         ((e: React.MouseEvent<HTMLElement, MouseEvent>) => {
           e.preventDefault()
           e.stopPropagation()
-          onClick()
+          onClick(e)
         }),
       'data-mode': mode || 'minimal',
       'data-field-name': field,
       'data-language': lang,
       'data-inode': inode,
+      ...(contentType && { 'data-content-type': contentType}),
+      ...(editorContent && { 'data-block-editor-content': editorContent }),
     },
     children
   )
