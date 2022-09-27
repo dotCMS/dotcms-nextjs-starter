@@ -1,8 +1,8 @@
 // Dependencies
-import gql from 'graphql-tag'
+import { gql } from "@apollo/client";
 
 export const PRODUCTS_QUERY = gql`
-  query PRODUCTS_QUERY($limit: Int, $query: String) {
+  query PRODUCTS_QUERY($limit: Int!, $query: String!) {
     ProductCollection(limit: $limit, query: $query) {
       title
       retailPrice

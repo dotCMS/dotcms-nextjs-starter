@@ -6,7 +6,7 @@ import { PageContext } from '@/contexts'
 import { Nav } from './Nav'
 import Footer from './Footer'
 
-export const Layout: React.FC = ({ children }) => {
+export const Layout: React.FC<{ children: React.ReactElement }> = ({ children }) => {
   const {
     // @ts-ignore TODO: add the correct types
     pageRender: {

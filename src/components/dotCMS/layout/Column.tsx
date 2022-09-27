@@ -4,6 +4,7 @@ import { clsx } from '@/utils'
 
 // TODO: add correct types with GraphQL-Codegen
 export type ColumnProps = {
+  children: React.ReactElement,
   className?: string
   leftOffset: number
   width: number

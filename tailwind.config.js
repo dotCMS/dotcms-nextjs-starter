@@ -1,16 +1,13 @@
 module.exports = {
-  purge: {
-    content: [
-      './pages/**/*.{js,ts,jsx,tsx}',
-      './components/**/*.{js,ts,jsx,tsx}',
-    ],
-    safelist: [
-      ...Array(12)
-        .fill(0)
-        .flatMap((el, i) => [`col-start-${i + 1}`, `col-end-${i + 1}`]),
-    ],
-  },
-  darkMode: false, // or 'media' or 'class'
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx}',
+    './src/components/**/*.{js,ts,jsx,tsx}',
+  ],
+  safelist: [
+    ...Array(13)
+      .fill(0)
+      .flatMap((el, i) => [`col-start-${i + 1}`, `col-end-${i + 1}`]),
+  ],
   theme: {
     extend: {
       fontSize: {
@@ -18,8 +15,8 @@ module.exports = {
       },
       colors: {
         'dot-purple': '#c336e5',
-        'dot-purple-80': '#CE5DEA'
-      }
+        'dot-purple-80': '#CE5DEA',
+      },
     },
   },
   variants: {
