@@ -34,9 +34,7 @@ export const Editable = ({ element, ...rest }: EditableProps) => {
       'data-mode': mode || 'minimal',
       'data-field-name': field,
       'data-language': lang,
-      'data-inode': inode,
-      ...(contentType && { 'data-content-type': contentType}),
-      ...(editorContent && { 'data-block-editor-content': editorContent }),
+      'data-inode': inode
     },
     children
   )

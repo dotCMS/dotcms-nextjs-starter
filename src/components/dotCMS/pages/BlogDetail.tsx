@@ -18,8 +18,8 @@ export function BlogDetail({
   return (
     <SinglePageDetail {...data}>
         <Editable
-            contentType={contentType}
-            editorContent={JSON.stringify(blogContent)}
+            data-block-editor-content={JSON.stringify(blogContent)}
+            data-content-type={contentType}
             element={<div><ContentBlocks content={blogContent.content} /></div>}
             field="blogContent"
             inode={inode}
