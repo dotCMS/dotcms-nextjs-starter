@@ -17,7 +17,7 @@
     "@apollo/client": "^3.6.9",
     "autoprefixer": "^10.4.11",
     "cross-fetch": "^3.1.5",
-    "dotcms": "0.0.17",
+    "dotcms": "0.0.21",
     "dotcms-ema-elements": "0.0.2",
     "fs": "^0.0.1-security",
     "graphql": "^16.6.0",
