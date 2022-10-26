@@ -1,5 +1,5 @@
 # DotCMS Next.js / JamStack Starter
-For this project we used [NextJS](https://nextjs.org/) to build a [JamStack Website](https://jamstack.org/) which data (pages and content) are fully driven from our [demo site](https://demo.dotcms.com).  This includes more than content - it includes pages, navigation and page layouts as well.
+For this project we used [NextJS](https://nextjs.org/) to build a [JamStack Website](https://jamstack.org/) which pages and content are fully driven from our [demo site](https://demo.dotcms.com).  dotCMS + Next.js allows you to manage more than content in your SPA - it includes pages, navigation and page layouts as well.
 
 It is not intended to be a complete site - more of a demonstration of how much control dotCMS gives your content creator and editors in a real world headless environment.
 
