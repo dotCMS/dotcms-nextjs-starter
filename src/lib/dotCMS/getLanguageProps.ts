@@ -1,5 +1,5 @@
 // Dependencies
-import type { DotCMSLanguageItem } from 'dotcms/lib/models'
+import type { DotCMSLanguageItem } from 'dotcms/src/lib/models'
 
 // Internals
 import { dotCMS } from './'

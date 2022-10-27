@@ -1,5 +1,5 @@
 // Dependencies
-import { DotCMSNavigationItem } from 'dotcms/lib/models'
+import { DotCMSNavigationItem } from 'dotcms/src/lib/models'
 
 // Internals
 import { logInfo } from '@/utils'

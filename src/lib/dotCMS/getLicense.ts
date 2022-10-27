@@ -1,5 +1,5 @@
 // Dependencies
-import type { DotCMSConfigurationItem } from 'dotcms/lib/models'
+import type { DotCMSConfigurationItem } from 'dotcms/src/lib/models'
 
 // Internals
 import { dotCMS } from './'
