@@ -5,6 +5,11 @@ const components = {
 }
 
 const FallbackComponent = ({ useComponent }: { useComponent: string }) => {
+
+    if (process.env.NODE_ENV !== 'development') {
+        return null;
+    }
+
     return (
       <h3>You don&apos;t have a component for the VtlInclude type: {useComponent}</h3>
     )

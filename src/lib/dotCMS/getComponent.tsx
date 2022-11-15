@@ -38,6 +38,10 @@ const components = {
 }
 
 const FallbackComponent = ({ contentType }: { contentType: string }) => {
+  if (process.env.NODE_ENV !== 'development') {
+    return null;
+  }
+
   return (
     <h3>You don&apos;t have a component for the content type: {contentType}</h3>
   )
