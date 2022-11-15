@@ -1,39 +1,10 @@
 export interface CallToActionProps {
-    publishDate:        number;
-    inode:              string;
-    host:               string;
-    variantId:          string;
-    locked:             boolean;
-    stInode:            string;
-    contentType:        string;
-    identifier:         string;
-    image?:             string;
-    buttonUrl2?:        string;
-    buttonUrl1?:        string;
-    folder:             string;
-    subHeading?:        string;
-    hasTitleImage:      boolean;
-    sortOrder:          number;
-    hostName:           string;
-    modDate:            number;
-    targetLink2:        string;
-    targetLink1:        string;
-    title:              string;
-    baseType:           string;
-    archived:           boolean;
-    working:            boolean;
-    headline:           string;
-    live:               boolean;
-    owner:              string;
-    imageVersion?:      string;
-    imageContentAsset?: string;
-    languageId:         number;
-    buttonText2?:       string;
-    buttonText1?:       string;
-    url:                string;
-    titleImage:         string;
-    modUserName:        string;
-    hasLiveVersion:     boolean;
-    modUser:            string;
+  headline: string
+  subHeading?: string
+  buttonText1?: string
+  buttonText2?: string
+  buttonUrl1?: string
+  buttonUrl2?: string
+  targetLink1: string
+  targetLink2: string
 }
-
