@@ -1909,12 +1909,10 @@ dotcms-ema-elements@0.0.2:
   resolved "https://registry.npmjs.org/dotcms-ema-elements/-/dotcms-ema-elements-0.0.2.tgz"
   integrity sha512-ruiUwaYUk0B0t1l2UmfggEpOyRm3C4kORhnkmdE57zVkQg1ZYQqLPE9rDSVaz6duef83B873pCFmpylpvuYtsg==
 
-dotcms@0.0.17:
-  version "0.0.17"
-  resolved "https://registry.npmjs.org/dotcms/-/dotcms-0.0.17.tgz"
-  integrity sha512-Aa4R0xoDhUxWpRLrr16cV38bOhlNbN2pgOOI4blXBqT2cslo3zHhVpvm0caaMr9BxwMgXrWewVTz+UBNwya2TQ==
-  dependencies:
-    tslib "^1.9.0"
+dotcms@0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/dotcms/-/dotcms-0.0.21.tgz#58a0eda6ec5740e8f09963b6ad49270404409b24"
+  integrity sha512-/TFSmok1g5OymVpKdBEYp9j25SbQBMM4WWTUhNnDI911xk3AhuUgdKGa3/3PRCMJoC1+TAhi/JHITMFXY+QEhQ==
 
 electron-to-chromium@^1.4.251:
   version "1.4.251"
@@ -4985,7 +4983,7 @@ tsconfig-paths@^3.14.1:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.1:
   version "1.14.1"
   resolved "https://registry.npmjs.org/tslib/-/tslib-1.14.1.tgz"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
