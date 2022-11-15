@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 export const Activity = dynamic(() => import('./Activity'))
 export const Banner = dynamic(() => import('./Banner'))
 export const BannerCarousel = dynamic(() => import('./BannerCarousel'))
+export const CallToAction = dynamic(() => import('./CallToAction'))
 export const CategoryFilter = dynamic(() => import('./CategoryFilter'))
 export const Image = dynamic(() => import('./Image'))
 export const Product = dynamic(() => import('./Product'))
