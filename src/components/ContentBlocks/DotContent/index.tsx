@@ -24,7 +24,7 @@ export const DotContent: any = ({
   const link = urlMap || `${contentType}/${urlTitle}`
 
   return (
-    <div className="w-full h-full mb-4 box-border">
+    <div className="w-full mb-4 box-border">
       <div className="bg-white border border-solid border-gray-300 flex p-4 flex flex-1 justify-start items-center flex-wrap flex-col lg:flex-row">
         <div className="w-40 h-40 p-3 border border-solid border-gray-300 justify-center items-center relative mb-4 lg:m-0">
           <DotCMSImage alt={titleImage} path={getImageURL({ ...data })} />
