@@ -24,12 +24,17 @@ export async function getNav(
   location = '/'
 ): Promise<(DotCMSNavigationItem | GetNavResult)[]> {
   if (process.env.NODE_ENV !== 'production') {
-    logInfo('DOTCMS NAV')
+    logInfo('DOTCMS NAV, location:' + location + ", deep:" + deep )
   }
 
   const nav = await dotCMS.nav
-    .get(String(deep), location)
-    .then((res) => res.children || [])
+    .get(String(deep), "")
+    .then((res) => {
+        return res.children 
+    }).catch((error) => {
+        logInfo('DOTCMS NAV ERROR', error)
+        return []
+    });
   const finalNav = [
     {
       href: '/index',
