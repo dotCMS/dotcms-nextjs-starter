@@ -1,4 +1,4 @@
-# Deprecated
+# ⚠️ Deprecated
 This example is not longer recommeded to render dotCMS pages
 
 > We release "Universal Visual Editor" a new approach to build and edit headless pages in dotCMS, 📽️ [check it out](https://www.youtube.com/watch?v=qqlrZKY-fAA).
