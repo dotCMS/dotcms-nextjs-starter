@@ -1,3 +1,9 @@
+# Deprecated
+This example is not longer recommeded to render dotCMS pages
+
+> We release "Universal Visual Editor" a new approach to build and edit headless pages in dotCMS, 📽️ [check it out](https://www.youtube.com/watch?v=qqlrZKY-fAA).
+
+
 # DotCMS Next.js / JamStack Starter
 For this project we used [NextJS](https://nextjs.org/) to build a [JamStack Website](https://jamstack.org/) which pages and content are fully driven from our [demo site](https://demo.dotcms.com).  dotCMS + Next.js allows you to manage more than content in your SPA - it includes pages, navigation and page layouts as well.
 
