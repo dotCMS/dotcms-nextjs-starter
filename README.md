@@ -2,8 +2,9 @@
 This example is not longer recommeded to render dotCMS pages
 
 > We release "Universal Visual Editor" a new approach to build and edit headless pages in dotCMS:
-> 🔗 [New Example](https://github.com/dotCMS/core/tree/main/examples/nextjs)
-> 📽️ [check it out](https://www.youtube.com/watch?v=qqlrZKY-fAA).
+
+- 🔗 [New Example](https://github.com/dotCMS/core/tree/main/examples/nextjs)
+- 📽️ [Demo Video](https://www.youtube.com/watch?v=qqlrZKY-fAA).
 
 
 # DotCMS Next.js / JamStack Starter
